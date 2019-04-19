@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { NgxElectronModule } from 'ngx-electron';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './app/app.component';
 
 @NgModule({
   declarations: [
