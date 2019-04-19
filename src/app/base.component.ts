@@ -1,14 +1,18 @@
 import { ElectronService } from 'ngx-electron';
+import { MessageModel } from '@shared/models/message.model';
 
 export abstract class BaseComponent {
-    private readonly _electronService: ElectronService;
-
-    constructor(electronService: ElectronService) {
-        this._electronService = electronService;
+    private readonly _electron: ElectronService;
+    
+    constructor(electron: ElectronService) {
+        this._electron = electron;
+        this._electron.ipcRenderer.on('message', (event: any, argument: MessageModel) => this.OnMessage(argument));
     }
 
-    protected get ElectronService(): ElectronService {
-        return this._electronService;
+    protected abstract OnMessage(message: MessageModel): void;
+
+    protected SendMessage(message: MessageModel) {
+        this._electron.ipcRenderer.send('message', message);
     }
 
 }

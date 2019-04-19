@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { NgxElectronModule } from 'ngx-electron';
 
 import { AppComponent } from './app/app.component';
+import { FileSystemTreeComponent } from './fs-tree/fs-tree.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FileSystemTreeComponent
   ],
   imports: [
     BrowserModule,
