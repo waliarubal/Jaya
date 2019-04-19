@@ -1,7 +1,7 @@
 import { BaseModel } from '@shared/base.model';
 
 export enum MessageType {
-    Handshake
+    Handshake = 'h'
 }
 
 export class MessageModel extends BaseModel {

@@ -1,7 +1,8 @@
 import { IpcRenderer } from 'electron';
 import { BaseService } from '@shared/base.service';
+import { OnDestroy } from '@angular/core';
 
-export abstract class WebBaseService extends BaseService {
+export abstract class WebBaseService extends BaseService implements OnDestroy {
     private readonly _ipc: IpcRenderer;
 
     constructor() {
@@ -19,6 +20,10 @@ export abstract class WebBaseService extends BaseService {
 
     protected get Ipc(): IpcRenderer {
         return this._ipc;
+    }
+
+    ngOnDestroy(): void {
+        this.Dispose();
     }
 
 }
