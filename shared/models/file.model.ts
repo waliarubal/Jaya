@@ -1,4 +1,4 @@
-import { BaseModel } from '@shared/models/base.model';
+import { BaseModel } from '@shared/base.model';
 
 export class FileModel extends BaseModel {
     

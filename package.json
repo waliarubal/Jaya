@@ -32,7 +32,6 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "core-js": "^2.5.4",
-    "ngx-electron": "^2.1.1",
     "primeicons": "^1.0.0",
     "primeng": "^7.1.1",
     "rxjs": "~6.3.3",
