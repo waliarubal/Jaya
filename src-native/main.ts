@@ -19,7 +19,8 @@ function CreateWindow(): void {
         width: 800,
         height: 600, 
         webPreferences: {
-            nodeIntegration: false
+            nodeIntegration: false,
+            contextIsolation: true
         }
     });
     _window.loadURL(url);
