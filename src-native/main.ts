@@ -1,11 +1,8 @@
 import { app, BrowserWindow } from 'electron';
 import * as Path from 'path';
 import * as Url from 'url';
-import { IpcService } from '@services/ipc.service';
-import { Constants } from '@shared/constants';
 
 let _window: BrowserWindow;
-let _ipc: IpcService;
 
 function CreateWindow(): void {
     if (_window)
@@ -29,14 +26,10 @@ function CreateWindow(): void {
     _window.loadURL(url);
     _window.webContents.openDevTools();
     _window.on('closed', DestroyWindow);
-
-    _ipc = new IpcService(_window);
-    _ipc.Event.on(Constants.IPC_CHANNEL, () => {});
 }
 
 function DestroyWindow(): void {
     if (_window) {
-        _ipc.Stop();
         _window = null;
     }
         
