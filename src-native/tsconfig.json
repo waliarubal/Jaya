@@ -10,6 +10,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "pretty": true,
     "target": "es5",
     "typeRoots": [
       "../node_modules/@types"
@@ -20,7 +21,7 @@
     ],
     "paths": {
       "@shared/*": [
-        "../shared/*"
+        "./shared/*"
       ],
       "@services/*": [
         "./services/*"

@@ -3,20 +3,14 @@ import { BaseModel } from '@shared/base.model';
 import { IpcService } from '@services/ipc.service';
 
 export abstract class BaseComponent extends BaseModel {
-    private readonly _ipc: IpcService;
 
-    constructor(ipc: IpcService) {
+    constructor(private _ipc: IpcService) {
        super();
-       this._ipc = ipc;
-       ipc.Receive.subscribe((message: MessageModel) => this.ReceiveMessage(message));
-    }
-
-    private get Ipc(): IpcService {
-        return this._ipc;
+       _ipc.Receive.subscribe((message: MessageModel) => this.ReceiveMessage(message));
     }
 
     protected SendMessage(message: MessageModel) {
-        this.Ipc.Send(message);
+        this._ipc.Send(message);
     }
 
     protected abstract ReceiveMessage(message: MessageModel): void;

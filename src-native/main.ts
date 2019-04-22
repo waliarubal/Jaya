@@ -10,7 +10,7 @@ function CreateWindow(): void {
     if (_window)
         return;
 
-    const path = Path.join(__dirname, 'jaya/index.html');
+    const path = Path.join(__dirname, '../../dist/jaya/index.html');
     const url = Url.format({
         pathname: path,
         protocol: 'file:',

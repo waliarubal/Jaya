@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@shared/*": [
-        "shared/*",
+        "src-native/shared/*",
         "src/app/shared/*"
       ],
       "@services/*": [

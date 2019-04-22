@@ -1,14 +1,12 @@
 import { ipcMain, BrowserWindow } from 'electron';
-import { Constants } from '@shared/constants';
-import { BaseService } from '@shared/base.service'
-import { MessageModel } from '@shared/models/message.model';
+import { Constants } from '../shared/constants';
+import { BaseService } from '../shared/base.service'
+import { MessageModel } from '../shared/models/message.model';
 
 export abstract class IpcService extends BaseService {
-    private readonly _window: BrowserWindow;
 
-    constructor(window: BrowserWindow){
+    constructor(readonly _window: BrowserWindow){
         super();
-        this._window = window;
         ipcMain.on(Constants.IPC_CHANNEL, (event: any, message: any) => this.Receive(message));
     }
 
