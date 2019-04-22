@@ -1,5 +1,8 @@
 {
   "compileOnSave": false,
+  "include": [
+    "./**/*"
+  ],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "../dist",
