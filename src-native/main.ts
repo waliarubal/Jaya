@@ -1,8 +1,10 @@
 import { app, BrowserWindow } from 'electron';
 import * as Path from 'path';
 import * as Url from 'url';
+import { FileSystemService } from './services/file-system.service';
 
 let _window: BrowserWindow;
+let _fileSystemService: FileSystemService;
 
 function CreateWindow(): void {
     if (_window)
@@ -26,6 +28,8 @@ function CreateWindow(): void {
     _window.loadURL(url);
     _window.webContents.openDevTools();
     _window.on('closed', DestroyWindow);
+
+    _fileSystemService = new FileSystemService(_window);
 }
 
 function DestroyWindow(): void {

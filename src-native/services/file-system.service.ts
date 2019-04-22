@@ -9,7 +9,7 @@ export class FileSystemService extends IpcService {
     }
 
     protected Receive(message: MessageModel) {
-        
+        console.log(message);
     }
 
 }

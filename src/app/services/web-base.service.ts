@@ -12,10 +12,10 @@ export abstract class WebBaseService extends BaseService implements OnDestroy {
             try {
                 this._ipc = (<any>window).require('electron').ipcRenderer;
             } catch (e) {
-                throw e;
+                console.error(e);
             }
         } else
-            console.warn('Could not load electron IPC.');
+            console.error('Could not load electron IPC.');
     }
 
     protected get Ipc(): IpcRenderer {
