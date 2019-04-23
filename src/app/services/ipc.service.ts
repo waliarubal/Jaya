@@ -27,6 +27,10 @@ export class IpcService extends WebBaseService {
         if (this.Ipc) {
             if (typeOrMessage instanceof MessageModel)
                 this.Ipc.send(Constants.IPC_CHANNEL, typeOrMessage);
+            else {
+                let message = new MessageModel(typeOrMessage, data);
+                this.Ipc.send(Constants.IPC_CHANNEL, message);
+            }
         }
         else
             console.error("Couldn't send message as electron IPC is not loaded.");

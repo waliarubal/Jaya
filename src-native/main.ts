@@ -25,11 +25,12 @@ function CreateWindow(): void {
             contextIsolation: false
         }
     });
+
+    _fileSystemService = new FileSystemService(_window);
+
     _window.loadURL(url);
     _window.webContents.openDevTools();
     _window.on('closed', DestroyWindow);
-
-    _fileSystemService = new FileSystemService(_window);
 }
 
 function DestroyWindow(): void {
