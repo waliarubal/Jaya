@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { IpcService } from '@services/ipc.service';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [IpcService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
