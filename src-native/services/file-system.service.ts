@@ -1,6 +1,6 @@
 import { BrowserWindow } from 'electron';
 import { IpcService } from './ipc.service';
-import { MessageModel } from '../../shared';
+import { MessageModel, MessageType } from '../../shared';
 
 export class FileSystemService extends IpcService {
 
@@ -9,7 +9,11 @@ export class FileSystemService extends IpcService {
     }
 
     protected Receive(message: MessageModel) {
-        console.log(message);
+        switch(message.Type) {
+            case MessageType.Handshake:
+                console.log('IPC bridge created.');
+                break;
+        }
     }
 
 }
