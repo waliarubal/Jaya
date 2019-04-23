@@ -5,7 +5,6 @@
     "../shared/**/*"
   ],
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "../dist",
     "sourceMap": true,
     "declaration": false,
@@ -22,14 +21,6 @@
     "lib": [
       "es2018",
       "dom"
-    ],
-    "paths": {
-      "@shared/*": [
-        "../shared/*"
-      ],
-      "@services/*": [
-        "./services/*"
-      ]
-    }
+    ]
   }
 }

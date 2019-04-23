@@ -1,6 +1,6 @@
 import { BrowserWindow } from 'electron';
 import { IpcService } from './ipc.service';
-import { MessageModel } from '@shared/models';
+import { MessageModel } from '../../shared';
 
 export class FileSystemService extends IpcService {
 
