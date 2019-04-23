@@ -5,21 +5,16 @@ import { MessageModel, MessageType } from '@shared/models';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  providers: [IpcService]
+  templateUrl: './app.component.html'
 })
 export class AppComponent extends BaseComponent {
 
   constructor(ipc: IpcService) {
     super(ipc);
   }
-  
+
   protected ReceiveMessage(message: MessageModel): void {
     console.log(message);
-  }
-
-  ngOnInit(): void {
-    this.SendMessage(new MessageModel(MessageType.Handshake, 'Hello World'));
   }
 
 }

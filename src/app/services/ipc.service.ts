@@ -7,11 +7,12 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class IpcService extends WebBaseService {
     private readonly _event: EventEmitter<MessageModel>;
 
-    constructor(){
+    constructor() {
         super();
+
         this._event = new EventEmitter();
         if (this.Ipc)
-            this.Ipc.on(Constants.IPC_CHANNEL, this.OnMessage);
+            this.Ipc.on(Constants.IPC_CHANNEL, (event: any, argument: any) => this.Receive.emit(argument));
     }
 
     get Receive(): EventEmitter<MessageModel> {
@@ -28,11 +29,7 @@ export class IpcService extends WebBaseService {
     protected Dispose(): void {
         this._event.isStopped = true;
         if (this.Ipc)
-            this.Ipc.removeListener(Constants.IPC_CHANNEL, this.OnMessage);
-    }
-
-    private OnMessage(event: any, argument: any): void {
-        this.Receive.emit(argument);
+            this.Ipc.removeAllListeners(Constants.IPC_CHANNEL);
     }
 
 }
