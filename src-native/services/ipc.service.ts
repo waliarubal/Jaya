@@ -5,7 +5,7 @@ export abstract class IpcService extends BaseService {
 
     constructor(readonly _window: BrowserWindow){
         super();
-        ipcMain.on(Constants.IPC_CHANNEL, (event: any, message: any) => this.Receive(message));
+        ipcMain.on(Constants.IPC_CHANNEL, (event: any, message: MessageModel) => this.Receive(message));
     }
 
     protected Dispose(): void {

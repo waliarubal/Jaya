@@ -1,27 +1,30 @@
-import { BaseModel } from '../base.model';
-
 export enum MessageType {
     Handshake = 'h'
 }
 
-export class MessageModel extends BaseModel {
+export class MessageModel {
+    private readonly _type: MessageType;
+    private readonly _data: any;
 
     constructor(type: MessageType, data?: any) {
-        super();
-        this.Set('t', type);
-        this.Set('d', data);
+        this._type = type;
+        this._data = data;
     }
 
     get Type(): MessageType {
-        return this.Get('t');
+        return this._type;
     }
 
     get Data(): any {
-        return this.Get('d');
+        return this._data;
     }
 
     GetData<T>(): T {
         return <T>this.Data;
+    }
+
+    toString(): string {
+        return `Message Type: ${this.Type}\r\nMessage Data: ${this.Data}`;
     }
 
 }
