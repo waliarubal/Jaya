@@ -9,7 +9,7 @@ export class FileSystemService extends IpcService {
     }
 
     protected Receive(message: MessageModel) {
-        switch(message.Type) {
+        switch (message.Type) {
             case MessageType.Handshake:
                 console.log('IPC bridge created.');
                 break;
