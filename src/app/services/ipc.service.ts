@@ -1,5 +1,5 @@
 import { WebBaseService } from '@services/web-base.service';
-import { MessageModel } from '@shared/models/message.model';
+import { MessageModel } from '@shared/models';
 import { Constants } from '@shared/constants';
 import { Injectable, EventEmitter } from '@angular/core';
 

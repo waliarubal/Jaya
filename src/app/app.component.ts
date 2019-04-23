@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IpcService } from '@services/ipc.service';
 import { BaseComponent } from '@shared/base.component';
-import { MessageModel, MessageType } from '@shared/models/message.model';
+import { MessageModel, MessageType } from '@shared/models';
 
 @Component({
   selector: 'app-root',

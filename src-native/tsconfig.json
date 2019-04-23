@@ -1,7 +1,8 @@
 {
   "compileOnSave": false,
   "include": [
-    "./**/*"
+    "./**/*",
+    "../shared/**/*"
   ],
   "compilerOptions": {
     "baseUrl": "./",
@@ -24,7 +25,7 @@
     ],
     "paths": {
       "@shared/*": [
-        "./shared/*"
+        "../shared/*"
       ],
       "@services/*": [
         "./services/*"

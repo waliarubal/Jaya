@@ -1,7 +1,7 @@
 import { ipcMain, BrowserWindow } from 'electron';
-import { Constants } from '../shared/constants';
-import { BaseService } from '../shared/base.service'
-import { MessageModel } from '../shared/models/message.model';
+import { Constants } from '@shared/constants';
+import { BaseService } from '@shared/base.service'
+import { MessageModel } from '@shared/models';
 
 export abstract class IpcService extends BaseService {
 

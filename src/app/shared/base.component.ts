@@ -1,4 +1,4 @@
-import { MessageModel } from '@shared/models/message.model';
+import { MessageModel } from '@shared/models';
 import { BaseModel } from '@shared/base.model';
 import { IpcService } from '@services/ipc.service';
 
