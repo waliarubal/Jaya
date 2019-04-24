@@ -1,6 +1,6 @@
 import * as Fs from 'fs';
 import { IpcService } from './ipc.service';
-import { BaseService, Constants, MessageModel, MessageType, DirectoryModel } from '../../src-common';
+import { BaseService, Constants, MessageModel, MessageType, DirectoryModel, Helpers } from '../../src-common';
 
 export class FileSystemService extends BaseService {
     private readonly _ipc: IpcService;
@@ -25,7 +25,8 @@ export class FileSystemService extends BaseService {
                         dir.Name = file;
                         dirs.push(dir);
                     })
-                    this._ipc.Send(MessageType.Directoties, dirs);
+                    message.Data = Helpers.Serialize(dirs);
+                    this._ipc.Send(message);
                 });
                 break;
         }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IpcBaseService } from '@shared/ipc-base.service';
-import { MessageModel, MessageType, DirectoryModel } from '@common/index';
+import { MessageModel, MessageType, DirectoryModel, Helpers } from '@common/index';
 
 @Injectable()
 export class FileSystemService extends IpcBaseService {
@@ -18,7 +18,8 @@ export class FileSystemService extends IpcBaseService {
     private OnMessageReceived(message: MessageModel): void {
         switch (message.Type) {
             case MessageType.Directoties:
-                console.log(message.Data);
+                let dirs = Helpers.Deserialize<DirectoryModel>(message.Data);
+                console.log(dirs);
                 break;
         }
     }

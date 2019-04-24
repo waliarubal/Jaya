@@ -8,9 +8,9 @@ export enum MessageType {
 }
 
 export class MessageModel {
-    private _id: string;
     private readonly _type: MessageType;
-    private readonly _data: string;
+    private _id: string;
+    private _data: string;
 
     private constructor(type: MessageType, data: string = '') {
         this._type = type;
@@ -31,6 +31,10 @@ export class MessageModel {
 
     get Data(): string {
         return this._data;
+    }
+
+    set Data(value: string) {
+        this._data = value;
     }
 
     toString(): string {
