@@ -1,18 +1,16 @@
-import { BaseModel } from '../base.model';
-
-export class ErrorModel extends BaseModel {
+export class ErrorModel {
+    private _message: string;
 
     constructor(message: string = null) {
-        super();
         this.Message = message;
     }
 
     get Message(): string {
-        return this.Get('msg');
+        return this._message;
     }
 
     set Message(value: string) {
-        this.Set('msg', value);
+        this._message = value;
     }
 
     toString(): string {

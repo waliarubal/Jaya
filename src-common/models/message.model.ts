@@ -1,5 +1,4 @@
 import { Helpers } from '../helpers';
-import { ISerializable } from '../interfaces';
 
 export enum MessageType {
     Unknown = 'u',
@@ -11,9 +10,9 @@ export enum MessageType {
 export class MessageModel {
     private _id: string;
     private readonly _type: MessageType;
-    private readonly _data: ISerializable;
+    private readonly _data: string;
 
-    private constructor(type: MessageType, data?: ISerializable) {
+    private constructor(type: MessageType, data: string = '') {
         this._type = type;
         this._data = data;
     }
@@ -30,7 +29,7 @@ export class MessageModel {
         return this._type;
     }
 
-    get Data(): ISerializable {
+    get Data(): string {
         return this._data;
     }
 
@@ -43,7 +42,7 @@ export class MessageModel {
         return message;
     }
 
-    static New(type: MessageType, data?: ISerializable): MessageModel {
+    static New(type: MessageType, data: string = ''): MessageModel {
         let message = new MessageModel(type, data);
         message.Id = Helpers.Guid();
         return message;

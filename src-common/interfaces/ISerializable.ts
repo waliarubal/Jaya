@@ -1,7 +1,4 @@
-export interface ISerializable {
-
+export interface ISerializable<T> {
     Serialize(): string;
-
-    Deserialize(data: string): any;
-
+    Deserialize(data: string): T;
 }

@@ -1,6 +1,6 @@
-import { ISerializable } from '../interfaces';
+import { ISerializable } from '../interfaces/ISerializable';
 
-export class FileModel implements ISerializable {
+export class FileModel implements ISerializable<FileModel> {
     private _name: string;
     private _size: number;
 
@@ -25,11 +25,19 @@ export class FileModel implements ISerializable {
     }
 
     Serialize(): string {
-        return null;
+        return `{
+            "name": "${this.Name}",
+            "size": ${this.Size}
+        }`;
     }
 
     Deserialize(data: string): FileModel {
-        return null;
+        let obj = JSON.parse(data);
+        
+        let file = new FileModel();
+        file.Name = obj.name;
+        file.Size = obj.size;
+        return file;
     }
 
 }

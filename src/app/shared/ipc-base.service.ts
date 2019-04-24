@@ -29,8 +29,8 @@ export abstract class IpcBaseService extends BaseService implements OnDestroy {
     }
 
     Send(message: MessageModel): void;
-    Send(type: MessageType, data?: any): void;
-    Send(typeOrMessage: MessageType | MessageModel, data?: any): void {
+    Send(type: MessageType, data?: string): void;
+    Send(typeOrMessage: MessageType | MessageModel, data: string = ''): void {
         if (this._ipc) {
             let messageString: string;
             if (typeOrMessage instanceof MessageModel)

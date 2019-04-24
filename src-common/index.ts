@@ -1,9 +1,13 @@
 import { BaseModel } from './base.model';
 import { BaseService } from './base.service';
 import { Constants } from './constants';
-import { Dictionary, Pair } from './data-structures';
+import { Dictionary } from './data-structures/dictionary';
+import { Pair } from './data-structures/pair';
 import { Helpers } from './helpers';
-import { ISerializable } from './interfaces';
-import { ErrorModel, FileModel, DirectoryModel, MessageModel, MessageType } from './models';
+import { ISerializable } from './interfaces/ISerializable';
+import { ErrorModel } from './models/error.model';
+import { FileModel } from './models/file.model';
+import { DirectoryModel } from './models/directory.model';
+import { MessageModel, MessageType } from './models/message.model';
 
 export { Helpers, BaseModel, BaseService, Constants, Dictionary, Pair, ErrorModel, FileModel, DirectoryModel, MessageModel, MessageType, ISerializable };

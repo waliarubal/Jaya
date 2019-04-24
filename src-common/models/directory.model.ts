@@ -1,7 +1,7 @@
 import { FileModel } from './file.model';
-import { ISerializable } from '../interfaces';
+import { ISerializable } from '../interfaces/ISerializable';
 
-export class DirectoryModel extends FileModel implements ISerializable {
+export class DirectoryModel extends FileModel implements ISerializable<DirectoryModel> {
     private _directories: DirectoryModel[];
     private _files: FileModel[];
 
@@ -22,10 +22,19 @@ export class DirectoryModel extends FileModel implements ISerializable {
     }
 
     Serialize(): string {
-        return null;
+        return `{
+            "name": "${this.Name}",
+            "size": ${this.Size}
+        }`;
     }
 
     Deserialize(data: string): DirectoryModel {
-        return null;
+        let obj = JSON.parse(data);
+        
+        let dir = new DirectoryModel();
+        dir.Name = obj.name;
+        dir.Size = obj.size;
+        return dir;
     }
+
 }

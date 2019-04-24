@@ -15,9 +15,9 @@ export class IpcService extends BaseService {
         return this._event;
     }
 
-    Send(type: MessageType, data?: any): void;
+    Send(type: MessageType, data?: string): void;
     Send(message: MessageModel): void
-    Send(typeOrMessage: MessageType | MessageModel, data?: any): void {
+    Send(typeOrMessage: MessageType | MessageModel, data: string = ''): void {
         let messageString: string;
         if (typeOrMessage instanceof MessageModel) {
             messageString = JSON.stringify(typeOrMessage);

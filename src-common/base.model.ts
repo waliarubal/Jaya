@@ -1,4 +1,4 @@
-import { Dictionary } from './data-structures';
+import { Dictionary } from './data-structures/dictionary';
 
 export abstract class BaseModel {
     private readonly _variables: Dictionary<string, any>;
