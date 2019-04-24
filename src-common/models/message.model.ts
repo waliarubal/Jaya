@@ -1,4 +1,5 @@
 export enum MessageType {
+    Unknown = 'u',
     Handshake = 'h'
 }
 
@@ -25,6 +26,10 @@ export class MessageModel {
 
     toString(): string {
         return `Message Type: ${this.Type}\r\nMessage Data: ${this.Data}`;
+    }
+
+    static Empty(): MessageModel {
+        return new MessageModel(MessageType.Unknown);
     }
 
 }

@@ -1,19 +1,24 @@
-import { BrowserWindow } from 'electron';
 import { IpcService } from './ipc.service';
-import { MessageModel, MessageType } from '../../src-common';
+import { BaseService, Constants, MessageModel, MessageType } from '../../src-common';
 
-export class FileSystemService extends IpcService {
+export class FileSystemService extends BaseService {
+    private readonly _ipc: IpcService;
 
-    constructor(window: BrowserWindow) {
-        super(window);
+    constructor(ipc: IpcService){
+        super();
+        this._ipc = ipc;
+        this._ipc.Receive.on(Constants.IPC_CHANNEL, this.OnMessage);
     }
 
-    protected Receive(message: MessageModel): void {
-        switch (message.Type) {
+    protected Dispose(): void {
+        this._ipc.Receive.removeListener(Constants.IPC_CHANNEL, this.OnMessage);
+    }
+
+    private OnMessage(message: MessageModel): void {
+        switch(message.Type) {
             case MessageType.Handshake:
                 console.log('IPC bridge created.');
                 break;
         }
     }
-
 }
