@@ -1,7 +1,6 @@
-import { WebBaseService } from '@services/web-base.service';
-import { MessageModel, MessageType } from '@shared/models';
-import { Constants } from '@shared/constants';
 import { Injectable, EventEmitter } from '@angular/core';
+import { WebBaseService } from '@services/web-base.service';
+import { MessageModel, MessageType, Constants } from '@common/index';
 
 @Injectable()
 export class IpcService extends WebBaseService {

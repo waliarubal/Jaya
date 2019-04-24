@@ -1,6 +1,6 @@
 import { IpcRenderer } from 'electron';
-import { BaseService } from '@shared/base.service';
 import { OnDestroy } from '@angular/core';
+import { BaseService } from '@common/index';
 
 export abstract class WebBaseService extends BaseService implements OnDestroy {
     private readonly _ipc: IpcRenderer;

@@ -1,5 +1,4 @@
-import { MessageModel } from '@shared/models';
-import { BaseModel } from '@shared/base.model';
+import { BaseModel, MessageModel } from '@common/index';
 import { IpcService } from '@services/ipc.service';
 
 export abstract class BaseComponent extends BaseModel {

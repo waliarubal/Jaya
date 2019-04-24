@@ -1,5 +1,5 @@
 import { ipcMain, BrowserWindow } from 'electron';
-import { Constants, BaseService, MessageModel } from '../../shared'
+import { Constants, BaseService, MessageModel } from '../../src-common'
 
 export abstract class IpcService extends BaseService {
 

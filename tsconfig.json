@@ -20,8 +20,10 @@
     ],
     "paths": {
       "@shared/*": [
-        "shared/*",
         "src/app/shared/*"
+      ],
+      "@common/*": [
+        "src-common/*"
       ],
       "@services/*": [
         "src/app/services/*"
