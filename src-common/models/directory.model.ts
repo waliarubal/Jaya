@@ -1,35 +1,31 @@
-import { BaseModel } from '../base.model';
 import { FileModel } from './file.model';
+import { ISerializable } from '../interfaces';
 
-export class DirectoryModel extends BaseModel {
-    
-    constructor(){
-        super();
-        this.Directories = [];
-        this.Files = [];
-    }
-
-    get Name(): string {
-        return this.Get('n');
-    }
-
-    set Name(value: string) {
-        this.Set('n', value);
-    }
+export class DirectoryModel extends FileModel implements ISerializable {
+    private _directories: DirectoryModel[];
+    private _files: FileModel[];
 
     get Directories(): DirectoryModel[] {
-        return this.Get('d');
+        return this._directories;
     }
 
     set Directories(value: DirectoryModel[]) {
-        this.Set('d', value);
+        this._directories = value;
     }
 
     get Files(): FileModel[] {
-        return this.Get('f');
+        return this._files;
     }
 
     set Files(value: FileModel[]) {
-        this.Set('f', value);
+        this._files = value;
+    }
+
+    Serialize(): string {
+        return null;
+    }
+
+    Deserialize(data: string): DirectoryModel {
+        return null;
     }
 }

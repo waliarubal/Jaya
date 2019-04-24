@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
-import { IpcService } from '@services/ipc.service';
 import { BaseComponent } from '@shared/base.component';
-import { MessageModel, MessageType } from '@common/index';
+import { FileSystemService } from '@services/file-system.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  providers: [FileSystemService]
 })
 export class AppComponent extends BaseComponent {
 
-  constructor(ipc: IpcService) {
-    super(ipc);
+  constructor(private _fileSystemService: FileSystemService) {
+    super();
   }
 
-  protected ReceiveMessage(message: MessageModel): void {
-    console.log(message);
+  ngOnInit(): void {
+    this._fileSystemService.GetDirectories('e://');
   }
 
 }

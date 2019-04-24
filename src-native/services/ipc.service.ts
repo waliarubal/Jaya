@@ -15,14 +15,14 @@ export class IpcService extends BaseService {
         return this._event;
     }
 
-    Send(message: MessageModel): void
     Send(type: MessageType, data?: any): void;
+    Send(message: MessageModel): void
     Send(typeOrMessage: MessageType | MessageModel, data?: any): void {
         let messageString: string;
         if (typeOrMessage instanceof MessageModel) {
             messageString = JSON.stringify(typeOrMessage);
         } else {
-            let message = new MessageModel(typeOrMessage, data);
+            let message = MessageModel.New(typeOrMessage, data);
             messageString = JSON.stringify(message);
         }
         this._window.webContents.send(Constants.IPC_CHANNEL, messageString);
@@ -30,11 +30,23 @@ export class IpcService extends BaseService {
 
     protected Dispose(): void {
         ipcMain.removeAllListeners(Constants.IPC_CHANNEL);
-        this._event.removeAllListeners(Constants.IPC_CHANNEL);
+        this.Receive.removeAllListeners(Constants.IPC_CHANNEL);
     }
 
     private OnMessage(event: any, messageString: string): void {
-        let message = Object.assign(MessageModel.Empty(), JSON.parse(messageString));
-        this._event.emit(Constants.IPC_CHANNEL, message);
+        let message = <MessageModel>Object.assign(MessageModel.Empty(), JSON.parse(messageString));
+        switch (message.Type) {
+            case MessageType.Unknown:
+                return;
+
+            case MessageType.Handshake:
+                this.Send(message);
+                console.log(`[${message.Id}] IPC bridge created.`);
+                break;
+
+            default:
+                this.Receive.emit(Constants.IPC_CHANNEL, message);
+                break;
+        }
     }
 }

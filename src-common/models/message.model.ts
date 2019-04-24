@@ -1,27 +1,37 @@
+import { Helpers } from '../helpers';
+import { ISerializable } from '../interfaces';
+
 export enum MessageType {
     Unknown = 'u',
-    Handshake = 'h'
+    Handshake = 'h',
+    Directoties = 'd',
+    Files = 'f'
 }
 
 export class MessageModel {
+    private _id: string;
     private readonly _type: MessageType;
-    private readonly _data: any;
+    private readonly _data: ISerializable;
 
-    constructor(type: MessageType, data?: any) {
+    private constructor(type: MessageType, data?: ISerializable) {
         this._type = type;
         this._data = data;
+    }
+
+    get Id(): string {
+        return this._id;
+    }
+
+    set Id(value: string) {
+        this._id = value;
     }
 
     get Type(): MessageType {
         return this._type;
     }
 
-    get Data(): any {
+    get Data(): ISerializable {
         return this._data;
-    }
-
-    GetData<T>(): T {
-        return <T>this.Data;
     }
 
     toString(): string {
@@ -29,7 +39,14 @@ export class MessageModel {
     }
 
     static Empty(): MessageModel {
-        return new MessageModel(MessageType.Unknown);
+        let message = new MessageModel(MessageType.Unknown);
+        return message;
+    }
+
+    static New(type: MessageType, data?: ISerializable): MessageModel {
+        let message = new MessageModel(type, data);
+        message.Id = Helpers.Guid();
+        return message;
     }
 
 }
