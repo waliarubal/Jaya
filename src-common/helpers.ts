@@ -26,7 +26,7 @@ export class Helpers {
         if (!data)
             return [];
 
-        const prototype = new Object() as ISerializable<T>;
+        const prototype: ISerializable<T> = <ISerializable<T>>{};
 
         let items: T[] = [];
         data.split(Constants.SEPARATOR).forEach(string => items.push(prototype.Deserialize(string)));
