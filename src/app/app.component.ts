@@ -13,8 +13,9 @@ export class AppComponent extends BaseComponent {
     super();
   }
 
-  ngOnInit(): void {
-    this._fileSystemService.GetDirectories('e://');
+  async ngOnInit(): Promise<void> {
+    let dir = await this._fileSystemService.GetDirectories('e://');
+    console.log(dir);
   }
 
 }

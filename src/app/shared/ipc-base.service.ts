@@ -10,6 +10,8 @@ export abstract class IpcBaseService extends BaseService implements OnDestroy {
         super();
 
         this._event = new EventEmitter();
+        this._event.isStopped = true;
+        
         if ((<any>window).require) {
             try {
                 let ipc = this._ipc = (<any>window).require('electron').ipcRenderer;
@@ -26,6 +28,42 @@ export abstract class IpcBaseService extends BaseService implements OnDestroy {
 
     get Receive(): EventEmitter<MessageModel> {
         return this._event;
+    }
+
+    get IsReceiving(): boolean {
+        return !this._event.isStopped;
+    }
+
+    set IsReceiving(value: boolean) {
+        this._event.isStopped = !value;
+    }
+
+    async SendAsync(message: MessageModel): Promise<MessageModel>;
+    async SendAsync(type: MessageType, data?: string): Promise<MessageModel>;
+    async SendAsync(typeOrMessage: MessageType | MessageModel, data: string = ''): Promise<MessageModel> {
+        let messageString: string;
+        let id: string;
+        if (typeOrMessage instanceof MessageModel) {
+            id = typeOrMessage.Id;
+            messageString = JSON.stringify(typeOrMessage);
+        }
+        else {
+            let message = MessageModel.New(typeOrMessage, data);
+            id = message.Id;
+            messageString = JSON.stringify(message);
+        }
+
+        return new Promise<MessageModel>((resolve, reject) => {
+            let listener = (event: any, messageString: string) => {
+                let reply = <MessageModel>Object.assign(MessageModel.Empty(), JSON.parse(messageString));
+                if (reply.Id === id) {
+                    this._ipc.removeListener(Constants.IPC_CHANNEL, listener);
+                    resolve(reply);
+                }
+            };
+            this._ipc.on(Constants.IPC_CHANNEL, listener);
+            this._ipc.send(Constants.IPC_CHANNEL, messageString);
+        });
     }
 
     Send(message: MessageModel): void;
