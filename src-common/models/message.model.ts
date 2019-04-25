@@ -10,11 +10,11 @@ export enum MessageType {
 export class MessageModel {
     private readonly _type: MessageType;
     private _id: string;
-    private _data: string;
+    private _dataJson: string;
 
-    private constructor(type: MessageType, data: string = '') {
+    private constructor(type: MessageType, dataJson: string = '') {
         this._type = type;
-        this._data = data;
+        this._dataJson = dataJson;
     }
 
     get Id(): string {
@@ -29,16 +29,16 @@ export class MessageModel {
         return this._type;
     }
 
-    get Data(): string {
-        return this._data;
+    get DataJson(): string {
+        return this._dataJson;
     }
 
-    set Data(value: string) {
-        this._data = value;
+    set DataJson(value: string) {
+        this._dataJson = value;
     }
 
     toString(): string {
-        return `Message Type: ${this.Type}\r\nMessage Data: ${this.Data}`;
+        return `Message Type: ${this.Type}\r\nMessage Data JSON: ${this.DataJson}`;
     }
 
     static Empty(): MessageModel {

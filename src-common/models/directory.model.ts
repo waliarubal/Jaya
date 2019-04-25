@@ -1,10 +1,12 @@
+import { serializable, object, list } from 'serializr';
 import { FileModel } from './file.model';
-import { ISerializable } from '../interfaces/ISerializable';
 
-export class DirectoryModel extends FileModel implements ISerializable<DirectoryModel> {
+
+export class DirectoryModel extends FileModel {
     private _directories: DirectoryModel[];
     private _files: FileModel[];
 
+    @serializable(list(object(DirectoryModel)))
     get Directories(): DirectoryModel[] {
         return this._directories;
     }
@@ -13,28 +15,13 @@ export class DirectoryModel extends FileModel implements ISerializable<Directory
         this._directories = value;
     }
 
+    @serializable(list(object(FileModel)))
     get Files(): FileModel[] {
         return this._files;
     }
 
     set Files(value: FileModel[]) {
         this._files = value;
-    }
-
-    Serialize(): string {
-        return `{
-            "name": "${this.Name}",
-            "size": ${this.Size}
-        }`;
-    }
-
-    Deserialize(data: string): DirectoryModel {
-        let obj = JSON.parse(data);
-        
-        let dir = new DirectoryModel();
-        dir.Name = obj.name;
-        dir.Size = obj.size;
-        return dir;
     }
 
 }

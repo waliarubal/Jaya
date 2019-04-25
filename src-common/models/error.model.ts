@@ -1,3 +1,5 @@
+import { serializable } from 'serializr';
+
 export class ErrorModel {
     private _message: string;
 
@@ -5,6 +7,7 @@ export class ErrorModel {
         this.Message = message;
     }
 
+    @serializable
     get Message(): string {
         return this._message;
     }
