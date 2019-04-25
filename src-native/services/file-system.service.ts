@@ -86,7 +86,7 @@ export class FileSystemService extends BaseService {
                 this.GetDirectory(message.DataJson).then(directory => {
                     message.DataJson = serialize<DirectoryModel>(directory);
                     this._ipc.Send(message);
-                });
+                }, (ex) => console.log(ex));
                 break;
         }
     }
