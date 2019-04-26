@@ -26,7 +26,7 @@ export class FileSystemService extends IpcBaseService {
     }
 
     async GetDirectories(path: string): Promise<DirectoryModel> {
-        let response = await this.SendAsync(MessageType.Directoties, 'd://');
+        let response = await this.SendAsync(MessageType.Directoties, path);
         let directory = deserialize(DirectoryModel, response.DataJson);
         return directory;
     }

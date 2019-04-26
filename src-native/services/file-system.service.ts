@@ -55,10 +55,11 @@ export class FileSystemService extends BaseService {
 
             while (fileNames.length > 0) {
                 let fileName = fileNames.pop();
+                let fullName = Path.join(path, fileName);
 
                 let info: Fs.Stats;
                 try {
-                    info = await this.GetFileInfo(Path.join(path, fileName));
+                    info = await this.GetFileInfo(fullName);
                 } catch (ex) {
                     console.log(ex);
                     continue;
@@ -67,10 +68,12 @@ export class FileSystemService extends BaseService {
                 if (info.isDirectory()) {
                     let dir = new DirectoryModel();
                     dir.Name = fileName;
+                    dir.Path = fullName;
                     directory.Directories.push(dir);
                 } else if (info.isFile()) {
                     let file = new FileModel();
                     file.Name = fileName;
+                    file.Path = fullName;
                     file.Size = info.size;
                     directory.Files.push(file);
                 }
