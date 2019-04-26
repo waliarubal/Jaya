@@ -24,4 +24,14 @@ export class DirectoryModel extends FileModel {
         this._files = value;
     }
 
+    get Contents(): FileModel[] {
+        let contents: FileModel[] = [];
+        if (this.Directories)
+            contents.push(...this.Directories);
+        if (this.Files)
+            contents.push(...this.Files);
+
+        return contents;
+    }
+
 }
