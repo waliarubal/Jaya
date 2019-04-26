@@ -3,8 +3,8 @@ import { BaseComponent } from '@shared/base.component';
 import { DirectoryModel } from '@common/index';
 
 @Component({
-    selector: 'app-file-system-table',
-    templateUrl: './file-system-table.component.html'
+    selector: 'app-fs-table',
+    templateUrl: './fs-table.component.html'
 })
 export class FileSystemTableComponent extends BaseComponent {
     private _directory: DirectoryModel;

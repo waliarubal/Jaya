@@ -5,8 +5,8 @@ import { FileSystemService } from '@services/file-system.service';
 import { DirectoryModel } from '@common/index';
 
 @Component({
-    selector: 'app-file-system-tree',
-    templateUrl: './file-system-tree.component.html',
+    selector: 'app-fs-tree',
+    templateUrl: './fs-tree.component.html',
     providers: [FileSystemService]
 })
 export class FileSystemTreeComponent extends BaseComponent {
