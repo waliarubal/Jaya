@@ -33,7 +33,6 @@
     "@angular/platform-browser-dynamic": "^7.2.14",
     "@angular/router": "^7.2.14",
     "core-js": "^2.5.4",
-    "primeflex": "^1.0.0-rc.1",
     "primeicons": "^1.0.0",
     "primeng": "^7.1.2",
     "rxjs": "~6.3.3",
