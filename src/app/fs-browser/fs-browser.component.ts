@@ -9,9 +9,15 @@ import { FileSystemTreeComponent } from './fs-tree/fs-tree.component';
 })
 export class FileSystemBrowserComponent extends BaseComponent implements AfterViewInit {
     private _directory: DirectoryModel;
+    @ViewChild("fsTree") private _fsTreeComponent: FileSystemTreeComponent;
 
-    @ViewChild("fsTree")
-    private _fsTreeComponent: FileSystemTreeComponent;
+    constructor() {
+        super();
+        this._directory = <DirectoryModel>{
+            Name: '/',
+            Path: '/'
+        };
+    }
 
     get Directory(): DirectoryModel {
         return this._directory;
