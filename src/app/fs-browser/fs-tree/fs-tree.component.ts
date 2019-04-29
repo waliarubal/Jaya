@@ -28,7 +28,7 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     protected Initialize(): void {
-        this.PopulateNode().then();
+        
     }
 
     protected Destroy(): void {
