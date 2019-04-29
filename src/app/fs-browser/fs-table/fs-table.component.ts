@@ -10,7 +10,7 @@ export class FileSystemTableComponent extends BaseComponent {
     private _directory: DirectoryModel;
 
     protected Initialize(): void {
-
+        
     }
 
     protected Destroy(): void {
