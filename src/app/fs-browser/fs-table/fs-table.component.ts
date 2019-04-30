@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { DirectoryModel } from '@common/index';
+import { DirectoryModel, FileModel } from '@common/index';
 
 @Component({
     selector: 'app-fs-table',
@@ -8,9 +8,10 @@ import { DirectoryModel } from '@common/index';
 })
 export class FileSystemTableComponent extends BaseComponent {
     private _directory: DirectoryModel;
+    private _contents: FileModel[];
 
     protected Initialize(): void {
-        
+        this._contents = [];
     }
 
     protected Destroy(): void {
@@ -24,5 +25,11 @@ export class FileSystemTableComponent extends BaseComponent {
 
     set Directory(value: DirectoryModel) {
         this._directory = value;
+
+        console.log(this.Directory);
+    }
+
+    get Contents(): FileModel[] {
+        return this._contents;
     }
 }
