@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { BaseComponent } from '@shared/base.component';
 import { FileSystemService } from '@services/file-system.service';
-import { DirectoryModel } from '@common/index';
+import { DirectoryModel, ProviderModel } from '@common/index';
 
 @Component({
     selector: 'app-fs-tree',
@@ -28,34 +28,74 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     protected Initialize(): void {
-        
+
     }
 
     protected Destroy(): void {
 
     }
 
-    async PopulateNode(node?: TreeNode): Promise<void> {
-        let path = node ? node.data.Path : '/';
+    async PopulateProviders(): Promise<void> {
         let nodes: TreeNode[] = [];
 
-        let directory = await this._fileSystemService.GetDirectories(path);
-        for (let directoryModel of directory.Directories) {
+        try {
+            let fileSystemProvider = await this._fileSystemService.GetProvider();
             let node = <TreeNode>{
-                label: directoryModel.Name,
-                data: directoryModel,
-                expandedIcon: "fa fa-folder-open",
-                collapsedIcon: "fa fa-folder",
+                label: fileSystemProvider.Name,
+                data: fileSystemProvider,
+                icon: fileSystemProvider.Icon,
                 leaf: false
             };
             nodes.push(node);
+        } catch (ex) {
+            console.log(ex);
         }
 
-        if (node) {
-            node.leaf = true;
-            node.children = nodes;
+        this._nodes = nodes;
+    }
+
+    OnNodeSelected(node: TreeNode): void {
+        if (!node)
+            return;
+
+        if (node.data instanceof DirectoryModel)
+            this.DirectorySelected.emit(node.data);
+    }
+
+    async PopulateNode(node?: TreeNode): Promise<void> {
+        if (!node)
+            return;
+
+        if (node.data instanceof ProviderModel) {
+            // let nodes: TreeNode[] = [];
+            // node.data.Directories.forEach(directory => {
+
+            // });
+
+            // if (node) {
+            //     node.leaf = true;
+            //     node.children = nodes;
+            // }
         }
-        else
-            this._nodes = nodes;
+        else if (node.data instanceof DirectoryModel) {
+            let nodes: TreeNode[] = [];
+
+            let directory = await this._fileSystemService.GetDirectories(node.data.Path);
+            for (let directoryModel of directory.Directories) {
+                let node = <TreeNode>{
+                    label: directoryModel.Name,
+                    data: directoryModel,
+                    expandedIcon: "fa fa-folder-open",
+                    collapsedIcon: "fa fa-folder",
+                    leaf: false
+                };
+                nodes.push(node);
+            }
+
+            if (node) {
+                node.leaf = true;
+                node.children = nodes;
+            }
+        }
     }
 }

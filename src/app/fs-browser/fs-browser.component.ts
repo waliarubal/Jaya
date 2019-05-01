@@ -9,13 +9,10 @@ import { FileSystemTreeComponent } from './fs-tree/fs-tree.component';
 })
 export class FileSystemBrowserComponent extends BaseComponent implements AfterViewInit {
     private _directory: DirectoryModel;
-    private _providers: ProviderModel[];
     @ViewChild("fsTree") private _fsTreeComponent: FileSystemTreeComponent;
 
     constructor() {
         super();
-        this._providers = [];
-
         this._directory = <DirectoryModel>{
             Name: '/',
             Path: '/'
@@ -31,7 +28,7 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
     }
 
     async ngAfterViewInit(): Promise<void> {
-        await this._fsTreeComponent.PopulateNode();
+        await this._fsTreeComponent.PopulateProviders();
     }
 
     protected Initialize(): void {

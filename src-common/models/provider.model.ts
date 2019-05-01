@@ -1,5 +1,6 @@
 import { serializable, list, object } from 'serializr';
-import { Helpers, DirectoryModel } from '../index';
+import { Helpers } from '../helpers';
+import { DirectoryModel } from './directory.model';
 
 export class ProviderModel {
     @serializable private _id: string;
