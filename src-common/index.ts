@@ -8,5 +8,6 @@ import { ErrorModel } from './models/error.model';
 import { FileModel } from './models/file.model';
 import { DirectoryModel } from './models/directory.model';
 import { MessageModel, MessageType } from './models/message.model';
+import { ProviderModel } from './models/provider.model';
 
-export { Helpers, BaseModel, BaseService, Constants, Dictionary, Pair, ErrorModel, FileModel, DirectoryModel, MessageModel, MessageType };
+export { Helpers, BaseModel, BaseService, Constants, Dictionary, Pair, ErrorModel, FileModel, DirectoryModel, MessageModel, MessageType, ProviderModel };

@@ -4,7 +4,8 @@ export enum MessageType {
     Unknown = 'u',
     Handshake = 'h',
     Directoties = 'd',
-    Files = 'f'
+    Files = 'f',
+    FileSystemProvider = 'p_fs'
 }
 
 export class MessageModel {

@@ -1,6 +1,6 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { DirectoryModel } from '@common/index';
+import { DirectoryModel, ProviderModel } from '@common/index';
 import { FileSystemTreeComponent } from './fs-tree/fs-tree.component';
 
 @Component({
@@ -9,10 +9,13 @@ import { FileSystemTreeComponent } from './fs-tree/fs-tree.component';
 })
 export class FileSystemBrowserComponent extends BaseComponent implements AfterViewInit {
     private _directory: DirectoryModel;
+    private _providers: ProviderModel[];
     @ViewChild("fsTree") private _fsTreeComponent: FileSystemTreeComponent;
 
     constructor() {
         super();
+        this._providers = [];
+
         this._directory = <DirectoryModel>{
             Name: '/',
             Path: '/'

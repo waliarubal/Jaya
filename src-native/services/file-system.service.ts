@@ -1,7 +1,8 @@
 import * as Fs from 'fs';
+import * as Os from 'os';
 import * as Path from 'path';
 import { IpcService } from './ipc.service';
-import { BaseService, Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel } from '../../src-common';
+import { BaseService, Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel, ProviderModel } from '../../src-common';
 
 export class FileSystemService extends BaseService {
     private readonly _ipc: IpcService;
@@ -82,20 +83,42 @@ export class FileSystemService extends BaseService {
         });
     }
 
-    private async OnMessage(message: MessageModel): Promise<void> {
+    private async GetProvider(): Promise<ProviderModel> {
+        let provider = ProviderModel.New(`Computer (${Os.hostname()})`, 'fa fa-laptop');
+        return new Promise<ProviderModel>(async (resolve, reject) => {
+            Os.hostname();
+            try {
+                let directories = await this.GetDirectory(Os.homedir());
+                provider.Directories = directories.Directories;
+            } catch (ex) {
+                console.log(ex);
+            }
+
+            if (provider)
+                resolve(provider);
+            else
+                reject('Failed to get File System provider.');
+        })
+    }
+
+    private OnMessage(message: MessageModel): void {
         switch (message.Type) {
             case MessageType.Directoties:
-                let directory: DirectoryModel;
-                try {
-                    directory = await this.GetDirectory(message.DataJson);
-                } catch (ex) {
-                    console.log(ex);
-                }
+                this.GetDirectory(message.DataJson).then(directory => {
+                    message.DataJson = Helpers.Serialize<DirectoryModel>(directory);
+                    this._ipc.Send(message);
+                }).catch(ex =>
+                    console.log(ex)
+                );
+                break;
 
-                if (directory)
-                    message.DataJson = Helpers.Serialize(DirectoryModel, directory);
-                
-                this._ipc.Send(message);
+            case MessageType.FileSystemProvider:
+                this.GetProvider().then(provider => {
+                    message.DataJson = Helpers.Serialize<ProviderModel>(provider);
+                    this._ipc.Send(message);
+                }).catch(ex =>
+                    console.log(ex)
+                );
                 break;
         }
     }
