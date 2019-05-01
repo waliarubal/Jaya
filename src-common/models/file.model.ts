@@ -1,21 +1,18 @@
 import { serializable } from 'serializr';
 
 export class FileModel {
-    private _name: string;
-    private _size: number;
-    private _path: string;
+    @serializable private _name: string;
+    @serializable private _size: number;
+    @serializable private _path: string;
 
-    @serializable
     get Name(): string {
         return this._name;
     }
-
     
     set Name(value: string) {
         this._name = value;
     }
 
-    @serializable
     get Path(): string {
         return this._path;
     }
@@ -24,7 +21,6 @@ export class FileModel {
         this._path = value;
     }
 
-    @serializable
     get Size(): number {
         return this._size;
     }

@@ -1,13 +1,12 @@
 import { serializable } from 'serializr';
 
 export class ErrorModel {
-    private _message: string;
+    @serializable private _message: string;
 
     constructor(message: string = null) {
         this.Message = message;
     }
 
-    @serializable
     get Message(): string {
         return this._message;
     }

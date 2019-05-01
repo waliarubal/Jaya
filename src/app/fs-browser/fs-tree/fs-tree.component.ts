@@ -54,11 +54,9 @@ export class FileSystemTreeComponent extends BaseComponent {
         this._nodes = nodes;
     }
 
-    OnNodeSelected(node: TreeNode): void {
-        if (!node)
-            return;
-
-        if (node.data instanceof DirectoryModel)
+    OnNodeSelected(event: any): void {
+        let node = event.node;
+        if (node && node.data instanceof DirectoryModel)
             this.DirectorySelected.emit(node.data);
     }
 
@@ -66,21 +64,23 @@ export class FileSystemTreeComponent extends BaseComponent {
         if (!node)
             return;
 
+        let nodes: TreeNode[] = [];
+
         if (node.data instanceof ProviderModel) {
-            // let nodes: TreeNode[] = [];
-            // node.data.Directories.forEach(directory => {
-
-            // });
-
-            // if (node) {
-            //     node.leaf = true;
-            //     node.children = nodes;
-            // }
+            node.data.Directories.forEach(directoryModel => {
+                let node = <TreeNode>{
+                    label: directoryModel.Name,
+                    data: directoryModel,
+                    expandedIcon: "fa fa-folder-open",
+                    collapsedIcon: "fa fa-folder",
+                    leaf: false
+                };
+                nodes.push(node);
+            });
         }
         else if (node.data instanceof DirectoryModel) {
-            let nodes: TreeNode[] = [];
-
             let directory = await this._fileSystemService.GetDirectories(node.data.Path);
+            
             for (let directoryModel of directory.Directories) {
                 let node = <TreeNode>{
                     label: directoryModel.Name,
@@ -91,11 +91,11 @@ export class FileSystemTreeComponent extends BaseComponent {
                 };
                 nodes.push(node);
             }
+        }
 
-            if (node) {
-                node.leaf = true;
-                node.children = nodes;
-            }
+        if (node) {
+            node.leaf = true;
+            node.children = nodes;
         }
     }
 }

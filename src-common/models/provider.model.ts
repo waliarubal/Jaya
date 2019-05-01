@@ -6,12 +6,11 @@ export class ProviderModel {
     @serializable private _id: string;
     @serializable private _name: string;
     @serializable private _icon: string;
-    private _directories: DirectoryModel[];
+    @serializable(list(object(DirectoryModel))) private _directories: DirectoryModel[];
 
     get Id(): string {
         return this._id;
     }
-
 
     get Name(): string {
         return this._name;
@@ -21,7 +20,6 @@ export class ProviderModel {
         return this._icon;
     }
 
-    @serializable(list(object(DirectoryModel)))
     get Directories(): DirectoryModel[] {
         return this._directories;
     }

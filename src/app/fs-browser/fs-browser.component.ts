@@ -13,10 +13,6 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
 
     constructor() {
         super();
-        this._directory = <DirectoryModel>{
-            Name: '/',
-            Path: '/'
-        };
     }
 
     get Directory(): DirectoryModel {
