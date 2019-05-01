@@ -1,3 +1,5 @@
+import { deserialize, serialize, ClazzOrModelSchema } from 'serializr';
+
 export class Helpers {
 
     static Guid(): string {
@@ -8,4 +10,18 @@ export class Helpers {
         });
     }
 
+    static async Deserialize<T>(modelSchema: ClazzOrModelSchema<T>, json: any): Promise<T> {
+        return new Promise<T>((resolve, reject) => {
+            deserialize<T>(modelSchema, json, (error: any, result: T) => {
+                if (error)
+                    reject(error);
+                else
+                    resolve(result);
+            });
+        });
+    }
+
+    static Serialize<T>(modelSchema: ClazzOrModelSchema<T>, object: T): string {
+        return serialize<T>(modelSchema, object);
+    }
 }

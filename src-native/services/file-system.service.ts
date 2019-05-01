@@ -1,6 +1,5 @@
 import * as Fs from 'fs';
 import * as Path from 'path';
-import { serialize } from 'serializr';
 import { IpcService } from './ipc.service';
 import { BaseService, Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel } from '../../src-common';
 
@@ -83,13 +82,20 @@ export class FileSystemService extends BaseService {
         });
     }
 
-    private OnMessage(message: MessageModel): void {
+    private async OnMessage(message: MessageModel): Promise<void> {
         switch (message.Type) {
             case MessageType.Directoties:
-                this.GetDirectory(message.DataJson).then(directory => {
-                    message.DataJson = serialize<DirectoryModel>(directory);
-                    this._ipc.Send(message);
-                }, (ex) => console.log(ex));
+                let directory: DirectoryModel;
+                try {
+                    directory = await this.GetDirectory(message.DataJson);
+                } catch (ex) {
+                    console.log(ex);
+                }
+
+                if (directory)
+                    message.DataJson = Helpers.Serialize(DirectoryModel, directory);
+                
+                this._ipc.Send(message);
                 break;
         }
     }

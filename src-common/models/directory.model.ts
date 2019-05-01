@@ -1,7 +1,6 @@
 import { serializable, object, list } from 'serializr';
 import { FileModel } from './file.model';
 
-
 export class DirectoryModel extends FileModel {
     private _directories: DirectoryModel[];
     private _files: FileModel[];
