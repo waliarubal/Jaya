@@ -21,7 +21,7 @@ export class Helpers {
         });
     }
 
-    static Serialize<T>(object: T): string {
-        return serialize<T>(object);
+    static Serialize<T>(modelSchema: ClazzOrModelSchema<T>, object: T): string {
+        return serialize<T>(modelSchema, object);
     }
 }

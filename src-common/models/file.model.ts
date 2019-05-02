@@ -1,9 +1,18 @@
-import { serializable, ModelSchema } from 'serializr';
+import { primitive } from 'serializr';
+
+export const FileModelSchema = {
+    factory: context => new FileModel(),
+    props: {
+        Name: primitive(),
+        Path: primitive(),
+        Size: primitive()
+    }
+};
 
 export class FileModel {
-    @serializable private _name: string;
-    @serializable private _size: number;
-    @serializable private _path: string;
+    private _name: string;
+    private _size: number;
+    private _path: string;
 
     get Name(): string {
         return this._name;

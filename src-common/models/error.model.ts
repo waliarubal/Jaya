@@ -1,7 +1,14 @@
-import { serializable } from 'serializr';
+import { primitive } from 'serializr';
+
+export const ErrorModelSchema = {
+    factory: context => new ErrorModel(),
+    props: {
+        Message: primitive()
+    }
+};
 
 export class ErrorModel {
-    @serializable private _message: string;
+    private _message: string;
 
     constructor(message: string = null) {
         this.Message = message;

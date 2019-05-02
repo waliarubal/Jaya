@@ -1,9 +1,18 @@
-import { serializable, object, list } from 'serializr';
-import { FileModel } from './file.model';
+import { object, list } from 'serializr';
+import { FileModel, FileModelSchema } from './file.model';
+
+export const DirectoryModelSchema = {
+    factory: context => new DirectoryModel(),
+    extends: FileModelSchema,
+    props: {
+        // Directories: list(object(DirectoryModelSchema)),
+        Files: list(object(FileModelSchema))
+    }
+};
 
 export class DirectoryModel extends FileModel {
-    @serializable(list(object(DirectoryModel))) private _directories: DirectoryModel[];
-    @serializable(list(object(FileModel))) private _files: FileModel[];
+    private _directories: DirectoryModel[];
+    private _files: FileModel[];
     
     get Directories(): DirectoryModel[] {
         return this._directories;

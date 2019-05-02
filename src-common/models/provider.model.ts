@@ -1,12 +1,22 @@
-import { serializable, list, object } from 'serializr';
+import { list, object, primitive, identifier } from 'serializr';
 import { Helpers } from '../helpers';
-import { DirectoryModel } from './directory.model';
+import { DirectoryModel, DirectoryModelSchema } from './directory.model';
+
+export const ProviderModelSchema = {
+    factory: contect => new ProviderModel(),
+    props: {
+        _id: identifier(),
+        _name: primitive(),
+        _icon: primitive(),
+        Directories: list(object(DirectoryModelSchema))
+    }
+};
 
 export class ProviderModel {
-    @serializable private _id: string;
-    @serializable private _name: string;
-    @serializable private _icon: string;
-    @serializable(list(object(DirectoryModel))) private _directories: DirectoryModel[];
+    private _id: string;
+    private _name: string;
+    private _icon: string;
+    private _directories: DirectoryModel[];
 
     get Id(): string {
         return this._id;
