@@ -8,10 +8,9 @@ import { DirectoryModel, FileModel } from '@common/index';
 })
 export class FileSystemTableComponent extends BaseComponent {
     private _directory: DirectoryModel;
-    private _contents: FileModel[];
 
     protected Initialize(): void {
-        this._contents = [];
+
     }
 
     protected Destroy(): void {
@@ -25,18 +24,5 @@ export class FileSystemTableComponent extends BaseComponent {
 
     set Directory(value: DirectoryModel) {
         this._directory = value;
-
-        if (value) {
-            let contents: FileModel[] = [];
-            for (let directory of value.Directories)
-                contents.push(directory);
-            for (let file of value.Files)
-                contents.push(file);
-            this._contents = contents;
-        }
-    }
-
-    get Contents(): FileModel[] {
-        return this._contents;
     }
 }
