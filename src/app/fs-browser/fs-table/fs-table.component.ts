@@ -25,7 +25,6 @@ export class FileSystemTableComponent extends BaseComponent {
 
     set Directory(value: DirectoryModel) {
         this._directory = value;
-        console.log(value);
     }
 
     get Contents(): FileModel[] {

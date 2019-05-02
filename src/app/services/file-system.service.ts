@@ -15,14 +15,13 @@ export class FileSystemService extends IpcBaseService {
 
     async GetDirectories(path: string): Promise<DirectoryModel> {
         let response = await this.SendAsync(MessageType.Directoties, path);
-        let directory = Helpers.Deserialize<DirectoryModel>(response.DataJson);
+        let directory = Helpers.Deserialize<DirectoryModel>(response.DataJson, DirectoryModel);
         return directory;
     }
 
     async GetProvider(): Promise<ProviderModel> {
         let response = await this.SendAsync(MessageType.FileSystemProvider);
-        let provider = Helpers.Deserialize<ProviderModel>(response.DataJson);
-        console.log(provider instanceof ProviderModel);
+        let provider = Helpers.Deserialize<ProviderModel>(response.DataJson, ProviderModel);
         return provider;
     }
 

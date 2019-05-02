@@ -1,4 +1,6 @@
-export class FileModel {
+import { ISerializable } from '../ISerializable';
+
+export class FileModel implements ISerializable {
     private _name: string;
     private _size: number;
     private _path: string;
@@ -6,7 +8,7 @@ export class FileModel {
     get Name(): string {
         return this._name;
     }
-    
+
     set Name(value: string) {
         this._name = value;
     }
@@ -29,6 +31,12 @@ export class FileModel {
 
     toString(): string {
         return this.Name;
+    }
+
+    Deserialize(object: any): void {
+        this.Name = object._name;
+        this.Size = object._size;
+        this.Path = object._path;
     }
 
 }

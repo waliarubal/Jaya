@@ -1,4 +1,5 @@
 import { parse, stringify } from 'flatted';
+import { ISerializable } from './ISerializable';
 
 export class Helpers {
 
@@ -10,11 +11,15 @@ export class Helpers {
         });
     }
 
-    static Deserialize<T>(json: string): T {
-        return <T>parse(json);
+    static Deserialize<T extends ISerializable>(json: string, type: new () => T): T {
+        let source = parse(json);
+        
+        let destination = new type();
+        destination.Deserialize(source);
+        return destination;
     }
 
-    static Serialize<T>(object: T): string {
+    static Serialize<T extends ISerializable>(object: T): string {
         return stringify(object);;
     }
 }

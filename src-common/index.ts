@@ -9,6 +9,7 @@ import { FileModel } from './models/file.model';
 import { DirectoryModel } from './models/directory.model';
 import { MessageModel, MessageType } from './models/message.model';
 import { ProviderModel } from './models/provider.model';
+import { ISerializable } from './ISerializable';
 
 export {
     Helpers,
@@ -22,4 +23,5 @@ export {
     DirectoryModel,
     MessageModel, MessageType,
     ProviderModel,
+    ISerializable
 };
