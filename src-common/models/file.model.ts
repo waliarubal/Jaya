@@ -1,6 +1,6 @@
-import { ISerializable } from '../interfaces/ISerializable';
+import { IClonable } from '../interfaces/IClonable';
 
-export class FileModel implements ISerializable {
+export class FileModel implements IClonable {
     private _name: string;
     private _size: number;
     private _path: string;
@@ -33,7 +33,7 @@ export class FileModel implements ISerializable {
         return this.Name;
     }
 
-    Deserialize(object: any): void {
+    Clone(object: any): void {
         this.Name = object._name;
         this.Size = object._size;
         this.Path = object._path;

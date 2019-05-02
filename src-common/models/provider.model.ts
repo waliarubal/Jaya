@@ -1,8 +1,8 @@
 import { Helpers } from '../helpers';
 import { DirectoryModel } from './directory.model';
-import { ISerializable } from '../interfaces/ISerializable';
+import { IClonable } from '../interfaces/IClonable';
 
-export class ProviderModel implements ISerializable {
+export class ProviderModel implements IClonable {
     private _id: string;
     private _name: string;
     private _icon: string;
@@ -28,7 +28,7 @@ export class ProviderModel implements ISerializable {
         this._directories = value;
     }
 
-    Deserialize(object: any): void {
+    Clone(object: any): void {
         this._id = object._id;
         this._name = object._name;
         this._icon = object._icon;
@@ -36,7 +36,7 @@ export class ProviderModel implements ISerializable {
         if (object._directories) {
             for (let dirObj of object._directories) {
                 let directory = new DirectoryModel();
-                directory.Deserialize(dirObj);
+                directory.Clone(dirObj);
                 this.Directories.push(directory);
             }
         }

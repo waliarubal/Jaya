@@ -1,4 +1,4 @@
-<p-table [value]="Directory.Directories">
+<p-table [value]="Objects">
     <ng-template pTemplate="header">
         <tr>
             <th>Name</th>
@@ -7,12 +7,12 @@
             <th>Size</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-file>
+    <ng-template pTemplate="body" let-object>
         <tr>
-            <td>{{file.Name}}</td>
-            <td>Type</td>
+            <td>{{object.Name}}</td>
+            <td>{{object.Type}}</td>
             <td>Date Modified</td>
-            <td>{{file.Size}}</td>
+            <td>{{object.Size}}</td>
         </tr>
     </ng-template>
 </p-table>

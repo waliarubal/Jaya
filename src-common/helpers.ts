@@ -1,5 +1,5 @@
 import { parse, stringify } from 'flatted';
-import { ISerializable } from './interfaces/ISerializable';
+import { IClonable } from './interfaces/IClonable';
 
 export class Helpers {
 
@@ -11,15 +11,15 @@ export class Helpers {
         });
     }
 
-    static Deserialize<T extends ISerializable>(json: string, type: new () => T): T {
+    static Deserialize<T extends IClonable>(json: string, type: new () => T): T {
         let source = parse(json);
         
         let destination = new type();
-        destination.Deserialize(source);
+        destination.Clone(source);
         return destination;
     }
 
-    static Serialize<T extends ISerializable>(object: T): string {
+    static Serialize<T extends IClonable>(object: T): string {
         return stringify(object);;
     }
 }

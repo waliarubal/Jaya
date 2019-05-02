@@ -1,4 +1,6 @@
-export class ErrorModel {
+import { IClonable } from '../interfaces/IClonable';
+
+export class ErrorModel implements IClonable {
     private _message: string;
 
     constructor(message: string = null) {
@@ -15,6 +17,10 @@ export class ErrorModel {
 
     toString(): string {
         return this.Message;
+    }
+
+    Clone(object: any): void {
+        this.Message = object._message;
     }
 
 }
