@@ -1,14 +1,3 @@
-import { primitive } from 'serializr';
-
-export const FileModelSchema = {
-    factory: context => new FileModel(),
-    props: {
-        Name: primitive(),
-        Path: primitive(),
-        Size: primitive()
-    }
-};
-
 export class FileModel {
     private _name: string;
     private _size: number;

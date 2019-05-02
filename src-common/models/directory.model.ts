@@ -1,32 +1,22 @@
-import { list, primitive } from 'serializr';
-import { FileModel, FileModelSchema } from './file.model';
-
-export const DirectoryModelSchema = {
-    factory: context => new DirectoryModel(),
-    extends: FileModelSchema,
-    props: {
-        Directories: list(primitive()),
-        Files: list(primitive())
-    }
-};
+import { FileModel } from './file.model';
 
 export class DirectoryModel extends FileModel {
-    private _directories: string[];
-    private _files: string[];
+    private _directories: DirectoryModel[];
+    private _files: FileModel[];
 
-    get Directories(): string[] {
+    get Directories(): DirectoryModel[] {
         return this._directories;
     }
 
-    set Directories(value: string[]) {
+    set Directories(value: DirectoryModel[]) {
         this._directories = value;
     }
 
-    get Files(): string[] {
+    get Files(): FileModel[] {
         return this._files;
     }
 
-    set Files(value: string[]) {
+    set Files(value: FileModel[]) {
         this._files = value;
     }
 

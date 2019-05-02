@@ -10,7 +10,7 @@ import { DirectoryModel, ProviderModel } from '@common/index';
     providers: [FileSystemService]
 })
 export class FileSystemTreeComponent extends BaseComponent {
-    private readonly _directorySelected: EventEmitter<string>;
+    private readonly _directorySelected: EventEmitter<DirectoryModel>;
     private _nodes: TreeNode[];
 
     constructor(private _fileSystemService: FileSystemService) {
@@ -23,7 +23,7 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     @Output()
-    get DirectorySelected(): EventEmitter<string> {
+    get DirectorySelected(): EventEmitter<DirectoryModel> {
         return this._directorySelected;
     }
 
@@ -56,7 +56,7 @@ export class FileSystemTreeComponent extends BaseComponent {
 
     OnNodeSelected(event: any): void {
         let node = event.node;
-        if (node && node.data)
+        if (node && node.data instanceof DirectoryModel)
             this.DirectorySelected.emit(node.data);
     }
 
@@ -69,7 +69,7 @@ export class FileSystemTreeComponent extends BaseComponent {
         if (node.data instanceof ProviderModel) {
             node.data.Directories.forEach(fileName => {
                 let node = <TreeNode>{
-                    label:fileName,
+                    label: fileName.Name,
                     data: fileName,
                     expandedIcon: "fa fa-folder-open",
                     collapsedIcon: "fa fa-folder",
@@ -80,10 +80,10 @@ export class FileSystemTreeComponent extends BaseComponent {
         }
         else if (node.data instanceof DirectoryModel) {
             let directory = await this._fileSystemService.GetDirectories(node.data.Path);
-            
+
             for (let fileName of directory.Directories) {
                 let node = <TreeNode>{
-                    label: fileName,
+                    label: fileName.Name,
                     data: fileName,
                     expandedIcon: "fa fa-folder-open",
                     collapsedIcon: "fa fa-folder",

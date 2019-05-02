@@ -1,12 +1,3 @@
-import { primitive } from 'serializr';
-
-export const ErrorModelSchema = {
-    factory: context => new ErrorModel(),
-    props: {
-        Message: primitive()
-    }
-};
-
 export class ErrorModel {
     private _message: string;
 
