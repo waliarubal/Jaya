@@ -7,7 +7,7 @@ import { DirectoryModel, FileModel } from '@common/index';
     templateUrl: './fs-table.component.html'
 })
 export class FileSystemTableComponent extends BaseComponent {
-    private _directory: DirectoryModel;
+    private _directory: string;
     private _contents: FileModel[];
 
     protected Initialize(): void {
@@ -19,11 +19,11 @@ export class FileSystemTableComponent extends BaseComponent {
     }
 
     @Input()
-    get Directory(): DirectoryModel {
+    get Directory(): string {
         return this._directory;
     }
 
-    set Directory(value: DirectoryModel) {
+    set Directory(value: string) {
         this._directory = value;
         console.log(value);
     }

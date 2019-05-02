@@ -10,7 +10,7 @@ import { DirectoryModel, ProviderModel } from '@common/index';
     providers: [FileSystemService]
 })
 export class FileSystemTreeComponent extends BaseComponent {
-    private readonly _directorySelected: EventEmitter<DirectoryModel>;
+    private readonly _directorySelected: EventEmitter<string>;
     private _nodes: TreeNode[];
 
     constructor(private _fileSystemService: FileSystemService) {
@@ -23,7 +23,7 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     @Output()
-    get DirectorySelected(): EventEmitter<DirectoryModel> {
+    get DirectorySelected(): EventEmitter<string> {
         return this._directorySelected;
     }
 
@@ -56,7 +56,7 @@ export class FileSystemTreeComponent extends BaseComponent {
 
     OnNodeSelected(event: any): void {
         let node = event.node;
-        if (node && node.data instanceof DirectoryModel)
+        if (node && node.data)
             this.DirectorySelected.emit(node.data);
     }
 
@@ -67,10 +67,10 @@ export class FileSystemTreeComponent extends BaseComponent {
         let nodes: TreeNode[] = [];
 
         if (node.data instanceof ProviderModel) {
-            node.data.Directories.forEach(directoryModel => {
+            node.data.Directories.forEach(fileName => {
                 let node = <TreeNode>{
-                    label: directoryModel.Name,
-                    data: directoryModel,
+                    label:fileName,
+                    data: fileName,
                     expandedIcon: "fa fa-folder-open",
                     collapsedIcon: "fa fa-folder",
                     leaf: false
@@ -81,10 +81,10 @@ export class FileSystemTreeComponent extends BaseComponent {
         else if (node.data instanceof DirectoryModel) {
             let directory = await this._fileSystemService.GetDirectories(node.data.Path);
             
-            for (let directoryModel of directory.Directories) {
+            for (let fileName of directory.Directories) {
                 let node = <TreeNode>{
-                    label: directoryModel.Name,
-                    data: directoryModel,
+                    label: fileName,
+                    data: fileName,
                     expandedIcon: "fa fa-folder-open",
                     collapsedIcon: "fa fa-folder",
                     leaf: false

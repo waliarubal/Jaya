@@ -66,16 +66,16 @@ export class FileSystemService extends BaseService {
                 }
 
                 if (info.isDirectory()) {
-                    let dir = new DirectoryModel();
-                    dir.Name = fileName;
-                    dir.Path = fullName;
-                    directory.Directories.push(dir);
+                    // let dir = new DirectoryModel();
+                    // dir.Name = fileName;
+                    // dir.Path = fullName;
+                    directory.Directories.push(fileName);
                 } else if (info.isFile()) {
-                    let file = new FileModel();
-                    file.Name = fileName;
-                    file.Path = fullName;
-                    file.Size = info.size;
-                    directory.Files.push(file);
+                    // let file = new FileModel();
+                    // file.Name = fileName;
+                    // file.Path = fullName;
+                    // file.Size = info.size;
+                    directory.Files.push(fileName);
                 }
             }
 

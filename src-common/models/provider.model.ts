@@ -1,6 +1,5 @@
-import { list, object, primitive, identifier } from 'serializr';
+import { primitive, identifier, list } from 'serializr';
 import { Helpers } from '../helpers';
-import { DirectoryModel, DirectoryModelSchema } from './directory.model';
 
 export const ProviderModelSchema = {
     factory: contect => new ProviderModel(),
@@ -8,7 +7,7 @@ export const ProviderModelSchema = {
         _id: identifier(),
         _name: primitive(),
         _icon: primitive(),
-        Directories: list(object(DirectoryModelSchema))
+        Directories: list(primitive())
     }
 };
 
@@ -16,7 +15,7 @@ export class ProviderModel {
     private _id: string;
     private _name: string;
     private _icon: string;
-    private _directories: DirectoryModel[];
+    private _directories: string[];
 
     get Id(): string {
         return this._id;
@@ -30,11 +29,11 @@ export class ProviderModel {
         return this._icon;
     }
 
-    get Directories(): DirectoryModel[] {
+    get Directories(): string[] {
         return this._directories;
     }
 
-    set Directories(value: DirectoryModel[]) {
+    set Directories(value: string[]) {
         this._directories = value;
     }
 
