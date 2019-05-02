@@ -1,5 +1,5 @@
 import { parse, stringify } from 'flatted';
-import { ISerializable } from './ISerializable';
+import { ISerializable } from './interfaces/ISerializable';
 
 export class Helpers {
 

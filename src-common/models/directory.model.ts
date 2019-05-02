@@ -1,5 +1,5 @@
 import { FileModel } from './file.model';
-import { ISerializable } from '../ISerializable';
+import { ISerializable } from '../interfaces/ISerializable';
 
 export class DirectoryModel extends FileModel implements ISerializable {
     private _directories: DirectoryModel[];

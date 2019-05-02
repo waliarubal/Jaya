@@ -1,6 +1,6 @@
 import { Helpers } from '../helpers';
 import { DirectoryModel } from './directory.model';
-import { ISerializable } from '../ISerializable';
+import { ISerializable } from '../interfaces/ISerializable';
 
 export class ProviderModel implements ISerializable {
     private _id: string;

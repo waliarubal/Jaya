@@ -1,4 +1,4 @@
-import { ISerializable } from '../ISerializable';
+import { ISerializable } from '../interfaces/ISerializable';
 
 export class FileModel implements ISerializable {
     private _name: string;
