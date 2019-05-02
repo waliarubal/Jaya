@@ -71,8 +71,7 @@ export class FileSystemTreeComponent extends BaseComponent {
                 let node = <TreeNode>{
                     label: fileName.Name,
                     data: fileName,
-                    expandedIcon: "fa fa-folder-open",
-                    collapsedIcon: "fa fa-folder",
+                    icon: "fa fa-hdd",
                     leaf: false
                 };
                 nodes.push(node);
