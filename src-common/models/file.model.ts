@@ -1,4 +1,4 @@
-import { serializable } from 'serializr';
+import { serializable, ModelSchema } from 'serializr';
 
 export class FileModel {
     @serializable private _name: string;
