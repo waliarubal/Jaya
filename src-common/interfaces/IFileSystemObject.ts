@@ -1,7 +1,7 @@
 export enum FileSystemObjectType {
-    File,
-    Directory,
-    Drive
+    File = 'File',
+    Directory = 'Directory',
+    Drive = 'Drive'
 }
 
 export interface IFileSystemObject {
