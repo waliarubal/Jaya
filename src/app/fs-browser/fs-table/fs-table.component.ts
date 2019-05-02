@@ -25,6 +25,15 @@ export class FileSystemTableComponent extends BaseComponent {
 
     set Directory(value: DirectoryModel) {
         this._directory = value;
+
+        if (value) {
+            let contents: FileModel[] = [];
+            for (let directory of value.Directories)
+                contents.push(directory);
+            for (let file of value.Files)
+                contents.push(file);
+            this._contents = contents;
+        }
     }
 
     get Contents(): FileModel[] {
