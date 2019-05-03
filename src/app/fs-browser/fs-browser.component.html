@@ -1,4 +1,4 @@
-<div class="ui-g ui-g-nopad">
-    <app-fs-tree class="ui-g-4" (DirectorySelected)="Directory = $event;" #fsTree></app-fs-tree>
-    <app-fs-table class="ui-g-8" [Directory]="Directory"></app-fs-table>
+<div class="ui-g ui-g-nopad full-size">
+    <app-fs-tree class="ui-g-4 ui-g-nopad" (DirectorySelected)="Directory = $event;" #fsTree></app-fs-tree>
+    <app-fs-table class="ui-g-8 ui-g-nopad" [Directory]="Directory"></app-fs-table>
 </div>

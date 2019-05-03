@@ -80,7 +80,7 @@ export class FileSystemTreeComponent extends BaseComponent {
         else if (node.data instanceof DirectoryModel) {
             let directory = await this._fileSystemService.GetDirectories(node.data.Path);
             node.data = directory;
-            
+
             for (let fileName of directory.Directories) {
                 let node = <TreeNode>{
                     label: fileName.Name,
