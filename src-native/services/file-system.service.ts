@@ -127,9 +127,6 @@ export class FileSystemService extends BaseService {
                 }
 
                 provider.Directories = directories;
-
-                // let directories = await this.GetDirectory(Os.homedir());
-                // provider.Directories = directories.Directories;
             } catch (ex) {
                 console.log(ex);
             }
