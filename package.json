@@ -51,7 +51,7 @@
     "@types/msgpack5": "^3.4.1",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
-    "electron": "^4.1.5",
+    "electron": "^4.2.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",
