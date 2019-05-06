@@ -1,2 +1,3 @@
-<p-tree [value]="Nodes" [selectionMode]="'single'" (onNodeSelect)="OnNodeSelected($event);"
-    (onNodeExpand)="PopulateNode($event.node);" [styleClass]="'full-size'" ></p-tree>
+<!-- <p-tree [value]="Nodes" [selectionMode]="'single'" (onNodeSelect)="OnNodeSelected($event);"
+    (onNodeExpand)="PopulateNode($event.node);" [styleClass]="'full-size'" ></p-tree> -->
+    <jqxTree #dirTree [width]="'100%'" [auto-create]="false" (onExpand)="PopulateNode($event);"></jqxTree>

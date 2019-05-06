@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { TreeNode } from 'primeng/api';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { jqxTreeComponent } from 'jqwidgets-ng/jqxtree/angular_jqxtree';
 import { BaseComponent } from '@shared/base.component';
 import { FileSystemService } from '@services/file-system.service';
 import { DirectoryModel, ProviderModel } from '@common/index';
@@ -11,15 +11,11 @@ import { DirectoryModel, ProviderModel } from '@common/index';
 })
 export class FileSystemTreeComponent extends BaseComponent {
     private readonly _directorySelected: EventEmitter<DirectoryModel>;
-    private _nodes: TreeNode[];
+    @ViewChild('dirTree') private _dirTree: jqxTreeComponent;
 
     constructor(private _fileSystemService: FileSystemService) {
         super();
         this._directorySelected = new EventEmitter();
-    }
-
-    get Nodes(): TreeNode[] {
-        return this._nodes;
     }
 
     @Output()
@@ -36,22 +32,22 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     async PopulateProviders(): Promise<void> {
-        let nodes: TreeNode[] = [];
 
         try {
             let fileSystemProvider = await this._fileSystemService.GetProvider();
-            let node = <TreeNode>{
+            let node = {
                 label: fileSystemProvider.Name,
                 data: fileSystemProvider,
                 icon: fileSystemProvider.Icon,
-                leaf: false
+                expanded: false
             };
-            nodes.push(node);
+            this._dirTree.addTo(node, null);
+            // nodes.push(node);
+
+            
         } catch (ex) {
             console.log(ex);
         }
-
-        this._nodes = nodes;
     }
 
     OnNodeSelected(event: any): void {
@@ -60,21 +56,19 @@ export class FileSystemTreeComponent extends BaseComponent {
             this.DirectorySelected.emit(node.data);
     }
 
-    async PopulateNode(node?: TreeNode): Promise<void> {
+    async PopulateNode(node?: any): Promise<void> {
         if (!node)
             return;
 
-        let nodes: TreeNode[] = [];
-
         if (node.data instanceof ProviderModel) {
             node.data.Directories.forEach(fileName => {
-                let node = <TreeNode>{
+                let node = {
                     label: fileName.Name,
                     data: fileName,
                     icon: "fa fa-hdd",
-                    leaf: false
+                    expanded: false
                 };
-                nodes.push(node);
+                //nodes.push(node);
             });
         }
         else if (node.data instanceof DirectoryModel) {
@@ -82,20 +76,20 @@ export class FileSystemTreeComponent extends BaseComponent {
             node.data = directory;
 
             for (let fileName of directory.Directories) {
-                let node = <TreeNode>{
+                let node = {
                     label: fileName.Name,
                     data: fileName,
                     expandedIcon: "fa fa-folder-open",
                     collapsedIcon: "fa fa-folder",
-                    leaf: false
+                    expanded: false
                 };
-                nodes.push(node);
+                //nodes.push(node);
             }
         }
 
         if (node) {
-            node.leaf = true;
-            node.children = nodes;
+            node.expanded = true;
+            //node.children = nodes;
         }
     }
 }

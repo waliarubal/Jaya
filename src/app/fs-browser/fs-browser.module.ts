@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { TreeModule } from 'primeng/tree'
-import { TableModule } from 'primeng/table'
+import { jqxTreeModule } from 'jqwidgets-ng/jqxtree';
+import { jqxGridModule } from 'jqwidgets-ng/jqxgrid';
 
 import { FileSystemTreeComponent } from './fs-tree/fs-tree.component';
 import { FileSystemTableComponent } from './fs-table/fs-table.component';
@@ -13,8 +13,8 @@ import { FileSystemBrowserComponent } from './fs-browser.component';
         FileSystemTableComponent
     ],
     imports: [
-        TreeModule,
-        TableModule
+        jqxTreeModule,
+        jqxGridModule
     ],
     exports: [FileSystemBrowserComponent]
 })
