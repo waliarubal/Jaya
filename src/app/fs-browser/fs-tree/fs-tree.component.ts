@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { jqxTreeComponent } from 'jqwidgets-ng/jqxtree/angular_jqxtree';
 import { BaseComponent } from '@shared/base.component';
 import { FileSystemService } from '@services/file-system.service';
 import { DirectoryModel, ProviderModel } from '@common/index';
@@ -11,7 +10,6 @@ import { DirectoryModel, ProviderModel } from '@common/index';
 })
 export class FileSystemTreeComponent extends BaseComponent {
     private readonly _directorySelected: EventEmitter<DirectoryModel>;
-    @ViewChild('dirTree') private _dirTree: jqxTreeComponent;
 
     constructor(private _fileSystemService: FileSystemService) {
         super();
@@ -35,13 +33,12 @@ export class FileSystemTreeComponent extends BaseComponent {
 
         try {
             let fileSystemProvider = await this._fileSystemService.GetProvider();
-            let node = {
-                label: fileSystemProvider.Name,
-                data: fileSystemProvider,
-                icon: fileSystemProvider.Icon,
-                expanded: false
-            };
-            this._dirTree.addTo(node, null);
+            // let node = {
+            //     label: fileSystemProvider.Name,
+            //     data: fileSystemProvider,
+            //     icon: fileSystemProvider.Icon,
+            //     expanded: false
+            // };
             // nodes.push(node);
 
             
