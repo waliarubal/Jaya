@@ -1,7 +1,7 @@
 <!-- <p-tree [value]="Nodes" [selectionMode]="'single'" (onNodeSelect)="OnNodeSelected($event);"
     (onNodeExpand)="PopulateNode($event.node);" [styleClass]="'full-size'" ></p-tree> -->
-<kendo-treeview kendoTreeViewExpandable [nodes]="Nodes" [hasChildren]="IsHavingChildNodes" [children]="PopulateNode"
-    kendoTreeViewHierarchyBinding childrenField="Children">
+<kendo-treeview [nodes]="Nodes" [hasChildren]="IsHavingChildNodes" [children]="PopulateNode" kendoTreeViewExpandable
+    kendoTreeViewHierarchyBinding [textField]="'Label'" [childrenField]="'Children'">
     <ng-template kendoTreeViewNodeTemplate let-node>
         <span [className]="node.Icon"></span>
         {{node.Label}}
