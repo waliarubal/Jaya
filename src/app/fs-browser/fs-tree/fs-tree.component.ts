@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { of, Observable } from 'rxjs';
 import { BaseComponent } from '@shared/base.component';
 import { FileSystemService } from '@services/file-system.service';
 import { DirectoryModel, ProviderModel } from '@common/index';
+import { FileSystemTreeNode } from './fs-tree-node.model';
 
 @Component({
     selector: 'app-fs-tree',
@@ -10,6 +12,7 @@ import { DirectoryModel, ProviderModel } from '@common/index';
 })
 export class FileSystemTreeComponent extends BaseComponent {
     private readonly _directorySelected: EventEmitter<DirectoryModel>;
+    private _nodes: FileSystemTreeNode[];
 
     constructor(private _fileSystemService: FileSystemService) {
         super();
@@ -17,8 +20,12 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     @Output()
-    get DirectorySelected(): EventEmitter<DirectoryModel> {
+    get OnDirectorySelected(): EventEmitter<DirectoryModel> {
         return this._directorySelected;
+    }
+
+    get Nodes(): FileSystemTreeNode[] {
+        return this._nodes;
     }
 
     protected Initialize(): void {
@@ -30,18 +37,15 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     async PopulateProviders(): Promise<void> {
-
         try {
             let fileSystemProvider = await this._fileSystemService.GetProvider();
-            // let node = {
-            //     label: fileSystemProvider.Name,
-            //     data: fileSystemProvider,
-            //     icon: fileSystemProvider.Icon,
-            //     expanded: false
-            // };
-            // nodes.push(node);
-
-            
+            let node = <FileSystemTreeNode>{
+                Label: fileSystemProvider.Name,
+                Data: fileSystemProvider,
+                Icon: fileSystemProvider.Icon,
+                Children: []
+            };
+            this._nodes = [node];
         } catch (ex) {
             console.log(ex);
         }
@@ -50,43 +54,45 @@ export class FileSystemTreeComponent extends BaseComponent {
     OnNodeSelected(event: any): void {
         let node = event.node;
         if (node && node.data instanceof DirectoryModel)
-            this.DirectorySelected.emit(node.data);
+            this.OnDirectorySelected.emit(node.data);
     }
 
-    async PopulateNode(node?: any): Promise<void> {
-        if (!node)
-            return;
+    IsHavingChildNodes(node: FileSystemTreeNode): boolean {
+        if (node.Data instanceof ProviderModel)
+            return true;
 
-        if (node.data instanceof ProviderModel) {
-            node.data.Directories.forEach(fileName => {
-                let node = {
-                    label: fileName.Name,
-                    data: fileName,
-                    icon: "fa fa-hdd",
-                    expanded: false
+        return node.Children && node.Children.length > 0;
+    }
+
+    async PopulateNode(node: FileSystemTreeNode): Promise<Observable<FileSystemTreeNode[]>> {
+        console.log(node);
+        if (node.Data instanceof ProviderModel) {
+            node.Data.Directories.forEach(fileName => {
+                let node = <FileSystemTreeNode>{
+                    Label: fileName.Name,
+                    Data: fileName,
+                    Icon: "fa fa-hdd",
+                    Children: []
                 };
-                //nodes.push(node);
+                node.Children.push(node);
             });
         }
-        else if (node.data instanceof DirectoryModel) {
-            let directory = await this._fileSystemService.GetDirectories(node.data.Path);
-            node.data = directory;
+        else if (node.Data instanceof DirectoryModel) {
+            let directory = await this._fileSystemService.GetDirectories(node.Data.Path);
+            node.Data = directory;
 
             for (let fileName of directory.Directories) {
-                let node = {
-                    label: fileName.Name,
-                    data: fileName,
-                    expandedIcon: "fa fa-folder-open",
-                    collapsedIcon: "fa fa-folder",
-                    expanded: false
+                let node = <FileSystemTreeNode>{
+                    Label: fileName.Name,
+                    Data: fileName,
+                    // expandedIcon: "fa fa-folder-open",
+                    // collapsedIcon: "fa fa-folder",
+                    Children: []
                 };
-                //nodes.push(node);
+                node.Children.push(node);
             }
         }
 
-        if (node) {
-            node.expanded = true;
-            //node.children = nodes;
-        }
+        return of(node.Children);
     }
 }

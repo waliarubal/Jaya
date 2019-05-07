@@ -1,4 +1,4 @@
 <div>
-    <app-fs-tree (DirectorySelected)="Directory = $event;" #fsTree></app-fs-tree>
+    <app-fs-tree (OnDirectorySelected)="Directory = $event;" #fsTree></app-fs-tree>
     <app-fs-table [Directory]="Directory"></app-fs-table>
 </div>

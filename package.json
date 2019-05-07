@@ -32,11 +32,15 @@
     "@angular/platform-browser": "^7.2.14",
     "@angular/platform-browser-dynamic": "^7.2.14",
     "@angular/router": "^7.2.14",
+    "@progress/kendo-angular-treeview": "^3.1.1",
     "core-js": "^2.5.4",
     "flatted": "^2.0.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "@progress/kendo-angular-l10n": "^1.1.0",
+    "rxjs-compat": "^6.0.0",
+    "@progress/kendo-theme-default": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
