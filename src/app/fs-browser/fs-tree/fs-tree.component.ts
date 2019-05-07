@@ -58,6 +58,8 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     IsHavingChildNodes(node: FileSystemTreeNode): boolean {
+        console.log(node);
+        
         if (node.Data instanceof ProviderModel)
             return true;
 
