@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { of, Observable } from 'rxjs';
 import { BaseComponent } from '@shared/base.component';
 import { FileSystemService } from '@services/file-system.service';
 import { DirectoryModel, ProviderModel } from '@common/index';
-import { FileSystemTreeNode } from './fs-tree-node.model';
+import { TreeNode } from '@shared/controls/tree/tree-node.model';
 
 @Component({
     selector: 'app-fs-tree',
@@ -12,11 +11,12 @@ import { FileSystemTreeNode } from './fs-tree-node.model';
 })
 export class FileSystemTreeComponent extends BaseComponent {
     private readonly _directorySelected: EventEmitter<DirectoryModel>;
-    private _nodes: FileSystemTreeNode[];
+    private _nodes: TreeNode[];
 
     constructor(private _fileSystemService: FileSystemService) {
         super();
         this._directorySelected = new EventEmitter();
+        this._nodes = [];
     }
 
     @Output()
@@ -24,7 +24,7 @@ export class FileSystemTreeComponent extends BaseComponent {
         return this._directorySelected;
     }
 
-    get Nodes(): FileSystemTreeNode[] {
+    get Nodes(): TreeNode[] {
         return this._nodes;
     }
 
@@ -39,12 +39,12 @@ export class FileSystemTreeComponent extends BaseComponent {
     async PopulateProviders(): Promise<void> {
         try {
             let fileSystemProvider = await this._fileSystemService.GetProvider();
-            let node = <FileSystemTreeNode>{
-                Label: fileSystemProvider.Name,
-                Data: fileSystemProvider,
-                Icon: fileSystemProvider.Icon,
-                Children: []
-            };
+
+            let node = new TreeNode();
+            node.Label = fileSystemProvider.Name;
+            node.Data = fileSystemProvider;
+            node.Icon = fileSystemProvider.Icon;
+
             this._nodes = [node];
         } catch (ex) {
             console.log(ex);
@@ -57,44 +57,31 @@ export class FileSystemTreeComponent extends BaseComponent {
             this.OnDirectorySelected.emit(node.data);
     }
 
-    IsHavingChildNodes(node: FileSystemTreeNode): boolean {
-        console.log(node);
-        
-        if (node.Data instanceof ProviderModel)
-            return true;
+    async PopulateNode(node: TreeNode): Promise<void> {
+        let children: TreeNode[] = [];
 
-        return node.Children && node.Children.length > 0;
-    }
-
-    async PopulateNode(node: FileSystemTreeNode): Promise<Observable<FileSystemTreeNode[]>> {
-        console.log(node);
         if (node.Data instanceof ProviderModel) {
-            node.Data.Directories.forEach(fileName => {
-                let node = <FileSystemTreeNode>{
-                    Label: fileName.Name,
-                    Data: fileName,
-                    Icon: "fa fa-hdd",
-                    Children: []
-                };
-                node.Children.push(node);
-            });
+            for (let dir of node.Data.Directories) {
+                let childNode = new TreeNode();
+                childNode.Label = dir.Name;
+                childNode.Data = dir;
+                childNode.Icon = "fa fa-hdd";
+                children.push(childNode);
+            }
         }
         else if (node.Data instanceof DirectoryModel) {
             let directory = await this._fileSystemService.GetDirectories(node.Data.Path);
             node.Data = directory;
 
-            for (let fileName of directory.Directories) {
-                let node = <FileSystemTreeNode>{
-                    Label: fileName.Name,
-                    Data: fileName,
-                    // expandedIcon: "fa fa-folder-open",
-                    // collapsedIcon: "fa fa-folder",
-                    Children: []
-                };
-                node.Children.push(node);
+            for (let dir of directory.Directories) {
+                let childNode = new TreeNode();
+                childNode.Label = dir.Name;
+                childNode.Data = dir;
+                children.push(childNode);
             }
-        }
+        } else
+            return;
 
-        return of(node.Children);
+        node.Children = children;
     }
 }
