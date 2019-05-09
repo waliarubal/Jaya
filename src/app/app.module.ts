@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { EasyUIModule } from 'ng-easyui/components/easyui/easyui.module';
 
 import { FileSystemBrowserModule } from './fs-browser/fs-browser.module'
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
+    EasyUIModule,
     FileSystemBrowserModule
   ],
   bootstrap: [AppComponent]

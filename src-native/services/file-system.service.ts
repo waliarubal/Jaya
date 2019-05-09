@@ -82,6 +82,9 @@ export class FileSystemService extends BaseService {
                 reject(ex);
             }
 
+            if (!fileNames)
+                resolve(directory);
+
             while (fileNames.length > 0) {
                 let fileName = fileNames.pop();
                 let fullName = Path.join(path, fileName);

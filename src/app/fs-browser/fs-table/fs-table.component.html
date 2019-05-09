@@ -1,18 +1,6 @@
-<!-- <p-table [value]="Objects">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Date Modified</th>
-            <th>Size</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-object>
-        <tr>
-            <td>{{object.Name}}</td>
-            <td>{{object.Type}}</td>
-            <td>Date Modified</td>
-            <td>{{object.Size}}</td>
-        </tr>
-    </ng-template>
-</p-table> -->
+<eui-datagrid [data]="Objects" style="width: 100%; height: 100%">
+    <eui-grid-column [field]="'Name'" title="Name"></eui-grid-column>
+    <eui-grid-column [field]="'Type'" title="Type"></eui-grid-column>
+    <eui-grid-column [field]="'Type'" title="Date Modified"></eui-grid-column>
+    <eui-grid-column [field]="'Size'" title="Size"></eui-grid-column>
+</eui-datagrid>
