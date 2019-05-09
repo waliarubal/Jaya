@@ -11,7 +11,7 @@ export class FileSystemTableComponent extends BaseComponent {
     private _objects: IFileSystemObject[];
 
     protected Initialize(): void {
-        this._objects = [];
+        //this._objects = [];
     }
 
     protected Destroy(): void {
