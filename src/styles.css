@@ -1,14 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
+@import '~ng-easyui/themes/material/easyui.css';
+@import '~ng-easyui/themes/angular.css';
+@import '~ng-easyui/themes/icon.css';
 
-.full-size {
-    width: 100%;
-    height: 100%
-}
-
-html body {
+html, body {
     width: 100%;
     height: 100vh;
     padding: 0;
     margin: 0;
+}
+
+.fa {
+    font-size: 16px;
 }

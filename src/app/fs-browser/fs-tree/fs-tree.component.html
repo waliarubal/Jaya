@@ -1,1 +1,1 @@
-<ctrl-tree [Nodes]="Nodes" (OnNodeExpanding)="PopulateNode($event);"></ctrl-tree>
+<eui-tree [data]="Nodes" (nodeExpand)="PopulateNode($event);" (nodeClick)="OnNodeSelected($event);"></eui-tree>

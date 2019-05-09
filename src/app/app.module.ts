@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { FileSystemBrowserModule } from './fs-browser/fs-browser.module'
@@ -14,6 +15,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
+    FormsModule,
     FileSystemBrowserModule
   ],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
+import { EasyUIModule } from 'ng-easyui/components/easyui/easyui.module';
 
-import { ControlsModule } from '@shared/controls/controls.module';
 import { FileSystemTreeComponent } from './fs-tree/fs-tree.component';
 import { FileSystemTableComponent } from './fs-table/fs-table.component';
 import { FileSystemBrowserComponent } from './fs-browser.component';
@@ -12,7 +12,7 @@ import { FileSystemBrowserComponent } from './fs-browser.component';
         FileSystemTableComponent
     ],
     imports: [
-        ControlsModule
+        EasyUIModule
     ],
     exports: [FileSystemBrowserComponent]
 })

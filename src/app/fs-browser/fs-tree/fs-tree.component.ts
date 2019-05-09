@@ -2,7 +2,21 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
 import { FileSystemService } from '@services/file-system.service';
 import { DirectoryModel, ProviderModel } from '@common/index';
-import { TreeNode } from '@shared/controls/tree/tree-node.model';
+
+enum TreeNodeState {
+    Open = 'open',
+    Close = 'closed'
+}
+
+interface ITreeNode {
+    readonly id: number;
+    readonly text: string;
+    readonly iconCls: string;
+    checked: boolean;
+    state: TreeNodeState;
+    attributes: any;
+    children: ITreeNode[];
+}
 
 @Component({
     selector: 'app-fs-tree',
@@ -11,7 +25,7 @@ import { TreeNode } from '@shared/controls/tree/tree-node.model';
 })
 export class FileSystemTreeComponent extends BaseComponent {
     private readonly _directorySelected: EventEmitter<DirectoryModel>;
-    private _nodes: TreeNode[];
+    private _nodes: ITreeNode[];
 
     constructor(private _fileSystemService: FileSystemService) {
         super();
@@ -24,7 +38,7 @@ export class FileSystemTreeComponent extends BaseComponent {
         return this._directorySelected;
     }
 
-    get Nodes(): TreeNode[] {
+    get Nodes(): ITreeNode[] {
         return this._nodes;
     }
 
@@ -40,10 +54,12 @@ export class FileSystemTreeComponent extends BaseComponent {
         try {
             let fileSystemProvider = await this._fileSystemService.GetProvider();
 
-            let node = new TreeNode();
-            node.Label = fileSystemProvider.Name;
-            node.Data = fileSystemProvider;
-            node.Icon = fileSystemProvider.Icon;
+            let node = <ITreeNode>{
+                text: fileSystemProvider.Name,
+                iconCls: fileSystemProvider.Icon,
+                attributes: fileSystemProvider,
+                state: TreeNodeState.Close
+            };
 
             this._nodes = [node];
         } catch (ex) {
@@ -51,37 +67,41 @@ export class FileSystemTreeComponent extends BaseComponent {
         }
     }
 
-    OnNodeSelected(event: any): void {
-        let node = event.node;
-        if (node && node.data instanceof DirectoryModel)
-            this.OnDirectorySelected.emit(node.data);
+    OnNodeSelected(node: ITreeNode): void {
+        if (node && node.attributes instanceof DirectoryModel)
+            this.OnDirectorySelected.emit(node.attributes);
     }
 
-    async PopulateNode(node: TreeNode): Promise<void> {
-        let children: TreeNode[] = [];
+    async PopulateNode(node: ITreeNode): Promise<void> {
+        let children: ITreeNode[] = [];
 
-        if (node.Data instanceof ProviderModel) {
-            for (let dir of node.Data.Directories) {
-                let childNode = new TreeNode();
-                childNode.Label = dir.Name;
-                childNode.Data = dir;
-                childNode.Icon = "fa fa-hdd";
+        if (node.attributes instanceof ProviderModel) {
+            for (let dir of node.attributes.Directories) {
+                let childNode = <ITreeNode>{
+                    text: dir.Name,
+                    iconCls: "fa fa-hdd",
+                    attributes: dir,
+                    state: TreeNodeState.Close
+                };
                 children.push(childNode);
             }
         }
-        else if (node.Data instanceof DirectoryModel) {
-            let directory = await this._fileSystemService.GetDirectories(node.Data.Path);
-            node.Data = directory;
+        else if (node.attributes instanceof DirectoryModel) {
+            let directory = await this._fileSystemService.GetDirectories(node.attributes.Path);
+            node.attributes = directory;
 
             for (let dir of directory.Directories) {
-                let childNode = new TreeNode();
-                childNode.Label = dir.Name;
-                childNode.Data = dir;
+                let childNode = <ITreeNode>{
+                    text: dir.Name,
+                    attributes: dir,
+                    state: TreeNodeState.Close
+                };
                 children.push(childNode);
             }
         } else
             return;
 
-        node.Children = children;
+        node.state = TreeNodeState.Open;
+        node.children = children;
     }
 }
