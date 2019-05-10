@@ -4,6 +4,9 @@ export class FileModel implements IClonable {
     private _name: string;
     private _size: number;
     private _path: string;
+    private _accessed: Date;
+    private _modified: Date;
+    private _created: Date;
 
     get Name(): string {
         return this._name;
@@ -29,6 +32,30 @@ export class FileModel implements IClonable {
         this._size = value;
     }
 
+    get Accessed(): Date {
+        return this._accessed;
+    }
+
+    set Accessed(value: Date) {
+        this._accessed = value;
+    }
+
+    get Modified(): Date {
+        return this._modified;
+    }
+
+    set Modified(value: Date) {
+        this._modified = value;
+    }
+
+    get Created(): Date {
+        return this._created;
+    }
+
+    set Created(value: Date) {
+        this._created = value;
+    }
+
     toString(): string {
         return this.Name;
     }
@@ -37,6 +64,9 @@ export class FileModel implements IClonable {
         this.Name = object._name;
         this.Size = object._size;
         this.Path = object._path;
+        this.Accessed = object._accessed;
+        this.Modified = object._modified;
+        this.Created = object._created;
     }
 
 }

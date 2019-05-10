@@ -9,5 +9,8 @@ export interface IFileSystemObject {
     Name: string;
     Path: string;
     Size: number;
-    Type: FileSystemObjectType
+    Type: FileSystemObjectType,
+    Accessed: Date,
+    Modified: Date,
+    Created: Date
 }

@@ -101,12 +101,18 @@ export class FileSystemService extends BaseService {
                     let dir = new DirectoryModel();
                     dir.Name = fileName;
                     dir.Path = fullName;
+                    dir.Accessed = info.atime;
+                    dir.Modified = info.mtime;
+                    dir.Created = info.ctime;
                     directory.Directories.push(dir);
                 } else if (info.isFile()) {
                     let file = new FileModel();
                     file.Name = fileName;
                     file.Path = fullName;
                     file.Size = info.size;
+                    file.Accessed = info.atime;
+                    file.Modified = info.mtime;
+                    file.Created = info.ctime;
                     directory.Files.push(file);
                 }
             }

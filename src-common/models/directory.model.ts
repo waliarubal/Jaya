@@ -52,8 +52,11 @@ export class DirectoryModel extends FileModel implements IClonable {
                 let object = <IFileSystemObject>{
                     Name: dir.Name,
                     Path: dir.Path,
-                    Type: FileSystemObjectType.Directory
-                }
+                    Type: FileSystemObjectType.Directory,
+                    Accessed: dir.Accessed,
+                    Modified: dir.Modified,
+                    Created: dir.Created
+                };
                 objects.push(object);
             }
         }
@@ -64,8 +67,11 @@ export class DirectoryModel extends FileModel implements IClonable {
                     Name: file.Name,
                     Path: file.Path,
                     Type: FileSystemObjectType.File,
-                    Size: file.Size
-                }
+                    Size: file.Size,
+                    Accessed: file.Accessed,
+                    Modified: file.Modified,
+                    Created: file.Created
+                };
                 objects.push(object);
             }
         }

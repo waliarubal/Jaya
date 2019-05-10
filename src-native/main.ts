@@ -12,6 +12,7 @@ class Main {
         app.on('ready',() => this.CreateWindow());
         app.on('activate', () => this.CreateWindow());
         app.on('window-all-closed', () => this.DestroyWindow());
+        app.on('browser-window-created', (event: Electron.Event, window: BrowserWindow) => window.setMenu(null));
     }
 
     private CreateServices(window: BrowserWindow): BaseService[] {
