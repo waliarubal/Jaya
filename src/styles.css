@@ -4,13 +4,11 @@
 @import '~ng-easyui/themes/angular.css';
 @import '~ng-easyui/themes/icon.css';
 
+@import './assets/styles/easyui-override.css';
+
 html, body {
     width: 100%;
     height: 100vh;
     padding: 0;
     margin: 0;
-}
-
-.fa {
-    font-size: 16px;
 }
