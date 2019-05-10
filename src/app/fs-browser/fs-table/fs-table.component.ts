@@ -27,8 +27,6 @@ export class FileSystemTableComponent extends BaseComponent {
         this._directory = value;
         if (value)
             this._objects = value.GetObjects();
-
-        console.log(this._objects);
     }
 
     get Objects(): IFileSystemObject[] {

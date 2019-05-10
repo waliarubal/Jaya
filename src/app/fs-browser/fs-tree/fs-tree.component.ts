@@ -78,6 +78,9 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     async PopulateNode(node: ITreeNode): Promise<void> {
+        if (node.state !== TreeNodeState.Close && node.children)
+            return;
+
         let children: ITreeNode[] = [];
 
         if (node.attributes instanceof ProviderModel) {
@@ -98,6 +101,7 @@ export class FileSystemTreeComponent extends BaseComponent {
             for (let dir of directory.Directories) {
                 let childNode = <ITreeNode>{
                     text: dir.Name,
+                    iconCls: "fa fa-folder",
                     attributes: dir,
                     state: TreeNodeState.Close
                 };
