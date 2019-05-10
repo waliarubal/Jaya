@@ -1,8 +1,10 @@
-<eui-layout style="width: 100%; height: 100%;">
-    <eui-layout-panel region="west" split="true">
-        <app-fs-tree (OnDirectorySelected)="Directory = $event;" #fsTree></app-fs-tree>
+<eui-layout style="height: 100%;" #layout>
+    <eui-layout-panel style="width: 280px;" region="west" euiResizable handles="e" (resizing)="layout.updatePaddings()"
+        [split]="true">
+        <app-fs-tree style="height: 100%;" [Providers]="Providers" (OnDirectorySelected)="Directory = $event;">
+        </app-fs-tree>
     </eui-layout-panel>
-    <eui-layout-panel region="center" style="height: 100%;">
-        <app-fs-table [Directory]="Directory"></app-fs-table>
+    <eui-layout-panel style="height: 100%;" region="center">
+        <app-fs-table style="height: 100%;" [Directory]="Directory"></app-fs-table>
     </eui-layout-panel>
 </eui-layout>

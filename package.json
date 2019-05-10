@@ -36,7 +36,7 @@
     "flatted": "^2.0.0",
     "ng-easyui": "^1.2.6",
     "rxjs": "~6.3.3",
-    "rxjs-compat": "^6.0.0",
+    "rxjs-compat": "^6.5.2",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
