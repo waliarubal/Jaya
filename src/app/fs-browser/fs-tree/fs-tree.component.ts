@@ -101,8 +101,8 @@ export class FileSystemTreeComponent extends BaseComponent {
             for (let dir of directory.Directories) {
                 let childNode = <ITreeNode>{
                     text: dir.Name,
-                    iconCls: "fa fa-folder",
                     attributes: dir,
+                    iconCls: "fa fa-folder",
                     state: TreeNodeState.Close
                 };
                 children.push(childNode);

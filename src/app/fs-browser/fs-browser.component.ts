@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
 import { DirectoryModel, ProviderModel } from '@common/index';
 import { FileSystemService } from '@services/file-system.service';

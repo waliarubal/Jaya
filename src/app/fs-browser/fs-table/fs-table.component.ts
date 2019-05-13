@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { DirectoryModel, FileModel, IFileSystemObject } from '@common/index';
+import { DirectoryModel, IFileSystemObject } from '@common/index';
 
 @Component({
     selector: 'app-fs-table',
