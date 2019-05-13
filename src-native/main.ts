@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import * as Path from 'path';
 import * as Url from 'url';
-import { IpcService, FileSystemService } from './services';
+import { IpcService, FileSystemService, DropboxService } from './services';
 import { BaseService } from '../src-common';
 
 class Main {
@@ -19,7 +19,8 @@ class Main {
         let ipc = new IpcService(window);
         let services: BaseService[] = [
             ipc,
-            new FileSystemService(ipc)
+            new FileSystemService(ipc),
+            new DropboxService(ipc)
         ];
         return services;
     }

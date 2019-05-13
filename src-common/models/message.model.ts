@@ -5,7 +5,8 @@ export enum MessageType {
     Handshake = 'h',
     Directoties = 'd',
     Files = 'f',
-    FileSystemProvider = 'p_fs'
+    FileSystemProvider = 'p_fs',
+    DropboxProvider = 'p_db'
 }
 
 export class MessageModel {
