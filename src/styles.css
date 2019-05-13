@@ -4,7 +4,7 @@
 @import '~ng-easyui/themes/angular.css';
 @import '~ng-easyui/themes/icon.css';
 
-@import './assets/styles/easyui-override.css';
+@import './assets/styles/easyui-overrides.css';
 
 html, body {
     width: 100%;
