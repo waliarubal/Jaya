@@ -9,10 +9,10 @@
     font-size: 14px;
 }
 
-.fa.tree-folder:not(.tree-file)::before {
+.fa.tree-folder:not(.tree-icon )::before {
     content: "\f07b"
 }
 
-.fa.tree-folder-open:not(.tree-file)::before {
+.fa.tree-folder-open:not(.tree-icon)::before {
     content: "\f07c"
 }
