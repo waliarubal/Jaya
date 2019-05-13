@@ -1,3 +1,19 @@
+//@import 'http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 .fa {
-    font-size: 16px;
+    background-image: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fa::before {
+    font-size: 14px;
+}
+
+.fa.tree-folder:not(.tree-file)::before {
+    content: "\f105"
+}
+
+.fa.tree-folder-open:not(.tree-file)::before {
+    content: "\f107"
 }
