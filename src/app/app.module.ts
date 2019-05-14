@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { EasyUIModule } from 'ng-easyui/components/easyui/easyui.module';
 
 import { FileSystemBrowserModule } from './fs-browser/fs-browser.module'
+import { FileSystemProviderModule } from './fs-provider/fs-provider.modeule';
 import { AppComponent } from './app.component';
 import { IpcService } from '@services/ipc.service';
 
@@ -19,7 +20,8 @@ import { IpcService } from '@services/ipc.service';
     CommonModule,
     FormsModule,
     EasyUIModule,
-    FileSystemBrowserModule
+    FileSystemBrowserModule,
+    FileSystemProviderModule
   ],
   providers: [IpcService],
   bootstrap: [AppComponent]
