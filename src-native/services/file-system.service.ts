@@ -1,5 +1,6 @@
 import * as Fs from 'fs';
 import * as Os from 'os';
+import * as Si from 'systeminformation';
 import { spawn } from 'child_process';
 import * as Path from 'path';
 import { IpcService } from './ipc.service';
@@ -19,6 +20,16 @@ export class FileSystemService extends BaseService {
     }
 
     private async GetDriveLetters(): Promise<string[]> {
+        let devices = await Si.blockDevices();
+        
+        let letters: string[] = [];
+        for(let device of devices)
+            letters.push(device.mount);
+        
+        return letters;
+    }
+
+    private async GetWindowsDriveLetters(): Promise<string[]> {
         return new Promise<string[]>((resolve, reject) => {
             let cmd = spawn('cmd');
             cmd.stdout.on('data', (chunk: string | Buffer) => {
