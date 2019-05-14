@@ -7,6 +7,7 @@ import { EasyUIModule } from 'ng-easyui/components/easyui/easyui.module';
 
 import { FileSystemBrowserModule } from './fs-browser/fs-browser.module'
 import { AppComponent } from './app.component';
+import { IpcService } from '@services/ipc.service';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
     EasyUIModule,
     FileSystemBrowserModule
   ],
+  providers: [IpcService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

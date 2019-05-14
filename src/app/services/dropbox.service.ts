@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
-import { IpcBaseService } from '@shared/ipc-base.service';
-import { ProviderModel, MessageType, Helpers } from '@common/index';
+import { IpcService } from '@services/ipc.service';
+import { ProviderModel, MessageType, Helpers, BaseService } from '@common/index';
 
 @Injectable()
-export class DropboxService extends IpcBaseService {
-    constructor(){
+export class DropboxService extends BaseService {
+
+    constructor(private readonly _ipc: IpcService) {
         super();
     }
 
     protected Dispose(): void {
-        this.Receive.unsubscribe();
+        this._ipc.Receive.unsubscribe();
     }
 
     async GetProvider(): Promise<ProviderModel> {
-        let response = await this.SendAsync(MessageType.DropboxProvider);
+        let response = await this._ipc.SendAsync(MessageType.DropboxProvider);
         let provider = Helpers.Deserialize<ProviderModel>(response.DataJson, ProviderModel);
         return provider;
     }

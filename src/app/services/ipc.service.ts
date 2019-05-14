@@ -1,8 +1,11 @@
 import { IpcRenderer } from 'electron';
-import { OnDestroy, EventEmitter } from '@angular/core';
+import { OnDestroy, EventEmitter, Injectable } from '@angular/core';
 import { Constants, BaseService, MessageModel, MessageType } from '@common/index';
 
-export abstract class IpcBaseService extends BaseService implements OnDestroy {
+@Injectable({
+    providedIn: 'root'
+})
+export class IpcService extends BaseService implements OnDestroy {
     private readonly _ipc: IpcRenderer;
     private readonly _event: EventEmitter<MessageModel>;
 
@@ -11,7 +14,7 @@ export abstract class IpcBaseService extends BaseService implements OnDestroy {
 
         this._event = new EventEmitter();
         this._event.isStopped = true;
-        
+
         if ((<any>window).require) {
             try {
                 let ipc = this._ipc = (<any>window).require('electron').ipcRenderer;
@@ -84,11 +87,13 @@ export abstract class IpcBaseService extends BaseService implements OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.Dispose();
+    }
+
+    protected Dispose(): void {
         this._event.isStopped = true;
         if (this._ipc)
             this._ipc.removeAllListeners(Constants.IPC_CHANNEL);
-
-        this.Dispose();
     }
 
     private OnMessage(event: any, messageString: string): void {
