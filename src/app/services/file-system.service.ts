@@ -1,16 +1,13 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { IpcService } from '@services/ipc.service';
-import { MessageType, DirectoryModel, Helpers, ProviderModel, BaseService } from '@common/index';
+import { MessageType, DirectoryModel, Helpers, ProviderModel } from '@common/index';
+import { SuperService } from '@shared/super.service';
 
 @Injectable()
-export class FileSystemService extends BaseService implements OnDestroy {
+export class FileSystemService extends SuperService {
 
     constructor(private readonly _ipc: IpcService) {
         super();
-    }
-
-    ngOnDestroy(): void {
-        this.Dispose();
     }
 
     protected Dispose(): void {

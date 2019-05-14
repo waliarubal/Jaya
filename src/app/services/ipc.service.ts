@@ -1,11 +1,12 @@
 import { IpcRenderer } from 'electron';
-import { OnDestroy, EventEmitter, Injectable } from '@angular/core';
-import { Constants, BaseService, MessageModel, MessageType } from '@common/index';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Constants, MessageModel, MessageType } from '@common/index';
+import { SuperService } from '@shared/super.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class IpcService extends BaseService implements OnDestroy {
+export class IpcService extends SuperService {
     private readonly _ipc: IpcRenderer;
     private readonly _event: EventEmitter<MessageModel>;
 
@@ -84,10 +85,6 @@ export class IpcService extends BaseService implements OnDestroy {
         }
         else
             console.error("Couldn't send message as electron IPC is not loaded.");
-    }
-
-    ngOnDestroy(): void {
-        this.Dispose();
     }
 
     protected Dispose(): void {
