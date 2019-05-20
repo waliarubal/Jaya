@@ -8,11 +8,13 @@ import { EasyUIModule } from 'ng-easyui/components/easyui/easyui.module';
 import { FileSystemBrowserModule } from './fs-browser/fs-browser.module'
 import { FileSystemProviderModule } from './fs-provider/fs-provider.modeule';
 import { AppComponent } from './app.component';
+import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { IpcService } from '@services/ipc.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuBarComponent
   ],
   imports: [
     BrowserModule,
