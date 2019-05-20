@@ -16,5 +16,11 @@ export enum Commands {
     NewFolder = 'New folder',
     Properties = 'Properties',
     Open = 'Open',
-    Exit = 'Exit'
+    Exit = 'Exit',
+    NavigationPane = 'Navigation pane',
+    PreviewPane = 'Preview pane',
+    DetailsPane = 'Details pane',
+    ItemCheckBoxes = 'Item check boxes',
+    FileNameExtensions = 'File name extensions',
+    HiddenItems = 'Hidden items'
 }

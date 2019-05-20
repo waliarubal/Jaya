@@ -26,5 +26,11 @@
     <eui-menu-item [text]="Commands.SelectNone" iconCls="fa fa-check"></eui-menu-item>
 </eui-menu>
 <eui-menu #view (itemClick)="OnMenuClicked($event);">
-
+    <eui-menu-item [text]="Commands.NavigationPane"></eui-menu-item>
+    <eui-menu-item [text]="Commands.PreviewPane"></eui-menu-item>
+    <eui-menu-item [text]="Commands.DetailsPane"></eui-menu-item>
+    <eui-menu-sep></eui-menu-sep>
+    <eui-menu-item [text]="Commands.ItemCheckBoxes"></eui-menu-item>
+    <eui-menu-item [text]="Commands.FileNameExtensions"></eui-menu-item>
+    <eui-menu-item [text]="Commands.HiddenItems"></eui-menu-item>
 </eui-menu>
