@@ -3,28 +3,28 @@
     <eui-menubutton [plain]="true" [menu]="edit">Edit</eui-menubutton>
     <eui-menubutton [plain]="true" [menu]="view">View</eui-menubutton>
 </eui-panel>
-<eui-menu #file>
-    <eui-menu-item text="New folder" iconCls="fa fa-folder-plus"></eui-menu-item>
+<eui-menu #file (itemClick)="OnMenuClicked($event);">
+    <eui-menu-item [text]="Commands.NewFolder" iconCls="fa fa-folder-plus"></eui-menu-item>
     <eui-menu-sep></eui-menu-sep>
-    <eui-menu-item text="Properties" iconCls="fa fa-info"></eui-menu-item>
-    <eui-menu-item text="Open" iconCls="fa fa-edit"></eui-menu-item>
+    <eui-menu-item [text]="Commands.Properties" iconCls="fa fa-info"></eui-menu-item>
+    <eui-menu-item [text]="Commands.Open" iconCls="fa fa-edit"></eui-menu-item>
     <eui-menu-sep></eui-menu-sep>
-    <eui-menu-item text="Exit" iconCls="fa fa-sign-out-alt"></eui-menu-item>
+    <eui-menu-item [text]="Commands.Exit" iconCls="fa fa-sign-out-alt"></eui-menu-item>
 </eui-menu>
-<eui-menu #edit>
-    <eui-menu-item text="Cut" iconCls="fa fa-cut"></eui-menu-item>
-    <eui-menu-item text="Copy" iconCls="fa fa-copy"></eui-menu-item>
-    <eui-menu-item text="Paste" iconCls="fa fa-paste"></eui-menu-item>
+<eui-menu #edit (itemClick)="OnMenuClicked($event);">
+    <eui-menu-item [text]="Commands.Cut" iconCls="fa fa-cut"></eui-menu-item>
+    <eui-menu-item [text]="Commands.Copy" iconCls="fa fa-copy"></eui-menu-item>
+    <eui-menu-item [text]="Commands.Paste" iconCls="fa fa-paste"></eui-menu-item>
     <eui-menu-sep></eui-menu-sep>
-    <eui-menu-item text="Move to..."></eui-menu-item>
-    <eui-menu-item text="Copy to..."></eui-menu-item>
+    <eui-menu-item [text]="Commands.MoveTo"></eui-menu-item>
+    <eui-menu-item [text]="Commands.CopyTo"></eui-menu-item>
     <eui-menu-sep></eui-menu-sep>
-    <eui-menu-item text="Delete" iconCls="fa fa-trash"></eui-menu-item>
-    <eui-menu-item text="Rename" iconCls="fa fa-signature"></eui-menu-item>
+    <eui-menu-item [text]="Commands.Delete" iconCls="fa fa-trash"></eui-menu-item>
+    <eui-menu-item [text]="Commands.Rename" iconCls="fa fa-signature"></eui-menu-item>
     <eui-menu-sep></eui-menu-sep>
-    <eui-menu-item text="Select all" iconCls="fa fa-check-double"></eui-menu-item>
-    <eui-menu-item text="Select none" iconCls="fa fa-check"></eui-menu-item>
+    <eui-menu-item [text]="Commands.SelectAll" iconCls="fa fa-check-double"></eui-menu-item>
+    <eui-menu-item [text]="Commands.SelectNone" iconCls="fa fa-check"></eui-menu-item>
 </eui-menu>
-<eui-menu #view>
+<eui-menu #view (itemClick)="OnMenuClicked($event);">
 
 </eui-menu>

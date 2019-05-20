@@ -1,6 +1,6 @@
 import { BaseModel } from './base.model';
 import { BaseService } from './base.service';
-import { Constants } from './constants';
+import { Constants, Commands } from './constants';
 import { Dictionary } from './data-structures/dictionary';
 import { Pair } from './data-structures/pair';
 import { Helpers } from './helpers';
@@ -16,7 +16,7 @@ export {
     Helpers,
     BaseModel,
     BaseService,
-    Constants,
+    Constants, Commands,
     Dictionary,
     Pair,
     ErrorModel,
