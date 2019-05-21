@@ -3,12 +3,9 @@ import { IpcService } from './ipc.service';
 
 export class DropboxService extends BaseService {
     private readonly ACCESS_TOKEN = 'JYfV_JpVuKMAAAAAAAADcLpyn2bzlTGiWOhMF7zIRmvoTq1zKRvSZQOLI5oWE_7E';
-
-    private readonly _ipc: IpcService;
-
-    constructor(ipc: IpcService) {
+    
+    constructor(private readonly _ipc: IpcService) {
         super();
-        this._ipc = ipc;
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
     }
 

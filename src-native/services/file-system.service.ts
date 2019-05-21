@@ -7,11 +7,9 @@ import { IpcService } from './ipc.service';
 import { BaseService, Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel, ProviderModel } from '../../src-common';
 
 export class FileSystemService extends BaseService {
-    private readonly _ipc: IpcService;
 
-    constructor(ipc: IpcService) {
+    constructor(private readonly _ipc: IpcService) {
         super();
-        this._ipc = ipc;
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
     }
 

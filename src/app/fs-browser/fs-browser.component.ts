@@ -37,7 +37,7 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
 
     }
 
-    protected Destroy(): void {
+    protected async Destroy(): Promise<void> {
 
     }
 

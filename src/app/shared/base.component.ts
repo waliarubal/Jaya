@@ -1,4 +1,4 @@
-import { OnInit, OnDestroy } from '@angular/core';
+import { OnInit, OnDestroy, HostListener } from '@angular/core';
 import { BaseModel } from '@common/index';
 
 export abstract class BaseComponent extends BaseModel implements OnInit, OnDestroy {
@@ -11,13 +11,14 @@ export abstract class BaseComponent extends BaseModel implements OnInit, OnDestr
         this.Initialize();
     }
 
-    ngOnDestroy(): void {
-        this.Destroy();
+    @HostListener('window:beforeunload')
+    async ngOnDestroy(): Promise<void> {
+        await this.Destroy();
         super.Clear();
     }
 
     protected abstract Initialize(): void;
 
-    protected abstract Destroy(): void;
+    protected async abstract Destroy(): Promise<void>;
 
 }

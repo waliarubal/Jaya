@@ -5,6 +5,8 @@ export enum MessageType {
     Handshake = 'h',
     Directoties = 'd',
     Files = 'f',
+    DeleteConfig = 's_con',
+    GetSetConfig = 'gs_con',
     FileSystemProvider = 'p_fs',
     DropboxProvider = 'p_db'
 }

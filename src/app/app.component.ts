@@ -11,7 +11,7 @@ export class AppComponent extends BaseComponent {
 
   }
 
-  protected Destroy(): void {
+  protected async Destroy(): Promise<void> {
 
   }
   

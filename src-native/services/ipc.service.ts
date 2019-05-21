@@ -5,7 +5,7 @@ import { Constants, BaseService, MessageModel, MessageType } from '../../src-com
 export class IpcService extends BaseService {
     private readonly _event: EventEmitter;
 
-    constructor(readonly _window: BrowserWindow) {
+    constructor(private readonly _window: BrowserWindow) {
         super();
         this._event = new EventEmitter();
         ipcMain.on(Constants.IPC_CHANNEL, (event: any, argument: any) => this.OnMessage(event, argument));

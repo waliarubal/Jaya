@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import * as Path from 'path';
 import * as Url from 'url';
-import { IpcService, FileSystemService, DropboxService } from './services';
+import { IpcService, FileSystemService, DropboxService, ConfigService } from './services';
 import { BaseService } from '../src-common';
 
 class Main {
@@ -9,7 +9,7 @@ class Main {
     private _services: BaseService[];
 
     Initialize(): void {
-        app.on('ready',() => this.CreateWindow());
+        app.on('ready', () => this.CreateWindow());
         app.on('activate', () => this.CreateWindow());
         app.on('window-all-closed', () => this.DestroyWindow());
         app.on('browser-window-created', (event: Electron.Event, window: BrowserWindow) => window.setMenu(null));
@@ -19,6 +19,7 @@ class Main {
         let ipc = new IpcService(window);
         let services: BaseService[] = [
             ipc,
+            new ConfigService(ipc),
             new FileSystemService(ipc),
             new DropboxService(ipc)
         ];
@@ -43,6 +44,8 @@ class Main {
         let window = this._window = new BrowserWindow({
             width: 800,
             height: 600,
+            minHeight: 600,
+            minWidth: 800,
             webPreferences: {
                 nodeIntegration: true,
                 contextIsolation: false

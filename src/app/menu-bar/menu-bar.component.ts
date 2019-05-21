@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
 import { Commands } from '@common/index';
+import { ConfigService } from '@services/config.service';
 
 @Component({
     selector: 'menu-bar',
@@ -9,12 +10,18 @@ import { Commands } from '@common/index';
 export class MenuBarComponent extends BaseComponent {
     readonly Commands = Commands;
 
-    protected Initialize(): void {
+    IsItemCheckBoxVisible: boolean;
 
+    constructor(private readonly _config: ConfigService){
+        super();
     }
 
-    protected Destroy(): void {
+    protected async Initialize(): Promise<void> {
+        this.IsItemCheckBoxVisible = await this._config.GetOrSetConfiguration<boolean>(Commands.ItemCheckBoxes, false);
+    }
 
+    protected async Destroy(): Promise<void> {
+        await this._config.GetOrSetConfiguration(Commands.ItemCheckBoxes, this.IsItemCheckBoxVisible);
     }
 
     OnMenuClicked(menu: Commands): void {

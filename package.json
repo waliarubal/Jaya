@@ -50,7 +50,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/msgpack5": "^3.4.1",
-    "@types/node": "~8.9.4",
+    "@types/node": "^8.10.48",
     "codelyzer": "~4.5.0",
     "electron": "^4.2.2",
     "jasmine-core": "~2.99.1",
