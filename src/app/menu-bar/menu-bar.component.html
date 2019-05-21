@@ -2,6 +2,7 @@
     <eui-menubutton [plain]="true" [menu]="file">File</eui-menubutton>
     <eui-menubutton [plain]="true" [menu]="edit">Edit</eui-menubutton>
     <eui-menubutton [plain]="true" [menu]="view">View</eui-menubutton>
+    <eui-menubutton [plain]="true" [menu]="help">Help</eui-menubutton>
 </eui-panel>
 <eui-menu #file (itemClick)="OnMenuClicked($event);">
     <eui-menu-item [text]="Commands.NewFolder" iconCls="fa fa-folder-plus"></eui-menu-item>
@@ -33,4 +34,12 @@
     <eui-menu-item [text]="Commands.ItemCheckBoxes"></eui-menu-item>
     <eui-menu-item [text]="Commands.FileNameExtensions"></eui-menu-item>
     <eui-menu-item [text]="Commands.HiddenItems"></eui-menu-item>
+</eui-menu>
+<eui-menu #help (itemClick)="OnMenuClicked($event);">
+    <eui-menu-item [text]="Commands.License" iconCls="fa fa-certificate"></eui-menu-item>
+    <eui-menu-item [text]="Commands.PrivacyStatement" iconCls="fa fa-user-secret"></eui-menu-item>
+    <eui-menu-sep></eui-menu-sep>
+    <eui-menu-item [text]="Commands.Update" iconCls="fa fa-retweet"></eui-menu-item>
+    <eui-menu-sep></eui-menu-sep>
+    <eui-menu-item [text]="Commands.About" iconCls="fa fa-info-circle"></eui-menu-item>
 </eui-menu>

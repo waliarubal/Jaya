@@ -22,5 +22,9 @@ export enum Commands {
     DetailsPane = 'Details pane',
     ItemCheckBoxes = 'Item check boxes',
     FileNameExtensions = 'File name extensions',
-    HiddenItems = 'Hidden items'
+    HiddenItems = 'Hidden items',
+    License = 'View License',
+    PrivacyStatement = 'Privacy Statement',
+    Update = 'Check for Updates...',
+    About = 'About'
 }
