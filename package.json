@@ -32,7 +32,7 @@
     "@angular/platform-browser": "^7.2.15",
     "@angular/platform-browser-dynamic": "^7.2.15",
     "@angular/router": "^7.2.15",
-    "core-js": "^2.6.6",
+    "core-js": "^2.6.7",
     "flatted": "^2.0.0",
     "ng-easyui": "^1.2.6",
     "rxjs": "~6.3.3",
