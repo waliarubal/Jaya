@@ -1,4 +1,5 @@
 /* regular */
+
 .fa {
     background-image: none;
     display: inline-flex;
@@ -10,7 +11,7 @@
     font-size: 14px;
 }
 
-.fa.tree-folder:not(.tree-icon )::before {
+.fa.tree-folder:not(.tree-icon)::before {
     content: "\f07b"
 }
 
@@ -19,6 +20,7 @@
 }
 
 /* bold */
+
 .fab {
     background-image: none;
     display: inline-flex;
@@ -30,7 +32,7 @@
     font-size: 14px;
 }
 
-.fab.tree-folder:not(.tree-icon )::before {
+.fab.tree-folder:not(.tree-icon)::before {
     content: "\f07b"
 }
 

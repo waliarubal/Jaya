@@ -3,7 +3,9 @@ import { SuperService } from '@shared/super.service';
 import { IpcService } from '@services/ipc.service';
 import { MessageType, ConfigModel, Helpers } from '@common/index';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ConfigService extends SuperService {
     
     constructor(private readonly _ipc: IpcService) {

@@ -1,8 +1,9 @@
 import { ipcMain, BrowserWindow } from 'electron';
 import { EventEmitter } from 'events';
-import { Constants, BaseService, MessageModel, MessageType } from '../../src-common'
+import { Constants, MessageModel, MessageType } from '../../src-common'
+import { SuperService } from '../super.service';
 
-export class IpcService extends BaseService {
+export class IpcService extends SuperService {
     private readonly _event: EventEmitter;
 
     constructor(private readonly _window: BrowserWindow) {

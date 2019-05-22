@@ -7,6 +7,7 @@ export enum Commands {
     Cut = 'Cut',
     Copy = 'Copy',
     Paste = 'Paste',
+    CopyPath = 'Copy path',
     MoveTo = 'Move to...',
     CopyTo = 'Copy to...',
     Delete = 'Delete',
@@ -26,5 +27,6 @@ export enum Commands {
     License = 'View License',
     PrivacyStatement = 'Privacy Statement',
     Update = 'Check for Updates...',
-    About = 'About'
+    About = 'About',
+    PinToQuickAccess = 'Pin to Quick access'
 }

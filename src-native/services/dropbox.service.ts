@@ -1,8 +1,9 @@
-import { BaseService, Constants, MessageModel, MessageType, ProviderModel, Helpers } from '../../src-common';
+import { Constants, MessageModel, MessageType, ProviderModel, Helpers } from '../../src-common';
 import { IpcService } from './ipc.service';
+import { SuperService } from '../super.service';
 
-export class DropboxService extends BaseService {
-    private readonly ACCESS_TOKEN = 'JYfV_JpVuKMAAAAAAAADcLpyn2bzlTGiWOhMF7zIRmvoTq1zKRvSZQOLI5oWE_7E';
+export class DropboxService extends SuperService {
+    // private readonly ACCESS_TOKEN = 'JYfV_JpVuKMAAAAAAAADcLpyn2bzlTGiWOhMF7zIRmvoTq1zKRvSZQOLI5oWE_7E';
     
     constructor(private readonly _ipc: IpcService) {
         super();

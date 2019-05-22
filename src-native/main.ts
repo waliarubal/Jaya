@@ -2,11 +2,11 @@ import { app, BrowserWindow } from 'electron';
 import * as Path from 'path';
 import * as Url from 'url';
 import { IpcService, FileSystemService, DropboxService, ConfigService } from './services';
-import { BaseService } from '../src-common';
+import { SuperService } from './super.service';
 
 class Main {
     private _window: BrowserWindow;
-    private _services: BaseService[];
+    private _services: SuperService[];
 
     Initialize(): void {
         app.on('ready', () => this.CreateWindow());
@@ -15,19 +15,23 @@ class Main {
         app.on('browser-window-created', (event: Electron.Event, window: BrowserWindow) => window.setMenu(null));
     }
 
-    private CreateServices(window: BrowserWindow): BaseService[] {
+    private CreateServices(window: BrowserWindow): SuperService[] {
         let ipc = new IpcService(window);
-        let services: BaseService[] = [
+        return [
             ipc,
+            new ConfigService(ipc),
             new ConfigService(ipc),
             new FileSystemService(ipc),
             new DropboxService(ipc)
         ];
-        return services;
     }
 
-    private DestroyServices(services: BaseService[]): void {
-
+    private DestroyServices(services: SuperService[]) {
+        while(services.length > 0) {
+            let service = services.pop();
+            service.Stop();
+            service = null;
+        }
     }
 
     private CreateWindow(): void {

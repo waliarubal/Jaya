@@ -4,9 +4,10 @@ import * as Si from 'systeminformation';
 import { spawn } from 'child_process';
 import * as Path from 'path';
 import { IpcService } from './ipc.service';
-import { BaseService, Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel, ProviderModel } from '../../src-common';
+import { Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel, ProviderModel } from '../../src-common';
+import { SuperService } from '../super.service';
 
-export class FileSystemService extends BaseService {
+export class FileSystemService extends SuperService {
 
     constructor(private readonly _ipc: IpcService) {
         super();

@@ -11,6 +11,7 @@ import { MenuBarModule } from './menu-bar/menu-bar.module';
 import { AppComponent } from './app.component';
 
 import { IpcService } from '@services/ipc.service';
+import { ConfigService } from '@services/config.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { IpcService } from '@services/ipc.service';
     FileSystemProviderModule,
     MenuBarModule
   ],
-  providers: [IpcService],
+  providers: [IpcService, ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,11 +8,12 @@ import { ConfigService } from '@services/config.service';
     templateUrl: './menu-bar.component.html'
 })
 export class MenuBarComponent extends BaseComponent {
+
     readonly Commands = Commands;
 
     IsItemCheckBoxVisible: boolean;
 
-    constructor(private readonly _config: ConfigService){
+    constructor(private readonly _config: ConfigService) {
         super();
     }
 
@@ -24,7 +25,7 @@ export class MenuBarComponent extends BaseComponent {
         await this._config.GetOrSetConfiguration(Commands.ItemCheckBoxes, this.IsItemCheckBoxVisible);
     }
 
-    OnMenuClicked(menu: Commands): void {
-        
+    OnMenuClicked(): void {
+
     }
 }
