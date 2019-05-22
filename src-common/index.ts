@@ -1,6 +1,6 @@
 import { BaseModel } from './base.model';
 import { BaseService } from './base.service';
-import { Constants, Commands } from './constants';
+import { Constants } from './constants';
 import { Dictionary } from './data-structures/dictionary';
 import { Pair } from './data-structures/pair';
 import { Helpers } from './helpers';
@@ -11,13 +11,14 @@ import { DirectoryModel } from './models/directory.model';
 import { MessageModel, MessageType } from './models/message.model';
 import { ProviderModel } from './models/provider.model';
 import { IClonable } from './interfaces/IClonable';
+import { ICommand, CommandType } from './interfaces/ICommand';
 import { IFileSystemObject, FileSystemObjectType } from './interfaces/IFileSystemObject';
 
 export {
     Helpers,
     BaseModel,
     BaseService,
-    Constants, Commands,
+    Constants, 
     Dictionary,
     Pair,
     ConfigModel,
@@ -27,5 +28,6 @@ export {
     MessageModel, MessageType,
     ProviderModel,
     IClonable,
+    ICommand, CommandType,
     IFileSystemObject, FileSystemObjectType
 };

@@ -1,42 +1,4 @@
-export enum Commands {
-    File,
-    Edit,
-    View,
-    Help,
-    Cut = 'Cut',
-    Copy = 'Copy',
-    Paste = 'Paste',
-    CopyPath = 'Copy path',
-    MoveTo = 'Move to...',
-    CopyTo = 'Copy to...',
-    Delete = 'Delete',
-    Rename = 'Rename',
-    SelectAll = 'Select all',
-    SelectNone = 'Select none',
-    NewFolder = 'New folder',
-    Properties = 'Properties',
-    Open = 'Open',
-    Exit = 'Exit',
-    NavigationPane = 'Navigation pane',
-    PreviewPane = 'Preview pane',
-    DetailsPane = 'Details pane',
-    ItemCheckBoxes = 'Item check boxes',
-    FileNameExtensions = 'File name extensions',
-    HiddenItems = 'Hidden items',
-    License = 'View License',
-    PrivacyStatement = 'Privacy Statement',
-    Update = 'Check for Updates...',
-    About = 'About',
-    PinToQuickAccess = 'Pin to Quick access'
-}
-
-export interface ICommand {
-    readonly Command?: Commands;
-    readonly Title?: string;
-    readonly IconClass?: string;
-    readonly IsSeparator?: boolean;
-    readonly Commands?: ICommand[];
-}
+import { CommandType, ICommand } from './interfaces/ICommand';
 
 export class Constants {
     static readonly IPC_CHANNEL: string = 'ipc_channel';
@@ -44,32 +6,142 @@ export class Constants {
 
     static readonly MENU_DATA: ICommand[] = [
         {
-            Command: Commands.File,
-            Title: 'File',
+            Command: CommandType.File,
+            Label: 'File',
             Commands: [
                 {
-                    Command: Commands.NewFolder,
-                    Title: 'New folder',
+                    Command: CommandType.NewFolder,
+                    Label: 'New folder',
                     IconClass: 'fa fa-folder-plus',
                 },
                 { IsSeparator: true },
                 {
-                    Command: Commands.Properties,
-                    Title: 'Properties',
+                    Command: CommandType.Properties,
+                    Label: 'Properties',
                     IconClass: 'fa fa-info'
                 },
                 {
-                    Command: Commands.Open,
-                    Title: 'Open',
+                    Command: CommandType.Open,
+                    Label: 'Open',
                     IconClass: 'fa fa-edit'
                 },
                 { IsSeparator: true },
                 {
-                    Command: Commands.Exit,
-                    Title: 'Exit',
+                    Command: CommandType.Exit,
+                    Label: 'Exit',
                     IconClass: 'fa fa-sign-out-alt'
                 }
             ]
         },
+        {
+            Command: CommandType.Edit,
+            Label: 'Edit',
+            Commands: [
+                {
+                    Command: CommandType.Cut,
+                    Label: 'Cut',
+                    IconClass: 'fa fa-cut'
+                },
+                {
+                    Command: CommandType.Copy,
+                    Label: 'Copy',
+                    IconClass: 'fa fa-copy'
+                },
+                {
+                    Command: CommandType.Paste,
+                    Label: 'Paste',
+                    IconClass: 'fa fa-paste'
+                },
+                { IsSeparator: true },
+                {
+                    Command: CommandType.MoveTo,
+                    Label: 'Move to...'
+                },
+                {
+                    Command: CommandType.CopyTo,
+                    Label: 'Copy to...'
+                },
+                { IsSeparator: true },
+                {
+                    Command: CommandType.Delete,
+                    Label: 'Delete',
+                    IconClass: 'fa fa-trash'
+                },
+                {
+                    Command: CommandType.Rename,
+                    Label: 'Rename',
+                    IconClass: 'fa fa-signature'
+                },
+                { IsSeparator: true },
+                {
+                    Command: CommandType.SelectAll,
+                    Label: 'Select all',
+                    IconClass: 'fas fa-check-double'
+                },
+                {
+                    Command: CommandType.SelectNone,
+                    Label: 'Select none'
+                }
+            ]
+        },
+        {
+            Command: CommandType.View,
+            Label: 'View',
+            Commands: [
+                {
+                    Command: CommandType.NavigationPane,
+                    Label: 'Navigation pane'
+                },
+                {
+                    Command: CommandType.PreviewPane,
+                    Label: 'Preview pane'
+                },
+                {
+                    Command: CommandType.DetailsPane,
+                    Label: 'Details pane'
+                },
+                { IsSeparator: true },
+                {
+                    Command: CommandType.ItemCheckBoxes,
+                    Label: 'Item check boxes'
+                },
+                {
+                    Command: CommandType.FileNameExtensions,
+                    Label: 'File name extensions'
+                },
+                {
+                    Command: CommandType.HiddenItems,
+                    Label: 'Hidden items'
+                }
+            ]
+        },
+        {
+            Command: CommandType.Help,
+            Label: 'Help',
+            Commands: [
+                {
+                    Command: CommandType.License,
+                    Label: 'View License',
+                    IconClass: 'fa fa-certificate'
+                },
+                {
+                    Command: CommandType.License,
+                    Label: 'Privacy Statement',
+                    IconClass: 'fa fa-user-secret'
+                },
+                { IsSeparator: true },
+                {
+                    Command: CommandType.Update,
+                    Label: 'Check for Updates...',
+                    IconClass: 'fa fa-retweet'
+                },
+                { IsSeparator: true },
+                {
+                    Command: CommandType.About,
+                    Label: 'About',
+                    IconClass: 'fa fa-info-circle'
+                }
+            ]
+        }
     ];
 }

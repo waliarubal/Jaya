@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { Commands } from '@common/index';
+import { Constants, CommandType } from '@common/index';
 import { ConfigService } from '@services/config.service';
 
 @Component({
@@ -8,8 +8,7 @@ import { ConfigService } from '@services/config.service';
     templateUrl: './menu-bar.component.html'
 })
 export class MenuBarComponent extends BaseComponent {
-
-    readonly Commands = Commands;
+    readonly Commands = Constants.MENU_DATA;
 
     IsItemCheckBoxVisible: boolean;
 
@@ -18,14 +17,14 @@ export class MenuBarComponent extends BaseComponent {
     }
 
     protected async Initialize(): Promise<void> {
-        this.IsItemCheckBoxVisible = await this._config.GetOrSetConfiguration<boolean>(Commands.ItemCheckBoxes, false);
+        // this.IsItemCheckBoxVisible = await this._config.GetOrSetConfiguration<boolean>(CommandType.ItemCheckBoxes, false);
     }
 
     protected async Destroy(): Promise<void> {
-        await this._config.GetOrSetConfiguration(Commands.ItemCheckBoxes, this.IsItemCheckBoxVisible);
+        // await this._config.GetOrSetConfiguration(CommandType.ItemCheckBoxes, this.IsItemCheckBoxVisible);
     }
 
-    OnMenuClicked(): void {
-
+    OnMenuClicked(label: string): void {
+        
     }
 }
