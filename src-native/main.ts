@@ -20,7 +20,6 @@ class Main {
         return [
             ipc,
             new ConfigService(ipc),
-            new ConfigService(ipc),
             new FileSystemService(ipc),
             new DropboxService(ipc)
         ];

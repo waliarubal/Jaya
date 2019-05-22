@@ -1,7 +1,7 @@
 import { app, remote } from 'electron';
 import * as Path from 'path';
 import * as Fs from 'fs';
-import { Constants, MessageModel, MessageType, Helpers, ConfigModel, IClonable, Dictionary } from '../../src-common';
+import { Constants, MessageModel, ConfigModel, MessageType, Helpers, IClonable, Dictionary } from '../../src-common';
 import { IpcService } from './ipc.service';
 import { SuperService } from '../super.service';
 
@@ -18,7 +18,7 @@ class ConfigCollection implements IClonable {
 
     Clone(object: any): void {
         if (object._configs) {
-            this._configs = [];
+            this._configs.length = 0;
             for (let configObj of object._configs) {
                 let config = new ConfigModel();
                 config.Clone(configObj);
@@ -39,7 +39,7 @@ export class ConfigService extends SuperService {
 
         const userDataPath = (app || remote.app).getPath('userData');
         this._configFile = Path.join(userDataPath, 'config.json');
-        console.log(this._configFile);
+        console.log('Config File: %s', this.ConfigFileName);
     }
 
     get ConfigFileName(): string {
