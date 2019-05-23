@@ -2,9 +2,9 @@ import { BaseService } from '../src-common';
 
 export abstract class SuperService extends BaseService {
 
-    Stop(): void {
-        this.Dispose();
+    async Stop(): Promise<void> {
+        await this.Dispose();
     }
 
-    protected abstract Dispose(): void;
+    protected async abstract Dispose(): Promise<void>;
 }

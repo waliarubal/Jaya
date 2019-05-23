@@ -29,7 +29,7 @@ export class IpcService extends SuperService {
         this._window.webContents.send(Constants.IPC_CHANNEL, messageString);
     }
 
-    protected Dispose(): void {
+    protected async Dispose(): Promise<void> {
         ipcMain.removeAllListeners(Constants.IPC_CHANNEL);
         this.Receive.removeAllListeners(Constants.IPC_CHANNEL);
     }

@@ -102,9 +102,9 @@ export class ConfigService extends SuperService {
         await this.WriteFileAsync(fileName, json);
     }
 
-    protected Dispose(): void {
+    protected async Dispose(): Promise<void> {
         this._ipc.Receive.removeAllListeners(Constants.IPC_CHANNEL);
-        this.WriteConfigFile(this.ConfigFileName).then();
+        await this.WriteConfigFile(this.ConfigFileName);
     }
 
     private OnMessage(message: MessageModel): void {

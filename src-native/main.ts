@@ -11,7 +11,7 @@ class Main {
     Initialize(): void {
         app.on('ready', () => this.CreateWindow());
         app.on('activate', () => this.CreateWindow());
-        app.on('window-all-closed', () => this.DestroyWindow());
+        app.on('window-all-closed', async () => await this.DestroyWindow());
         app.on('browser-window-created', (event: Electron.Event, window: BrowserWindow) => window.setMenu(null));
     }
 
@@ -26,10 +26,10 @@ class Main {
         ];
     }
 
-    private DestroyServices(services: SuperService[]) {
-        while(services.length > 0) {
+    private async DestroyServices(services: SuperService[]): Promise<void> {
+        while (services.length > 0) {
             let service = services.pop();
-            service.Stop();
+            await service.Stop();
             service = null;
         }
     }
@@ -60,12 +60,12 @@ class Main {
 
         window.loadURL(url);
         window.webContents.openDevTools();
-        window.on('closed', () => this.DestroyWindow());
+        window.on('closed', async () => await this.DestroyWindow());
     }
 
-    private DestroyWindow(): void {
+    private async DestroyWindow(): Promise<void> {
         if (this._services)
-            this.DestroyServices(this._services);
+            await this.DestroyServices(this._services);
 
         if (this._window)
             this._window = null;

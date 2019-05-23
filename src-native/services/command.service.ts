@@ -10,7 +10,7 @@ export class CommandService extends SuperService {
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
     }
 
-    protected Dispose(): void {
+    protected async Dispose(): Promise<void> {
         this._ipc.Receive.removeAllListeners(Constants.IPC_CHANNEL);
     }
 
