@@ -1,14 +1,14 @@
-import { CommandType, ICommand } from './interfaces/ICommand';
+import { CommandType, IMenu } from './interfaces/IMenu';
 
 export class Constants {
     static readonly IPC_CHANNEL: string = 'ipc_channel';
     static readonly SEPARATOR: string = '¶';
 
-    static readonly MENU_DATA: ICommand[] = [
+    static readonly MENU_DATA: IMenu[] = [
         {
             Command: CommandType.File,
             Label: 'File',
-            Commands: [
+            SubMenus: [
                 {
                     Command: CommandType.NewFolder,
                     Label: 'New folder',
@@ -36,7 +36,7 @@ export class Constants {
         {
             Command: CommandType.Edit,
             Label: 'Edit',
-            Commands: [
+            SubMenus: [
                 {
                     Command: CommandType.Cut,
                     Label: 'Cut',
@@ -87,38 +87,44 @@ export class Constants {
         {
             Command: CommandType.View,
             Label: 'View',
-            Commands: [
+            SubMenus: [
                 {
                     Command: CommandType.NavigationPane,
-                    Label: 'Navigation pane'
+                    Label: 'Navigation pane',
+                    IsCheckable: true
                 },
                 {
                     Command: CommandType.PreviewPane,
-                    Label: 'Preview pane'
+                    Label: 'Preview pane',
+                    IsCheckable: true
                 },
                 {
                     Command: CommandType.DetailsPane,
-                    Label: 'Details pane'
+                    Label: 'Details pane',
+                    IsCheckable: true
                 },
                 { IsSeparator: true },
                 {
                     Command: CommandType.ItemCheckBoxes,
-                    Label: 'Item check boxes'
+                    Label: 'Item check boxes',
+                    IsCheckable: true
                 },
                 {
                     Command: CommandType.FileNameExtensions,
-                    Label: 'File name extensions'
+                    Label: 'File name extensions',
+                    IsCheckable: true
                 },
                 {
                     Command: CommandType.HiddenItems,
-                    Label: 'Hidden items'
+                    Label: 'Hidden items',
+                    IsCheckable: true
                 }
             ]
         },
         {
             Command: CommandType.Help,
             Label: 'Help',
-            Commands: [
+            SubMenus: [
                 {
                     Command: CommandType.License,
                     Label: 'View License',

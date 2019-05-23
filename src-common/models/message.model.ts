@@ -8,7 +8,8 @@ export enum MessageType {
     DeleteConfig = 's_con',
     GetSetConfig = 'gs_con',
     FileSystemProvider = 'p_fs',
-    DropboxProvider = 'p_db'
+    DropboxProvider = 'p_db',
+    Command = 'c'
 }
 
 export class MessageModel {

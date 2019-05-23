@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 
 import { IpcService } from '@services/ipc.service';
 import { ConfigService } from '@services/config.service';
+import { CommandService } from '@services/command.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,11 @@ import { ConfigService } from '@services/config.service';
     FileSystemProviderModule,
     MenuBarModule
   ],
-  providers: [IpcService, ConfigService],
+  providers: [
+    IpcService,
+    ConfigService,
+    CommandService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

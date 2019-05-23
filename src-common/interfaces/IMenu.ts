@@ -29,10 +29,12 @@ export enum CommandType {
     About
 }
 
-export interface ICommand {
+export interface IMenu {
     readonly Command?: CommandType;
     readonly Label?: string;
     readonly IconClass?: string;
     readonly IsSeparator?: boolean;
-    readonly Commands?: ICommand[];
+    readonly SubMenus?: IMenu[];
+    readonly IsCheckable?: boolean;
+    IsChecked?: boolean;
 }

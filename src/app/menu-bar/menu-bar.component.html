@@ -1,11 +1,11 @@
 <eui-panel [border]="false">
-    <ng-container *ngFor="let command of Commands;">
-        <eui-menubutton [plain]="true" [menu]="subMenu">{{command.Label}}</eui-menubutton>
+    <ng-container *ngFor="let menu of Menus;">
+        <eui-menubutton [plain]="true" [menu]="subMenu">{{menu.Label}}</eui-menubutton>
         <eui-menu #subMenu (itemClick)="OnMenuClicked($event);">
-            <ng-container *ngFor="let childCommand of command.Commands;">
-                <eui-menu-sep *ngIf="childCommand.IsSeparator"></eui-menu-sep>
-                <eui-menu-item *ngIf="!childCommand.IsSeparator" [text]="childCommand.Label"
-                    [iconCls]="childCommand.IconClass">
+            <ng-container *ngFor="let childMenu of menu.SubMenus;">
+                <eui-menu-sep *ngIf="childMenu.IsSeparator"></eui-menu-sep>
+                <eui-menu-item *ngIf="!childMenu.IsSeparator" [text]="childMenu.Label" [value]="childMenu.Command"
+                    [iconCls]="childMenu.IsCheckable ? (childMenu.IsChecked ? 'fas fa-check' : '') : childMenu.IconClass">
                 </eui-menu-item>
             </ng-container>
         </eui-menu>

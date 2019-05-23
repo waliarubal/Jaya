@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import * as Path from 'path';
 import * as Url from 'url';
-import { IpcService, FileSystemService, DropboxService, ConfigService } from './services';
+import { IpcService, FileSystemService, DropboxService, ConfigService, CommandService } from './services';
 import { SuperService } from './super.service';
 
 class Main {
@@ -20,6 +20,7 @@ class Main {
         return [
             ipc,
             new ConfigService(ipc),
+            new CommandService(ipc),
             new FileSystemService(ipc),
             new DropboxService(ipc)
         ];

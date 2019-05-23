@@ -8,10 +8,11 @@ import { ConfigModel } from './models/config.model';
 import { ErrorModel } from './models/error.model';
 import { FileModel } from './models/file.model';
 import { DirectoryModel } from './models/directory.model';
+import {CommandModel} from './models/command.model';
 import { MessageModel, MessageType } from './models/message.model';
 import { ProviderModel } from './models/provider.model';
 import { IClonable } from './interfaces/IClonable';
-import { ICommand, CommandType } from './interfaces/ICommand';
+import { IMenu, CommandType } from './interfaces/IMenu';
 import { IFileSystemObject, FileSystemObjectType } from './interfaces/IFileSystemObject';
 
 export {
@@ -22,12 +23,13 @@ export {
     Dictionary,
     Pair,
     ConfigModel,
+    CommandModel,
     ErrorModel,
     FileModel,
     DirectoryModel,
     MessageModel, MessageType,
     ProviderModel,
     IClonable,
-    ICommand, CommandType,
+    IMenu, CommandType,
     IFileSystemObject, FileSystemObjectType
 };
