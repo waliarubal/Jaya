@@ -7,8 +7,8 @@ export abstract class BaseComponent extends BaseModel implements OnInit, OnDestr
        super();
     }
 
-    ngOnInit(): void {
-        this.Initialize();
+    async ngOnInit(): Promise<void> {
+        await this.Initialize();
     }
 
     @HostListener('window:beforeunload')
@@ -17,7 +17,7 @@ export abstract class BaseComponent extends BaseModel implements OnInit, OnDestr
         super.Clear();
     }
 
-    protected abstract Initialize(): void;
+    protected async abstract Initialize(): Promise<void>;
 
     protected async abstract Destroy(): Promise<void>;
 

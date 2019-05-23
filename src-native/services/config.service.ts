@@ -31,7 +31,7 @@ class ConfigCollection implements IClonable {
 
 export class ConfigService extends SuperService {
     private readonly _configFile: string;
-    private _configs: Dictionary<string, any>;
+    private _configs: Dictionary<number, any>;
 
     constructor(private readonly _ipc: IpcService) {
         super();
@@ -110,29 +110,30 @@ export class ConfigService extends SuperService {
     private OnMessage(message: MessageModel): void {
         switch (message.Type) {
             case MessageType.GetSetConfig:
-                this.ReadConfigFile(this.ConfigFileName).then();
-
                 const config = Helpers.Deserialize<ConfigModel>(message.DataJson, ConfigModel);
                 let value = config.Value;
-                if (this._configs.IsHaving(config.Key)) {
-                    value = this._configs.Get(config.Key);
+                this.ReadConfigFile(this.ConfigFileName).then(() => {
+                    if (this._configs.IsHaving(config.Key)) {
+                        value = this._configs.Get(config.Key);
 
-                    this._configs.Set(config.Key, config.Value);
+                        this._configs.Set(config.Key, config.Value);
 
-                    config.Value = value;
-                }
-                else
-                    this._configs.Set(config.Key, value);
+                        config.Value = value;
+                    }
+                    else
+                        this._configs.Set(config.Key, value);
 
-                message.DataJson = Helpers.Serialize<ConfigModel>(config);
-                this._ipc.Send(message);
+                    message.DataJson = Helpers.Serialize<ConfigModel>(config);
+                    this._ipc.Send(message);
+                });
                 break;
 
             case MessageType.DeleteConfig:
-                this.ReadConfigFile(this.ConfigFileName).then();
-
-                if (this._configs.IsHaving(message.DataJson))
-                    this._configs.Delete(message.DataJson);
+                let command = parseInt(message.DataJson);
+                this.ReadConfigFile(this.ConfigFileName).then(() => {
+                    if (this._configs.IsHaving(command))
+                        this._configs.Delete(command);
+                });
                 break;
         }
     }

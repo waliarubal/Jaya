@@ -7,7 +7,7 @@ import { BaseComponent } from '@shared/base.component';
 })
 export class AppComponent extends BaseComponent {
 
-  protected Initialize(): void {
+  protected async Initialize(): Promise<void> {
 
   }
 

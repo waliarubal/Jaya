@@ -16,12 +16,12 @@ export class ConfigService extends SuperService {
         this._ipc.Receive.unsubscribe();
     }
 
-    async GetOrSetConfiguration<T>(key: string, value: T): Promise<T> {
+    async GetOrSetConfiguration<T>(key: number, value: T): Promise<T> {
         let config = new ConfigModel(key, value)
         const configJson = Helpers.Serialize<ConfigModel>(config);
         const response = await this._ipc.SendAsync(MessageType.GetSetConfig, configJson);
         config = Helpers.Deserialize<ConfigModel>(response.DataJson, ConfigModel);
-        return null;
+        return config.Value;
     }
 
     DeleteConfiguration(key: string): void {

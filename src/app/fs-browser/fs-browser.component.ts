@@ -33,7 +33,7 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
         this._providers = await this.GetProviders();
     }
 
-    protected Initialize(): void {
+    protected async Initialize(): Promise<void> {
 
     }
 

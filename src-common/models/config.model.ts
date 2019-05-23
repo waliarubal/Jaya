@@ -1,15 +1,15 @@
 import { IClonable } from '../interfaces/IClonable';
 
 export class ConfigModel implements IClonable {
-    private _key: string;
+    private _key: number;
     private _value: any;
 
-    constructor(key?: string, value?: any){
+    constructor(key?: number, value?: any){
         this._key = key;
         this._value = value;
     }
 
-    get Key(): string {
+    get Key(): number {
         return this._key;
     }
 

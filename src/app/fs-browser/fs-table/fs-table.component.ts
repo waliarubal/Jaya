@@ -10,8 +10,8 @@ export class FileSystemTableComponent extends BaseComponent {
     private _directory: DirectoryModel;
     private _objects: IFileSystemObject[];
 
-    protected Initialize(): void {
-        
+    protected async Initialize(): Promise<void> {
+
     }
 
     protected async Destroy(): Promise<void> {

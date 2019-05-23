@@ -64,7 +64,7 @@ export class FileSystemTreeComponent extends BaseComponent {
         return this._nodes;
     }
 
-    protected Initialize(): void {
+    protected async Initialize(): Promise<void> {
 
     }
 
