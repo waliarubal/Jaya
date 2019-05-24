@@ -14,6 +14,8 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
     private _directory: DirectoryModel;
     private _providers: ProviderModel[];
     private _isNavigationPaneVisible: boolean;
+    private _isPreviewPaneVisible: boolean;
+    private _isDetailsPaneVisible: boolean;
 
     constructor(config: ConfigService, private _fileSystemService: FileSystemService, private _dropboxService: DropboxService) {
         super(config);
@@ -35,22 +37,48 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
         return this._isNavigationPaneVisible;
     }
 
+    get IsPreviewPaneVisible(): boolean {
+        return this._isPreviewPaneVisible;
+    }
+
+    get IsDetailsPaneVisible(): boolean {
+        return this._isDetailsPaneVisible;
+    }
+
     async ngAfterViewInit(): Promise<void> {
         this._providers = await this.GetProviders();
     }
 
     protected async Initialize(): Promise<void> {
-        this._isNavigationPaneVisible = await this._config.GetValue<boolean>(CommandType.NavigationPane, false);
+        this._isNavigationPaneVisible = await this._config.GetValue<boolean>(CommandType.NavigationPane, true);
+        this._isPreviewPaneVisible = await this._config.GetValue<boolean>(CommandType.PreviewPane, false);
+        this._isDetailsPaneVisible = await this._config.GetValue<boolean>(CommandType.DetailsPane, false);
     }
 
     protected async Destroy(): Promise<void> {
-        
+
     }
 
     protected OnConfigChanged(config: ConfigModel): void {
-        switch(config.Key) {
+        switch (config.Key) {
             case CommandType.NavigationPane:
                 this._isNavigationPaneVisible = <boolean>config.Value;
+                break;
+
+            case CommandType.PreviewPane:
+                this._isPreviewPaneVisible = <boolean>config.Value;
+                if (this.IsPreviewPaneVisible && this.IsDetailsPaneVisible) {
+                    this._isDetailsPaneVisible = false;
+                    this._config.SetValue(CommandType.DetailsPane, this.IsDetailsPaneVisible).then();
+                }
+                break;
+
+            case CommandType.DetailsPane:
+                this._isDetailsPaneVisible = <boolean>config.Value;
+                if (this.IsDetailsPaneVisible && this.IsPreviewPaneVisible) {
+                    this._isPreviewPaneVisible = false;
+                    this._config.SetValue(CommandType.PreviewPane, this.IsPreviewPaneVisible).then();
+                }
                 break;
         }
     }
