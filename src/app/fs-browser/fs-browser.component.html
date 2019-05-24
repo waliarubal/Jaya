@@ -1,4 +1,4 @@
-<eui-layout style="height: 100%; width: 100%;" #layout>
+<eui-layout style="height: 100%;" #layout>
     <eui-layout-panel style="width: 280px;" region="west" euiResizable handles="e" [split]="true"
         [collapsed]="!IsNavigationPaneVisible" (resizing)="layout.updatePaddings()">
         <app-fs-tree style="height: 100%;" [Providers]="Providers" (OnDirectorySelected)="Directory = $event;">
