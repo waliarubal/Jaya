@@ -108,24 +108,27 @@ export class ConfigService extends SuperService {
     }
 
     private OnMessage(message: MessageModel): void {
+        let config: ConfigModel;
         switch (message.Type) {
-            case MessageType.GetSetConfig:
-                const config = Helpers.Deserialize<ConfigModel>(message.DataJson, ConfigModel);
+            case MessageType.GetConfig:
+                config = Helpers.Deserialize<ConfigModel>(message.DataJson, ConfigModel);
                 let value = config.Value;
                 this.ReadConfigFile(this.ConfigFileName).then(() => {
-                    if (this._configs.IsHaving(config.Key)) {
+                    if (this._configs.IsHaving(config.Key))
                         value = this._configs.Get(config.Key);
 
-                        this._configs.Set(config.Key, config.Value);
-
-                        config.Value = value;
-                    }
-                    else
-                        this._configs.Set(config.Key, value);
-
+                    config.Value = value;
                     message.DataJson = Helpers.Serialize<ConfigModel>(config);
                     this._ipc.Send(message);
                 });
+                break;
+
+            case MessageType.SetConfig:
+                config = Helpers.Deserialize<ConfigModel>(message.DataJson, ConfigModel);
+                this.ReadConfigFile(this.ConfigFileName).then(() => {
+                    this._configs.Set(config.Key, config.Value);
+                    this._ipc.Send(message);
+                })
                 break;
 
             case MessageType.DeleteConfig:

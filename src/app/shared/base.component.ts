@@ -1,10 +1,12 @@
 import { OnInit, OnDestroy, HostListener } from '@angular/core';
-import { BaseModel } from '@common/index';
+import { BaseModel, ConfigModel } from '@common/index';
+import { ConfigService } from '@services/config.service';
 
 export abstract class BaseComponent extends BaseModel implements OnInit, OnDestroy {
 
-    constructor() {
-       super();
+    constructor(protected _config: ConfigService) {
+        super();
+        _config.OnConfigChanged.subscribe((config: ConfigModel) => this.OnConfigChanged(config));
     }
 
     async ngOnInit(): Promise<void> {
@@ -13,9 +15,12 @@ export abstract class BaseComponent extends BaseModel implements OnInit, OnDestr
 
     @HostListener('window:beforeunload')
     async ngOnDestroy(): Promise<void> {
+        this._config.OnConfigChanged.unsubscribe();
         await this.Destroy();
         super.Clear();
     }
+
+    protected abstract OnConfigChanged(config: ConfigModel): void;
 
     protected async abstract Initialize(): Promise<void>;
 

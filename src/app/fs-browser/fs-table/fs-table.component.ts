@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { DirectoryModel, IFileSystemObject } from '@common/index';
+import { DirectoryModel, IFileSystemObject, ConfigModel } from '@common/index';
+import { ConfigService } from '@services/config.service';
 
 @Component({
     selector: 'app-fs-table',
@@ -10,12 +11,8 @@ export class FileSystemTableComponent extends BaseComponent {
     private _directory: DirectoryModel;
     private _objects: IFileSystemObject[];
 
-    protected async Initialize(): Promise<void> {
-
-    }
-
-    protected async Destroy(): Promise<void> {
-
+    constructor(config: ConfigService) {
+        super(config);
     }
 
     @Input()
@@ -32,4 +29,18 @@ export class FileSystemTableComponent extends BaseComponent {
     get Objects(): IFileSystemObject[] {
         return this._objects;
     }
+
+    protected async Initialize(): Promise<void> {
+
+    }
+
+    protected async Destroy(): Promise<void> {
+
+    }
+
+    protected OnConfigChanged(config: ConfigModel): void {
+
+    }
+
+
 }

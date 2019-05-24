@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
 import { FileSystemService } from '@services/file-system.service';
-import { DirectoryModel, ProviderModel } from '@common/index';
+import { DirectoryModel, ProviderModel, ConfigModel } from '@common/index';
+import { ConfigService } from '@services/config.service';
 
 enum TreeNodeState {
     Open = 'open',
@@ -28,8 +29,8 @@ export class FileSystemTreeComponent extends BaseComponent {
     private _nodes: ITreeNode[];
     private _providers: ProviderModel[];
 
-    constructor(private _fileSystemService: FileSystemService) {
-        super();
+    constructor(config: ConfigService, private _fileSystemService: FileSystemService) {
+        super(config);
         this._directorySelected = new EventEmitter();
         this._nodes = [];
     }
@@ -69,6 +70,10 @@ export class FileSystemTreeComponent extends BaseComponent {
     }
 
     protected async Destroy(): Promise<void> {
+
+    }
+
+    protected OnConfigChanged(config: ConfigModel): void {
 
     }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { Constants, CommandType, IMenu } from '@common/index';
+import { Constants, CommandType, IMenu, ConfigModel } from '@common/index';
 import { ConfigService } from '@services/config.service';
 import { CommandService } from '@services/command.service';
 
@@ -14,12 +14,13 @@ export class MenuBarComponent extends BaseComponent {
     IsItemCheckBoxVisible: boolean;
 
     constructor(
-        private readonly _config: ConfigService,
+        config: ConfigService,
         private readonly _command: CommandService) {
-        super();
+        super(config);
     }
 
     protected async Initialize(): Promise<void> {
+        // check/uncheck checkable menus
         for (let menu of this.Menus) {
             if (!menu.SubMenus)
                 continue;
@@ -28,13 +29,20 @@ export class MenuBarComponent extends BaseComponent {
                 if (!subMenu.IsCheckable)
                     continue;
 
-                subMenu.IsChecked = await this._config.GetOrSetConfiguration<boolean>(subMenu.Command, false);
+                subMenu.IsChecked = await this._config.GetValue<boolean>(subMenu.Command, false);
             }
         }
     }
 
     protected async Destroy(): Promise<void> {
         
+    }
+
+    protected OnConfigChanged(config: ConfigModel): void {
+        // check/uncheck checkable menu
+        let menu = this.GetMenu(config.Key);
+        if (menu && menu.IsCheckable)
+            menu.IsChecked = <boolean>config.Value;
     }
 
     private GetMenu(command: CommandType): IMenu {
@@ -56,9 +64,10 @@ export class MenuBarComponent extends BaseComponent {
         if (!menu)
             return;
 
+        // toggle checkable menu
         if (menu.IsCheckable) {
             menu.IsChecked = !menu.IsChecked;
-            await this._config.GetOrSetConfiguration(menu.Command, menu.IsChecked);
+            await this._config.SetValue(menu.Command, menu.IsChecked);
         }
         
         switch (menu.Command) {
