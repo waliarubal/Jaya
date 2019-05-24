@@ -10,6 +10,11 @@ export class Constants {
             Label: 'File',
             SubMenus: [
                 {
+                    Command: CommandType.Refresh,
+                    Label: 'Refresh',
+                    IconClass: 'fas fa-sync-alt'
+                },
+                {
                     Command: CommandType.NewFolder,
                     Label: 'New folder',
                     IconClass: 'fa fa-folder-plus',

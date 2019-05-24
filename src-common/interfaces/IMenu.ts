@@ -26,7 +26,8 @@ export enum CommandType {
     License,
     PrivacyStatement,
     Update,
-    About
+    About,
+    Refresh
 }
 
 export interface IMenu {
