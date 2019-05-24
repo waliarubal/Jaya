@@ -72,8 +72,6 @@ export class ConfigService extends SuperService {
         if (this._configs)
             return;
 
-        this._configs = new Dictionary();
-
         let json: string;
         try {
             json = await this.ReadFileAsync(fileName);
@@ -81,6 +79,7 @@ export class ConfigService extends SuperService {
             console.error(ex);
         }
 
+        this._configs = new Dictionary();
         if (!json)
             return;
 
