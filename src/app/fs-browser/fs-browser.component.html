@@ -1,16 +1,14 @@
-<eui-layout #layout style="height: 100%;">
-    <eui-layout-panel region="west" style="width: 280px;" [split]="true" [collapsed]="!IsNavigationPaneVisible"
-        euiResizable handles="e" (resizing)="layout.updatePaddings();">
-        <app-fs-tree style="height: 100%;" [Providers]="Providers" (OnDirectorySelected)="Directory = $event;">
-        </app-fs-tree>
-    </eui-layout-panel>
-    <eui-layout-panel region="east" style="width: 280px;" [split]="true"
-        [collapsed]="!IsDetailsPaneVisible && !IsPreviewPaneVisible" euiResizable handles="w"
-        (resizing)="layout.updatePaddings();">
-        <fs-detail style="height: 100%;" hidden="{{!IsDetailsPaneVisible}}"></fs-detail>
-        <fs-preview style="height: 100%;" hidden="{{!IsPreviewPaneVisible}}"></fs-preview>
-    </eui-layout-panel>
-    <eui-layout-panel region="center" style="height: 100%;">
-        <app-fs-table [Directory]="Directory" style="height: 100%;"></app-fs-table>
-    </eui-layout-panel>
+<eui-layout #layout style="height: calc(100% - 30px);">
+  <eui-layout-panel region="west" style="width: 280px;" [split]="true" [collapsed]="!IsNavigationPaneVisible"
+    euiResizable handles="e" (resizing)="layout.updatePaddings();">
+    <app-fs-tree style="height: 100%;" [Providers]="Providers" (OnDirectorySelected)="Directory = $event;">
+    </app-fs-tree>
+  </eui-layout-panel>
+  <eui-layout-panel region="east" style="width: 280px;" [split]="true"
+    [collapsed]="!IsDetailsPaneVisible && !IsPreviewPaneVisible" euiResizable handles="w"
+    (resizing)="layout.updatePaddings();">
+    <fs-detail style="height: 100%;" hidden="{{!IsDetailsPaneVisible}}"></fs-detail>
+    <fs-preview style="height: 100%;" hidden="{{!IsPreviewPaneVisible}}"></fs-preview>
+  </eui-layout-panel>
+  <app-fs-table [Directory]="Directory" style="height: 100%;"></app-fs-table>
 </eui-layout>
