@@ -4,9 +4,8 @@
     <app-fs-tree style="height: 100%;" [Providers]="Providers" (OnDirectorySelected)="Directory = $event;">
     </app-fs-tree>
   </eui-layout-panel>
-  <eui-layout-panel region="east" style="width: 280px;" [split]="true"
-    [collapsed]="!IsDetailsPaneVisible && !IsPreviewPaneVisible" euiResizable handles="w"
-    (resizing)="layout.updatePaddings();">
+  <eui-layout-panel region="east" style="width: 220px;" [split]="false" [bodyCls]="'custom-panel-body'"
+    [collapsed]="!(IsDetailsPaneVisible || IsPreviewPaneVisible)">
     <fs-detail style="height: 100%;" *ngIf="IsDetailsPaneVisible"></fs-detail>
     <fs-preview style="height: 100%;" *ngIf="IsPreviewPaneVisible"></fs-preview>
   </eui-layout-panel>

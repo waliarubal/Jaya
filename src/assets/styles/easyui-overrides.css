@@ -1,41 +1,48 @@
 /* regular */
 
 .fa {
-    background-image: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  background-image: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fa::before {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .fa.tree-folder:not(.tree-icon)::before {
-    content: "\f07b"
+  content: "\f07b"
 }
 
 .fa.tree-folder-open:not(.tree-icon)::before {
-    content: "\f07c"
+  content: "\f07c"
 }
 
 /* bold */
 
 .fab {
-    background-image: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  background-image: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fab::before {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .fab.tree-folder:not(.tree-icon)::before {
-    content: "\f07b"
+  content: "\f07b"
 }
 
 .fab.tree-folder-open:not(.tree-icon)::before {
-    content: "\f07c"
+  content: "\f07c"
+}
+
+/* miscellaneous */
+
+.custom-panel-body {
+  background-color: #efefef;
+  padding: 4px;
 }
