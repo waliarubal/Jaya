@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { DirectoryModel, ProviderModel, ConfigModel, CommandType } from '@common/index';
+import { DirectoryModel, ProviderModel, ConfigModel, CommandType, IFileSystemObject } from '@common/index';
 import { FileSystemService } from '@services/file-system.service';
 import { DropboxService } from '@services/dropbox.service';
 import { ConfigService } from '@services/config.service';
@@ -13,6 +13,7 @@ import { ConfigService } from '@services/config.service';
 export class FileSystemBrowserComponent extends BaseComponent implements AfterViewInit {
     private _directory: DirectoryModel;
     private _providers: ProviderModel[];
+    private _selectedObjects: IFileSystemObject[];
     private _isNavigationPaneVisible: boolean;
     private _isPreviewPaneVisible: boolean;
     private _isDetailsPaneVisible: boolean;
@@ -27,6 +28,14 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
 
     set Directory(value: DirectoryModel) {
         this._directory = value;
+    }
+
+    get SelectedObjects(): IFileSystemObject[] {
+        return this._selectedObjects;
+    }
+
+    set SelectedObjects(value: IFileSystemObject[]) {
+        this._selectedObjects = value;
     }
 
     get Providers(): ProviderModel[] {
