@@ -22,7 +22,7 @@ export class AppComponent extends BaseComponent {
   }
 
   protected OnConfigChanged(config: ConfigModel): void {
-    
+
   }
 
 }
