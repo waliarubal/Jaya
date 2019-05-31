@@ -7,8 +7,8 @@
   <eui-layout-panel region="east" style="width: 280px;" [split]="true"
     [collapsed]="!IsDetailsPaneVisible && !IsPreviewPaneVisible" euiResizable handles="w"
     (resizing)="layout.updatePaddings();">
-    <fs-detail style="height: 100%;" hidden="{{!IsDetailsPaneVisible}}"></fs-detail>
-    <fs-preview style="height: 100%;" hidden="{{!IsPreviewPaneVisible}}"></fs-preview>
+    <fs-detail style="height: 100%;" *ngIf="IsDetailsPaneVisible"></fs-detail>
+    <fs-preview style="height: 100%;" *ngIf="IsPreviewPaneVisible"></fs-preview>
   </eui-layout-panel>
   <app-fs-table [Directory]="Directory" style="height: 100%;"></app-fs-table>
 </eui-layout>

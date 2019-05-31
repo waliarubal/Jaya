@@ -1,12 +1,14 @@
 import { OnInit, OnDestroy, HostListener } from '@angular/core';
 import { BaseModel, ConfigModel } from '@common/index';
 import { ConfigService } from '@services/config.service';
+import { Subscription } from 'rxjs';
 
 export abstract class BaseComponent extends BaseModel implements OnInit, OnDestroy {
+    private readonly _onConfigChangedSubscription: Subscription;
 
     constructor(protected _config: ConfigService) {
         super();
-        _config.OnConfigChanged.subscribe((config: ConfigModel) => this.OnConfigChanged(config));
+        this._onConfigChangedSubscription = _config.OnConfigChanged.subscribe((config: ConfigModel) => this.OnConfigChanged(config));
     }
 
     async ngOnInit(): Promise<void> {
@@ -15,7 +17,7 @@ export abstract class BaseComponent extends BaseModel implements OnInit, OnDestr
 
     @HostListener('window:beforeunload')
     async ngOnDestroy(): Promise<void> {
-        this._config.OnConfigChanged.unsubscribe();
+        this._onConfigChangedSubscription.unsubscribe();
         await this.Destroy();
         super.Clear();
     }

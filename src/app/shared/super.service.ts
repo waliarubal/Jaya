@@ -9,6 +9,4 @@ export abstract class SuperService extends BaseService implements OnDestroy {
 
     protected abstract Dispose(): void;
 
-    
-
 }
