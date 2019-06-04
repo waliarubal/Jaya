@@ -37,7 +37,7 @@
     "ng-easyui": "^1.2.6",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.5.2",
-    "systeminformation": "^4.8.3",
+    "systeminformation": "^4.9.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
