@@ -8,14 +8,23 @@
     Title="Jaya.Ui"
     Width="800"
     Height="600"
-    Icon="/Assets/Logo.ico"
+    Icon="/Assets/Images/Logo.ico"
     mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <Grid ColumnDefinitions="220,8,*" RowDefinitions="Auto,*">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="8" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="3">
             <MenuItem Header="File">
                 <MenuItem Header="Refresh" />
@@ -65,6 +74,14 @@
             Grid.Row="1"
             Grid.Column="1"
             Width="4" />
+        <DataGrid Grid.Row="1" Grid.Column="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" />
+                <DataGridTextColumn Header="Type" />
+                <DataGridTextColumn Header="Date Modified" />
+                <DataGridTextColumn Header="Size" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 
 </Window>

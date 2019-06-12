@@ -20,6 +20,7 @@ namespace Jaya.Ui
         {
             return AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .UseDataGrid()
                 .LogToDebug()
                 .UseReactiveUI();
         }
