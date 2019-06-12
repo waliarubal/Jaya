@@ -26,7 +26,8 @@
                 <MenuItem Header="Paste" />
             </MenuItem>
         </Menu>
-      <StackPanel></StackPanel>
+        <StackPanel>
+        </StackPanel>
     </DockPanel>
 
 </Window>
