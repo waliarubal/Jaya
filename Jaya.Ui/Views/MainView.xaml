@@ -6,28 +6,65 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     Title="Jaya.Ui"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Width="800"
+    Height="600"
+    Icon="/Assets/Logo.ico"
     mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
-                <MenuItem Header="_Open..." />
+    <Grid ColumnDefinitions="220,8,*" RowDefinitions="Auto,*">
+        <Menu Grid.ColumnSpan="3">
+            <MenuItem Header="File">
+                <MenuItem Header="Refresh" />
+                <MenuItem Header="New folder" />
                 <Separator />
-                <MenuItem Header="_Exit" />
+                <MenuItem Header="Properties" />
+                <MenuItem Header="Open" />
+                <Separator />
+                <MenuItem Header="Exit" />
             </MenuItem>
-            <MenuItem Header="_Edit">
+            <MenuItem Header="Edit">
+                <MenuItem Header="Cut" />
                 <MenuItem Header="Copy" />
                 <MenuItem Header="Paste" />
+                <Separator />
+                <MenuItem Header="Move to..." />
+                <MenuItem Header="Copy to..." />
+                <Separator />
+                <MenuItem Header="Delete" />
+                <MenuItem Header="Rename" />
+                <Separator />
+                <MenuItem Header="Select all" />
+                <MenuItem Header="Select none" />
+                <MenuItem Header="Invert selection" />
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Navigation pane" />
+                <MenuItem Header="Preview pane" />
+                <MenuItem Header="Details pane" />
+                <Separator />
+                <MenuItem Header="Item check boxes" />
+                <MenuItem Header="File name extensions" />
+                <MenuItem Header="Hidden items" />
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="View License" />
+                <MenuItem Header="Privacy Statement" />
+                <Separator />
+                <MenuItem Header="Check for Updates..." />
+                <Separator />
+                <MenuItem Header="About" />
             </MenuItem>
         </Menu>
-        <StackPanel>
-        </StackPanel>
-    </DockPanel>
+        <TreeView Grid.Row="1">
+        </TreeView>
+        <GridSplitter
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="4" />
+    </Grid>
 
 </Window>

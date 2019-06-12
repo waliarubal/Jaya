@@ -16,29 +16,8 @@
     <AvaloniaResource Include="Assets\*" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaResource Remove="Views\AboutView.xaml" />
-    <AvaloniaResource Remove="Views\MainView.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Views\AboutView.xaml" />
-    <None Remove="Views\MainView.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\AboutView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.8.0" />
     <PackageReference Include="Avalonia.Desktop" Version="0.8.0" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 </Project>
