@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.Logging.Serilog;
 using Jaya.Ui.ViewModels;
 using Jaya.Ui.Views;
 
@@ -21,7 +20,6 @@ namespace Jaya.Ui
             return AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .UseDataGrid()
-                .LogToDebug()
                 .UseReactiveUI();
         }
 
