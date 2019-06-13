@@ -1,14 +1,13 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
 import { DirectoryModel, ProviderModel, ConfigModel, CommandType, IFileSystemObject } from '@common/index';
-import { FileSystemService } from '@services/providers/file-system.service';
-import { DropboxService } from '@services/providers/dropbox.service';
 import { ConfigService } from '@services/config.service';
+import { ProviderService } from '@services/provider.service';
 
 @Component({
     selector: 'app-fs-browser',
     templateUrl: './fs-browser.component.html',
-    providers: [FileSystemService, DropboxService]
+    providers: [ProviderService]
 })
 export class FileSystemBrowserComponent extends BaseComponent implements AfterViewInit {
     private _directory: DirectoryModel;
@@ -18,7 +17,7 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
     private _isPreviewPaneVisible: boolean;
     private _isDetailsPaneVisible: boolean;
 
-    constructor(config: ConfigService, private _fileSystemService: FileSystemService, private _dropboxService: DropboxService) {
+    constructor(config: ConfigService, private readonly _providerService: ProviderService) {
         super(config);
     }
 
@@ -55,7 +54,7 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
     }
 
     async ngAfterViewInit(): Promise<void> {
-        this._providers = await this.GetProviders();
+        this._providers = await this._providerService.GetProviders();
     }
 
     protected async Initialize(): Promise<void> {
@@ -89,17 +88,6 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
                     this._config.SetValue(CommandType.PreviewPane, this.IsPreviewPaneVisible).then();
                 }
                 break;
-        }
-    }
-
-    private async GetProviders(): Promise<ProviderModel[]> {
-        try {
-            let fileSystemProvider = await this._fileSystemService.GetProvider();
-            let dropboxProvider = await this._dropboxService.GetProvider();
-
-            return [fileSystemProvider, dropboxProvider];
-        } catch (ex) {
-            console.log(ex);
         }
     }
 }

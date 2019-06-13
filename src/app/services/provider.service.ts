@@ -1,17 +1,18 @@
 import { SuperService } from '@shared/super.service';
 import { IpcService } from '@services/ipc.service';
 import { Injectable } from '@angular/core';
-import { Dictionary, ProviderType, IProviderService } from '@common/index';
-import { FileSystemService } from './providers/file-system.service';
-import { DropboxService } from './providers/dropbox.service';
+import { Dictionary, ProviderType, IProviderService, ProviderModel } from '@common/index';
+import { FileSystemService } from '@services/providers/file-system.service';
+import { DropboxService } from '@services/providers/dropbox.service';
 
 @Injectable()
 export class ProviderService extends SuperService {
     private readonly _providers: Dictionary<ProviderType, IProviderService>;
 
-    constructor(private readonly _ipc: IpcService, 
+    constructor(private readonly _ipc: IpcService,
         s1: FileSystemService,
         s2: DropboxService) {
+            
         super();
         this._providers = new Dictionary();
         this._providers.Set(s1.Type, s1);
@@ -20,6 +21,21 @@ export class ProviderService extends SuperService {
 
     protected Dispose(): void {
         this._ipc.Receive.unsubscribe();
+    }
+
+    async GetProviders(): Promise<ProviderModel[]> {
+        try {
+            let providers: ProviderModel[] = [];
+
+            for (let service of this._providers.Values) {
+                const provider = await service.GetProvider();
+                providers.push(provider);
+            }
+
+            return providers;
+        } catch (ex) {
+            console.log(ex);
+        }
     }
 
 }
