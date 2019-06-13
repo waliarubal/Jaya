@@ -17,9 +17,9 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="220" MinWidth="80" />
             <ColumnDefinition Width="8" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" MinWidth="120" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -27,11 +27,27 @@
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="3">
             <MenuItem Header="File">
-                <MenuItem Header="Refresh" />
-                <MenuItem Header="New folder" />
+                <MenuItem Header="Refresh">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/Images/Refresh-32.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="New folder">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/Images/Add-Folder-32.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Properties" />
-                <MenuItem Header="Open" />
+                <MenuItem Header="Properties">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/Images/Show-Property-32.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open">
+                    <MenuItem.Icon>
+                        <Image Source="/Assets/Images/Open-32.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" />
             </MenuItem>
