@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { FileSystemService } from '@services/file-system.service';
+import { FileSystemService } from '@services/providers/file-system.service';
 import { DirectoryModel, ProviderModel, ConfigModel } from '@common/index';
 import { ConfigService } from '@services/config.service';
 
@@ -89,7 +89,15 @@ export class FileSystemTreeComponent extends BaseComponent {
         let children: ITreeNode[] = [];
 
         if (node.attributes instanceof ProviderModel) {
-            for (let dir of node.attributes.Directories) {
+            let directories: DirectoryModel[];
+            if (node.attributes.Directory)
+                directories = node.attributes.Directory.Directories;
+            else {
+                const dirs = await this._fileSystemService.GetDirectory(undefined);
+                directories = dirs.Directories;
+            }
+
+            for (let dir of directories) {
                 let childNode = <ITreeNode>{
                     text: dir.Name,
                     iconCls: "fa fa-hdd",
@@ -100,7 +108,7 @@ export class FileSystemTreeComponent extends BaseComponent {
             }
         }
         else if (node.attributes instanceof DirectoryModel) {
-            let directory = await this._fileSystemService.GetDirectories(node.attributes.Path);
+            let directory = await this._fileSystemService.GetDirectory(node.attributes.Path);
             node.attributes = directory;
 
             for (let dir of directory.Directories) {

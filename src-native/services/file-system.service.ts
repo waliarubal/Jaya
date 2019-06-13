@@ -4,14 +4,18 @@ import * as Si from 'systeminformation';
 import { spawn } from 'child_process';
 import * as Path from 'path';
 import { IpcService } from './ipc.service';
-import { Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel, ProviderModel } from '../../src-common';
+import { Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel, ProviderModel, IProviderService, ProviderType } from '../../src-common';
 import { SuperService } from '../super.service';
 
-export class FileSystemService extends SuperService {
+export class FileSystemService extends SuperService implements IProviderService {
 
     constructor(private readonly _ipc: IpcService) {
         super();
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
+    }
+
+    get Type(): ProviderType {
+        return ProviderType.FileSystem;
     }
 
     protected async Dispose(): Promise<void> {
@@ -20,11 +24,11 @@ export class FileSystemService extends SuperService {
 
     private async GetDriveLetters(): Promise<string[]> {
         let devices = await Si.blockDevices();
-        
+
         let letters: string[] = [];
-        for(let device of devices)
+        for (let device of devices)
             letters.push(device.mount);
-        
+
         return letters;
     }
 
@@ -78,12 +82,25 @@ export class FileSystemService extends SuperService {
         });
     }
 
-    private async GetDirectory(path: string): Promise<DirectoryModel> {
+    async GetDirectory(path: string): Promise<DirectoryModel> {
         return new Promise<DirectoryModel>(async (resolve, reject) => {
             let directory = new DirectoryModel();
             directory.Name = path;
             directory.Files = [];
             directory.Directories = [];
+
+            // if path is empty then get mount points
+            if (!path) {
+                let driveLetters = await this.GetDriveLetters();
+                for (let letter of driveLetters) {
+                    let drive = new DirectoryModel();
+                    drive.Name = letter;
+                    drive.Path = Path.join(letter, '/');
+                    directory.Directories.push(drive);
+                }
+
+                resolve(directory);
+            }
 
             let fileNames: string[];
             try {
@@ -131,25 +148,9 @@ export class FileSystemService extends SuperService {
         });
     }
 
-    private async GetProvider(): Promise<ProviderModel> {
-        let provider = ProviderModel.New(`Computer (${Os.hostname()})`, 'fa fa-laptop');
+    async GetProvider(): Promise<ProviderModel> {
+        let provider = ProviderModel.New(ProviderType.FileSystem, `Computer (${Os.hostname()})`, 'fa fa-laptop');
         return new Promise<ProviderModel>(async (resolve, reject) => {
-            try {
-                let driveLetters = await this.GetDriveLetters();
-
-                let directories: DirectoryModel[] = [];
-                for (let letter of driveLetters) {
-                    let directory = new DirectoryModel();
-                    directory.Name = letter;
-                    directory.Path = Path.join(letter, '/');
-                    directories.push(directory);
-                }
-
-                provider.Directories = directories;
-            } catch (ex) {
-                console.log(ex);
-            }
-
             if (provider)
                 resolve(provider);
             else

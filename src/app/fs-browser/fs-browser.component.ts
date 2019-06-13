@@ -1,8 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
 import { DirectoryModel, ProviderModel, ConfigModel, CommandType, IFileSystemObject } from '@common/index';
-import { FileSystemService } from '@services/file-system.service';
-import { DropboxService } from '@services/dropbox.service';
+import { FileSystemService } from '@services/providers/file-system.service';
+import { DropboxService } from '@services/providers/dropbox.service';
 import { ConfigService } from '@services/config.service';
 
 @Component({

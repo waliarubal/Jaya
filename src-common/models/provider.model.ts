@@ -2,11 +2,21 @@ import { Helpers } from '../helpers';
 import { DirectoryModel } from './directory.model';
 import { IClonable } from '../interfaces/IClonable';
 
+export enum ProviderType {
+    FileSystem,
+    Dropbox
+}
+
 export class ProviderModel implements IClonable {
+    private _type: ProviderType;
     private _id: string;
     private _name: string;
     private _icon: string;
-    private _directories: DirectoryModel[];
+    private _directory: DirectoryModel;
+
+    get Type(): ProviderType {
+        return this._type;
+    }
 
     get Id(): string {
         return this._id;
@@ -20,30 +30,25 @@ export class ProviderModel implements IClonable {
         return this._icon;
     }
 
-    get Directories(): DirectoryModel[] {
-        return this._directories;
+    get Directory(): DirectoryModel {
+        return this._directory;
     }
 
-    set Directories(value: DirectoryModel[]) {
-        this._directories = value;
+    set Directory(value: DirectoryModel) {
+        this._directory = value;
     }
 
     Clone(object: any): void {
+        this._type = object._type;
         this._id = object._id;
         this._name = object._name;
         this._icon = object._icon;
-        this.Directories = [];
-        if (object._directories) {
-            for (let dirObj of object._directories) {
-                let directory = new DirectoryModel();
-                directory.Clone(dirObj);
-                this.Directories.push(directory);
-            }
-        }
+        this._directory = object._directory;
     }
 
-    static New(name: string, icon: string): ProviderModel {
+    static New(type: ProviderType, name: string, icon: string): ProviderModel {
         let provider = new ProviderModel();
+        provider._type = type;
         provider._id = Helpers.Guid();
         provider._name = name;
         provider._icon = icon;
