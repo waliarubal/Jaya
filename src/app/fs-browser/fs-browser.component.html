@@ -1,0 +1,15 @@
+<eui-layout #layout style="height: calc(100% - 30px);">
+  <eui-layout-panel region="west" style="width: 280px;" [split]="true" [collapsed]="!IsNavigationPaneVisible"
+    euiResizable handles="e" (resizing)="layout.updatePaddings();">
+    <app-fs-tree style="height: 100%;" [Providers]="Providers" (OnDirectorySelected)="Directory = $event;">
+    </app-fs-tree>
+  </eui-layout-panel>
+  <eui-layout-panel region="east" style="width: 220px;" [split]="false" [bodyCls]="'custom-panel-body'"
+    [collapsed]="!(IsDetailsPaneVisible || IsPreviewPaneVisible)">
+    <fs-detail style="height: 100%;" *ngIf="IsDetailsPaneVisible" [SelectedObjects]="SelectedObjects"></fs-detail>
+    <fs-preview #preview style="height: 100%;" *ngIf="IsPreviewPaneVisible"></fs-preview>
+  </eui-layout-panel>
+  <app-fs-table [Directory]="Directory" style="height: 100%;"
+    (OnObjectsSelected)="SelectedObjects = $event; preview.SelectedObject = SelectedObjects && SelectedObjects.length === 1 ? SelectedObjects[0] : null;">
+  </app-fs-table>
+</eui-layout>

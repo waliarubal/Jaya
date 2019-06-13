@@ -1,0 +1,7 @@
+<eui-datagrid style="height: 100%; width: 100%;" [data]="Objects" [border]="true" columnResizing="true"
+  selectionMode="multiple" (selectionChange)="OnObjectsSelected.emit($event);">
+  <eui-grid-column field="Name" title="Name" [sortable]="true"></eui-grid-column>
+  <eui-grid-column field="Type" title="Type" [sortable]="true"></eui-grid-column>
+  <eui-grid-column field="Modified" title="Date Modified" [sortable]="true"></eui-grid-column>
+  <eui-grid-column field="Size" title="Size" [sortable]="true"></eui-grid-column>
+</eui-datagrid>
