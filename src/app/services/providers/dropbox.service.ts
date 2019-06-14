@@ -14,6 +14,10 @@ export class DropboxService extends SuperService implements IProviderService {
         return ProviderType.Dropbox;
     }
 
+    get IsRootDrive(): boolean {
+        return false;
+    }
+
     protected Dispose(): void {
         this._ipc.Receive.unsubscribe();
     }
@@ -25,7 +29,7 @@ export class DropboxService extends SuperService implements IProviderService {
     }
 
     async GetDirectory(path: string): Promise<DirectoryModel> {
-        let response = await this._ipc.SendAsync(MessageType.Directoties, path);
+        let response = await this._ipc.SendAsync(MessageType.DropboxDirectories, path);
         let directory = Helpers.Deserialize<DirectoryModel>(response.DataJson, DirectoryModel);
         return directory;
     }

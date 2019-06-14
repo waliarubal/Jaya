@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { DirectoryModel, ProviderModel, ConfigModel, IProviderService } from '@common/index';
+import { DirectoryModel, ProviderModel, ConfigModel, IProviderService, ProviderType } from '@common/index';
 import { ConfigService } from '@services/config.service';
 import { ProviderService } from '@services/provider.service';
 
@@ -136,7 +136,7 @@ export class FileSystemTreeComponent extends BaseComponent {
                 };
                 let childNode = <ITreeNode>{
                     text: dir.Name,
-                    iconCls: "fa fa-hdd",
+                    iconCls: nodeData.ProviderService.IsRootDrive ? "fa fa-hdd" : "fa fa-folder",
                     attributes: childNodeData,
                     state: TreeNodeState.Close
                 };

@@ -14,6 +14,10 @@ export class FileSystemService extends SuperService implements IProviderService 
         return ProviderType.FileSystem;
     }
 
+    get IsRootDrive(): boolean {
+        return true;
+    }
+
     protected Dispose(): void {
         this._ipc.Receive.unsubscribe();
     }

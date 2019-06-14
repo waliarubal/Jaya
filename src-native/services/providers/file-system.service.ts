@@ -18,6 +18,10 @@ export class FileSystemService extends SuperService implements IProviderService 
         return ProviderType.FileSystem;
     }
 
+    get IsRootDrive(): boolean {
+        return true;
+    }
+
     protected async Dispose(): Promise<void> {
         this._ipc.Receive.removeAllListeners(Constants.IPC_CHANNEL);
     }

@@ -1,7 +1,8 @@
+import { Dropbox } from 'dropbox';
+import { fetch } from 'isomorphic-fetch';
 import { Constants, MessageModel, MessageType, ProviderModel, Helpers, IProviderService, DirectoryModel, ProviderType, FileModel } from '../../../src-common';
 import { IpcService } from '..';
 import { SuperService } from '../../shared';
-import { Dropbox } from 'dropbox';
 
 export class DropboxService extends SuperService implements IProviderService {
     private readonly ACCESS_TOKEN = 'JYfV_JpVuKMAAAAAAAADeXBqB1cjfNYgLPeyWRkhCgmj9OIjnRGpyKlgbb87mx4p';
@@ -10,11 +11,15 @@ export class DropboxService extends SuperService implements IProviderService {
     constructor(private readonly _ipc: IpcService) {
         super();
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
-        this._client = new Dropbox({ accessToken: this.ACCESS_TOKEN, fetch: () => { } });
+        this._client = new Dropbox({ accessToken: this.ACCESS_TOKEN, fetch: fetch });
     }
 
     get Type(): ProviderType {
         return ProviderType.Dropbox;
+    }
+
+    get IsRootDrive(): boolean {
+        return false;
     }
 
     protected async Dispose(): Promise<void> {
@@ -34,6 +39,8 @@ export class DropboxService extends SuperService implements IProviderService {
     async GetDirectory(path: string): Promise<DirectoryModel> {
         let directory = new DirectoryModel();
         directory.Path = path;
+        directory.Directories = [];
+        directory.Files = [];
 
         let result = await this._client.filesListFolder({ path: path });
         let isHavingData: boolean;
@@ -70,6 +77,15 @@ export class DropboxService extends SuperService implements IProviderService {
             case MessageType.DropboxProvider:
                 this.GetProvider().then(provider => {
                     message.DataJson = Helpers.Serialize<ProviderModel>(provider);
+                    this._ipc.Send(message);
+                }).catch(ex =>
+                    console.log(ex)
+                );
+                break;
+
+            case MessageType.DropboxDirectories:
+                this.GetDirectory(message.DataJson).then(directory => {
+                    message.DataJson = Helpers.Serialize<DirectoryModel>(directory);
                     this._ipc.Send(message);
                 }).catch(ex =>
                     console.log(ex)

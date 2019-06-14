@@ -35,6 +35,7 @@
     "core-js": "^2.6.9",
     "dropbox": "^4.0.27",
     "flatted": "^2.0.0",
+    "isomorphic-fetch": "^2.2.1",
     "ng-easyui": "^1.2.6",
     "rxjs": "~6.5.2",
     "rxjs-compat": "^6.5.2",

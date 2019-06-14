@@ -10,7 +10,8 @@ export enum MessageType {
     GetConfig = 'g_con',
     FileSystemProvider = 'p_fs',
     DropboxProvider = 'p_db',
-    Command = 'c'
+    Command = 'c',
+    DropboxDirectories = 'dd'
 }
 
 export class MessageModel {
