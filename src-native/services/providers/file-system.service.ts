@@ -3,9 +3,9 @@ import * as Os from 'os';
 import * as Si from 'systeminformation';
 import { spawn } from 'child_process';
 import * as Path from 'path';
-import { IpcService } from './ipc.service';
-import { Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel, ProviderModel, IProviderService, ProviderType } from '../../src-common';
-import { SuperService } from '../super.service';
+import { IpcService } from '../ipc.service';
+import { Constants, MessageModel, MessageType, DirectoryModel, Helpers, FileModel, ProviderModel, IProviderService, ProviderType } from '../../../src-common';
+import { SuperService } from '../../shared/super.service';
 
 export class FileSystemService extends SuperService implements IProviderService {
 

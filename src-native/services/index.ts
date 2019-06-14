@@ -1,6 +1,6 @@
 import { IpcService } from './ipc.service';
-import { FileSystemService } from './file-system.service';
-import { DropboxService } from './dropbox.service';
+import { FileSystemService } from './providers/file-system.service';
+import { DropboxService } from './providers/dropbox.service';
 import { ConfigService } from './config.service';
 import { CommandService } from './command.service';
 

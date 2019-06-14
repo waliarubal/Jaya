@@ -2,7 +2,7 @@ import { app, BrowserWindow } from 'electron';
 import * as Path from 'path';
 import * as Url from 'url';
 import { IpcService, FileSystemService, DropboxService, ConfigService, CommandService } from './services';
-import { SuperService } from './super.service';
+import { SuperService } from './shared/super.service';
 
 class Main {
     private _window: BrowserWindow;

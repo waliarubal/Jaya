@@ -1,4 +1,4 @@
-import { BaseService } from '../src-common';
+import { BaseService } from '../../src-common';
 
 export abstract class SuperService extends BaseService {
 

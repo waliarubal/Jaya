@@ -1,5 +1,5 @@
 import {app} from 'electron';
-import { SuperService } from '../super.service';
+import { SuperService } from '../shared/super.service';
 import { IpcService } from './ipc.service';
 import { MessageModel, Constants, MessageType, Helpers, CommandModel, CommandType } from '../../src-common';
 
