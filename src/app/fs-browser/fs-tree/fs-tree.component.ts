@@ -20,8 +20,9 @@ interface ITreeNode {
 }
 
 interface ITreeNodeData {
-    readonly Object: any;
     readonly ProviderService: IProviderService;
+    Object: any;
+    IsPopulated: boolean;
 }
 
 @Component({
@@ -51,8 +52,9 @@ export class FileSystemTreeComponent extends BaseComponent {
             this.Nodes.length = 0;
             for (let provider of value) {
                 let nodeData = <ITreeNodeData>{
+                    ProviderService: this._providerService.GetService(provider.Type),
                     Object: provider,
-                    ProviderService: this._providerService.GetService(provider.Type)
+                    IsPopulated: false
                 };
                 let node = <ITreeNode>{
                     text: provider.Name,
@@ -86,11 +88,24 @@ export class FileSystemTreeComponent extends BaseComponent {
 
     }
 
+    private RaiseDirectorySelected(nodeData: ITreeNodeData): void {
+        let directory: DirectoryModel;
+        if (nodeData.Object instanceof ProviderModel)
+            directory = nodeData.Object.Directory;
+        else if (nodeData.Object instanceof DirectoryModel)
+            directory = nodeData.Object;
+        else
+            return;
+
+        this.OnDirectorySelected.emit(directory);
+    }
+
     OnNodeSelected(node: ITreeNode): void {
-        if (node &&
-            node.attributes &&
-            (<ITreeNodeData>node.attributes).Object instanceof DirectoryModel)
-            this.OnDirectorySelected.emit(node.attributes);
+        if (node && node.attributes) {
+            let nodeData = <ITreeNodeData>node.attributes;
+            if (nodeData.IsPopulated)
+                this.RaiseDirectorySelected(nodeData);
+        }
     }
 
     async PopulateNode(node: ITreeNode): Promise<void> {
@@ -99,6 +114,9 @@ export class FileSystemTreeComponent extends BaseComponent {
 
         let children: ITreeNode[] = [];
         let nodeData = <ITreeNodeData>node.attributes;
+
+        if (nodeData.IsPopulated)
+            return;
 
         if (nodeData.Object instanceof ProviderModel) {
             let directories: DirectoryModel[];
@@ -109,10 +127,12 @@ export class FileSystemTreeComponent extends BaseComponent {
                 directories = dirs.Directories;
             }
 
+            nodeData.IsPopulated = true;
+
             for (let dir of directories) {
                 let childNodeData = <ITreeNodeData>{
-                    Object: dir,
-                    ProviderService: nodeData.ProviderService
+                    ProviderService: nodeData.ProviderService,
+                    Object: dir
                 };
                 let childNode = <ITreeNode>{
                     text: dir.Name,
@@ -125,12 +145,14 @@ export class FileSystemTreeComponent extends BaseComponent {
         }
         else if (nodeData.Object instanceof DirectoryModel) {
             let directory = await nodeData.ProviderService.GetDirectory(nodeData.Object.Path);
-            node.attributes = directory;
+            nodeData.Object = directory;
+
+            nodeData.IsPopulated = true;
 
             for (let dir of directory.Directories) {
                 let childNodeData = <ITreeNodeData>{
-                    Object: dir,
-                    ProviderService: nodeData.ProviderService
+                    ProviderService: nodeData.ProviderService,
+                    Object: dir
                 };
                 let childNode = <ITreeNode>{
                     text: dir.Name,
