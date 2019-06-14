@@ -7,7 +7,9 @@ import { FileSystemTableComponent } from './fs-table/fs-table.component';
 import { FileSystemBrowserComponent } from './fs-browser.component';
 import { FileSystemPreviewComponent } from './fs-preview/fs-preview.component';
 import { FileSystemDetailComponent } from './fs-detail/fs-detail.component';
-import { from } from 'rxjs';
+
+import { FileSystemService } from '@services/providers/file-system.service';
+import { DropboxService } from '@services/providers/dropbox.service';
 
 @NgModule({
     declarations: [
@@ -20,6 +22,10 @@ import { from } from 'rxjs';
     imports: [
         CommonModule,
         EasyUIModule
+    ],
+    providers: [
+        FileSystemService, 
+        DropboxService
     ],
     exports: [FileSystemBrowserComponent]
 })

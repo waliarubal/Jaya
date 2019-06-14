@@ -23,6 +23,10 @@ export class ProviderService extends SuperService {
         this._ipc.Receive.unsubscribe();
     }
 
+    GetService(type: ProviderType): IProviderService {
+        return this._providers.Get(type);
+    }
+
     async GetProviders(): Promise<ProviderModel[]> {
         try {
             let providers: ProviderModel[] = [];

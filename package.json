@@ -31,7 +31,7 @@
     "@angular/forms": "^8.0.0",
     "@angular/platform-browser": "^8.0.0",
     "@angular/platform-browser-dynamic": "^8.0.0",
-    "@angular/router": "^8.0.0",
+    "@angular/router": "^8.0.1",
     "core-js": "^2.6.9",
     "flatted": "^2.0.0",
     "ng-easyui": "^1.2.6",
@@ -42,10 +42,10 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.800.0",
-    "@angular/cli": "^8.0.2",
-    "@angular/compiler-cli": "^8.0.0",
-    "@angular/language-service": "^8.0.0",
+    "@angular-devkit/build-angular": "^0.800.3",
+    "@angular/cli": "^8.0.3",
+    "@angular/compiler-cli": "^8.0.1",
+    "@angular/language-service": "^8.0.1",
     "@fortawesome/fontawesome-free": "^5.9.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
