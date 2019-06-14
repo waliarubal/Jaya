@@ -1,7 +1,7 @@
 import { ipcMain, BrowserWindow } from 'electron';
 import { EventEmitter } from 'events';
 import { Constants, MessageModel, MessageType } from '../../src-common'
-import { SuperService } from '../shared/super.service';
+import { SuperService } from '../shared';
 
 export class IpcService extends SuperService {
     private readonly _event: EventEmitter;

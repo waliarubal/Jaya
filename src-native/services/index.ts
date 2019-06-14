@@ -1,7 +1,5 @@
-import { IpcService } from './ipc.service';
-import { FileSystemService } from './providers/file-system.service';
-import { DropboxService } from './providers/dropbox.service';
-import { ConfigService } from './config.service';
 import { CommandService } from './command.service';
+import { ConfigService } from './config.service';
+import { IpcService } from './ipc.service';
 
-export { IpcService, FileSystemService, DropboxService, ConfigService, CommandService };
+export { CommandService, ConfigService, IpcService }

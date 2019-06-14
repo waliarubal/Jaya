@@ -1,11 +1,11 @@
-import {app} from 'electron';
-import { SuperService } from '../shared/super.service';
+import { app } from 'electron';
+import { SuperService } from '../shared';
 import { IpcService } from './ipc.service';
 import { MessageModel, Constants, MessageType, Helpers, CommandModel, CommandType } from '../../src-common';
 
 export class CommandService extends SuperService {
 
-    constructor(private readonly _ipc: IpcService){
+    constructor(private readonly _ipc: IpcService) {
         super();
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
     }
@@ -19,11 +19,11 @@ export class CommandService extends SuperService {
             return;
 
         const command = Helpers.Deserialize<CommandModel>(message.DataJson, CommandModel);
-        switch(command.Command) {
+        switch (command.Command) {
             case CommandType.Exit:
                 app.quit();
                 break;
         }
     }
-    
+
 }

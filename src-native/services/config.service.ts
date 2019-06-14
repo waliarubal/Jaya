@@ -3,7 +3,7 @@ import * as Path from 'path';
 import * as Fs from 'fs';
 import { Constants, MessageModel, ConfigModel, MessageType, Helpers, IClonable, Dictionary } from '../../src-common';
 import { IpcService } from './ipc.service';
-import { SuperService } from '../shared/super.service';
+import { SuperService } from '../shared';
 
 class ConfigCollection implements IClonable {
     private _configs: ConfigModel[];
