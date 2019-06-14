@@ -1,14 +1,16 @@
-import { Constants, MessageModel, MessageType, ProviderModel, Helpers, IProviderService, DirectoryModel, ProviderType } from '../../../src-common';
+import { Constants, MessageModel, MessageType, ProviderModel, Helpers, IProviderService, DirectoryModel, ProviderType, FileModel } from '../../../src-common';
 import { IpcService } from '..';
 import { SuperService } from '../../shared';
 import { Dropbox } from 'dropbox';
 
 export class DropboxService extends SuperService implements IProviderService {
-    // private readonly ACCESS_TOKEN = 'JYfV_JpVuKMAAAAAAAADcLpyn2bzlTGiWOhMF7zIRmvoTq1zKRvSZQOLI5oWE_7E';
+    private readonly ACCESS_TOKEN = 'JYfV_JpVuKMAAAAAAAADeXBqB1cjfNYgLPeyWRkhCgmj9OIjnRGpyKlgbb87mx4p';
+    private readonly _client: Dropbox;
 
     constructor(private readonly _ipc: IpcService) {
         super();
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
+        this._client = new Dropbox({ accessToken: this.ACCESS_TOKEN, fetch: () => { } });
     }
 
     get Type(): ProviderType {
@@ -30,7 +32,37 @@ export class DropboxService extends SuperService implements IProviderService {
     }
 
     async GetDirectory(path: string): Promise<DirectoryModel> {
-        throw new Error('Not implemented yet.')
+        let directory = new DirectoryModel();
+        directory.Path = path;
+
+        let result = await this._client.filesListFolder({ path: path });
+        let isHavingData: boolean;
+        do {
+            for (let entry of result.entries) {
+                switch (entry[".tag"]) {
+                    case "file":
+                        let file = new FileModel();
+                        file.Name = entry.name;
+                        file.Path = entry.path_lower;
+                        file.Size = entry.size;
+                        directory.Files.push(file);
+                        break;
+
+                    case "folder":
+                        let dir = new DirectoryModel();
+                        dir.Name = entry.name;
+                        dir.Path = entry.path_lower;
+                        directory.Directories.push(dir);
+                        break;
+                }
+            }
+
+            isHavingData = result.has_more;
+
+            result = await this._client.filesListFolderContinue({ cursor: result.cursor });
+        } while (isHavingData);
+
+        return directory;
     }
 
     private OnMessage(message: MessageModel): void {
