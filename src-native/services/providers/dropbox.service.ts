@@ -1,6 +1,7 @@
 import { Constants, MessageModel, MessageType, ProviderModel, Helpers, IProviderService, DirectoryModel, ProviderType } from '../../../src-common';
 import { IpcService } from '..';
 import { SuperService } from '../../shared';
+import { Dropbox } from 'dropbox';
 
 export class DropboxService extends SuperService implements IProviderService {
     // private readonly ACCESS_TOKEN = 'JYfV_JpVuKMAAAAAAAADcLpyn2bzlTGiWOhMF7zIRmvoTq1zKRvSZQOLI5oWE_7E';

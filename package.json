@@ -33,6 +33,7 @@
     "@angular/platform-browser-dynamic": "^8.0.0",
     "@angular/router": "^8.0.1",
     "core-js": "^2.6.9",
+    "dropbox": "^4.0.27",
     "flatted": "^2.0.0",
     "ng-easyui": "^1.2.6",
     "rxjs": "~6.5.2",
