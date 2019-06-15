@@ -39,7 +39,7 @@
     "ng-easyui": "^1.2.6",
     "rxjs": "~6.5.2",
     "rxjs-compat": "^6.5.2",
-    "systeminformation": "^4.10.0",
+    "systeminformation": "^4.11.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
@@ -54,7 +54,7 @@
     "@types/msgpack5": "^3.4.1",
     "@types/node": "^8.10.49",
     "codelyzer": "^5.0.1",
-    "electron": "^5.0.3",
+    "electron": "^5.0.4",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",
