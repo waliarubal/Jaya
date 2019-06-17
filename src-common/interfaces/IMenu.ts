@@ -28,7 +28,8 @@ export enum CommandType {
     Update,
     About,
     Refresh,
-    Settings
+    Settings,
+    OpenWindow
 }
 
 export interface IMenu {

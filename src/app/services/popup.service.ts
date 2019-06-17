@@ -1,7 +1,9 @@
 import { Injectable, EventEmitter, Type } from '@angular/core';
+import { isNullOrUndefined } from 'util';
 import { WindowModel } from '@shared/window.model';
 import { SuperService } from '@shared/super.service';
-import { isNullOrUndefined } from 'util';
+import { CommandService } from '@services/command.service';
+import { CommandType } from '@common/index';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +12,7 @@ export class PopupService extends SuperService {
     private readonly _onOpen: EventEmitter<WindowModel>;
     private readonly _onClose: EventEmitter<void>;
 
-    constructor() {
+    constructor(private readonly _commandService: CommandService) {
         super();
         this._onOpen = new EventEmitter();
         this._onClose = new EventEmitter();
@@ -49,5 +51,9 @@ export class PopupService extends SuperService {
     Close(): void {
         this.Set('pd', undefined);
         this._onClose.emit();
+    }
+
+    OpenWindow(url: string): void {
+        this._commandService.Execute(CommandType.OpenWindow, url);
     }
 }

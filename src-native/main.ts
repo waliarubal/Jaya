@@ -16,6 +16,10 @@ class Main {
         app.on('browser-window-created', (event: Electron.Event, window: BrowserWindow) => window.setMenu(null));
     }
 
+    get MainWindow(): BrowserWindow {
+        return this._window;
+    }
+
     private CreateServices(window: BrowserWindow): SuperService[] {
         let ipc = new IpcService(window);
         return [

@@ -93,6 +93,12 @@ export class DropboxService extends SuperService implements IProviderService {
                     console.log(ex)
                 );
                 break;
+
+            case MessageType.DropboxAuthUrl:
+                const authUrl = this._client.getAuthenticationUrl(this.REDIRECT_URL, 'dropbox-auth', 'token');
+                message.DataJson = authUrl;
+                this._ipc.Send(message);
+                break;
         }
     }
 }

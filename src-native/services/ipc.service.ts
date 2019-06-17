@@ -16,6 +16,10 @@ export class IpcService extends SuperService {
         return this._event;
     }
 
+    get Window(): BrowserWindow {
+        return this._window;
+    }
+
     Send(type: MessageType, data?: string): void;
     Send(message: MessageModel): void
     Send(typeOrMessage: MessageType | MessageModel, data: string = ''): void {

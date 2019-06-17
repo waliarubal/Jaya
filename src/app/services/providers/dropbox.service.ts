@@ -22,6 +22,11 @@ export class DropboxService extends SuperService implements IProviderService {
         this._ipc.Receive.unsubscribe();
     }
 
+    async GetAuthUrl(): Promise<string> {
+        let response = await this._ipc.SendAsync(MessageType.DropboxAuthUrl);
+        return response.DataJson;
+    }
+
     async GetProvider(): Promise<ProviderModel> {
         let response = await this._ipc.SendAsync(MessageType.DropboxProvider);
         let provider = Helpers.Deserialize<ProviderModel>(response.DataJson, ProviderModel);
