@@ -1,3 +1,4 @@
 import { SuperService } from './super.service';
+import { ElectronHelpers } from './electron-helpers';
 
-export { SuperService };
+export { SuperService, ElectronHelpers };
