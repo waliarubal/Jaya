@@ -10,7 +10,7 @@ export enum MessageType {
     GetConfig = 'g_con',
     FileSystemProvider = 'p_fs',
     DropboxProvider = 'p_db',
-    DropboxAuthUrl = 'p_db_auth',
+    DropboxAuthenticate = 'p_db_auth',
     Command = 'c',
     DropboxDirectories = 'dd'
 }

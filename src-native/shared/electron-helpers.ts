@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, BrowserView } from 'electron';
 import * as Url from 'url';
 
 export class ElectronHelpers {
@@ -20,7 +20,7 @@ export class ElectronHelpers {
         });
         await window.loadURL(url);
         window.webContents.on('dom-ready', (event: Electron.Event) => {
-            console.log(event);
+            console.log(event.sender);
         });
         return window;
     }

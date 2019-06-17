@@ -32,7 +32,7 @@ export class DropboxComponent extends BaseComponent {
     }
 
     async Authenticate(): Promise<void> {
-        const authUrl = await this._service.GetAuthUrl();
+        const authUrl = await this._service.Authenticate();
         this._popupService.OpenWindow(authUrl);
     }
 }

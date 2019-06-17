@@ -2,18 +2,18 @@ import { Dropbox } from 'dropbox';
 import * as fetch from 'isomorphic-fetch';
 import { Constants, MessageModel, MessageType, ProviderModel, Helpers, IProviderService, DirectoryModel, ProviderType, FileModel } from '../../../src-common';
 import { IpcService } from '..';
-import { SuperService } from '../../shared';
+import { SuperService, ElectronHelpers } from '../../shared';
 
 export class DropboxService extends SuperService implements IProviderService {
     private readonly APP_KEY = 'wr1084dwe5oimdh';
     private readonly REDIRECT_URL = 'http://localhost:7860/login/callback';
-    
+
     private readonly _client: Dropbox;
 
     constructor(private readonly _ipc: IpcService) {
         super();
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
-        this._client = new Dropbox({clientId: this.APP_KEY, fetch: fetch });
+        this._client = new Dropbox({ clientId: this.APP_KEY, fetch: fetch });
     }
 
     get Type(): ProviderType {
@@ -94,10 +94,12 @@ export class DropboxService extends SuperService implements IProviderService {
                 );
                 break;
 
-            case MessageType.DropboxAuthUrl:
+            case MessageType.DropboxAuthenticate:
                 const authUrl = this._client.getAuthenticationUrl(this.REDIRECT_URL, 'dropbox-auth', 'token');
-                message.DataJson = authUrl;
-                this._ipc.Send(message);
+                ElectronHelpers.OpenModal(authUrl, this.REDIRECT_URL, this._ipc.Window).then((window: Electron.BrowserWindow) => {
+                    message.DataJson = authUrl;
+                    this._ipc.Send(message);
+                });
                 break;
         }
     }

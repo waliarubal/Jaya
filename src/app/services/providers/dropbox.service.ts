@@ -22,8 +22,8 @@ export class DropboxService extends SuperService implements IProviderService {
         this._ipc.Receive.unsubscribe();
     }
 
-    async GetAuthUrl(): Promise<string> {
-        let response = await this._ipc.SendAsync(MessageType.DropboxAuthUrl);
+    async Authenticate(): Promise<string> {
+        let response = await this._ipc.SendAsync(MessageType.DropboxAuthenticate);
         return response.DataJson;
     }
 
