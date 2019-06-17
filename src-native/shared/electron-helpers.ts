@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserView } from 'electron';
+import { BrowserWindow } from 'electron';
 import * as Url from 'url';
 
 export class ElectronHelpers {
@@ -19,10 +19,14 @@ export class ElectronHelpers {
             }
         });
         await window.loadURL(url);
-        window.webContents.on('dom-ready', (event: Electron.Event) => {
-            console.log(event.sender);
-        });
         return window;
+    }
+
+    static GetHistory(window: BrowserWindow): string[] {
+        if (window.webContents)
+            return (<any>window.webContents).history;
+
+        return null;
     }
 
 }

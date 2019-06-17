@@ -96,9 +96,22 @@ export class DropboxService extends SuperService implements IProviderService {
 
             case MessageType.DropboxAuthenticate:
                 const authUrl = this._client.getAuthenticationUrl(this.REDIRECT_URL, 'dropbox-auth', 'token');
-                ElectronHelpers.OpenModal(authUrl, this.REDIRECT_URL, this._ipc.Window).then((window: Electron.BrowserWindow) => {
-                    message.DataJson = authUrl;
-                    this._ipc.Send(message);
+                ElectronHelpers.OpenModal(authUrl, this.REDIRECT_URL, this._ipc.Window).then(window => {
+                    if (window.webContents) {
+                        window.webContents.on('did-finish-load', () => {
+                            let history = ElectronHelpers.GetHistory(window);
+                            if (history && history.length > 0 && history[history.length - 1].startsWith(this.REDIRECT_URL)) {
+                                let authUrl = history[history.length - 1];
+                                
+                                message.DataJson = authUrl;
+                                this._ipc.Send(message);
+                            }
+                        });
+                    } else {
+                        message.DataJson = null;
+                        this._ipc.Send(message);
+                    }
+
                 });
                 break;
         }
