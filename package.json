@@ -32,6 +32,7 @@
     "@angular/platform-browser": "^8.0.1",
     "@angular/platform-browser-dynamic": "^8.0.1",
     "@angular/router": "^8.0.1",
+    "@types/isomorphic-fetch": "0.0.35",
     "core-js": "^2.6.9",
     "dropbox": "^4.0.27",
     "flatted": "^2.0.0",

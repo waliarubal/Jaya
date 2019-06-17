@@ -1,5 +1,5 @@
 import { Dropbox } from 'dropbox';
-import { fetch } from 'isomorphic-fetch';
+import * as fetch from 'isomorphic-fetch';
 import { Constants, MessageModel, MessageType, ProviderModel, Helpers, IProviderService, DirectoryModel, ProviderType, FileModel } from '../../../src-common';
 import { IpcService } from '..';
 import { SuperService } from '../../shared';
