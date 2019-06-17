@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IpcService } from '@services/ipc.service';
-import { ProviderModel, MessageType, Helpers, IProviderService, DirectoryModel, ProviderType } from '@common/index';
+import { ProviderModel, MessageType, Helpers, IProviderService, DirectoryModel, ProviderType, AccountModel } from '@common/index';
 import { SuperService } from '@shared/super.service';
 
 @Injectable()
@@ -22,9 +22,14 @@ export class DropboxService extends SuperService implements IProviderService {
         this._ipc.Receive.unsubscribe();
     }
 
-    async Authenticate(): Promise<string> {
+    async Authenticate(): Promise<AccountModel> {
         let response = await this._ipc.SendAsync(MessageType.DropboxAuthenticate);
-        return response.DataJson;
+        if (response.DataJson) {
+            let account = Helpers.Deserialize<AccountModel>(response.DataJson, AccountModel);
+            return account;
+        }
+
+        return null;
     }
 
     async GetProvider(): Promise<ProviderModel> {

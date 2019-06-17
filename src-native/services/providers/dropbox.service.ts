@@ -1,12 +1,13 @@
 import { Dropbox } from 'dropbox';
 import * as fetch from 'isomorphic-fetch';
-import { Constants, MessageModel, MessageType, ProviderModel, Helpers, IProviderService, DirectoryModel, ProviderType, FileModel } from '../../../src-common';
-import { IpcService } from '..';
+import { Constants, MessageModel, MessageType, ProviderModel, Helpers, IProviderService, DirectoryModel, ProviderType, FileModel, AccountModel } from '../../../src-common';
+import { IpcService } from '../ipc.service';
 import { SuperService, ElectronHelpers } from '../../shared';
+import * as Url from 'url';
 
 export class DropboxService extends SuperService implements IProviderService {
     private readonly APP_KEY = 'wr1084dwe5oimdh';
-    private readonly REDIRECT_URL = 'http://localhost:7860/login/callback';
+    private readonly REDIRECT_URL = 'https://github.com/waliarubal/Jaya';
 
     private readonly _client: Dropbox;
 
@@ -74,6 +75,40 @@ export class DropboxService extends SuperService implements IProviderService {
         return directory;
     }
 
+    private async Authenticate(): Promise<AccountModel> {
+        const authUrl = this._client.getAuthenticationUrl(this.REDIRECT_URL, 'dropbox-auth', 'token');
+        const window = await ElectronHelpers.OpenModal(authUrl, this._ipc.Window);
+        const page = window.webContents;
+        if (page) {
+            page.on('did-navigate', async (event: Electron.Event, url: string, code: number, status: string) => {
+                if (url && url.startsWith(this.REDIRECT_URL)) {
+                    let hash = Helpers.ParseUrlHash(url);
+                    if (hash) {
+                        if (hash.IsHaving('error')) {
+                            window.close();
+                            return null;
+                        }
+                        else if (hash.IsHaving('access_token')) {
+                            let user = await this._client.usersGetAccount({ account_id: hash.Get('uid') });
+                            let account = new AccountModel(user.email, ProviderType.Dropbox, hash.Get('access_token'));
+                            window.close();
+                            return account;
+                        } 
+                    }
+                }
+            });
+            page.on('did-fail-load', (event: Electron.Event, code: number, desc: string, url: string, isMainFrame: boolean, procId: number, routingId: number) => {
+                console.log(url);
+                console.log(code);
+                // if (code < 0) {
+                //     window.close();
+                //     return null;
+                // } 
+            });
+        } else
+            return null;
+    }
+
     private OnMessage(message: MessageModel): void {
         switch (message.Type) {
             case MessageType.DropboxProvider:
@@ -95,24 +130,12 @@ export class DropboxService extends SuperService implements IProviderService {
                 break;
 
             case MessageType.DropboxAuthenticate:
-                const authUrl = this._client.getAuthenticationUrl(this.REDIRECT_URL, 'dropbox-auth', 'token');
-                ElectronHelpers.OpenModal(authUrl, this.REDIRECT_URL, this._ipc.Window).then(window => {
-                    if (window.webContents) {
-                        window.webContents.on('did-finish-load', () => {
-                            let history = ElectronHelpers.GetHistory(window);
-                            if (history && history.length > 0 && history[history.length - 1].startsWith(this.REDIRECT_URL)) {
-                                let authUrl = history[history.length - 1];
-                                
-                                message.DataJson = authUrl;
-                                this._ipc.Send(message);
-                            }
-                        });
-                    } else {
-                        message.DataJson = null;
-                        this._ipc.Send(message);
-                    }
-
-                });
+                this.Authenticate().then((account: AccountModel) => {
+                    message.DataJson = Helpers.Serialize(account);
+                    this._ipc.Send(message);
+                }).catch(ex =>
+                    console.log(ex)
+                );
                 break;
         }
     }

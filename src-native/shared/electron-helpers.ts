@@ -3,7 +3,7 @@ import * as Url from 'url';
 
 export class ElectronHelpers {
 
-    static async OpenModal(url: string, closeOnUrl: string, parent: BrowserWindow): Promise<BrowserWindow> {
+    static async OpenModal(url: string, parent: BrowserWindow): Promise<BrowserWindow> {
         url = Url.format(url);
         let window = new BrowserWindow({
             modal: true,

@@ -15,6 +15,7 @@ import { IClonable } from './interfaces/IClonable';
 import { IMenu, CommandType } from './interfaces/IMenu';
 import { IFileSystemObject, FileSystemObjectType } from './interfaces/IFileSystemObject';
 import { IProviderService } from './interfaces/IProviderService';
+import { AccountModel } from './models/account.model';
 
 export {
     Helpers,
@@ -33,5 +34,6 @@ export {
     IProviderService,
     IClonable,
     IMenu, CommandType,
-    IFileSystemObject, FileSystemObjectType
+    IFileSystemObject, FileSystemObjectType,
+    AccountModel
 };
