@@ -5,13 +5,15 @@ import { IpcService } from '..';
 import { SuperService } from '../../shared';
 
 export class DropboxService extends SuperService implements IProviderService {
-    private readonly ACCESS_TOKEN = 'JYfV_JpVuKMAAAAAAAADeXBqB1cjfNYgLPeyWRkhCgmj9OIjnRGpyKlgbb87mx4p';
+    private readonly APP_KEY = 'wr1084dwe5oimdh';
+    private readonly REDIRECT_URL = 'http://localhost:7860/login/callback';
+    
     private readonly _client: Dropbox;
 
     constructor(private readonly _ipc: IpcService) {
         super();
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
-        this._client = new Dropbox({ accessToken: this.ACCESS_TOKEN, fetch: fetch });
+        this._client = new Dropbox({clientId: this.APP_KEY, fetch: fetch });
     }
 
     get Type(): ProviderType {

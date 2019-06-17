@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
 import { Constants, CommandType, IMenu, ConfigModel } from '@common/index';
 import { ConfigService } from '@services/config.service';
 import { CommandService } from '@services/command.service';
+import { PopupService } from '@services/popup.service';
+import { SettingsComponent } from '../settings/settings.component';
 
 @Component({
     selector: 'menu-bar',
@@ -15,7 +17,8 @@ export class MenuBarComponent extends BaseComponent {
 
     constructor(
         config: ConfigService,
-        private readonly _command: CommandService) {
+        private readonly _command: CommandService,
+        private readonly _popupService: PopupService) {
         super(config);
     }
 
@@ -35,7 +38,7 @@ export class MenuBarComponent extends BaseComponent {
     }
 
     protected async Destroy(): Promise<void> {
-        
+
     }
 
     protected OnConfigChanged(config: ConfigModel): void {
@@ -69,15 +72,15 @@ export class MenuBarComponent extends BaseComponent {
             menu.IsChecked = !menu.IsChecked;
             await this._config.SetValue(menu.Command, menu.IsChecked);
         }
-        
+
         switch (menu.Command) {
             case CommandType.Exit:
                 this._command.Execute(CommandType.Exit, null);
-                break;
+                return;
 
-            case CommandType.ItemCheckBoxes:        
+            case CommandType.Settings:
+                this._popupService.Open('Settings', SettingsComponent)
                 break;
-
         }
     }
 } 

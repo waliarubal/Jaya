@@ -123,6 +123,12 @@ export class Constants {
                     Command: CommandType.HiddenItems,
                     Label: 'Hidden items',
                     IsCheckable: true
+                },
+                { IsSeparator: true },
+                {
+                    Command: CommandType.Settings,
+                    Label: 'Settings',
+                    IconClass: 'fas fa-cogs'
                 }
             ]
         },

@@ -5,18 +5,26 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EasyUIModule } from 'ng-easyui/components/easyui/easyui.module';
 
+import { ComponentHostDirective } from './shared/component-host.directive';
+import { SettingsComponent } from './settings/settings.component';
 import { FileSystemBrowserModule } from './fs-browser/fs-browser.module'
-import { FileSystemProviderModule } from './fs-provider/fs-provider.modeule';
+import { SettingsModule } from './settings/settings.module';
 import { MenuBarModule } from './menu-bar/menu-bar.module';
 import { AppComponent } from './app.component';
 
 import { IpcService } from '@services/ipc.service';
 import { ConfigService } from '@services/config.service';
 import { CommandService } from '@services/command.service';
+import { PopupService } from '@services/popup.service';
+
 
 @NgModule({
   declarations: [
+    ComponentHostDirective,
     AppComponent
+  ],
+  entryComponents: [
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -25,13 +33,14 @@ import { CommandService } from '@services/command.service';
     FormsModule,
     EasyUIModule,
     FileSystemBrowserModule,
-    FileSystemProviderModule,
+    SettingsModule,
     MenuBarModule
   ],
   providers: [
     IpcService,
     ConfigService,
-    CommandService
+    CommandService,
+    PopupService
   ],
   bootstrap: [AppComponent]
 })
