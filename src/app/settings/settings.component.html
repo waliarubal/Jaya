@@ -1,8 +1,20 @@
 <eui-tabs tabPosition="left" [border]=false [narrow]=true style="width: 520px; height: 320px;">
-  <eui-tab-panel title="Dropbox" iconCls="fab fa-dropbox">
-    <dropbox-setting style="margin: 2px;"></dropbox-setting>
+  <eui-tab-panel title="Providers" iconCls="fas fa-tools" [bodyStyle]="{ padding: '4px'}">
+    <span class="textbox-label">Enable or disable file system providers which you want to use.</span>
+    <div style="margin-bottom: 2px;">
+      <label [for]="dropbox"><span class="fab fa-dropbox">&nbsp;</span>Dropbox</label>
+      <eui-switchbutton #dropbox [(ngModel)]="IsDropboxEnabled"></eui-switchbutton>
+    </div>
+    <div style="margin-bottom: 2px;">
+      <label [for]="gdrive"><span class="fab fa-google-drive">&nbsp;</span>Google Drive</label>
+      <eui-switchbutton #gdrive></eui-switchbutton>
+    </div>
   </eui-tab-panel>
-  <eui-tab-panel title="Google Drive" iconCls="fab fa-google-drive">
+  <eui-tab-panel [disabled]="!IsDropboxEnabled" title="Dropbox" iconCls="fab fa-dropbox"
+    [bodyStyle]="{ padding: '4px'}">
+    <dropbox-setting></dropbox-setting>
+  </eui-tab-panel>
+  <eui-tab-panel title="Google Drive" iconCls="fab fa-google-drive" [bodyStyle]="{ padding: '4px'}">
     Drive settings appear here.
   </eui-tab-panel>
 </eui-tabs>

@@ -47,10 +47,8 @@
   padding: 4px;
 }
 
-.rounded .switchbutton {
-  border-radius: 28px;
-}
-
-.rounded .switchbutton .switchbutton-handle {
-  border-radius: 28px;
+.textbox-label {
+  text-overflow: unset !important;
+  width: auto;
+  min-width: 120px;
 }
