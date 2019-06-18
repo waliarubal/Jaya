@@ -11,17 +11,19 @@
     <span>Click Add Account button to link new Dropbox account.</span>
   </div>
   <div class="col-xs-4">
-    <eui-linkbutton (click)="Authenticate();" iconCls="fas fa-user-plus">Add Account</eui-linkbutton>
+    <eui-linkbutton (click)="Authenticate();"><span class="fas fa-user-plus"></span>Add Account</eui-linkbutton>
   </div>
 </div>
 <div class="row">
   <ng-container *ngFor="let account of Accounts; let i = index;">
-    <div class="col-xs-8">
+    <div class="col-xs-8 ">
       <span class="fas fa-user">&nbsp;</span>
       <span>{{account.Name}}</span>
     </div>
     <div class="col-xs-4">
-      <eui-linkbutton (click)="Accounts.splice(i, 1);" iconCls="fas fa-user-minus"></eui-linkbutton>
+      <eui-linkbutton (click)="Accounts.splice(i, 1);">
+        <span class="fas fa-user-minus"></span>
+      </eui-linkbutton>
     </div>
   </ng-container>
 </div>
