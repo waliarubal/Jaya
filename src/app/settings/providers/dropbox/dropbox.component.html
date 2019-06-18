@@ -1,3 +1,16 @@
-<div>
-  <eui-linkbutton (click)="Authenticate();">Add Account</eui-linkbutton>
+<div class="row">
+  <div class="col-xs-8">
+    <span>Dropbox integration is enabled?</span>
+  </div>
+  <div class="col-xs-4">
+    <eui-switchbutton></eui-switchbutton>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-8">
+    <span>Click Add Account button to link new Dropbox account.</span>
+  </div>
+  <div class="col-xs-4">
+    <eui-linkbutton (click)="Authenticate();">Add Account</eui-linkbutton>
+  </div>
 </div>

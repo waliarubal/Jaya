@@ -3,6 +3,7 @@ import { CommandType, IMenu } from './interfaces/IMenu';
 export class Constants {
     static readonly IPC_CHANNEL: string = 'ipc_channel';
     static readonly SEPARATOR: string = '¶';
+    static readonly BACK_COLOR: string = '#efefef';
 
     static readonly MENU_DATA: IMenu[] = [
         {

@@ -1,24 +1,25 @@
 import { BrowserWindow } from 'electron';
 import * as Url from 'url';
+import { Constants } from '../../src-common';
 
 export class ElectronHelpers {
 
-    static async OpenModal(url: string, parent: BrowserWindow): Promise<BrowserWindow> {
+    static CreateWindow(url: string, parent: BrowserWindow = null, isModal: boolean = true): BrowserWindow {
         url = Url.format(url);
         let window = new BrowserWindow({
-            modal: true,
+            modal: isModal,
             parent: parent,
             maximizable: false,
             focusable: true,
             skipTaskbar: true,
             useContentSize: true,
             title: 'Loading...',
+            backgroundColor: Constants.BACK_COLOR,
             webPreferences: {
                 contextIsolation: true,
                 nodeIntegration: false
             }
         });
-        await window.loadURL(url);
         return window;
     }
 

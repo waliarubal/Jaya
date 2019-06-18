@@ -3,7 +3,6 @@ import * as fetch from 'isomorphic-fetch';
 import { Constants, MessageModel, MessageType, ProviderModel, Helpers, IProviderService, DirectoryModel, ProviderType, FileModel, AccountModel } from '../../../src-common';
 import { IpcService } from '../ipc.service';
 import { SuperService, ElectronHelpers } from '../../shared';
-import * as Url from 'url';
 
 export class DropboxService extends SuperService implements IProviderService {
     private readonly APP_KEY = 'wr1084dwe5oimdh';
@@ -77,36 +76,46 @@ export class DropboxService extends SuperService implements IProviderService {
 
     private async Authenticate(): Promise<AccountModel> {
         const authUrl = this._client.getAuthenticationUrl(this.REDIRECT_URL, 'dropbox-auth', 'token');
-        const window = await ElectronHelpers.OpenModal(authUrl, this._ipc.Window);
-        const page = window.webContents;
-        if (page) {
-            page.on('did-navigate', async (event: Electron.Event, url: string, code: number, status: string) => {
-                if (url && url.startsWith(this.REDIRECT_URL)) {
-                    let hash = Helpers.ParseUrlHash(url);
-                    if (hash) {
-                        if (hash.IsHaving('error')) {
-                            window.close();
-                            return null;
+        const window = ElectronHelpers.CreateWindow(authUrl, this._ipc.Window);
+
+        return new Promise<AccountModel>(async (resolve, reject) => {
+            let account: AccountModel;
+            let error: string;
+
+            window.on('closed', () => {
+                if (account)
+                    resolve(account);
+                else
+                    reject(error);
+            });
+
+            window.webContents.on('did-navigate', async (event: Electron.Event, url: string, code: number, status: string) => {
+                let hash = Helpers.ParseUrlHash(url);
+                if (hash) {
+                    error = hash.Get('error');
+                    let account_id = hash.Get('account_id');
+                    let token = hash.Get('access_token');
+
+                    if (error)
+                        window.close();
+                    else if (token) {
+                        this._client.setAccessToken(token);
+
+                        try {
+                            let user = await this._client.usersGetAccount({ account_id: account_id });
+                            account = new AccountModel(user.name.display_name, ProviderType.Dropbox, token);
+                        } catch (ex) {
+                            console.log(ex);
+                            error = ex;
                         }
-                        else if (hash.IsHaving('access_token')) {
-                            let user = await this._client.usersGetAccount({ account_id: hash.Get('uid') });
-                            let account = new AccountModel(user.email, ProviderType.Dropbox, hash.Get('access_token'));
-                            window.close();
-                            return account;
-                        } 
+
+                        window.close();
                     }
                 }
             });
-            page.on('did-fail-load', (event: Electron.Event, code: number, desc: string, url: string, isMainFrame: boolean, procId: number, routingId: number) => {
-                console.log(url);
-                console.log(code);
-                // if (code < 0) {
-                //     window.close();
-                //     return null;
-                // } 
-            });
-        } else
-            return null;
+
+            await window.loadURL(authUrl)
+        });
     }
 
     private OnMessage(message: MessageModel): void {

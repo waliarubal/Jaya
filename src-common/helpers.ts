@@ -28,6 +28,8 @@ export class Helpers {
         if (!url)
             return null;
 
+        url = decodeURIComponent(url);
+
         let temp = url.split('#', 2);
         if (!temp || temp.length !== 2)
             return null;

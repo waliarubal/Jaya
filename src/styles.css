@@ -3,6 +3,7 @@
 @import '~ng-easyui/themes/gray/easyui.css';
 @import '~ng-easyui/themes/angular.css';
 @import '~ng-easyui/themes/icon.css';
+@import '~flexboxgrid/dist/flexboxgrid.min.css';
 
 @import './assets/styles/easyui-overrides.css';
 
