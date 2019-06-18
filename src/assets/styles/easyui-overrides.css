@@ -46,3 +46,11 @@
   background-color: #efefef;
   padding: 4px;
 }
+
+.rounded .switchbutton {
+  border-radius: 28px;
+}
+
+.rounded .switchbutton .switchbutton-handle {
+  border-radius: 28px;
+}
