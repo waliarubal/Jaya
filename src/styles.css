@@ -6,6 +6,7 @@
 @import '~flexboxgrid/dist/flexboxgrid.min.css';
 
 @import './assets/styles/easyui-overrides.css';
+@import './assets/styles/flexboxgrid-overrides.css';
 
 html,
 body {

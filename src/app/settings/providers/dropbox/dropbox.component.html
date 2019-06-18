@@ -14,3 +14,16 @@
     <eui-linkbutton (click)="Authenticate();">Add Account</eui-linkbutton>
   </div>
 </div>
+<div class="row">
+  <ng-container *ngFor="let account of Accounts; let i = index;">
+    <div class="col-xs-8 ">
+      <span class="fas fa-user">&nbsp;</span>
+      <span>{{account.Name}}</span>
+    </div>
+    <div class="col-xs-4">
+      <eui-linkbutton (click)="Accounts.splice(i, 1);">
+        <span class="fas user-times">&nbsp;</span>
+      </eui-linkbutton>
+    </div>
+  </ng-container>
+</div>

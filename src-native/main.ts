@@ -63,8 +63,7 @@ class Main {
 
         this._services = this.CreateServices(window);
 
-        window.loadURL(url);
-        window.webContents.openDevTools();
+        window.loadURL(url).then(() => window.webContents.openDevTools());
         window.on('closed', async () => await this.DestroyWindow());
     }
 
