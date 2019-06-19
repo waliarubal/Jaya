@@ -41,7 +41,7 @@
     "rxjs": "~6.5.2",
     "rxjs-compat": "^6.5.2",
     "systeminformation": "^4.11.4",
-    "tslib": "^1.9.0",
+    "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
