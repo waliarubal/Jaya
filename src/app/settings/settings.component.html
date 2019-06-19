@@ -1,20 +1,25 @@
-<eui-tabs tabPosition="left" [border]=false [narrow]=true style="width: 520px; height: 320px;">
-  <eui-tab-panel title="Providers" iconCls="fas fa-tools" [bodyStyle]="{ padding: '4px'}">
-    <span class="textbox-label">Enable or disable file system providers which you want to use.</span>
-    <div style="margin-bottom: 2px;">
-      <label [for]="dropbox"><span class="fab fa-dropbox">&nbsp;</span>Dropbox</label>
-      <eui-switchbutton #dropbox [(ngModel)]="IsDropboxEnabled"></eui-switchbutton>
-    </div>
-    <div style="margin-bottom: 2px;">
-      <label [for]="gdrive"><span class="fab fa-google-drive">&nbsp;</span>Google Drive</label>
-      <eui-switchbutton #gdrive></eui-switchbutton>
-    </div>
+<eui-tabs tabPosition="left" [border]=false [narrow]=true style="width: 640px; height: 480px;">
+  <eui-tab-panel title="Integrations" [bodyStyle]="{ padding: '4px'}">
+    <span class="textbox-label">Enable or disable file system provider integration.</span>
+    <ng-container *ngFor="let provider of Providers;">
+      <div style="margin-bottom: 2px;" *ngIf="provider">
+        <label [for]="isEnabled" style="min-width: 120px;"><span
+            class="{{provider.Icon}}">&nbsp;</span>{{provider.Name}}</label>
+        <eui-switchbutton #isEnabled [(ngModel)]="provider.IsEnabled"></eui-switchbutton>
+      </div>
+    </ng-container>
+
   </eui-tab-panel>
-  <eui-tab-panel [disabled]="!IsDropboxEnabled" title="Dropbox" iconCls="fab fa-dropbox"
-    [bodyStyle]="{ padding: '4px'}">
-    <dropbox-setting></dropbox-setting>
-  </eui-tab-panel>
-  <eui-tab-panel title="Google Drive" iconCls="fab fa-google-drive" [bodyStyle]="{ padding: '4px'}">
-    Drive settings appear here.
-  </eui-tab-panel>
+  <ng-container *ngIf="Providers">
+    <eui-tab-panel [disabled]="!Providers[ProviderType.Dropbox].IsEnabled"
+      title="{{Providers[ProviderType.Dropbox].Name}}" iconCls="{{Providers[ProviderType.Dropbox].Icon}}"
+      [bodyStyle]="{ padding: '4px'}">
+      <dropbox-setting></dropbox-setting>
+    </eui-tab-panel>
+    <!-- <eui-tab-panel [disabled]="!Providers[ProviderType.GoogleDrive - ProviderType.FileSystem].IsEnabled"
+      title="{{Providers[ProviderType.GoogleDrive - ProviderType.FileSystem].Name}}"
+      iconCls="{{Providers[ProviderType.GoogleDrive - ProviderType.FileSystem].Icon}}" [bodyStyle]="{ padding: '4px'}">
+      Drive settings appear here.
+    </eui-tab-panel> -->
+  </ng-container>
 </eui-tabs>

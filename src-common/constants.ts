@@ -127,8 +127,8 @@ export class Constants {
                 },
                 { IsSeparator: true },
                 {
-                    Command: CommandType.Settings,
-                    Label: 'Settings',
+                    Command: CommandType.Providers,
+                    Label: 'Providers',
                     IconClass: 'fas fa-cogs'
                 }
             ]

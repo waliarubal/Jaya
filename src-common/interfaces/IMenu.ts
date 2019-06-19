@@ -28,7 +28,7 @@ export enum CommandType {
     Update,
     About,
     Refresh,
-    Settings,
+    Providers,
     OpenWindow
 }
 

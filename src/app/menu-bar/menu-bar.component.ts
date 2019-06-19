@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
 import { Constants, CommandType, IMenu, ConfigModel } from '@common/index';
 import { ConfigService } from '@services/config.service';
@@ -78,7 +78,7 @@ export class MenuBarComponent extends BaseComponent {
                 this._command.Execute(CommandType.Exit, null);
                 return;
 
-            case CommandType.Settings:
+            case CommandType.Providers:
                 this._popupService.Open('Settings', SettingsComponent)
                 break;
         }

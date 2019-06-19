@@ -153,7 +153,7 @@ export class FileSystemService extends SuperService implements IProviderService 
     }
 
     async GetProvider(): Promise<ProviderModel> {
-        let provider = ProviderModel.New(ProviderType.FileSystem, `Computer (${Os.hostname()})`, 'fa fa-laptop');
+        let provider = ProviderModel.New(ProviderType.FileSystem, `Computer`, 'fa fa-laptop');
         return new Promise<ProviderModel>(async (resolve, reject) => {
             if (provider)
                 resolve(provider);
