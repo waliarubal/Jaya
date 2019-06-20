@@ -37,7 +37,6 @@ export class ConfigService extends SuperService {
         const configJson = Helpers.Serialize<ConfigModel>(config);
         const response = await this._ipc.SendAsync(MessageType.GetConfig, configJson);
         config = Helpers.Deserialize<ConfigModel>(response.DataJson, ConfigModel);
-        console.log(config.Value);
         return <T>config.Value;
     }
 

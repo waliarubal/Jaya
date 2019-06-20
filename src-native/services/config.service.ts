@@ -47,9 +47,11 @@ export class ConfigService extends SuperService {
                 let value = config.Value;
 
                 this._configDb.Find({ _key: config.Key }).then((configs: ConfigModel[]) => {
-                    if (configs && configs.length === 1)
+                    if (configs && configs.length === 1) {
                         value = configs[0].Value;
-
+                        console.log(value);
+                    }
+                        
                     config.Value = value;
                     message.DataJson = Helpers.Serialize<ConfigModel>(config);
                     this._ipc.Send(message);
