@@ -1,109 +1,42 @@
 import { app, remote } from 'electron';
 import * as Path from 'path';
-import * as Fs from 'fs';
-import { Constants, MessageModel, ConfigModel, MessageType, Helpers, IClonable, Dictionary } from '../../src-common';
+import { Constants, MessageModel, ConfigModel, MessageType, Helpers, AccountModel } from '../../src-common';
 import { IpcService } from './ipc.service';
-import { SuperService } from '../shared';
-
-class ConfigCollection implements IClonable {
-    private _configs: ConfigModel[];
-
-    constructor() {
-        this._configs = [];
-    }
-
-    get Configs(): ConfigModel[] {
-        return this._configs;
-    }
-
-    Clone(object: any): void {
-        if (object._configs) {
-            this._configs.length = 0;
-            for (let configObj of object._configs) {
-                let config = new ConfigModel();
-                config.Clone(configObj);
-                this._configs.push(config);
-            }
-        }
-    }
-
-}
+import { SuperService, DataBase } from '../shared';
 
 export class ConfigService extends SuperService {
-    private readonly _configFile: string;
-    private _configs: Dictionary<number, any>;
+    private readonly _dbDirectory: string;
+    private _configDb: DataBase<ConfigModel>;
+    private _accountsDb: DataBase<AccountModel>;
 
     constructor(private readonly _ipc: IpcService) {
         super();
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
 
         const userDataPath = (app || remote.app).getPath('userData');
-        this._configFile = Path.join(userDataPath, 'config.json');
-        console.log('Config File: %s', this.ConfigFileName);
+        this._dbDirectory = userDataPath;
+        console.log('DB Files Directory: %s', this.DbFilesDirectory);
+
+        this.LoadConfigurations();
     }
 
-    get ConfigFileName(): string {
-        return this._configFile;
+    get DbFilesDirectory(): string {
+        return this._dbDirectory;
     }
 
-    private async ReadFileAsync(fileName: string): Promise<string> {
-        return new Promise<string>((resolve, reject) => {
-            Fs.readFile(fileName, 'utf8', (error: NodeJS.ErrnoException, data: string) => {
-                if (error)
-                    reject(error);
-                else
-                    resolve(data);
-            });
-        });
-    }
+    private LoadConfigurations(): void {
+        this._configDb = new DataBase();
+        this._configDb.Open(Path.join(this.DbFilesDirectory, 'config.db'));
 
-    private async WriteFileAsync(fileName: string, data: string): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
-            Fs.writeFile(fileName, data, (error: NodeJS.ErrnoException) => {
-                if (error)
-                    reject(error);
-                else
-                    resolve();
-            });
-        });
-    }
-
-    private async ReadConfigFile(fileName: string): Promise<void> {
-        if (this._configs)
-            return;
-
-        let json: string;
-        try {
-            json = await this.ReadFileAsync(fileName);
-        } catch (ex) {
-            console.error(ex);
-        }
-
-        this._configs = new Dictionary();
-        if (!json)
-            return;
-
-        var configs = Helpers.Deserialize<ConfigCollection>(json, ConfigCollection);
-        for (let config of configs.Configs)
-            this._configs.Set(config.Key, config.Value);
-    }
-
-    private async WriteConfigFile(fileName: string): Promise<void> {
-        if (!this._configs)
-            return;
-
-        let collection = new ConfigCollection();
-        for (let key of this._configs.Keys) {
-            let value = this._configs.Get(key);
-            collection.Configs.push(new ConfigModel(key, value));
-        }
-        let json = Helpers.Serialize<ConfigCollection>(collection);
-        await this.WriteFileAsync(fileName, json);
+        this._accountsDb = new DataBase();
+        this._accountsDb.Open(Path.join(this.DbFilesDirectory, 'accounts.db'));
     }
 
     protected async Dispose(): Promise<void> {
         this._ipc.Receive.removeAllListeners(Constants.IPC_CHANNEL);
-        await this.WriteConfigFile(this.ConfigFileName);
+
+        this._configDb.Close();
+        this._accountsDb.Close();
     }
 
     private OnMessage(message: MessageModel): void {
@@ -112,30 +45,46 @@ export class ConfigService extends SuperService {
             case MessageType.GetConfig:
                 config = Helpers.Deserialize<ConfigModel>(message.DataJson, ConfigModel);
                 let value = config.Value;
-                this.ReadConfigFile(this.ConfigFileName).then(() => {
-                    if (this._configs.IsHaving(config.Key))
-                        value = this._configs.Get(config.Key);
+
+                this._configDb.Find({ _key: config.Key }).then((configs: ConfigModel[]) => {
+                    if (configs && configs.length === 1)
+                        value = configs[0].Value;
 
                     config.Value = value;
                     message.DataJson = Helpers.Serialize<ConfigModel>(config);
                     this._ipc.Send(message);
-                });
+                }).catch((err: Error) => console.log(err));
+
+                // this.ReadConfigFile(this.DbFilesDirectory).then(() => {
+                //     if (this._configs.IsHaving(config.Key))
+                //         value = this._configs.Get(config.Key);
+
+                //     config.Value = value;
+                //     message.DataJson = Helpers.Serialize<ConfigModel>(config);
+                //     this._ipc.Send(message);
+                // });
                 break;
 
             case MessageType.SetConfig:
                 config = Helpers.Deserialize<ConfigModel>(message.DataJson, ConfigModel);
-                this.ReadConfigFile(this.ConfigFileName).then(() => {
-                    this._configs.Set(config.Key, config.Value);
+                this._configDb.Update({ _key: config.Key }, config).finally(() => {
                     this._ipc.Send(message);
-                })
+                }).catch((err: Error) => console.log(err));
+                // this.ReadConfigFile(this.DbFilesDirectory).then(() => {
+                //     this._configs.Set(config.Key, config.Value);
+                //     this._ipc.Send(message);
+                // })
                 break;
 
             case MessageType.DeleteConfig:
                 let command = parseInt(message.DataJson);
-                this.ReadConfigFile(this.ConfigFileName).then(() => {
-                    if (this._configs.IsHaving(command))
-                        this._configs.Delete(command);
-                });
+                this._configDb.Delete({ _key: command }).then((count: number) => {
+
+                }).catch((err: Error) => console.log(err));
+                // this.ReadConfigFile(this.DbFilesDirectory).then(() => {
+                //     if (this._configs.IsHaving(command))
+                //         this._configs.Delete(command);
+                // });
                 break;
         }
     }
