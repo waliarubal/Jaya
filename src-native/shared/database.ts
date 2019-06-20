@@ -17,8 +17,6 @@ export class DataBase<T> {
         this._fileName = fileName;
         this._db = new Datastore({
             autoload: true,
-            inMemoryOnly: false,
-            timestampData: false,
             filename: fileName
         });
     }
