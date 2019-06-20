@@ -54,15 +54,6 @@ export class ConfigService extends SuperService {
                     message.DataJson = Helpers.Serialize<ConfigModel>(config);
                     this._ipc.Send(message);
                 }).catch((err: Error) => console.log(err));
-
-                // this.ReadConfigFile(this.DbFilesDirectory).then(() => {
-                //     if (this._configs.IsHaving(config.Key))
-                //         value = this._configs.Get(config.Key);
-
-                //     config.Value = value;
-                //     message.DataJson = Helpers.Serialize<ConfigModel>(config);
-                //     this._ipc.Send(message);
-                // });
                 break;
 
             case MessageType.SetConfig:
@@ -70,10 +61,6 @@ export class ConfigService extends SuperService {
                 this._configDb.Update({ _key: config.Key }, config).finally(() => {
                     this._ipc.Send(message);
                 }).catch((err: Error) => console.log(err));
-                // this.ReadConfigFile(this.DbFilesDirectory).then(() => {
-                //     this._configs.Set(config.Key, config.Value);
-                //     this._ipc.Send(message);
-                // })
                 break;
 
             case MessageType.DeleteConfig:
@@ -81,10 +68,6 @@ export class ConfigService extends SuperService {
                 this._configDb.Delete({ _key: command }).then((count: number) => {
 
                 }).catch((err: Error) => console.log(err));
-                // this.ReadConfigFile(this.DbFilesDirectory).then(() => {
-                //     if (this._configs.IsHaving(command))
-                //         this._configs.Delete(command);
-                // });
                 break;
         }
     }
