@@ -31,6 +31,27 @@ export class ElectronHelpers {
         return null;
     }
 
+    static async FileExists(fileName: string): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            try {
+                Fs.exists(fileName, (exists: boolean) => resolve(exists));
+            } catch (ex) {
+                reject(ex);
+            }
+        });
+    }
+
+    static ReadFileBufferAsync(fileName: string): Promise<Buffer> {
+        return new Promise<Buffer>((resolve, reject) => {
+            Fs.readFile(fileName, (error: NodeJS.ErrnoException, data: Buffer) => {
+                if (error)
+                    reject(error);
+                else
+                    resolve(data);
+            });
+        })
+    }
+
     static async ReadFileAsync(fileName: string): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             Fs.readFile(fileName, 'utf8', (error: NodeJS.ErrnoException, data: string) => {
@@ -42,7 +63,7 @@ export class ElectronHelpers {
         });
     }
 
-    static async WriteFileAsync(fileName: string, data: string): Promise<void> {
+    static async WriteFileAsync(fileName: string, data: string | Buffer): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             Fs.writeFile(fileName, data, (error: NodeJS.ErrnoException) => {
                 if (error)
