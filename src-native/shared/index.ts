@@ -1,5 +1,5 @@
 import { SuperService } from './super.service';
 import { ElectronHelpers } from './electron-helpers';
-import { DataBase } from './database'
+import { SQLite } from './sqlite'
 
-export { SuperService, ElectronHelpers, DataBase };
+export { SuperService, ElectronHelpers, SQLite };

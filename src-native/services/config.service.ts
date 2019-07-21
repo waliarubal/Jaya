@@ -1,42 +1,37 @@
-import { app, remote } from 'electron';
 import * as Path from 'path';
 import { Constants, MessageModel, ConfigModel, MessageType, Helpers, AccountModel } from '../../src-common';
 import { IpcService } from './ipc.service';
-import { SuperService, DataBase } from '../shared';
+import { SuperService, SQLite, ElectronHelpers } from '../shared';
 
 export class ConfigService extends SuperService {
     private readonly _dbDirectory: string;
-    private _configDb: DataBase<ConfigModel>;
-    private _accountsDb: DataBase<AccountModel>;
+    private _db: SQLite;
 
     constructor(private readonly _ipc: IpcService) {
         super();
+        this._db = new SQLite();
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
 
-        const userDataPath = (app || remote.app).getPath('userData');
-        this._dbDirectory = userDataPath;
-        console.log('DB Files Directory: %s', this.DbFilesDirectory);
+        this._dbDirectory = ElectronHelpers.GetUserDataPath();
 
-        this.LoadConfigurations();
+        this.LoadConfigurations().then().catch(ex => console.log(ex));
     }
 
     get DbFilesDirectory(): string {
         return this._dbDirectory;
     }
 
-    private LoadConfigurations(): void {
-        this._configDb = new DataBase();
-        this._configDb.Open(Path.join(this.DbFilesDirectory, 'config.db'));
-
-        this._accountsDb = new DataBase();
-        this._accountsDb.Open(Path.join(this.DbFilesDirectory, 'accounts.db'));
+    private async LoadConfigurations(): Promise<void> {
+        const configFile = Path.join(this.DbFilesDirectory, 'config.sqlite');
+        console.log('Config File Path: %s', configFile); 
+        await this._db.Open(configFile);
     }
 
     protected async Dispose(): Promise<void> {
         this._ipc.Receive.removeAllListeners(Constants.IPC_CHANNEL);
 
-        this._configDb.Close();
-        this._accountsDb.Close();
+        await this._db.Close();
+        this._db = undefined;
     }
 
     private OnMessage(message: MessageModel): void {

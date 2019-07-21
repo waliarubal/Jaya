@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, remote, app } from 'electron';
 import * as Url from 'url';
 import * as Fs from 'fs';
 import { Constants } from '../../src-common';
@@ -72,6 +72,10 @@ export class ElectronHelpers {
                     resolve();
             });
         });
+    }
+
+    static GetUserDataPath(): string {
+        return (app || remote.app).getPath('userData');
     }
 
 }
