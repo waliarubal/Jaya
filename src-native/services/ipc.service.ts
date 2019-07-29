@@ -9,7 +9,6 @@ export class IpcService extends SuperService {
     constructor(private readonly _window: BrowserWindow) {
         super();
         this._event = new EventEmitter();
-        ipcMain.on(Constants.IPC_CHANNEL, (event: any, argument: any) => this.OnMessage(event, argument));
     }
 
     get Receive(): EventEmitter {
@@ -31,6 +30,10 @@ export class IpcService extends SuperService {
             messageString = JSON.stringify(message);
         }
         this._window.webContents.send(Constants.IPC_CHANNEL, messageString);
+    }
+
+    protected async Initialize(): Promise<void> {
+        ipcMain.on(Constants.IPC_CHANNEL, (event: any, argument: any) => this.OnMessage(event, argument));
     }
 
     protected async Dispose(): Promise<void> {

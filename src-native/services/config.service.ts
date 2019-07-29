@@ -4,8 +4,8 @@ import { IpcService } from './ipc.service';
 import { SuperService, ElectronHelpers } from '../shared';
 
 export class ConfigService extends SuperService {
-    readonly RECORD_SEPARATOR = '\n';
-    readonly DATA_SEPARATOR = '\u2665';
+    private readonly RECORD_SEPARATOR = '\n';
+    private readonly DATA_SEPARATOR = '\u2665';
 
     private readonly _configFile: string;
     private readonly _configs: Dictionary<number, any>;
@@ -13,16 +13,15 @@ export class ConfigService extends SuperService {
     constructor(private readonly _ipc: IpcService) {
         super();
         this._configs = new Dictionary();
-        this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
-
+        
         this._configFile = Path.join(ElectronHelpers.GetUserDataPath(), 'config.dat');
-        this.LoadConfigurations(this._configFile).then().catch(ex => console.log(ex));
+        console.log('Config File: %s', this._configFile);
     }
 
-    private async LoadConfigurations(fileName: string): Promise<void> {
-        console.log('Config File Path: %s', fileName);
+    protected async Initialize(): Promise<void> {
+        this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
 
-        const data = await ElectronHelpers.ReadFileAsync(fileName);
+        const data = await ElectronHelpers.ReadFileAsync(this._configFile);
         if (!data)
             return;
 

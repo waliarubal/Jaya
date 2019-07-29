@@ -7,6 +7,9 @@ export class CommandService extends SuperService {
 
     constructor(private readonly _ipc: IpcService) {
         super();
+    }
+
+    protected async Initialize(): Promise<void> {
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
     }
 

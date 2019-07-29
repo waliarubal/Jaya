@@ -10,7 +10,6 @@ export class FileSystemService extends SuperService implements IProviderService 
 
     constructor(private readonly _ipc: IpcService) {
         super();
-        this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
     }
 
     get Type(): ProviderType {
@@ -19,6 +18,10 @@ export class FileSystemService extends SuperService implements IProviderService 
 
     get IsRootDrive(): boolean {
         return true;
+    }
+
+    protected async Initialize(): Promise<void> {
+        this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
     }
 
     protected async Dispose(): Promise<void> {

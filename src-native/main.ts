@@ -10,8 +10,8 @@ class Main {
     private _services: SuperService[];
 
     Initialize(): void {
-        app.on('ready', () => this.CreateWindow());
-        app.on('activate', () => this.CreateWindow());
+        app.on('ready', async () => await this.CreateWindow());
+        app.on('activate', async () => await this.CreateWindow());
         app.on('window-all-closed', async () => await this.DestroyWindow());
         app.on('browser-window-created', (event: Electron.Event, window: BrowserWindow) => window.setMenu(null));
     }
@@ -20,15 +20,20 @@ class Main {
         return this._window;
     }
 
-    private CreateServices(window: BrowserWindow): SuperService[] {
+    private async CreateServices(window: BrowserWindow): Promise<SuperService[]> {
         let ipc = new IpcService(window);
-        return [
+        let services = [
             ipc,
             new ConfigService(ipc),
             new CommandService(ipc),
             new FileSystemService(ipc),
             new DropboxService(ipc)
         ];
+
+        for(let service of services)
+            await service.Start();
+
+        return services;
     }
 
     private async DestroyServices(services: SuperService[]): Promise<void> {
@@ -39,7 +44,7 @@ class Main {
         }
     }
 
-    private CreateWindow(): void {
+    private async CreateWindow(): Promise<void> {
         if (this._window)
             return;
 
@@ -61,7 +66,7 @@ class Main {
             }
         });
 
-        this._services = this.CreateServices(window);
+        this._services = await this.CreateServices(window);
 
         window.loadURL(url).then(() => window.webContents.openDevTools());
         window.on('closed', async () => await this.DestroyWindow());

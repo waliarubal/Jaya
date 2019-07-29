@@ -12,7 +12,6 @@ export class DropboxService extends SuperService implements IProviderService {
 
     constructor(private readonly _ipc: IpcService) {
         super();
-        this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
         this._client = new Dropbox({ clientId: this.APP_KEY, fetch: fetch });
     }
 
@@ -22,6 +21,10 @@ export class DropboxService extends SuperService implements IProviderService {
 
     get IsRootDrive(): boolean {
         return false;
+    }
+
+    protected async Initialize(): Promise<void> {
+        this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
     }
 
     protected async Dispose(): Promise<void> {
