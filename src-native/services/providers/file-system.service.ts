@@ -1,5 +1,4 @@
 import * as Fs from 'fs';
-import * as Os from 'os';
 import * as Si from 'systeminformation';
 import { spawn } from 'child_process';
 import * as Path from 'path';
