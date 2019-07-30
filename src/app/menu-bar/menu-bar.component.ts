@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { Constants, CommandType, IMenu, ConfigModel } from '@common/index';
+import { Constants, CommandType, IMenu, ConfigModel, Helpers } from '@common/index';
 import { ConfigService } from '@services/config.service';
 import { CommandService } from '@services/command.service';
 import { PopupService } from '@services/popup.service';
@@ -32,7 +32,7 @@ export class MenuBarComponent extends BaseComponent {
                 if (!subMenu.IsCheckable)
                     continue;
 
-                subMenu.IsChecked = await this._config.GetValue<number>(subMenu.Command, 0) === 1;
+                subMenu.IsChecked = Helpers.ToBoolean(await this._config.GetValue(subMenu.Command, Constants.FALSE));
             }
         }
     }
@@ -45,7 +45,7 @@ export class MenuBarComponent extends BaseComponent {
         // check/uncheck checkable menu
         let menu = this.GetMenu(config.Key);
         if (menu && menu.IsCheckable)
-            menu.IsChecked = <number>config.Value === 1;
+            menu.IsChecked = Helpers.ToBoolean(config.Value);
     }
 
     private GetMenu(command: CommandType): IMenu {
@@ -70,7 +70,7 @@ export class MenuBarComponent extends BaseComponent {
         // toggle checkable menu
         if (menu.IsCheckable) {
             menu.IsChecked = !menu.IsChecked;
-            await this._config.SetValue(menu.Command, menu.IsChecked ? 1 : 0);
+            await this._config.SetValue(menu.Command, menu.IsChecked.toString());
         }
 
         switch (menu.Command) {

@@ -5,6 +5,9 @@ export class Constants {
     static readonly SEPARATOR: string = '¶';
     static readonly BACK_COLOR: string = '#efefef';
 
+    static readonly TRUE = 'true';
+    static readonly FALSE = 'false';
+
     static readonly MENU_DATA: IMenu[] = [
         {
             Command: CommandType.File,

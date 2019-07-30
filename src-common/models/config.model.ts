@@ -2,7 +2,7 @@ import { IClonable } from '../interfaces/IClonable';
 
 export class ConfigModel implements IClonable {
     private _key: number;
-    private _value: any;
+    private _value: string;
 
     constructor(key?: number, value?: any){
         this._key = key;
@@ -13,11 +13,11 @@ export class ConfigModel implements IClonable {
         return this._key;
     }
 
-    get Value(): any {
+    get Value(): string {
         return this._value;
     }
 
-    set Value(value: any) {
+    set Value(value: string) {
         this._value = value;
     }
 

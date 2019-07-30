@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { DirectoryModel, ProviderModel, ConfigModel, CommandType, IFileSystemObject } from '@common/index';
+import { DirectoryModel, ProviderModel, ConfigModel, CommandType, IFileSystemObject, Constants, Helpers } from '@common/index';
 import { ConfigService } from '@services/config.service';
 import { ProviderService } from '@services/provider.service';
 
@@ -58,9 +58,9 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
     }
 
     protected async Initialize(): Promise<void> {
-        this._isNavigationPaneVisible = await this._config.GetValue<number>(CommandType.NavigationPane, 1) === 1;
-        this._isPreviewPaneVisible = await this._config.GetValue<number>(CommandType.PreviewPane, 0) === 1;
-        this._isDetailsPaneVisible = await this._config.GetValue<number>(CommandType.DetailsPane, 0) === 1;
+        this._isNavigationPaneVisible = Helpers.ToBoolean(await this._config.GetValue(CommandType.NavigationPane, Constants.TRUE));
+        this._isPreviewPaneVisible = Helpers.ToBoolean(await this._config.GetValue(CommandType.PreviewPane, Constants.FALSE));
+        this._isDetailsPaneVisible = Helpers.ToBoolean(await this._config.GetValue(CommandType.DetailsPane, Constants.FALSE));
     }
 
     protected async Destroy(): Promise<void> {
@@ -70,22 +70,22 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
     protected OnConfigChanged(config: ConfigModel): void {
         switch (config.Key) {
             case CommandType.NavigationPane:
-                this._isNavigationPaneVisible = <number>config.Value === 1;
+                this._isNavigationPaneVisible = Helpers.ToBoolean(config.Value);
                 break;
 
             case CommandType.PreviewPane:
-                this._isPreviewPaneVisible = <number>config.Value === 1;
+                this._isPreviewPaneVisible = Helpers.ToBoolean(config.Value);
                 if (this.IsPreviewPaneVisible && this.IsDetailsPaneVisible) {
                     this._isDetailsPaneVisible = false;
-                    this._config.SetValue(CommandType.DetailsPane, this.IsDetailsPaneVisible ? 1 : 0).then();
+                    this._config.SetValue(CommandType.DetailsPane, this.IsDetailsPaneVisible.toString()).then();
                 }
                 break;
 
             case CommandType.DetailsPane:
-                this._isDetailsPaneVisible = <boolean>config.Value;
+                this._isDetailsPaneVisible = Helpers.ToBoolean(config.Value);
                 if (this.IsDetailsPaneVisible && this.IsPreviewPaneVisible) {
                     this._isPreviewPaneVisible = false;
-                    this._config.SetValue(CommandType.PreviewPane, this.IsPreviewPaneVisible ? 1 : 0).then();
+                    this._config.SetValue(CommandType.PreviewPane, this.IsPreviewPaneVisible.toString()).then();
                 }
                 break;
         }

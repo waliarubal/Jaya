@@ -1,8 +1,26 @@
 import { parse, stringify } from 'flatted';
 import { IClonable } from './interfaces/IClonable';
 import { Dictionary } from './data-structures/dictionary';
+import { Constants } from './constants';
 
 export class Helpers {
+
+    static ToBoolean(value: any): boolean {
+        switch (value) {
+            case 1:
+            case true:
+            case Constants.TRUE:
+                return true;
+
+            case 0:
+            case false:
+            case Constants.FALSE:
+                return false;
+
+            default:
+                return false;
+        }
+    }
 
     static Guid(): string {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (subString) => {
@@ -39,7 +57,7 @@ export class Helpers {
             return null;
 
         let parts = new Dictionary<string, string>();
-        for(let str of temp) {
+        for (let str of temp) {
             let arr = str.split('=');
             if (arr && arr.length === 2)
                 parts.Set(arr[0], arr[1]);

@@ -4,16 +4,16 @@ import { IpcService } from './ipc.service';
 import { SuperService, ElectronHelpers } from '../shared';
 
 export class ConfigService extends SuperService {
-    private readonly RECORD_SEPARATOR = '\n';
+    private readonly RECORD_SEPARATOR = '\u03a9';
     private readonly DATA_SEPARATOR = '\u2665';
 
     private readonly _configFile: string;
-    private readonly _configs: Dictionary<number, any>;
+    private readonly _configs: Dictionary<number, string>;
 
     constructor(private readonly _ipc: IpcService) {
         super();
         this._configs = new Dictionary();
-        
+
         this._configFile = Path.join(ElectronHelpers.GetUserDataPath(), 'config.dat');
         console.log('Config File: %s', this._configFile);
     }
@@ -42,8 +42,8 @@ export class ConfigService extends SuperService {
         this._ipc.Receive.removeAllListeners(Constants.IPC_CHANNEL);
 
         let data = '';
-        for(let key of this._configs.Keys)
-            data+= `${key}${this.DATA_SEPARATOR}${this._configs.Get(key)}${this.RECORD_SEPARATOR}`;
+        for (let key of this._configs.Keys)
+            data += `${key}${this.DATA_SEPARATOR}${this._configs.Get(key)}${this.RECORD_SEPARATOR}`;
 
         await ElectronHelpers.WriteFileAsync(this._configFile, data);
     }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { ConfigModel, ProviderType, Dictionary, ProviderModel } from '@common/index';
+import { ConfigModel, ProviderType, Dictionary, ProviderModel, Constants, Helpers } from '@common/index';
 import { ConfigService } from '@services/config.service';
 import { ProviderService } from '@services/provider.service';
 
@@ -29,7 +29,7 @@ export class SettingsComponent extends BaseComponent {
         const providers = await this._providerService.GetProviders();
         let models: ProviderModel[] = [];
         for (let provider of providers) {
-            provider.IsEnabled = await this._config.GetValue<boolean>(provider.Type, false);
+            provider.IsEnabled = Helpers.ToBoolean(await this._config.GetValue(provider.Type, Constants.FALSE));
             models[provider.Type] = provider;
         }
         this._providers = models;
@@ -38,7 +38,4 @@ export class SettingsComponent extends BaseComponent {
     protected async Destroy(): Promise<void> {
 
     }
-
-
-
 }
