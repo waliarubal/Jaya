@@ -21,7 +21,7 @@ export class ConfigService extends SuperService {
     protected async Initialize(): Promise<void> {
         this._ipc.Receive.on(Constants.IPC_CHANNEL, (message: MessageModel) => this.OnMessage(message));
 
-        if (!ElectronHelpers.FileExists(this._configFile))
+        if (!(await ElectronHelpers.FileExists(this._configFile)))
             return;
 
         const data = await ElectronHelpers.ReadFileAsync(this._configFile);
