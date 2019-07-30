@@ -36,6 +36,8 @@ export class SettingsComponent extends BaseComponent {
     }
 
     protected async Destroy(): Promise<void> {
-
+        for (let provider of this.Providers)
+            if (provider && provider.Type)
+                await this._config.SetValue(provider.Type, provider.IsEnabled.toString());
     }
 }
