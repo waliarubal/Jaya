@@ -11,15 +11,18 @@ export abstract class BaseComponent extends BaseModel implements OnInit, OnDestr
         this._onConfigChangedSubscription = _config.OnConfigChanged.subscribe((config: ConfigModel) => this.OnConfigChanged(config));
     }
 
-    async ngOnInit(): Promise<void> {
-        await this.Initialize();
+    ngOnInit(): void {
+        this.Initialize()
+            .then()
+            .catch((ex) => console.log(ex));
     }
 
     @HostListener('window:beforeunload')
-    async ngOnDestroy(): Promise<void> {
+    ngOnDestroy(): void {
         this._onConfigChangedSubscription.unsubscribe();
-        await this.Destroy();
-        super.Clear();
+        this.Destroy()
+            .then(() => super.Clear())
+            .catch((ex) => console.log(ex));
     }
 
     protected abstract OnConfigChanged(config: ConfigModel): void;

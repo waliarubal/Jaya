@@ -58,9 +58,9 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
     }
 
     protected async Initialize(): Promise<void> {
-        this._isNavigationPaneVisible = await this._config.GetValue<boolean>(CommandType.NavigationPane, true);
-        this._isPreviewPaneVisible = await this._config.GetValue<boolean>(CommandType.PreviewPane, false);
-        this._isDetailsPaneVisible = await this._config.GetValue<boolean>(CommandType.DetailsPane, false);
+        this._isNavigationPaneVisible = await this._config.GetValue<number>(CommandType.NavigationPane, 1) === 1;
+        this._isPreviewPaneVisible = await this._config.GetValue<number>(CommandType.PreviewPane, 0) === 1;
+        this._isDetailsPaneVisible = await this._config.GetValue<number>(CommandType.DetailsPane, 0) === 1;
     }
 
     protected async Destroy(): Promise<void> {
@@ -70,14 +70,14 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
     protected OnConfigChanged(config: ConfigModel): void {
         switch (config.Key) {
             case CommandType.NavigationPane:
-                this._isNavigationPaneVisible = <boolean>config.Value;
+                this._isNavigationPaneVisible = <number>config.Value === 1;
                 break;
 
             case CommandType.PreviewPane:
-                this._isPreviewPaneVisible = <boolean>config.Value;
+                this._isPreviewPaneVisible = <number>config.Value === 1;
                 if (this.IsPreviewPaneVisible && this.IsDetailsPaneVisible) {
                     this._isDetailsPaneVisible = false;
-                    this._config.SetValue(CommandType.DetailsPane, this.IsDetailsPaneVisible).then();
+                    this._config.SetValue(CommandType.DetailsPane, this.IsDetailsPaneVisible ? 1 : 0).then();
                 }
                 break;
 
@@ -85,7 +85,7 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
                 this._isDetailsPaneVisible = <boolean>config.Value;
                 if (this.IsDetailsPaneVisible && this.IsPreviewPaneVisible) {
                     this._isPreviewPaneVisible = false;
-                    this._config.SetValue(CommandType.PreviewPane, this.IsPreviewPaneVisible).then();
+                    this._config.SetValue(CommandType.PreviewPane, this.IsPreviewPaneVisible ? 1 : 0).then();
                 }
                 break;
         }
