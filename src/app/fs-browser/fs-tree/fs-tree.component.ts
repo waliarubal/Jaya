@@ -51,6 +51,9 @@ export class FileSystemTreeComponent extends BaseComponent {
         if (value) {
             this.Nodes.length = 0;
             for (let provider of value) {
+                if (!provider.IsEnabled)
+                    continue;
+
                 let nodeData = <ITreeNodeData>{
                     ProviderService: this._providerService.GetService(provider.Type),
                     Object: provider,

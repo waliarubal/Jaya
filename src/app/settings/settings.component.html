@@ -11,8 +11,8 @@
 
   </eui-tab-panel>
   <ng-container *ngIf="Providers">
-    <eui-tab-panel [disabled]="!Providers[ProviderType.Dropbox].IsEnabled"
-      title="{{Providers[ProviderType.Dropbox].Name}}" iconCls="{{Providers[ProviderType.Dropbox].Icon}}"
+    <eui-tab-panel [disabled]="!Providers[ProviderType.Dropbox - Offset].IsEnabled"
+      title="{{Providers[ProviderType.Dropbox - Offset].Name}}" iconCls="{{Providers[ProviderType.Dropbox - Offset].Icon}}"
       [bodyStyle]="{ padding: '4px'}">
       <dropbox-setting></dropbox-setting>
     </eui-tab-panel>

@@ -12,6 +12,7 @@ import { ProviderService } from '@services/provider.service';
 export class SettingsComponent extends BaseComponent {
     private _providers: ProviderModel[];
     readonly ProviderType = ProviderType;
+    readonly Offset = ProviderType.FileSystem;
 
     constructor(config: ConfigService, private readonly _providerService: ProviderService) {
         super(config);
@@ -26,18 +27,13 @@ export class SettingsComponent extends BaseComponent {
     }
 
     protected async Initialize(): Promise<void> {
-        const providers = await this._providerService.GetProviders();
-        let models: ProviderModel[] = [];
-        for (let provider of providers) {
+        this._providers = await this._providerService.GetProviders();
+        for (let provider of this.Providers)
             provider.IsEnabled = Helpers.ToBoolean(await this._config.GetValue(provider.Type, Constants.FALSE));
-            models[provider.Type] = provider;
-        }
-        this._providers = models;
     }
 
     protected async Destroy(): Promise<void> {
         for (let provider of this.Providers)
-            if (provider && provider.Type)
-                await this._config.SetValue(provider.Type, provider.IsEnabled.toString());
+            await this._config.SetValue(provider.Type, provider.IsEnabled.toString());
     }
 }

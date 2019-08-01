@@ -55,6 +55,8 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
 
     async ngAfterViewInit(): Promise<void> {
         this._providers = await this._providerService.GetProviders();
+        for (let provider of this.Providers)
+            provider.IsEnabled = Helpers.ToBoolean(await this._config.GetValue(provider.Type, Constants.FALSE));
     }
 
     protected async Initialize(): Promise<void> {
