@@ -51,6 +51,7 @@ export class FileSystemTreeComponent extends BaseComponent {
         if (value) {
             this.Nodes.length = 0;
             for (let provider of value) {
+                debugger;
                 if (!provider.IsEnabled)
                     continue;
 

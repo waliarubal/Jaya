@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { BaseComponent } from '@shared/base.component';
-import { DirectoryModel, ProviderModel, ConfigModel, CommandType, IFileSystemObject, Constants, Helpers } from '@common/index';
+import { DirectoryModel, ProviderModel, ConfigModel, CommandType, IFileSystemObject, Constants, Helpers, ProviderType } from '@common/index';
 import { ConfigService } from '@services/config.service';
 import { ProviderService } from '@services/provider.service';
 
@@ -53,10 +53,16 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
         return this._isDetailsPaneVisible;
     }
 
-    async ngAfterViewInit(): Promise<void> {
-        this._providers = await this._providerService.GetProviders();
-        for (let provider of this.Providers)
+    ngAfterViewInit(): void {
+        this.Refresh().then();
+    }
+
+    private async Refresh(): Promise<void> {
+        let providers = await this._providerService.GetProviders();
+        for (let provider of providers)
             provider.IsEnabled = Helpers.ToBoolean(await this._config.GetValue(provider.Type, Constants.FALSE));
+
+        this._providers = providers
     }
 
     protected async Initialize(): Promise<void> {
@@ -89,6 +95,13 @@ export class FileSystemBrowserComponent extends BaseComponent implements AfterVi
                     this._isPreviewPaneVisible = false;
                     this._config.SetValue(CommandType.PreviewPane, this.IsPreviewPaneVisible.toString()).then();
                 }
+                break;
+
+            case ProviderType.FileSystem:
+            case ProviderType.Dropbox:
+            case ProviderType.GoogleDrive:
+                alert('here');
+                this.Refresh().then();
                 break;
         }
     }
