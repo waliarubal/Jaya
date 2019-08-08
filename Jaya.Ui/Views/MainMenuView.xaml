@@ -1,0 +1,109 @@
+﻿<UserControl
+    x:Class="Jaya.Ui.Views.MainMenuView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Menu>
+        <MenuItem Header="_File">
+            <MenuItem Header="Refresh">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Refresh-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="New Folder">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Add-Folder-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Properties">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Property-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Open">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Open-Document-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Exit">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Shutdown-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_Edit">
+            <MenuItem Header="Cut">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Cut-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Copy">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Copy-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Paste">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Paste-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Move To..." />
+            <MenuItem Header="Copy To..." />
+            <Separator />
+            <MenuItem Header="Delete">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Delete-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Rename">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Rename-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Select All">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Select-All-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Select None">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Select-None-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Invert Selection">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Invert-Selection-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="_View">
+            <MenuItem Header="Navigation Pane">
+                <MenuItem.Icon>
+                    <CheckBox BorderThickness="0" IsHitTestVisible="False" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Preview Pane" />
+            <MenuItem Header="Details Pane" />
+            <Separator />
+            <MenuItem Header="Item Check Boxes" />
+            <MenuItem Header="File Name Extensions" />
+            <MenuItem Header="Hidden Items" />
+            <Separator />
+            <MenuItem Header="Providers..." />
+        </MenuItem>
+        <MenuItem Header="_Help">
+            <MenuItem Header="View License" />
+            <MenuItem Header="Privacy Statement" />
+            <Separator />
+            <MenuItem Header="Check For Update..." />
+            <Separator />
+            <MenuItem Header="About" />
+        </MenuItem>
+    </Menu>
+</UserControl>
