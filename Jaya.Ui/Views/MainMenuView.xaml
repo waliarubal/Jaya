@@ -95,13 +95,34 @@
             <MenuItem Header="File Name Extensions" />
             <MenuItem Header="Hidden Items" />
             <Separator />
-            <MenuItem Header="Providers..." />
+            <MenuItem Header="Plugins...">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Plugin-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="_Help">
-            <MenuItem Header="View License" />
-            <MenuItem Header="Privacy Statement" />
+            <MenuItem Header="View Help">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Help-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="View License">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Certificate-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Check For Update..." />
+            <MenuItem Header="Send Feedback...">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Feedback-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Check For Update...">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Update-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator />
             <MenuItem Header="About" />
         </MenuItem>

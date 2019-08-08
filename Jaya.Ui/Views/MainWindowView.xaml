@@ -10,6 +10,7 @@
     Title="Jaya.Ui"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    HasSystemDecorations="True"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
 
