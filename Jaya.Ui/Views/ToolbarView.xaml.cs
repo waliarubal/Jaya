@@ -1,14 +1,13 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
 namespace Jaya.Ui.Views
 {
-    public class MainMenuView : UserControl
+    public class ToolbarView : UserControl
     {
-        public MainMenuView()
+        public ToolbarView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

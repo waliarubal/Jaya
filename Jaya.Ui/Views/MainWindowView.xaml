@@ -10,7 +10,6 @@
     Title="Jaya.Ui"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    HasSystemDecorations="True"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
 
@@ -18,13 +17,9 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <v:MainMenuView Grid.Row="0" />
-    </Grid>
+    <DockPanel LastChildFill="True">
+        <v:MenuView DockPanel.Dock="Top" />
+        <v:ToolbarView DockPanel.Dock="Top" />
+    </DockPanel>
 
 </Window>
