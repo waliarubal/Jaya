@@ -93,5 +93,21 @@
         <Button>
             <Image Source="/Assets/Images/Plugin-16.png" />
         </Button>
+
+        <Border Classes="Separator" />
+
+        <Button>
+            <Image Source="/Assets/Images/Help-16.png" />
+        </Button>
+        <Button>
+            <Image Source="/Assets/Images/Certificate-16.png" />
+        </Button>
+        <Border Classes="Separator" />
+        <Button>
+            <Image Source="/Assets/Images/Feedback-16.png" />
+        </Button>
+        <Button>
+            <Image Source="/Assets/Images/Update-16.png" />
+        </Button>
     </WrapPanel>
 </UserControl>
