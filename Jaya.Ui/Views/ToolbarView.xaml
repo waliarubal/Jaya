@@ -41,72 +41,72 @@
             </Style>
         </WrapPanel.Styles>
 
-        <Button>
+        <Button ToolTip.Tip="Refresh">
             <Image Source="/Assets/Images/Refresh-16.png" />
         </Button>
-        <Button>
+        <Button ToolTip.Tip="New Folder">
             <Image Source="/Assets/Images/Add-Folder-16.png" />
         </Button>
         <Border Classes="Separator" />
-        <Button>
+        <Button ToolTip.Tip="Properties">
             <Image Source="/Assets/Images/Property-16.png" />
         </Button>
-        <Button>
+        <Button ToolTip.Tip="Open">
             <Image Source="/Assets/Images/Open-Document-16.png" />
         </Button>
         <Border Classes="Separator" />
-        <Button>
+        <Button ToolTip.Tip="Exit">
             <Image Source="/Assets/Images/Shutdown-16.png" />
         </Button>
 
         <Border Classes="Separator" />
 
-        <Button>
+        <Button ToolTip.Tip="Cut">
             <Image Source="/Assets/Images/Cut-16.png" />
         </Button>
-        <Button>
+        <Button ToolTip.Tip="Copy">
             <Image Source="/Assets/Images/Copy-16.png" />
         </Button>
-        <Button>
+        <Button ToolTip.Tip="Paste">
             <Image Source="/Assets/Images/Paste-16.png" />
         </Button>
         <Border Classes="Separator" />
-        <Button>
+        <Button ToolTip.Tip="Delete">
             <Image Source="/Assets/Images/Delete-16.png" />
         </Button>
-        <Button>
+        <Button ToolTip.Tip="Rename">
             <Image Source="/Assets/Images/Rename-16.png" />
         </Button>
         <Border Classes="Separator" />
-        <Button>
+        <Button ToolTip.Tip="Select All">
             <Image Source="/Assets/Images/Select-All-16.png" />
         </Button>
-        <Button>
+        <Button ToolTip.Tip="Select None">
             <Image Source="/Assets/Images/Select-None-16.png" />
         </Button>
-        <Button>
+        <Button ToolTip.Tip="Invert Selection">
             <Image Source="/Assets/Images/Invert-Selection-16.png" />
         </Button>
 
         <Border Classes="Separator" />
 
-        <Button>
+        <Button ToolTip.Tip="Plugins...">
             <Image Source="/Assets/Images/Plugin-16.png" />
         </Button>
 
         <Border Classes="Separator" />
 
-        <Button>
+        <Button ToolTip.Tip="View Help">
             <Image Source="/Assets/Images/Help-16.png" />
         </Button>
-        <Button>
+        <Button ToolTip.Tip="View License">
             <Image Source="/Assets/Images/Certificate-16.png" />
         </Button>
         <Border Classes="Separator" />
-        <Button>
+        <Button ToolTip.Tip="Send Feedback...">
             <Image Source="/Assets/Images/Feedback-16.png" />
         </Button>
-        <Button>
+        <Button ToolTip.Tip="Check For Update...">
             <Image Source="/Assets/Images/Update-16.png" />
         </Button>
     </WrapPanel>
