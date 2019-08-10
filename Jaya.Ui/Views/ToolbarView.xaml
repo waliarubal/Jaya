@@ -6,7 +6,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <WrapPanel Margin="6,0" KeyboardNavigation.TabNavigation="Continue">
+        <WrapPanel.Resources>
+            <VisualBrush
+                x:Key="ThumbBrush"
+                DestinationRect="0,0,2,2"
+                SourceRect="0,0,2,2"
+                TileMode="Tile">
+                <VisualBrush.Visual>
+                    <Rectangle
+                        Width="1"
+                        Height="1"
+                        Fill="#FF505050" />
+                    <!--  ThemeControlMidColor  -->
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </WrapPanel.Resources>
         <WrapPanel.Styles>
+            <Style Selector="Border.Thumb">
+                <Setter Property="Background" Value="{StaticResource ThumbBrush}" />
+                <Setter Property="Margin" Value="2 0" />
+                <Setter Property="Width" Value="6" />
+            </Style>
+
             <Style Selector="Button">
                 <Setter Property="Margin" Value="1 0" />
                 <Setter Property="Padding" Value="2" />
@@ -41,6 +62,8 @@
             </Style>
         </WrapPanel.Styles>
 
+        <Border Classes="Thumb" />
+
         <Button ToolTip.Tip="Refresh">
             <Image Source="/Assets/Images/Refresh-16.png" />
         </Button>
@@ -59,7 +82,7 @@
             <Image Source="/Assets/Images/Shutdown-16.png" />
         </Button>
 
-        <Border Classes="Separator" />
+        <Border Classes="Thumb" />
 
         <Button ToolTip.Tip="Cut">
             <Image Source="/Assets/Images/Cut-16.png" />
@@ -88,13 +111,13 @@
             <Image Source="/Assets/Images/Invert-Selection-16.png" />
         </Button>
 
-        <Border Classes="Separator" />
+        <Border Classes="Thumb" />
 
         <Button ToolTip.Tip="Plugins...">
             <Image Source="/Assets/Images/Plugin-16.png" />
         </Button>
 
-        <Border Classes="Separator" />
+        <Border Classes="Thumb" />
 
         <Button ToolTip.Tip="View Help">
             <Image Source="/Assets/Images/Help-16.png" />

@@ -5,7 +5,7 @@ using Jaya.Ui.ViewModels;
 
 namespace Jaya.Ui
 {
-    public class ViewLocator : IDataTemplate
+    class ViewLocator : IDataTemplate
     {
         public bool SupportsRecycling
         {
