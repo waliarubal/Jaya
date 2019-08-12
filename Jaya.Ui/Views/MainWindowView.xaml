@@ -17,9 +17,12 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <DockPanel LastChildFill="True">
+    <DockPanel>
         <v:MenuView DockPanel.Dock="Top" />
         <v:ToolbarView DockPanel.Dock="Top" />
+        <v:StatusbarView DockPanel.Dock="Bottom" />
+        <Grid>
+        </Grid>
     </DockPanel>
 
 </Window>
