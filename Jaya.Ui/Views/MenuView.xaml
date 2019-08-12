@@ -6,6 +6,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Menu>
+        <Menu.Styles>
+            <Style Selector="ToggleButton">
+                <Setter Property="Margin" Value="1 0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="MinWidth" Value="21" />
+                <Setter Property="MinHeight" Value="21" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Style>
+            <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Style>
+            <Style Selector="ToggleButton:pressed /template/ ContentPresenter">
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+            <Style Selector="ToggleButton:disabled">
+                <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+            </Style>
+            <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+            </Style>
+        </Menu.Styles>
+
         <MenuItem Header="_File">
             <MenuItem Header="Refresh">
                 <MenuItem.Icon>
@@ -85,33 +111,45 @@
         <MenuItem Header="_View">
             <MenuItem Header="Navigation Pane">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
+                    <ToggleButton>
+                        <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
+                    </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Preview Pane">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Preview-16.png" />
+                    <ToggleButton>
+                        <Image Source="/Assets/Images/Preview-16.png" />
+                    </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Details Pane">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Details-16.png" />
+                    <ToggleButton>
+                        <Image Source="/Assets/Images/Details-16.png" />
+                    </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
             <MenuItem Header="Item Check Boxes">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Checklist-16.png" />
+                    <ToggleButton>
+                        <Image Source="/Assets/Images/Checklist-16.png" />
+                    </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="File Name Extensions">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Code-File-16.png" />
+                    <ToggleButton>
+                        <Image Source="/Assets/Images/Code-File-16.png" />
+                    </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Hidden Items">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Hide-16.png" />
+                    <ToggleButton>
+                        <Image Source="/Assets/Images/Hide-16.png" />
+                    </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
