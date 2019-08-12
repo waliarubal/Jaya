@@ -9,5 +9,5 @@
     BorderBrush="{DynamicResource ThemeControlMidBrush}"
     BorderThickness="1"
     mc:Ignorable="d">
-    Details View
+    <TextBlock Text="Details View" />
 </UserControl>

@@ -5,7 +5,6 @@
     <StartupObject>Jaya.Ui.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Compile Update="**\*.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>

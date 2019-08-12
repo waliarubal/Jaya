@@ -4,7 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:MenuViewModel />
+    </UserControl.DataContext>
+
     <Menu>
         <Menu.Styles>
             <Style Selector="ToggleButton">
@@ -129,6 +134,36 @@
                         <Image Source="/Assets/Images/Details-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Toolbars">
+                <MenuItem.Styles>
+                    <Style Selector="CheckBox">
+                        <Setter Property="IsThreeState" Value="False" />
+                    </Style>
+                </MenuItem.Styles>
+
+                <MenuItem Header="Show Toolbars" />
+                <Separator />
+                <MenuItem Header="File">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding ToolbarsConfiguration.IsFileToolbarVisible, Mode=OneWay}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Edit">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding ToolbarsConfiguration.IsEditToolbarVisible, Mode=OneWay}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding ToolbarsConfiguration.IsViewToolbarVisible, Mode=OneWay}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding ToolbarsConfiguration.IsHelpToolbarVisible, Mode=OneWay}" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <Separator />
             <MenuItem Header="Item Check Boxes">

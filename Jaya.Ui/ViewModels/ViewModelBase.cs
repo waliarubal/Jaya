@@ -1,8 +1,8 @@
-﻿using ReactiveUI;
+﻿using Jaya.Ui.Models;
 
 namespace Jaya.Ui.ViewModels
 {
-    abstract class ViewModelBase : ReactiveObject
+    public abstract class ViewModelBase : ModelBase
     {
     }
 }
