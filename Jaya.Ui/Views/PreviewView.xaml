@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="Jaya.Ui.Views.NavigationView"
+    x:Class="Jaya.Ui.Views.PreviewView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,6 +9,8 @@
     BorderBrush="{DynamicResource ThemeControlMidBrush}"
     BorderThickness="1"
     mc:Ignorable="d">
-    <TreeView BorderThickness="0">
-    </TreeView>
+    <TextBlock
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Text="Select a file to preview." />
 </UserControl>

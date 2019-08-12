@@ -8,8 +8,8 @@
     xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     Title="Jaya.Ui"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Width="800"
+    Height="600"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
 
@@ -26,9 +26,14 @@
                 <ColumnDefinition Width="220" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="220" />
             </Grid.ColumnDefinitions>
             <v:NavigationView />
             <GridSplitter Grid.Column="1" Width="6" />
+            <GridSplitter Grid.Column="3" Width="6" />
+            <v:PreviewView Grid.Column="4" />
+            <v:DetailsView Grid.Column="4" />
         </Grid>
     </DockPanel>
 

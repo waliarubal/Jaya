@@ -32,7 +32,7 @@
                 <Setter Property="Width" Value="6" />
             </Style>
 
-            <Style Selector="Button">
+            <Style Selector="Button, ToggleButton">
                 <Setter Property="Margin" Value="1 0" />
                 <Setter Property="Padding" Value="2" />
                 <Setter Property="MinWidth" Value="21" />
@@ -41,15 +41,19 @@
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="BorderBrush" Value="Transparent" />
             </Style>
-            <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Style Selector="Button:pointerover /template/ ContentPresenter, ToggleButton:pointerover /template/ ContentPresenter">
                 <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
             </Style>
-            <Style Selector="Button:pressed  /template/ ContentPresenter">
+            <Style Selector="Button:pressed /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
                 <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
             </Style>
-            <Style Selector="Button:disabled">
+            <Style Selector="Button:disabled, ToggleButton:disabled">
                 <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+            </Style>
+            <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
             </Style>
 
             <Style Selector="Button &gt; Image">
@@ -122,6 +126,26 @@
         <StackPanel>
             <Border Classes="Thumb" />
 
+            <ToggleButton ToolTip.Tip="Navigation Pane">
+                <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
+            </ToggleButton>
+            <ToggleButton ToolTip.Tip="Preview Pane">
+                <Image Source="/Assets/Images/Preview-16.png" />
+            </ToggleButton>
+            <ToggleButton ToolTip.Tip="Details Pane">
+                <Image Source="/Assets/Images/Details-16.png" />
+            </ToggleButton>
+            <Border Classes="Separator" />
+            <ToggleButton ToolTip.Tip="Item Check Boxes">
+                <Image Source="/Assets/Images/Checklist-16.png" />
+            </ToggleButton>
+            <ToggleButton ToolTip.Tip="File Name Extensions">
+                <Image Source="/Assets/Images/Code-File-16.png" />
+            </ToggleButton>
+            <ToggleButton ToolTip.Tip="Hidden Items">
+                <Image Source="/Assets/Images/Hide-16.png" />
+            </ToggleButton>
+            <Border Classes="Separator" />
             <Button ToolTip.Tip="Plugins...">
                 <Image Source="/Assets/Images/Plugin-16.png" />
             </Button>

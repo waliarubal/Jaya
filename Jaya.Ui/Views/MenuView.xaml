@@ -85,15 +85,35 @@
         <MenuItem Header="_View">
             <MenuItem Header="Navigation Pane">
                 <MenuItem.Icon>
-                    <CheckBox BorderThickness="0" IsHitTestVisible="False" />
+                    <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Preview Pane" />
-            <MenuItem Header="Details Pane" />
+            <MenuItem Header="Preview Pane">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Preview-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Details Pane">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Details-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Item Check Boxes" />
-            <MenuItem Header="File Name Extensions" />
-            <MenuItem Header="Hidden Items" />
+            <MenuItem Header="Item Check Boxes">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Checklist-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="File Name Extensions">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Code-File-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Hidden Items">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Hide-16.png" />
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator />
             <MenuItem Header="Plugins...">
                 <MenuItem.Icon>
