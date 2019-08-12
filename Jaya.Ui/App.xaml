@@ -2,6 +2,7 @@
     x:Class="Jaya.Ui.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:local="clr-namespace:Jaya.Ui">
 
     <Application.Styles>

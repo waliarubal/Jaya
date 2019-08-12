@@ -22,12 +22,12 @@ namespace Jaya.Ui.Models
         protected T Get<T>([CallerMemberName]string propertyName = null)
         {
             if (string.IsNullOrEmpty(propertyName))
-                return default(T);
+                return default;
 
             if (_variables.ContainsKey(propertyName))
                 return (T)_variables[propertyName];
 
-            return default(T);
+            return default;
         }
 
         protected bool Set<T>(T value, [CallerMemberName]string propertyName = null, bool raiseNotification = true)

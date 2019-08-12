@@ -4,8 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     mc:Ignorable="d">
-    <WrapPanel Margin="6,4" KeyboardNavigation.TabNavigation="Continue">
+
+    <UserControl.DataContext>
+        <vm:ToolbarViewModel />
+    </UserControl.DataContext>
+
+    <WrapPanel
+        Margin="6,2"
+        IsVisible="{Binding ToolbarConfiguration.IsVisible, Mode=OneWay}"
+        KeyboardNavigation.TabNavigation="Continue">
         <WrapPanel.Resources>
             <VisualBrush
                 x:Key="ThumbBrush"
@@ -24,6 +33,7 @@
         <WrapPanel.Styles>
             <Style Selector="StackPanel">
                 <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Margin" Value="0 2" />
             </Style>
 
             <Style Selector="Border.Thumb">
@@ -70,7 +80,7 @@
             </Style>
         </WrapPanel.Styles>
 
-        <StackPanel>
+        <StackPanel IsVisible="{Binding ToolbarConfiguration.IsFileVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
             <Button ToolTip.Tip="Refresh">
@@ -92,7 +102,7 @@
             </Button>
         </StackPanel>
 
-        <StackPanel>
+        <StackPanel IsVisible="{Binding ToolbarConfiguration.IsEditVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
             <Button ToolTip.Tip="Cut">
@@ -123,7 +133,7 @@
             </Button>
         </StackPanel>
 
-        <StackPanel>
+        <StackPanel IsVisible="{Binding ToolbarConfiguration.IsViewVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
             <ToggleButton ToolTip.Tip="Navigation Pane">
@@ -151,7 +161,7 @@
             </Button>
         </StackPanel>
 
-        <StackPanel>
+        <StackPanel IsVisible="{Binding ToolbarConfiguration.IsHelpVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
             <Button ToolTip.Tip="View Help">

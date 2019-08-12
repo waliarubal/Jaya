@@ -3,9 +3,11 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     mc:Ignorable="d">
+
     <UserControl.DataContext>
         <vm:MenuViewModel />
     </UserControl.DataContext>
@@ -34,6 +36,11 @@
             <Style Selector="ToggleButton:checked /template/ ContentPresenter">
                 <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+            </Style>
+
+            <Style Selector="CheckBox">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="IsHitTestVisible" Value="False" />
             </Style>
         </Menu.Styles>
 
@@ -142,26 +149,45 @@
                     </Style>
                 </MenuItem.Styles>
 
-                <MenuItem Header="Show Toolbars" />
+                <MenuItem
+                    Command="{Binding ExecuteCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbars}"
+                    Header="Show Toolbars">
+                    <MenuItem.Icon>
+                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsVisible, Mode=OneWay}" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="File">
+                <MenuItem
+                    Command="{Binding ExecuteCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarFile}"
+                    Header="File">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding ToolbarsConfiguration.IsFileToolbarVisible, Mode=OneWay}" />
+                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsFileVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Edit">
+                <MenuItem
+                    Command="{Binding ExecuteCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarEdit}"
+                    Header="Edit">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding ToolbarsConfiguration.IsEditToolbarVisible, Mode=OneWay}" />
+                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsEditVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="View">
+                <MenuItem
+                    Command="{Binding ExecuteCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarView}"
+                    Header="View">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding ToolbarsConfiguration.IsViewToolbarVisible, Mode=OneWay}" />
+                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsViewVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Help">
+                <MenuItem
+                    Command="{Binding ExecuteCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarHelp}"
+                    Header="Help">
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding ToolbarsConfiguration.IsHelpToolbarVisible, Mode=OneWay}" />
+                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsHelpVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>

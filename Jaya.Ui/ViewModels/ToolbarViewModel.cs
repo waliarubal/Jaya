@@ -2,7 +2,7 @@
 
 namespace Jaya.Ui.ViewModels
 {
-    public class MenuViewModel : ViewModelBase
+    public class ToolbarViewModel
     {
         public ToolbarConfigModel ToolbarConfiguration => Shared.Instance.ToolbarConfiguration;
     }

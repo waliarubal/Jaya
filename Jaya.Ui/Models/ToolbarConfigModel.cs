@@ -1,32 +1,32 @@
 ﻿namespace Jaya.Ui.Models
 {
-    public class ToolbarsConfigurationModel: ModelBase
+    public class ToolbarConfigModel: ModelBase
     {
-        public bool IsToolbarTrayVisible
+        public bool IsVisible
         {
             get => Get<bool>();
             set => Set(value);
         }
 
-        public bool IsFileToolbarVisible
+        public bool IsFileVisible
         {
             get => Get<bool>();
             set => Set(value);
         }
 
-        public bool IsEditToolbarVisible
+        public bool IsEditVisible
         {
             get => Get<bool>();
             set => Set(value);
         }
 
-        public bool IsViewToolbarVisible
+        public bool IsViewVisible
         {
             get => Get<bool>();
             set => Set(value);
         }
 
-        public bool IsHelpToolbarVisible
+        public bool IsHelpVisible
         {
             get => Get<bool>();
             set => Set(value);
