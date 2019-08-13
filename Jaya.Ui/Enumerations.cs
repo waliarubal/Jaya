@@ -1,5 +1,12 @@
 ﻿namespace Jaya.Ui
 {
+    public enum FileSystemObjectType : byte
+    {
+        File,
+        Directory,
+        Drive
+    }
+
     public enum CommandType : byte
     {
         ToggleToolbars,

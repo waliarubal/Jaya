@@ -10,6 +10,18 @@
 
         public bool IsPreviewOrDetailsPaneVisible => IsPreviewPaneVisible || IsDetailsPaneVisible;
 
+        public float NavigationPaneWidth
+        {
+            get => Get<float>();
+            set => Set(value);
+        }
+
+        public float PreviewOrDetailsPanePaneWidth
+        {
+            get => Get<float>();
+            set => Set(value);
+        }
+
         public bool IsPreviewPaneVisible
         {
             get => Get<bool>();

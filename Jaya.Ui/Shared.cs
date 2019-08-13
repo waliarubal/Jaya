@@ -30,7 +30,9 @@ namespace Jaya.Ui
             {
                 IsNavigationPaneVisible = true,
                 IsDetailsPaneVisible = false,
-                IsPreviewPaneVisible = false
+                IsPreviewPaneVisible = false,
+                NavigationPaneWidth = 220,
+                PreviewOrDetailsPanePaneWidth = 220
             };
             ApplicationConfiguration = new ApplicationConfigModel();
         }
