@@ -8,5 +8,7 @@ namespace Jaya.Ui.ViewModels
 
         public PaneConfigModel PaneConfig => Shared.Instance.PaneConfiguration;
 
+        public ApplicationConfigModel ApplicationConfig => Shared.Instance.ApplicationConfiguration;
+
     }
 }

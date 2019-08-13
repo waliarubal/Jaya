@@ -129,36 +129,30 @@
         </MenuItem>
 
         <MenuItem Header="_View">
-            <MenuItem Command="{Binding SharedCommand}" Header="Navigation Pane">
-                <MenuItem.CommandParameter>
-                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                        <Binding Source="{x:Static local:CommandType.TogglePaneNavigation}" />
-                    </MultiBinding>
-                </MenuItem.CommandParameter>
+            <MenuItem
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.TogglePaneNavigation}"
+                Header="Navigation Pane">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}">
                         <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Command="{Binding SharedCommand}" Header="Preview Pane">
-                <MenuItem.CommandParameter>
-                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                        <Binding Source="{x:Static local:CommandType.TogglePanePreview}" />
-                    </MultiBinding>
-                </MenuItem.CommandParameter>
+            <MenuItem
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.TogglePanePreview}"
+                Header="Preview Pane">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}">
                         <Image Source="/Assets/Images/Preview-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Command="{Binding SharedCommand}" Header="Details Pane">
-                <MenuItem.CommandParameter>
-                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                        <Binding Source="{x:Static local:CommandType.TogglePaneDetails}" />
-                    </MultiBinding>
-                </MenuItem.CommandParameter>
+            <MenuItem
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.TogglePaneDetails}"
+                Header="Details Pane">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}">
                         <Image Source="/Assets/Images/Details-16.png" />
@@ -171,76 +165,75 @@
                         <Setter Property="IsThreeState" Value="False" />
                     </Style>
                 </MenuItem.Styles>
-                <MenuItem Command="{Binding SharedCommand}" Header="Show Toolbars">
-                    <MenuItem.CommandParameter>
-                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                            <Binding Source="{x:Static local:CommandType.ToggleToolbars}" />
-                        </MultiBinding>
-                    </MenuItem.CommandParameter>
+                <MenuItem
+                    Command="{Binding SimpleCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbars}"
+                    Header="Show Toolbars">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Command="{Binding SharedCommand}" Header="File">
-                    <MenuItem.CommandParameter>
-                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                            <Binding Source="{x:Static local:CommandType.ToggleToolbarFile}" />
-                        </MultiBinding>
-                    </MenuItem.CommandParameter>
+                <MenuItem
+                    Command="{Binding SimpleCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarFile}"
+                    Header="File">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsFileVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Command="{Binding SharedCommand}" Header="Edit">
-                    <MenuItem.CommandParameter>
-                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                            <Binding Source="{x:Static local:CommandType.ToggleToolbarEdit}" />
-                        </MultiBinding>
-                    </MenuItem.CommandParameter>
+                <MenuItem
+                    Command="{Binding SimpleCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarEdit}"
+                    Header="Edit">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsEditVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Command="{Binding SharedCommand}" Header="View">
-                    <MenuItem.CommandParameter>
-                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                            <Binding Source="{x:Static local:CommandType.ToggleToolbarView}" />
-                        </MultiBinding>
-                    </MenuItem.CommandParameter>
+                <MenuItem
+                    Command="{Binding SimpleCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarView}"
+                    Header="View">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsViewVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Command="{Binding SharedCommand}" Header="Help">
-                    <MenuItem.CommandParameter>
-                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                            <Binding Source="{x:Static local:CommandType.ToggleToolbarHelp}" />
-                        </MultiBinding>
-                    </MenuItem.CommandParameter>
+                <MenuItem
+                    Command="{Binding SimpleCommand}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarHelp}"
+                    Header="Help">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsHelpVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <Separator />
-            <MenuItem Header="Item Check Boxes">
+            <MenuItem
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.ToggleItemCheckBoxes}"
+                Header="Item Check Boxes">
                 <MenuItem.Icon>
-                    <ToggleButton>
+                    <ToggleButton IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}">
                         <Image Source="/Assets/Images/Checklist-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="File Name Extensions">
+            <MenuItem
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.ToggleFileNameExtensions}"
+                Header="File Name Extensions">
                 <MenuItem.Icon>
-                    <ToggleButton>
+                    <ToggleButton IsChecked="{Binding ApplicationConfig.IsFileNameExtensionVisible, Mode=OneWay}">
                         <Image Source="/Assets/Images/Code-File-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Hidden Items">
+            <MenuItem
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.ToggleHiddenItems}"
+                Header="Hidden Items">
                 <MenuItem.Icon>
-                    <ToggleButton>
+                    <ToggleButton IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}">
                         <Image Source="/Assets/Images/Hide-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>

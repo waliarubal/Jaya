@@ -7,5 +7,7 @@ namespace Jaya.Ui.ViewModels
         public ToolbarConfigModel ToolbarConfig => Shared.Instance.ToolbarConfiguration;
 
         public PaneConfigModel PaneConfig => Shared.Instance.PaneConfiguration;
+
+        public ApplicationConfigModel ApplicationConfig => Shared.Instance.ApplicationConfiguration;
     }
 }

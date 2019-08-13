@@ -32,6 +32,7 @@ namespace Jaya.Ui
                 IsDetailsPaneVisible = false,
                 IsPreviewPaneVisible = false
             };
+            ApplicationConfiguration = new ApplicationConfigModel();
         }
 
         #endregion
@@ -42,7 +43,7 @@ namespace Jaya.Ui
         {
             get
             {
-                lock(_syncRoot)
+                lock (_syncRoot)
                 {
                     if (_instance == null)
                         _instance = new Shared();
@@ -56,20 +57,26 @@ namespace Jaya.Ui
 
         public PaneConfigModel PaneConfiguration { get; }
 
+        public ApplicationConfigModel ApplicationConfiguration { get; }
+
         #endregion
 
-        public void SharedCommandAction(object parameter)
+        void CommandAction(CommandType type, object parameter)
         {
-            if (parameter == null)
-                throw new ArgumentNullException(nameof(parameter));
-
-            var parameters = parameter as List<object>;
-            if (parameters == null)
-                throw new ArgumentException("Failed to parse command parameters.", nameof(parameter));
-
-            var type = (CommandType)parameters[0];
             switch (type)
             {
+                case CommandType.ToggleItemCheckBoxes:
+                    ApplicationConfiguration.IsItemCheckBoxVisible = !ApplicationConfiguration.IsItemCheckBoxVisible;
+                    break;
+
+                case CommandType.ToggleFileNameExtensions:
+                    ApplicationConfiguration.IsFileNameExtensionVisible = !ApplicationConfiguration.IsFileNameExtensionVisible;
+                    break;
+
+                case CommandType.ToggleHiddenItems:
+                    ApplicationConfiguration.IsHiddenItemVisible = !ApplicationConfiguration.IsHiddenItemVisible;
+                    break;
+
                 case CommandType.ToggleToolbars:
                     ToolbarConfiguration.IsVisible = !ToolbarConfiguration.IsVisible;
                     break;
@@ -102,6 +109,23 @@ namespace Jaya.Ui
                     PaneConfiguration.IsDetailsPaneVisible = !PaneConfiguration.IsDetailsPaneVisible;
                     break;
             }
+        }
+
+        public void SimpleCommandAction(CommandType type)
+        {
+            CommandAction(type, null);
+        }
+
+        public void ParameterizedCommandAction(object parameter)
+        {
+            if (parameter == null)
+                throw new ArgumentNullException(nameof(parameter));
+
+            var parameters = parameter as List<object>;
+            if (parameters == null)
+                throw new ArgumentException("Failed to parse command parameters.", nameof(parameter));
+
+            CommandAction((CommandType)parameters[0], parameters[1]);
         }
     }
 }

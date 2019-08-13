@@ -9,6 +9,9 @@
         ToggleToolbarHelp,
         TogglePaneNavigation,
         TogglePanePreview,
-        TogglePaneDetails
+        TogglePaneDetails,
+        ToggleItemCheckBoxes,
+        ToggleFileNameExtensions,
+        ToggleHiddenItems
     }
 }

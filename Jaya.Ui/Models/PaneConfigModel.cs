@@ -20,8 +20,7 @@
                         IsDetailsPaneVisible = !value;
 
                 Set(value);
-                if (!value)
-                    RaisePropertyChanged(nameof(IsPreviewOrDetailsPaneVisible));
+                RaisePropertyChanged(nameof(IsPreviewOrDetailsPaneVisible));
             }
         }
 
@@ -35,8 +34,7 @@
                         IsPreviewPaneVisible = !value;
 
                 Set(value);
-                if (!value)
-                    RaisePropertyChanged(nameof(IsPreviewOrDetailsPaneVisible));
+                RaisePropertyChanged(nameof(IsPreviewOrDetailsPaneVisible));
             }
         }
     }

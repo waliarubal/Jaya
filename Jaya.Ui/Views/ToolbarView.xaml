@@ -138,48 +138,47 @@
 
         <StackPanel IsVisible="{Binding ToolbarConfig.IsViewVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
-
             <ToggleButton
-                Command="{Binding SharedCommand}"
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.TogglePaneNavigation}"
                 IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
                 ToolTip.Tip="Navigation Pane">
                 <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
-                <ToggleButton.CommandParameter>
-                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                        <Binding Source="{x:Static local:CommandType.TogglePaneNavigation}" />
-                    </MultiBinding>
-                </ToggleButton.CommandParameter>
             </ToggleButton>
             <ToggleButton
-                Command="{Binding SharedCommand}"
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.TogglePanePreview}"
                 IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}"
                 ToolTip.Tip="Preview Pane">
                 <Image Source="/Assets/Images/Preview-16.png" />
-                <ToggleButton.CommandParameter>
-                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                        <Binding Source="{x:Static local:CommandType.TogglePanePreview}" />
-                    </MultiBinding>
-                </ToggleButton.CommandParameter>
             </ToggleButton>
             <ToggleButton
-                Command="{Binding SharedCommand}"
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.TogglePaneDetails}"
                 IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}"
                 ToolTip.Tip="Details Pane">
                 <Image Source="/Assets/Images/Details-16.png" />
-                <ToggleButton.CommandParameter>
-                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
-                        <Binding Source="{x:Static local:CommandType.TogglePaneDetails}" />
-                    </MultiBinding>
-                </ToggleButton.CommandParameter>
             </ToggleButton>
             <Border Classes="Separator" />
-            <ToggleButton ToolTip.Tip="Item Check Boxes">
+            <ToggleButton
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.ToggleItemCheckBoxes}"
+                IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}"
+                ToolTip.Tip="Item Check Boxes">
                 <Image Source="/Assets/Images/Checklist-16.png" />
             </ToggleButton>
-            <ToggleButton ToolTip.Tip="File Name Extensions">
+            <ToggleButton
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.ToggleFileNameExtensions}"
+                IsChecked="{Binding ApplicationConfig.IsFileNameExtensionVisible, Mode=OneWay}"
+                ToolTip.Tip="File Name Extensions">
                 <Image Source="/Assets/Images/Code-File-16.png" />
             </ToggleButton>
-            <ToggleButton ToolTip.Tip="Hidden Items">
+            <ToggleButton
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.ToggleHiddenItems}"
+                IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}"
+                ToolTip.Tip="Hidden Items">
                 <Image Source="/Assets/Images/Hide-16.png" />
             </ToggleButton>
             <Border Classes="Separator" />
