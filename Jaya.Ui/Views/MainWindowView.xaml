@@ -18,7 +18,7 @@
 
     <DockPanel>
         <v:MenuView DockPanel.Dock="Top" />
-        <v:ToolbarView DockPanel.Dock="Top" />
+        <v:ToolbarView DockPanel.Dock="Top" IsVisible="{Binding ToolbarConfig.IsVisible, Mode=OneWay}" />
         <v:StatusbarView DockPanel.Dock="Bottom" />
         <Grid>
             <Grid.ColumnDefinitions>
@@ -28,11 +28,17 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="220" />
             </Grid.ColumnDefinitions>
-            <v:NavigationView />
-            <GridSplitter Grid.Column="1" Width="6" />
-            <GridSplitter Grid.Column="3" Width="6" />
-            <v:PreviewView Grid.Column="4" />
-            <v:DetailsView Grid.Column="4" />
+            <v:NavigationView IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}" />
+            <GridSplitter
+                Grid.Column="1"
+                Width="6"
+                IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}" />
+            <GridSplitter
+                Grid.Column="3"
+                Width="6"
+                IsVisible="{Binding PaneConfig.IsPreviewOrDetailsPaneVisible, Mode=OneWay}" />
+            <v:PreviewView Grid.Column="4" IsVisible="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}" />
+            <v:DetailsView Grid.Column="4" IsVisible="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}" />
         </Grid>
     </DockPanel>
 

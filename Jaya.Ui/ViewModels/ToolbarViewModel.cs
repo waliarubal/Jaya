@@ -2,8 +2,10 @@
 
 namespace Jaya.Ui.ViewModels
 {
-    public class ToolbarViewModel
+    public class ToolbarViewModel : ViewModelBase
     {
-        public ToolbarConfigModel ToolbarConfiguration => Shared.Instance.ToolbarConfiguration;
+        public ToolbarConfigModel ToolbarConfig => Shared.Instance.ToolbarConfiguration;
+
+        public PaneConfigModel PaneConfig => Shared.Instance.PaneConfiguration;
     }
 }

@@ -2,6 +2,7 @@
     x:Class="Jaya.Ui.Views.MenuView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,6 +14,10 @@
     </UserControl.DataContext>
 
     <Menu>
+        <Menu.Resources>
+            <c:MultiValueConverter x:Key="MultiValueConverter" />
+        </Menu.Resources>
+
         <Menu.Styles>
             <Style Selector="ToggleButton">
                 <Setter Property="Margin" Value="1 0" />
@@ -22,6 +27,7 @@
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="IsHitTestVisible" Value="False" />
             </Style>
             <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
                 <Setter Property="Background" Value="Transparent" />
@@ -73,6 +79,7 @@
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
+
         <MenuItem Header="_Edit">
             <MenuItem Header="Cut">
                 <MenuItem.Icon>
@@ -120,24 +127,40 @@
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
+
         <MenuItem Header="_View">
-            <MenuItem Header="Navigation Pane">
+            <MenuItem Command="{Binding SharedCommand}" Header="Navigation Pane">
+                <MenuItem.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                        <Binding Source="{x:Static local:CommandType.TogglePaneNavigation}" />
+                    </MultiBinding>
+                </MenuItem.CommandParameter>
                 <MenuItem.Icon>
-                    <ToggleButton>
+                    <ToggleButton IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}">
                         <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Preview Pane">
+            <MenuItem Command="{Binding SharedCommand}" Header="Preview Pane">
+                <MenuItem.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                        <Binding Source="{x:Static local:CommandType.TogglePanePreview}" />
+                    </MultiBinding>
+                </MenuItem.CommandParameter>
                 <MenuItem.Icon>
-                    <ToggleButton>
+                    <ToggleButton IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}">
                         <Image Source="/Assets/Images/Preview-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Details Pane">
+            <MenuItem Command="{Binding SharedCommand}" Header="Details Pane">
+                <MenuItem.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                        <Binding Source="{x:Static local:CommandType.TogglePaneDetails}" />
+                    </MultiBinding>
+                </MenuItem.CommandParameter>
                 <MenuItem.Icon>
-                    <ToggleButton>
+                    <ToggleButton IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}">
                         <Image Source="/Assets/Images/Details-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>
@@ -148,46 +171,55 @@
                         <Setter Property="IsThreeState" Value="False" />
                     </Style>
                 </MenuItem.Styles>
-
-                <MenuItem
-                    Command="{Binding ExecuteCommand}"
-                    CommandParameter="{x:Static local:CommandType.ToggleToolbars}"
-                    Header="Show Toolbars">
+                <MenuItem Command="{Binding SharedCommand}" Header="Show Toolbars">
+                    <MenuItem.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                            <Binding Source="{x:Static local:CommandType.ToggleToolbars}" />
+                        </MultiBinding>
+                    </MenuItem.CommandParameter>
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsVisible, Mode=OneWay}" />
+                        <CheckBox IsChecked="{Binding ToolbarConfig.IsVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem
-                    Command="{Binding ExecuteCommand}"
-                    CommandParameter="{x:Static local:CommandType.ToggleToolbarFile}"
-                    Header="File">
+                <MenuItem Command="{Binding SharedCommand}" Header="File">
+                    <MenuItem.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                            <Binding Source="{x:Static local:CommandType.ToggleToolbarFile}" />
+                        </MultiBinding>
+                    </MenuItem.CommandParameter>
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsFileVisible, Mode=OneWay}" />
+                        <CheckBox IsChecked="{Binding ToolbarConfig.IsFileVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem
-                    Command="{Binding ExecuteCommand}"
-                    CommandParameter="{x:Static local:CommandType.ToggleToolbarEdit}"
-                    Header="Edit">
+                <MenuItem Command="{Binding SharedCommand}" Header="Edit">
+                    <MenuItem.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                            <Binding Source="{x:Static local:CommandType.ToggleToolbarEdit}" />
+                        </MultiBinding>
+                    </MenuItem.CommandParameter>
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsEditVisible, Mode=OneWay}" />
+                        <CheckBox IsChecked="{Binding ToolbarConfig.IsEditVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem
-                    Command="{Binding ExecuteCommand}"
-                    CommandParameter="{x:Static local:CommandType.ToggleToolbarView}"
-                    Header="View">
+                <MenuItem Command="{Binding SharedCommand}" Header="View">
+                    <MenuItem.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                            <Binding Source="{x:Static local:CommandType.ToggleToolbarView}" />
+                        </MultiBinding>
+                    </MenuItem.CommandParameter>
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsViewVisible, Mode=OneWay}" />
+                        <CheckBox IsChecked="{Binding ToolbarConfig.IsViewVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem
-                    Command="{Binding ExecuteCommand}"
-                    CommandParameter="{x:Static local:CommandType.ToggleToolbarHelp}"
-                    Header="Help">
+                <MenuItem Command="{Binding SharedCommand}" Header="Help">
+                    <MenuItem.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                            <Binding Source="{x:Static local:CommandType.ToggleToolbarHelp}" />
+                        </MultiBinding>
+                    </MenuItem.CommandParameter>
                     <MenuItem.Icon>
-                        <CheckBox IsChecked="{Binding ToolbarConfiguration.IsHelpVisible, Mode=OneWay}" />
+                        <CheckBox IsChecked="{Binding ToolbarConfig.IsHelpVisible, Mode=OneWay}" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -220,6 +252,7 @@
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
+
         <MenuItem Header="_Help">
             <MenuItem Header="View Help">
                 <MenuItem.Icon>

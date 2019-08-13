@@ -7,5 +7,8 @@
         ToggleToolbarEdit,
         ToggleToolbarView,
         ToggleToolbarHelp,
+        TogglePaneNavigation,
+        TogglePanePreview,
+        TogglePaneDetails
     }
 }

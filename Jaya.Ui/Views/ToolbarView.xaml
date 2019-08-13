@@ -2,7 +2,9 @@
     x:Class="Jaya.Ui.Views.ToolbarView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     mc:Ignorable="d">
@@ -11,10 +13,11 @@
         <vm:ToolbarViewModel />
     </UserControl.DataContext>
 
-    <WrapPanel
-        Margin="6,2"
-        IsVisible="{Binding ToolbarConfiguration.IsVisible, Mode=OneWay}"
-        KeyboardNavigation.TabNavigation="Continue">
+    <UserControl.Resources>
+        <c:MultiValueConverter x:Key="MultiValueConverter" />
+    </UserControl.Resources>
+
+    <WrapPanel Margin="6,2" KeyboardNavigation.TabNavigation="Continue">
         <WrapPanel.Resources>
             <VisualBrush
                 x:Key="ThumbBrush"
@@ -80,7 +83,7 @@
             </Style>
         </WrapPanel.Styles>
 
-        <StackPanel IsVisible="{Binding ToolbarConfiguration.IsFileVisible, Mode=OneWay}">
+        <StackPanel IsVisible="{Binding ToolbarConfig.IsFileVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
             <Button ToolTip.Tip="Refresh">
@@ -102,7 +105,7 @@
             </Button>
         </StackPanel>
 
-        <StackPanel IsVisible="{Binding ToolbarConfiguration.IsEditVisible, Mode=OneWay}">
+        <StackPanel IsVisible="{Binding ToolbarConfig.IsEditVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
             <Button ToolTip.Tip="Cut">
@@ -133,17 +136,41 @@
             </Button>
         </StackPanel>
 
-        <StackPanel IsVisible="{Binding ToolbarConfiguration.IsViewVisible, Mode=OneWay}">
+        <StackPanel IsVisible="{Binding ToolbarConfig.IsViewVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
-            <ToggleButton ToolTip.Tip="Navigation Pane">
+            <ToggleButton
+                Command="{Binding SharedCommand}"
+                IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
+                ToolTip.Tip="Navigation Pane">
                 <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
+                <ToggleButton.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                        <Binding Source="{x:Static local:CommandType.TogglePaneNavigation}" />
+                    </MultiBinding>
+                </ToggleButton.CommandParameter>
             </ToggleButton>
-            <ToggleButton ToolTip.Tip="Preview Pane">
+            <ToggleButton
+                Command="{Binding SharedCommand}"
+                IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}"
+                ToolTip.Tip="Preview Pane">
                 <Image Source="/Assets/Images/Preview-16.png" />
+                <ToggleButton.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                        <Binding Source="{x:Static local:CommandType.TogglePanePreview}" />
+                    </MultiBinding>
+                </ToggleButton.CommandParameter>
             </ToggleButton>
-            <ToggleButton ToolTip.Tip="Details Pane">
+            <ToggleButton
+                Command="{Binding SharedCommand}"
+                IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}"
+                ToolTip.Tip="Details Pane">
                 <Image Source="/Assets/Images/Details-16.png" />
+                <ToggleButton.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                        <Binding Source="{x:Static local:CommandType.TogglePaneDetails}" />
+                    </MultiBinding>
+                </ToggleButton.CommandParameter>
             </ToggleButton>
             <Border Classes="Separator" />
             <ToggleButton ToolTip.Tip="Item Check Boxes">
@@ -161,7 +188,7 @@
             </Button>
         </StackPanel>
 
-        <StackPanel IsVisible="{Binding ToolbarConfiguration.IsHelpVisible, Mode=OneWay}">
+        <StackPanel IsVisible="{Binding ToolbarConfig.IsHelpVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
             <Button ToolTip.Tip="View Help">
