@@ -11,6 +11,9 @@
     Height="600"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
 
     <DockPanel>
         <v:MenuView DockPanel.Dock="Top" />

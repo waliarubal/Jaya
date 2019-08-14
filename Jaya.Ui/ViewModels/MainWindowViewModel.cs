@@ -5,15 +5,9 @@ namespace Jaya.Ui.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        readonly ConfigurationService _configService;
 
-        public MainWindowViewModel(ConfigurationService configService)
-        {
-            _configService = configService;
-        }
+        public ToolbarConfigModel ToolbarConfig => GetService<ConfigurationService>().ToolbarConfiguration;
 
-        public ToolbarConfigModel ToolbarConfig => _configService.ToolbarConfiguration;
-
-        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
+        public PaneConfigModel PaneConfig => GetService<ConfigurationService>().PaneConfiguration;
     }
 }
