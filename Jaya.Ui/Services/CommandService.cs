@@ -3,10 +3,14 @@ using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
-    [Service(typeof(ConfigurationService))]
-    class CommandService : ServiceBase
+    public class CommandService : IService
     {
-        ConfigurationService _configService;
+        readonly ConfigurationService _configService;
+
+        public CommandService(ConfigurationService configService)
+        {
+            _configService = configService;
+        }
 
         void CommandAction(CommandType type, object parameter)
         {
@@ -56,16 +60,6 @@ namespace Jaya.Ui.Services
                     _configService.PaneConfiguration.IsDetailsPaneVisible = !_configService.PaneConfiguration.IsDetailsPaneVisible;
                     break;
             }
-        }
-
-        public override void Start()
-        {
-            _configService = ServiceManager.Instance.Get<ConfigurationService>();
-        }
-
-        public override void Stop()
-        {
-            
         }
 
         public void SimpleCommandAction(CommandType type)

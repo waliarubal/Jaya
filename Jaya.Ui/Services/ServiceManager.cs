@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Jaya.Ui.Services
 {
-    sealed class ServiceManager : IDisposable
+    sealed class ServiceManager: IDisposable
     {
         static ServiceManager _instance;
-        static object _syncRoot;
-        readonly Dictionary<Type, ServiceBase> _services;
+        static readonly object _syncRoot;
+        IServiceScope _scope;
 
         static ServiceManager()
         {
@@ -17,7 +16,12 @@ namespace Jaya.Ui.Services
 
         private ServiceManager()
         {
-            _services = new Dictionary<Type, ServiceBase>();
+
+        }
+
+        ~ServiceManager()
+        {
+            Dispose();
         }
 
         #region properties
@@ -26,94 +30,48 @@ namespace Jaya.Ui.Services
         {
             get
             {
-                lock (_syncRoot)
+                lock(_syncRoot)
                 {
                     if (_instance == null)
                         _instance = new ServiceManager();
-
-                    return _instance;
                 }
+
+                return _instance;
             }
         }
-
-        public bool IsRunning { get; private set; }
 
         #endregion
 
-        public T Get<T>() where T : ServiceBase
+        IServiceScope RegisterServices()
         {
-            var service = Get(typeof(T));
-            return service as T;
+            var collection = new ServiceCollection();
+            collection.AddScoped<ConfigurationService>();
+            collection.AddScoped<CommandService>();
+
+            var container = collection.BuildServiceProvider();
+            var scopeFactory = container.GetRequiredService<IServiceScopeFactory>();
+            return scopeFactory.CreateScope();
         }
 
-        public ServiceBase Get(Type serviceType)
+        void UnregisterServices(IServiceScope scope)
         {
-            if (!IsRunning)
-                return null;
+            if (scope == null)
+                return;
 
-            ServiceBase service;
-            if (_services.ContainsKey(serviceType))
-                service = _services[serviceType];
-            else
-            {
-                service = Activator.CreateInstance(serviceType) as ServiceBase;
-                _services.Add(serviceType, service);
-            }
-
-            return service;
+            scope.Dispose();
         }
 
         public void Dispose()
         {
-            Stop();
+            UnregisterServices(_scope);
         }
 
-        public void Start()
+        public T GetService<T>()
         {
-            if (IsRunning)
-                return;
+            if (_scope == null)
+                _scope = RegisterServices();
 
-            Stop();
-
-            var name_space = GetType().Namespace;
-            var serviceBaseType = typeof(ServiceBase);
-            var serviceAttributeType = typeof(Service);
-
-            var types = Assembly.GetExecutingAssembly().GetTypes();
-            foreach (var type in types)
-            {
-                type.GetCustomAttribute(typeof(Service));
-                if (!type.Namespace.Equals(name_space) ||
-                    !type.IsClass ||
-                    type.IsAbstract ||
-                    !serviceBaseType.IsAssignableFrom(type) || 
-                    !type.IsDefined(serviceAttributeType))
-                    continue;
-
-                a type.GetCustomAttribute<Service>();
-
-                var service = Activator.CreateInstance(type) as ServiceBase;
-                if (_services.ContainsKey(type))
-                    continue;
-
-                _services.Add(type, service);
-                service.Start();
-            }
-
-            IsRunning = true;
+            return _scope.ServiceProvider.GetService<T>();
         }
-
-        public void Stop()
-        {
-            if (!IsRunning || _services.Count == 0)
-                return;
-
-            foreach (var service in _services.Values)
-                service.Stop();
-
-            _services.Clear();
-            IsRunning = false;
-        }
-
     }
 }

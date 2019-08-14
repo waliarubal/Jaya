@@ -10,9 +10,9 @@ namespace Jaya.Ui.ViewModels
         ReactiveCommand<CommandType, Unit> _simpleCommand;
         ReactiveCommand<object, Unit> _parameterizedCommand;
 
-        protected T GetService<T>() where T : ServiceBase
+        protected T GetService<T>()
         {
-            return ServiceManager.Instance.Get<T>();
+            return ServiceManager.Instance.GetService<T>();
         }
 
         public ReactiveCommand<CommandType, Unit> SimpleCommand

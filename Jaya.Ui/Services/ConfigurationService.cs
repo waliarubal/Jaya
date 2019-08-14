@@ -2,20 +2,9 @@
 
 namespace Jaya.Ui.Services
 {
-    [Service]
-    public class ConfigurationService : ServiceBase
+    public class ConfigurationService : IService
     {
-        #region properties
-
-        public ToolbarConfigModel ToolbarConfiguration { get; private set; }
-
-        public PaneConfigModel PaneConfiguration { get; private set; }
-
-        public ApplicationConfigModel ApplicationConfiguration { get; private set; }
-
-        #endregion
-
-        public override void Start()
+        public ConfigurationService()
         {
             ToolbarConfiguration = new ToolbarConfigModel
             {
@@ -36,10 +25,15 @@ namespace Jaya.Ui.Services
             ApplicationConfiguration = new ApplicationConfigModel();
         }
 
-        public override void Stop()
-        {
+        #region properties
 
-        }
+        public ToolbarConfigModel ToolbarConfiguration { get; private set; }
+
+        public PaneConfigModel PaneConfiguration { get; private set; }
+
+        public ApplicationConfigModel ApplicationConfiguration { get; private set; }
+
+        #endregion
 
     }
 }
