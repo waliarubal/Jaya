@@ -1,6 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Logging.Serilog;
+using Jaya.Ui.Services;
 using Jaya.Ui.Views;
+using System;
 
 namespace Jaya.Ui
 {
@@ -26,7 +28,17 @@ namespace Jaya.Ui
         // Application entry point. Avalonia is completely initialized.
         static void AppMain(Application app, string[] args)
         {
-            app.RunWithMainWindow<MainWindowView>();
+            ServiceManager.Instance.Start();
+
+            Application.Current.OnExit += App_OnExit;
+            Application.Current.RunWithMainWindow<MainWindowView>();
+        }
+
+        static void App_OnExit(object sender, EventArgs e)
+        {
+            Application.Current.OnExit -= App_OnExit;
+
+            ServiceManager.Instance.Stop();
         }
     }
 }
