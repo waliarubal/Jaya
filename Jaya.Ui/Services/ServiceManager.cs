@@ -3,7 +3,7 @@ using System;
 
 namespace Jaya.Ui.Services
 {
-    sealed class ServiceManager: IDisposable
+    sealed class ServiceManager : IDisposable
     {
         static ServiceManager _instance;
         static readonly object _syncRoot;
@@ -30,13 +30,24 @@ namespace Jaya.Ui.Services
         {
             get
             {
-                lock(_syncRoot)
+                lock (_syncRoot)
                 {
                     if (_instance == null)
                         _instance = new ServiceManager();
                 }
 
                 return _instance;
+            }
+        }
+
+        public IServiceProvider Provider
+        {
+            get
+            {
+                if (_scope == null)
+                    _scope = RegisterServices();
+
+                return _scope.ServiceProvider;
             }
         }
 
@@ -72,6 +83,11 @@ namespace Jaya.Ui.Services
                 _scope = RegisterServices();
 
             return _scope.ServiceProvider.GetService<T>();
+        }
+
+        public T CreateInstance<T>()
+        {
+            return ActivatorUtilities.CreateInstance<T>(Provider, typeof(T));
         }
     }
 }
