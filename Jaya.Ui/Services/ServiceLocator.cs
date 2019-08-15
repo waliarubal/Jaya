@@ -26,14 +26,14 @@ namespace Jaya.Ui.Services
 
         #region properties
 
-        public static Serviceocator Instance
+        public static ServiceLocator Instance
         {
             get
             {
                 lock (_syncRoot)
                 {
                     if (_instance == null)
-                        _instance = new Serviceocator();
+                        _instance = new ServiceLocator();
                 }
 
                 return _instance;
