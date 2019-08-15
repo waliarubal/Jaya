@@ -3,37 +3,37 @@ using System;
 
 namespace Jaya.Ui.Services
 {
-    sealed class ServiceManager : IDisposable
+    sealed class ServiceLocator : IDisposable
     {
-        static ServiceManager _instance;
+        static ServiceLocator _instance;
         static readonly object _syncRoot;
         IServiceScope _scope;
 
-        static ServiceManager()
+        static ServiceLocator()
         {
             _syncRoot = new object();
         }
 
-        private ServiceManager()
+        private ServiceLocator()
         {
 
         }
 
-        ~ServiceManager()
+        ~ServiceLocator()
         {
             Dispose();
         }
 
         #region properties
 
-        public static ServiceManager Instance
+        public static Serviceocator Instance
         {
             get
             {
                 lock (_syncRoot)
                 {
                     if (_instance == null)
-                        _instance = new ServiceManager();
+                        _instance = new Serviceocator();
                 }
 
                 return _instance;

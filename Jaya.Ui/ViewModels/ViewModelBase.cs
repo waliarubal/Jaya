@@ -12,7 +12,7 @@ namespace Jaya.Ui.ViewModels
 
         protected T GetService<T>()
         {
-            return ServiceManager.Instance.GetService<T>();
+            return ServiceLocator.Instance.GetService<T>();
         }
 
         public ReactiveCommand<CommandType, Unit> SimpleCommand
