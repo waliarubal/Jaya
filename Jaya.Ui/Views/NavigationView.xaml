@@ -3,6 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:m="clr-namespace:Jaya.Ui.Models;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="320"
@@ -14,11 +15,15 @@
     <UserControl.DataContext>
         <vm:NavigationViewModel />
     </UserControl.DataContext>
-    <TreeView BorderThickness="0" Items="{Binding Node.Children, Mode=OneTime}">
-        <TreeView.ItemTemplate>
-            <TreeDataTemplate ItemsSource="{Binding Children}">
-                <TextBlock Text="{Binding Label, Mode=OneWay}" />
+
+    <TreeView BorderThickness="0" Items="{Binding Providers}">
+        <TreeView.DataTemplates>
+            <TreeDataTemplate DataType="m:ProviderModel" ItemsSource="{Binding Directory.Directories}">
+                <TextBlock Text="{Binding Name}" />
             </TreeDataTemplate>
-        </TreeView.ItemTemplate>
+            <TreeDataTemplate DataType="m:DirectoryModel" ItemsSource="{Binding Directories}">
+                <TextBlock Text="{Binding Name}" />
+            </TreeDataTemplate>
+        </TreeView.DataTemplates>
     </TreeView>
 </UserControl>

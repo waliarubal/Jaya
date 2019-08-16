@@ -8,42 +8,31 @@ namespace Jaya.Ui.ViewModels
     {
         public NavigationViewModel()
         {
-            Services = new ObservableCollection<ProviderModel>();
+            Providers = new ObservableCollection<ProviderModel>();
+            Populate();
         }
 
         public PaneConfigModel PaneConfig => GetService<ConfigurationService>().PaneConfiguration;
 
-        public ObservableCollection<ProviderModel> Services { get; }
+        public ObservableCollection<ProviderModel> Providers { get; }
 
-        //void PopulateNode(TreeNodeModel node)
-        //{
-        //    node.Children.Clear();
+        void Populate(object node = null)
+        {
 
-        //    if (node.Service == null)
-        //    {
-        //        foreach (var service in GetService<ProviderService>().Services)
-        //        {
-        //            var provider = new ProviderModel(service.Name, service);
-
-        //            var childNode = new TreeNodeModel(service);
-        //            childNode.Data = provider;
-        //            childNode.Label = provider.Name;
-        //            //childNode.AddDummyNode();
-        //            node.Children.Add(childNode);
-        //        }
-        //    }
-        //    else if (node.Data is ProviderModel)
-        //    {
-        //        var provider = node.Data as ProviderModel;
-        //        provider.GetDirectory();
-
-        //        foreach(var directory in provider.Directory.Directories)
-        //        {
-        //            var childNode = new TreeNodeModel(node.Service);
-        //            childNode.Label = directory.Name;
-        //            node.Children.Add(childNode);
-        //        }
-        //    }
-        //}
+            if (node == null)
+            {
+                foreach (var service in GetService<ProviderService>().Services)
+                {
+                    var provider = new ProviderModel(service.Name, service);
+                    provider.GetDirectory();
+                    Providers.Add(provider);
+                }
+            }
+            else if (node is ProviderModel)
+            {
+                var provider = node as ProviderModel;
+                provider.GetDirectory();
+            }
+        }
     }
 }
