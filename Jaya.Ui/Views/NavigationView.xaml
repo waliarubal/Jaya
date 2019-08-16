@@ -4,11 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="320"
     d:DesignWidth="220"
     BorderBrush="{DynamicResource ThemeControlMidBrush}"
     BorderThickness="1"
+    IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
     mc:Ignorable="d">
-    <TreeView BorderThickness="0">
+    <UserControl.DataContext>
+        <vm:NavigationViewModel />
+    </UserControl.DataContext>
+    <TreeView BorderThickness="0" Items="{Binding Node.Children, Mode=OneTime}">
+        <TreeView.ItemTemplate>
+            <TreeDataTemplate ItemsSource="{Binding Children}">
+                <TextBlock Text="{Binding Label, Mode=OneWay}" />
+            </TreeDataTemplate>
+        </TreeView.ItemTemplate>
     </TreeView>
 </UserControl>

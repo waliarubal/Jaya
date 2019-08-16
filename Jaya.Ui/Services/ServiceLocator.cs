@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Jaya.Ui.Services.Providers;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Jaya.Ui.Services
@@ -58,6 +59,8 @@ namespace Jaya.Ui.Services
             var collection = new ServiceCollection();
             collection.AddScoped<ConfigurationService>();
             collection.AddScoped<CommandService>();
+            collection.AddScoped<ProviderService>();
+            collection.AddScoped<FileSystemService>();
 
             var container = collection.BuildServiceProvider();
             var scopeFactory = container.GetRequiredService<IServiceScopeFactory>();

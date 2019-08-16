@@ -2,7 +2,7 @@
 
 namespace Jaya.Ui.Models
 {
-    public class FileSystemObjectModel : ModelBase
+    public abstract class FileSystemObjectModel : ModelBase
     {
         public string Id
         {
@@ -31,7 +31,7 @@ namespace Jaya.Ui.Models
         public FileSystemObjectType Type
         {
             get => Get<FileSystemObjectType>();
-            set => Set(value);
+            protected set => Set(value);
         }
 
         public DateTime? Created

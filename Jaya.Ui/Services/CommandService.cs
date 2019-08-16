@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
-    public class CommandService : IService
+    public class CommandService
     {
         readonly ConfigurationService _configService;
 

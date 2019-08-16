@@ -2,7 +2,7 @@
 
 namespace Jaya.Ui.Services
 {
-    public class ConfigurationService : IService
+    public class ConfigurationService
     {
         public ConfigurationService()
         {

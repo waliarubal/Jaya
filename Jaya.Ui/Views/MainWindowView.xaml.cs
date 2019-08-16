@@ -6,6 +6,7 @@ namespace Jaya.Ui.Views
 {
     public class MainWindowView : Window
     {
+
         public MainWindowView()
         {
             InitializeComponent();

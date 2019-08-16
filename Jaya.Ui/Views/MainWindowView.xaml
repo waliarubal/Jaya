@@ -27,7 +27,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="220" />
             </Grid.ColumnDefinitions>
-            <v:NavigationView IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}" />
+            <v:NavigationView />
             <GridSplitter
                 Grid.Column="1"
                 Width="6"
