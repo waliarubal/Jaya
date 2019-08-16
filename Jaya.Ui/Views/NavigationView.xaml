@@ -17,6 +17,11 @@
     </UserControl.DataContext>
 
     <TreeView BorderThickness="0" Items="{Binding Providers}">
+        <TreeView.Styles>
+            <Style Selector="TreeViewItem">
+                <Setter Property="IsExpanded" Value="false" />
+            </Style>
+        </TreeView.Styles>
         <TreeView.DataTemplates>
             <TreeDataTemplate DataType="m:ProviderModel" ItemsSource="{Binding Directory.Directories}">
                 <TextBlock Text="{Binding Name}" />
