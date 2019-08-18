@@ -17,6 +17,11 @@
     </UserControl.DataContext>
 
     <TreeView BorderThickness="0" Items="{Binding Node.Children}">
+        <TreeView.Styles>
+            <Style Selector="TreeViewItem">
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded}" />
+            </Style>
+        </TreeView.Styles>
         <TreeView.ItemTemplate>
             <TreeDataTemplate ItemsSource="{Binding Children}">
                 <TextBlock Text="{Binding Label}" />
