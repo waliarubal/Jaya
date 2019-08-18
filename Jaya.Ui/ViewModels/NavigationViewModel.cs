@@ -1,6 +1,5 @@
 ﻿using Jaya.Ui.Models;
 using Jaya.Ui.Services;
-using System.Collections.ObjectModel;
 
 namespace Jaya.Ui.ViewModels
 {
@@ -8,31 +7,12 @@ namespace Jaya.Ui.ViewModels
     {
         public NavigationViewModel()
         {
-            Providers = new ObservableCollection<ProviderModel>();
-            Populate();
+            Node = new TreeNodeModel();
         }
 
         public PaneConfigModel PaneConfig => GetService<ConfigurationService>().PaneConfiguration;
 
-        public ObservableCollection<ProviderModel> Providers { get; }
+        public TreeNodeModel Node { get; }
 
-        void Populate(object node = null)
-        {
-
-            if (node == null)
-            {
-                foreach (var service in GetService<ProviderService>().Services)
-                {
-                    var provider = new ProviderModel(service.Name, service);
-                    provider.GetDirectory();
-                    Providers.Add(provider);
-                }
-            }
-            else if (node is ProviderModel)
-            {
-                var provider = node as ProviderModel;
-                provider.GetDirectory();
-            }
-        }
     }
 }

@@ -13,10 +13,6 @@
         <vm:ToolbarViewModel />
     </UserControl.DataContext>
 
-    <UserControl.Resources>
-        <c:MultiValueConverter x:Key="MultiValueConverter" />
-    </UserControl.Resources>
-
     <WrapPanel Margin="6,2" KeyboardNavigation.TabNavigation="Continue">
         <WrapPanel.Resources>
             <VisualBrush
