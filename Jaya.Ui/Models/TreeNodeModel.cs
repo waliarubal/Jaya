@@ -53,12 +53,6 @@ namespace Jaya.Ui.Models
             private set => Set(value);
         }
 
-        public string Path
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
         public bool IsExpanded
         {
             get => Get<bool>();
@@ -85,6 +79,12 @@ namespace Jaya.Ui.Models
         public bool IsHavingDummyChild => _dummyChild != null;
 
         public ObservableCollection<TreeNodeModel> Children { get; }
+
+        public FileSystemObjectModel FileSystemObject
+        {
+            get => Get<FileSystemObjectModel>();
+            set => Set(value);
+        }
 
         #endregion
 

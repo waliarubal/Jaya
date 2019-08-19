@@ -64,12 +64,12 @@ namespace Jaya.Ui.ViewModels
             }
             else
             {
-                var currentDirectory = node.Service.GetDirectory(node.Provider, node.Path);
+                var currentDirectory = node.Service.GetDirectory(node.Provider, node.FileSystemObject?.Path);
                 foreach (var directory in currentDirectory.Directories)
                 {
                     var child = new TreeNodeModel(node.Service, node.Provider);
                     child.Label = directory.Name;
-                    child.Path = directory.Path;
+                    child.FileSystemObject = directory;
                     child.NodeExpanded += OnNodeExpanded;
                     node.Children.Add(child);
 
