@@ -9,6 +9,7 @@
 
     public enum CommandType : byte
     {
+        Exit,
         ToggleToolbars,
         ToggleToolbarFile,
         ToggleToolbarEdit,

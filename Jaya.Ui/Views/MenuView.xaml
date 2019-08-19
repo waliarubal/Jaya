@@ -68,7 +68,10 @@
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem Header="Exit">
+            <MenuItem
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.Exit}"
+                Header="Exit">
                 <MenuItem.Icon>
                     <Image Source="/Assets/Images/Shutdown-16.png" />
                 </MenuItem.Icon>

@@ -93,7 +93,10 @@
                 <Image Source="/Assets/Images/Open-Document-16.png" />
             </Button>
             <Border Classes="Separator" />
-            <Button ToolTip.Tip="Exit">
+            <Button
+                Command="{Binding SimpleCommand}"
+                CommandParameter="{x:Static local:CommandType.Exit}"
+                ToolTip.Tip="Exit">
                 <Image Source="/Assets/Images/Shutdown-16.png" />
             </Button>
         </StackPanel>

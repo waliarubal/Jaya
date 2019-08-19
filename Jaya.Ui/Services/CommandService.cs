@@ -16,6 +16,10 @@ namespace Jaya.Ui.Services
         {
             switch (type)
             {
+                case CommandType.Exit:
+                    App.Current.Exit();
+                    break;
+
                 case CommandType.ToggleItemCheckBoxes:
                     _configService.ApplicationConfiguration.IsItemCheckBoxVisible = !_configService.ApplicationConfiguration.IsItemCheckBoxVisible;
                     break;

@@ -75,19 +75,19 @@
             <ColumnDefinition Width="220" />
         </Grid.ColumnDefinitions>
 
-        <Button Margin="0,0,8,0">
+        <Button Margin="0,0,8,0" ToolTip.Tip="Back">
             <Image Source="/Assets/Images/Left-16.png" />
         </Button>
         <Button Grid.Column="1">
-            <Image Source="/Assets/Images/Right-16.png" />
+            <Image Source="/Assets/Images/Right-16.png" ToolTip.Tip="Forward" />
         </Button>
-        <Button Grid.Column="2">
+        <Button Grid.Column="2" ToolTip.Tip="Recent Locations">
             <Image
                 Width="12"
                 Height="12"
                 Source="/Assets/Images/Expand-16.png" />
         </Button>
-        <Button Grid.Column="3">
+        <Button Grid.Column="3" ToolTip.Tip="Up">
             <Image Source="/Assets/Images/Up-16.png" />
         </Button>
         <Border Grid.Column="4" Classes="AddressBox">
