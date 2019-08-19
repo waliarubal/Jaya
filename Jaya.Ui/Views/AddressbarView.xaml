@@ -54,15 +54,11 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
             </Style>
 
-            <Style Selector="Border.AddressBox &gt; DockPanel &gt; TextBox">
+            <Style Selector="Border.AddressBox &gt; DockPanel &gt; TextBox, Border.AddressBox &gt; DockPanel &gt; ComboBox">
                 <Setter Property="Height" Value="18" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Margin" Value="4 0" />
                 <Setter Property="Padding" Value="0" />
-                <Setter Property="AcceptsReturn" Value="False" />
-                <Setter Property="TextWrapping" Value="NoWrap" />
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
             </Style>
         </Grid.Styles>
         <Grid.ColumnDefinitions>
@@ -95,7 +91,7 @@
                 <Button DockPanel.Dock="Right" ToolTip.Tip="Refresh">
                     <Image Source="/Assets/Images/Refresh-16.png" />
                 </Button>
-                <TextBox />
+                <ComboBox Margin="4,0,0,0" />
             </DockPanel>
         </Border>
         <GridSplitter
@@ -114,7 +110,12 @@
                     ToolTip.Tip="Clear Search">
                     <Image Source="/Assets/Images/Delete-16.png" />
                 </Button>
-                <TextBox Text="{Binding SearchQuery, Mode=TwoWay}" Watermark="Search" />
+                <TextBox
+                    Margin="4,0"
+                    AcceptsReturn="False"
+                    Text="{Binding SearchQuery, Mode=TwoWay}"
+                    TextWrapping="NoWrap"
+                    Watermark="Search" />
             </DockPanel>
         </Border>
     </Grid>
