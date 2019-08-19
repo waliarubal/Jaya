@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid Margin="6,2">
+    <Grid Margin="6,4">
         <Grid.Styles>
             <Style Selector="Button, ToggleButton">
                 <Setter Property="Margin" Value="1 0" />
@@ -37,10 +37,28 @@
                 <Setter Property="Height" Value="16" />
             </Style>
 
-            <Style Selector="TextBox">
-                <Setter Property="Height" Value="24" />
-                <Setter Property="TextWrapping" Value="NoWrap" />
+            <Style Selector="Border.AddressBox">
+                <Setter Property="Height" Value="22" />
+                <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+                <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+            </Style>
+            <Style Selector="Border.AddressBox:pointerover">
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+            </Style>
+            <Style Selector="Border.AddressBox:focus">
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+            </Style>
+
+            <Style Selector="Border.AddressBox &gt; DockPanel &gt; TextBox">
+                <Setter Property="Height" Value="18" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Margin" Value="4 0" />
+                <Setter Property="Padding" Value="0" />
                 <Setter Property="AcceptsReturn" Value="False" />
+                <Setter Property="TextWrapping" Value="NoWrap" />
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
             </Style>
         </Grid.Styles>
         <Grid.ColumnDefinitions>
@@ -68,11 +86,25 @@
         <Button Grid.Column="3">
             <Image Source="/Assets/Images/Up-16.png" />
         </Button>
-        <TextBox Grid.Column="4" />
+        <Border Grid.Column="4" Classes="AddressBox">
+            <DockPanel>
+                <Button DockPanel.Dock="Right" ToolTip.Tip="Refresh">
+                    <Image Source="/Assets/Images/Refresh-16.png" />
+                </Button>
+                <TextBox />
+            </DockPanel>
+        </Border>
         <GridSplitter
             Grid.Column="5"
             Width="6"
             Opacity="0" />
-        <TextBox Grid.Column="6" />
+        <Border Grid.Column="6" Classes="AddressBox">
+            <DockPanel>
+                <Button DockPanel.Dock="Right">
+                    <Image Source="/Assets/Images/Search-16.png" />
+                </Button>
+                <TextBox Watermark="Search" />
+            </DockPanel>
+        </Border>
     </Grid>
 </UserControl>

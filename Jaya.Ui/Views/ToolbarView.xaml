@@ -82,9 +82,6 @@
         <StackPanel IsVisible="{Binding ToolbarConfig.IsFileVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
-            <Button ToolTip.Tip="Refresh">
-                <Image Source="/Assets/Images/Refresh-16.png" />
-            </Button>
             <Button ToolTip.Tip="New Folder">
                 <Image Source="/Assets/Images/Add-Folder-16.png" />
             </Button>

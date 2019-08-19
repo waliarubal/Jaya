@@ -51,11 +51,6 @@
         </Menu.Styles>
 
         <MenuItem Header="_File">
-            <MenuItem Header="Refresh">
-                <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Refresh-16.png" />
-                </MenuItem.Icon>
-            </MenuItem>
             <MenuItem Header="New Folder">
                 <MenuItem.Icon>
                     <Image Source="/Assets/Images/Add-Folder-16.png" />
