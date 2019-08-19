@@ -2,6 +2,7 @@
     x:Class="Jaya.Ui.Views.NavigationView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:m="clr-namespace:Jaya.Ui.Models;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,16 +16,26 @@
     <UserControl.DataContext>
         <vm:NavigationViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <c:BitmapValueConverter x:Key="BitmapValueConverter" />
+    </UserControl.Resources>
 
     <TreeView BorderThickness="0" Items="{Binding Node.Children}">
         <TreeView.Styles>
             <Style Selector="TreeViewItem">
-                <Setter Property="IsExpanded" Value="{Binding IsExpanded}" />
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=OneWayToSource}" />
             </Style>
         </TreeView.Styles>
         <TreeView.ItemTemplate>
             <TreeDataTemplate ItemsSource="{Binding Children}">
-                <TextBlock Text="{Binding Label}" />
+                <StackPanel Orientation="Horizontal">
+                    <Image
+                        Width="16"
+                        Height="16"
+                        Margin="0,0,4,0"
+                        Source="{Binding IconImagePath, Converter={StaticResource BitmapValueConverter}}" />
+                    <TextBlock Text="{Binding Label}" />
+                </StackPanel>
             </TreeDataTemplate>
         </TreeView.ItemTemplate>
     </TreeView>

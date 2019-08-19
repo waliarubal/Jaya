@@ -4,8 +4,10 @@ using System;
 
 namespace Jaya.Ui.ViewModels
 {
-    public class NavigationViewModel: ViewModelBase
+    public class NavigationViewModel : ViewModelBase
     {
+        const string PATH_ROOT = "/";
+
         public NavigationViewModel()
         {
             Node = new TreeNodeModel(null, null);
@@ -22,10 +24,7 @@ namespace Jaya.Ui.ViewModels
                 return;
 
             if (node.IsHavingDummyChild)
-            {
-                node.RemoveDummyChild();
                 Populate(node);
-            }
         }
 
         void Populate(TreeNodeModel node)
@@ -33,12 +32,14 @@ namespace Jaya.Ui.ViewModels
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
 
-            if (node.IsExpanded)
+            if (node.IsExpanded && !node.IsHavingDummyChild)
                 return;
+
+            node.RemoveDummyChild();
 
             if (node.Service == null)
             {
-                foreach(var service in GetService<ProviderService>().Services)
+                foreach (var service in GetService<ProviderService>().Services)
                 {
                     var child = new TreeNodeModel(service, null);
                     child.Label = service.Name;
@@ -54,10 +55,15 @@ namespace Jaya.Ui.ViewModels
 
                 var child = new TreeNodeModel(node.Service, provider);
                 child.Label = provider.Name;
+                child.Path = PATH_ROOT;
                 child.NodeExpanded += OnNodeExpanded;
                 node.Children.Add(child);
 
                 child.AddDummyChild();
+            }
+            else if (node.Path != null)
+            {
+                
             }
         }
     }
