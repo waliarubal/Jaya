@@ -16,6 +16,12 @@ namespace Jaya.Ui.ViewModels
 
         public TreeNodeModel Node { get; }
 
+        public TreeNodeModel SelectedNode
+        {
+            get => Get<TreeNodeModel>();
+            set => Set(value);
+        }
+
         void OnNodeExpanded(TreeNodeModel node, bool isExpaded)
         {
             if (!isExpaded)

@@ -20,7 +20,11 @@
         <c:BitmapValueConverter x:Key="BitmapValueConverter" />
     </UserControl.Resources>
 
-    <TreeView BorderThickness="0" Items="{Binding Node.Children}">
+    <TreeView
+        BorderThickness="0"
+        Items="{Binding Node.Children}"
+        SelectedItem="{Binding SelectedNode, Mode=OneWayToSource}"
+        SelectionMode="Single">
         <TreeView.Styles>
             <Style Selector="TreeViewItem">
                 <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=OneWayToSource}" />

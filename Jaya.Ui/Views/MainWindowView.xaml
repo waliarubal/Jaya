@@ -18,6 +18,7 @@
     <DockPanel>
         <v:MenuView DockPanel.Dock="Top" />
         <v:ToolbarView DockPanel.Dock="Top" IsVisible="{Binding ToolbarConfig.IsVisible, Mode=OneWay}" />
+        <v:AddressbarView DockPanel.Dock="Top" />
         <v:StatusbarView DockPanel.Dock="Bottom" />
         <Grid>
             <Grid.ColumnDefinitions>
