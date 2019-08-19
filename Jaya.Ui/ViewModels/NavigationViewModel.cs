@@ -43,6 +43,7 @@ namespace Jaya.Ui.ViewModels
                 {
                     var child = new TreeNodeModel(service, null);
                     child.Label = service.Name;
+                    child.ImagePath = service.ImagePath;
                     child.NodeExpanded += OnNodeExpanded;
                     node.Children.Add(child);
 
@@ -55,15 +56,25 @@ namespace Jaya.Ui.ViewModels
 
                 var child = new TreeNodeModel(node.Service, provider);
                 child.Label = provider.Name;
-                child.Path = PATH_ROOT;
+                child.ImagePath = provider.ImagePath;
                 child.NodeExpanded += OnNodeExpanded;
                 node.Children.Add(child);
 
                 child.AddDummyChild();
             }
-            else if (node.Path != null)
+            else
             {
-                
+                var currentDirectory = node.Service.GetDirectory(node.Provider, node.Path);
+                foreach (var directory in currentDirectory.Directories)
+                {
+                    var child = new TreeNodeModel(node.Service, node.Provider);
+                    child.Label = directory.Name;
+                    child.Path = directory.Path;
+                    child.NodeExpanded += OnNodeExpanded;
+                    node.Children.Add(child);
+
+                    child.AddDummyChild();
+                }
             }
         }
     }

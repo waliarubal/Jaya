@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace Jaya.Ui.Models
 {
-    public class TreeNodeModel: ModelBase
+    public class TreeNodeModel : ModelBase
     {
         const string COLLAPSED_IMAGE = "avares://Jaya.Ui/Assets/Images/Folder-16.png";
         const string EXPANDED_IMAGE = "avares://Jaya.Ui/Assets/Images/Folder-Open-16.png";
@@ -36,7 +36,15 @@ namespace Jaya.Ui.Models
         public string ImagePath
         {
             get => Get<string>();
-            set => Set(value);
+            set
+            {
+                Set(value);
+
+                if (string.IsNullOrEmpty(value))
+                    IconImagePath = COLLAPSED_IMAGE;
+                else
+                    IconImagePath = ImagePath;
+            }
         }
 
         public string IconImagePath
@@ -85,7 +93,7 @@ namespace Jaya.Ui.Models
             if (IsHavingDummyChild)
                 return;
 
-            var child = _dummyChild =  new TreeNodeModel(Service, Provider);
+            var child = _dummyChild = new TreeNodeModel(Service, Provider);
             child.Label = "Loading...";
             Children.Add(child);
         }

@@ -10,6 +10,7 @@ namespace Jaya.Ui.Services.Providers
         public FileSystemService()
         {
             Name = "File System";
+            ImagePath = "avares://Jaya.Ui/Assets/Images/Computer-16.png";
         }
 
         #region properties
@@ -20,11 +21,14 @@ namespace Jaya.Ui.Services.Providers
 
         public string Name { get; }
 
+        public string ImagePath { get; }
+
         #endregion
 
         public ProviderModel GetDefaultProvider()
         {
             var provider = new ProviderModel(Environment.MachineName, this);
+            provider.ImagePath = "avares://Jaya.Ui/Assets/Images/Client-16.png";
             return provider;
         }
 

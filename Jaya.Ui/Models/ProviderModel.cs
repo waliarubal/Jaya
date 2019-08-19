@@ -24,6 +24,12 @@ namespace Jaya.Ui.Models
             private set => Set(value);
         }
 
+        public string ImagePath
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
+
         public IProviderService Service
         {
             get => Get<IProviderService>();

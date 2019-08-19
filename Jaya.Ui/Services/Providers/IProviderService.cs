@@ -8,6 +8,8 @@ namespace Jaya.Ui.Services.Providers
 
         string Name { get;  }
 
+        string ImagePath { get; }
+
         DirectoryModel GetDirectory(ProviderModel provider, string path = null);
 
         ProviderModel GetDefaultProvider();
