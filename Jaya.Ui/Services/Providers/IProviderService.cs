@@ -9,5 +9,7 @@ namespace Jaya.Ui.Services.Providers
         string Name { get;  }
 
         DirectoryModel GetDirectory(ProviderModel provider, string path = null);
+
+        ProviderModel GetDefaultProvider();
     }
 }

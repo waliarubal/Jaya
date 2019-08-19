@@ -1,4 +1,5 @@
 ﻿using Jaya.Ui.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -8,7 +9,7 @@ namespace Jaya.Ui.Services.Providers
     {
         public FileSystemService()
         {
-            Name = "Computer";
+            Name = "File System";
         }
 
         #region properties
@@ -20,6 +21,12 @@ namespace Jaya.Ui.Services.Providers
         public string Name { get; }
 
         #endregion
+
+        public ProviderModel GetDefaultProvider()
+        {
+            var provider = new ProviderModel(Environment.MachineName, this);
+            return provider;
+        }
 
         public DirectoryModel GetDirectory(ProviderModel provider, string path = null)
         {
