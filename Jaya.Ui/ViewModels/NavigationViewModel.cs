@@ -6,8 +6,6 @@ namespace Jaya.Ui.ViewModels
 {
     public class NavigationViewModel : ViewModelBase
     {
-        const string PATH_ROOT = "/";
-
         public NavigationViewModel()
         {
             Node = new TreeNodeModel(null, null);
