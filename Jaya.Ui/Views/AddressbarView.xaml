@@ -50,7 +50,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width=".40*" />
+            <ColumnDefinition Width="220" />
         </Grid.ColumnDefinitions>
 
         <Button Margin="0,0,8,0">
