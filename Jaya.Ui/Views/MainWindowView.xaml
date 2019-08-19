@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="260" />
             </Grid.ColumnDefinitions>
             <v:NavigationView />
             <GridSplitter

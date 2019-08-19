@@ -4,8 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:AddressbarViewModel />
+    </UserControl.DataContext>
     <Grid Margin="6,4">
         <Grid.Styles>
             <Style Selector="Button, ToggleButton">
@@ -100,10 +104,17 @@
             Opacity="0" />
         <Border Grid.Column="6" Classes="AddressBox">
             <DockPanel>
-                <Button DockPanel.Dock="Right">
-                    <Image Source="/Assets/Images/Search-16.png" />
+                <Image
+                    DockPanel.Dock="Right"
+                    IsVisible="{Binding IsSearchQueryEmpty, Mode=OneWay}"
+                    Source="/Assets/Images/Search-16.png" />
+                <Button
+                    DockPanel.Dock="Right"
+                    IsVisible="{Binding !IsSearchQueryEmpty, Mode=OneWay}"
+                    ToolTip.Tip="Clear Search">
+                    <Image Source="/Assets/Images/Delete-16.png" />
                 </Button>
-                <TextBox Watermark="Search" />
+                <TextBox Text="{Binding SearchQuery, Mode=TwoWay}" Watermark="Search" />
             </DockPanel>
         </Border>
     </Grid>
