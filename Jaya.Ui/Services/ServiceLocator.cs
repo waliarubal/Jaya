@@ -88,6 +88,11 @@ namespace Jaya.Ui.Services
             return _scope.ServiceProvider.GetService<T>();
         }
 
+        public object CreateInstance(Type type)
+        {
+            return ActivatorUtilities.CreateInstance(Provider, type);
+        }
+
         public T CreateInstance<T>()
         {
             return ActivatorUtilities.CreateInstance<T>(Provider, typeof(T));
