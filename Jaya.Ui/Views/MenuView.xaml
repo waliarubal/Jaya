@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    DataContext="{Binding MenuViewModel, Source={DynamicResource ViewModelLocator}, Mode=OneTime}"
+    DataContext="{Binding MenuViewModel, Source={StaticResource ViewModelLocator}, Mode=OneTime}"
     mc:Ignorable="d">
     <Menu>
         <Menu.Resources>

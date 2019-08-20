@@ -10,7 +10,7 @@
     d:DesignWidth="220"
     BorderBrush="{DynamicResource ThemeControlMidBrush}"
     BorderThickness="1"
-    DataContext="{Binding NavigationViewModel, Source={DynamicResource ViewModelLocator}, Mode=OneTime}"
+    DataContext="{Binding NavigationViewModel, Source={StaticResource ViewModelLocator}, Mode=OneTime}"
     IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
     mc:Ignorable="d">
     <UserControl.Resources>
