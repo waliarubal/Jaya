@@ -5,6 +5,13 @@ namespace Jaya.Ui.ViewModels
 {
     public class PreviewViewModel : ViewModelBase
     {
-        public PaneConfigModel PaneConfig => GetService<ConfigurationService>().PaneConfiguration;
+        readonly ConfigurationService _configService;
+
+        public PreviewViewModel()
+        {
+            _configService = GetService<ConfigurationService>();
+        }
+
+        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
     }
 }

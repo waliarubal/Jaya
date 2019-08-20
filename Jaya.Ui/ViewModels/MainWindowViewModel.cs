@@ -7,9 +7,9 @@ namespace Jaya.Ui.ViewModels
     {
         readonly ConfigurationService _configService;
 
-        public MainWindowViewModel(ConfigurationService configService)
+        public MainWindowViewModel()
         {
-            _configService = configService;
+            _configService = GetService<ConfigurationService>();
         }
 
         public ToolbarConfigModel ToolbarConfig => _configService.ToolbarConfiguration;

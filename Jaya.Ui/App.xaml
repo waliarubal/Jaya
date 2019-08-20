@@ -2,11 +2,7 @@
     x:Class="Jaya.Ui.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Jaya.Ui"
-    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui">
-    <Application.Resources>
-        <vm:ViewModelLocator x:Key="ViewModelLocator" />
-    </Application.Resources>
+    xmlns:local="clr-namespace:Jaya.Ui">
     <Application.Styles>
         <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />

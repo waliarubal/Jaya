@@ -5,10 +5,17 @@ namespace Jaya.Ui.ViewModels
 {
     public class ToolbarViewModel : ViewModelBase
     {
-        public ToolbarConfigModel ToolbarConfig => GetService<ConfigurationService>().ToolbarConfiguration;
+        readonly ConfigurationService _configService;
 
-        public PaneConfigModel PaneConfig => GetService<ConfigurationService>().PaneConfiguration;
+        public ToolbarViewModel()
+        {
+            _configService = GetService<ConfigurationService>();
+        }
 
-        public ApplicationConfigModel ApplicationConfig => GetService<ConfigurationService>().ApplicationConfiguration;
+        public ToolbarConfigModel ToolbarConfig => _configService.ToolbarConfiguration;
+
+        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
+
+        public ApplicationConfigModel ApplicationConfig => _configService.ApplicationConfiguration;
     }
 }

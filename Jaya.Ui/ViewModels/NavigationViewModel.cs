@@ -8,9 +8,9 @@ namespace Jaya.Ui.ViewModels
     {
         readonly ConfigurationService _configService;
 
-        public NavigationViewModel(ConfigurationService configService)
+        public NavigationViewModel()
         {
-            _configService = configService;
+            _configService = GetService<ConfigurationService>();
             Node = new TreeNodeModel(null, null);
             Populate(Node);
         }
