@@ -1,12 +1,11 @@
 ﻿using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Runtime.CompilerServices;
 
 namespace Jaya.Ui.ViewModels
 {
-    public class ViewModelLocator : DynamicObject
+    public sealed class ViewModelLocator
     {
         readonly Dictionary<string, ViewModelBase> _viewModels;
         readonly string _namespaceFormat;
@@ -36,10 +35,10 @@ namespace Jaya.Ui.ViewModels
             return viewModel;
         }
 
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
-        {
-            result = GetViewModel(binder.Name);
-            return result != null;
-        }
+        public ViewModelBase MainWindowViewModel => GetViewModel();
+
+        public ViewModelBase MenuViewModel => GetViewModel();
+
+        public ViewModelBase NavigationViewModel => GetViewModel();
     }
 }

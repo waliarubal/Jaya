@@ -4,7 +4,7 @@ using System;
 
 namespace Jaya.Ui.Services
 {
-    sealed class ServiceLocator : IDisposable
+    public sealed class ServiceLocator : IDisposable
     {
         static ServiceLocator _instance;
         static readonly object _syncRoot;

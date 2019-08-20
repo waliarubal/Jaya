@@ -6,16 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:m="clr-namespace:Jaya.Ui.Models;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="320"
     d:DesignWidth="220"
     BorderBrush="{DynamicResource ThemeControlMidBrush}"
     BorderThickness="1"
+    DataContext="{Binding NavigationViewModel, Source={DynamicResource ViewModelLocator}, Mode=OneTime}"
     IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <vm:NavigationViewModel />
-    </UserControl.DataContext>
     <UserControl.Resources>
         <c:BitmapValueConverter x:Key="BitmapValueConverter" />
     </UserControl.Resources>

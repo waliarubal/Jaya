@@ -6,6 +6,7 @@ namespace Jaya.Ui.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         readonly ConfigurationService _configService;
+
         public MainWindowViewModel(ConfigurationService configService)
         {
             _configService = configService;

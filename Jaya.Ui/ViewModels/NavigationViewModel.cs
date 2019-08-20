@@ -6,13 +6,16 @@ namespace Jaya.Ui.ViewModels
 {
     public class NavigationViewModel : ViewModelBase
     {
-        public NavigationViewModel()
+        readonly ConfigurationService _configService;
+
+        public NavigationViewModel(ConfigurationService configService)
         {
+            _configService = configService;
             Node = new TreeNodeModel(null, null);
             Populate(Node);
         }
 
-        public PaneConfigModel PaneConfig => GetService<ConfigurationService>().PaneConfiguration;
+        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
 
         public TreeNodeModel Node { get; }
 
