@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia;
+using System;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
@@ -17,7 +18,7 @@ namespace Jaya.Ui.Services
             switch (type)
             {
                 case CommandType.Exit:
-                    App.Current.Exit();
+                    Application.Current.Exit();
                     break;
 
                 case CommandType.ToggleItemCheckBoxes:
