@@ -60,6 +60,7 @@ namespace Jaya.Ui.Services.Providers
             model.Created = info.CreationTime;
             model.Modified = info.LastWriteTime;
             model.Accessed = info.LastAccessTime;
+            model.IsHidden = info.Attributes.HasFlag(FileAttributes.Hidden);
 
             model.Files = new List<FileModel>();
             foreach (var fileInfo in info.GetFiles())
@@ -70,6 +71,7 @@ namespace Jaya.Ui.Services.Providers
                 file.Created = fileInfo.CreationTime;
                 file.Modified = fileInfo.LastWriteTime;
                 file.Accessed = fileInfo.LastAccessTime;
+                file.IsHidden = fileInfo.Attributes.HasFlag(FileAttributes.Hidden);
                 model.Files.Add(file);
             }
 
@@ -82,6 +84,7 @@ namespace Jaya.Ui.Services.Providers
                 directory.Created = directoryInfo.CreationTime;
                 directory.Modified = directoryInfo.LastWriteTime;
                 directory.Accessed = directoryInfo.LastAccessTime;
+                directory.IsHidden = directoryInfo.Attributes.HasFlag(FileAttributes.Hidden);
                 model.Directories.Add(directory);
             }
 

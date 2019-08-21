@@ -9,7 +9,6 @@
     d:DesignWidth="220"
     BorderBrush="{DynamicResource ThemeControlMidBrush}"
     BorderThickness="1"
-    IsVisible="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:PreviewViewModel />

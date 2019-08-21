@@ -52,6 +52,12 @@ namespace Jaya.Ui.Models
             set => Set(value);
         }
 
+        public bool IsHidden
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         public override string ToString()
         {
             return Name;

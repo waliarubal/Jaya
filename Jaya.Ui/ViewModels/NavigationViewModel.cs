@@ -17,6 +17,8 @@ namespace Jaya.Ui.ViewModels
 
         public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
 
+        public ApplicationConfigModel ApplicationConfig => _configService.ApplicationConfiguration;
+
         public TreeNodeModel Node { get; }
 
         public TreeNodeModel SelectedNode
