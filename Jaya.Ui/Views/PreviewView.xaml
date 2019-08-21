@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="320"
-    d:DesignWidth="220"
+    d:DesignWidth="260"
     BorderBrush="{DynamicResource ThemeControlMidBrush}"
     BorderThickness="1"
     mc:Ignorable="d">
