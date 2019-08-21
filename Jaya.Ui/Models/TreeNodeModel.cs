@@ -1,5 +1,7 @@
-﻿using Jaya.Ui.Services.Providers;
+﻿using Jaya.Ui.Services;
+using Jaya.Ui.Services.Providers;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Jaya.Ui.Models
 {
@@ -8,7 +10,8 @@ namespace Jaya.Ui.Models
         const string COLLAPSED_IMAGE = "avares://Jaya.Ui/Assets/Images/Folder-16.png";
         const string EXPANDED_IMAGE = "avares://Jaya.Ui/Assets/Images/Folder-Open-16.png";
 
-        private TreeNodeModel _dummyChild;
+        TreeNodeModel _dummyChild;
+        readonly ConfigurationService _configService;
 
         public delegate void TreeNodeExpanded(TreeNodeModel node, bool isExpaded);
         public event TreeNodeExpanded NodeExpanded;
@@ -19,6 +22,18 @@ namespace Jaya.Ui.Models
             Provider = provider;
             IconImagePath = COLLAPSED_IMAGE;
             Children = new ObservableCollection<TreeNodeModel>();
+
+            if (Service != null && Provider != null)
+            {
+                _configService = ServiceLocator.Instance.GetService<ConfigurationService>();
+                _configService.ApplicationConfiguration.PropertyChanged += OnApplicationConfigChanged;
+            }
+        }
+
+        ~TreeNodeModel()
+        {
+            if (_configService != null)
+                _configService.ApplicationConfiguration.PropertyChanged -= OnApplicationConfigChanged;
         }
 
         #region properties
@@ -84,6 +99,17 @@ namespace Jaya.Ui.Models
         {
             get => Get<FileSystemObjectModel>();
             set => Set(value);
+        }
+
+        private void OnApplicationConfigChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case nameof(ConfigurationService.ApplicationConfiguration.IsHiddenItemVisible):
+                    if (FileSystemObject != null)
+                        FileSystemObject.RaisePropertyChanged(nameof(FileSystemObject.IsHidden));
+                    break;
+            }
         }
 
         #endregion

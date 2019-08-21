@@ -68,7 +68,7 @@ namespace Jaya.Ui.Models
             return true;
         }
 
-        protected void RaisePropertyChanged([CallerMemberName]string propertyName = null)
+        public void RaisePropertyChanged([CallerMemberName]string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler == null)
