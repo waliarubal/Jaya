@@ -21,13 +21,16 @@
         <v:StatusbarView DockPanel.Dock="Bottom" />
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="260" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <v:NavigationView IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}" />
+            <v:NavigationView
+                Grid.Column="0"
+                Width="{Binding $parent[Grid].Grid.ColumnDefinitions[0].Bounds.Width, Mode=OneWay}"
+                IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}" />
             <GridSplitter
                 Grid.Column="1"
                 Width="6"
@@ -36,8 +39,15 @@
                 Grid.Column="3"
                 Width="6"
                 IsVisible="{Binding PaneConfig.IsPreviewOrDetailsPaneVisible, Mode=OneWay}" />
-            <v:PreviewView Grid.Column="4" IsVisible="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}" />
-            <v:DetailsView Grid.Column="4" IsVisible="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}" />
+            <v:ExplorerView Grid.Column="2" />
+            <v:PreviewView
+                Grid.Column="4"
+                Width="{Binding $parent[Grid].Grid.ColumnDefinitions[4].Bounds.Width, Mode=OneWay}"
+                IsVisible="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}" />
+            <v:DetailsView
+                Grid.Column="4"
+                Width="{Binding $parent[Grid].Grid.ColumnDefinitions[4].Bounds.Width, Mode=OneWay}"
+                IsVisible="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}" />
         </Grid>
     </DockPanel>
 
