@@ -7,8 +7,10 @@
     d:DesignHeight="480"
     d:DesignWidth="640"
     mc:Ignorable="d">
-    <TextBlock
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Text="This folder is empty." />
+    <Grid>
+        <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="This folder is empty." />
+    </Grid>
 </UserControl>
