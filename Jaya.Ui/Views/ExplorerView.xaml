@@ -4,13 +4,30 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="480"
     d:DesignWidth="640"
     mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:ExplorerViewModel />
+    </UserControl.DataContext>
     <Grid>
+        <ItemsControl Items="{Binding Directory.Children, Mode=OneWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name, Mode=OneWay}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         <TextBlock
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
+            IsVisible="{Binding !Directory.Children.Count, Mode=OneWay}"
             Text="This folder is empty." />
     </Grid>
 </UserControl>

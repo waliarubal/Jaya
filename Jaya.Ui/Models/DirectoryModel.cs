@@ -12,13 +12,35 @@ namespace Jaya.Ui.Models
         public IList<DirectoryModel> Directories
         {
             get => Get<IList<DirectoryModel>>();
-            set => Set(value);
+            set
+            {
+                Set(value);
+                RaisePropertyChanged(nameof(Children));
+            }
         }
 
         public IList<FileModel> Files
         {
             get => Get<IList<FileModel>>();
-            set => Set(value);
+            set
+            {
+                Set(value);
+                RaisePropertyChanged(nameof(Children));
+            }
+        }
+
+        public IEnumerable<FileSystemObjectModel> Children
+        {
+            get
+            {
+                var children = new List<FileSystemObjectModel>();
+                if (Directories != null)
+                    children.AddRange(Directories);
+                if(Files != null)
+                    children.AddRange(Files);
+
+                return children;
+            }
         }
     }
 }
