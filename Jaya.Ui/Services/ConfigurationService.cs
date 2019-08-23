@@ -16,11 +16,11 @@ namespace Jaya.Ui.Services
             };
             PaneConfiguration = new PaneConfigModel
             {
+                NavigationPaneWidthPx = 220,
+                PreviewOrDetailsPanePaneWidthPx = 240,
                 IsNavigationPaneVisible = true,
                 IsDetailsPaneVisible = false,
-                IsPreviewPaneVisible = false,
-                NavigationPaneWidth = 220,
-                PreviewOrDetailsPanePaneWidth = 220
+                IsPreviewPaneVisible = false
             };
             ApplicationConfiguration = new ApplicationConfigModel();
         }

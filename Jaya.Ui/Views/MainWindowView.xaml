@@ -21,11 +21,11 @@
         <v:StatusbarView DockPanel.Dock="Bottom" />
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="{Binding PaneConfig.NavigationPaneWidth, Mode=OneWay}" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="{Binding PaneConfig.PreviewOrDetailsPanePaneWidth, Mode=OneWay}" />
             </Grid.ColumnDefinitions>
             <v:NavigationView
                 Grid.Column="0"
