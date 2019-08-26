@@ -14,13 +14,10 @@ namespace Jaya.Ui.ViewModels
 
         protected ViewModelBase()
         {
-            CommandService = GetService<CommandService>();
-            EventAggregator = CommandService.EventAggregator;
+            EventAggregator = GetService<CommandService>().EventAggregator;
         }
 
         #region properties
-
-        protected CommandService CommandService { get; }
 
         protected EventAggregator EventAggregator { get; }
 
