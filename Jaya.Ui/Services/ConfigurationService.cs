@@ -51,7 +51,7 @@ namespace Jaya.Ui.Services
 
         #endregion
 
-        void CommandAction(CommandType type, object parameter)
+        void SimpleCommandAction(CommandType type)
         {
             switch (type)
             {
@@ -105,14 +105,9 @@ namespace Jaya.Ui.Services
             }
         }
 
-        void SimpleCommandAction(CommandType type)
-        {
-            CommandAction(type, null);
-        }
-
         void ParameterizedCommandAction(KeyValuePair<CommandType, object> parameter)
         {
-            CommandAction(parameter.Key, parameter.Value);
+            
         }
 
     }
