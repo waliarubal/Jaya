@@ -4,11 +4,11 @@ namespace Jaya.Ui.ViewModels
 {
     public class ExplorerViewModel: ViewModelBase
     {
-        readonly Subscription<DirectoryModel> _onDirectoryChanged;
+        readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
 
         public ExplorerViewModel()
         {
-            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryModel>(DirectoryChanged);
+            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
         }
 
         ~ExplorerViewModel()
@@ -22,8 +22,9 @@ namespace Jaya.Ui.ViewModels
             private set => Set(value);
         }
 
-        void DirectoryChanged(DirectoryModel directory)
+        void DirectoryChanged(DirectoryChangedEventArgs args)
         {
+            var directory = args.Service.GetDirectory(args.Provider, args.Directory.Path);
             Directory = directory;
         }
     }

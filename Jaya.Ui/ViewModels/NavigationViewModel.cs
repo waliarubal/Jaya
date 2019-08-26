@@ -7,12 +7,12 @@ namespace Jaya.Ui.ViewModels
     public class NavigationViewModel : ViewModelBase
     {
         readonly ConfigurationService _configService;
-        readonly Subscription<DirectoryModel> _onDirectoryChanged;
+        readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
 
         public NavigationViewModel()
         {
             _configService = GetService<ConfigurationService>();
-            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryModel>(OnDirectoryChanged);
+            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(OnDirectoryChanged);
 
             Node = new TreeNodeModel(null, null);
             Populate(Node);
@@ -40,11 +40,15 @@ namespace Jaya.Ui.ViewModels
                     return;
 
                 if (value.FileSystemObject != null)
-                    EventAggregator.Publish(value.FileSystemObject as DirectoryModel);
+                {
+                    var args = new DirectoryChangedEventArgs(value.Service, value.Provider, value.FileSystemObject as DirectoryModel);
+                    EventAggregator.Publish(args);
+                }
+                    
             }
         }
 
-        void OnDirectoryChanged(DirectoryModel directory)
+        void OnDirectoryChanged(DirectoryChangedEventArgs args)
         {
             
         }
