@@ -5,7 +5,6 @@
         public CommandService()
         {
             EventAggregator = new EventAggregator();
-
         }
 
         public EventAggregator EventAggregator { get; }

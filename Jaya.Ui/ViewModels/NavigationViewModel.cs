@@ -7,13 +7,20 @@ namespace Jaya.Ui.ViewModels
     public class NavigationViewModel : ViewModelBase
     {
         readonly ConfigurationService _configService;
+        readonly Subscription<DirectoryModel> _onDirectoryChanged;
 
         public NavigationViewModel()
         {
             _configService = GetService<ConfigurationService>();
+            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryModel>(OnDirectoryChanged);
 
             Node = new TreeNodeModel(null, null);
             Populate(Node);
+        }
+
+        ~NavigationViewModel()
+        {
+            EventAggregator.UnSubscribe(_onDirectoryChanged);
         }
 
         public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
@@ -29,9 +36,17 @@ namespace Jaya.Ui.ViewModels
             {
                 Set(value);
 
-                if (value != null && value.FileSystemObject != null)
+                if (value == null)
+                    return;
+
+                if (value.FileSystemObject != null)
                     EventAggregator.Publish(value.FileSystemObject as DirectoryModel);
             }
+        }
+
+        void OnDirectoryChanged(DirectoryModel directory)
+        {
+            
         }
 
         void OnNodeExpanded(TreeNodeModel node, bool isExpaded)
