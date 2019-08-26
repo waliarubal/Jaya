@@ -1,10 +1,16 @@
-﻿using Jaya.Ui.Models;
+﻿using Avalonia;
+using Jaya.Ui.Models;
+using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
     public class ConfigurationService
     {
-        public ConfigurationService()
+        readonly Subscription<CommandType> _onSimpleCommand;
+        readonly Subscription<KeyValuePair<CommandType, object>> _onParameterizedCommand;
+        readonly CommandService _commandService;
+
+        public ConfigurationService(CommandService commandService)
         {
             ToolbarConfiguration = new ToolbarConfigModel
             {
@@ -23,6 +29,16 @@ namespace Jaya.Ui.Services
                 IsPreviewPaneVisible = false
             };
             ApplicationConfiguration = new ApplicationConfigModel();
+
+            _commandService = commandService;
+            _onSimpleCommand = commandService.EventAggregator.Subscribe<CommandType>(SimpleCommandAction);
+            _onParameterizedCommand = commandService.EventAggregator.Subscribe<KeyValuePair<CommandType, object>>(ParameterizedCommandAction);
+        }
+
+        ~ConfigurationService()
+        {
+            _commandService.EventAggregator.UnSubscribe(_onSimpleCommand);
+            _commandService.EventAggregator.UnSubscribe(_onParameterizedCommand);
         }
 
         #region properties
@@ -34,6 +50,70 @@ namespace Jaya.Ui.Services
         public ApplicationConfigModel ApplicationConfiguration { get; private set; }
 
         #endregion
+
+        void CommandAction(CommandType type, object parameter)
+        {
+            switch (type)
+            {
+                case CommandType.Exit:
+                    Application.Current.Exit();
+                    break;
+
+                case CommandType.ToggleItemCheckBoxes:
+                    ApplicationConfiguration.IsItemCheckBoxVisible = !ApplicationConfiguration.IsItemCheckBoxVisible;
+                    break;
+
+                case CommandType.ToggleFileNameExtensions:
+                    ApplicationConfiguration.IsFileNameExtensionVisible = !ApplicationConfiguration.IsFileNameExtensionVisible;
+                    break;
+
+                case CommandType.ToggleHiddenItems:
+                    ApplicationConfiguration.IsHiddenItemVisible = !ApplicationConfiguration.IsHiddenItemVisible;
+                    break;
+
+                case CommandType.ToggleToolbars:
+                    ToolbarConfiguration.IsVisible = !ToolbarConfiguration.IsVisible;
+                    break;
+
+                case CommandType.ToggleToolbarFile:
+                    ToolbarConfiguration.IsFileVisible = !ToolbarConfiguration.IsFileVisible;
+                    break;
+
+                case CommandType.ToggleToolbarEdit:
+                    ToolbarConfiguration.IsEditVisible = !ToolbarConfiguration.IsEditVisible;
+                    break;
+
+                case CommandType.ToggleToolbarView:
+                    ToolbarConfiguration.IsViewVisible = !ToolbarConfiguration.IsViewVisible;
+                    break;
+
+                case CommandType.ToggleToolbarHelp:
+                    ToolbarConfiguration.IsHelpVisible = !ToolbarConfiguration.IsHelpVisible;
+                    break;
+
+                case CommandType.TogglePaneNavigation:
+                    PaneConfiguration.IsNavigationPaneVisible = !PaneConfiguration.IsNavigationPaneVisible;
+                    break;
+
+                case CommandType.TogglePanePreview:
+                    PaneConfiguration.IsPreviewPaneVisible = !PaneConfiguration.IsPreviewPaneVisible;
+                    break;
+
+                case CommandType.TogglePaneDetails:
+                    PaneConfiguration.IsDetailsPaneVisible = !PaneConfiguration.IsDetailsPaneVisible;
+                    break;
+            }
+        }
+
+        void SimpleCommandAction(CommandType type)
+        {
+            CommandAction(type, null);
+        }
+
+        void ParameterizedCommandAction(KeyValuePair<CommandType, object> parameter)
+        {
+            CommandAction(parameter.Key, parameter.Value);
+        }
 
     }
 }

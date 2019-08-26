@@ -11,6 +11,7 @@ namespace Jaya.Ui.ViewModels
         public NavigationViewModel()
         {
             _configService = GetService<ConfigurationService>();
+
             Node = new TreeNodeModel(null, null);
             Populate(Node);
         }
@@ -24,7 +25,13 @@ namespace Jaya.Ui.ViewModels
         public TreeNodeModel SelectedNode
         {
             get => Get<TreeNodeModel>();
-            set => Set(value);
+            set
+            {
+                Set(value);
+
+                if (value != null && value.FileSystemObject != null)
+                    EventAggregator.Publish(value.FileSystemObject as DirectoryModel);
+            }
         }
 
         void OnNodeExpanded(TreeNodeModel node, bool isExpaded)

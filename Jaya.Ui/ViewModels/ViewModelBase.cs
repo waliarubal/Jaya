@@ -1,6 +1,8 @@
 ﻿using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using ReactiveUI;
+using System;
+using System.Collections.Generic;
 using System.Reactive;
 
 namespace Jaya.Ui.ViewModels
@@ -10,17 +12,24 @@ namespace Jaya.Ui.ViewModels
         ReactiveCommand<CommandType, Unit> _simpleCommand;
         ReactiveCommand<object, Unit> _parameterizedCommand;
 
-        protected T GetService<T>()
+        protected ViewModelBase()
         {
-            return ServiceLocator.Instance.GetService<T>();
+            CommandService = GetService<CommandService>();
+            EventAggregator = CommandService.EventAggregator;
         }
+
+        #region properties
+
+        protected CommandService CommandService { get; }
+
+        protected EventAggregator EventAggregator { get; }
 
         public ReactiveCommand<CommandType, Unit> SimpleCommand
         {
             get
             {
                 if (_simpleCommand == null)
-                    _simpleCommand = ReactiveCommand.Create<CommandType>(GetService<CommandService>().SimpleCommandAction);
+                    _simpleCommand = ReactiveCommand.Create<CommandType>(SimpleCommandAction);
 
                 return _simpleCommand;
             }
@@ -31,10 +40,35 @@ namespace Jaya.Ui.ViewModels
             get
             {
                 if (_parameterizedCommand == null)
-                    _parameterizedCommand = ReactiveCommand.Create<object>(GetService<CommandService>().ParameterizedCommandAction);
+                    _parameterizedCommand = ReactiveCommand.Create<object>(ParameterizedCommandAction);
 
                 return _parameterizedCommand;
             }
+        }
+
+        #endregion
+
+        protected T GetService<T>()
+        {
+            return ServiceLocator.Instance.GetService<T>();
+        }
+
+        void SimpleCommandAction(CommandType type)
+        {
+            EventAggregator.Publish(type);
+        }
+
+        void ParameterizedCommandAction(object parameter)
+        {
+            if (parameter == null)
+                throw new ArgumentNullException(nameof(parameter));
+
+            var parameters = parameter as List<object>;
+            if (parameters == null)
+                throw new ArgumentException("Failed to parse command parameters.", nameof(parameter));
+
+            var param = new KeyValuePair<CommandType, object>((CommandType)parameters[0], parameters[1]);
+            EventAggregator.Publish(param);
         }
     }
 }
