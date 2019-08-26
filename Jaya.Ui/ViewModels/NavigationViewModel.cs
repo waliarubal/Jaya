@@ -44,7 +44,6 @@ namespace Jaya.Ui.ViewModels
                     var args = new DirectoryChangedEventArgs(value.Service, value.Provider, value.FileSystemObject as DirectoryModel);
                     EventAggregator.Publish(args);
                 }
-                    
             }
         }
 

@@ -20,7 +20,14 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name, Mode=OneWay}" />
+                    <!--<TextBlock Text="{Binding Name, Mode=OneWay}" />-->
+                    <StackPanel Orientation="Vertical">
+                        <Image
+                            Width="48"
+                            Height="48"
+                            Source="/Assets/Images/Folder-Open-48.png" />
+                        <TextBlock Text="{Binding Name, Mode=OneWay}" />
+                    </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
