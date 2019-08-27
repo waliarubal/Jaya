@@ -14,33 +14,15 @@ namespace Jaya.Ui.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-
-            Uri uri;
-            var iconSize = 16;
-
-            var param = parameter as string;
-            if (param != null)
-            {
-                if (!int.TryParse(param, out iconSize))
-                {
-                    uri = new Uri(string.Format("avares://Jaya.Ui/Assets/Images/{0}", param), UriKind.RelativeOrAbsolute);
-                    return new Bitmap(assets.Open(uri));
-                }
-            }
-
             var fso = value as FileSystemObjectModel;
             if (fso == null)
-            {
-                uri = new Uri(string.Format("avares://Jaya.Ui/Assets/Images/{0}", param), UriKind.RelativeOrAbsolute);
-                return new Bitmap(assets.Open(uri));
-            }
+                return null;
 
+            var iconSize = 48;
             if (parameter != null)
                 iconSize = int.Parse(parameter as string);
 
-
-
+            Uri uri;
             switch (fso.Type)
             {
                 case FileSystemObjectType.Drive:
@@ -59,6 +41,7 @@ namespace Jaya.Ui.Converters
                     return null;
             }
 
+            var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
             return new Bitmap(assets.Open(uri));
         }
 

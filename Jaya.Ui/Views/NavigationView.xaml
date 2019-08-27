@@ -17,7 +17,6 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <c:BitmapValueConverter x:Key="BitmapValueConverter" />
-        <c:FileSystemObjectToImageConverter x:Key="FileSystemObjectToImageConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
     </UserControl.Resources>
 
@@ -40,8 +39,7 @@
         <TreeView.ItemTemplate>
             <TreeDataTemplate ItemsSource="{Binding Children}">
                 <StackPanel Orientation="Horizontal">
-                    <Image IsVisible="{Binding !IsExpanded, Mode=OneWay}" Source="{Binding FileSystemObject, Converter={StaticResource FileSystemObjectToImageConverter}, ConverterParameter=16}" />
-                    <Image IsVisible="{Binding IsExpanded, Mode=OneWay}" Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}}" />
+                    <Image Source="{Binding IconImagePath, Converter={StaticResource BitmapValueConverter}}" />
                     <TextBlock Text="{Binding Label}" />
                 </StackPanel>
             </TreeDataTemplate>
