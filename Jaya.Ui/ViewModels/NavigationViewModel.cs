@@ -105,6 +105,9 @@ namespace Jaya.Ui.ViewModels
                     child.Label = directory.Name;
                     child.FileSystemObject = directory;
                     child.NodeExpanded += OnNodeExpanded;
+                    //if (directory.Type == FileSystemObjectType.Drive)
+                    //    child.ImagePath = "avares://Jaya.Ui/Assets/Images/Hdd-16.png";
+
                     node.Children.Add(child);
 
                     child.AddDummyChild();

@@ -2,6 +2,7 @@
     x:Class="Jaya.Ui.Views.ExplorerView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
@@ -11,26 +12,20 @@
     <UserControl.DataContext>
         <vm:ExplorerViewModel />
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <c:FileSystemObjectToImageConverter x:Key="FileSystemObjectToImageConverter" />
+    </UserControl.Resources>
     <Grid>
-        <ItemsControl Items="{Binding Directory.Children, Mode=OneWay}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
+        <ListBox Items="{Binding Directory.Children, Mode=OneWay}">
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <!--<TextBlock Text="{Binding Name, Mode=OneWay}" />-->
                     <StackPanel Orientation="Vertical">
-                        <Image
-                            Width="48"
-                            Height="48"
-                            Source="/Assets/Images/Folder-Open-48.png" />
+                        <Image Source="{Binding Converter={StaticResource FileSystemObjectToImageConverter}}" />
                         <TextBlock Text="{Binding Name, Mode=OneWay}" />
                     </StackPanel>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <TextBlock
             HorizontalAlignment="Center"
             VerticalAlignment="Center"

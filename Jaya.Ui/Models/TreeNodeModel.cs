@@ -55,7 +55,7 @@ namespace Jaya.Ui.Models
             {
                 Set(value);
 
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value) || (FileSystemObject != null && FileSystemObject.Type == FileSystemObjectType.Directory))
                     IconImagePath = COLLAPSED_IMAGE;
                 else
                     IconImagePath = ImagePath;

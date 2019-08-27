@@ -78,7 +78,7 @@ namespace Jaya.Ui.Services.Providers
             model.Directories = new List<DirectoryModel>();
             foreach (var directoryInfo in info.GetDirectories())
             {
-                var directory = new DirectoryModel(true);
+                var directory = new DirectoryModel();
                 directory.Name = directoryInfo.Name;
                 directory.Path = directoryInfo.FullName;
                 directory.Created = directoryInfo.CreationTime;
