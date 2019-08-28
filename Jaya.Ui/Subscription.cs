@@ -2,6 +2,7 @@
 
 namespace Jaya.Ui
 {
+    // taken from https://www.c-sharpcorner.com/UploadFile/pranayamr/publisher-or-subscriber-pattern-with-event-or-delegate-and-e/
     public sealed class Subscription<TMessage> : IDisposable
     {
         readonly EventAggregator _aggregator;

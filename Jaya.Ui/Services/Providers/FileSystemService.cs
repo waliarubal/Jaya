@@ -66,7 +66,13 @@ namespace Jaya.Ui.Services.Providers
             foreach (var fileInfo in info.GetFiles())
             {
                 var file = new FileModel();
-                file.Name = fileInfo.Name;
+                if (string.IsNullOrEmpty(fileInfo.Extension))
+                    file.Name = fileInfo.Name;
+                else
+                {
+                    file.Name = fileInfo.Name.Replace(fileInfo.Extension, string.Empty);
+                    file.Extension = fileInfo.Extension.Substring(1).ToLowerInvariant();
+                }
                 file.Path = fileInfo.FullName;
                 file.Created = fileInfo.CreationTime;
                 file.Modified = fileInfo.LastWriteTime;
