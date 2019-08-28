@@ -16,6 +16,7 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <c:FileSystemObjectToImageConverter x:Key="FileSystemObjectToImageConverter" />
+        <c:FileSystemObjectToFileNameConverter x:Key="FileSystemObjectToFileNameConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
@@ -53,7 +54,7 @@
                             Source="{Binding Converter={StaticResource FileSystemObjectToImageConverter}, ConverterParameter=48}" />
                         <TextBlock
                             Width="54"
-                            Text="{Binding Name, Mode=OneWay}"
+                            Text="{Binding Mode=OneWay, Converter={StaticResource FileSystemObjectToFileNameConverter}}"
                             TextAlignment="Center"
                             TextWrapping="Wrap" />
                     </StackPanel>
