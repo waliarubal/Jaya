@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+    xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="480"
@@ -19,7 +21,9 @@
         <ListBox
             Padding="0"
             BorderBrush="Transparent"
-            Items="{Binding Directory.Children, Mode=OneWay}">
+            IsVisible="{Binding Directory.Children.Count, Mode=OneWay}"
+            Items="{Binding Directory.Children, Mode=OneWay}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding $parent[ScrollViewer].Bounds.Width, Mode=OneWay}" />
@@ -27,7 +31,12 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="2">
+                    <StackPanel Name="FileSyetemObjectEntry" Margin="2">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #FileSyetemObjectEntry}">
+                                <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.ChangeDirectoryCommand}" CommandParameter="{Binding}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
                         <Image
                             Width="48"
                             Height="48"
