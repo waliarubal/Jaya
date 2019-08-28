@@ -49,7 +49,7 @@ namespace Jaya.Ui.ViewModels
 
         void OnDirectoryChanged(DirectoryChangedEventArgs args)
         {
-            
+
         }
 
         void OnNodeExpanded(TreeNodeModel node, bool isExpaded)
@@ -90,6 +90,7 @@ namespace Jaya.Ui.ViewModels
 
                 var child = new TreeNodeModel(node.Service, provider);
                 child.Label = provider.Name;
+                child.FileSystemObject = new DirectoryModel();
                 child.ImagePath = provider.ImagePath;
                 child.NodeExpanded += OnNodeExpanded;
                 node.Children.Add(child);

@@ -16,10 +16,13 @@
         <c:FileSystemObjectToImageConverter x:Key="FileSystemObjectToImageConverter" />
     </UserControl.Resources>
     <Grid>
-        <ListBox BorderBrush="Transparent" Items="{Binding Directory.Children, Mode=OneWay}">
+        <ListBox
+            Padding="0"
+            BorderBrush="Transparent"
+            Items="{Binding Directory.Children, Mode=OneWay}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Width="{Binding $parent[ListBox].Bounds.Width, Mode=OneWay}" />
+                    <WrapPanel Width="{Binding $parent[ScrollViewer].Bounds.Width, Mode=OneWay}" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
@@ -28,9 +31,9 @@
                         <Image
                             Width="48"
                             Height="48"
-                            Source="{Binding Converter={StaticResource FileSystemObjectToImageConverter}}" />
+                            Source="{Binding Converter={StaticResource FileSystemObjectToImageConverter}, ConverterParameter=48}" />
                         <TextBlock
-                            Width="52"
+                            Width="54"
                             Text="{Binding Name, Mode=OneWay}"
                             TextAlignment="Center"
                             TextWrapping="Wrap" />

@@ -55,7 +55,7 @@ namespace Jaya.Ui.Models
             {
                 Set(value);
 
-                if (string.IsNullOrEmpty(value) || (FileSystemObject != null && FileSystemObject.Type == FileSystemObjectType.Directory))
+                if (string.IsNullOrEmpty(value) || (FileSystemObject != null && FileSystemObject.Type == FileSystemObjectType.Directory && !string.IsNullOrEmpty(FileSystemObject.Path)))
                     IconImagePath = COLLAPSED_IMAGE;
                 else
                     IconImagePath = ImagePath;
@@ -103,7 +103,7 @@ namespace Jaya.Ui.Models
 
         private void OnApplicationConfigChanged(object sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(ConfigurationService.ApplicationConfiguration.IsHiddenItemVisible):
                     if (FileSystemObject != null)
