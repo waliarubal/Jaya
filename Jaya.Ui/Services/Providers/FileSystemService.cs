@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Jaya.Ui.Services.Providers
 {
@@ -64,36 +63,52 @@ namespace Jaya.Ui.Services.Providers
             model.IsHidden = info.Attributes.HasFlag(FileAttributes.Hidden);
 
             model.Files = new List<FileModel>();
-            foreach (var fileInfo in info.GetFiles())
+            try
             {
-                var file = new FileModel();
-                if (string.IsNullOrEmpty(fileInfo.Extension))
-                    file.Name = fileInfo.Name;
-                else
+                foreach (var fileInfo in info.GetFiles())
                 {
-                    file.Name = fileInfo.Name.Replace(fileInfo.Extension, string.Empty);
-                    file.Extension = fileInfo.Extension.Substring(1).ToLowerInvariant();
+                    var file = new FileModel();
+                    if (string.IsNullOrEmpty(fileInfo.Extension))
+                        file.Name = fileInfo.Name;
+                    else
+                    {
+                        file.Name = fileInfo.Name.Replace(fileInfo.Extension, string.Empty);
+                        file.Extension = fileInfo.Extension.Substring(1).ToLowerInvariant();
+                    }
+                    file.Path = fileInfo.FullName;
+                    file.Created = fileInfo.CreationTime;
+                    file.Modified = fileInfo.LastWriteTime;
+                    file.Accessed = fileInfo.LastAccessTime;
+                    file.IsHidden = fileInfo.Attributes.HasFlag(FileAttributes.Hidden);
+                    model.Files.Add(file);
                 }
-                file.Path = fileInfo.FullName;
-                file.Created = fileInfo.CreationTime;
-                file.Modified = fileInfo.LastWriteTime;
-                file.Accessed = fileInfo.LastAccessTime;
-                file.IsHidden = fileInfo.Attributes.HasFlag(FileAttributes.Hidden);
-                model.Files.Add(file);
             }
+            catch(UnauthorizedAccessException)
+            {
+
+            }
+           
 
             model.Directories = new List<DirectoryModel>();
-            foreach (var directoryInfo in info.GetDirectories())
+            try
             {
-                var directory = new DirectoryModel();
-                directory.Name = directoryInfo.Name;
-                directory.Path = directoryInfo.FullName;
-                directory.Created = directoryInfo.CreationTime;
-                directory.Modified = directoryInfo.LastWriteTime;
-                directory.Accessed = directoryInfo.LastAccessTime;
-                directory.IsHidden = directoryInfo.Attributes.HasFlag(FileAttributes.Hidden);
-                model.Directories.Add(directory);
+                foreach (var directoryInfo in info.GetDirectories())
+                {
+                    var directory = new DirectoryModel();
+                    directory.Name = directoryInfo.Name;
+                    directory.Path = directoryInfo.FullName;
+                    directory.Created = directoryInfo.CreationTime;
+                    directory.Modified = directoryInfo.LastWriteTime;
+                    directory.Accessed = directoryInfo.LastAccessTime;
+                    directory.IsHidden = directoryInfo.Attributes.HasFlag(FileAttributes.Hidden);
+                    model.Directories.Add(directory);
+                }
             }
+            catch(UnauthorizedAccessException)
+            {
+
+            }
+            
 
             return model;
         }
