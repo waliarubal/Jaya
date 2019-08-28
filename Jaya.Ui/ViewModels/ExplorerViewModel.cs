@@ -1,4 +1,5 @@
 ﻿using Jaya.Ui.Models;
+using Jaya.Ui.Services;
 using Jaya.Ui.Services.Providers;
 using ReactiveUI;
 using System.Reactive;
@@ -8,12 +9,15 @@ namespace Jaya.Ui.ViewModels
     public class ExplorerViewModel: ViewModelBase
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
+        readonly ConfigurationService _configService;
+
         ReactiveCommand<DirectoryModel, Unit> _changeDirectory;
         IProviderService _service;
         ProviderModel _provider;
 
         public ExplorerViewModel()
         {
+            _configService = GetService<ConfigurationService>();
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
         }
 
@@ -32,6 +36,8 @@ namespace Jaya.Ui.ViewModels
                 return _changeDirectory;
             }
         }
+
+        public ApplicationConfigModel ApplicationConfig => _configService.ApplicationConfiguration;
 
         public DirectoryModel Directory
         {

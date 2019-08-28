@@ -16,6 +16,7 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <c:FileSystemObjectToImageConverter x:Key="FileSystemObjectToImageConverter" />
+        <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <ListBox
@@ -24,14 +25,23 @@
             IsVisible="{Binding Directory.Children.Count, Mode=OneWay}"
             Items="{Binding Directory.Children, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.Styles>
+                <Style Selector="WrapPanel">
+                    <Setter Property="Width" Value="{Binding $parent[ScrollViewer].Bounds.Width, Mode=OneWay}" />
+                </Style>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />
+                    <Setter Property="Margin" Value="2" />
+                </Style>
+            </ListBox.Styles>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Width="{Binding $parent[ScrollViewer].Bounds.Width, Mode=OneWay}" />
+                    <WrapPanel />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Name="FileSyetemObjectEntry" Margin="2">
+                    <StackPanel Name="FileSyetemObjectEntry">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #FileSyetemObjectEntry}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.ChangeDirectoryCommand}" CommandParameter="{Binding}" />
