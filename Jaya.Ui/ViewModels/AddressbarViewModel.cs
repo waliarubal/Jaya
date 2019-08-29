@@ -1,8 +1,10 @@
 ﻿using Jaya.Ui.Models;
 using Jaya.Ui.Services.Providers;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reactive;
 
 namespace Jaya.Ui.ViewModels
 {
@@ -10,6 +12,7 @@ namespace Jaya.Ui.ViewModels
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly char[] _pathSeparator;
+        ReactiveCommand<Unit, Unit> _clearSearch;
         IProviderService _service;
         ProviderModel _provider;
 
@@ -21,6 +24,8 @@ namespace Jaya.Ui.ViewModels
                 Path.DirectorySeparatorChar,
                 Path.AltDirectorySeparatorChar
             };
+            SearchQuery = string.Empty;
+            SearchWatermark = "Search";
         }
 
         ~AddressbarViewModel()
@@ -30,17 +35,22 @@ namespace Jaya.Ui.ViewModels
 
         #region properties
 
-        public string SearchQuery
+        public ReactiveCommand<Unit, Unit> ClearSearchCommand
         {
-            get => Get<string>();
-            set
+            get
             {
-                Set(value);
-                RaisePropertyChanged(nameof(IsSearchQueryEmpty));
+                if (_clearSearch == null)
+                    _clearSearch = ReactiveCommand.Create(ClearSearch);
+
+                return _clearSearch;
             }
         }
 
-        public bool IsSearchQueryEmpty => string.IsNullOrEmpty(SearchQuery);
+        public string SearchQuery
+        {
+            get => Get<string>();
+            set => Set(value);
+        }
 
         public string ImagePath
         {
@@ -54,11 +64,17 @@ namespace Jaya.Ui.ViewModels
             private set => Set(value);
         }
 
+        public string SearchWatermark
+        {
+            get => Get<string>();
+            private set => Set(value);
+        }
+
         #endregion
 
-        public void ClearSearchQuery()
+        void ClearSearch()
         {
-            SearchQuery = null;
+            SearchQuery = string.Empty;
         }
 
         void DirectoryChanged(DirectoryChangedEventArgs args)
@@ -69,14 +85,17 @@ namespace Jaya.Ui.ViewModels
             var pathParts = new List<string> { _service.Name, _provider.Name };
             if (_provider == null)
             {
+                SearchWatermark = string.Format("Search {0}", _service.Name);
                 ImagePath = _service.ImagePath;
             }
             else if (args.Directory == null || string.IsNullOrEmpty(args.Directory.Path))
             {
+                SearchWatermark = string.Format("Search {0}", _provider.Name);
                 ImagePath = _provider.ImagePath;
             }
             else
             {
+                SearchWatermark = string.Format("Search {0}", args.Directory.Name);
                 if (args.Directory.Type == FileSystemObjectType.Drive)
                     ImagePath = "avares://Jaya.Ui/Assets/Images/Hdd-16.png";
                 else
