@@ -11,7 +11,7 @@ namespace Jaya.Ui.ViewModels
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly ConfigurationService _configService;
 
-        ReactiveCommand<DirectoryModel, Unit> _changeDirectory;
+        ReactiveCommand<FileSystemObjectModel, Unit> _invokeObject;
         IProviderService _service;
         ProviderModel _provider;
 
@@ -26,14 +26,14 @@ namespace Jaya.Ui.ViewModels
             EventAggregator.UnSubscribe(_onDirectoryChanged);
         }
 
-        public ReactiveCommand<DirectoryModel, Unit> ChangeDirectoryCommand
+        public ReactiveCommand<FileSystemObjectModel, Unit> InvokeObjectCommand
         {
             get
             {
-                if (_changeDirectory == null)
-                    _changeDirectory = ReactiveCommand.Create<DirectoryModel>(ChangeDirectory);
+                if (_invokeObject == null)
+                    _invokeObject = ReactiveCommand.Create<FileSystemObjectModel>(InvokeObject);
 
-                return _changeDirectory;
+                return _invokeObject;
             }
         }
 
@@ -45,10 +45,19 @@ namespace Jaya.Ui.ViewModels
             private set => Set(value);
         }
 
-        void ChangeDirectory(DirectoryModel directory)
+        void InvokeObject(FileSystemObjectModel @object)
         {
-            var args = new DirectoryChangedEventArgs(_service, _provider, directory);
-            EventAggregator.Publish(args);
+            switch(@object.Type)
+            {
+                case FileSystemObjectType.Drive:
+                case FileSystemObjectType.Directory:
+                    var args = new DirectoryChangedEventArgs(_service, _provider, @object as DirectoryModel);
+                    EventAggregator.Publish(args);
+                    break;
+
+                case FileSystemObjectType.File:
+                    break;
+            }
         }
 
         void DirectoryChanged(DirectoryChangedEventArgs args)

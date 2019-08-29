@@ -16,6 +16,8 @@ namespace Jaya.Ui.ViewModels
             Populate(Node);
         }
 
+        #region properties
+
         public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
 
         public ApplicationConfigModel ApplicationConfig => _configService.ApplicationConfiguration;
@@ -39,6 +41,8 @@ namespace Jaya.Ui.ViewModels
                 }
             }
         }
+
+        #endregion
 
         void OnNodeExpanded(TreeNodeModel node, bool isExpaded)
         {
