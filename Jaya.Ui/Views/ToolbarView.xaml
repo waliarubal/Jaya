@@ -161,7 +161,7 @@
                 CommandParameter="{x:Static local:CommandType.ToggleItemCheckBoxes}"
                 IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}"
                 ToolTip.Tip="Item Check Boxes">
-                <Image Source="/Assets/Images/Checklist-16.png" />
+                <Image Source="/Assets/Images/Checked-Checkbox-16.png" />
             </ToggleButton>
             <ToggleButton
                 Command="{Binding SimpleCommand}"

@@ -210,7 +210,7 @@
                 Header="Item Check Boxes">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}">
-                        <Image Source="/Assets/Images/Checklist-16.png" />
+                        <Image Source="/Assets/Images/Checked-Checkbox-16.png" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
