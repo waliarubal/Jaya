@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    Title="Jaya.Ui"
+    Title="{Binding WindowTitle, Mode=OneWay}"
     Width="800"
     Height="600"
     Icon="/Assets/avalonia-logo.ico"
@@ -39,7 +39,7 @@
                 Grid.Column="3"
                 Width="6"
                 IsVisible="{Binding PaneConfig.IsPreviewOrDetailsPaneVisible, Mode=OneWay}" />
-            <v:ExplorerView Grid.Column="2" />
+            <v:ExplorerView Grid.Column="2" Padding="8 0 0 0" />
             <v:PreviewView
                 Grid.Column="4"
                 Width="{Binding $parent[Grid].Grid.ColumnDefinitions[4].Bounds.Width, Mode=OneWay}"
