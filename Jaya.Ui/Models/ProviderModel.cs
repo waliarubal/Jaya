@@ -57,5 +57,10 @@ namespace Jaya.Ui.Models
         {
             return Name;
         }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

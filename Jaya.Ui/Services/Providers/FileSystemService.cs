@@ -5,36 +5,35 @@ using System.IO;
 
 namespace Jaya.Ui.Services.Providers
 {
-    public class FileSystemService : IProviderService
+    public class FileSystemService : ProviderServiceBase
     {
         public FileSystemService()
         {
             Name = "File System";
             ImagePath = "avares://Jaya.Ui/Assets/Images/Computer-16.png";
+            IsRootDrive = true;
         }
 
         #region properties
 
-        public bool IsRootDrive => true;
-
-        public ProviderModel Provider { get; set; }
-
-        public string Name { get; }
-
-        public string ImagePath { get; }
+        //public ProviderModel Provider { get; set; }
 
         #endregion
 
-        public ProviderModel GetDefaultProvider()
+        public override ProviderModel GetDefaultProvider()
         {
             var provider = new ProviderModel(Environment.MachineName, this);
             provider.ImagePath = "avares://Jaya.Ui/Assets/Images/Client-16.png";
             return provider;
         }
 
-        public DirectoryModel GetDirectory(ProviderModel provider, string path = null)
+        public override DirectoryModel GetDirectory(ProviderModel provider, string path = null)
         {
-            var model = new DirectoryModel();
+            var model = GetFromCache(provider, path);
+            if (model != null)
+                return model;
+            else
+                model = new DirectoryModel();
 
             if (string.IsNullOrEmpty(path))
             {
@@ -51,6 +50,7 @@ namespace Jaya.Ui.Services.Providers
                     model.Directories.Add(drive);
                 }
 
+                AddToCache(provider, model);
                 return model;
             }
 
@@ -84,11 +84,11 @@ namespace Jaya.Ui.Services.Providers
                     model.Files.Add(file);
                 }
             }
-            catch(UnauthorizedAccessException)
+            catch (UnauthorizedAccessException)
             {
 
             }
-           
+
 
             model.Directories = new List<DirectoryModel>();
             try
@@ -105,12 +105,12 @@ namespace Jaya.Ui.Services.Providers
                     model.Directories.Add(directory);
                 }
             }
-            catch(UnauthorizedAccessException)
+            catch (UnauthorizedAccessException)
             {
 
             }
-            
 
+            AddToCache(provider, model);
             return model;
         }
 
