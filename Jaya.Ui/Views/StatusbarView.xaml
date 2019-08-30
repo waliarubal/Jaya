@@ -4,8 +4,68 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     mc:Ignorable="d">
-    <StackPanel Margin="6,2" Orientation="Horizontal">
-        <TextBlock Text="0 items" />
-    </StackPanel>
+    <UserControl.DataContext>
+        <vm:StatusbarViewModel />
+    </UserControl.DataContext>
+    <UserControl.Styles>
+        <Style Selector="Border.Separator">
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value=".5" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+            <Setter Property="Margin" Value="8 0" />
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="Button, ToggleButton">
+            <Setter Property="Margin" Value="1 0" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="MinWidth" Value="21" />
+            <Setter Property="MinHeight" Value="21" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="Button:pointerover /template/ ContentPresenter, ToggleButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+        </Style>
+        <Style Selector="Button:pressed /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+        </Style>
+        <Style Selector="Button:disabled, ToggleButton:disabled">
+            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+        </Style>
+        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+        </Style>
+
+        <Style Selector="Button &gt; Image, ToggleButton &gt; Image">
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+        </Style>
+    </UserControl.Styles>
+    <Grid Margin="6,2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Text="{Binding Count, Mode=OneWay, StringFormat={}{0} items, FallbackValue=0L}" />
+        <Border Grid.Column="1" Classes="Separator" />
+        <ToggleButton Grid.Column="3" ToolTip.Tip="Dispaly information about each item in the window.">
+            <Image Source="/Assets/Images/List-16.png" />
+        </ToggleButton>
+        <ToggleButton Grid.Column="4" ToolTip.Tip="Display items by using large thumbnails.">
+            <Image Source="/Assets/Images/Image-16.png" />
+        </ToggleButton>
+    </Grid>
 </UserControl>
