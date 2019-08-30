@@ -26,7 +26,9 @@ namespace Jaya.Ui.Services
                 PreviewOrDetailsPanePaneWidthPx = 240,
                 IsNavigationPaneVisible = true,
                 IsDetailsPaneVisible = false,
-                IsPreviewPaneVisible = false
+                IsPreviewPaneVisible = false,
+                IsDetailsView = false,
+                IsThumbnailView = true
             };
             ApplicationConfiguration = new ApplicationConfigModel();
 

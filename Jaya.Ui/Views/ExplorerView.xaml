@@ -18,14 +18,42 @@
         <c:FileSystemObjectToImageConverter x:Key="FileSystemObjectToImageConverter" />
         <c:FileSystemObjectToFileNameConverter x:Key="FileSystemObjectToFileNameConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
+        <c:FileSizeToStringConverter x:Key="FileSizeToStringConverter" />
     </UserControl.Resources>
     <Grid>
+        <DataGrid
+            Padding="0"
+            AlternatingRowBackground="Transparent"
+            Background="Transparent"
+            IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
+            Items="{Binding Directory.Children, Mode=OneWay}"
+            RowBackground="Transparent">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Binding="{Binding Name}"
+                    Header="Name"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Modified}"
+                    Header="Date Modified"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Type}"
+                    Header="Type"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding Size, Converter={StaticResource FileSizeToStringConverter}, ConverterParameter=2}"
+                    Header="Size"
+                    IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
         <ListBox
             Padding="0"
             BorderBrush="Transparent"
-            IsVisible="{Binding Directory.Children.Count, Mode=OneWay}"
+            IsVisible="{Binding PaneConfig.IsThumbnailView, Mode=OneWay}"
             Items="{Binding Directory.Children, Mode=OneWay}"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            SelectionMode="Multiple">
             <ListBox.Styles>
                 <Style Selector="WrapPanel">
                     <Setter Property="Width" Value="{Binding $parent[ScrollViewer].Bounds.Width, Mode=OneWay}" />

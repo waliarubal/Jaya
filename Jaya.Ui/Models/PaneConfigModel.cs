@@ -53,9 +53,8 @@ namespace Jaya.Ui.Models
             get => Get<bool>();
             set
             {
-                if (value)
-                    if (IsDetailsPaneVisible)
-                        IsDetailsPaneVisible = !value;
+                if (value && IsDetailsPaneVisible)
+                    IsDetailsPaneVisible = !value;
 
                 Set(value);
                 SetPaneWidths();
@@ -67,12 +66,35 @@ namespace Jaya.Ui.Models
             get => Get<bool>();
             set
             {
-                if (value)
-                    if (IsPreviewPaneVisible)
-                        IsPreviewPaneVisible = !value;
+                if (value && IsPreviewPaneVisible)
+                    IsPreviewPaneVisible = !value;
 
                 Set(value);
                 SetPaneWidths();
+            }
+        }
+
+        public bool IsDetailsView
+        {
+            get => Get<bool>();
+            set
+            {
+                if (value && IsThumbnailView)
+                    IsThumbnailView = !value;
+
+                Set(value);
+            }
+        }
+
+        public bool IsThumbnailView
+        {
+            get => Get<bool>();
+            set
+            {
+                if (value && IsDetailsView)
+                    IsDetailsView = !value;
+
+                Set(value);
             }
         }
 

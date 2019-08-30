@@ -61,10 +61,16 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Text="{Binding Count, Mode=OneWay, StringFormat={}{0} items, FallbackValue=0L}" />
         <Border Grid.Column="1" Classes="Separator" />
-        <ToggleButton Grid.Column="3" ToolTip.Tip="Dispaly information about each item in the window.">
+        <ToggleButton
+            Grid.Column="3"
+            IsChecked="{Binding PaneConfig.IsDetailsView, Mode=TwoWay}"
+            ToolTip.Tip="Dispaly information about each item in the window.">
             <Image Source="/Assets/Images/List-16.png" />
         </ToggleButton>
-        <ToggleButton Grid.Column="4" ToolTip.Tip="Display items by using large thumbnails.">
+        <ToggleButton
+            Grid.Column="4"
+            IsChecked="{Binding PaneConfig.IsThumbnailView, Mode=TwoWay}"
+            ToolTip.Tip="Display items by using large thumbnails.">
             <Image Source="/Assets/Images/Image-16.png" />
         </ToggleButton>
     </Grid>

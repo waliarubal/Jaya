@@ -26,6 +26,8 @@ namespace Jaya.Ui.ViewModels
             EventAggregator.UnSubscribe(_onDirectoryChanged);
         }
 
+        #region properties
+
         public ReactiveCommand<FileSystemObjectModel, Unit> InvokeObjectCommand
         {
             get
@@ -39,11 +41,15 @@ namespace Jaya.Ui.ViewModels
 
         public ApplicationConfigModel ApplicationConfig => _configService.ApplicationConfiguration;
 
+        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
+
         public DirectoryModel Directory
         {
             get => Get<DirectoryModel>();
             private set => Set(value);
         }
+
+        #endregion
 
         void InvokeObject(FileSystemObjectModel @object)
         {

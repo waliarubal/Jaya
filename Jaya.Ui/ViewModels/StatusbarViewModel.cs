@@ -1,4 +1,5 @@
 ﻿using Jaya.Ui.Models;
+using Jaya.Ui.Services;
 using Jaya.Ui.Services.Providers;
 
 namespace Jaya.Ui.ViewModels
@@ -6,6 +7,7 @@ namespace Jaya.Ui.ViewModels
     public class StatusbarViewModel: ViewModelBase
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
+        readonly ConfigurationService _configService;
         IProviderService _service;
         ProviderModel _provider;
         DirectoryModel _directory;
@@ -13,12 +15,15 @@ namespace Jaya.Ui.ViewModels
         public StatusbarViewModel()
         {
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
+            _configService = GetService<ConfigurationService>();
         }
 
         ~StatusbarViewModel()
         {
             EventAggregator.UnSubscribe(_onDirectoryChanged);
         }
+
+        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
 
         public long Count
         {
