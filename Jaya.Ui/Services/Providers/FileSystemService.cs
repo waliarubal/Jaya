@@ -76,6 +76,7 @@ namespace Jaya.Ui.Services.Providers
                         file.Extension = fileInfo.Extension.Substring(1).ToLowerInvariant();
                     }
                     file.Path = fileInfo.FullName;
+                    file.Size = fileInfo.Length;
                     file.Created = fileInfo.CreationTime;
                     file.Modified = fileInfo.LastWriteTime;
                     file.Accessed = fileInfo.LastAccessTime;

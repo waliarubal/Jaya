@@ -1,11 +1,12 @@
 ﻿using Avalonia.Data.Converters;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Jaya.Ui.Converters
 {
     // logic taken from https://stackoverflow.com/questions/14488796/does-net-provide-an-easy-way-convert-bytes-to-kb-mb-gb-etc
-    public class FileSizeToStringConverter : IValueConverter
+    public class FileSystemObjectSizeToStringConverter : IMultiValueConverter
     {
         readonly string[] _sizeSuffixes =
         {
@@ -20,23 +21,23 @@ namespace Jaya.Ui.Converters
             "YB"
         };
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
         {
-            var sizeInBytes = value as long?;
-            return SizeSuffix(sizeInBytes ?? 0L, parameter == null ? 1 : int.Parse(parameter.ToString()));
+            var type = (FileSystemObjectType)values[1];
+            if (type == FileSystemObjectType.Directory)
+                return string.Empty;
+
+            var sizeInBytes = values[0] as long?;
+            return SizeSuffix(sizeInBytes ?? 0L, 2);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
 
-        string SizeSuffix(long value, int decimalPlaces = 1)
+        string SizeSuffix(long value, int decimalPlaces)
         {
             if (decimalPlaces < 0)
                 throw new ArgumentOutOfRangeException(nameof(decimalPlaces));
             if (value < 0)
-                return "-" + SizeSuffix(-value);
+                return "-" + SizeSuffix(-value, decimalPlaces);
             if (value == 0)
                 return string.Format("{0:n" + decimalPlaces + "} bytes", 0);
 

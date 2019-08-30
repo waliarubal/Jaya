@@ -18,35 +18,61 @@
         <c:FileSystemObjectToImageConverter x:Key="FileSystemObjectToImageConverter" />
         <c:FileSystemObjectToFileNameConverter x:Key="FileSystemObjectToFileNameConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
-        <c:FileSizeToStringConverter x:Key="FileSizeToStringConverter" />
+        <c:FileSystemObjectSizeToStringConverter x:Key="FileSystemObjectSizeToStringConverter" />
     </UserControl.Resources>
     <Grid>
+        <!--  details view  -->
         <DataGrid
             Padding="0"
             AlternatingRowBackground="Transparent"
             Background="Transparent"
+            CanUserReorderColumns="True"
+            CanUserResizeColumns="True"
+            CanUserSortColumns="True"
+            IsReadOnly="True"
             IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
             Items="{Binding Directory.Children, Mode=OneWay}"
             RowBackground="Transparent">
+            <DataGrid.Styles>
+                <Style Selector="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+                <Style Selector="Image">
+                    <Setter Property="Width" Value="16" />
+                    <Setter Property="Height" Value="16" />
+                </Style>
+            </DataGrid.Styles>
             <DataGrid.Columns>
-                <DataGridTextColumn
-                    Binding="{Binding Name}"
-                    Header="Name"
-                    IsReadOnly="True" />
-                <DataGridTextColumn
-                    Binding="{Binding Modified}"
-                    Header="Date Modified"
-                    IsReadOnly="True" />
-                <DataGridTextColumn
-                    Binding="{Binding Type}"
-                    Header="Type"
-                    IsReadOnly="True" />
-                <DataGridTextColumn
-                    Binding="{Binding Size, Converter={StaticResource FileSizeToStringConverter}, ConverterParameter=2}"
-                    Header="Size"
-                    IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="0,0,4,0" Source="{Binding Converter={StaticResource FileSystemObjectToImageConverter}, ConverterParameter=48}" />
+                                <TextBlock Width="220" Text="{Binding Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Modified}" Header="Date Modified" />
+                <DataGridTextColumn Binding="{Binding Type}" Header="Type" />
+                <DataGridTemplateColumn Header="Size">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock TextAlignment="Right">
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource FileSystemObjectSizeToStringConverter}">
+                                        <Binding Path="Size" />
+                                        <Binding Path="Type" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <!--  thumbnail view  -->
         <ListBox
             Padding="0"
             BorderBrush="Transparent"
@@ -89,6 +115,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
         <TextBlock
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
