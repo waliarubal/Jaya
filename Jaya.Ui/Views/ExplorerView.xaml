@@ -18,7 +18,6 @@
         <c:FileSystemObjectToImageConverter x:Key="FileSystemObjectToImageConverter" />
         <c:FileSystemObjectToFileNameConverter x:Key="FileSystemObjectToFileNameConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
-        <c:FileSystemObjectSizeToStringConverter x:Key="FileSystemObjectSizeToStringConverter" />
     </UserControl.Resources>
     <Grid>
         <!--  details view  -->
@@ -41,9 +40,9 @@
                     <Setter Property="Width" Value="16" />
                     <Setter Property="Height" Value="16" />
                 </Style>
-              <Style Selector="DataGridRow">
-                <Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />
-              </Style>
+                <Style Selector="DataGridRow">
+                    <Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />
+                </Style>
             </DataGrid.Styles>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name">
@@ -61,14 +60,7 @@
                 <DataGridTemplateColumn Header="Size">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock TextAlignment="Right">
-                                <TextBlock.Text>
-                                    <MultiBinding Converter="{StaticResource FileSystemObjectSizeToStringConverter}">
-                                        <Binding Path="Size" />
-                                        <Binding Path="Type" />
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
+                            <TextBlock Text="{Binding SizeString}" TextAlignment="Right" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
