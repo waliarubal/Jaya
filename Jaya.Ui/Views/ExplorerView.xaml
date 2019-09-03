@@ -31,7 +31,8 @@
             IsReadOnly="True"
             IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
             Items="{Binding Directory.Children, Mode=OneWay}"
-            RowBackground="Transparent">
+            RowBackground="Transparent"
+            SelectionMode="Extended">
             <DataGrid.Styles>
                 <Style Selector="TextBlock">
                     <Setter Property="VerticalAlignment" Value="Center" />
