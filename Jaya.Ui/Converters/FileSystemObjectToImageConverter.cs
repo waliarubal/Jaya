@@ -3,8 +3,8 @@ using Avalonia.Data.Converters;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Jaya.Ui.Models;
+using Microsoft.Extensions.Caching.Memory;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
@@ -15,11 +15,12 @@ namespace Jaya.Ui.Converters
         const string IMAGE_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/{0}{1}.png";
         const string FILE_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/FileExtensions/{0}";
 
-        static readonly Dictionary<Uri, Bitmap> _imageCache;
+        static readonly MemoryCache _imageCache;
 
         static FileSystemObjectToImageConverter()
         {
-            _imageCache = new Dictionary<Uri, Bitmap>();
+            var cacheOptions = new MemoryCacheOptions();
+            _imageCache = new MemoryCache(cacheOptions);
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -62,14 +63,13 @@ namespace Jaya.Ui.Converters
 
         Bitmap AddOrGetFromCache(Uri uri, IAssetLoader assets, Uri fallbackUri = null)
         {
-            if (_imageCache.ContainsKey(uri))
-                return _imageCache[uri];
+            if (_imageCache.TryGetValue(uri, out Bitmap image))
+                return image;
 
-            Bitmap image;
             try
             {
                 image = new Bitmap(assets.Open(uri));
-                _imageCache.Add(uri, image);
+                _imageCache.Set(uri, image);
 
             }
             catch (FileNotFoundException)
@@ -77,11 +77,11 @@ namespace Jaya.Ui.Converters
                 if (fallbackUri == null)
                     return null;
 
-                if (_imageCache.ContainsKey(fallbackUri))
-                    return _imageCache[fallbackUri];
+                if (_imageCache.TryGetValue(fallbackUri, out image))
+                    return image;
 
                 image = new Bitmap(assets.Open(fallbackUri));
-                _imageCache.Add(fallbackUri, image);
+                _imageCache.Set(fallbackUri, image);
             }
 
             return image;
