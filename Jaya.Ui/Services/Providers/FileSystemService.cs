@@ -14,12 +14,6 @@ namespace Jaya.Ui.Services.Providers
             IsRootDrive = true;
         }
 
-        #region properties
-
-        //public ProviderModel Provider { get; set; }
-
-        #endregion
-
         public override ProviderModel GetDefaultProvider()
         {
             var provider = new ProviderModel(Environment.MachineName, this);

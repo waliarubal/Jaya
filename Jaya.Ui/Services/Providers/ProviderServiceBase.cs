@@ -1,21 +1,15 @@
 ﻿using Jaya.Ui.Models;
 using System;
-using System.Collections.Generic;
 
 namespace Jaya.Ui.Services.Providers
 {
     public abstract class ProviderServiceBase : IProviderService
     {
-        readonly Dictionary<int, DirectoryModel> _cache;
+        readonly MemoryCacheService _cache;
 
         protected ProviderServiceBase()
         {
-            _cache = new Dictionary<int, DirectoryModel>();
-        }
-
-        ~ProviderServiceBase()
-        {
-            _cache.Clear();
+            _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
         }
 
         public bool IsRootDrive
@@ -42,8 +36,8 @@ namespace Jaya.Ui.Services.Providers
             if (!string.IsNullOrEmpty(path))
                 hash += path.GetHashCode();
 
-            if (_cache.ContainsKey(hash))
-                return _cache[hash];
+            if (_cache.TryGetValue(hash, out DirectoryModel directory))
+                return directory;
 
             return null;
         }
@@ -57,10 +51,7 @@ namespace Jaya.Ui.Services.Providers
             if (!string.IsNullOrEmpty(directory.Path))
                 hash += directory.Path.GetHashCode();
 
-            if (_cache.ContainsKey(hash))
-                _cache[hash] = directory;
-            else
-                _cache.Add(hash, directory);
+            _cache.Set(hash, directory);
         }
 
         public abstract ProviderModel GetDefaultProvider();

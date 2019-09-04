@@ -57,6 +57,7 @@ namespace Jaya.Ui.Services
         IServiceScope RegisterServices()
         {
             var collection = new ServiceCollection();
+            collection.AddScoped<MemoryCacheService>();
             collection.AddScoped<ConfigurationService>();
             collection.AddScoped<CommandService>();
             collection.AddScoped<ProviderService>();

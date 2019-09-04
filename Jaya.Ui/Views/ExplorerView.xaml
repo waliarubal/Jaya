@@ -95,7 +95,7 @@
                     <StackPanel Name="FileSyetemObjectEntry">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #FileSyetemObjectEntry}">
-                                <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
+                                <ia:InvokeCommandAction Command="{Binding $parent[UserControl].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <Image

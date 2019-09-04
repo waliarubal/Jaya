@@ -3,7 +3,7 @@ using Avalonia.Data.Converters;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Jaya.Ui.Models;
-using Microsoft.Extensions.Caching.Memory;
+using Jaya.Ui.Services;
 using System;
 using System.Globalization;
 using System.IO;
@@ -15,12 +15,11 @@ namespace Jaya.Ui.Converters
         const string IMAGE_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/{0}{1}.png";
         const string FILE_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/FileExtensions/{0}";
 
-        static readonly MemoryCache _imageCache;
+        readonly MemoryCacheService _cache;
 
-        static FileSystemObjectToImageConverter()
+        public FileSystemObjectToImageConverter()
         {
-            var cacheOptions = new MemoryCacheOptions();
-            _imageCache = new MemoryCache(cacheOptions);
+            _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -63,13 +62,13 @@ namespace Jaya.Ui.Converters
 
         Bitmap AddOrGetFromCache(Uri uri, IAssetLoader assets, Uri fallbackUri = null)
         {
-            if (_imageCache.TryGetValue(uri, out Bitmap image))
+            if (_cache.TryGetValue(uri, out Bitmap image))
                 return image;
 
             try
             {
                 image = new Bitmap(assets.Open(uri));
-                _imageCache.Set(uri, image);
+                _cache.Set(uri, image);
 
             }
             catch (FileNotFoundException)
@@ -77,11 +76,11 @@ namespace Jaya.Ui.Converters
                 if (fallbackUri == null)
                     return null;
 
-                if (_imageCache.TryGetValue(fallbackUri, out image))
+                if (_cache.TryGetValue(fallbackUri, out image))
                     return image;
 
                 image = new Bitmap(assets.Open(fallbackUri));
-                _imageCache.Set(fallbackUri, image);
+                _cache.Set(fallbackUri, image);
             }
 
             return image;
