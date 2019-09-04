@@ -106,8 +106,7 @@ namespace Jaya.Ui.Services.Providers
 
             AddToCache(provider, model);
             return model;
+
         }
-
-
     }
 }

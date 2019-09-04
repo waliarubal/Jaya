@@ -2,7 +2,6 @@
 using Jaya.Ui.Services;
 using Jaya.Ui.Services.Providers;
 using ReactiveUI;
-using System.Collections.ObjectModel;
 using System.Reactive;
 
 namespace Jaya.Ui.ViewModels

@@ -31,7 +31,7 @@ namespace Jaya.Ui.ViewModels
             private set => Set(value);
         }
 
-        void DirectoryChanged(DirectoryChangedEventArgs args)
+        async void DirectoryChanged(DirectoryChangedEventArgs args)
         {
             _service = args.Service;
             _provider = args.Provider;
