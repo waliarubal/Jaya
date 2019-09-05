@@ -2,8 +2,7 @@
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using Jaya.Ui.Services.Providers;
-using ReactiveUI;
-using System.Reactive;
+using System.Windows.Input;
 
 namespace Jaya.Ui.ViewModels
 {
@@ -12,7 +11,7 @@ namespace Jaya.Ui.ViewModels
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly ConfigurationService _configService;
 
-        ReactiveCommand<FileSystemObjectModel, Unit> _invokeObject;
+        ICommand _invokeObject;
         IProviderService _service;
         ProviderModel _provider;
 
@@ -29,12 +28,12 @@ namespace Jaya.Ui.ViewModels
 
         #region properties
 
-        public ReactiveCommand<FileSystemObjectModel, Unit> InvokeObjectCommand
+        public ICommand InvokeObjectCommand
         {
             get
             {
                 if (_invokeObject == null)
-                    _invokeObject = ReactiveCommand.Create<FileSystemObjectModel>(InvokeObject);
+                    _invokeObject = new RelayCommand<FileSystemObjectModel>(InvokeObject, isAsynchronous: true);
 
                 return _invokeObject;
             }

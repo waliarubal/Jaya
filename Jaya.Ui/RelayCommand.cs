@@ -1,5 +1,6 @@
 ﻿using Jaya.Ui.Base;
 using System;
+using System.Threading.Tasks;
 
 namespace Jaya.Ui
 {
@@ -7,19 +8,24 @@ namespace Jaya.Ui
     {
         readonly Action _action;
 
-        public RelayCommand(Action action)
+        public RelayCommand(Action action, bool isEnabled = true, bool isAsynchronous = false) : base(isEnabled, isAsynchronous)
         {
             _action = action;
         }
 
-        public override void Execute(object parameter)
+        public async override void Execute(object parameter)
         {
-            if(!CanExecute(parameter))
+            if (!CanExecute(parameter))
                 return;
 
-            IsExecuting = !IsExecuting;
-            _action.Invoke();
-            IsExecuting = !IsExecuting;
+            IsExecuting = true;
+
+            if (IsAsynchronous)
+                await Task.Run(_action);
+            else
+                _action.Invoke();
+
+            IsExecuting = false;
         }
     }
 
@@ -27,19 +33,27 @@ namespace Jaya.Ui
     {
         readonly Action<P> _action;
 
-        public RelayCommand(Action<P> action)
+        public RelayCommand(Action<P> action, bool isEnabled = true, bool isAsynchronous = false) : base(isEnabled, isAsynchronous)
         {
             _action = action;
         }
 
-        public override void Execute(object parameter)
+        public async override void Execute(object parameter)
         {
             if (!CanExecute(parameter))
                 return;
 
-            IsExecuting = !IsExecuting;
-            _action.Invoke((P)parameter);
-            IsExecuting = !IsExecuting;
+            IsExecuting = true;
+
+            if (IsAsynchronous)
+            {
+                var argument = (P)parameter;
+                await Task.Run(() => _action.Invoke(argument));
+            }
+            else
+                _action.Invoke((P)parameter);
+
+            IsExecuting = false;
         }
     }
 }

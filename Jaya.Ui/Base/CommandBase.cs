@@ -7,6 +7,12 @@ namespace Jaya.Ui.Base
     {
         public event EventHandler CanExecuteChanged;
 
+        protected CommandBase(bool isEnabled, bool isAsynchronous)
+        {
+            IsEnabled = isEnabled;
+            IsAsynchronous = isAsynchronous;
+        }
+
         #region properties
 
         public bool IsEnabled
@@ -28,6 +34,8 @@ namespace Jaya.Ui.Base
                 RaiseCanExecuteChanged();
             }
         }
+
+        public bool IsAsynchronous { get; set; }
 
         #endregion
 
