@@ -1,4 +1,5 @@
-﻿using Jaya.Ui.Models;
+﻿using Jaya.Ui.Base;
+using Jaya.Ui.Models;
 using Jaya.Ui.Services.Providers;
 using ReactiveUI;
 using System;

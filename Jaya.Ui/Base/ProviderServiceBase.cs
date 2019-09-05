@@ -1,7 +1,9 @@
 ﻿using Jaya.Ui.Models;
+using Jaya.Ui.Services;
+using Jaya.Ui.Services.Providers;
 using System;
 
-namespace Jaya.Ui.Services.Providers
+namespace Jaya.Ui.Base
 {
     public abstract class ProviderServiceBase : IProviderService
     {

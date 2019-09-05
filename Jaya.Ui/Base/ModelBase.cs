@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Jaya.Ui.Models
+namespace Jaya.Ui.Base
 {
     public abstract class ModelBase : INotifyPropertyChanged
     {

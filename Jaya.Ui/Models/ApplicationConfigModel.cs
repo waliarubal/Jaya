@@ -1,4 +1,6 @@
-﻿namespace Jaya.Ui.Models
+﻿using Jaya.Ui.Base;
+
+namespace Jaya.Ui.Models
 {
     public class ApplicationConfigModel: ModelBase
     {

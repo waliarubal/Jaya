@@ -1,4 +1,5 @@
-﻿using Jaya.Ui.Services;
+﻿using Jaya.Ui.Base;
+using Jaya.Ui.Services;
 using Jaya.Ui.Services.Providers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

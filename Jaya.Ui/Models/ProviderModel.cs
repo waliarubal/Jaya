@@ -1,4 +1,5 @@
-﻿using Jaya.Ui.Services.Providers;
+﻿using Jaya.Ui.Base;
+using Jaya.Ui.Services.Providers;
 using System;
 
 namespace Jaya.Ui.Models

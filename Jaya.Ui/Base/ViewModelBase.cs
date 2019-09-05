@@ -1,11 +1,10 @@
-﻿using Jaya.Ui.Models;
-using Jaya.Ui.Services;
+﻿using Jaya.Ui.Services;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Reactive;
 
-namespace Jaya.Ui.ViewModels
+namespace Jaya.Ui.Base
 {
     public abstract class ViewModelBase : ModelBase
     {

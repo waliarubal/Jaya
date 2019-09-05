@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Jaya.Ui.Base;
 
 namespace Jaya.Ui.Models
 {

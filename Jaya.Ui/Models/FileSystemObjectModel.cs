@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jaya.Ui.Base;
+using System;
 
 namespace Jaya.Ui.Models
 {
