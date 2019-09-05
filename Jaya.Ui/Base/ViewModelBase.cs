@@ -1,15 +1,13 @@
 ﻿using Jaya.Ui.Services;
-using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.Reactive;
+using System.Windows.Input;
 
 namespace Jaya.Ui.Base
 {
     public abstract class ViewModelBase : ModelBase
     {
-        ReactiveCommand<CommandType, Unit> _simpleCommand;
-        ReactiveCommand<object, Unit> _parameterizedCommand;
+        ICommand _simpleCommand, _parameterizedCommand;
 
         protected ViewModelBase()
         {
@@ -20,23 +18,23 @@ namespace Jaya.Ui.Base
 
         protected EventAggregator EventAggregator { get; }
 
-        public ReactiveCommand<CommandType, Unit> SimpleCommand
+        public ICommand SimpleCommand
         {
             get
             {
                 if (_simpleCommand == null)
-                    _simpleCommand = ReactiveCommand.Create<CommandType>(SimpleCommandAction);
+                    _simpleCommand = new RelayCommand<CommandType>(SimpleCommandAction);
 
                 return _simpleCommand;
             }
         }
 
-        public ReactiveCommand<object, Unit> ParameterizedCommand
+        public ICommand ParameterizedCommand
         {
             get
             {
                 if (_parameterizedCommand == null)
-                    _parameterizedCommand = ReactiveCommand.Create<object>(ParameterizedCommandAction);
+                    _parameterizedCommand = new RelayCommand<object>(ParameterizedCommandAction);
 
                 return _parameterizedCommand;
             }
