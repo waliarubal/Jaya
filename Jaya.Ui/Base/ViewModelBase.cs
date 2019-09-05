@@ -1,4 +1,5 @@
-﻿using Jaya.Ui.Services;
+﻿using Avalonia.Threading;
+using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -45,6 +46,16 @@ namespace Jaya.Ui.Base
         protected T GetService<T>()
         {
             return ServiceLocator.Instance.GetService<T>();
+        }
+
+        protected void Invoke(Action action)
+        {
+            var dispatcher = Dispatcher.UIThread;
+
+            if (dispatcher.CheckAccess())
+                action.Invoke();
+            else
+                dispatcher.InvokeAsync(action, DispatcherPriority.Layout);
         }
 
         void SimpleCommandAction(CommandType type)

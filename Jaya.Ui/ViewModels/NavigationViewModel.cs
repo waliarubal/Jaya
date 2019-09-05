@@ -67,6 +67,11 @@ namespace Jaya.Ui.ViewModels
                 PopulateCommand.Execute(node);
         }
 
+        void AddChildNode(TreeNodeModel node, TreeNodeModel childNode)
+        {
+            Invoke(() => node.Children.Add(childNode));
+        }
+
         void Populate(TreeNodeModel node)
         {
             if (node == null)
@@ -85,9 +90,8 @@ namespace Jaya.Ui.ViewModels
                     child.Label = service.Name;
                     child.ImagePath = service.ImagePath;
                     child.NodeExpanded += OnNodeExpanded;
-                    node.Children.Add(child);
-
                     child.AddDummyChild();
+                    AddChildNode(node, child);
                 }
             }
             else if (node.Provider == null)
@@ -99,9 +103,8 @@ namespace Jaya.Ui.ViewModels
                 child.FileSystemObject = new DirectoryModel();
                 child.ImagePath = provider.ImagePath;
                 child.NodeExpanded += OnNodeExpanded;
-                node.Children.Add(child);
-
                 child.AddDummyChild();
+                AddChildNode(node, child);
             }
             else
             {
@@ -114,10 +117,8 @@ namespace Jaya.Ui.ViewModels
                     child.NodeExpanded += OnNodeExpanded;
                     if (directory.Type == FileSystemObjectType.Drive)
                         child.ImagePath = "avares://Jaya.Ui/Assets/Images/Hdd-16.png";
-
-                    node.Children.Add(child);
-
                     child.AddDummyChild();
+                    AddChildNode(node, child);
                 }
             }
         }
