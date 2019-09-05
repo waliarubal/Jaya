@@ -29,10 +29,9 @@ namespace Jaya.Ui
         public Subscription<TMessageType> Subscribe<TMessageType>(Action<TMessageType> action)
         {
             Type type = typeof(TMessageType);
-            IList actionList;
             var actionDetail = new Subscription<TMessageType>(action, this);
 
-            if (!_subscribers.TryGetValue(type, out actionList))
+            if (!_subscribers.TryGetValue(type, out IList actionList))
             {
                 actionList = new List<Subscription<TMessageType>>();
                 actionList.Add(actionDetail);

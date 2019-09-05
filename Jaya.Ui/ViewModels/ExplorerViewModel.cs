@@ -51,13 +51,13 @@ namespace Jaya.Ui.ViewModels
 
         #endregion
 
-        void InvokeObject(FileSystemObjectModel @object)
+        void InvokeObject(FileSystemObjectModel fileSystemObject)
         {
-            switch(@object.Type)
+            switch(fileSystemObject.Type)
             {
                 case FileSystemObjectType.Drive:
                 case FileSystemObjectType.Directory:
-                    var args = new DirectoryChangedEventArgs(_service, _provider, @object as DirectoryModel);
+                    var args = new DirectoryChangedEventArgs(_service, _provider, fileSystemObject as DirectoryModel);
                     EventAggregator.Publish(args);
                     break;
 
