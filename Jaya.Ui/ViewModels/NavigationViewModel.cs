@@ -2,22 +2,35 @@
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System;
+using System.Windows.Input;
 
 namespace Jaya.Ui.ViewModels
 {
     public class NavigationViewModel : ViewModelBase
     {
         readonly ConfigurationService _configService;
+        ICommand _populateCommand;
 
         public NavigationViewModel()
         {
             _configService = GetService<ConfigurationService>();
 
             Node = new TreeNodeModel(null, null);
-            Populate(Node);
+            PopulateCommand.Execute(Node);
         }
 
         #region properties
+
+        public ICommand PopulateCommand
+        {
+            get
+            {
+                if (_populateCommand == null)
+                    _populateCommand = new RelayCommand<TreeNodeModel>(Populate, isAsynchronous: true);
+
+                return _populateCommand;
+            }
+        }
 
         public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
 
@@ -51,7 +64,7 @@ namespace Jaya.Ui.ViewModels
                 return;
 
             if (node.IsHavingDummyChild)
-                Populate(node);
+                PopulateCommand.Execute(node);
         }
 
         void Populate(TreeNodeModel node)
