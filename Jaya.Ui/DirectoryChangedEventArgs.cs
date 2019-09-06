@@ -6,12 +6,15 @@ namespace Jaya.Ui
 {
     public class DirectoryChangedEventArgs: EventArgs
     {
-        public DirectoryChangedEventArgs(ProviderServiceBase service, ProviderModel provider, DirectoryModel directory)
+        public DirectoryChangedEventArgs(ProviderServiceBase service, ProviderModel provider, DirectoryModel directory, NavigationDirection direction = NavigationDirection.Unknown)
         {
             Service = service;
             Provider = provider;
             Directory = directory;
+            Direction = direction;
         }
+
+        public NavigationDirection Direction { get; }
 
         public ProviderServiceBase Service { get; }
 

@@ -22,4 +22,11 @@
         ToggleFileNameExtensions,
         ToggleHiddenItems
     }
+
+    public enum NavigationDirection: byte
+    {
+        Backward,
+        Forward,
+        Unknown
+    }
 }

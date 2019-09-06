@@ -1,23 +1,26 @@
 ﻿using Jaya.Ui.Base;
 using Jaya.Ui.Models;
-using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reactive;
+using System.Windows.Input;
 
 namespace Jaya.Ui.ViewModels
 {
     public class AddressbarViewModel : ViewModelBase
     {
+        readonly Stack<DirectoryChangedEventArgs> _backwardStack, _forwardStack;
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly char[] _pathSeparator;
-        ReactiveCommand<Unit, Unit> _clearSearch;
+        RelayCommand _clearSearch, _navigateBack, _navigateForward;
         ProviderServiceBase _service;
         ProviderModel _provider;
 
         public AddressbarViewModel()
         {
+            _backwardStack = new Stack<DirectoryChangedEventArgs>();
+            _forwardStack = new Stack<DirectoryChangedEventArgs>();
+
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
             _pathSeparator = new char[]
             {
@@ -35,14 +38,36 @@ namespace Jaya.Ui.ViewModels
 
         #region properties
 
-        public ReactiveCommand<Unit, Unit> ClearSearchCommand
+        public ICommand ClearSearchCommand
         {
             get
             {
                 if (_clearSearch == null)
-                    _clearSearch = ReactiveCommand.Create(ClearSearch);
+                    _clearSearch = new RelayCommand(ClearSearch);
 
                 return _clearSearch;
+            }
+        }
+
+        public RelayCommand NavigateBackCommand
+        {
+            get
+            {
+                if (_navigateBack == null)
+                    _navigateBack = new RelayCommand(NavigateBack, false);
+
+                return _navigateBack;
+            }
+        }
+
+        public RelayCommand NavigateForwardCommand
+        {
+            get
+            {
+                if (_navigateForward == null)
+                    _navigateForward = new RelayCommand(NavigateForward, false);
+
+                return _navigateForward;
             }
         }
 
@@ -72,6 +97,25 @@ namespace Jaya.Ui.ViewModels
 
         #endregion
 
+        void NavigateBack()
+        {
+            var item = _backwardStack.Pop();
+            _forwardStack.Push(item);
+
+
+            var args = new DirectoryChangedEventArgs(item.Service, item.Provider, item.Directory, NavigationDirection.Backward);
+            EventAggregator.Publish(args);
+        }
+
+        void NavigateForward()
+        {
+            var item = _forwardStack.Pop();
+            _backwardStack.Push(item);
+
+            var args = new DirectoryChangedEventArgs(item.Service, item.Provider, item.Directory, NavigationDirection.Forward);
+            EventAggregator.Publish(args);
+        }
+
         void ClearSearch()
         {
             SearchQuery = string.Empty;
@@ -79,6 +123,12 @@ namespace Jaya.Ui.ViewModels
 
         void DirectoryChanged(DirectoryChangedEventArgs args)
         {
+            if (args.Direction == NavigationDirection.Unknown)
+                _backwardStack.Push(args);
+
+            NavigateBackCommand.IsEnabled = _backwardStack.Count > 0;
+            NavigateForwardCommand.IsEnabled = _forwardStack.Count > 0;
+
             _service = args.Service;
             _provider = args.Provider;
 
