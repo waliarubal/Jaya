@@ -26,7 +26,7 @@ namespace Jaya.Ui.ViewModels
             get
             {
                 if (_populateCommand == null)
-                    _populateCommand = new RelayCommand<TreeNodeModel>(Populate, isAsynchronous: true);
+                    _populateCommand = new RelayCommand<TreeNodeModel>(Populate);
 
                 return _populateCommand;
             }

@@ -32,7 +32,7 @@ namespace Jaya.Ui.ViewModels
             get
             {
                 if (_invokeObject == null)
-                    _invokeObject = new RelayCommand<FileSystemObjectModel>(InvokeObject, isAsynchronous: true);
+                    _invokeObject = new RelayCommand<FileSystemObjectModel>(InvokeObject);
 
                 return _invokeObject;
             }
