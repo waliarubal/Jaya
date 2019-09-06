@@ -3,6 +3,13 @@ using System;
 
 namespace Jaya.Ui.Models
 {
+    public enum FileSystemObjectType : byte
+    {
+        File,
+        Directory,
+        Drive
+    }
+
     public abstract class FileSystemObjectModel : ModelBase
     {
         static readonly string[] _sizeSuffixes;

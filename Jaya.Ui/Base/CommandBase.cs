@@ -20,8 +20,8 @@ namespace Jaya.Ui.Base
             get => Get<bool>();
             set
             {
-                Set(value);
-                RaiseCanExecuteChanged();
+                if (Set(value))
+                    RaiseCanExecuteChanged();
             }
         }
 
@@ -30,8 +30,8 @@ namespace Jaya.Ui.Base
             get => Get<bool>();
             protected set
             {
-                Set(value);
-                RaiseCanExecuteChanged();
+                if (Set(value))
+                    RaiseCanExecuteChanged();
             }
         }
 

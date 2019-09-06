@@ -60,6 +60,7 @@ namespace Jaya.Ui.Services
             collection.AddScoped<MemoryCacheService>();
             collection.AddScoped<ConfigurationService>();
             collection.AddScoped<CommandService>();
+            collection.AddScoped<NavigationService>();
             collection.AddScoped<ProviderService>();
             collection.AddScoped<FileSystemService>();
 

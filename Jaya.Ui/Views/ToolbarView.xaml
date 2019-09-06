@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="clr-namespace:Jaya.Ui.Services;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     mc:Ignorable="d">
 
@@ -95,7 +95,7 @@
             <Border Classes="Separator" />
             <Button
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static local:CommandType.Exit}"
+                CommandParameter="{x:Static s:CommandType.Exit}"
                 ToolTip.Tip="Exit">
                 <Image Source="/Assets/Images/Shutdown-16.png" />
             </Button>
@@ -136,21 +136,21 @@
             <Border Classes="Thumb" />
             <ToggleButton
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static local:CommandType.TogglePaneNavigation}"
+                CommandParameter="{x:Static s:CommandType.TogglePaneNavigation}"
                 IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
                 ToolTip.Tip="Navigation Pane">
                 <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
             </ToggleButton>
             <ToggleButton
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static local:CommandType.TogglePanePreview}"
+                CommandParameter="{x:Static s:CommandType.TogglePanePreview}"
                 IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}"
                 ToolTip.Tip="Preview Pane">
                 <Image Source="/Assets/Images/Preview-16.png" />
             </ToggleButton>
             <ToggleButton
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static local:CommandType.TogglePaneDetails}"
+                CommandParameter="{x:Static s:CommandType.TogglePaneDetails}"
                 IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}"
                 ToolTip.Tip="Details Pane">
                 <Image Source="/Assets/Images/Details-16.png" />
@@ -158,21 +158,21 @@
             <Border Classes="Separator" />
             <ToggleButton
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static local:CommandType.ToggleItemCheckBoxes}"
+                CommandParameter="{x:Static s:CommandType.ToggleItemCheckBoxes}"
                 IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}"
                 ToolTip.Tip="Item Check Boxes">
                 <Image Source="/Assets/Images/Checked-Checkbox-16.png" />
             </ToggleButton>
             <ToggleButton
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static local:CommandType.ToggleFileNameExtensions}"
+                CommandParameter="{x:Static s:CommandType.ToggleFileNameExtensions}"
                 IsChecked="{Binding ApplicationConfig.IsFileNameExtensionVisible, Mode=OneWay}"
                 ToolTip.Tip="File Name Extensions">
                 <Image Source="/Assets/Images/Code-File-16.png" />
             </ToggleButton>
             <ToggleButton
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static local:CommandType.ToggleHiddenItems}"
+                CommandParameter="{x:Static s:CommandType.ToggleHiddenItems}"
                 IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}"
                 ToolTip.Tip="Hidden Items">
                 <Image Source="/Assets/Images/Hide-16.png" />

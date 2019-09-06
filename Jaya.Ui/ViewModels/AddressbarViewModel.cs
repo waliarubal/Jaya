@@ -1,5 +1,6 @@
 ﻿using Jaya.Ui.Base;
 using Jaya.Ui.Models;
+using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,24 +10,21 @@ namespace Jaya.Ui.ViewModels
 {
     public class AddressbarViewModel : ViewModelBase
     {
-        readonly Stack<DirectoryChangedEventArgs> _backwardStack, _forwardStack;
+        readonly NavigationService _navigationService;
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly char[] _pathSeparator;
-        RelayCommand _clearSearch, _navigateBack, _navigateForward;
-        ProviderServiceBase _service;
-        ProviderModel _provider;
+        ICommand _clearSearch;
 
         public AddressbarViewModel()
         {
-            _backwardStack = new Stack<DirectoryChangedEventArgs>();
-            _forwardStack = new Stack<DirectoryChangedEventArgs>();
-
-            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
             _pathSeparator = new char[]
             {
                 Path.DirectorySeparatorChar,
                 Path.AltDirectorySeparatorChar
             };
+            _navigationService = GetService<NavigationService>();
+            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
+            
             SearchQuery = string.Empty;
             SearchWatermark = "Search";
         }
@@ -49,27 +47,9 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        public RelayCommand NavigateBackCommand
-        {
-            get
-            {
-                if (_navigateBack == null)
-                    _navigateBack = new RelayCommand(NavigateBack, false);
+        public ICommand NavigateBackCommand => _navigationService.NavigateBackCommand;
 
-                return _navigateBack;
-            }
-        }
-
-        public RelayCommand NavigateForwardCommand
-        {
-            get
-            {
-                if (_navigateForward == null)
-                    _navigateForward = new RelayCommand(NavigateForward, false);
-
-                return _navigateForward;
-            }
-        }
+        public ICommand NavigateForwardCommand => _navigationService.NavigateForwardCommand;
 
         public string SearchQuery
         {
@@ -97,25 +77,6 @@ namespace Jaya.Ui.ViewModels
 
         #endregion
 
-        void NavigateBack()
-        {
-            var item = _backwardStack.Pop();
-            _forwardStack.Push(item);
-
-
-            var args = new DirectoryChangedEventArgs(item.Service, item.Provider, item.Directory, NavigationDirection.Backward);
-            EventAggregator.Publish(args);
-        }
-
-        void NavigateForward()
-        {
-            var item = _forwardStack.Pop();
-            _backwardStack.Push(item);
-
-            var args = new DirectoryChangedEventArgs(item.Service, item.Provider, item.Directory, NavigationDirection.Forward);
-            EventAggregator.Publish(args);
-        }
-
         void ClearSearch()
         {
             SearchQuery = string.Empty;
@@ -123,25 +84,16 @@ namespace Jaya.Ui.ViewModels
 
         void DirectoryChanged(DirectoryChangedEventArgs args)
         {
-            if (args.Direction == NavigationDirection.Unknown)
-                _backwardStack.Push(args);
-
-            NavigateBackCommand.IsEnabled = _backwardStack.Count > 0;
-            NavigateForwardCommand.IsEnabled = _forwardStack.Count > 0;
-
-            _service = args.Service;
-            _provider = args.Provider;
-
-            var pathParts = new List<string> { _service.Name, _provider.Name };
-            if (_provider == null)
+            var pathParts = new List<string> { args.Service.Name, args.Provider.Name };
+            if (args.Provider == null)
             {
-                SearchWatermark = string.Format("Search {0}", _service.Name);
-                ImagePath = _service.ImagePath;
+                SearchWatermark = string.Format("Search {0}", args.Service.Name);
+                ImagePath = args.Service.ImagePath;
             }
             else if (args.Directory == null || string.IsNullOrEmpty(args.Directory.Path))
             {
-                SearchWatermark = string.Format("Search {0}", _provider.Name);
-                ImagePath = _provider.ImagePath;
+                SearchWatermark = string.Format("Search {0}", args.Provider.Name);
+                ImagePath = args.Provider.ImagePath;
             }
             else
             {
