@@ -2,16 +2,16 @@
 
 Cross platform file explorer application compatible with Windows, Mac and Linux operating systems. This project is in alpha at the moment so it's not suitable for general use.
 
-#### Screenshot(s)
+## Screenshot
 Dark Theme
 ![Main Window](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/00.png)
 
 Light Theme
 ![Main Window](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/01.png)
 
-#### MIT License
+## MIT License
 
-Copyright (c) 2019 Rubal Walia ([walia.rubal@gmail.com](mailto:walia.ribal@gmail.com))
+Copyright (c) 2019 Rubal Walia
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
