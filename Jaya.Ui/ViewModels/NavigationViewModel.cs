@@ -72,7 +72,7 @@ namespace Jaya.Ui.ViewModels
             Invoke(() => node.Children.Add(childNode));
         }
 
-        void Populate(TreeNodeModel node)
+        async void Populate(TreeNodeModel node)
         {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
@@ -96,7 +96,7 @@ namespace Jaya.Ui.ViewModels
             }
             else if (node.Provider == null)
             {
-                var provider = node.Service.GetDefaultProvider();
+                var provider = await node.Service.GetDefaultProviderAsync();
 
                 var child = new TreeNodeModel(node.Service, provider);
                 child.Label = provider.Name;
@@ -108,7 +108,7 @@ namespace Jaya.Ui.ViewModels
             }
             else
             {
-                var currentDirectory = node.Service.GetDirectory(node.Provider, node.FileSystemObject?.Path);
+                var currentDirectory = await node.Service.GetDirectoryAsync(node.Provider, node.FileSystemObject?.Path);
                 foreach (var directory in currentDirectory.Directories)
                 {
                     var child = new TreeNodeModel(node.Service, node.Provider);

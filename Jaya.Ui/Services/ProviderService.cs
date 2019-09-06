@@ -1,20 +1,21 @@
-﻿using Jaya.Ui.Services.Providers;
+﻿using Jaya.Ui.Base;
+using Jaya.Ui.Services.Providers;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
     public class ProviderService
     {
-        readonly List<IProviderService> _services;
+        readonly List<ProviderServiceBase> _services;
 
         public ProviderService(FileSystemService fileSystemService)
         {
-            _services = new List<IProviderService>
+            _services = new List<ProviderServiceBase>
             {
                 fileSystemService
             };
         }
 
-        public IEnumerable<IProviderService> Services => _services;
+        public IEnumerable<ProviderServiceBase> Services => _services;
     }
 }

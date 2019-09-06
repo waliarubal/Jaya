@@ -1,6 +1,5 @@
 ﻿using Jaya.Ui.Base;
 using Jaya.Ui.Services;
-using Jaya.Ui.Services.Providers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -17,7 +16,7 @@ namespace Jaya.Ui.Models
         public delegate void TreeNodeExpanded(TreeNodeModel node, bool isExpaded);
         public event TreeNodeExpanded NodeExpanded;
 
-        public TreeNodeModel(IProviderService service, ProviderModel provider)
+        public TreeNodeModel(ProviderServiceBase service, ProviderModel provider)
         {
             Service = service;
             Provider = provider;
@@ -39,7 +38,7 @@ namespace Jaya.Ui.Models
 
         #region properties
 
-        public IProviderService Service { get; }
+        public ProviderServiceBase Service { get; }
 
         public ProviderModel Provider { get; }
 

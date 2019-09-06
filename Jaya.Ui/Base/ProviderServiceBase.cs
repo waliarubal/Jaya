@@ -1,11 +1,11 @@
 ﻿using Jaya.Ui.Models;
 using Jaya.Ui.Services;
-using Jaya.Ui.Services.Providers;
 using System;
+using System.Threading.Tasks;
 
 namespace Jaya.Ui.Base
 {
-    public abstract class ProviderServiceBase : IProviderService
+    public abstract class ProviderServiceBase
     {
         readonly MemoryCacheService _cache;
 
@@ -13,6 +13,8 @@ namespace Jaya.Ui.Base
         {
             _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
         }
+
+        #region properties
 
         public bool IsRootDrive
         {
@@ -31,6 +33,8 @@ namespace Jaya.Ui.Base
             get;
             protected set;
         }
+
+        #endregion
 
         protected DirectoryModel GetFromCache(ProviderModel provider, string path)
         {
@@ -56,9 +60,19 @@ namespace Jaya.Ui.Base
             _cache.Set(hash, directory);
         }
 
-        public abstract ProviderModel GetDefaultProvider();
+        public async Task<ProviderModel> GetDefaultProviderAsync()
+        {
+            return await Task.Run(() => GetDefaultProvider());
+        }
 
-        public abstract DirectoryModel GetDirectory(ProviderModel provider, string path = null);
+        public async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
+        {
+            return await Task.Run(() => GetDirectory(provider, path));
+        }
+
+        protected abstract ProviderModel GetDefaultProvider();
+
+        protected abstract DirectoryModel GetDirectory(ProviderModel provider, string path = null);
 
         public override string ToString()
         {

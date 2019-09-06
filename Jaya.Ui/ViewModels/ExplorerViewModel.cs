@@ -1,7 +1,6 @@
 ﻿using Jaya.Ui.Base;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
-using Jaya.Ui.Services.Providers;
 using System.Windows.Input;
 
 namespace Jaya.Ui.ViewModels
@@ -12,7 +11,7 @@ namespace Jaya.Ui.ViewModels
         readonly ConfigurationService _configService;
 
         ICommand _invokeObject;
-        IProviderService _service;
+        ProviderServiceBase _service;
         ProviderModel _provider;
 
         public ExplorerViewModel()
@@ -66,12 +65,12 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        void DirectoryChanged(DirectoryChangedEventArgs args)
+        async void DirectoryChanged(DirectoryChangedEventArgs args)
         {
             _service = args.Service;
             _provider = args.Provider;
 
-            var directory = args.Service.GetDirectory(args.Provider, args.Directory.Path);
+            var directory = await args.Service.GetDirectoryAsync(args.Provider, args.Directory.Path);
             Directory = directory;
         }
     }

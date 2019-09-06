@@ -1,12 +1,11 @@
 ﻿using Jaya.Ui.Base;
-using Jaya.Ui.Services.Providers;
 using System;
 
 namespace Jaya.Ui.Models
 {
     public class ProviderModel: ModelBase
     {
-        public ProviderModel(string name, IProviderService service)
+        public ProviderModel(string name, ProviderServiceBase service)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -31,9 +30,9 @@ namespace Jaya.Ui.Models
             set => Set(value);
         }
 
-        public IProviderService Service
+        public ProviderServiceBase Service
         {
-            get => Get<IProviderService>();
+            get => Get<ProviderServiceBase>();
             private set => Set(value);
         }
 
@@ -49,9 +48,9 @@ namespace Jaya.Ui.Models
             private set => Set(value);
         }
 
-        public void GetDirectory(string path = null)
+        public async void GetDirectory(string path = null)
         {
-            Directory = Service.GetDirectory(this, path);
+            Directory = await Service.GetDirectoryAsync(this, path);
         }
 
         public override string ToString()

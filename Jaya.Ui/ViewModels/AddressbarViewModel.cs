@@ -1,6 +1,5 @@
 ﻿using Jaya.Ui.Base;
 using Jaya.Ui.Models;
-using Jaya.Ui.Services.Providers;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ namespace Jaya.Ui.ViewModels
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly char[] _pathSeparator;
         ReactiveCommand<Unit, Unit> _clearSearch;
-        IProviderService _service;
+        ProviderServiceBase _service;
         ProviderModel _provider;
 
         public AddressbarViewModel()

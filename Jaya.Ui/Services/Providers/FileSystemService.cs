@@ -15,14 +15,14 @@ namespace Jaya.Ui.Services.Providers
             IsRootDrive = true;
         }
 
-        public override ProviderModel GetDefaultProvider()
+        protected override ProviderModel GetDefaultProvider()
         {
             var provider = new ProviderModel(Environment.MachineName, this);
             provider.ImagePath = "avares://Jaya.Ui/Assets/Images/Client-16.png";
             return provider;
         }
 
-        public override DirectoryModel GetDirectory(ProviderModel provider, string path = null)
+        protected override DirectoryModel GetDirectory(ProviderModel provider, string path = null)
         {
             var model = GetFromCache(provider, path);
             if (model != null)
