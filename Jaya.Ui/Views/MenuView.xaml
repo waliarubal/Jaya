@@ -235,7 +235,7 @@
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem Header="Plugins...">
+            <MenuItem Header="Manage Plugins">
                 <MenuItem.Icon>
                     <Image Source="/Assets/Images/Plugin-16.png" />
                 </MenuItem.Icon>

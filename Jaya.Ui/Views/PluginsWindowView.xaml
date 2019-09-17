@@ -1,0 +1,27 @@
+﻿<Window
+    x:Class="Jaya.Ui.Views.PluginsWindowView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
+    Title="Manage Plugins"
+    d:DesignHeight="480"
+    d:DesignWidth="640"
+    Icon="/Assets/Images/Plugin-16.png"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <vm:PluginsWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListBox />
+    </Grid>
+</Window>
