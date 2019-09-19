@@ -178,7 +178,7 @@
                 <Image Source="/Assets/Images/Hide-16.png" />
             </ToggleButton>
             <Border Classes="Separator" />
-            <Button ToolTip.Tip="Manage Plugins">
+            <Button Command="{Binding ParameterizedCommand}" ToolTip.Tip="Manage Plugins">
                 <Image Source="/Assets/Images/Plugin-16.png" />
             </Button>
         </StackPanel>
