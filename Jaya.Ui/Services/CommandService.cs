@@ -13,7 +13,9 @@
         TogglePaneDetails,
         ToggleItemCheckBoxes,
         ToggleFileNameExtensions,
-        ToggleHiddenItems
+        ToggleHiddenItems,
+        OpenWindow,
+        CloseWindow
     }
 
     public class CommandService

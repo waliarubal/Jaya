@@ -1,6 +1,5 @@
 ﻿using Jaya.Ui.Base;
 using System;
-using System.Threading.Tasks;
 
 namespace Jaya.Ui.Models
 {

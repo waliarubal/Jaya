@@ -28,6 +28,12 @@ namespace Jaya.Ui.Base
             protected set;
         }
 
+        public string Description
+        {
+            get;
+            protected set;
+        }
+
         public string ImagePath
         {
             get;
