@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     Title="Manage Plugins"
-    Width="640"
+    Width="320"
     Height="480"
     Icon="/Assets/Images/Plugin-16.png"
     mc:Ignorable="d">
@@ -17,37 +17,45 @@
     <Window.Resources>
         <c:BitmapValueConverter x:Key="BitmapValueConverter" />
     </Window.Resources>
-    <Grid Margin="4">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <ListBox Items="{Binding Providers, Mode=OneWay}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Image
-                            Grid.RowSpan="2"
-                            Width="16"
-                            Height="16"
-                            Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}}" />
-                        <TextBlock Grid.Column="1" Text="{Binding Name}" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button
-            Grid.Row="1"
-            Margin="0,4,0,0"
-            HorizontalAlignment="Right"
-            Content="Close" />
-    </Grid>
+    <ListBox
+        Margin="4"
+        BorderThickness="0"
+        Items="{Binding Plugins, Mode=OneWay}"
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.Styles>
+                        <Style Selector="Image">
+                            <Setter Property="Width" Value="32" />
+                            <Setter Property="Height" Value="32" />
+                            <Setter Property="VerticalAlignment" Value="Top" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                        </Style>
+                        <Style Selector="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="Margin" Value="4 0 0 0" />
+                        </Style>
+                    </Grid.Styles>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Image Grid.RowSpan="2" Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}}" />
+                    <TextBlock
+                        Grid.Column="1"
+                        FontWeight="Bold"
+                        Text="{Binding Name}" />
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{Binding Description}" />
+                </Grid>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
 </Window>

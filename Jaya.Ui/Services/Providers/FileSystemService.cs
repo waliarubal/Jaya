@@ -11,7 +11,8 @@ namespace Jaya.Ui.Services.Providers
         public FileSystemService()
         {
             Name = "File System";
-            ImagePath = "avares://Jaya.Ui/Assets/Images/Computer-16.png";
+            ImagePath = "avares://Jaya.Ui/Assets/Images/Computer-32.png";
+            Description = "View your local drives, inspect their properties and play with directories & files stored within them.";
             IsRootDrive = true;
         }
 

@@ -55,12 +55,16 @@ namespace Jaya.Ui.Services
 
         async void ParameterizedCommandAction(KeyValuePair<CommandType, object> parameter)
         {
-            switch(parameter.Key)
+            switch (parameter.Key)
             {
                 case CommandType.OpenWindow:
                     var window = Activator.CreateInstance(parameter.Value as Type) as Window;
                     if (window != null)
+                    {
+                        window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                        window.CanResize = false;
                         await window.ShowDialog(Application.Current.MainWindow);
+                    }
                     break;
 
                 case CommandType.CloseWindow:

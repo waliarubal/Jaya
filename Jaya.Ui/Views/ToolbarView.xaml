@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="clr-namespace:Jaya.Ui.Services;assembly=Jaya.Ui"
+    xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     mc:Ignorable="d">
 
@@ -28,7 +29,9 @@
                     <!--  ThemeControlMidColor #FF505050  -->
                 </VisualBrush.Visual>
             </VisualBrush>
+            <c:MultiValueConverter x:Key="MultiValueConverter" />
         </WrapPanel.Resources>
+
         <WrapPanel.Styles>
             <Style Selector="StackPanel">
                 <Setter Property="Orientation" Value="Horizontal" />
@@ -179,6 +182,16 @@
             </ToggleButton>
             <Border Classes="Separator" />
             <Button Command="{Binding ParameterizedCommand}" ToolTip.Tip="Manage Plugins">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource MultiValueConverter}">
+                        <Binding>
+                            <Binding.Source>
+                                <s:CommandType>OpenWindow</s:CommandType>
+                            </Binding.Source>
+                        </Binding>
+                        <Binding Source="{x:Type v:PluginsWindowView}" />
+                    </MultiBinding>
+                </Button.CommandParameter>
                 <Image Source="/Assets/Images/Plugin-16.png" />
             </Button>
         </StackPanel>
