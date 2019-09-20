@@ -1,6 +1,0 @@
-!define PRODUCT_NAME "Jaya"
-!define PRODUCT_VERSION "1.0.0.0"
-
-InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
-
-SetOutPath "$INSTDIR"
