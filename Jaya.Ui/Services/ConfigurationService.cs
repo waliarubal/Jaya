@@ -1,5 +1,4 @@
-﻿using Avalonia;
-using Jaya.Ui.Models;
+﻿using Jaya.Ui.Models;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
@@ -57,10 +56,6 @@ namespace Jaya.Ui.Services
         {
             switch (type)
             {
-                case CommandType.Exit:
-                    Application.Current.Exit();
-                    break;
-
                 case CommandType.ToggleItemCheckBoxes:
                     ApplicationConfiguration.IsItemCheckBoxVisible = !ApplicationConfiguration.IsItemCheckBoxVisible;
                     break;
