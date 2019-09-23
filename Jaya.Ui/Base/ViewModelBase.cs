@@ -8,7 +8,7 @@ namespace Jaya.Ui.Base
 {
     public abstract class ViewModelBase : ModelBase
     {
-        ICommand _simpleCommand, _parameterizedCommand;
+        ICommand _simpleCommand, _parameterizedCommand, _openWindowCommand;
 
         protected ViewModelBase()
         {
@@ -38,6 +38,17 @@ namespace Jaya.Ui.Base
                     _parameterizedCommand = new RelayCommand<object>(ParameterizedCommandAction);
 
                 return _parameterizedCommand;
+            }
+        }
+
+        public ICommand OpenWindowCommand
+        {
+            get
+            {
+                if (_openWindowCommand == null)
+                    _openWindowCommand = new RelayCommand<OpenWindowArgs>(OpenWindowCommandAction);
+
+                return _openWindowCommand;
             }
         }
 
@@ -74,6 +85,14 @@ namespace Jaya.Ui.Base
 
             var param = new KeyValuePair<CommandType, object>((CommandType)parameters[0], parameters[1]);
             EventAggregator.Publish(param);
+        }
+
+        void OpenWindowCommandAction(OpenWindowArgs parameter)
+        {
+            if (parameter == null)
+                throw new ArgumentNullException(nameof(parameter));
+
+            EventAggregator.Publish(parameter);
         }
     }
 }

@@ -8,9 +8,26 @@
     Title="{Binding Header, Mode=OneWay}"
     d:DesignHeight="480"
     d:DesignWidth="640"
-    Content="{Binding Child, Mode=OneWay}"
+    CanResize="False"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
     <Window.DataContext>
         <vm:HostWindowViewModel />
     </Window.DataContext>
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ContentPresenter Content="{Binding Child, Mode=OneWay}" />
+        <Button
+            Grid.Row="1"
+            MinWidth="80"
+            Margin="0,8,0,0"
+            HorizontalAlignment="Right"
+            Command="{Binding CloseCommand}"
+            CommandParameter="{Binding $parent[Window]}"
+            Content="Close" />
+    </Grid>
 </Window>

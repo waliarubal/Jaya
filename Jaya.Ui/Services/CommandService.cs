@@ -1,7 +1,7 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
+using Jaya.Ui.ViewModels;
+using Jaya.Ui.Views;
 using System;
-using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
@@ -18,27 +18,25 @@ namespace Jaya.Ui.Services
         TogglePaneDetails,
         ToggleItemCheckBoxes,
         ToggleFileNameExtensions,
-        ToggleHiddenItems,
-        OpenWindow,
-        CloseWindow
+        ToggleHiddenItems
     }
 
     public class CommandService
     {
         readonly Subscription<CommandType> _onSimpleCommand;
-        readonly Subscription<KeyValuePair<CommandType, object>> _onParameterizedCommand;
+        readonly Subscription<OpenWindowArgs> _onOpenWindow;
 
         public CommandService()
         {
             EventAggregator = new EventAggregator();
             _onSimpleCommand = EventAggregator.Subscribe<CommandType>(SimpleCommandAction);
-            _onParameterizedCommand = EventAggregator.Subscribe<KeyValuePair<CommandType, object>>(ParameterizedCommandAction);
+            _onOpenWindow = EventAggregator.Subscribe<OpenWindowArgs>(OpenWindowCommandAction);
         }
 
         ~CommandService()
         {
             EventAggregator.UnSubscribe(_onSimpleCommand);
-            EventAggregator.UnSubscribe(_onParameterizedCommand);
+            EventAggregator.UnSubscribe(_onOpenWindow);
         }
 
         public EventAggregator EventAggregator { get; }
@@ -53,25 +51,17 @@ namespace Jaya.Ui.Services
             }
         }
 
-        async void ParameterizedCommandAction(KeyValuePair<CommandType, object> parameter)
+        async void OpenWindowCommandAction(OpenWindowArgs parameter)
         {
-            switch (parameter.Key)
+            var child = Activator.CreateInstance(parameter.ChildType);
+            if (child != null)
             {
-                case CommandType.OpenWindow:
-                    var window = Activator.CreateInstance(parameter.Value as Type) as Window;
-                    if (window != null)
-                    {
-                        window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                        window.CanResize = false;
-                        await window.ShowDialog(Application.Current.MainWindow);
-                    }
-                    break;
-
-                case CommandType.CloseWindow:
-                    var windowToClose = parameter.Value as Window;
-                    if (windowToClose != null)
-                        windowToClose.Close(true);
-                    break;
+                var windowView = new HostWindowView();
+                ((HostWindowViewModel)windowView.DataContext).Child = child;
+                windowView.Title = parameter.Title;
+                windowView.Width = parameter.Width;
+                windowView.Height = parameter.Height;
+                await windowView.ShowDialog(Application.Current.MainWindow);
             }
         }
     }
