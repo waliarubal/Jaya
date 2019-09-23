@@ -5,27 +5,6 @@
     <StartupObject>Jaya.Ui.Program</StartupObject>
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
-  <PropertyGroup>
-    <Authors>waliarubal</Authors>
-    <Company>NullVoid Creations</Company>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <Copyright>MIT</Copyright>
-    <PackageId>Jaya</PackageId>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/waliarubal/Jaya/master/LICENSE</PackageLicenseUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/waliarubal/Jaya.git</RepositoryUrl>
-    <AssemblyTitle>Jaya</AssemblyTitle>
-    <Description>Cross platform file explorer application for Windows, Mac and Linux operating systems.</Description>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ServerGarbageCollection>false</ServerGarbageCollection>
-    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
-    <RetainVMGarbageCollection>false</RetainVMGarbageCollection>
-    <ThreadPoolMinThreads>4</ThreadPoolMinThreads>
-    <ThreadPoolMaxThreads>25</ThreadPoolMaxThreads>
-    <PackageProjectUrl>https://github.com/waliarubal/Jaya</PackageProjectUrl>
-    <Product>Jaya</Product>
-  </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
