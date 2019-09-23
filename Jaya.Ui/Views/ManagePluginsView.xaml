@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<Window
     x:Class="Jaya.Ui.Views.ManagePluginsView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,15 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    d:DesignHeight="480"
-    d:DesignWidth="320"
+    Title="Manage Plugins"
+    Width="320"
+    Height="480"
+    ShowInTaskbar="True"
+    WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <vm:PluginsWindowViewModel />
-    </UserControl.DataContext>
-    <UserControl.Resources>
+    <Window.DataContext>
+        <vm:ManagePluginsViewModel />
+    </Window.DataContext>
+    <Window.Resources>
         <c:BitmapValueConverter x:Key="BitmapValueConverter" />
-    </UserControl.Resources>
+    </Window.Resources>
     <ListBox
         Margin="4"
         BorderThickness="0"
@@ -56,4 +59,4 @@
             </DataTemplate>
         </ListBox.ItemTemplate>
     </ListBox>
-</UserControl>
+</Window>

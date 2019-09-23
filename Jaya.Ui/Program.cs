@@ -27,7 +27,7 @@ namespace Jaya.Ui
         // Application entry point. Avalonia is completely initialized.
         static void AppMain(Application app, string[] args)
         {
-            Application.Current.RunWithMainWindow<MainWindowView>();
+            Application.Current.RunWithMainWindow<MainView>();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Avalonia.Threading;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Threading;
 using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;
@@ -46,7 +48,7 @@ namespace Jaya.Ui.Base
             get
             {
                 if (_openWindowCommand == null)
-                    _openWindowCommand = new RelayCommand<OpenWindowArgs>(OpenWindowCommandAction);
+                    _openWindowCommand = new RelayCommand<Type>(OpenWindowCommandAction);
 
                 return _openWindowCommand;
             }
@@ -69,6 +71,12 @@ namespace Jaya.Ui.Base
                 dispatcher.InvokeAsync(action, DispatcherPriority.Layout);
         }
 
+        async void OpenWindowCommandAction(Type windowType)
+        {
+            if (Activator.CreateInstance(windowType) is Window window)
+                await window.ShowDialog(Application.Current.MainWindow);
+        }
+
         void SimpleCommandAction(CommandType type)
         {
             EventAggregator.Publish(type);
@@ -85,14 +93,6 @@ namespace Jaya.Ui.Base
 
             var param = new KeyValuePair<CommandType, object>((CommandType)parameters[0], parameters[1]);
             EventAggregator.Publish(param);
-        }
-
-        void OpenWindowCommandAction(OpenWindowArgs parameter)
-        {
-            if (parameter == null)
-                throw new ArgumentNullException(nameof(parameter));
-
-            EventAggregator.Publish(parameter);
         }
     }
 }

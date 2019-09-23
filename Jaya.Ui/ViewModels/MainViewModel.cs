@@ -4,19 +4,19 @@ using Jaya.Ui.Services;
 
 namespace Jaya.Ui.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly ConfigurationService _configService;
 
-        public MainWindowViewModel()
+        public MainViewModel()
         {
             WindowTitle = "Jaya";
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
             _configService = GetService<ConfigurationService>();
         }
 
-        ~MainWindowViewModel()
+        ~MainViewModel()
         {
             EventAggregator.UnSubscribe(_onDirectoryChanged);
         }

@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="Jaya.Ui.Views.MainWindowView"
+    x:Class="Jaya.Ui.Views.MainView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
     <Window.DataContext>
-        <vm:MainWindowViewModel />
+        <vm:MainViewModel />
     </Window.DataContext>
     <DockPanel>
         <v:MenuView DockPanel.Dock="Top" />

@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="clr-namespace:Jaya.Ui.Services;assembly=Jaya.Ui"
     xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
@@ -182,14 +181,10 @@
                 <Image Source="/Assets/Images/Hide-16.png" />
             </ToggleButton>
             <Border Classes="Separator" />
-            <Button Command="{Binding OpenWindowCommand}" ToolTip.Tip="Manage Plugins">
-                <Button.CommandParameter>
-                    <local:OpenWindowArgs
-                        Title="Manage Plugins"
-                        Width="320"
-                        Height="480"
-                        ChildType="{x:Type v:ManagePluginsView}" />
-                </Button.CommandParameter>
+            <Button
+                Command="{Binding OpenWindowCommand}"
+                CommandParameter="{x:Type v:ManagePluginsView}"
+                ToolTip.Tip="Manage Plugins">
                 <Image Source="/Assets/Images/Plugin-16.png" />
             </Button>
         </StackPanel>

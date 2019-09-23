@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Jaya.Ui.ViewModels
 {
-    public class PluginsWindowViewModel: ViewModelBase
+    public class ManagePluginsViewModel: ViewModelBase
     {
         public IEnumerable<ProviderServiceBase> Plugins => GetService<ProviderService>().Services;
     }
