@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     Title="Manage Plugins"
-    Width="320"
+    Width="640"
     Height="480"
     CanResize="False"
     ShowInTaskbar="False"
@@ -19,45 +19,50 @@
     <Window.Resources>
         <c:BitmapValueConverter x:Key="BitmapValueConverter" />
     </Window.Resources>
-    <ListBox
-        Margin="4"
-        BorderThickness="0"
-        Items="{Binding Plugins, Mode=OneWay}"
-        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Grid.Styles>
-                        <Style Selector="Image">
-                            <Setter Property="Width" Value="32" />
-                            <Setter Property="Height" Value="32" />
-                            <Setter Property="VerticalAlignment" Value="Top" />
-                            <Setter Property="HorizontalAlignment" Value="Left" />
-                        </Style>
-                        <Style Selector="TextBlock">
-                            <Setter Property="TextWrapping" Value="Wrap" />
-                            <Setter Property="Margin" Value="4 0 0 0" />
-                        </Style>
-                    </Grid.Styles>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Image Grid.RowSpan="2" Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}}" />
-                    <TextBlock
-                        Grid.Column="1"
-                        FontWeight="Bold"
-                        Text="{Binding Name}" />
-                    <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Text="{Binding Description}" />
-                </Grid>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+    <Grid Margin="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListBox
+            BorderThickness="0"
+            Items="{Binding Plugins, Mode=OneWay}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.Styles>
+                            <Style Selector="Image">
+                                <Setter Property="Width" Value="32" />
+                                <Setter Property="Height" Value="32" />
+                                <Setter Property="VerticalAlignment" Value="Top" />
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                            </Style>
+                            <Style Selector="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="Margin" Value="4 0 0 0" />
+                            </Style>
+                        </Grid.Styles>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Image Grid.RowSpan="2" Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}}" />
+                        <TextBlock
+                            Grid.Column="1"
+                            FontWeight="Bold"
+                            Text="{Binding Name}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding Description}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </Window>
