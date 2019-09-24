@@ -9,6 +9,9 @@
     Title="Manage Plugins"
     Width="320"
     Height="480"
+    CanResize="False"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
     <Window.DataContext>
         <vm:ManagePluginsViewModel />

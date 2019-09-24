@@ -8,7 +8,7 @@ namespace Jaya.Ui.Views
     {
         public ManagePluginsView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
