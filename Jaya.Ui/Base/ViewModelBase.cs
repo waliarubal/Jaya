@@ -73,8 +73,11 @@ namespace Jaya.Ui.Base
 
         async void OpenWindowCommandAction(Type windowType)
         {
-            if (Activator.CreateInstance(windowType) is Window window)
-                await window.ShowDialog(Application.Current.MainWindow);
+            var window = Activator.CreateInstance(windowType) as Window;
+            if (window == null)
+                return;
+
+            await window.ShowDialog(Application.Current.MainWindow);
         }
 
         void SimpleCommandAction(CommandType type)
