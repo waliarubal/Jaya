@@ -4,6 +4,7 @@ using Avalonia.Threading;
 using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace Jaya.Ui.Base
@@ -76,6 +77,8 @@ namespace Jaya.Ui.Base
             var window = Activator.CreateInstance(windowType) as Window;
             if (window == null)
                 return;
+
+            Debug.WriteLine(window.Width);
 
             await window.ShowDialog(Application.Current.MainWindow);
         }
