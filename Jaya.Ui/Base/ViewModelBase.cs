@@ -1,10 +1,11 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Threading;
+using Jaya.Ui.Models;
 using Jaya.Ui.Services;
+using Jaya.Ui.ViewModels;
+using Jaya.Ui.Views;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows.Input;
 
 namespace Jaya.Ui.Base
@@ -49,7 +50,7 @@ namespace Jaya.Ui.Base
             get
             {
                 if (_openWindowCommand == null)
-                    _openWindowCommand = new RelayCommand<Type>(OpenWindowCommandAction);
+                    _openWindowCommand = new RelayCommand<WindowOptionsModel>(OpenWindowCommandAction);
 
                 return _openWindowCommand;
             }
@@ -72,13 +73,13 @@ namespace Jaya.Ui.Base
                 dispatcher.InvokeAsync(action, DispatcherPriority.Layout);
         }
 
-        async void OpenWindowCommandAction(Type windowType)
+        async void OpenWindowCommandAction(WindowOptionsModel option)
         {
-            var window = Activator.CreateInstance(windowType) as Window;
-            if (window == null)
-                return;
+            var window = new HostView();
 
-            Debug.WriteLine(window.Width);
+            var viewModel = window.DataContext as HostViewModel;
+            viewModel.Option = option;
+            viewModel.Option.InitializeContent();
 
             await window.ShowDialog(Application.Current.MainWindow);
         }

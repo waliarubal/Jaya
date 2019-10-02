@@ -1,4 +1,4 @@
-﻿<Window
+﻿<UserControl
     x:Class="Jaya.Ui.Views.ManagePluginsView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,19 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    Title="Manage Plugins"
     Width="640"
     Height="480"
-    CanResize="False"
-    ShowInTaskbar="False"
-    WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
-    <Window.DataContext>
+    <UserControl.DataContext>
         <vm:ManagePluginsViewModel />
-    </Window.DataContext>
-    <Window.Resources>
+    </UserControl.DataContext>
+    <UserControl.Resources>
         <c:BitmapValueConverter x:Key="BitmapValueConverter" />
-    </Window.Resources>
+    </UserControl.Resources>
     <Grid Margin="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".4*" />
@@ -58,7 +54,8 @@
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="{Binding SelectedPlugin.Description, Mode=OneWay}" />
+                Text="{Binding SelectedPlugin.Description, Mode=OneWay}"
+                TextWrapping="Wrap" />
         </Grid>
 
         <ListBox
@@ -89,4 +86,4 @@
             </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
-</Window>
+</UserControl>

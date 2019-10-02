@@ -4,11 +4,14 @@ using Avalonia.Markup.Xaml;
 
 namespace Jaya.Ui.Views
 {
-    public class ManagePluginsView : UserControl
+    public class HostView : Window
     {
-        public ManagePluginsView()
+        public HostView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
         }
 
         private void InitializeComponent()
