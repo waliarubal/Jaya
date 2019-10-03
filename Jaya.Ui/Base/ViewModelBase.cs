@@ -83,8 +83,6 @@ namespace Jaya.Ui.Base
             window.Content = Activator.CreateInstance(option.ContentType);
 
             await window.ShowDialog(Application.Current.MainWindow);
-
-            viewModel = null;
         }
 
         void SimpleCommandAction(CommandType type)
