@@ -26,25 +26,7 @@ namespace Jaya.Ui.Models
         public Type ContentType
         {
             get => Get<Type>();
-            set
-            {
-                if (Set(value) && Content != null)
-                    InitializeContent();
-            }
-        }
-
-        public object Content
-        {
-            get => Get<object>();
-            private set => Set(value);
-        }
-
-        internal void InitializeContent()
-        {
-            if (ContentType == null)
-                return;
-
-            Content = Activator.CreateInstance(ContentType);
+            set => Set(value);
         }
     }
 }

@@ -79,9 +79,12 @@ namespace Jaya.Ui.Base
 
             var viewModel = window.DataContext as HostViewModel;
             viewModel.Option = option;
-            viewModel.Option.InitializeContent();
+
+            window.Content = Activator.CreateInstance(option.ContentType);
 
             await window.ShowDialog(Application.Current.MainWindow);
+
+            viewModel = null;
         }
 
         void SimpleCommandAction(CommandType type)

@@ -7,7 +7,6 @@
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     Title="{Binding Option.Title, Mode=OneWay}"
     CanResize="False"
-    Content="{Binding Option.Content, Mode=OneWay}"
     ShowInTaskbar="False"
     SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterOwner"
