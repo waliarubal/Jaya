@@ -6,10 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     Title="{Binding Option.Title, Mode=OneWay}"
-    CanResize="False"
-    ShowInTaskbar="False"
-    SizeToContent="WidthAndHeight"
-    WindowStartupLocation="CenterOwner"
+    Width="{Binding Option.Width, Mode=OneWay}"
+    Height="{Binding Option.Height, Mode=OneWay}"
     mc:Ignorable="d">
     <Window.DataContext>
         <vm:HostViewModel />

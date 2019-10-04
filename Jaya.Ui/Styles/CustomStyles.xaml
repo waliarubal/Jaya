@@ -1,4 +1,57 @@
-﻿<Styles xmlns="https://github.com/avaloniaui">
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui">
+
+    <!--  host window  -->
+    <Style Selector="local:StyledWindow">
+        <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+        <Setter Property="CanResize" Value="False" />
+        <Setter Property="HasSystemDecorations" Value="False" />
+        <Setter Property="ShowInTaskbar" Value="False" />
+        <Setter Property="WindowStartupLocation" Value="CenterOwner" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{TemplateBinding Text}" />
+                    <StackPanel Grid.Row="1" Grid.Column="2">
+                        <Button />
+                        <Button />
+                        <Button />
+                    </StackPanel>
+                    <Border
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Background="{TemplateBinding Background}">
+                        <VisualLayerManager>
+                            <ContentPresenter
+                                Name="PART_ContentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        </VisualLayerManager>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
 
     <!--  data grid  -->
     <Style Selector="DataGrid">
