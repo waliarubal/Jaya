@@ -1,7 +1,10 @@
-﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui">
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui">
 
     <!--  host window  -->
-    <Style Selector="local:StyledWindow">
+    <Style Selector="local|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
@@ -11,7 +14,13 @@
         <Setter Property="WindowStartupLocation" Value="CenterOwner" />
         <Setter Property="Template">
             <ControlTemplate>
-                <Grid>
+                <Grid Background="{TemplateBinding Background}">
+                    <Grid.Styles>
+                        <Style Selector="Border.Grip">
+                            <Setter Property="BorderThickness" Value="1 0 0 0" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+                        </Style>
+                    </Grid.Styles>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -28,26 +37,69 @@
                     <TextBlock
                         Grid.Row="1"
                         Grid.Column="1"
-                        Text="{TemplateBinding Text}" />
-                    <StackPanel Grid.Row="1" Grid.Column="2">
+                        Text="{TemplateBinding Title}" />
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Orientation="Horizontal">
                         <Button />
                         <Button />
                         <Button />
                     </StackPanel>
-                    <Border
+                    <ContentPresenter
+                        Name="PART_ContentPresenter"
                         Grid.Row="2"
                         Grid.Column="1"
-                        Background="{TemplateBinding Background}">
-                        <VisualLayerManager>
-                            <ContentPresenter
-                                Name="PART_ContentPresenter"
-                                Margin="{TemplateBinding Padding}"
-                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Content="{TemplateBinding Content}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}" />
-                        </VisualLayerManager>
-                    </Border>
+                        Margin="{TemplateBinding Padding}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Background="{TemplateBinding Background}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    <Border
+                        Name="PART_TopLeftGrip"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Classes="Grip" />
+                    <Border
+                        Name="PART_TopGrip"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Classes="Grip" />
+                    <Border
+                        Name="PART_TopRightGrip"
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        Classes="Grip" />
+                    <Border
+                        Name="PART_LeftGrip"
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Classes="Grip" />
+                    <Border
+                        Name="PART_RightGrip"
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        Grid.Column="3"
+                        Classes="Grip" />
+                    <Border
+                        Name="PART_BottomLeftGrip"
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Classes="Grip" />
+                    <Border
+                        Name="PART_BottomGrip"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Classes="Grip" />
+                    <Border
+                        Name="PART_BottomRightGrip"
+                        Grid.Row="3"
+                        Grid.Column="3"
+                        Classes="Grip" />
                 </Grid>
             </ControlTemplate>
         </Setter>
