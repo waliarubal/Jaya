@@ -16,8 +16,12 @@
             <ControlTemplate>
                 <Grid Background="{TemplateBinding Background}">
                     <Grid.Styles>
-                        <Style Selector="Border.Grip">
-                            <Setter Property="BorderThickness" Value="1 0 0 0" />
+                        <Style Selector="Border.GripHorizontal">
+                            <Setter Property="BorderThickness" Value="0 0.5" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+                        </Style>
+                        <Style Selector="Border.GripVertical">
+                            <Setter Property="BorderThickness" Value="0.5 0" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
                         </Style>
                     </Grid.Styles>
@@ -60,46 +64,46 @@
                         Name="PART_TopLeftGrip"
                         Grid.Row="0"
                         Grid.Column="0"
-                        Classes="Grip" />
+                        Classes="GripVertical" />
                     <Border
                         Name="PART_TopGrip"
                         Grid.Row="0"
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
-                        Classes="Grip" />
+                        Classes="GripHorizontal" />
                     <Border
                         Name="PART_TopRightGrip"
                         Grid.Row="0"
                         Grid.Column="3"
-                        Classes="Grip" />
+                        Classes="GripVertical" />
                     <Border
                         Name="PART_LeftGrip"
                         Grid.Row="1"
                         Grid.RowSpan="2"
                         Grid.Column="0"
-                        Classes="Grip" />
+                        Classes="GripVertical" />
                     <Border
                         Name="PART_RightGrip"
                         Grid.Row="1"
                         Grid.RowSpan="2"
                         Grid.Column="3"
-                        Classes="Grip" />
+                        Classes="GripVertical" />
                     <Border
                         Name="PART_BottomLeftGrip"
                         Grid.Row="3"
                         Grid.Column="0"
-                        Classes="Grip" />
+                        Classes="GripVertical" />
                     <Border
                         Name="PART_BottomGrip"
                         Grid.Row="3"
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
-                        Classes="Grip" />
+                        Classes="GripHorizontal" />
                     <Border
                         Name="PART_BottomRightGrip"
                         Grid.Row="3"
                         Grid.Column="3"
-                        Classes="Grip" />
+                        Classes="GripVertical" />
                 </Grid>
             </ControlTemplate>
         </Setter>
