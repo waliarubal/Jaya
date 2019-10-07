@@ -8,7 +8,7 @@
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     Title="{Binding Option.Title, Mode=OneWay}"
     Width="{Binding Option.Width, Mode=OneWay}"
-    Height="{Binding Option.Height, Mode=OneWay}" 
+    Height="{Binding Option.Height, Mode=OneWay}"
     d:DesignWidth="640" 
     d:DesignHeight="480"
     mc:Ignorable="d">

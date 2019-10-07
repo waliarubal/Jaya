@@ -7,6 +7,6 @@
         <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
         <StyleInclude Source="resm:Avalonia.Controls.DataGrid.Themes.Default.xaml?assembly=Avalonia.Controls.DataGrid" />
-        <StyleInclude Source="/Styles/CustomStyles.xaml" />
+        <StyleInclude Source="/Styles/Styles.xaml" />
     </Application.Styles>
 </Application>

@@ -10,10 +10,12 @@ namespace Jaya.Ui
     public class StyledWindow : Window, IStyleable
     {
         public static StyledProperty<object> HeaderContentProperty;
+        public static StyledProperty<bool> IsModalProperty;
 
         static StyledWindow()
         {
             HeaderContentProperty = AvaloniaProperty.Register<StyledWindow, object>(nameof(HeaderContent));
+            IsModalProperty = AvaloniaProperty.Register<StyledWindow, bool>(nameof(HeaderContent));
         }
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
@@ -40,6 +42,12 @@ namespace Jaya.Ui
         {
             get => GetValue(HeaderContentProperty);
             set => SetValue(HeaderContentProperty, value);
+        }
+
+        public bool IsModal
+        {
+            get => GetValue(IsModalProperty);
+            set => SetValue(IsModalProperty, value);
         }
 
         Type IStyleable.StyleKey => typeof(StyledWindow);

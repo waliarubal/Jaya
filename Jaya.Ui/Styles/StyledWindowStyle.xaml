@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui">
 
-    <!--  styled window window  -->
+
     <Style Selector="local|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
@@ -74,7 +74,10 @@
                             Margin="4,0,0,0"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0">
-                            <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Title}" />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Text="{TemplateBinding Title}"
+                                TextAlignment="Center" />
                         </Border>
                     </Grid>
                     <StackPanel
@@ -152,60 +155,4 @@
         </Setter>
     </Style>
 
-    <!--  data grid  -->
-    <Style Selector="DataGrid">
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                    <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,*,Auto,Auto">
-                        <DataGridColumnHeader Name="PART_TopLeftCornerHeader" Width="22" />
-                        <DataGridColumnHeadersPresenter Name="PART_ColumnHeadersPresenter" Grid.Column="1" />
-                        <DataGridColumnHeader Name="PART_TopRightCornerHeader" Grid.Column="2" />
-                        <Rectangle
-                            Name="PART_ColumnHeadersAndRowsSeparator"
-                            Grid.ColumnSpan="3"
-                            Height="1"
-                            VerticalAlignment="Bottom"
-                            Fill="#FFC9CACA"
-                            StrokeThickness="1" />
-
-                        <DataGridRowsPresenter
-                            Name="PART_RowsPresenter"
-                            Grid.Row="1"
-                            Grid.ColumnSpan="2" />
-                        <Rectangle
-                            Name="BottomRightCorner"
-                            Grid.Row="2"
-                            Grid.Column="2"
-                            Fill="#FFE9EEF4" />
-                        <Rectangle
-                            Name="BottomLeftCorner"
-                            Grid.Row="2"
-                            Grid.ColumnSpan="2"
-                            Fill="#FFE9EEF4" />
-                        <ScrollBar
-                            Name="PART_VerticalScrollbar"
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            Width="{DynamicResource ScrollBarThickness}"
-                            Margin="0,-1,-1,-1"
-                            Orientation="Vertical" />
-
-                        <Grid
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            ColumnDefinitions="Auto,*">
-                            <Rectangle Name="PART_FrozenColumnScrollBarSpacer" />
-                            <ScrollBar
-                                Name="PART_HorizontalScrollbar"
-                                Grid.Column="1"
-                                Height="{DynamicResource ScrollBarThickness}"
-                                Margin="-1,0,-1,-1"
-                                Orientation="Horizontal" />
-                        </Grid>
-                    </Grid>
-                </Border>
-            </ControlTemplate>
-        </Setter>
-    </Style>
 </Styles>
