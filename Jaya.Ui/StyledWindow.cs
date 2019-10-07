@@ -29,7 +29,7 @@ namespace Jaya.Ui
             SetupWindowEdge(e, "PART_BottomLeftGrip", StandardCursorType.BottomLeftCorner, WindowEdge.SouthWest);
             SetupWindowEdge(e, "PART_BottomRightGrip", StandardCursorType.BottomRightCorner, WindowEdge.SouthEast);
 
-            GetControl<TextBlock>(e, "PART_TitleBar").PointerPressed += delegate { PlatformImpl?.BeginMoveDrag(); };
+            GetControl<Border>(e, "PART_TitleBar").PointerPressed += delegate { PlatformImpl?.BeginMoveDrag(); };
 
             GetControl<Button>(e, "PART_Close").Click += delegate { Close(); };
             GetControl<Button>(e, "PART_Minimize").Click += delegate { WindowState = WindowState.Minimized; };

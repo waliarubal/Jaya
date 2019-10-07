@@ -68,13 +68,14 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <ContentControl Background="Transparent" Content="{TemplateBinding HeaderContent}" />
-                        <TextBlock
+                        <Border
                             Name="PART_TitleBar"
                             Grid.Column="1"
                             Margin="4,0,0,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            Text="{TemplateBinding Title}" />
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="0">
+                            <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Title}" />
+                        </Border>
                     </Grid>
                     <StackPanel
                         Grid.Row="1"
@@ -95,6 +96,7 @@
                         Name="PART_ContentPresenter"
                         Grid.Row="2"
                         Grid.Column="1"
+                        Grid.ColumnSpan="2"
                         Margin="{TemplateBinding Padding}"
                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
