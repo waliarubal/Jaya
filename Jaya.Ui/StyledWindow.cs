@@ -12,6 +12,7 @@ namespace Jaya.Ui
         public static StyledProperty<object> HeaderContentProperty;
         public static StyledProperty<bool> IsModalProperty;
         Button _closeButton, _minimizeButton, _maximizeButton;
+        bool _isTemplateApplied;
 
         static StyledWindow()
         {
@@ -37,13 +38,17 @@ namespace Jaya.Ui
             _closeButton = GetControl<Button>(e, "PART_Close");
             _closeButton.Click += delegate { Close(); };
 
+            var isNotModal = !IsModal;
+
             _minimizeButton = GetControl<Button>(e, "PART_Minimize");
-            _minimizeButton.IsVisible = !IsModal;
+            _minimizeButton.IsVisible = isNotModal;
             _minimizeButton.Click += delegate { WindowState = WindowState.Minimized; };
 
             _maximizeButton = GetControl<Button>(e, "PART_Maximize");
-            _maximizeButton.IsVisible = !IsModal;
+            _maximizeButton.IsVisible = isNotModal;
             _maximizeButton.Click += delegate { WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; };
+
+            _isTemplateApplied = true;
         }
 
         public object HeaderContent
@@ -59,28 +64,16 @@ namespace Jaya.Ui
             {
                 SetValue(IsModalProperty, value);
 
-                if (value)
-                {
-                    CanResize = false;
-                    ShowInTaskbar = false;
-                    WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                var inverseValue = !value;
 
-                    if (_minimizeButton != null)
-                        _minimizeButton.IsVisible = false;
-                    if (_maximizeButton != null)
-                        _maximizeButton.IsVisible = false;
-                }
-                else
-                {
-                    CanResize = true;
-                    ShowInTaskbar = true;
-                    WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                ShowInTaskbar = inverseValue;
+                WindowStartupLocation = inverseValue ? WindowStartupLocation.CenterScreen : WindowStartupLocation.CenterOwner;
 
-                    if (_minimizeButton != null)
-                        _minimizeButton.IsVisible = true;
-                    if (_maximizeButton != null)
-                        _maximizeButton.IsVisible = true;
-                }
+                if (!_isTemplateApplied)
+                    return;
+
+                _minimizeButton.IsVisible = inverseValue;
+                _maximizeButton.IsVisible = inverseValue;
             }
         }
 
