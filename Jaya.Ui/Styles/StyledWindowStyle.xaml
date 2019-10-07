@@ -3,6 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui">
 
+    <Design.PreviewWith>
+        <local:StyledWindow Width="640" Height="480" />
+    </Design.PreviewWith>
 
     <Style Selector="local|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
@@ -10,7 +13,7 @@
         <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
         <Setter Property="CanResize" Value="False" />
         <Setter Property="HasSystemDecorations" Value="False" />
-        <Setter Property="ShowInTaskbar" Value="False" />
+        <Setter Property="ShowInTaskbar" Value="{TemplateBinding !IsModal}" />
         <Setter Property="WindowStartupLocation" Value="CenterOwner" />
         <Setter Property="Template">
             <ControlTemplate>
