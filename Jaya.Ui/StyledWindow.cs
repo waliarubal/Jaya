@@ -11,6 +11,7 @@ namespace Jaya.Ui
     {
         public static StyledProperty<object> HeaderContentProperty;
         public static StyledProperty<bool> IsModalProperty;
+        Button _closeButton, _minimizeButton, _maximizeButton;
 
         static StyledWindow()
         {
@@ -33,9 +34,16 @@ namespace Jaya.Ui
 
             GetControl<Border>(e, "PART_TitleBar").PointerPressed += delegate { PlatformImpl?.BeginMoveDrag(); };
 
-            GetControl<Button>(e, "PART_Close").Click += delegate { Close(); };
-            GetControl<Button>(e, "PART_Minimize").Click += delegate { WindowState = WindowState.Minimized; };
-            GetControl<Button>(e, "PART_Maximize").Click += delegate { WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; };
+            _closeButton = GetControl<Button>(e, "PART_Close");
+            _closeButton.Click += delegate { Close(); };
+
+            _minimizeButton = GetControl<Button>(e, "PART_Minimize");
+            _minimizeButton.IsVisible = !IsModal;
+            _minimizeButton.Click += delegate { WindowState = WindowState.Minimized; };
+
+            _maximizeButton = GetControl<Button>(e, "PART_Maximize");
+            _maximizeButton.IsVisible = !IsModal;
+            _maximizeButton.Click += delegate { WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; };
         }
 
         public object HeaderContent
@@ -47,7 +55,33 @@ namespace Jaya.Ui
         public bool IsModal
         {
             get => GetValue(IsModalProperty);
-            set => SetValue(IsModalProperty, value);
+            set
+            {
+                SetValue(IsModalProperty, value);
+
+                if (value)
+                {
+                    CanResize = false;
+                    ShowInTaskbar = false;
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
+                    if (_minimizeButton != null)
+                        _minimizeButton.IsVisible = false;
+                    if (_maximizeButton != null)
+                        _maximizeButton.IsVisible = false;
+                }
+                else
+                {
+                    CanResize = true;
+                    ShowInTaskbar = true;
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                    if (_minimizeButton != null)
+                        _minimizeButton.IsVisible = true;
+                    if (_maximizeButton != null)
+                        _maximizeButton.IsVisible = true;
+                }
+            }
         }
 
         Type IStyleable.StyleKey => typeof(StyledWindow);

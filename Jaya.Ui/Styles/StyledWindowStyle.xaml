@@ -1,20 +1,14 @@
 ﻿<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui">
-
-    <Design.PreviewWith>
-        <local:StyledWindow Width="640" Height="480" />
-    </Design.PreviewWith>
 
     <Style Selector="local|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
-        <Setter Property="CanResize" Value="False" />
         <Setter Property="HasSystemDecorations" Value="False" />
-        <Setter Property="ShowInTaskbar" Value="{TemplateBinding !IsModal}" />
-        <Setter Property="WindowStartupLocation" Value="CenterOwner" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Grid Background="{TemplateBinding Background}">

@@ -9,6 +9,7 @@
     Title="{Binding Option.Title, Mode=OneWay}"
     Width="{Binding Option.Width, Mode=OneWay}"
     Height="{Binding Option.Height, Mode=OneWay}"
+    IsModal="True"
     d:DesignWidth="640" 
     d:DesignHeight="480"
     mc:Ignorable="d">
