@@ -1,10 +1,9 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
 namespace Jaya.Ui.Views
 {
-    public class MainView : Window
+    public class MainView : StyledWindow
     {
 
         public MainView()

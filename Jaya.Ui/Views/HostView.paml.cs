@@ -5,6 +5,7 @@ namespace Jaya.Ui.Views
 {
     public class HostView : StyledWindow
     {
+
         public HostView()
         {
             this.InitializeComponent();

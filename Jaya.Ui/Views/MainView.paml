@@ -1,4 +1,4 @@
-﻿<Window
+﻿<local:StyledWindow
     x:Class="Jaya.Ui.Views.MainView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,16 +6,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
+    xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     Title="{Binding WindowTitle, Mode=OneWay}"
     Width="800"
     Height="600"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
-    <Window.DataContext>
+    <local:StyledWindow.DataContext>
         <vm:MainViewModel />
-    </Window.DataContext>
+    </local:StyledWindow.DataContext>
+    <local:StyledWindow.HeaderContent>
+      <v:MenuView />
+    </local:StyledWindow.HeaderContent>
     <DockPanel>
-        <v:MenuView DockPanel.Dock="Top" />
         <v:ToolbarView DockPanel.Dock="Top" IsVisible="{Binding ToolbarConfig.IsVisible, Mode=OneWay}" />
         <v:AddressbarView DockPanel.Dock="Top" />
         <v:StatusbarView DockPanel.Dock="Bottom" />
@@ -51,4 +54,4 @@
         </Grid>
     </DockPanel>
 
-</Window>
+</local:StyledWindow>

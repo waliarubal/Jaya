@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Styling;
@@ -8,6 +9,13 @@ namespace Jaya.Ui
 {
     public class StyledWindow : Window, IStyleable
     {
+        public static StyledProperty<object> HeaderContentProperty;
+
+        static StyledWindow()
+        {
+            HeaderContentProperty = AvaloniaProperty.Register<StyledWindow, object>(nameof(HeaderContent));
+        }
+
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
             base.OnTemplateApplied(e);
@@ -21,8 +29,17 @@ namespace Jaya.Ui
             SetupWindowEdge(e, "PART_BottomLeftGrip", StandardCursorType.BottomLeftCorner, WindowEdge.SouthWest);
             SetupWindowEdge(e, "PART_BottomRightGrip", StandardCursorType.BottomRightCorner, WindowEdge.SouthEast);
 
-            GetControl<TextBlock>(e, "PART_TitleBar").PointerPressed += (object sender, PointerPressedEventArgs args) => PlatformImpl?.BeginMoveDrag();
+            GetControl<TextBlock>(e, "PART_TitleBar").PointerPressed += delegate { PlatformImpl?.BeginMoveDrag(); };
 
+            GetControl<Button>(e, "PART_Close").Click += delegate { Close(); };
+            GetControl<Button>(e, "PART_Minimize").Click += delegate { WindowState = WindowState.Minimized; };
+            GetControl<Button>(e, "PART_Maximize").Click += delegate { WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; };
+        }
+
+        public object HeaderContent
+        {
+            get => GetValue(HeaderContentProperty);
+            set => SetValue(HeaderContentProperty, value);
         }
 
         Type IStyleable.StyleKey => typeof(StyledWindow);
@@ -31,7 +48,7 @@ namespace Jaya.Ui
         {
             var control = GetControl<Border>(e, name);
             control.Cursor = new Cursor(cursor);
-            control.PointerPressed += (object sender, PointerPressedEventArgs args) => PlatformImpl?.BeginResizeDrag(edge);
+            control.PointerPressed += delegate { PlatformImpl?.BeginResizeDrag(edge); };
         }
 
         T GetControl<T>(TemplateAppliedEventArgs e, string name) where T : Control
