@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui">
 
-    <!--  host window  -->
+    <!--  styled window window  -->
     <Style Selector="local|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
@@ -16,13 +16,34 @@
             <ControlTemplate>
                 <Grid Background="{TemplateBinding Background}">
                     <Grid.Styles>
-                        <Style Selector="Border.GripHorizontal">
-                            <Setter Property="BorderThickness" Value="0 0.5" />
+                        <Style Selector="Border.Grip">
+                            <Setter Property="BorderThickness" Value="0.5" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
                         </Style>
-                        <Style Selector="Border.GripVertical">
-                            <Setter Property="BorderThickness" Value="0.5 0" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+                        <Style Selector="Button &gt; Path">
+                            <Setter Property="Width" Value="12" />
+                            <Setter Property="Height" Value="12" />
+                            <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+                            <Setter Property="Stretch" Value="UniformToFill" />
+                        </Style>
+                        <Style Selector="Button">
+                            <Setter Property="Margin" Value="1 0" />
+                            <Setter Property="Padding" Value="2" />
+                            <Setter Property="MinWidth" Value="21" />
+                            <Setter Property="MinHeight" Value="21" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                        </Style>
+                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+                        </Style>
+                        <Style Selector="Button:pressed /template/ ContentPresenter">
+                            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+                        </Style>
+                        <Style Selector="Button:disabled">
+                            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
                         </Style>
                     </Grid.Styles>
                     <Grid.ColumnDefinitions>
@@ -39,16 +60,26 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock
+                        Name="PART_TitleBar"
                         Grid.Row="1"
                         Grid.Column="1"
+                        Margin="4,2"
+                        VerticalAlignment="Center"
                         Text="{TemplateBinding Title}" />
                     <StackPanel
                         Grid.Row="1"
                         Grid.Column="2"
+                        Margin="0,2,2,2"
                         Orientation="Horizontal">
-                        <Button />
-                        <Button />
-                        <Button />
+                        <Button ToolTip.Tip="Minimize">
+                            <Path Data="M1600 736v192q0 40-28 68t-68 28h-1216q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h1216q40 0 68 28t28 68z" Stretch="Uniform" />
+                        </Button>
+                        <Button>
+                            <Path Data="M70,0H29.9C24.4,0,20,4.4,20,9.9V50c0,5.5,4.5,10,10,10h40c5.5,0,10-4.5,10-10V10C80,4.5,75.5,0,70,0z M70,50H30V10h40V50z    M10,40H0v30c0,5.5,4.5,10,10,10h30V70H10V40z" />
+                        </Button>
+                        <Button ToolTip.Tip="Close">
+                            <Path Data="M22.245,4.015c0.313,0.313,0.313,0.826,0,1.139l-6.276,6.27c-0.313,0.312-0.313,0.826,0,1.14l6.273,6.272  c0.313,0.313,0.313,0.826,0,1.14l-2.285,2.277c-0.314,0.312-0.828,0.312-1.142,0l-6.271-6.271c-0.313-0.313-0.828-0.313-1.141,0  l-6.276,6.267c-0.313,0.313-0.828,0.313-1.141,0l-2.282-2.28c-0.313-0.313-0.313-0.826,0-1.14l6.278-6.269  c0.313-0.312,0.313-0.826,0-1.14L1.709,5.147c-0.314-0.313-0.314-0.827,0-1.14l2.284-2.278C4.308,1.417,4.821,1.417,5.135,1.73  L11.405,8c0.314,0.314,0.828,0.314,1.141,0.001l6.276-6.267c0.312-0.312,0.826-0.312,1.141,0L22.245,4.015z" />
+                        </Button>
                     </StackPanel>
                     <ContentPresenter
                         Name="PART_ContentPresenter"
@@ -64,46 +95,46 @@
                         Name="PART_TopLeftGrip"
                         Grid.Row="0"
                         Grid.Column="0"
-                        Classes="GripVertical" />
+                        Classes="Grip" />
                     <Border
                         Name="PART_TopGrip"
                         Grid.Row="0"
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
-                        Classes="GripHorizontal" />
+                        Classes="Grip" />
                     <Border
                         Name="PART_TopRightGrip"
                         Grid.Row="0"
                         Grid.Column="3"
-                        Classes="GripVertical" />
+                        Classes="Grip" />
                     <Border
                         Name="PART_LeftGrip"
                         Grid.Row="1"
                         Grid.RowSpan="2"
                         Grid.Column="0"
-                        Classes="GripVertical" />
+                        Classes="Grip" />
                     <Border
                         Name="PART_RightGrip"
                         Grid.Row="1"
                         Grid.RowSpan="2"
                         Grid.Column="3"
-                        Classes="GripVertical" />
+                        Classes="Grip" />
                     <Border
                         Name="PART_BottomLeftGrip"
                         Grid.Row="3"
                         Grid.Column="0"
-                        Classes="GripVertical" />
+                        Classes="Grip" />
                     <Border
                         Name="PART_BottomGrip"
                         Grid.Row="3"
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
-                        Classes="GripHorizontal" />
+                        Classes="Grip" />
                     <Border
                         Name="PART_BottomRightGrip"
                         Grid.Row="3"
                         Grid.Column="3"
-                        Classes="GripVertical" />
+                        Classes="Grip" />
                 </Grid>
             </ControlTemplate>
         </Setter>
