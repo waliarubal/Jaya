@@ -21,12 +21,12 @@ namespace Jaya.Ui.ViewModels
                     else
                         ConfigurationEditor = Activator.CreateInstance(value.ConfigurationEditorType);
 
-                    RaisePropertyChanged(nameof(IsHavingConfigurationEditor));
+                    RaisePropertyChanged(nameof(IsPluginConfigurable));
                 }
             }
         }
 
-        public bool IsHavingConfigurationEditor => ConfigurationEditor != null;
+        public bool IsPluginConfigurable => ConfigurationEditor != null;
 
         public object ConfigurationEditor
         {

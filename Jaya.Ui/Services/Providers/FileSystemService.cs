@@ -1,5 +1,6 @@
 ﻿using Jaya.Ui.Base;
 using Jaya.Ui.Models;
+using Jaya.Ui.Views.Providers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +15,7 @@ namespace Jaya.Ui.Services.Providers
             ImagePath = "avares://Jaya.Ui/Assets/Images/Computer-32.png";
             Description = "View your local drives, inspect their properties and play with directories & files stored within them.";
             IsRootDrive = true;
+            ConfigurationEditorType = typeof(FileSystemConfigurationView);
         }
 
         protected override ProviderModel GetDefaultProvider()
