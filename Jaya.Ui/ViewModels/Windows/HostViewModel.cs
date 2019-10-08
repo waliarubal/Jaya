@@ -1,7 +1,7 @@
 ﻿using Jaya.Ui.Base;
 using Jaya.Ui.Models;
 
-namespace Jaya.Ui.ViewModels
+namespace Jaya.Ui.ViewModels.Windows
 {
     public class HostViewModel: ViewModelBase
     {

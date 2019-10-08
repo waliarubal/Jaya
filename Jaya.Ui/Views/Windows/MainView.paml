@@ -1,11 +1,11 @@
 ﻿<local:StyledWindow
-    x:Class="Jaya.Ui.Views.MainView"
+    x:Class="Jaya.Ui.Views.Windows.MainView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
-    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels.Windows;assembly=Jaya.Ui"
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     Title="{Binding WindowTitle, Mode=OneWay}"
     Width="800"

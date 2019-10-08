@@ -2,8 +2,8 @@
 using Avalonia.Threading;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
-using Jaya.Ui.ViewModels;
-using Jaya.Ui.Views;
+using Jaya.Ui.ViewModels.Windows;
+using Jaya.Ui.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;

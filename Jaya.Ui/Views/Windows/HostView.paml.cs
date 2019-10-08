@@ -1,14 +1,14 @@
 ﻿using Avalonia;
 using Avalonia.Markup.Xaml;
 
-namespace Jaya.Ui.Views
+namespace Jaya.Ui.Views.Windows
 {
-    public class MainView : StyledWindow
+    public class HostView : StyledWindow
     {
 
-        public MainView()
+        public HostView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif

@@ -1,6 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Logging.Serilog;
-using Jaya.Ui.Views;
+using Jaya.Ui.Views.Windows;
 
 namespace Jaya.Ui
 {

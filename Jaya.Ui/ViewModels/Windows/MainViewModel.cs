@@ -2,7 +2,7 @@
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 
-namespace Jaya.Ui.ViewModels
+namespace Jaya.Ui.ViewModels.Windows
 {
     public class MainViewModel : ViewModelBase
     {
