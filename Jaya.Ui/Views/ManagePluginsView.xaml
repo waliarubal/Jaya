@@ -20,10 +20,6 @@
             <ColumnDefinition Width=".4*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
         <ListBox
             Grid.RowSpan="2"
@@ -85,7 +81,17 @@
                 Grid.Column="1"
                 Text="{Binding SelectedPlugin.Description, Mode=OneWay}"
                 TextWrapping="Wrap" />
-            <ContentControl Grid.Row="2" Grid.ColumnSpan="2" />
+            <ContentControl
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Content="{Binding ConfigurationEditor, Mode=OneWay}"
+                IsVisible="{Binding IsHavingConfigurationEditor, Mode=OneWay}" />
+            <TextBlock
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                VerticalAlignment="Center"
+                Text="No editable Configurations are available."
+                TextAlignment="Center" />
         </Grid>
     </Grid>
 </UserControl>
