@@ -1,5 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Threading;
+﻿using Avalonia.Threading;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using Jaya.Ui.ViewModels.Windows;
@@ -82,7 +81,7 @@ namespace Jaya.Ui.Base
 
             window.Content = Activator.CreateInstance(option.ContentType);
 
-            await window.ShowDialog(Application.Current.MainWindow);
+            await window.ShowDialog(App.Lifetime.MainWindow);
         }
 
         void SimpleCommandAction(CommandType type)

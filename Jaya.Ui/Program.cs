@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Logging.Serilog;
-using Jaya.Ui.Views.Windows;
 
 namespace Jaya.Ui
 {
@@ -11,8 +10,6 @@ namespace Jaya.Ui
         {
             return AppBuilder.Configure<App>()
                            .UsePlatformDetect()
-                           .UseReactiveUI()
-                           .UseDataGrid()
                            .LogToDebug();
         }
 
@@ -21,13 +18,7 @@ namespace Jaya.Ui
         // a SynchronizationContext to be ready
         static void Main(string[] args)
         {
-            BuildAvaloniaApp().Start(AppMain, args);
-        }
-
-        // Application entry point. Avalonia is completely initialized.
-        static void AppMain(Application app, string[] args)
-        {
-            Application.Current.RunWithMainWindow<MainView>();
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         }
     }
 }

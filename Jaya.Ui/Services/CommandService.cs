@@ -40,7 +40,7 @@ namespace Jaya.Ui.Services
             switch (type)
             {
                 case CommandType.Exit:
-                    Application.Current.Exit();
+                    App.Lifetime.Shutdown();
                     break;
             }
         }
