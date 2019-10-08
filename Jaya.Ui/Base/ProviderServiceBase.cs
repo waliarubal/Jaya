@@ -40,6 +40,12 @@ namespace Jaya.Ui.Base
             protected set;
         }
 
+        public Type ConfigurationEditorType
+        {
+            get;
+            protected set;
+        }
+
         #endregion
 
         protected DirectoryModel GetFromCache(ProviderModel provider, string path)

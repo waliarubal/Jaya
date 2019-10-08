@@ -25,39 +25,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="1">
-            <Grid.Styles>
-                <Style Selector="Image">
-                    <Setter Property="Width" Value="32" />
-                    <Setter Property="Height" Value="32" />
-                    <Setter Property="VerticalAlignment" Value="Top" />
-                    <Setter Property="HorizontalAlignment" Value="Left" />
-                </Style>
-                <Style Selector="TextBlock">
-                    <Setter Property="TextWrapping" Value="Wrap" />
-                    <Setter Property="Margin" Value="4 0 0 0" />
-                </Style>
-            </Grid.Styles>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Image Grid.RowSpan="2" Source="{Binding SelectedPlugin.ImagePath, Mode=OneWay, Converter={StaticResource BitmapValueConverter}}" />
-            <TextBlock
-                Grid.Column="1"
-                FontWeight="Bold"
-                Text="{Binding SelectedPlugin.Name, Mode=OneWay}" />
-            <TextBlock
-                Grid.Row="1"
-                Grid.Column="1"
-                Text="{Binding SelectedPlugin.Description, Mode=OneWay}"
-                TextWrapping="Wrap" />
-        </Grid>
-
         <ListBox
             Grid.RowSpan="2"
             Items="{Binding Plugins, Mode=OneWay}"
@@ -85,5 +52,40 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <Grid Grid.Column="1">
+            <Grid.Styles>
+                <Style Selector="Image">
+                    <Setter Property="Width" Value="32" />
+                    <Setter Property="Height" Value="32" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                </Style>
+                <Style Selector="TextBlock">
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="Margin" Value="4 0 0 0" />
+                </Style>
+            </Grid.Styles>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Image Grid.RowSpan="2" Source="{Binding SelectedPlugin.ImagePath, Mode=OneWay, Converter={StaticResource BitmapValueConverter}}" />
+            <TextBlock
+                Grid.Column="1"
+                FontWeight="Bold"
+                Text="{Binding SelectedPlugin.Name, Mode=OneWay}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding SelectedPlugin.Description, Mode=OneWay}"
+                TextWrapping="Wrap" />
+            <ContentControl Grid.Row="2" Grid.ColumnSpan="2" />
+        </Grid>
     </Grid>
 </UserControl>
