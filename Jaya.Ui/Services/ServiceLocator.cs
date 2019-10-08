@@ -1,6 +1,6 @@
-﻿using Jaya.Ui.Services.Providers;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Reflection;
 
 namespace Jaya.Ui.Services
 {
@@ -57,12 +57,11 @@ namespace Jaya.Ui.Services
         IServiceScope RegisterServices()
         {
             var collection = new ServiceCollection();
-            collection.AddScoped<MemoryCacheService>();
-            collection.AddScoped<ConfigurationService>();
-            collection.AddScoped<CommandService>();
-            collection.AddScoped<NavigationService>();
-            collection.AddScoped<ProviderService>();
-            collection.AddScoped<FileSystemService>();
+
+            var types = Assembly.GetExecutingAssembly().DefinedTypes;
+            foreach (TypeInfo typeInfo in types)
+                if (typeInfo.IsClass && typeInfo.Name.EndsWith("Service", StringComparison.InvariantCulture))
+                    collection.AddScoped(typeInfo);
 
             var container = collection.BuildServiceProvider();
             var scopeFactory = container.GetRequiredService<IServiceScopeFactory>();
