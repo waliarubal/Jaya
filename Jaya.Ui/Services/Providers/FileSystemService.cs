@@ -21,7 +21,7 @@ namespace Jaya.Ui.Services.Providers
         protected override ProviderModel GetDefaultProvider()
         {
             var provider = new ProviderModel(Environment.MachineName, this);
-            provider.ImagePath = "avares://Jaya.Ui/Assets/Images/Client-16.png";
+            provider.ImagePath = "avares://Jaya.Ui/Assets/Images/Computer-32.png";
             return provider;
         }
 
