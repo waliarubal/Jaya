@@ -27,7 +27,7 @@ namespace Jaya.Ui
             SetupWindowEdge(e, "PART_RightGrip", StandardCursorType.RightSide, WindowEdge.East);
             SetupWindowEdge(e, "PART_LeftGrip", StandardCursorType.LeftSide, WindowEdge.West);
             SetupWindowEdge(e, "PART_TopGrip", StandardCursorType.TopSide, WindowEdge.North);
-            SetupWindowEdge(e, "PART_BottomGrip", StandardCursorType.BottomSide, WindowEdge.South);
+            SetupWindowEdge(e, "PART_BottomGrip", StandardCursorType.BottomSize, WindowEdge.South);
             SetupWindowEdge(e, "PART_TopLeftGrip", StandardCursorType.TopLeftCorner, WindowEdge.NorthWest);
             SetupWindowEdge(e, "PART_TopRightGrip", StandardCursorType.TopRightCorner, WindowEdge.NorthEast);
             SetupWindowEdge(e, "PART_BottomLeftGrip", StandardCursorType.BottomLeftCorner, WindowEdge.SouthWest);
