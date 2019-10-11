@@ -2,7 +2,7 @@
 
 namespace Jaya.Ui.Models
 {
-    public class ApplicationConfigModel: ModelBase
+    public class ApplicationConfigModel: ConfigModelBase
     {
         public bool IsItemCheckBoxVisible
         {

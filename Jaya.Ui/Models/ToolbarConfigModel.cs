@@ -2,7 +2,7 @@
 
 namespace Jaya.Ui.Models
 {
-    public class ToolbarConfigModel: ModelBase
+    public class ToolbarConfigModel: ConfigModelBase
     {
         public bool IsVisible
         {

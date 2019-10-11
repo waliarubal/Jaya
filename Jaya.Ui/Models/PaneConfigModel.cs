@@ -3,7 +3,7 @@ using Jaya.Ui.Base;
 
 namespace Jaya.Ui.Models
 {
-    public class PaneConfigModel : ModelBase
+    public class PaneConfigModel : ConfigModelBase
     {
         public bool IsPreviewOrDetailsPaneVisible => IsPreviewPaneVisible || IsDetailsPaneVisible;
 
