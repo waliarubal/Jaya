@@ -69,11 +69,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image
-                            Width="24"
-                            Height="24"
-                            Source="{TemplateBinding Icon,
-                                                     Converter={StaticResource IconImageConverter}}" />
+                        <Image Source="{TemplateBinding Icon, Converter={StaticResource IconImageConverter}}" />
                         <ContentControl
                             Grid.Column="1"
                             Background="Transparent"

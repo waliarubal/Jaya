@@ -10,7 +10,6 @@
     Title="{Binding WindowTitle, Mode=OneWay}"
     Width="800"
     Height="600"
-    Icon="avares://Jaya.Ui/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
     <local:StyledWindow.DataContext>
         <vm:MainViewModel />
