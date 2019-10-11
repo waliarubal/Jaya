@@ -3,6 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui">
+    <Styles.Resources>
+        <c:IconImageConverter x:Key="IconImageConverter" />
+    </Styles.Resources>
 
     <Style Selector="local|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
@@ -66,7 +69,11 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image />
+                        <Image
+                            Width="24"
+                            Height="24"
+                            Source="{TemplateBinding Icon,
+                                                     Converter={StaticResource IconImageConverter}}" />
                         <ContentControl
                             Grid.Column="1"
                             Background="Transparent"
