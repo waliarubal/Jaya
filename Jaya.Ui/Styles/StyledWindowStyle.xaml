@@ -70,7 +70,7 @@
                             Name="PART_Icon"
                             Width="22"
                             Height="22"
-                            Margin="4" />
+                            Margin="2,2,2,0" />
                         <ContentControl
                             Grid.Column="1"
                             HorizontalContentAlignment="Left"
@@ -80,7 +80,7 @@
                         <Border
                             Name="PART_TitleBar"
                             Grid.Column="2"
-                            Margin="4,0,0,0"
+                            Margin="4,0,4,0"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0">
                             <TextBlock
