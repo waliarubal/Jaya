@@ -12,7 +12,7 @@ namespace Jaya.Ui
 {
     public class StyledWindow : Window, IStyleable
     {
-        const string DEFAULT_ICON = "avares://Jaya.Ui/Assets/avalonia-logo.ico";
+        const string DEFAULT_ICON = "avares://Jaya.Ui/Assets/Logo.ico";
 
         public static StyledProperty<object> HeaderContentProperty;
         public static StyledProperty<bool> IsModalProperty;
