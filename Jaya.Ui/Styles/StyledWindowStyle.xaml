@@ -3,9 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui">
-    <Styles.Resources>
-        <c:IconImageConverter x:Key="IconImageConverter" />
-    </Styles.Resources>
 
     <Style Selector="local|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
@@ -21,29 +18,29 @@
                             <Setter Property="BorderThickness" Value="0.5" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
                         </Style>
-                        <Style Selector="Button &gt; Path">
+                        <Style Selector="StackPanel &gt; Button &gt; Path">
                             <Setter Property="Width" Value="12" />
                             <Setter Property="Height" Value="12" />
                             <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
                             <Setter Property="Stretch" Value="UniformToFill" />
                         </Style>
-                        <Style Selector="Button">
+                        <Style Selector="StackPanel &gt; Button">
                             <Setter Property="Margin" Value="1 0" />
                             <Setter Property="Padding" Value="2" />
-                            <Setter Property="MinWidth" Value="21" />
-                            <Setter Property="MinHeight" Value="21" />
+                            <Setter Property="Width" Value="30" />
+                            <Setter Property="Height" Value="24" />
                             <Setter Property="Background" Value="Transparent" />
                             <Setter Property="BorderThickness" Value="1" />
                             <Setter Property="BorderBrush" Value="Transparent" />
                         </Style>
-                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Style Selector="StackPanel &gt; Button:pointerover /template/ ContentPresenter">
                             <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
                         </Style>
-                        <Style Selector="Button:pressed /template/ ContentPresenter">
+                        <Style Selector="StackPanel &gt; Button:pressed /template/ ContentPresenter">
                             <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
                         </Style>
-                        <Style Selector="Button:disabled">
+                        <Style Selector="StackPanel &gt; Button:disabled">
                             <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
                         </Style>
                     </Grid.Styles>
@@ -69,9 +66,15 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="{TemplateBinding Icon, Converter={StaticResource IconImageConverter}}" />
+                        <Image
+                            Name="PART_Icon"
+                            Width="22"
+                            Height="22"
+                            Margin="4" />
                         <ContentControl
                             Grid.Column="1"
+                            HorizontalContentAlignment="Left"
+                            VerticalContentAlignment="Center"
                             Background="Transparent"
                             Content="{TemplateBinding HeaderContent}" />
                         <Border
