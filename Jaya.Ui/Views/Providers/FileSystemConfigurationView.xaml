@@ -15,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <CheckBox>Show protected operating system files. (Not Recommended)</CheckBox>
+        <CheckBox IsChecked="{Binding FileSystemServiceConfiguration.IsProtectedFileVisible, Mode=TwoWay}">Show protected operating system files. (Not Recommended)</CheckBox>
     </Grid>
 
 </UserControl>
