@@ -1,4 +1,5 @@
 ﻿using Jaya.Ui.Models;
+using Jaya.Ui.Models.Providers;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
@@ -10,6 +11,35 @@ namespace Jaya.Ui.Services
         readonly CommandService _commandService;
 
         public ConfigurationService(CommandService commandService)
+        {
+            _commandService = commandService;
+            _onSimpleCommand = commandService.EventAggregator.Subscribe<CommandType>(SimpleCommandAction);
+            _onParameterizedCommand = commandService.EventAggregator.Subscribe<KeyValuePair<CommandType, object>>(ParameterizedCommandAction);
+
+            LoadConfiguration();
+        }
+
+        ~ConfigurationService()
+        {
+            SaveConfiguration();
+
+            _commandService.EventAggregator.UnSubscribe(_onSimpleCommand);
+            _commandService.EventAggregator.UnSubscribe(_onParameterizedCommand);
+        }
+
+        #region properties
+
+        public FileSystemServiceConfigModel FileSystemServiceConfiguration { get; private set; }
+
+        public ToolbarConfigModel ToolbarConfiguration { get; private set; }
+
+        public PaneConfigModel PaneConfiguration { get; private set; }
+
+        public ApplicationConfigModel ApplicationConfiguration { get; private set; }
+
+        #endregion
+
+        void LoadConfiguration()
         {
             ToolbarConfiguration = new ToolbarConfigModel
             {
@@ -31,26 +61,13 @@ namespace Jaya.Ui.Services
             };
             ApplicationConfiguration = new ApplicationConfigModel();
 
-            _commandService = commandService;
-            _onSimpleCommand = commandService.EventAggregator.Subscribe<CommandType>(SimpleCommandAction);
-            _onParameterizedCommand = commandService.EventAggregator.Subscribe<KeyValuePair<CommandType, object>>(ParameterizedCommandAction);
+            FileSystemServiceConfiguration = new FileSystemServiceConfigModel();
         }
 
-        ~ConfigurationService()
+        void SaveConfiguration()
         {
-            _commandService.EventAggregator.UnSubscribe(_onSimpleCommand);
-            _commandService.EventAggregator.UnSubscribe(_onParameterizedCommand);
+
         }
-
-        #region properties
-
-        public ToolbarConfigModel ToolbarConfiguration { get; private set; }
-
-        public PaneConfigModel PaneConfiguration { get; private set; }
-
-        public ApplicationConfigModel ApplicationConfiguration { get; private set; }
-
-        #endregion
 
         void SimpleCommandAction(CommandType type)
         {

@@ -1,6 +1,6 @@
 ﻿using Jaya.Ui.Base;
 
-namespace Jaya.Ui.Models
+namespace Jaya.Ui.Models.Providers
 {
     public class FileSystemServiceConfigModel: ConfigModelBase
     {
