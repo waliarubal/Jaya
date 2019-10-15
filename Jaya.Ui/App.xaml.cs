@@ -15,14 +15,12 @@ namespace Jaya.Ui
         public override void RegisterServices()
         {
             base.RegisterServices();
-
-            ServiceLocator.Instance.GetService<ConfigurationService>().LoadConfiguration();
+            ServiceLocator.Instance.Register();
         }
 
         protected override void OnExiting(object sender, EventArgs e)
         {
-            ServiceLocator.Instance.GetService<ConfigurationService>().SaveConfiguration();
-
+            ServiceLocator.Instance.Unregister();
             base.OnExiting(sender, e);
         }
     }

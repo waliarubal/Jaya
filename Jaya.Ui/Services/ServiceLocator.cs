@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Jaya.Ui.Services
 {
-    public sealed class ServiceLocator : IDisposable
+    internal sealed class ServiceLocator : IDisposable
     {
         static ServiceLocator _instance;
         static readonly object _syncRoot;
@@ -74,6 +74,16 @@ namespace Jaya.Ui.Services
                 return;
 
             scope.Dispose();
+        }
+
+        public void Register()
+        {
+            GetService<ConfigurationService>().LoadConfiguration();
+        }
+
+        public void Unregister()
+        {
+            GetService<ConfigurationService>().SaveConfiguration();
         }
 
         public void Dispose()

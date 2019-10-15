@@ -9,27 +9,12 @@ namespace Jaya.Ui.Services
 {
     public class ConfigurationService
     {
-        [JsonObject(MemberSerialization.OptIn)]
-        private class Config
-        {
-            [JsonProperty]
-            internal ApplicationConfigModel ApplicationConfiguration { get; set; }
-
-            [JsonProperty]
-            internal ToolbarConfigModel ToolbarConfiguration { get; set; }
-
-            [JsonProperty]
-            internal PaneConfigModel PaneConfiguration { get; set; }
-
-            [JsonProperty]
-            internal FileSystemServiceConfigModel FileSystemServiceConfiguration { get; set; }
-        }
-
         const string CONFIGURATION_FILE_NAME = "configuration.json";
 
         readonly Subscription<CommandType> _onSimpleCommand;
         readonly Subscription<KeyValuePair<CommandType, object>> _onParameterizedCommand;
         readonly CommandService _commandService;
+        ConfigModel _config;
 
         public ConfigurationService(CommandService commandService)
         {
@@ -48,83 +33,17 @@ namespace Jaya.Ui.Services
 
         #region properties
 
-        public FileSystemServiceConfigModel FileSystemServiceConfiguration { get; private set; }
-
-        public ToolbarConfigModel ToolbarConfiguration { get; private set; }
-
-        public PaneConfigModel PaneConfiguration { get; private set; }
-
-        public ApplicationConfigModel ApplicationConfiguration { get; private set; }
-
         public string ConfigurationFilePath { get; private set; }
 
+        public ApplicationConfigModel ApplicationConfiguration => _config.ApplicationConfiguration;
+
+        public ToolbarConfigModel ToolbarConfiguration => _config.ToolbarConfiguration;
+
+        public PaneConfigModel PaneConfiguration => _config.PaneConfiguration;
+
+        public FileSystemServiceConfigModel FileSystemServiceConfiguration => _config.FileSystemServiceConfiguration;
+
         #endregion
-
-        internal void LoadConfiguration()
-        {
-            if (File.Exists(ConfigurationFilePath))
-            {
-                Config settings;
-                using (var reader = File.OpenText(ConfigurationFilePath))
-                {
-                    var serializer = new JsonSerializer { Formatting = Formatting.None };
-                    settings = serializer.Deserialize(reader, typeof(Config)) as Config;
-                }
-
-                ApplicationConfiguration = settings.ApplicationConfiguration;
-                ToolbarConfiguration = settings.ToolbarConfiguration;
-                PaneConfiguration = settings.PaneConfiguration;
-
-                FileSystemServiceConfiguration = settings.FileSystemServiceConfiguration;
-            }
-            else
-            {
-                ToolbarConfiguration = new ToolbarConfigModel
-                {
-                    IsFileVisible = true,
-                    IsEditVisible = true,
-                    IsViewVisible = true,
-                    IsHelpVisible = true,
-                    IsVisible = true
-                };
-                PaneConfiguration = new PaneConfigModel
-                {
-                    NavigationPaneWidthPx = 220,
-                    PreviewOrDetailsPanePaneWidthPx = 240,
-                    IsNavigationPaneVisible = true,
-                    IsDetailsPaneVisible = false,
-                    IsPreviewPaneVisible = false,
-                    IsDetailsView = false,
-                    IsThumbnailView = true
-                };
-                ApplicationConfiguration = new ApplicationConfigModel();
-
-                FileSystemServiceConfiguration = new FileSystemServiceConfigModel();
-            }
-        }
-
-
-        internal void SaveConfiguration()
-        {
-            var settings = new Config
-            {
-                ApplicationConfiguration = ApplicationConfiguration,
-                ToolbarConfiguration = ToolbarConfiguration,
-                PaneConfiguration = PaneConfiguration,
-                FileSystemServiceConfiguration = FileSystemServiceConfiguration
-            };
-
-            // create configuration directory if missing
-            var fileInfo = new FileInfo(ConfigurationFilePath);
-            if (!fileInfo.Directory.Exists)
-                Directory.CreateDirectory(fileInfo.DirectoryName);
-
-            using (var writer = File.CreateText(ConfigurationFilePath))
-            {
-                var serializer = new JsonSerializer { Formatting = Formatting.None };
-                serializer.Serialize(writer, settings, typeof(Config));
-            }
-        }
 
         void SimpleCommandAction(CommandType type)
         {
@@ -179,6 +98,36 @@ namespace Jaya.Ui.Services
         void ParameterizedCommandAction(KeyValuePair<CommandType, object> parameter)
         {
 
+        }
+
+        internal void LoadConfiguration()
+        {
+            var fileInfo = new FileInfo(ConfigurationFilePath);
+            if (fileInfo.Exists)
+            {
+                using (var reader = File.OpenText(fileInfo.FullName))
+                {
+                    var serializer = new JsonSerializer { Formatting = Formatting.None };
+                    _config = serializer.Deserialize(reader, typeof(ConfigModel)) as ConfigModel;
+                }
+            }
+            else
+                _config = new ConfigModel();
+        }
+
+
+        internal void SaveConfiguration()
+        {
+            // create configuration directory if missing
+            var fileInfo = new FileInfo(ConfigurationFilePath);
+            if (!fileInfo.Directory.Exists)
+                Directory.CreateDirectory(fileInfo.DirectoryName);
+
+            using (var writer = File.CreateText(fileInfo.FullName))
+            {
+                var serializer = new JsonSerializer { Formatting = Formatting.None };
+                serializer.Serialize(writer, _config, typeof(ConfigModel));
+            }
         }
 
     }
