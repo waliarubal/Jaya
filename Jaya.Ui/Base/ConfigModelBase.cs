@@ -1,6 +1,9 @@
-﻿namespace Jaya.Ui.Base
+﻿using Newtonsoft.Json;
+
+namespace Jaya.Ui.Base
 {
-    public class ConfigModelBase: ModelBase
+    [JsonObject(MemberSerialization.OptIn)]
+    public abstract class ConfigModelBase: ModelBase
     {
         
     }

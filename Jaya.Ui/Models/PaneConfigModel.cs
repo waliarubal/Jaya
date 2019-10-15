@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Jaya.Ui.Base;
+using Newtonsoft.Json;
 
 namespace Jaya.Ui.Models
 {
@@ -19,6 +20,7 @@ namespace Jaya.Ui.Models
             private set => Set(value);
         }
 
+        [JsonProperty]
         public double NavigationPaneWidthPx
         {
             get => Get<double>();
@@ -29,6 +31,7 @@ namespace Jaya.Ui.Models
             }
         }
 
+        [JsonProperty]
         public double PreviewOrDetailsPanePaneWidthPx
         {
             get => Get<double>();
@@ -39,6 +42,7 @@ namespace Jaya.Ui.Models
             }
         }
 
+        [JsonProperty]
         public bool IsNavigationPaneVisible
         {
             get => Get<bool>();
@@ -49,6 +53,7 @@ namespace Jaya.Ui.Models
             }
         }
 
+        [JsonProperty]
         public bool IsPreviewPaneVisible
         {
             get => Get<bool>();
@@ -62,6 +67,7 @@ namespace Jaya.Ui.Models
             }
         }
 
+        [JsonProperty]
         public bool IsDetailsPaneVisible
         {
             get => Get<bool>();
@@ -75,6 +81,7 @@ namespace Jaya.Ui.Models
             }
         }
 
+        [JsonProperty]
         public bool IsDetailsView
         {
             get => Get<bool>();
@@ -87,6 +94,7 @@ namespace Jaya.Ui.Models
             }
         }
 
+        [JsonProperty]
         public bool IsThumbnailView
         {
             get => Get<bool>();
