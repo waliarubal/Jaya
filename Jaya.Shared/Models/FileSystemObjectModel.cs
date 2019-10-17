@@ -1,7 +1,7 @@
-﻿using Jaya.Ui.Base;
+﻿using Jaya.Shared.Base;
 using System;
 
-namespace Jaya.Ui.Models
+namespace Jaya.Shared.Models
 {
     public enum FileSystemObjectType : byte
     {

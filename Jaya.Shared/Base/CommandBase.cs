@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Jaya.Ui.Base
+namespace Jaya.Shared.Base
 {
     public abstract class CommandBase : ModelBase, ICommand
     {

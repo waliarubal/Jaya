@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using Jaya.Ui.Base;
+using Jaya.Shared.Base;
 using System;
 
 namespace Jaya.Ui

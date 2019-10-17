@@ -1,8 +1,11 @@
 ﻿using System;
 
-namespace Jaya.Ui
+namespace Jaya.Shared
 {
-    // taken from https://www.c-sharpcorner.com/UploadFile/pranayamr/publisher-or-subscriber-pattern-with-event-or-delegate-and-e/
+    /// <summary>
+    /// Taken from https://www.c-sharpcorner.com/UploadFile/pranayamr/publisher-or-subscriber-pattern-with-event-or-delegate-and-e/
+    /// </summary>
+    /// <typeparam name="TMessage"></typeparam>
     public sealed class Subscription<TMessage> : IDisposable
     {
         readonly EventAggregator _aggregator;

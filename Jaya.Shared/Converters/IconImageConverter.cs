@@ -5,7 +5,7 @@ using System;
 using System.Globalization;
 using System.IO;
 
-namespace Jaya.Ui.Converters
+namespace Jaya.Shared.Converters
 {
     public class IconImageConverter : IValueConverter
     {

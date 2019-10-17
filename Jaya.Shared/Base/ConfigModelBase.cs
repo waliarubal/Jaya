@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Jaya.Ui.Base
+namespace Jaya.Shared.Base
 {
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class ConfigModelBase: ModelBase

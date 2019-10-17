@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 
-namespace Jaya.Ui.Services
+namespace Jaya.Shared.Services
 {
     public class MemoryCacheService
     {

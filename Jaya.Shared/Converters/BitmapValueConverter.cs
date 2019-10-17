@@ -5,7 +5,7 @@ using Avalonia.Platform;
 using System;
 using System.Globalization;
 
-namespace Jaya.Ui.Converters
+namespace Jaya.Shared.Converters
 {
     public class BitmapValueConverter : IValueConverter
     {

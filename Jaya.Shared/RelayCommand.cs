@@ -1,8 +1,8 @@
-﻿using Jaya.Ui.Base;
+﻿using Jaya.Shared.Base;
 using System;
 using System.Threading.Tasks;
 
-namespace Jaya.Ui
+namespace Jaya.Shared
 {
     public class RelayCommand : CommandBase
     {

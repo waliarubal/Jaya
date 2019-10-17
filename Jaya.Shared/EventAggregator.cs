@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Jaya.Ui
+namespace Jaya.Shared
 {
-    // taken from https://www.c-sharpcorner.com/UploadFile/pranayamr/publisher-or-subscriber-pattern-with-event-or-delegate-and-e/
+    /// <summary>
+    /// Taken from https://www.c-sharpcorner.com/UploadFile/pranayamr/publisher-or-subscriber-pattern-with-event-or-delegate-and-e/
+    /// </summary>
     public sealed class EventAggregator
     {
         readonly Dictionary<Type, IList> _subscribers;

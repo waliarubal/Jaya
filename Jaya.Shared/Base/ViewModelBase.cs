@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 
-namespace Jaya.Ui.Base
+namespace Jaya.Shared.Base
 {
     public abstract class ViewModelBase : ModelBase
     {

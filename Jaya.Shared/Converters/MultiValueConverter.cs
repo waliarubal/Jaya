@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Jaya.Ui.Converters
+namespace Jaya.Shared.Converters
 {
     public class MultiValueConverter : IMultiValueConverter
     {

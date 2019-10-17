@@ -1,4 +1,4 @@
-﻿namespace Jaya.Ui.Models
+﻿namespace Jaya.Shared.Models
 {
     public class FileModel : FileSystemObjectModel
     {

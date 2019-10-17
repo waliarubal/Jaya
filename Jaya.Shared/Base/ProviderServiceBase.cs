@@ -1,9 +1,9 @@
-﻿using Jaya.Ui.Models;
-using Jaya.Ui.Services;
+﻿using Jaya.Shared.Models;
+using Jaya.Shared.Services;
 using System;
 using System.Threading.Tasks;
 
-namespace Jaya.Ui.Base
+namespace Jaya.Shared.Base
 {
     public abstract class ProviderServiceBase
     {

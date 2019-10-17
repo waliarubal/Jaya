@@ -2,9 +2,9 @@
 using System;
 using System.Reflection;
 
-namespace Jaya.Ui.Services
+namespace Jaya.Shared
 {
-    internal sealed class ServiceLocator : IDisposable
+    public sealed class ServiceLocator : IDisposable
     {
         static ServiceLocator _instance;
         static readonly object _syncRoot;
@@ -58,10 +58,17 @@ namespace Jaya.Ui.Services
         {
             var collection = new ServiceCollection();
 
-            var types = Assembly.GetExecutingAssembly().DefinedTypes;
-            foreach (TypeInfo typeInfo in types)
-                if (typeInfo.IsClass && typeInfo.Name.EndsWith("Service", StringComparison.InvariantCulture))
-                    collection.AddScoped(typeInfo);
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var assembly in assemblies)
+            {
+                if (!assembly.FullName.StartsWith("Jaya", StringComparison.InvariantCultureIgnoreCase))
+                    continue;
+
+                var types = assembly.DefinedTypes;
+                foreach (TypeInfo typeInfo in types)
+                    if (typeInfo.IsClass && typeInfo.Name.EndsWith("Service", StringComparison.InvariantCulture))
+                        collection.AddScoped(typeInfo);
+            }
 
             var container = collection.BuildServiceProvider();
             var scopeFactory = container.GetRequiredService<IServiceScopeFactory>();
@@ -74,16 +81,6 @@ namespace Jaya.Ui.Services
                 return;
 
             scope.Dispose();
-        }
-
-        public void Register()
-        {
-            GetService<ConfigurationService>().LoadConfiguration();
-        }
-
-        public void Unregister()
-        {
-            GetService<ConfigurationService>().SaveConfiguration();
         }
 
         public void Dispose()

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Jaya.Ui.Models
+namespace Jaya.Shared.Models
 {
     public class DirectoryModel : FileSystemObjectModel
     {

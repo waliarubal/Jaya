@@ -1,7 +1,6 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.Markup.Xaml;
-using Jaya.Ui.Services;
 
 namespace Jaya.Ui
 {
@@ -15,12 +14,12 @@ namespace Jaya.Ui
         public override void RegisterServices()
         {
             base.RegisterServices();
-            ServiceLocator.Instance.Register();
+            //ServiceLocator.Instance.Register();
         }
 
         protected override void OnExiting(object sender, EventArgs e)
         {
-            ServiceLocator.Instance.Unregister();
+            //ServiceLocator.Instance.Unregister();
             base.OnExiting(sender, e);
         }
     }
