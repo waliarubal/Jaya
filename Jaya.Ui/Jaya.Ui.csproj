@@ -32,8 +32,11 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
+  </ItemGroup>
+  <!--<ItemGroup>
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
-  </ItemGroup>
+  </ItemGroup>-->
 </Project>
