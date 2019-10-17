@@ -8,11 +8,11 @@ using Avalonia.Styling;
 using System;
 using System.IO;
 
-namespace Jaya.Ui
+namespace Jaya.Shared
 {
     public class StyledWindow : Window, IStyleable
     {
-        const string DEFAULT_ICON = "avares://Jaya.Ui/Assets/Logo.ico";
+        const string DEFAULT_ICON = "avares://Jaya.Shared/Assets/Logo.ico";
 
         public static StyledProperty<object> HeaderContentProperty;
         public static StyledProperty<bool> IsModalProperty;

@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 
-namespace Jaya.Shared
+namespace Jaya.Shared.Services
 {
     public sealed class ServiceLocator : IDisposable
     {

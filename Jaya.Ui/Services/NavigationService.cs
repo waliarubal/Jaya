@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Jaya.Shared;
+using Jaya.Shared.Services;
+using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {

@@ -1,5 +1,6 @@
 ﻿using Avalonia.Data.Converters;
-using Jaya.Ui.Models;
+using Jaya.Shared;
+using Jaya.Shared.Models;
 using Jaya.Ui.Services;
 using System;
 using System.Globalization;

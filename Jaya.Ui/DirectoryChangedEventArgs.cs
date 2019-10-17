@@ -1,5 +1,5 @@
-﻿using Jaya.Ui.Base;
-using Jaya.Ui.Models;
+﻿using Jaya.Shared.Base;
+using Jaya.Shared.Models;
 using System;
 
 namespace Jaya.Ui

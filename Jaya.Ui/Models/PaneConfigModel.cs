@@ -1,5 +1,5 @@
 ﻿using Avalonia.Controls;
-using Jaya.Ui.Base;
+using Jaya.Shared.Base;
 using Newtonsoft.Json;
 
 namespace Jaya.Ui.Models

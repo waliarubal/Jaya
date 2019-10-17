@@ -1,4 +1,5 @@
-﻿using Jaya.Ui.Base;
+﻿using Jaya.Shared;
+using Jaya.Shared.Base;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 

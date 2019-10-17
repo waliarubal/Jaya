@@ -1,4 +1,6 @@
-﻿using Jaya.Ui.Models;
+﻿using Jaya.Shared;
+using Jaya.Shared.Services;
+using Jaya.Ui.Models;
 using Jaya.Ui.Models.Providers;
 using Newtonsoft.Json;
 using System;
@@ -7,12 +9,12 @@ using System.IO;
 
 namespace Jaya.Ui.Services
 {
-    public class ConfigurationService
+    public sealed class ConfigurationService
     {
         const string CONFIGURATION_FILE_NAME = "configuration.json";
 
-        readonly Subscription<CommandType> _onSimpleCommand;
-        readonly Subscription<KeyValuePair<CommandType, object>> _onParameterizedCommand;
+        readonly Subscription<byte> _onSimpleCommand;
+        readonly Subscription<KeyValuePair<byte, object>> _onParameterizedCommand;
         readonly CommandService _commandService;
         ConfigModel _config;
 
@@ -21,8 +23,8 @@ namespace Jaya.Ui.Services
             ConfigurationFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Jaya", CONFIGURATION_FILE_NAME);
 
             _commandService = commandService;
-            _onSimpleCommand = commandService.EventAggregator.Subscribe<CommandType>(SimpleCommandAction);
-            _onParameterizedCommand = commandService.EventAggregator.Subscribe<KeyValuePair<CommandType, object>>(ParameterizedCommandAction);
+            _onSimpleCommand = commandService.EventAggregator.Subscribe<byte>(SimpleCommandAction);
+            _onParameterizedCommand = commandService.EventAggregator.Subscribe<KeyValuePair<byte, object>>(ParameterizedCommandAction);
         }
 
         ~ConfigurationService()
@@ -45,9 +47,9 @@ namespace Jaya.Ui.Services
 
         #endregion
 
-        void SimpleCommandAction(CommandType type)
+        void SimpleCommandAction(byte type)
         {
-            switch (type)
+            switch ((CommandType)type)
             {
                 case CommandType.ToggleItemCheckBoxes:
                     ApplicationConfiguration.IsItemCheckBoxVisible = !ApplicationConfiguration.IsItemCheckBoxVisible;
@@ -95,7 +97,7 @@ namespace Jaya.Ui.Services
             }
         }
 
-        void ParameterizedCommandAction(KeyValuePair<CommandType, object> parameter)
+        void ParameterizedCommandAction(KeyValuePair<byte, object> parameter)
         {
 
         }

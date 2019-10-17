@@ -1,4 +1,4 @@
-﻿using Jaya.Ui.Base;
+﻿using Jaya.Shared.Base;
 using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;

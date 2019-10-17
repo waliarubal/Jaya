@@ -2,8 +2,8 @@
 using Avalonia.Data.Converters;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using Jaya.Ui.Models;
-using Jaya.Ui.Services;
+using Jaya.Shared.Models;
+using Jaya.Shared.Services;
 using System;
 using System.Globalization;
 using System.IO;

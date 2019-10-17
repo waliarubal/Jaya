@@ -13,6 +13,10 @@
     <AvaloniaResource Include="**\*.xaml">
       <SubType>Designer</SubType>
     </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Remove="Styles\StyledWindowStyle.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.8.3" />
@@ -20,6 +24,11 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Styles\StyledWindowStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
   <!--<ItemGroup>
     <Reference Include="System">

@@ -1,9 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Threading;
-using Jaya.Ui.Models;
-using Jaya.Ui.Services;
-using Jaya.Ui.ViewModels.Windows;
-using Jaya.Ui.Views.Windows;
+using Jaya.Shared.Models;
+using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -28,7 +26,7 @@ namespace Jaya.Shared.Base
             get
             {
                 if (_simpleCommand == null)
-                    _simpleCommand = new RelayCommand<CommandType>(SimpleCommandAction);
+                    _simpleCommand = new RelayCommand<byte>(SimpleCommandAction);
 
                 return _simpleCommand;
             }
@@ -85,7 +83,7 @@ namespace Jaya.Shared.Base
             await window.ShowDialog(Application.Current.MainWindow);
         }
 
-        void SimpleCommandAction(CommandType type)
+        void SimpleCommandAction(byte type)
         {
             EventAggregator.Publish(type);
         }
@@ -99,7 +97,7 @@ namespace Jaya.Shared.Base
             if (parameters == null)
                 throw new ArgumentException("Failed to parse command parameters.", nameof(parameter));
 
-            var param = new KeyValuePair<CommandType, object>((CommandType)parameters[0], parameters[1]);
+            var param = new KeyValuePair<byte, object>((byte)parameters[0], parameters[1]);
             EventAggregator.Publish(param);
         }
     }
