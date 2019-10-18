@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:j="https://github.com/waliarubal/Jaya"
+    xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:s="clr-namespace:Jaya.Ui.Services;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     mc:Ignorable="d">
     <UserControl.DataContext>
@@ -68,7 +68,7 @@
             <Separator />
             <MenuItem
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static s:CommandType.Exit}"
+                CommandParameter="{x:Static local:CommandType.Exit}"
                 Header="Exit">
                 <MenuItem.Icon>
                     <Image Source="/Assets/Images/Shutdown-16.png" />
@@ -127,7 +127,7 @@
         <MenuItem Header="_View">
             <MenuItem
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static s:CommandType.TogglePaneNavigation}"
+                CommandParameter="{x:Static local:CommandType.TogglePaneNavigation}"
                 Header="Navigation Pane">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}">
@@ -137,7 +137,7 @@
             </MenuItem>
             <MenuItem
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static s:CommandType.TogglePanePreview}"
+                CommandParameter="{x:Static local:CommandType.TogglePanePreview}"
                 Header="Preview Pane">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}">
@@ -147,7 +147,7 @@
             </MenuItem>
             <MenuItem
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static s:CommandType.TogglePaneDetails}"
+                CommandParameter="{x:Static local:CommandType.TogglePaneDetails}"
                 Header="Details Pane">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}">
@@ -163,7 +163,7 @@
                 </MenuItem.Styles>
                 <MenuItem
                     Command="{Binding SimpleCommand}"
-                    CommandParameter="{x:Static s:CommandType.ToggleToolbars}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbars}"
                     Header="Show Toolbars">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsVisible, Mode=OneWay}" />
@@ -172,7 +172,7 @@
                 <Separator />
                 <MenuItem
                     Command="{Binding SimpleCommand}"
-                    CommandParameter="{x:Static s:CommandType.ToggleToolbarFile}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarFile}"
                     Header="File">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsFileVisible, Mode=OneWay}" />
@@ -180,7 +180,7 @@
                 </MenuItem>
                 <MenuItem
                     Command="{Binding SimpleCommand}"
-                    CommandParameter="{x:Static s:CommandType.ToggleToolbarEdit}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarEdit}"
                     Header="Edit">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsEditVisible, Mode=OneWay}" />
@@ -188,7 +188,7 @@
                 </MenuItem>
                 <MenuItem
                     Command="{Binding SimpleCommand}"
-                    CommandParameter="{x:Static s:CommandType.ToggleToolbarView}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarView}"
                     Header="View">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsViewVisible, Mode=OneWay}" />
@@ -196,7 +196,7 @@
                 </MenuItem>
                 <MenuItem
                     Command="{Binding SimpleCommand}"
-                    CommandParameter="{x:Static s:CommandType.ToggleToolbarHelp}"
+                    CommandParameter="{x:Static local:CommandType.ToggleToolbarHelp}"
                     Header="Help">
                     <MenuItem.Icon>
                         <CheckBox IsChecked="{Binding ToolbarConfig.IsHelpVisible, Mode=OneWay}" />
@@ -206,7 +206,7 @@
             <Separator />
             <MenuItem
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static s:CommandType.ToggleItemCheckBoxes}"
+                CommandParameter="{x:Static local:CommandType.ToggleItemCheckBoxes}"
                 Header="Item Check Boxes">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}">
@@ -216,7 +216,7 @@
             </MenuItem>
             <MenuItem
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static s:CommandType.ToggleFileNameExtensions}"
+                CommandParameter="{x:Static local:CommandType.ToggleFileNameExtensions}"
                 Header="File Name Extensions">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding ApplicationConfig.IsFileNameExtensionVisible, Mode=OneWay}">
@@ -226,7 +226,7 @@
             </MenuItem>
             <MenuItem
                 Command="{Binding SimpleCommand}"
-                CommandParameter="{x:Static s:CommandType.ToggleHiddenItems}"
+                CommandParameter="{x:Static local:CommandType.ToggleHiddenItems}"
                 Header="Hidden Items">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}">

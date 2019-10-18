@@ -1,12 +1,14 @@
 ﻿using Jaya.Shared.Base;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
+using System.Windows.Input;
 
 namespace Jaya.Ui.ViewModels
 {
     public class ToolbarViewModel : ViewModelBase
     {
         readonly ConfigurationService _configService;
+        ICommand _openWindow;
 
         public ToolbarViewModel()
         {
@@ -18,5 +20,16 @@ namespace Jaya.Ui.ViewModels
         public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
 
         public ApplicationConfigModel ApplicationConfig => _configService.ApplicationConfiguration;
+
+        public ICommand OpenWindowCommand
+        {
+            get
+            {
+                if (_openWindow == null)
+                    _openWindow = GetService<NavigationService>().OpenWindowCommand;
+
+                return _openWindow;
+            }
+        }
     }
 }
