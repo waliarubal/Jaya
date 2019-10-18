@@ -9,11 +9,11 @@ namespace Jaya.Ui.Converters
 {
     public class FileSystemObjectToFileNameConverter : IValueConverter
     {
-        readonly ConfigurationService _configService;
+        readonly SharedService _shared;
 
         public FileSystemObjectToFileNameConverter()
         {
-            _configService = ServiceLocator.Instance.GetService<ConfigurationService>();
+            _shared = ServiceLocator.Instance.GetService<SharedService>();
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -30,7 +30,7 @@ namespace Jaya.Ui.Converters
 
                 case FileSystemObjectType.File:
                     var file = fso as FileModel;
-                    if (_configService.ApplicationConfiguration.IsFileNameExtensionVisible)
+                    if (_shared.ApplicationConfiguration.IsFileNameExtensionVisible)
                         return string.Format("{0}.{1}", file.Name, file.Extension);
                     else
                         return file.Name;

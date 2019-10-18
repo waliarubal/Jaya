@@ -1,11 +1,14 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Markup.Xaml;
+using Jaya.Shared.Services;
+using Jaya.Ui.Services;
+using System;
 
 namespace Jaya.Ui
 {
     public class App : Application
     {
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -14,12 +17,12 @@ namespace Jaya.Ui
         public override void RegisterServices()
         {
             base.RegisterServices();
-            //ServiceLocator.Instance.Register();
+            ServiceLocator.Instance.GetService<SharedService>().LoadConfigurations();
         }
 
         protected override void OnExiting(object sender, EventArgs e)
         {
-            //ServiceLocator.Instance.Unregister();
+            ServiceLocator.Instance.GetService<SharedService>().SaveConfigurations();
             base.OnExiting(sender, e);
         }
     }

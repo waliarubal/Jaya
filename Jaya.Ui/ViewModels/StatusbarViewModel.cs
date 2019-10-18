@@ -9,7 +9,7 @@ namespace Jaya.Ui.ViewModels
     public class StatusbarViewModel: ViewModelBase
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
-        readonly ConfigurationService _configService;
+        readonly SharedService _shared;
         ProviderServiceBase _service;
         ProviderModel _provider;
         DirectoryModel _directory;
@@ -17,7 +17,7 @@ namespace Jaya.Ui.ViewModels
         public StatusbarViewModel()
         {
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
-            _configService = GetService<ConfigurationService>();
+            _shared = GetService<SharedService>();
         }
 
         ~StatusbarViewModel()
@@ -25,7 +25,7 @@ namespace Jaya.Ui.ViewModels
             EventAggregator.UnSubscribe(_onDirectoryChanged);
         }
 
-        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
+        public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
 
         public long Count
         {

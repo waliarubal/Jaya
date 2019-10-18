@@ -1,33 +1,30 @@
-﻿using Jaya.Shared;
+﻿using Avalonia;
+using Jaya.Shared;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using Jaya.Ui.Models.Providers;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Jaya.Ui.Services
 {
-    public sealed class ConfigurationService
+    public sealed class SharedService
     {
-        const string CONFIGURATION_FILE_NAME = "configuration.json";
-
         readonly Subscription<byte> _onSimpleCommand;
         readonly Subscription<KeyValuePair<byte, object>> _onParameterizedCommand;
+
         readonly CommandService _commandService;
-        ConfigModel _config;
+        readonly ConfigurationService _configService;
 
-        public ConfigurationService(CommandService commandService)
+        public SharedService(CommandService commandService, ConfigurationService configurationService)
         {
-            ConfigurationFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Jaya", CONFIGURATION_FILE_NAME);
-
             _commandService = commandService;
-            _onSimpleCommand = commandService.EventAggregator.Subscribe<byte>(SimpleCommandAction);
-            _onParameterizedCommand = commandService.EventAggregator.Subscribe<KeyValuePair<byte, object>>(ParameterizedCommandAction);
+            _configService = configurationService;
+
+            _onSimpleCommand = _commandService.EventAggregator.Subscribe<byte>(SimpleCommandAction);
+            _onParameterizedCommand = _commandService.EventAggregator.Subscribe<KeyValuePair<byte, object>>(ParameterizedCommandAction);
         }
 
-        ~ConfigurationService()
+        ~SharedService()
         {
             _commandService.EventAggregator.UnSubscribe(_onSimpleCommand);
             _commandService.EventAggregator.UnSubscribe(_onParameterizedCommand);
@@ -35,17 +32,57 @@ namespace Jaya.Ui.Services
 
         #region properties
 
-        public string ConfigurationFilePath { get; private set; }
+        public ApplicationConfigModel ApplicationConfiguration { get; private set; }
 
-        public ApplicationConfigModel ApplicationConfiguration => _config.ApplicationConfiguration;
+        public ToolbarConfigModel ToolbarConfiguration { get; private set; }
 
-        public ToolbarConfigModel ToolbarConfiguration => _config.ToolbarConfiguration;
+        public PaneConfigModel PaneConfiguration { get; private set; }
 
-        public PaneConfigModel PaneConfiguration => _config.PaneConfiguration;
-
-        public FileSystemServiceConfigModel FileSystemServiceConfiguration => _config.FileSystemServiceConfiguration;
+        public FileSystemServiceConfigModel FileSystemServiceConfiguration { get; private set; }
 
         #endregion
+
+        internal void LoadConfigurations()
+        {
+            ApplicationConfiguration = _configService.Get<ApplicationConfigModel>();
+            if (ApplicationConfiguration == null)
+                ApplicationConfiguration = new ApplicationConfigModel();
+
+            ToolbarConfiguration = _configService.Get<ToolbarConfigModel>();
+            if (ToolbarConfiguration == null)
+            {
+                ToolbarConfiguration = new ToolbarConfigModel
+                {
+                    IsFileVisible = true,
+                    IsEditVisible = true,
+                    IsViewVisible = true,
+                    IsHelpVisible = true,
+                    IsVisible = true
+                };
+            }
+
+            PaneConfiguration = _configService.Get<PaneConfigModel>();
+            if (PaneConfiguration == null)
+            {
+                PaneConfiguration = new PaneConfigModel
+                {
+                    NavigationPaneWidthPx = 220,
+                    PreviewOrDetailsPanePaneWidthPx = 240,
+                    IsNavigationPaneVisible = true,
+                    IsDetailsPaneVisible = false,
+                    IsPreviewPaneVisible = false,
+                    IsDetailsView = false,
+                    IsThumbnailView = true
+                };
+            }
+        }
+
+        internal void SaveConfigurations()
+        {
+            _configService.Set(ApplicationConfiguration);
+            _configService.Set(ToolbarConfiguration);
+            _configService.Set(PaneConfiguration);
+        }
 
         void SimpleCommandAction(byte type)
         {
@@ -94,6 +131,10 @@ namespace Jaya.Ui.Services
                 case CommandType.TogglePaneDetails:
                     PaneConfiguration.IsDetailsPaneVisible = !PaneConfiguration.IsDetailsPaneVisible;
                     break;
+
+                case CommandType.Exit:
+                    Application.Current.Exit();
+                    break;
             }
         }
 
@@ -101,36 +142,5 @@ namespace Jaya.Ui.Services
         {
 
         }
-
-        internal void LoadConfiguration()
-        {
-            var fileInfo = new FileInfo(ConfigurationFilePath);
-            if (fileInfo.Exists)
-            {
-                using (var reader = File.OpenText(fileInfo.FullName))
-                {
-                    var serializer = new JsonSerializer { Formatting = Formatting.None };
-                    _config = serializer.Deserialize(reader, typeof(ConfigModel)) as ConfigModel;
-                }
-            }
-            else
-                _config = new ConfigModel();
-        }
-
-
-        internal void SaveConfiguration()
-        {
-            // create configuration directory if missing
-            var fileInfo = new FileInfo(ConfigurationFilePath);
-            if (!fileInfo.Directory.Exists)
-                Directory.CreateDirectory(fileInfo.DirectoryName);
-
-            using (var writer = File.CreateText(fileInfo.FullName))
-            {
-                var serializer = new JsonSerializer { Formatting = Formatting.None };
-                serializer.Serialize(writer, _config, typeof(ConfigModel));
-            }
-        }
-
     }
 }

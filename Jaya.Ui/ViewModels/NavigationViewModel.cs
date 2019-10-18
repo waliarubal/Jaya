@@ -10,12 +10,12 @@ namespace Jaya.Ui.ViewModels
 {
     public class NavigationViewModel : ViewModelBase
     {
-        readonly ConfigurationService _configService;
+        readonly SharedService _shared;
         ICommand _populateCommand;
 
         public NavigationViewModel()
         {
-            _configService = GetService<ConfigurationService>();
+            _shared = GetService<SharedService>();
 
             Node = new TreeNodeModel(null, null);
             PopulateCommand.Execute(Node);
@@ -34,9 +34,9 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
+        public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
 
-        public ApplicationConfigModel ApplicationConfig => _configService.ApplicationConfiguration;
+        public ApplicationConfigModel ApplicationConfig => _shared.ApplicationConfiguration;
 
         public TreeNodeModel Node { get; }
 

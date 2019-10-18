@@ -8,16 +8,16 @@ namespace Jaya.Ui.Converters
 {
     public class BooleanToTreeNodeVisibilityConverter : IValueConverter
     {
-        readonly ConfigurationService _configService;
+        readonly SharedService _shared;
 
         public BooleanToTreeNodeVisibilityConverter()
         {
-            _configService = ServiceLocator.Instance.GetService<ConfigurationService>();
+            _shared = ServiceLocator.Instance.GetService<SharedService>();
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (_configService.ApplicationConfiguration.IsHiddenItemVisible)
+            if (_shared.ApplicationConfiguration.IsHiddenItemVisible)
                 return true;
 
             return !(bool)value;

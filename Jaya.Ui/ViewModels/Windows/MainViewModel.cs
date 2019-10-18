@@ -8,13 +8,13 @@ namespace Jaya.Ui.ViewModels.Windows
     public class MainViewModel : ViewModelBase
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
-        readonly ConfigurationService _configService;
+        readonly SharedService _shared;
 
         public MainViewModel()
         {
             WindowTitle = "Jaya";
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
-            _configService = GetService<ConfigurationService>();
+            _shared = GetService<SharedService>();
         }
 
         ~MainViewModel()
@@ -22,9 +22,9 @@ namespace Jaya.Ui.ViewModels.Windows
             EventAggregator.UnSubscribe(_onDirectoryChanged);
         }
 
-        public ToolbarConfigModel ToolbarConfig => _configService.ToolbarConfiguration;
+        public ToolbarConfigModel ToolbarConfig => _shared.ToolbarConfiguration;
 
-        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
+        public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
 
         public string WindowTitle
         {

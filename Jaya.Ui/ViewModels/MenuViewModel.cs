@@ -7,19 +7,19 @@ namespace Jaya.Ui.ViewModels
 {
     public class MenuViewModel : ViewModelBase
     {
-        readonly ConfigurationService _configService;
+        readonly SharedService _shared;
         ICommand _openWindow;
 
         public MenuViewModel()
         {
-            _configService = GetService<ConfigurationService>();
+            _shared = GetService<SharedService>();
         }
 
-        public ToolbarConfigModel ToolbarConfig => _configService.ToolbarConfiguration;
+        public ToolbarConfigModel ToolbarConfig => _shared.ToolbarConfiguration;
 
-        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
+        public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
 
-        public ApplicationConfigModel ApplicationConfig => _configService.ApplicationConfiguration;
+        public ApplicationConfigModel ApplicationConfig => _shared.ApplicationConfiguration;
 
         public ICommand OpenWindowCommand
         {

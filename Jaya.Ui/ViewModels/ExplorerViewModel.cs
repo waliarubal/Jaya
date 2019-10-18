@@ -10,7 +10,7 @@ namespace Jaya.Ui.ViewModels
     public class ExplorerViewModel: ViewModelBase
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
-        readonly ConfigurationService _configService;
+        readonly SharedService _shared;
 
         ICommand _invokeObject;
         ProviderServiceBase _service;
@@ -18,7 +18,7 @@ namespace Jaya.Ui.ViewModels
 
         public ExplorerViewModel()
         {
-            _configService = GetService<ConfigurationService>();
+            _shared = GetService<SharedService>();
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
         }
 
@@ -40,9 +40,9 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        public ApplicationConfigModel ApplicationConfig => _configService.ApplicationConfiguration;
+        public ApplicationConfigModel ApplicationConfig => _shared.ApplicationConfiguration;
 
-        public PaneConfigModel PaneConfig => _configService.PaneConfiguration;
+        public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
 
         public DirectoryModel Directory
         {

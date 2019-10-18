@@ -13,7 +13,7 @@ namespace Jaya.Ui.Models
         const string EXPANDED_IMAGE = "avares://Jaya.Ui/Assets/Images/Folder-Open-16.png";
 
         TreeNodeModel _dummyChild;
-        readonly ConfigurationService _configService;
+        readonly SharedService _shared;
 
         public delegate void TreeNodeExpanded(TreeNodeModel node, bool isExpaded);
         public event TreeNodeExpanded NodeExpanded;
@@ -27,15 +27,15 @@ namespace Jaya.Ui.Models
 
             if (Service != null && Provider != null)
             {
-                _configService = ServiceLocator.Instance.GetService<ConfigurationService>();
-                _configService.ApplicationConfiguration.PropertyChanged += OnApplicationConfigChanged;
+                _shared = ServiceLocator.Instance.GetService<SharedService>();
+                _shared.ApplicationConfiguration.PropertyChanged += OnApplicationConfigChanged;
             }
         }
 
         ~TreeNodeModel()
         {
-            if (_configService != null)
-                _configService.ApplicationConfiguration.PropertyChanged -= OnApplicationConfigChanged;
+            if (_shared != null)
+                _shared.ApplicationConfiguration.PropertyChanged -= OnApplicationConfigChanged;
         }
 
         #region properties
@@ -107,7 +107,7 @@ namespace Jaya.Ui.Models
         {
             switch (e.PropertyName)
             {
-                case nameof(ConfigurationService.ApplicationConfiguration.IsHiddenItemVisible):
+                case nameof(ApplicationConfigModel.IsHiddenItemVisible):
                     if (FileSystemObject != null)
                         FileSystemObject.RaisePropertyChanged(nameof(FileSystemObject.IsHidden));
                     break;
