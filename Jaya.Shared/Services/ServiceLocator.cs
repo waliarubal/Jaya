@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using McMaster.NETCore.Plugins;
+using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
@@ -58,10 +60,6 @@ namespace Jaya.Shared.Services
 
         IServiceScope RegisterServices()
         {
-            var pluginFiles = Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll");
-            foreach (var filePath in pluginFiles)
-                AssemblyLoadContext.Default.LoadFromAssemblyPath(filePath);
-
             var collection = new ServiceCollection();
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -76,21 +74,20 @@ namespace Jaya.Shared.Services
                         collection.AddScoped(typeInfo);
             }
 
-            //domain.AssemblyResolve -= OnAssemblyResolve;
+            var pluginFiles = Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll");
+            foreach (var filePath in pluginFiles)
+            {
+                var loader = PluginLoader.CreateFromAssemblyFile(filePath);
+                var types = loader.LoadDefaultAssembly().ExportedTypes;
+                foreach (TypeInfo typeInfo in types)
+                    if (typeInfo.IsClass && typeInfo.Name.EndsWith("Service", StringComparison.InvariantCulture))
+                        collection.AddScoped(typeInfo);
+            }
 
             var container = collection.BuildServiceProvider();
             var scopeFactory = container.GetRequiredService<IServiceScopeFactory>();
             return scopeFactory.CreateScope();
         }
-
-        //Assembly OnAssemblyResolve(object sender, ResolveEventArgs args)
-        //{
-        //    var uri = new UriBuilder(args.RequestingAssembly.CodeBase);
-        //    var directory = Path.GetDirectoryName(Uri.UnescapeDataString(uri.Path));
-        //    var assemblyPath = Path.Combine(directory, string.Format("{0}.dll", args.Name.Split(',')[0]));
-
-        //    return Assembly.Load(File.ReadAllBytes(assemblyPath));
-        //}
 
         void UnregisterServices(IServiceScope scope)
         {
