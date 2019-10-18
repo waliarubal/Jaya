@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Markup.Xaml;
+using Jaya.Shared;
 
 namespace Jaya.Ui.Views.Windows
 {

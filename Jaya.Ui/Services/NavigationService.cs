@@ -1,5 +1,10 @@
-﻿using Jaya.Shared;
+﻿using Avalonia;
+using Jaya.Shared;
+using Jaya.Shared.Models;
 using Jaya.Shared.Services;
+using Jaya.Ui.ViewModels.Windows;
+using Jaya.Ui.Views.Windows;
+using System;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
@@ -10,6 +15,7 @@ namespace Jaya.Ui.Services
         readonly Stack<DirectoryChangedEventArgs> _backwardStack, _forwardStack;
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         RelayCommand _navigateBack, _navigateForward;
+        RelayCommand<WindowOptionsModel> _openWindow;
         DirectoryChangedEventArgs _directoryChangedArgs;
 
         public NavigationService(CommandService commandService)
@@ -23,6 +29,17 @@ namespace Jaya.Ui.Services
         ~NavigationService()
         {
             _commandService.EventAggregator.UnSubscribe(_onDirectoryChanged);
+        }
+
+        public RelayCommand<WindowOptionsModel> OpenWindowCommand
+        {
+            get
+            {
+                if (_openWindow == null)
+                    _openWindow = new RelayCommand<WindowOptionsModel>(OpenWindowCommandAction);
+
+                return _openWindow;
+            }
         }
 
         public RelayCommand NavigateBackCommand
@@ -45,6 +62,18 @@ namespace Jaya.Ui.Services
 
                 return _navigateForward;
             }
+        }
+
+        async void OpenWindowCommandAction(WindowOptionsModel option)
+        {
+            var window = new HostView();
+
+            var viewModel = window.DataContext as HostViewModel;
+            viewModel.Option = option;
+
+            window.Content = Activator.CreateInstance(option.ContentType);
+
+            await window.ShowDialog(Application.Current.MainWindow);
         }
 
         void NavigateBack()

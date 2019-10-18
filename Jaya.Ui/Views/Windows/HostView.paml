@@ -1,9 +1,9 @@
-﻿<local:StyledWindow
+﻿<j:StyledWindow
     x:Class="Jaya.Ui.Views.Windows.HostView"
     xmlns="https://github.com/avaloniaui"
+    xmlns:j="https://github.com/waliarubal/Jaya"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels.Windows;assembly=Jaya.Ui"
     Title="{Binding Option.Title, Mode=OneWay}"
@@ -15,7 +15,7 @@
     d:DesignWidth="640"
     d:DesignHeight="480"
     mc:Ignorable="d">
-  <local:StyledWindow.DataContext>
+  <j:StyledWindow.DataContext>
     <vm:HostViewModel />
-  </local:StyledWindow.DataContext>
-</local:StyledWindow>
+  </j:StyledWindow.DataContext>
+</j:StyledWindow>

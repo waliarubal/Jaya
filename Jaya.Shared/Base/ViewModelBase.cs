@@ -1,6 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Threading;
-using Jaya.Shared.Models;
+﻿using Avalonia.Threading;
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
@@ -10,7 +8,7 @@ namespace Jaya.Shared.Base
 {
     public abstract class ViewModelBase : ModelBase
     {
-        ICommand _simpleCommand, _parameterizedCommand, _openWindowCommand;
+        ICommand _simpleCommand, _parameterizedCommand;
 
         protected ViewModelBase()
         {
@@ -43,17 +41,6 @@ namespace Jaya.Shared.Base
             }
         }
 
-        public ICommand OpenWindowCommand
-        {
-            get
-            {
-                if (_openWindowCommand == null)
-                    _openWindowCommand = new RelayCommand<WindowOptionsModel>(OpenWindowCommandAction);
-
-                return _openWindowCommand;
-            }
-        }
-
         #endregion
 
         protected T GetService<T>()
@@ -69,18 +56,6 @@ namespace Jaya.Shared.Base
                 action.Invoke();
             else
                 dispatcher.InvokeAsync(action, DispatcherPriority.Layout);
-        }
-
-        async void OpenWindowCommandAction(WindowOptionsModel option)
-        {
-            var window = new HostView();
-
-            var viewModel = window.DataContext as HostViewModel;
-            viewModel.Option = option;
-
-            window.Content = Activator.CreateInstance(option.ContentType);
-
-            await window.ShowDialog(Application.Current.MainWindow);
         }
 
         void SimpleCommandAction(byte type)

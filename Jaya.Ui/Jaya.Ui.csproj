@@ -5,6 +5,7 @@
     <StartupObject>Jaya.Ui.Program</StartupObject>
     <LangVersion>7.1</LangVersion>
     <ApplicationIcon>Assets\Logo.ico</ApplicationIcon>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
