@@ -10,7 +10,6 @@ namespace Jaya.Ui.Services
         public ProviderService()
         {
             _services = new List<ProviderServiceBase>();
-
         }
 
         public IEnumerable<ProviderServiceBase> Services => _services;

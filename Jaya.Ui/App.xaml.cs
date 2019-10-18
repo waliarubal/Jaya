@@ -18,6 +18,7 @@ namespace Jaya.Ui
         {
             base.RegisterServices();
             ServiceLocator.Instance.GetService<SharedService>().LoadConfigurations();
+            
         }
 
         protected override void OnExiting(object sender, EventArgs e)

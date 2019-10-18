@@ -1,10 +1,7 @@
-﻿using McMaster.NETCore.Plugins;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using System.Runtime.Loader;
 
 namespace Jaya.Shared.Services
 {
@@ -13,6 +10,7 @@ namespace Jaya.Shared.Services
         static ServiceLocator _instance;
         static readonly object _syncRoot;
         IServiceScope _scope;
+        readonly List<Type> _plugins;
 
         static ServiceLocator()
         {
@@ -21,7 +19,7 @@ namespace Jaya.Shared.Services
 
         private ServiceLocator()
         {
-
+            _plugins = new List<Type>();
         }
 
         ~ServiceLocator()
@@ -56,6 +54,8 @@ namespace Jaya.Shared.Services
             }
         }
 
+        public IEnumerable<Type> PluginTypes => _plugins;
+
         #endregion
 
         IServiceScope RegisterServices()
@@ -69,16 +69,6 @@ namespace Jaya.Shared.Services
                     continue;
 
                 var types = assembly.DefinedTypes;
-                foreach (TypeInfo typeInfo in types)
-                    if (typeInfo.IsClass && typeInfo.Name.EndsWith("Service", StringComparison.InvariantCulture))
-                        collection.AddScoped(typeInfo);
-            }
-
-            var pluginFiles = Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll");
-            foreach (var filePath in pluginFiles)
-            {
-                var loader = PluginLoader.CreateFromAssemblyFile(filePath);
-                var types = loader.LoadDefaultAssembly().ExportedTypes;
                 foreach (TypeInfo typeInfo in types)
                     if (typeInfo.IsClass && typeInfo.Name.EndsWith("Service", StringComparison.InvariantCulture))
                         collection.AddScoped(typeInfo);
