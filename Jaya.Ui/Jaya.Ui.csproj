@@ -30,6 +30,7 @@
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.8.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj" />
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
   </ItemGroup>
   <!--<ItemGroup>

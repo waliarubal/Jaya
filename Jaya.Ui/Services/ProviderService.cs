@@ -1,4 +1,5 @@
-﻿using Jaya.Shared.Base;
+﻿using Jaya.Provider.FileSystem.Services;
+using Jaya.Shared.Base;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
@@ -7,9 +8,12 @@ namespace Jaya.Ui.Services
     {
         readonly List<ProviderServiceBase> _services;
 
-        public ProviderService()
+        public ProviderService(FileSystemService fileSystemService)
         {
-            _services = new List<ProviderServiceBase>();
+            _services = new List<ProviderServiceBase>
+            {
+                fileSystemService
+            };
         }
 
         public IEnumerable<ProviderServiceBase> Services => _services;
