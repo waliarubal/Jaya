@@ -52,5 +52,4 @@
                 IsVisible="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}" />
         </Grid>
     </DockPanel>
-
 </j:StyledWindow>

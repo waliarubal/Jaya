@@ -2,8 +2,8 @@
     x:Class="Jaya.Ui.Views.MenuView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:j="https://github.com/waliarubal/Jaya"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="clr-namespace:Jaya.Ui.Services;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
@@ -13,7 +13,7 @@
     </UserControl.DataContext>
     <Menu>
         <Menu.Resources>
-            <c:MultiValueConverter x:Key="MultiValueConverter" />
+            <j:MultiValueConverter x:Key="MultiValueConverter" />
         </Menu.Resources>
 
         <Menu.Styles>

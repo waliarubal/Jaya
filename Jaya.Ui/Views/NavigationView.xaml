@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:Jaya.Ui.Converters;assembly=Jaya.Ui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:j="https://github.com/waliarubal/Jaya"
     xmlns:m="clr-namespace:Jaya.Ui.Models;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
@@ -16,7 +17,7 @@
         <vm:NavigationViewModel />
     </UserControl.DataContext>
     <UserControl.Resources>
-        <c:BitmapValueConverter x:Key="BitmapValueConverter" />
+        <j:BitmapValueConverter x:Key="BitmapValueConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
     </UserControl.Resources>
 
