@@ -12,9 +12,12 @@ namespace Jaya.Shared.Base
         protected ProviderServiceBase()
         {
             _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
+            ConfigurationService = ServiceLocator.Instance.GetService<ConfigurationService>();
         }
 
         #region properties
+
+        protected ConfigurationService ConfigurationService { get; }
 
         public bool IsRootDrive
         {
@@ -41,6 +44,12 @@ namespace Jaya.Shared.Base
         }
 
         public Type ConfigurationEditorType
+        {
+            get;
+            protected set;
+        }
+
+        public ConfigModelBase Configuration
         {
             get;
             protected set;

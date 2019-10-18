@@ -1,27 +1,33 @@
-﻿using Jaya.Shared.Base;
+﻿using Jaya.Provider.FileSystem.Models;
+using Jaya.Provider.FileSystem.Views;
+using Jaya.Shared.Base;
 using Jaya.Shared.Models;
-using Jaya.Ui.Views.Providers;
+using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Jaya.Ui.Services.Providers
+namespace Jaya.Provider.FileSystem.Services
 {
     public class FileSystemService : ProviderServiceBase
     {
         public FileSystemService()
         {
             Name = "File System";
-            ImagePath = "avares://Jaya.Ui/Assets/Images/Computer-32.png";
+            ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png";
             Description = "View your local drives, inspect their properties and play with directories & files stored within them.";
             IsRootDrive = true;
-            ConfigurationEditorType = typeof(FileSystemConfigurationView);
+            ConfigurationEditorType = typeof(ConfigurationView);
+
+            Configuration = ConfigurationService.Get<FileSystemConfigModel>();
+            if (Configuration == null)
+                Configuration = new FileSystemConfigModel { IsProtectedFileVisible = false };
         }
 
         protected override ProviderModel GetDefaultProvider()
         {
             var provider = new ProviderModel(Environment.MachineName, this);
-            provider.ImagePath = "avares://Jaya.Ui/Assets/Images/Computer-32.png";
+            provider.ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png";
             return provider;
         }
 
@@ -110,7 +116,6 @@ namespace Jaya.Ui.Services.Providers
 
             AddToCache(provider, model);
             return model;
-
         }
     }
 }

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.8.999" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.8.999" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
+  </ItemGroup>
+  <!--<PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
+    <OutputPath>..\Jaya.Ui\bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>-->
+</Project>

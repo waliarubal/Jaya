@@ -2,7 +2,6 @@
 using Jaya.Shared;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
-using Jaya.Ui.Models.Providers;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
@@ -37,8 +36,6 @@ namespace Jaya.Ui.Services
         public ToolbarConfigModel ToolbarConfiguration { get; private set; }
 
         public PaneConfigModel PaneConfiguration { get; private set; }
-
-        public FileSystemServiceConfigModel FileSystemServiceConfiguration { get; private set; }
 
         #endregion
 

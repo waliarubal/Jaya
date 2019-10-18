@@ -1,9 +1,9 @@
 ﻿using Jaya.Shared.Base;
 using Newtonsoft.Json;
 
-namespace Jaya.Ui.Models.Providers
+namespace Jaya.Provider.FileSystem.Models
 {
-    public class FileSystemServiceConfigModel: ConfigModelBase
+    public class FileSystemConfigModel: ConfigModelBase
     {
         [JsonProperty]
         public bool IsProtectedFileVisible

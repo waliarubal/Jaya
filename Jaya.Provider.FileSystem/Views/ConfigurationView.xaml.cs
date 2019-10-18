@@ -1,13 +1,13 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace Jaya.Ui.Views.Providers
+namespace Jaya.Provider.FileSystem.Views
 {
-    public class FileSystemConfigurationView : UserControl
+    public class ConfigurationView : UserControl
     {
-        public FileSystemConfigurationView()
+        public ConfigurationView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()
