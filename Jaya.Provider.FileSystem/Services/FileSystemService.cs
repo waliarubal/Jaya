@@ -1,8 +1,10 @@
 ﻿using Jaya.Provider.FileSystem.Models;
 using Jaya.Provider.FileSystem.Views;
 using Jaya.Shared.Base;
+using Jaya.Shared.Contracts;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
+using Prise.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Composition;
@@ -10,10 +12,15 @@ using System.IO;
 
 namespace Jaya.Provider.FileSystem.Services
 {
-    [Export(typeof(IPorviderService))]
-    public class FileSystemService : ProviderServiceBase, IPorviderService
+    [Plugin(PluginType = typeof(IProviderService))]
+    public class FileSystemService : ProviderServiceBase, IProviderService
     {
-        public FileSystemService()
+
+        // No ctor parameters, this should be fine
+        public FileSystemService(
+            IMemoryCacheService memoryCacheService,
+            IConfigurationService configurationService
+            ) : base(memoryCacheService, configurationService)
         {
             Name = "File System";
             ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png";
@@ -21,10 +28,18 @@ namespace Jaya.Provider.FileSystem.Services
             IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
 
-            Configuration = ConfigurationService.Get<FileSystemConfigModel>();
+            Configuration = this.configurationService.Get<FileSystemConfigModel>();
             if (Configuration == null)
                 Configuration = new FileSystemConfigModel { IsProtectedFileVisible = false };
         }
+
+
+        [PluginFactory]
+        public static FileSystemService FileSystemServiceFactoryMethod(IServiceProvider serviceProvider) =>
+            new FileSystemService(
+                (IMemoryCacheService)serviceProvider.GetService(typeof(IMemoryCacheService)),
+                (IConfigurationService)serviceProvider.GetService(typeof(IConfigurationService))
+            );
 
         protected override ProviderModel GetDefaultProvider()
         {

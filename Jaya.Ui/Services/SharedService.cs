@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Jaya.Shared;
+using Jaya.Shared.Contracts;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using System.Collections.Generic;
@@ -7,16 +8,28 @@ using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
-    public sealed class SharedService: IService
+    public interface ISharedService
+    {
+        ApplicationConfigModel ApplicationConfiguration { get; }
+
+        ToolbarConfigModel ToolbarConfiguration { get; }
+
+        PaneConfigModel PaneConfiguration { get; }
+
+        void LoadConfigurations();
+        void SaveConfigurations();
+    }
+
+    //[Export(typeof(IService))]
+    public sealed class SharedService : ISharedService
     {
         readonly Subscription<byte> _onSimpleCommand;
         readonly Subscription<KeyValuePair<byte, object>> _onParameterizedCommand;
 
-        readonly CommandService _commandService;
-        readonly ConfigurationService _configService;
+        readonly ICommandService _commandService;
+        readonly IConfigurationService _configService;
 
-        public SharedService(CommandService commandService, ConfigurationService configurationService)
+        public SharedService(ICommandService commandService, IConfigurationService configurationService)
         {
             _commandService = commandService;
             _configService = configurationService;
@@ -41,7 +54,7 @@ namespace Jaya.Ui.Services
 
         #endregion
 
-        internal void LoadConfigurations()
+        public void LoadConfigurations()
         {
             ApplicationConfiguration = _configService.Get<ApplicationConfigModel>();
             if (ApplicationConfiguration == null)
@@ -76,7 +89,7 @@ namespace Jaya.Ui.Services
             }
         }
 
-        internal void SaveConfigurations()
+        public void SaveConfigurations()
         {
             _configService.Set(ApplicationConfiguration);
             _configService.Set(ToolbarConfiguration);

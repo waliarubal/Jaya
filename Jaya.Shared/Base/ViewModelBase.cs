@@ -1,4 +1,5 @@
 ﻿using Avalonia.Threading;
+using Jaya.Shared.Contracts;
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Jaya.Shared.Base
 
         protected ViewModelBase()
         {
-            EventAggregator = GetService<CommandService>().EventAggregator;
+            EventAggregator = GetService<ICommandService>().EventAggregator;
         }
 
         #region properties
@@ -43,14 +44,14 @@ namespace Jaya.Shared.Base
 
         #endregion
 
-        protected T GetService<T>() where T : IService
+        protected T GetService<T>() where T : class
         {
             return ServiceLocator.Instance.GetService<T>();
         }
 
-        protected T GetProvider<T>() where T : IPorviderService
+        protected T GetProvider<T>() where T : class, IProviderService
         {
-            return ServiceLocator.Instance.GetProvider<T>();
+            return ServiceLocator.Instance.GetService<T>();
         }
 
         protected void Invoke(Action action)

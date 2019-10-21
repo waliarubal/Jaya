@@ -1,6 +1,7 @@
 ﻿using Jaya.Shared;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
+using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System;
@@ -86,7 +87,7 @@ namespace Jaya.Ui.ViewModels
 
             if (node.Service == null)
             {
-                foreach (var service in GetService<ProviderService>().Services)
+                foreach (var service in GetService<IProviderService>().Services)
                 {
                     var child = new TreeNodeModel(service as ProviderServiceBase, null);
                     child.Label = service.Name;

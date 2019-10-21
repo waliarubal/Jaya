@@ -1,23 +1,24 @@
-﻿using Jaya.Shared.Models;
+﻿using Jaya.Shared.Contracts;
+using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;
 using System.Threading.Tasks;
 
 namespace Jaya.Shared.Base
 {
-    public abstract class ProviderServiceBase: IPorviderService
+    public abstract class ProviderServiceBase : IProviderService
     {
-        readonly MemoryCacheService _cache;
+        protected readonly IMemoryCacheService memoryCacheService; // Dependency #1
+        protected readonly IConfigurationService configurationService;
 
-        protected ProviderServiceBase()
+        protected ProviderServiceBase(IMemoryCacheService memoryCacheService, IConfigurationService configurationService)
         {
-            _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
-            ConfigurationService = ServiceLocator.Instance.GetService<ConfigurationService>();
+            this.memoryCacheService = memoryCacheService; // Dependency #1
+            this.configurationService = configurationService; // Dependency #2
         }
 
         #region properties
 
-        protected ConfigurationService ConfigurationService { get; }
 
         public bool IsRootDrive
         {
@@ -63,7 +64,7 @@ namespace Jaya.Shared.Base
             if (!string.IsNullOrEmpty(path))
                 hash += path.GetHashCode();
 
-            if (_cache.TryGetValue(hash, out DirectoryModel directory))
+            if (this.memoryCacheService.TryGetValue(hash, out DirectoryModel directory))
                 return directory;
 
             return null;
@@ -78,7 +79,7 @@ namespace Jaya.Shared.Base
             if (!string.IsNullOrEmpty(directory.Path))
                 hash += directory.Path.GetHashCode();
 
-            _cache.Set(hash, directory);
+            this.memoryCacheService.Set(hash, directory);
         }
 
         public async Task<ProviderModel> GetDefaultProviderAsync()

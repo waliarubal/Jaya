@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using Jaya.Shared.Contracts;
+using Microsoft.Extensions.Caching.Memory;
 using System.Composition;
 
 namespace Jaya.Shared.Services
 {
-    [Export(typeof(IService))]
-    public sealed class MemoryCacheService: IService
+    //[Export(typeof(IService))]
+    public sealed class MemoryCacheService : IMemoryCacheService // Use dedicated typed service
     {
         readonly MemoryCache _cache;
 

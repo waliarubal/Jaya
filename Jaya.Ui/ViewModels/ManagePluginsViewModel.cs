@@ -7,7 +7,7 @@ namespace Jaya.Ui.ViewModels
 {
     public class ManagePluginsViewModel: ViewModelBase
     {
-        public IEnumerable<ProviderServiceBase> Plugins => GetService<ProviderService>().Services as IEnumerable<ProviderServiceBase>;
+        public IEnumerable<ProviderServiceBase> Plugins => GetService<IProviderService>().Services as IEnumerable<ProviderServiceBase>;
 
         public ProviderServiceBase SelectedPlugin
         {

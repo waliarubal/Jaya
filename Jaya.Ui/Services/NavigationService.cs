@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Jaya.Shared;
+using Jaya.Shared.Contracts;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using Jaya.Ui.ViewModels.Windows;
@@ -10,17 +11,24 @@ using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
-    public sealed class NavigationService: IService
+    public interface INavigationService
     {
-        readonly CommandService _commandService;
+        RelayCommand<WindowOptionsModel> OpenWindowCommand { get; }
+        RelayCommand NavigateBackCommand { get; }
+        RelayCommand NavigateForwardCommand { get; }
+    }
+
+    //[Export(typeof(IService))]
+    public sealed class NavigationService: INavigationService
+    {
+        readonly ICommandService _commandService;
         readonly Stack<DirectoryChangedEventArgs> _backwardStack, _forwardStack;
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         RelayCommand _navigateBack, _navigateForward;
         RelayCommand<WindowOptionsModel> _openWindow;
         DirectoryChangedEventArgs _directoryChangedArgs;
 
-        public NavigationService(CommandService commandService)
+        public NavigationService(ICommandService commandService)
         {
             _commandService = commandService;
             _backwardStack = new Stack<DirectoryChangedEventArgs>();
