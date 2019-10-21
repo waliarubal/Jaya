@@ -3,7 +3,7 @@ using System.Composition;
 
 namespace Jaya.Shared.Services
 {
-    [Export(typeof(CommandService))]
+    [Export(typeof(IService))]
     public sealed class CommandService: IService
     {
         public CommandService()

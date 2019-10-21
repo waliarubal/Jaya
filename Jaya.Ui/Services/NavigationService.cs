@@ -10,7 +10,7 @@ using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(NavigationService))]
+    [Export(typeof(IService))]
     public sealed class NavigationService: IService
     {
         readonly CommandService _commandService;

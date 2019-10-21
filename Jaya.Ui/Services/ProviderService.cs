@@ -4,7 +4,7 @@ using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(ProviderService))]
+    [Export(typeof(IService))]
     public sealed class ProviderService: IService
     {
         readonly List<IPorviderService> _services;
