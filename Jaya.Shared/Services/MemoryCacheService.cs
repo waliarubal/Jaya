@@ -18,8 +18,6 @@ namespace Jaya.Shared.Services
             _cache.Dispose();
         }
 
-        public string Name => nameof(MemoryCacheService);
-
         public long Count => _cache.Count;
 
         public bool TryGetValue<T>(object key, out T result)

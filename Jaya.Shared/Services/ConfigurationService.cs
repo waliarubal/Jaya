@@ -19,8 +19,6 @@ namespace Jaya.Shared.Services
 
         }
 
-        public string Name => nameof(ConfigurationService);
-
         public T Get<T>(string key = null) where T : ConfigModelBase
         {
             var type = typeof(T);

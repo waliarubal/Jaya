@@ -9,7 +9,5 @@ namespace Jaya.Shared.Services
         }
 
         public EventAggregator EventAggregator { get; }
-
-        public string Name => nameof(CommandService);
     }
 }

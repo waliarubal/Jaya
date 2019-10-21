@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 
 namespace Jaya.Shared.Services
 {
@@ -18,7 +16,7 @@ namespace Jaya.Shared.Services
 
         private ServiceLocator()
         {
-            Plugins = RegisterServices();
+            Services = RegisterServices();
         }
 
         ~ServiceLocator()
@@ -42,7 +40,9 @@ namespace Jaya.Shared.Services
             }
         }
 
-        public IEnumerable<IService> Plugins { get; private set; }
+        public IEnumerable<IService> Services { get; private set; }
+
+        public IEnumerable<IPorviderService> Providers { get; private set; }
 
         #endregion
 
@@ -69,17 +69,6 @@ namespace Jaya.Shared.Services
             //return scopeFactory.CreateScope();
         }
 
-        IEnumerable<Assembly> GetAssemblies()
-        {
-            var assemblies = new List<Assembly>();
-
-            var files = Directory.GetFiles(Environment.CurrentDirectory, "Jaya.*.dll");
-            foreach(var file in files)
-                assemblies.Add(Assembly.LoadFile(file));
-
-            return assemblies;
-        }
-
         void UnregisterServices(IServiceScope scope)
         {
             if (scope == null)
@@ -90,13 +79,13 @@ namespace Jaya.Shared.Services
 
         public void Dispose()
         {
-            Plugins = null;
+            Services = null;
         }
 
         public T GetService<T>()
         {
-            if (Plugins == null)
-                Plugins = RegisterServices();
+            if (Services == null)
+                Services = RegisterServices();
 
             return default;
         }

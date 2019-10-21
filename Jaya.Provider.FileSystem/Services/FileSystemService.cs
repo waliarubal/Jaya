@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Jaya.Provider.FileSystem.Services
 {
-    public class FileSystemService : ProviderServiceBase, IService
+    public class FileSystemService : ProviderServiceBase, IPorviderService
     {
         public FileSystemService()
         {
