@@ -3,10 +3,12 @@ using Jaya.Shared;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using System.Collections.Generic;
+using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    public sealed class SharedService
+    [Export(typeof(IService))]
+    public sealed class SharedService: IService
     {
         readonly Subscription<byte> _onSimpleCommand;
         readonly Subscription<KeyValuePair<byte, object>> _onParameterizedCommand;

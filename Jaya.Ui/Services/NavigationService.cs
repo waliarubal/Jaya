@@ -6,10 +6,12 @@ using Jaya.Ui.ViewModels.Windows;
 using Jaya.Ui.Views.Windows;
 using System;
 using System.Collections.Generic;
+using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    public sealed class NavigationService
+    [Export(typeof(IService))]
+    public sealed class NavigationService: IService
     {
         readonly CommandService _commandService;
         readonly Stack<DirectoryChangedEventArgs> _backwardStack, _forwardStack;

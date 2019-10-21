@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Composition.Hosting;
+using System.IO;
 using System.Reflection;
 
 namespace Jaya.Shared.Services
@@ -9,8 +11,6 @@ namespace Jaya.Shared.Services
     {
         static ServiceLocator _instance;
         static readonly object _syncRoot;
-        IServiceScope _scope;
-        readonly List<Type> _plugins;
 
         static ServiceLocator()
         {
@@ -19,7 +19,7 @@ namespace Jaya.Shared.Services
 
         private ServiceLocator()
         {
-            _plugins = new List<Type>();
+            Plugins = RegisterServices();
         }
 
         ~ServiceLocator()
@@ -43,40 +43,48 @@ namespace Jaya.Shared.Services
             }
         }
 
-        public IServiceProvider Provider
-        {
-            get
-            {
-                if (_scope == null)
-                    _scope = RegisterServices();
-
-                return _scope.ServiceProvider;
-            }
-        }
-
-        public IEnumerable<Type> PluginTypes => _plugins;
+        public IEnumerable<IService> Plugins { get; private set; }
 
         #endregion
 
-        IServiceScope RegisterServices()
+        IEnumerable<IService> RegisterServices()
         {
-            var collection = new ServiceCollection();
+            var configuration = new ContainerConfiguration()
+                .WithAssemblies(GetAssemblies());
 
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (var assembly in assemblies)
+            using(var container = configuration.CreateContainer())
             {
-                if (!assembly.FullName.StartsWith("Jaya", StringComparison.InvariantCultureIgnoreCase))
-                    continue;
-
-                var types = assembly.DefinedTypes;
-                foreach (TypeInfo typeInfo in types)
-                    if (typeInfo.IsClass && typeInfo.Name.EndsWith("Service", StringComparison.InvariantCulture))
-                        collection.AddScoped(typeInfo);
+                return container.GetExports<IService>();
             }
 
-            var container = collection.BuildServiceProvider();
-            var scopeFactory = container.GetRequiredService<IServiceScopeFactory>();
-            return scopeFactory.CreateScope();
+            //var collection = new ServiceCollection();
+
+            //var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            //foreach (var assembly in assemblies)
+            //{
+            //    if (!assembly.FullName.StartsWith("Jaya", StringComparison.InvariantCultureIgnoreCase))
+            //        continue;
+
+            //    var types = assembly.DefinedTypes;
+            //    foreach (TypeInfo typeInfo in types)
+            //        if (typeInfo.IsClass && typeInfo.Name.EndsWith("Service", StringComparison.InvariantCulture))
+            //            collection.AddScoped(typeInfo);
+            //}
+
+            //var container = collection.BuildServiceProvider();
+            //var scopeFactory = container.GetRequiredService<IServiceScopeFactory>();
+            //return scopeFactory.CreateScope();
+        }
+
+        IEnumerable<Assembly> GetAssemblies()
+        {
+            var assemblies = new List<Assembly>();
+
+            var files = Directory.GetFiles(Environment.CurrentDirectory, "Jaya.*.dll");
+            foreach(var file in files)
+                assemblies.Add(Assembly.LoadFile(file));
+
+            return assemblies;
         }
 
         void UnregisterServices(IServiceScope scope)
@@ -89,25 +97,25 @@ namespace Jaya.Shared.Services
 
         public void Dispose()
         {
-            UnregisterServices(_scope);
+            Plugins = null;
         }
 
         public T GetService<T>()
         {
-            if (_scope == null)
-                _scope = RegisterServices();
+            if (Plugins == null)
+                Plugins = RegisterServices();
 
-            return _scope.ServiceProvider.GetService<T>();
+            return default;
         }
 
         public object CreateInstance(Type type)
         {
-            return ActivatorUtilities.CreateInstance(Provider, type);
+            return null;
         }
 
         public T CreateInstance<T>()
         {
-            return ActivatorUtilities.CreateInstance<T>(Provider, typeof(T));
+            return default;
         }
     }
 }

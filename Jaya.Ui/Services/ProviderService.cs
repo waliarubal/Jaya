@@ -1,10 +1,13 @@
 ﻿using Jaya.Provider.FileSystem.Services;
 using Jaya.Shared.Base;
+using Jaya.Shared.Services;
 using System.Collections.Generic;
+using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    public sealed class ProviderService
+    [Export(typeof(IService))]
+    public sealed class ProviderService: IService
     {
         readonly List<ProviderServiceBase> _services;
 
