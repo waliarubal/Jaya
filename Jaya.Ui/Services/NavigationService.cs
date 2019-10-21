@@ -4,12 +4,14 @@ using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using Jaya.Ui.ViewModels.Windows;
 using Jaya.Ui.Views.Windows;
+using Prise.Infrastructure;
 using System;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
-    public class NavigationService
+    [Plugin(PluginType = typeof(NavigationService))]
+    public sealed class NavigationService
     {
         readonly CommandService _commandService;
         readonly Stack<DirectoryChangedEventArgs> _backwardStack, _forwardStack;

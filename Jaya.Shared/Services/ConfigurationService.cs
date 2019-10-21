@@ -1,10 +1,12 @@
 ﻿using Jaya.Shared.Base;
 using Newtonsoft.Json;
+using Prise.Infrastructure;
 using System;
 using System.IO;
 
 namespace Jaya.Shared.Services
 {
+    [Plugin(PluginType = typeof(ConfigurationService))]
     public sealed class ConfigurationService
     {
         readonly string _configurationFilePathFormat;

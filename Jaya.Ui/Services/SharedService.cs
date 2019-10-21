@@ -2,10 +2,12 @@
 using Jaya.Shared;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
+using Prise.Infrastructure;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
+    [Plugin(PluginType = typeof(SharedService))]
     public sealed class SharedService
     {
         readonly Subscription<byte> _onSimpleCommand;

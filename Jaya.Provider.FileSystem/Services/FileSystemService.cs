@@ -3,12 +3,14 @@ using Jaya.Provider.FileSystem.Views;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
+using Prise.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace Jaya.Provider.FileSystem.Services
 {
+    [Plugin(PluginType = typeof(FileSystemService))]
     public class FileSystemService : ProviderServiceBase
     {
         public FileSystemService()
