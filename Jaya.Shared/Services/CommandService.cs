@@ -1,12 +1,8 @@
 ﻿
-using System.Composition;
-
 namespace Jaya.Shared.Services
 {
-    [Export(typeof(IService))]
     public sealed class CommandService: IService
     {
-        [ImportingConstructor]
         public CommandService()
         {
             EventAggregator = new EventAggregator();

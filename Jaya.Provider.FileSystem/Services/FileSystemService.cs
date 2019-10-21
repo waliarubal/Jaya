@@ -5,12 +5,10 @@ using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
-using System.Composition;
 using System.IO;
 
 namespace Jaya.Provider.FileSystem.Services
 {
-    [Export(typeof(ProviderServiceBase))]
     public class FileSystemService : ProviderServiceBase, IService
     {
         public FileSystemService()

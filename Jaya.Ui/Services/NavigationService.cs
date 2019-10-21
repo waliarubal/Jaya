@@ -6,11 +6,9 @@ using Jaya.Ui.ViewModels.Windows;
 using Jaya.Ui.Views.Windows;
 using System;
 using System.Collections.Generic;
-using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
     public sealed class NavigationService: IService
     {
         readonly CommandService _commandService;
@@ -20,7 +18,6 @@ namespace Jaya.Ui.Services
         RelayCommand<WindowOptionsModel> _openWindow;
         DirectoryChangedEventArgs _directoryChangedArgs;
 
-        [ImportingConstructor]
         public NavigationService(CommandService commandService)
         {
             _commandService = commandService;

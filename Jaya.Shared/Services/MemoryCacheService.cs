@@ -1,14 +1,11 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using System.Composition;
 
 namespace Jaya.Shared.Services
 {
-    [Export(typeof(IService))]
     public sealed class MemoryCacheService: IService
     {
         readonly MemoryCache _cache;
 
-        [ImportingConstructor]
         public MemoryCacheService()
         {
             var options = new MemoryCacheOptions();

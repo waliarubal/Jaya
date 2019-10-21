@@ -3,11 +3,9 @@ using Jaya.Shared;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using System.Collections.Generic;
-using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
     public sealed class SharedService: IService
     {
         readonly Subscription<byte> _onSimpleCommand;
@@ -16,7 +14,6 @@ namespace Jaya.Ui.Services
         readonly CommandService _commandService;
         readonly ConfigurationService _configService;
 
-        [ImportingConstructor]
         public SharedService(CommandService commandService, ConfigurationService configurationService)
         {
             _commandService = commandService;

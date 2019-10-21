@@ -1,17 +1,14 @@
 ﻿using Jaya.Shared.Base;
 using Newtonsoft.Json;
 using System;
-using System.Composition;
 using System.IO;
 
 namespace Jaya.Shared.Services
 {
-    [Export(typeof(IService))]
     public sealed class ConfigurationService: IService
     {
         readonly string _configurationFilePathFormat;
 
-        [ImportingConstructor]
         public ConfigurationService()
         {
             _configurationFilePathFormat = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Jaya", "config_{0}.json");
