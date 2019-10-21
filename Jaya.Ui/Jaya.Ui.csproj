@@ -28,7 +28,6 @@
     <PackageReference Include="Avalonia.Desktop" Version="0.8.3" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.3" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.8.2" />
-    <PackageReference Include="Prise.Infrastructure" Version="1.0.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj" />

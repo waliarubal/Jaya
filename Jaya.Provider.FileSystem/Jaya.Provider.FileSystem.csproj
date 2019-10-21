@@ -17,7 +17,6 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.8.3" />
     <PackageReference Include="Avalonia.Desktop" Version="0.8.3" />
-    <PackageReference Include="Prise.Infrastructure" Version="1.0.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />

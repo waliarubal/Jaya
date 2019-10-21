@@ -4,13 +4,11 @@ using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using Jaya.Ui.ViewModels.Windows;
 using Jaya.Ui.Views.Windows;
-using Prise.Infrastructure;
 using System;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
-    [Plugin(PluginType = typeof(NavigationService))]
     public sealed class NavigationService
     {
         readonly CommandService _commandService;

@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using Prise.Infrastructure;
 
 namespace Jaya.Shared.Services
 {
-    [Plugin(PluginType = typeof(MemoryCacheService))]
     public sealed class MemoryCacheService
     {
         readonly MemoryCache _cache;

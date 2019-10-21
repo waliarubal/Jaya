@@ -22,7 +22,6 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="Prise" Version="1.0.5" />
   </ItemGroup>
   <!--<ItemGroup>
     <Reference Include="System">
