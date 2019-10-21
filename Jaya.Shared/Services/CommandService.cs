@@ -1,6 +1,9 @@
 ﻿
+using System.Composition;
+
 namespace Jaya.Shared.Services
 {
+    [Export(typeof(CommandService))]
     public sealed class CommandService: IService
     {
         public CommandService()

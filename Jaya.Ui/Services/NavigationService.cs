@@ -10,7 +10,7 @@ using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
+    [Export(typeof(NavigationService))]
     public sealed class NavigationService: IService
     {
         readonly CommandService _commandService;
@@ -32,8 +32,6 @@ namespace Jaya.Ui.Services
         {
             _commandService.EventAggregator.UnSubscribe(_onDirectoryChanged);
         }
-
-        public string Name => nameof(NavigationService);
 
         public RelayCommand<WindowOptionsModel> OpenWindowCommand
         {

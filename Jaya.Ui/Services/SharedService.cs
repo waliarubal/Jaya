@@ -7,7 +7,7 @@ using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
+    [Export(typeof(SharedService))]
     public sealed class SharedService: IService
     {
         readonly Subscription<byte> _onSimpleCommand;
@@ -32,8 +32,6 @@ namespace Jaya.Ui.Services
         }
 
         #region properties
-
-        public string Name => nameof(SharedService);
 
         public ApplicationConfigModel ApplicationConfiguration { get; private set; }
 

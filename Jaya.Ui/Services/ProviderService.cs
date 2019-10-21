@@ -1,25 +1,20 @@
-﻿using Jaya.Shared.Base;
-using Jaya.Shared.Services;
+﻿using Jaya.Shared.Services;
 using System.Collections.Generic;
 using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
+    [Export(typeof(ProviderService))]
     public sealed class ProviderService: IService
     {
-        readonly List<ProviderServiceBase> _services;
+        readonly List<IPorviderService> _services;
 
         public ProviderService()
         {
-            _services = new List<ProviderServiceBase>
-            {
-                
-            };
+            _services = new List<IPorviderService>();
+            _services.AddRange(ServiceLocator.Instance.Providers);
         }
 
-        public string Name => nameof(ProviderService);
-
-        public IEnumerable<ProviderServiceBase> Services => _services;
+        public IEnumerable<IPorviderService> Services => _services;
     }
 }

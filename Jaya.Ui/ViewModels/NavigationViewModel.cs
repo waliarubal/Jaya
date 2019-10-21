@@ -88,7 +88,7 @@ namespace Jaya.Ui.ViewModels
             {
                 foreach (var service in GetService<ProviderService>().Services)
                 {
-                    var child = new TreeNodeModel(service, null);
+                    var child = new TreeNodeModel(service as ProviderServiceBase, null);
                     child.Label = service.Name;
                     child.ImagePath = service.ImagePath;
                     child.NodeExpanded += OnNodeExpanded;

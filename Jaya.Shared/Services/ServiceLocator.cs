@@ -72,6 +72,9 @@ namespace Jaya.Shared.Services
 
         void UnregisterServices()
         {
+            if (_host == null)
+                return;
+
             _host.Dispose();
         }
 
@@ -85,8 +88,8 @@ namespace Jaya.Shared.Services
             if (_host == null)
             {
                 _host = RegisterServices();
-                //Services = _host.GetExports<IService>();
-                //Providers = _host.GetExports<IPorviderService>();
+                Services = _host.GetExports<IService>();
+                Providers = _host.GetExports<IPorviderService>();
             }
                 
             return _host.GetExport<T>();
@@ -97,8 +100,8 @@ namespace Jaya.Shared.Services
             if (_host == null)
             {
                 _host = RegisterServices();
-                //Services = _host.GetExports<IService>();
-                //Providers = _host.GetExports<IPorviderService>();
+                Services = _host.GetExports<IService>();
+                Providers = _host.GetExports<IPorviderService>();
             }
 
             return _host.GetExport<T>();

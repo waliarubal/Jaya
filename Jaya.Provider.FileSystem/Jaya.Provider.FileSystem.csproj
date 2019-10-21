@@ -22,7 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
   </ItemGroup>
-  <!--<PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
+  <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
     <OutputPath>..\Jaya.Ui\bin\$(Configuration)\</OutputPath>
-  </PropertyGroup>-->
+  </PropertyGroup>
 </Project>

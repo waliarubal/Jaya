@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Jaya.Provider.FileSystem.Services
 {
-    [Export(typeof(IPorviderService))]
+    [Export(typeof(FileSystemService))]
     public class FileSystemService : ProviderServiceBase, IPorviderService
     {
         public FileSystemService()
