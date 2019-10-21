@@ -1,6 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Composition;
+using System.Composition.Convention;
+using System.Composition.Hosting;
+using System.IO;
+using System.Reflection;
 
 namespace Jaya.Shared.Services
 {
@@ -8,6 +12,7 @@ namespace Jaya.Shared.Services
     {
         static ServiceLocator _instance;
         static readonly object _syncRoot;
+        CompositionHost _host;
 
         static ServiceLocator()
         {
@@ -16,7 +21,7 @@ namespace Jaya.Shared.Services
 
         private ServiceLocator()
         {
-            Services = RegisterServices();
+            
         }
 
         ~ServiceLocator()
@@ -40,56 +45,66 @@ namespace Jaya.Shared.Services
             }
         }
 
+        [ImportMany]
         public IEnumerable<IService> Services { get; private set; }
 
+        [ImportMany]
         public IEnumerable<IPorviderService> Providers { get; private set; }
 
         #endregion
 
-        IEnumerable<IService> RegisterServices()
+        CompositionHost RegisterServices()
         {
-            return null;
+            var conventions = new ConventionBuilder();
+            conventions.ForTypesDerivedFrom<IService>().Export<IService>();
+            conventions.ForTypesDerivedFrom<IServiceProvider>().Export<IServiceProvider>();
 
-            //var collection = new ServiceCollection();
+            var assemblies = new List<Assembly>();
+            foreach(var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.*.dll", SearchOption.TopDirectoryOnly))
+            {
+                var assembly = Assembly.LoadFrom(fileName);
+                assemblies.Add(assembly);
+            }
 
-            //var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            //foreach (var assembly in assemblies)
-            //{
-            //    if (!assembly.FullName.StartsWith("Jaya", StringComparison.InvariantCultureIgnoreCase))
-            //        continue;
-
-            //    var types = assembly.DefinedTypes;
-            //    foreach (TypeInfo typeInfo in types)
-            //        if (typeInfo.IsClass && typeInfo.Name.EndsWith("Service", StringComparison.InvariantCulture))
-            //            collection.AddScoped(typeInfo);
-            //}
-
-            //var container = collection.BuildServiceProvider();
-            //var scopeFactory = container.GetRequiredService<IServiceScopeFactory>();
-            //return scopeFactory.CreateScope();
+            var configuration = new ContainerConfiguration().WithAssemblies(assemblies, conventions);
+            return configuration.CreateContainer();
         }
 
-        void UnregisterServices(IServiceScope scope)
+        void UnregisterServices()
         {
-            if (scope == null)
-                return;
-
-            scope.Dispose();
+            _host.Dispose();
         }
 
         public void Dispose()
         {
-            Services = null;
+            UnregisterServices();
         }
 
-        public T GetService<T>()
+        public T GetService<T>() where T: IService
         {
-            if (Services == null)
-                Services = RegisterServices();
-
-            return default;
+            if (_host == null)
+            {
+                _host = RegisterServices();
+                //Services = _host.GetExports<IService>();
+                //Providers = _host.GetExports<IPorviderService>();
+            }
+                
+            return _host.GetExport<T>();
         }
 
+        public T GetProvider<T>() where T : IPorviderService
+        {
+            if (_host == null)
+            {
+                _host = RegisterServices();
+                //Services = _host.GetExports<IService>();
+                //Providers = _host.GetExports<IPorviderService>();
+            }
+
+            return _host.GetExport<T>();
+        }
+
+        /*
         public object CreateInstance(Type type)
         {
             return null;
@@ -99,5 +114,6 @@ namespace Jaya.Shared.Services
         {
             return default;
         }
+        */
     }
 }
