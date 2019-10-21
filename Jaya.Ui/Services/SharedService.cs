@@ -16,6 +16,7 @@ namespace Jaya.Ui.Services
         readonly CommandService _commandService;
         readonly ConfigurationService _configService;
 
+        [ImportingConstructor]
         public SharedService(CommandService commandService, ConfigurationService configurationService)
         {
             _commandService = commandService;
@@ -32,6 +33,8 @@ namespace Jaya.Ui.Services
         }
 
         #region properties
+
+        public string Name => nameof(SharedService);
 
         public ApplicationConfigModel ApplicationConfiguration { get; private set; }
 

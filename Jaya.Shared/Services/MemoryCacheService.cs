@@ -8,6 +8,7 @@ namespace Jaya.Shared.Services
     {
         readonly MemoryCache _cache;
 
+        [ImportingConstructor]
         public MemoryCacheService()
         {
             var options = new MemoryCacheOptions();
@@ -19,6 +20,8 @@ namespace Jaya.Shared.Services
         {
             _cache.Dispose();
         }
+
+        public string Name => nameof(MemoryCacheService);
 
         public long Count => _cache.Count;
 

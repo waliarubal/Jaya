@@ -31,7 +31,6 @@
     <PackageReference Include="System.Composition.AttributedModel" Version="1.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj" />
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
   </ItemGroup>
   <!--<ItemGroup>

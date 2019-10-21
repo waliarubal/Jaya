@@ -11,6 +11,7 @@ namespace Jaya.Shared.Services
     {
         readonly string _configurationFilePathFormat;
 
+        [ImportingConstructor]
         public ConfigurationService()
         {
             _configurationFilePathFormat = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Jaya", "config_{0}.json");
@@ -20,6 +21,8 @@ namespace Jaya.Shared.Services
         {
 
         }
+
+        public string Name => nameof(ConfigurationService);
 
         public T Get<T>(string key = null) where T : ConfigModelBase
         {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Composition;
 using System.Composition.Hosting;
 using System.IO;
 using System.Reflection;
@@ -43,6 +44,7 @@ namespace Jaya.Shared.Services
             }
         }
 
+        [ImportMany]
         public IEnumerable<IService> Plugins { get; private set; }
 
         #endregion

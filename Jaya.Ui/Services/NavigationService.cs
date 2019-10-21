@@ -20,6 +20,7 @@ namespace Jaya.Ui.Services
         RelayCommand<WindowOptionsModel> _openWindow;
         DirectoryChangedEventArgs _directoryChangedArgs;
 
+        [ImportingConstructor]
         public NavigationService(CommandService commandService)
         {
             _commandService = commandService;
@@ -32,6 +33,8 @@ namespace Jaya.Ui.Services
         {
             _commandService.EventAggregator.UnSubscribe(_onDirectoryChanged);
         }
+
+        public string Name => nameof(NavigationService);
 
         public RelayCommand<WindowOptionsModel> OpenWindowCommand
         {
