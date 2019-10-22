@@ -2,6 +2,7 @@
 using Avalonia.Data.Converters;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Jaya.Shared.Contracts;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;
@@ -15,11 +16,11 @@ namespace Jaya.Ui.Converters
         const string IMAGE_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/{0}{1}.png";
         const string FILE_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/FileExtensions/{0}";
 
-        readonly MemoryCacheService _cache;
+        readonly IMemoryCacheService _cache;
 
         public FileSystemObjectToImageConverter()
         {
-            _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
+            _cache = ServiceLocator.Instance.GetService<IMemoryCacheService>();
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

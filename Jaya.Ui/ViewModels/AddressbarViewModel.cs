@@ -11,7 +11,7 @@ namespace Jaya.Ui.ViewModels
 {
     public class AddressbarViewModel : ViewModelBase
     {
-        readonly NavigationService _navigationService;
+        readonly INavigationService _navigationService;
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly char[] _pathSeparator;
         ICommand _clearSearch;
@@ -23,7 +23,7 @@ namespace Jaya.Ui.ViewModels
                 Path.DirectorySeparatorChar,
                 Path.AltDirectorySeparatorChar
             };
-            _navigationService = GetService<NavigationService>();
+            _navigationService = GetService<INavigationService>();
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
             
             SearchQuery = string.Empty;

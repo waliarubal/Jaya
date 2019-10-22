@@ -1,4 +1,5 @@
 ﻿using Jaya.Shared.Base;
+using Jaya.Shared.Contracts;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using Jaya.Ui.Services;
@@ -13,21 +14,21 @@ namespace Jaya.Ui.Models
         const string EXPANDED_IMAGE = "avares://Jaya.Ui/Assets/Images/Folder-Open-16.png";
 
         TreeNodeModel _dummyChild;
-        readonly SharedService _shared;
+        readonly ISharedService _shared;
 
         public delegate void TreeNodeExpanded(TreeNodeModel node, bool isExpaded);
         public event TreeNodeExpanded NodeExpanded;
 
-        public TreeNodeModel(ProviderServiceBase service, ProviderModel provider)
+        public TreeNodeModel(IJayaPlugin plugin, ProviderModel provider)
         {
-            Service = service;
+            Service = plugin;
             Provider = provider;
             IconImagePath = COLLAPSED_IMAGE;
             Children = new ObservableCollection<TreeNodeModel>();
 
             if (Service != null && Provider != null)
             {
-                _shared = ServiceLocator.Instance.GetService<SharedService>();
+                _shared = ServiceLocator.Instance.GetService<ISharedService>();
                 _shared.ApplicationConfiguration.PropertyChanged += OnApplicationConfigChanged;
             }
         }
@@ -40,7 +41,7 @@ namespace Jaya.Ui.Models
 
         #region properties
 
-        public ProviderServiceBase Service { get; }
+        public IJayaPlugin Service { get; }
 
         public ProviderModel Provider { get; }
 

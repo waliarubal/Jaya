@@ -10,7 +10,8 @@ namespace Jaya.Provider.FileSystem.ViewModels
 
         public ConfigurationViewModel()
         {
-            _config = GetProvider<FileSystemService>();
+            //TODO
+            //_config = GetProvider<FileSystemService>();
         }
 
         public FileSystemConfigModel Configuration => _config.Configuration as FileSystemConfigModel;

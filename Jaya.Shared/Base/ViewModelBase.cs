@@ -49,11 +49,6 @@ namespace Jaya.Shared.Base
             return ServiceLocator.Instance.GetService<T>();
         }
 
-        protected T GetProvider<T>() where T : class, IProviderService
-        {
-            return ServiceLocator.Instance.GetService<T>();
-        }
-
         protected void Invoke(Action action)
         {
             var dispatcher = Dispatcher.UIThread;

@@ -1,5 +1,6 @@
 ﻿using Jaya.Shared;
 using Jaya.Shared.Base;
+using Jaya.Shared.Contracts;
 using Jaya.Shared.Models;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
@@ -10,15 +11,15 @@ namespace Jaya.Ui.ViewModels
     public class ExplorerViewModel: ViewModelBase
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
-        readonly SharedService _shared;
+        readonly ISharedService _shared;
 
         ICommand _invokeObject;
-        ProviderServiceBase _service;
+        IJayaPlugin _service;
         ProviderModel _provider;
 
         public ExplorerViewModel()
         {
-            _shared = GetService<SharedService>();
+            _shared = GetService<ISharedService>();
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
         }
 
@@ -67,12 +68,12 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        async void DirectoryChanged(DirectoryChangedEventArgs args)
+        void DirectoryChanged(DirectoryChangedEventArgs args)
         {
             _service = args.Service;
             _provider = args.Provider;
 
-            var directory = await args.Service.GetDirectoryAsync(args.Provider, args.Directory.Path);
+            var directory = args.Service.GetDirectory(args.Provider, args.Directory.Path);
             Directory = directory;
         }
     }

@@ -8,13 +8,13 @@ namespace Jaya.Ui.ViewModels.Windows
     public class MainViewModel : ViewModelBase
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
-        readonly SharedService _shared;
+        readonly ISharedService _shared;
 
         public MainViewModel()
         {
             WindowTitle = "Jaya";
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
-            _shared = GetService<SharedService>();
+            _shared = GetService<ISharedService>();
         }
 
         ~MainViewModel()

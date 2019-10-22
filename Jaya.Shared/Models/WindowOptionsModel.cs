@@ -3,6 +3,7 @@ using System;
 
 namespace Jaya.Shared.Models
 {
+    [Serializable]
     public class WindowOptionsModel : ModelBase
     {
         public string Title

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Jaya.Shared.Models
 {
+    [Serializable]
     public class DirectoryModel : FileSystemObjectModel
     {
         public DirectoryModel(bool isDrive = false)

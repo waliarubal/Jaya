@@ -17,13 +17,19 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.8.3" />
     <PackageReference Include="Avalonia.Desktop" Version="0.8.3" />
-    <PackageReference Include="Prise.Infrastructure" Version="1.0.5" />
-    <PackageReference Include="System.Composition.AttributedModel" Version="1.3.0" />
+    <!--<PackageReference Include="Prise.Infrastructure" Version="1.0.5" />-->
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Prise\src\Prise.Infrastructure\Prise.Infrastructure.csproj" />
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
   </ItemGroup>
-  <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
-    <OutputPath>..\Jaya.Ui\bin\$(Configuration)\</OutputPath>
-  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <!--Delete the plugins directory in Jaya.UI-->
+    <Exec Command="rmdir ..\Jaya.Ui\bin\$(Configuration)\$(TargetFramework)\Plugins /s /q" />
+    <!--Create the plugins directory in Jaya.UI-->
+    <Exec Command="mkdir ..\Jaya.Ui\bin\$(Configuration)\$(TargetFramework)\Plugins" />
+    <!--Copy all files to the plugins directory in Jaya.UI-->
+    <Exec Command="copy $(OutDir)\**.* ..\Jaya.Ui\bin\$(Configuration)\$(TargetFramework)\Plugins /Y" />
+  </Target>
 </Project>

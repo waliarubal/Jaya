@@ -1,15 +1,17 @@
 ﻿using Jaya.Shared.Base;
+using Jaya.Shared.Contracts;
+using Jaya.Shared.Services;
 using System;
 
 namespace Jaya.Shared.Models
 {
-    public class ProviderModel: ModelBase
+    [Serializable]
+    public class ProviderModel : ModelBase
     {
-        public ProviderModel(string name, ProviderServiceBase service)
+        public ProviderModel(string name)
         {
             Id = Guid.NewGuid();
             Name = name;
-            Service = service;
         }
 
         public Guid Id
@@ -30,27 +32,10 @@ namespace Jaya.Shared.Models
             set => Set(value);
         }
 
-        public ProviderServiceBase Service
-        {
-            get => Get<ProviderServiceBase>();
-            private set => Set(value);
-        }
-
         public bool IsEnabled
         {
             get => Get<bool>();
             set => Set(value);
-        }
-
-        public DirectoryModel Directory
-        {
-            get => Get<DirectoryModel>();
-            private set => Set(value);
-        }
-
-        public async void GetDirectory(string path = null)
-        {
-            Directory = await Service.GetDirectoryAsync(this, path);
         }
 
         public override string ToString()

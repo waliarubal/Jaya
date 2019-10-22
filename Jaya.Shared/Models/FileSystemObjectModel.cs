@@ -10,6 +10,7 @@ namespace Jaya.Shared.Models
         Drive
     }
 
+    [Serializable]
     public abstract class FileSystemObjectModel : ModelBase
     {
         static readonly string[] _sizeSuffixes;

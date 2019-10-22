@@ -1,22 +1,18 @@
 ﻿using Jaya.Provider.FileSystem.Models;
 using Jaya.Provider.FileSystem.Views;
-using Jaya.Shared.Base;
 using Jaya.Shared.Contracts;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using Prise.Infrastructure;
 using System;
 using System.Collections.Generic;
-using System.Composition;
 using System.IO;
 
 namespace Jaya.Provider.FileSystem.Services
 {
-    [Plugin(PluginType = typeof(IProviderService))]
-    public class FileSystemService : ProviderServiceBase, IProviderService
+    [Plugin(PluginType = typeof(IJayaPlugin))]
+    public class FileSystemService : JayaPluginBase, IJayaPlugin
     {
-
-        // No ctor parameters, this should be fine
         public FileSystemService(
             IMemoryCacheService memoryCacheService,
             IConfigurationService configurationService
@@ -33,7 +29,6 @@ namespace Jaya.Provider.FileSystem.Services
                 Configuration = new FileSystemConfigModel { IsProtectedFileVisible = false };
         }
 
-
         [PluginFactory]
         public static FileSystemService FileSystemServiceFactoryMethod(IServiceProvider serviceProvider) =>
             new FileSystemService(
@@ -41,14 +36,14 @@ namespace Jaya.Provider.FileSystem.Services
                 (IConfigurationService)serviceProvider.GetService(typeof(IConfigurationService))
             );
 
-        protected override ProviderModel GetDefaultProvider()
+        public override ProviderModel GetDefaultProvider()
         {
-            var provider = new ProviderModel(Environment.MachineName, this);
+            var provider = new ProviderModel(Environment.MachineName);
             provider.ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png";
             return provider;
         }
 
-        protected override DirectoryModel GetDirectory(ProviderModel provider, string path = null)
+        public override DirectoryModel GetDirectory(ProviderModel provider, string path = null)
         {
             var model = GetFromCache(provider, path);
             if (model != null)

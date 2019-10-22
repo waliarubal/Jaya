@@ -1,4 +1,5 @@
 ﻿using Jaya.Shared.Base;
+using Jaya.Shared.Contracts;
 using Jaya.Shared.Models;
 using System;
 
@@ -13,9 +14,9 @@ namespace Jaya.Ui
 
     public class DirectoryChangedEventArgs : EventArgs
     {
-        public DirectoryChangedEventArgs(ProviderServiceBase service, ProviderModel provider, DirectoryModel directory, NavigationDirection direction = NavigationDirection.Unknown)
+        public DirectoryChangedEventArgs(IJayaPlugin plugin, ProviderModel provider, DirectoryModel directory, NavigationDirection direction = NavigationDirection.Unknown)
         {
-            Service = service;
+            Service = plugin;
             Provider = provider;
             Directory = directory;
             Direction = direction;
@@ -23,7 +24,7 @@ namespace Jaya.Ui
 
         public NavigationDirection Direction { get; }
 
-        public ProviderServiceBase Service { get; }
+        public IJayaPlugin Service { get; }
 
         public ProviderModel Provider { get; }
 

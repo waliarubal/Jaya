@@ -2,6 +2,7 @@
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
+using Jaya.Shared.Services.Contracts;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System;
@@ -75,7 +76,7 @@ namespace Jaya.Ui.ViewModels
             Invoke(() => node.Children.Add(childNode));
         }
 
-        async void Populate(TreeNodeModel node)
+        void Populate(TreeNodeModel node)
         {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
@@ -87,11 +88,11 @@ namespace Jaya.Ui.ViewModels
 
             if (node.Service == null)
             {
-                foreach (var service in GetService<IProviderService>().Services)
+                foreach (var plugin in GetService<IPluginProvider>().GetPlugins())
                 {
-                    var child = new TreeNodeModel(service as ProviderServiceBase, null);
-                    child.Label = service.Name;
-                    child.ImagePath = service.ImagePath;
+                    var child = new TreeNodeModel(plugin, null);
+                    child.Label = plugin.Name;
+                    child.ImagePath = plugin.ImagePath;
                     child.NodeExpanded += OnNodeExpanded;
                     child.AddDummyChild();
                     AddChildNode(node, child);
@@ -99,7 +100,7 @@ namespace Jaya.Ui.ViewModels
             }
             else if (node.Provider == null)
             {
-                var provider = await node.Service.GetDefaultProviderAsync();
+                var provider = node.Service.GetDefaultProvider();
 
                 var child = new TreeNodeModel(node.Service, provider);
                 child.Label = provider.Name;
@@ -111,7 +112,7 @@ namespace Jaya.Ui.ViewModels
             }
             else
             {
-                var currentDirectory = await node.Service.GetDirectoryAsync(node.Provider, node.FileSystemObject?.Path);
+                var currentDirectory = node.Service.GetDirectory(node.Provider, node.FileSystemObject?.Path);
                 foreach (var directory in currentDirectory.Directories)
                 {
                     var child = new TreeNodeModel(node.Service, node.Provider);

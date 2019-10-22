@@ -1,4 +1,7 @@
 ﻿using Jaya.Shared.Base;
+using Jaya.Shared.Contracts;
+using Jaya.Shared.Services;
+using Jaya.Shared.Services.Contracts;
 using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;
@@ -7,11 +10,11 @@ namespace Jaya.Ui.ViewModels
 {
     public class ManagePluginsViewModel: ViewModelBase
     {
-        public IEnumerable<ProviderServiceBase> Plugins => GetService<IProviderService>().Services as IEnumerable<ProviderServiceBase>;
+        public IEnumerable<IJayaPlugin> Plugins => GetService<IPluginProvider>().GetPlugins();
 
-        public ProviderServiceBase SelectedPlugin
+        public IJayaPlugin SelectedPlugin
         {
-            get => Get<ProviderServiceBase>();
+            get => Get<IJayaPlugin>();
             set
             {
                 if (Set(value))

@@ -7,12 +7,12 @@ namespace Jaya.Ui.ViewModels
 {
     public class ToolbarViewModel : ViewModelBase
     {
-        readonly SharedService _shared;
+        readonly ISharedService _shared;
         ICommand _openWindow;
 
         public ToolbarViewModel()
         {
-            _shared = GetService<SharedService>();
+            _shared = GetService<ISharedService>();
         }
 
         public ToolbarConfigModel ToolbarConfig => _shared.ToolbarConfiguration;
@@ -26,7 +26,7 @@ namespace Jaya.Ui.ViewModels
             get
             {
                 if (_openWindow == null)
-                    _openWindow = GetService<NavigationService>().OpenWindowCommand;
+                    _openWindow = GetService<INavigationService>().OpenWindowCommand;
 
                 return _openWindow;
             }

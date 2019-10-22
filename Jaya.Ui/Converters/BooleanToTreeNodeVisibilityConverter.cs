@@ -8,11 +8,11 @@ namespace Jaya.Ui.Converters
 {
     public class BooleanToTreeNodeVisibilityConverter : IValueConverter
     {
-        readonly SharedService _shared;
+        readonly ISharedService _shared;
 
         public BooleanToTreeNodeVisibilityConverter()
         {
-            _shared = ServiceLocator.Instance.GetService<SharedService>();
+            _shared = ServiceLocator.Instance.GetService<ISharedService>();
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

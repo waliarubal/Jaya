@@ -6,11 +6,11 @@ namespace Jaya.Ui.ViewModels
 {
     public class PreviewViewModel : ViewModelBase
     {
-        readonly SharedService _shared;
+        readonly ISharedService _shared;
 
         public PreviewViewModel()
         {
-            _shared = GetService<SharedService>();
+            _shared = GetService<ISharedService>();
         }
 
         public PaneConfigModel PaneConfig => _shared.PaneConfiguration;

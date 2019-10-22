@@ -9,11 +9,11 @@ namespace Jaya.Ui.Converters
 {
     public class FileSystemObjectToFileNameConverter : IValueConverter
     {
-        readonly SharedService _shared;
+        readonly ISharedService _shared;
 
         public FileSystemObjectToFileNameConverter()
         {
-            _shared = ServiceLocator.Instance.GetService<SharedService>();
+            _shared = ServiceLocator.Instance.GetService<ISharedService>();
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

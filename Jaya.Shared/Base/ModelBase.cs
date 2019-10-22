@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Jaya.Shared.Base
 {
+    [Serializable]
     public abstract class ModelBase : INotifyPropertyChanged
     {
         readonly Dictionary<string, object> _variables;

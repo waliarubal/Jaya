@@ -1,5 +1,8 @@
-﻿namespace Jaya.Shared.Models
+﻿using System;
+
+namespace Jaya.Shared.Models
 {
+    [Serializable]
     public class FileModel : FileSystemObjectModel
     {
         public FileModel()
