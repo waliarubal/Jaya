@@ -49,11 +49,7 @@ namespace Jaya.Shared.Base
             protected set;
         }
 
-        public ConfigModelBase Configuration
-        {
-            get;
-            protected set;
-        }
+        protected ConfigModelBase Configuration { get; set; }
 
         #endregion
 
@@ -81,6 +77,11 @@ namespace Jaya.Shared.Base
             _cache.Set(hash, directory);
         }
 
+        public T GetConfigurtion<T>() where T : ConfigModelBase
+        {
+            return (T)Configuration;
+        }
+
         public async Task<ProviderModel> GetDefaultProviderAsync()
         {
             return await Task.Run(() => GetDefaultProvider());
@@ -103,6 +104,11 @@ namespace Jaya.Shared.Base
         public override int GetHashCode()
         {
             return Name.GetHashCode();
+        }
+
+        public T GetConfiguration<T>() where T : ConfigModelBase
+        {
+            throw new NotImplementedException();
         }
     }
 }

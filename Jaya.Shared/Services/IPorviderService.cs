@@ -15,6 +15,6 @@ namespace Jaya.Shared.Services
 
         Type ConfigurationEditorType { get; }
 
-        ConfigModelBase Configuration { get; }
+        T GetConfiguration<T>() where T : ConfigModelBase;
     }
 }

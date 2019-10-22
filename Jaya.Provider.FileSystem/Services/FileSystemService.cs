@@ -67,6 +67,7 @@ namespace Jaya.Provider.FileSystem.Services
             model.Modified = info.LastWriteTime;
             model.Accessed = info.LastAccessTime;
             model.IsHidden = info.Attributes.HasFlag(FileAttributes.Hidden);
+            model.IsSystem = info.Attributes.HasFlag(FileAttributes.System);
 
             model.Files = new List<FileModel>();
             try
@@ -87,6 +88,7 @@ namespace Jaya.Provider.FileSystem.Services
                     file.Modified = fileInfo.LastWriteTime;
                     file.Accessed = fileInfo.LastAccessTime;
                     file.IsHidden = fileInfo.Attributes.HasFlag(FileAttributes.Hidden);
+                    file.IsSystem = fileInfo.Attributes.HasFlag(FileAttributes.System);
                     model.Files.Add(file);
                 }
             }
@@ -108,6 +110,7 @@ namespace Jaya.Provider.FileSystem.Services
                     directory.Modified = directoryInfo.LastWriteTime;
                     directory.Accessed = directoryInfo.LastAccessTime;
                     directory.IsHidden = directoryInfo.Attributes.HasFlag(FileAttributes.Hidden);
+                    directory.IsSystem = directoryInfo.Attributes.HasFlag(FileAttributes.System);
                     model.Directories.Add(directory);
                 }
             }

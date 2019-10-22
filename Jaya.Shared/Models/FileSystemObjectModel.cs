@@ -90,6 +90,12 @@ namespace Jaya.Shared.Models
             set => Set(value);
         }
 
+        public bool IsSystem
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         #endregion
 
         public override string ToString()
