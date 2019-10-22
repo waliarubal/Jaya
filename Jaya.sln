@@ -9,10 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Shared", "Jaya.Shared\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.FileSystem", "Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj", "{2E4C50A5-0CD5-4E7E-ABCB-E76EFE75D068}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prise.Infrastructure", "..\Prise\src\Prise.Infrastructure\Prise.Infrastructure.csproj", "{041FF48E-0339-4F8B-B99E-319B52FC55F2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prise.Infrastructure.NetCore", "..\Prise\src\Prise.Infrastructure.NetCore\Prise.Infrastructure.NetCore.csproj", "{5788D446-E2F4-4EF5-8596-244F286258E4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,14 +27,6 @@ Global
 		{2E4C50A5-0CD5-4E7E-ABCB-E76EFE75D068}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E4C50A5-0CD5-4E7E-ABCB-E76EFE75D068}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E4C50A5-0CD5-4E7E-ABCB-E76EFE75D068}.Release|Any CPU.Build.0 = Release|Any CPU
-		{041FF48E-0339-4F8B-B99E-319B52FC55F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{041FF48E-0339-4F8B-B99E-319B52FC55F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{041FF48E-0339-4F8B-B99E-319B52FC55F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{041FF48E-0339-4F8B-B99E-319B52FC55F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5788D446-E2F4-4EF5-8596-244F286258E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5788D446-E2F4-4EF5-8596-244F286258E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5788D446-E2F4-4EF5-8596-244F286258E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5788D446-E2F4-4EF5-8596-244F286258E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

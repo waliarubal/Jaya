@@ -10,7 +10,7 @@ namespace Jaya.Provider.FileSystem.ViewModels
 
         public ConfigurationViewModel()
         {
-            //TODO
+            // TODO Why is this required ?
             //_config = GetProvider<FileSystemService>();
         }
 

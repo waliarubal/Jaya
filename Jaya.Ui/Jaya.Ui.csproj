@@ -30,11 +30,9 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.3" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.8.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
-    <!--<PackageReference Include="Prise" Version="1.0.5" />-->
+    <PackageReference Include="Prise" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Prise\src\Prise.Infrastructure.NetCore\Prise.Infrastructure.NetCore.csproj" />
-    <ProjectReference Include="..\..\Prise\src\Prise.Infrastructure\Prise.Infrastructure.csproj" />
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
   </ItemGroup>
   <!--<ItemGroup>
