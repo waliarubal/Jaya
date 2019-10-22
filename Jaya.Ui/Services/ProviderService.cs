@@ -5,15 +5,14 @@ using System.Composition;
 namespace Jaya.Ui.Services
 {
     [Export(nameof(ProviderService), typeof(IService))]
-    public sealed class ProviderService: IService
+    public sealed class ProviderService : IService
     {
-        readonly List<IProviderService> _services;
-
-        public ProviderService()
+        [ImportingConstructor]
+        public ProviderService([ImportMany]IEnumerable<IProviderService> services)
         {
-            _services = new List<IProviderService>();
+            Services = services;
         }
 
-        public IEnumerable<IProviderService> Services => _services;
+        public IEnumerable<IProviderService> Services { get; }
     }
 }

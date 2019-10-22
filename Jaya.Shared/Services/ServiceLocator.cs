@@ -49,8 +49,8 @@ namespace Jaya.Shared.Services
         CompositionHost RegisterServices()
         {
             var conventions = new ConventionBuilder();
-            conventions.ForTypesDerivedFrom<IService>().Export<IService>();
-            conventions.ForTypesDerivedFrom<IServiceProvider>().Export<IServiceProvider>();
+            conventions.ForTypesDerivedFrom<IService>().Export<IService>().Shared();
+            conventions.ForTypesDerivedFrom<IServiceProvider>().Export<IServiceProvider>().Shared();
 
             var assemblies = new List<Assembly>();
             foreach(var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.*.dll", SearchOption.TopDirectoryOnly))
