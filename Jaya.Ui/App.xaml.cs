@@ -1,6 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Markup.Xaml;
-using Jaya.Shared.Services;
+using Jaya.Shared;
 using Jaya.Ui.Services;
 using System;
 
@@ -18,7 +18,6 @@ namespace Jaya.Ui
         {
             base.RegisterServices();
             ServiceLocator.Instance.GetService<SharedService>().LoadConfigurations();
-            
         }
 
         protected override void OnExiting(object sender, EventArgs e)

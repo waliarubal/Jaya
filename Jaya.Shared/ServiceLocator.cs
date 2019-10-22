@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Jaya.Shared.Services;
+using System;
 using System.Collections.Generic;
 using System.Composition.Convention;
 using System.Composition.Hosting;
 using System.IO;
 using System.Reflection;
 
-namespace Jaya.Shared.Services
+namespace Jaya.Shared
 {
     public sealed class ServiceLocator : IDisposable
     {
@@ -76,7 +77,7 @@ namespace Jaya.Shared.Services
             UnregisterServices();
         }
 
-        public T GetService<T>() where T: IService
+        public T GetService<T>() where T: class, IService
         {
             if (_host == null)
                 _host = RegisterServices();
@@ -85,7 +86,7 @@ namespace Jaya.Shared.Services
             return (T)_host.GetExport<IService>(type.Name);
         }
 
-        public T GetProviderService<T>() where T : IProviderService
+        public T GetProviderService<T>() where T : class, IProviderService
         {
             if (_host == null)
                 _host = RegisterServices();

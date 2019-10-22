@@ -2,6 +2,7 @@
 using Avalonia.Data.Converters;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using Jaya.Shared;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;

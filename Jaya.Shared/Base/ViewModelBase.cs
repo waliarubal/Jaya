@@ -43,12 +43,12 @@ namespace Jaya.Shared.Base
 
         #endregion
 
-        protected T GetService<T>() where T : IService
+        protected T GetService<T>() where T : class, IService
         {
             return ServiceLocator.Instance.GetService<T>();
         }
 
-        protected T GetProvider<T>() where T : IProviderService
+        protected T GetProvider<T>() where T : class, IProviderService
         {
             return ServiceLocator.Instance.GetProviderService<T>();
         }

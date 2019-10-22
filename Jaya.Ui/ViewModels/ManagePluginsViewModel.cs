@@ -1,4 +1,5 @@
 ﻿using Jaya.Shared.Base;
+using Jaya.Shared.Services;
 using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,11 @@ namespace Jaya.Ui.ViewModels
 {
     public class ManagePluginsViewModel: ViewModelBase
     {
-        public IEnumerable<ProviderServiceBase> Plugins => GetService<ProviderService>().Services as IEnumerable<ProviderServiceBase>;
+        public IEnumerable<IProviderService> Plugins => GetService<ProviderService>().Services;
 
-        public ProviderServiceBase SelectedPlugin
+        public IProviderService SelectedPlugin
         {
-            get => Get<ProviderServiceBase>();
+            get => Get<IProviderService>();
             set
             {
                 if (Set(value))
@@ -25,7 +26,7 @@ namespace Jaya.Ui.ViewModels
                 }
             }
         }
-
+        
         public bool IsPluginConfigurable => ConfigurationEditor != null;
 
         public object ConfigurationEditor
