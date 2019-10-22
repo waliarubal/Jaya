@@ -5,7 +5,6 @@ namespace Jaya.Shared.Services
 {
     public interface IProviderService
     {
-
         bool IsRootDrive { get; }
 
         string Name { get; }

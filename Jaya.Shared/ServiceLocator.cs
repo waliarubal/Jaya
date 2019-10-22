@@ -54,7 +54,13 @@ namespace Jaya.Shared
             conventions.ForTypesDerivedFrom<IServiceProvider>().Export<IServiceProvider>().Shared();
 
             var assemblies = new List<Assembly>();
-            foreach(var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.*.dll", SearchOption.TopDirectoryOnly))
+            foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (assembly.FullName.StartsWith("Jaya.", StringComparison.InvariantCultureIgnoreCase))
+                    assemblies.Add(assembly);
+            }
+
+            foreach(var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll", SearchOption.TopDirectoryOnly))
             {
                 var assembly = Assembly.LoadFrom(fileName);
                 assemblies.Add(assembly);
@@ -92,7 +98,7 @@ namespace Jaya.Shared
                 _host = RegisterServices();
 
             var type = typeof(T);
-            return (T)_host.GetExport<IProviderService>(type.Name);
+            return (T)_host.GetExport<IProviderService>();
         }
 
         /*
