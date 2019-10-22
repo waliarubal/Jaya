@@ -51,7 +51,7 @@ namespace Jaya.Shared
         {
             var conventions = new ConventionBuilder();
             conventions.ForTypesDerivedFrom<IService>().Export<IService>().Shared();
-            conventions.ForTypesDerivedFrom<IServiceProvider>().Export<IServiceProvider>().Shared();
+            conventions.ForTypesDerivedFrom<IProviderService>().Export<IProviderService>().Shared();
 
             var assemblies = new List<Assembly>();
             foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies())
