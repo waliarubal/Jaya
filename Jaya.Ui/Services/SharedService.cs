@@ -7,8 +7,8 @@ using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
-    public sealed class SharedService: IService
+    [Export(nameof(SharedService), typeof(IService))]
+    public sealed class SharedService : IService
     {
         readonly Subscription<byte> _onSimpleCommand;
         readonly Subscription<KeyValuePair<byte, object>> _onParameterizedCommand;
@@ -16,10 +16,11 @@ namespace Jaya.Ui.Services
         readonly CommandService _commandService;
         readonly ConfigurationService _configService;
 
-        public SharedService(CommandService commandService, ConfigurationService configurationService)
+        [ImportingConstructor]
+        public SharedService([Import(nameof(CommandService))]IService commandService, [Import(nameof(ConfigurationService))]IService configurationService)
         {
-            _commandService = commandService;
-            _configService = configurationService;
+            _commandService = commandService as CommandService;
+            _configService = configurationService as ConfigurationService;
 
             _onSimpleCommand = _commandService.EventAggregator.Subscribe<byte>(SimpleCommandAction);
             _onParameterizedCommand = _commandService.EventAggregator.Subscribe<KeyValuePair<byte, object>>(ParameterizedCommandAction);

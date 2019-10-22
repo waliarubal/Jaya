@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Composition;
 using System.Composition.Convention;
 using System.Composition.Hosting;
 using System.IO;
@@ -45,12 +44,6 @@ namespace Jaya.Shared.Services
             }
         }
 
-        [ImportMany]
-        public IEnumerable<IService> Services { get; private set; }
-
-        [ImportMany]
-        public IEnumerable<IPorviderService> Providers { get; private set; }
-
         #endregion
 
         CompositionHost RegisterServices()
@@ -86,25 +79,19 @@ namespace Jaya.Shared.Services
         public T GetService<T>() where T: IService
         {
             if (_host == null)
-            {
                 _host = RegisterServices();
-                Services = _host.GetExports<IService>();
-                Providers = _host.GetExports<IPorviderService>();
-            }
-                
-            return _host.GetExport<T>();
+
+            var type = typeof(T);
+            return (T)_host.GetExport<IService>(type.Name);
         }
 
-        public T GetProvider<T>() where T : IPorviderService
+        public T GetProvider<T>() where T : IProviderService
         {
             if (_host == null)
-            {
                 _host = RegisterServices();
-                Services = _host.GetExports<IService>();
-                Providers = _host.GetExports<IPorviderService>();
-            }
 
-            return _host.GetExport<T>();
+            var type = typeof(T);
+            return (T)_host.GetExport<IProviderService>(type.Name);
         }
 
         /*

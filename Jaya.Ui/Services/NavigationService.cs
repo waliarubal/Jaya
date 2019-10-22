@@ -10,7 +10,7 @@ using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
+    [Export(nameof(NavigationService), typeof(IService))]
     public sealed class NavigationService: IService
     {
         readonly CommandService _commandService;
@@ -20,12 +20,14 @@ namespace Jaya.Ui.Services
         RelayCommand<WindowOptionsModel> _openWindow;
         DirectoryChangedEventArgs _directoryChangedArgs;
 
-        public NavigationService(CommandService commandService)
+        [ImportingConstructor]
+        public NavigationService([Import(nameof(CommandService))]IService commandService)
         {
-            _commandService = commandService;
+            _commandService = commandService as CommandService;
+
             _backwardStack = new Stack<DirectoryChangedEventArgs>();
             _forwardStack = new Stack<DirectoryChangedEventArgs>();
-            _onDirectoryChanged = commandService.EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
+            _onDirectoryChanged = _commandService.EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
         }
 
         ~NavigationService()

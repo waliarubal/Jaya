@@ -3,7 +3,7 @@ using System;
 
 namespace Jaya.Shared.Services
 {
-    public interface IPorviderService
+    public interface IProviderService
     {
 
         bool IsRootDrive { get; }

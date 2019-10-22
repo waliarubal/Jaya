@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Jaya.Shared.Base
 {
-    public abstract class ProviderServiceBase: IPorviderService
+    public abstract class ProviderServiceBase: IProviderService
     {
         readonly MemoryCacheService _cache;
 

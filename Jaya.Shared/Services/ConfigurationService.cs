@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Jaya.Shared.Services
 {
-    [Export(typeof(IService))]
+    [Export(nameof(ConfigurationService), typeof(IService))]
     public sealed class ConfigurationService: IService
     {
         readonly string _configurationFilePathFormat;

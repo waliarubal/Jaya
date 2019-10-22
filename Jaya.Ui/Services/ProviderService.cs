@@ -4,17 +4,16 @@ using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(typeof(IService))]
+    [Export(nameof(ProviderService), typeof(IService))]
     public sealed class ProviderService: IService
     {
-        readonly List<IPorviderService> _services;
+        readonly List<IProviderService> _services;
 
         public ProviderService()
         {
-            _services = new List<IPorviderService>();
-            _services.AddRange(ServiceLocator.Instance.Providers);
+            _services = new List<IProviderService>();
         }
 
-        public IEnumerable<IPorviderService> Services => _services;
+        public IEnumerable<IProviderService> Services => _services;
     }
 }

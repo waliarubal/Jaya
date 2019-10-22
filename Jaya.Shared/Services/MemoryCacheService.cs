@@ -3,7 +3,7 @@ using System.Composition;
 
 namespace Jaya.Shared.Services
 {
-    [Export(typeof(IService))]
+    [Export(nameof(MemoryCacheService), typeof(IService))]
     public sealed class MemoryCacheService: IService
     {
         readonly MemoryCache _cache;
