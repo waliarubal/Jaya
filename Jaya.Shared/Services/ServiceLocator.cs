@@ -85,7 +85,7 @@ namespace Jaya.Shared.Services
             return (T)_host.GetExport<IService>(type.Name);
         }
 
-        public T GetProvider<T>() where T : IProviderService
+        public T GetProviderService<T>() where T : IProviderService
         {
             if (_host == null)
                 _host = RegisterServices();

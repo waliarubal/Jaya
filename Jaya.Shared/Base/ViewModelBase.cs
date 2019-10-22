@@ -50,7 +50,7 @@ namespace Jaya.Shared.Base
 
         protected T GetProvider<T>() where T : IProviderService
         {
-            return ServiceLocator.Instance.GetProvider<T>();
+            return ServiceLocator.Instance.GetProviderService<T>();
         }
 
         protected void Invoke(Action action)
