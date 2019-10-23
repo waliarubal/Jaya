@@ -26,6 +26,8 @@ namespace Jaya.Ui.ViewModels.Windows
 
         public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
 
+        public ApplicationConfigModel ApplicationConfig => _shared.ApplicationConfiguration;
+
         public string WindowTitle
         {
             get => Get<string>();

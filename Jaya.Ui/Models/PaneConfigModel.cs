@@ -107,6 +107,20 @@ namespace Jaya.Ui.Models
             }
         }
 
+        protected override ConfigModelBase Empty()
+        {
+            return new PaneConfigModel
+            {
+                NavigationPaneWidthPx = 220,
+                PreviewOrDetailsPanePaneWidthPx = 240,
+                IsNavigationPaneVisible = true,
+                IsDetailsPaneVisible = false,
+                IsPreviewPaneVisible = false,
+                IsDetailsView = false,
+                IsThumbnailView = true
+            };
+        }
+
         void SetPaneWidths()
         {
             RaisePropertyChanged(nameof(IsPreviewOrDetailsPaneVisible));

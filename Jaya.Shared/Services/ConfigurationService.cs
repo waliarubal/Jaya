@@ -41,6 +41,15 @@ namespace Jaya.Shared.Services
                 return default;
         }
 
+        public T GetOrDefault<T>(string key = null) where T : ConfigModelBase
+        {
+            var config = Get<T>(key);
+            if (config == default(T))
+                config = ConfigModelBase.Empty<T>();
+
+            return config;
+        }
+
         public void Set<T>(T value, string key = null)
         {
             var type = typeof(T);

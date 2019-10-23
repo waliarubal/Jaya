@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Jaya.Ui.Models
 {
-    public class ToolbarConfigModel: ConfigModelBase
+    public class ToolbarConfigModel : ConfigModelBase
     {
         [JsonProperty]
         public bool IsVisible
@@ -38,6 +38,18 @@ namespace Jaya.Ui.Models
         {
             get => Get<bool>();
             set => Set(value);
+        }
+
+        protected override ConfigModelBase Empty()
+        {
+            return new ToolbarConfigModel
+            {
+                IsFileVisible = true,
+                IsEditVisible = true,
+                IsViewVisible = true,
+                IsHelpVisible = true,
+                IsVisible = true
+            };
         }
     }
 }

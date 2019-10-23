@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Jaya.Shared;
+using Jaya.Shared.Base;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using System.Collections.Generic;
@@ -44,37 +45,9 @@ namespace Jaya.Ui.Services
 
         internal void LoadConfigurations()
         {
-            ApplicationConfiguration = _configService.Get<ApplicationConfigModel>();
-            if (ApplicationConfiguration == null)
-                ApplicationConfiguration = new ApplicationConfigModel();
-
-            ToolbarConfiguration = _configService.Get<ToolbarConfigModel>();
-            if (ToolbarConfiguration == null)
-            {
-                ToolbarConfiguration = new ToolbarConfigModel
-                {
-                    IsFileVisible = true,
-                    IsEditVisible = true,
-                    IsViewVisible = true,
-                    IsHelpVisible = true,
-                    IsVisible = true
-                };
-            }
-
-            PaneConfiguration = _configService.Get<PaneConfigModel>();
-            if (PaneConfiguration == null)
-            {
-                PaneConfiguration = new PaneConfigModel
-                {
-                    NavigationPaneWidthPx = 220,
-                    PreviewOrDetailsPanePaneWidthPx = 240,
-                    IsNavigationPaneVisible = true,
-                    IsDetailsPaneVisible = false,
-                    IsPreviewPaneVisible = false,
-                    IsDetailsView = false,
-                    IsThumbnailView = true
-                };
-            }
+            ApplicationConfiguration = _configService.GetOrDefault<ApplicationConfigModel>();
+            ToolbarConfiguration = _configService.GetOrDefault<ToolbarConfigModel>();
+            PaneConfiguration = _configService.GetOrDefault<PaneConfigModel>();
         }
 
         internal void SaveConfigurations()

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Jaya.Ui.Models
 {
-    public class ApplicationConfigModel: ConfigModelBase
+    public class ApplicationConfigModel : ConfigModelBase
     {
         [JsonProperty]
         public bool IsItemCheckBoxVisible
@@ -24,6 +24,29 @@ namespace Jaya.Ui.Models
         {
             get => Get<bool>();
             set => Set(value);
+        }
+
+        [JsonProperty]
+        public double WidthPx
+        {
+            get => Get<double>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
+        public double HeightPx
+        {
+            get => Get<double>();
+            set => Set(value);
+        }
+
+        protected override ConfigModelBase Empty()
+        {
+            return new ApplicationConfigModel
+            {
+                WidthPx = 800,
+                HeightPx = 600
+            };
         }
     }
 }

@@ -11,5 +11,10 @@ namespace Jaya.Provider.FileSystem.Models
             get => Get<bool>();
             set => Set(value);
         }
+
+        protected override ConfigModelBase Empty()
+        {
+            return new FileSystemConfigModel();
+        }
     }
 }
