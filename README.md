@@ -14,7 +14,7 @@ This project is in beta at the moment so it's not suitable for general use.
 * [.NET Core](https://github.com/dotnet/core)
 * [Avalonia UI](https://avaloniaui.net/)
 
-### Screenshot
+### Screenshots
 
 ![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/00.png)
 
