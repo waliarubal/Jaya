@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Jaya.Shared;
-using Jaya.Shared.Base;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using System.Collections.Generic;
