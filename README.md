@@ -10,12 +10,15 @@ Jaya is a small .NET Core based cross platform plug-able file explorer applicati
 
 This project is in beta at the moment so it's not suitable for general use.
 
-## Screenshot
-Dark Theme
-![Main Window](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/00.png)
+### Built With
+* [.NET Core](https://github.com/dotnet/core)
+* [Avalonia UI](https://avaloniaui.net/)
 
-Light Theme
-![Main Window](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/01.png)
+### Screenshot
+
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/00.png)
+
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/01.png)
 
 ## Roadmap
 
@@ -30,6 +33,7 @@ Contributions are what make the open source community such an amazing place to b
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+6. Buy me a coffee or donate funds to buy a Mac for development [here](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2).
 
 ## License
 
