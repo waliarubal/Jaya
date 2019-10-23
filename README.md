@@ -4,7 +4,11 @@
 [![MIT license](https://img.shields.io/github/license/waliarubal/Jaya)](https://raw.githubusercontent.com/waliarubal/Jaya/master/LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2)
 
-Cross platform file explorer application compatible with Windows, Mac and Linux operating systems. This project is in alpha at the moment so it's not suitable for general use.
+## About The Project
+
+Jaya is a small .NET Core based cross platform plug-able file explorer application which runs on Windows, Mac and Linux. It currently allows browsing of file system but will include integrations of cloud storage services like Dropbox, Google Drive, Sky Drive, Box, etc. in future.
+
+This project is in beta at the moment so it's not suitable for general use.
 
 ## Screenshot
 Dark Theme
@@ -13,6 +17,25 @@ Dark Theme
 Light Theme
 ![Main Window](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/01.png)
 
+## Roadmap
+
+See the [open issues](https://github.com/waliarubal/Jaya/issues) for a list of proposed features (and known issues).
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
 ## License
 
-This project is licensed under MIT License whose terms and conditions can be found [here](https://raw.githubusercontent.com/waliarubal/Jaya/master/LICENSE).
+Distributed under the MIT License. See [here](https://raw.githubusercontent.com/waliarubal/Jaya/master/LICENSE) for more information.
+
+## Contact
+
+Rubal Walia - walia.rubal@gmail.com  
+Project Link: [https://github.com/waliarubal/Jaya](https://github.com/waliarubal/Jaya)
