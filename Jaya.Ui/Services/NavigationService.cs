@@ -76,7 +76,7 @@ namespace Jaya.Ui.Services
 
             window.Content = Activator.CreateInstance(option.ContentType);
 
-            await window.ShowDialog(App.DesktopLifetime.MainWindow);
+            await window.ShowDialog(App.Lifetime.MainWindow);
         }
 
         void NavigateBack()

@@ -9,9 +9,6 @@ namespace Jaya.Ui.Models
 {
     public class TreeNodeModel : ModelBase
     {
-        const string COLLAPSED_IMAGE = "avares://Jaya.Ui/Assets/Images/Folder-16.png";
-        const string EXPANDED_IMAGE = "avares://Jaya.Ui/Assets/Images/Folder-Open-16.png";
-
         TreeNodeModel _dummyChild;
         readonly SharedService _shared;
 
@@ -22,7 +19,7 @@ namespace Jaya.Ui.Models
         {
             Service = service;
             Provider = provider;
-            IconImagePath = COLLAPSED_IMAGE;
+            IconImagePath = Constants.COLLAPSED_IMAGE_URL;
             Children = new ObservableCollection<TreeNodeModel>();
 
             if (Service != null && Provider != null)
@@ -58,7 +55,7 @@ namespace Jaya.Ui.Models
                 Set(value);
 
                 if (string.IsNullOrEmpty(value) || (FileSystemObject != null && FileSystemObject.Type == FileSystemObjectType.Directory && !string.IsNullOrEmpty(FileSystemObject.Path)))
-                    IconImagePath = COLLAPSED_IMAGE;
+                    IconImagePath = Constants.COLLAPSED_IMAGE_URL;
                 else
                     IconImagePath = ImagePath;
             }
@@ -80,9 +77,9 @@ namespace Jaya.Ui.Models
                 if (string.IsNullOrEmpty(ImagePath))
                 {
                     if (value && Children.Count > 0)
-                        IconImagePath = EXPANDED_IMAGE;
+                        IconImagePath = Constants.EXPANDED_IMAGE_URL;
                     else
-                        IconImagePath = COLLAPSED_IMAGE;
+                        IconImagePath = Constants.COLLAPSED_IMAGE_URL;
                 }
                 else
                     IconImagePath = ImagePath;

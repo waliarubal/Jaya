@@ -104,7 +104,7 @@ namespace Jaya.Ui.Services
                     break;
 
                 case CommandType.Exit:
-                    App.DesktopLifetime.Shutdown();
+                    App.Lifetime.Shutdown();
                     break;
             }
         }

@@ -100,9 +100,9 @@ namespace Jaya.Ui.ViewModels
             {
                 SearchWatermark = string.Format("Search {0}", args.Directory.Name);
                 if (args.Directory.Type == FileSystemObjectType.Drive)
-                    ImagePath = "avares://Jaya.Ui/Assets/Images/Hdd-16.png";
+                    ImagePath = "Hdd-16.png".GetImageUrl();
                 else
-                    ImagePath = "avares://Jaya.Ui/Assets/Images/Folder-16.png";
+                    ImagePath = "Folder-16.png".GetImageUrl();
 
                 pathParts.AddRange(args.Directory.Path.Split(_pathSeparator, StringSplitOptions.RemoveEmptyEntries));
             }

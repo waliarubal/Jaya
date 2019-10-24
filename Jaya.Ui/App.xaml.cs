@@ -15,26 +15,24 @@ namespace Jaya.Ui
             AvaloniaXamlLoader.Load(this);
         }
 
-        public override void RegisterServices()
-        {
-            base.RegisterServices();
-            ServiceLocator.Instance.GetService<SharedService>().LoadConfigurations();
-        }
-
         public override void OnFrameworkInitializationCompleted()
         {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-                App.DesktopLifetime.MainWindow = new MainView();
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
+            {
+                Lifetime.Exit += OnExit;
+                ServiceLocator.Instance.GetService<SharedService>().LoadConfigurations();
+                Lifetime.MainWindow = new MainView();
+            }
 
             base.OnFrameworkInitializationCompleted();
         }
 
-        internal static IClassicDesktopStyleApplicationLifetime DesktopLifetime => Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
+        void OnExit(object sender, ControlledApplicationLifetimeExitEventArgs e)
+        {
+            ServiceLocator.Instance.GetService<SharedService>().SaveConfigurations();
+            Lifetime.Exit -= OnExit;
+        }
 
-        //protected override void OnExiting(object sender, EventArgs e)
-        //{
-        //    ServiceLocator.Instance.GetService<SharedService>().SaveConfigurations();
-        //    base.OnExiting(sender, e);
-        //}
+        internal static IClassicDesktopStyleApplicationLifetime Lifetime => Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
     }
 }

@@ -13,9 +13,6 @@ namespace Jaya.Ui.Converters
 {
     public class FileSystemObjectToImageConverter : IValueConverter
     {
-        const string IMAGE_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/{0}{1}.png";
-        const string FILE_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/FileExtensions/{0}";
-
         readonly MemoryCacheService _cache;
 
         public FileSystemObjectToImageConverter()
@@ -38,11 +35,11 @@ namespace Jaya.Ui.Converters
             switch (fso.Type)
             {
                 case FileSystemObjectType.Drive:
-                    uri = new Uri(string.Format(IMAGE_PATH_FORMAT, "Hdd-", iconSize), UriKind.RelativeOrAbsolute);
+                    uri = new Uri(Constants.GetImageUrl(string.Format("Hdd-{0}.png", iconSize)), UriKind.RelativeOrAbsolute); ;
                     break;
 
                 case FileSystemObjectType.Directory:
-                    uri = new Uri(string.Format(IMAGE_PATH_FORMAT, "Folder-", iconSize), UriKind.RelativeOrAbsolute);
+                    uri = new Uri(Constants.GetImageUrl(string.Format("Folder-{0}.png", iconSize)), UriKind.RelativeOrAbsolute);
                     break;
 
                 case FileSystemObjectType.File:
@@ -89,13 +86,13 @@ namespace Jaya.Ui.Converters
 
         Bitmap GetFileImage(FileModel fso, int iconSize, IAssetLoader assets)
         {
-            var fallbackUri = new Uri(string.Format(IMAGE_PATH_FORMAT, "File-", iconSize), UriKind.RelativeOrAbsolute);
+            var fallbackUri = new Uri(Constants.GetImageUrl(string.Format("File-{0}.png", iconSize)), UriKind.RelativeOrAbsolute);
 
             if (string.IsNullOrEmpty(fso.Extension))
                 return AddOrGetFromCache(fallbackUri, assets);
 
-            var extensionImageFile = string.Format("{0}-{1}.png", fso.Extension, iconSize);
-            var uri = new Uri(string.Format(FILE_PATH_FORMAT, extensionImageFile), UriKind.RelativeOrAbsolute);
+            var extensionImageFile = Constants.GetImageUrl(string.Format("FileExtensions/{0}-{1}.png", fso.Extension, iconSize));
+            var uri = new Uri(extensionImageFile, UriKind.RelativeOrAbsolute);
 
             return AddOrGetFromCache(uri, assets, fallbackUri);
         }

@@ -12,7 +12,7 @@ namespace Jaya.Ui.ViewModels.Windows
 
         public MainViewModel()
         {
-            WindowTitle = "Jaya";
+            WindowTitle = Constants.APP_NAME;
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
             _shared = GetService<SharedService>();
         }
@@ -37,7 +37,7 @@ namespace Jaya.Ui.ViewModels.Windows
         void DirectoryChanged(DirectoryChangedEventArgs args)
         {
             if (args.Provider == null)
-                WindowTitle = "Jaya";
+                WindowTitle = Constants.APP_NAME;
             else if (args.Directory == null || string.IsNullOrEmpty(args.Directory.Path))
                 WindowTitle = args.Provider.Name;
             else
