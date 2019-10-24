@@ -23,7 +23,7 @@ namespace Jaya.Provider.Dropbox.Services
 
         protected override ProviderModel GetDefaultProvider()
         {
-            var provider = new ProviderModel("Dummy Dropbox User", this);
+            var provider = new ProviderModel("<Unknown Account>", this);
             provider.ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Dropbox-32.png";
             return provider;
         }

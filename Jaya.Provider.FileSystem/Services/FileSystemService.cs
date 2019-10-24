@@ -20,10 +20,7 @@ namespace Jaya.Provider.FileSystem.Services
             Description = "View your local drives, inspect their properties and play with directories & files stored within them.";
             IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
-
-            Configuration = ConfigurationService.Get<ConfigurationModel>();
-            if (Configuration == null)
-                Configuration = new ConfigurationModel { IsProtectedFileVisible = false };
+            Configuration = ConfigurationService.GetOrDefault<ConfigurationModel>();
         }
 
         protected override ProviderModel GetDefaultProvider()

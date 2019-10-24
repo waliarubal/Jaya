@@ -13,6 +13,8 @@ namespace Jaya.Shared
         static ServiceLocator _instance;
         static readonly object _syncRoot;
         CompositionHost _host;
+        readonly Dictionary<string, IProviderService> _providersCache;
+        bool _isProviderCacheInitialized;
 
         static ServiceLocator()
         {
@@ -21,7 +23,7 @@ namespace Jaya.Shared
 
         private ServiceLocator()
         {
-            
+            _providersCache = new Dictionary<string, IProviderService>();
         }
 
         ~ServiceLocator()
@@ -54,13 +56,13 @@ namespace Jaya.Shared
             conventions.ForTypesDerivedFrom<IProviderService>().Export<IProviderService>().Shared();
 
             var assemblies = new List<Assembly>();
-            foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 if (assembly.FullName.StartsWith("Jaya.", StringComparison.InvariantCultureIgnoreCase))
                     assemblies.Add(assembly);
             }
 
-            foreach(var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll", SearchOption.TopDirectoryOnly))
+            foreach (var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll", SearchOption.TopDirectoryOnly))
             {
                 var assembly = Assembly.LoadFrom(fileName);
                 assemblies.Add(assembly);
@@ -80,10 +82,30 @@ namespace Jaya.Shared
 
         public void Dispose()
         {
+            if (_isProviderCacheInitialized)
+            {
+                _providersCache.Clear();
+                _isProviderCacheInitialized = false;
+            }
+                
             UnregisterServices();
         }
 
-        public T GetService<T>() where T: class, IService
+        void InitializeProvidersCache()
+        {
+            if (_isProviderCacheInitialized)
+                return;
+
+            var providers = _host.GetExports<IProviderService>();
+            foreach (var provider in providers)
+            {
+                var providerType = provider.GetType();
+                _providersCache.Add(providerType.Name, provider);
+            }
+            _isProviderCacheInitialized = true;
+        }
+
+        public T GetService<T>() where T : class, IService
         {
             if (_host == null)
                 _host = RegisterServices();
@@ -97,14 +119,11 @@ namespace Jaya.Shared
             if (_host == null)
                 _host = RegisterServices();
 
+            InitializeProvidersCache();
+
             var type = typeof(T);
+            return (T)_providersCache[type.Name];
 
-            var providers = _host.GetExports<IProviderService>();
-            foreach (var provider in providers)
-                if (provider.GetType() == type)
-                    return (T)provider;
-
-            return null;
         }
 
         /*
