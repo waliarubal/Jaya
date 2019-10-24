@@ -1,8 +1,9 @@
 ﻿using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Jaya.Shared;
 using Jaya.Ui.Services;
-using System;
+using Jaya.Ui.Views.Windows;
 
 namespace Jaya.Ui
 {
@@ -20,10 +21,20 @@ namespace Jaya.Ui
             ServiceLocator.Instance.GetService<SharedService>().LoadConfigurations();
         }
 
-        protected override void OnExiting(object sender, EventArgs e)
+        public override void OnFrameworkInitializationCompleted()
         {
-            ServiceLocator.Instance.GetService<SharedService>().SaveConfigurations();
-            base.OnExiting(sender, e);
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                App.DesktopLifetime.MainWindow = new MainView();
+
+            base.OnFrameworkInitializationCompleted();
         }
+
+        internal static IClassicDesktopStyleApplicationLifetime DesktopLifetime => Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
+
+        //protected override void OnExiting(object sender, EventArgs e)
+        //{
+        //    ServiceLocator.Instance.GetService<SharedService>().SaveConfigurations();
+        //    base.OnExiting(sender, e);
+        //}
     }
 }

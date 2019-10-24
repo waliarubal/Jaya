@@ -1,5 +1,4 @@
-﻿using Avalonia;
-using Jaya.Shared;
+﻿using Jaya.Shared;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using Jaya.Ui.ViewModels.Windows;
@@ -77,7 +76,7 @@ namespace Jaya.Ui.Services
 
             window.Content = Activator.CreateInstance(option.ContentType);
 
-            await window.ShowDialog(Application.Current.MainWindow);
+            await window.ShowDialog(App.DesktopLifetime.MainWindow);
         }
 
         void NavigateBack()

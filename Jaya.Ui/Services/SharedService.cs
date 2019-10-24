@@ -1,5 +1,4 @@
-﻿using Avalonia;
-using Jaya.Shared;
+﻿using Jaya.Shared;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using System.Collections.Generic;
@@ -105,7 +104,7 @@ namespace Jaya.Ui.Services
                     break;
 
                 case CommandType.Exit:
-                    Application.Current.Exit();
+                    App.DesktopLifetime.Shutdown();
                     break;
             }
         }

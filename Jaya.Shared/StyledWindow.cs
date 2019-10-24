@@ -33,13 +33,13 @@ namespace Jaya.Shared
             SetupWindowEdge(e, "PART_RightGrip", StandardCursorType.RightSide, WindowEdge.East);
             SetupWindowEdge(e, "PART_LeftGrip", StandardCursorType.LeftSide, WindowEdge.West);
             SetupWindowEdge(e, "PART_TopGrip", StandardCursorType.TopSide, WindowEdge.North);
-            SetupWindowEdge(e, "PART_BottomGrip", StandardCursorType.BottomSize, WindowEdge.South);
+            SetupWindowEdge(e, "PART_BottomGrip", StandardCursorType.BottomSide, WindowEdge.South);
             SetupWindowEdge(e, "PART_TopLeftGrip", StandardCursorType.TopLeftCorner, WindowEdge.NorthWest);
             SetupWindowEdge(e, "PART_TopRightGrip", StandardCursorType.TopRightCorner, WindowEdge.NorthEast);
             SetupWindowEdge(e, "PART_BottomLeftGrip", StandardCursorType.BottomLeftCorner, WindowEdge.SouthWest);
             SetupWindowEdge(e, "PART_BottomRightGrip", StandardCursorType.BottomRightCorner, WindowEdge.SouthEast);
 
-            GetControl<Border>(e, "PART_TitleBar").PointerPressed += delegate { PlatformImpl?.BeginMoveDrag(); };
+            GetControl<Border>(e, "PART_TitleBar").PointerPressed += (sender, args) => PlatformImpl?.BeginMoveDrag(args);
 
             _closeButton = GetControl<Button>(e, "PART_Close");
             _closeButton.Click += delegate { Close(); };
@@ -126,7 +126,7 @@ namespace Jaya.Shared
         {
             var control = GetControl<Border>(e, name);
             control.Cursor = new Cursor(cursor);
-            control.PointerPressed += delegate { PlatformImpl?.BeginResizeDrag(edge); };
+            control.PointerPressed += (sender, args) => PlatformImpl?.BeginResizeDrag(edge, args);;
         }
 
         T GetControl<T>(TemplateAppliedEventArgs e, string name) where T : Control
