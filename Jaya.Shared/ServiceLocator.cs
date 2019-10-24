@@ -98,7 +98,13 @@ namespace Jaya.Shared
                 _host = RegisterServices();
 
             var type = typeof(T);
-            return (T)_host.GetExport<IProviderService>(type.Name);
+
+            var providers = _host.GetExports<IProviderService>();
+            foreach (var provider in providers)
+                if (provider.GetType() == type)
+                    return (T)provider;
+
+            return null;
         }
 
         /*

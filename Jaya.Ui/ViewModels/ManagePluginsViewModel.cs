@@ -6,8 +6,10 @@ using System.Collections.Generic;
 
 namespace Jaya.Ui.ViewModels
 {
-    public class ManagePluginsViewModel: ViewModelBase
+    public class ManagePluginsViewModel : ViewModelBase
     {
+        object _configurationEditor;
+
         public IEnumerable<IProviderService> Plugins => GetService<ProviderService>().Services;
 
         public IProviderService SelectedPlugin
@@ -15,24 +17,31 @@ namespace Jaya.Ui.ViewModels
             get => Get<IProviderService>();
             set
             {
+                if (value == null)
+                    ConfigurationEditor = null;
+
                 if (Set(value))
                 {
-                    if (value == null || value.ConfigurationEditorType == null)
+                    if (value.ConfigurationEditorType == null)
                         ConfigurationEditor = null;
                     else
                         ConfigurationEditor = Activator.CreateInstance(value.ConfigurationEditorType);
-
-                    RaisePropertyChanged(nameof(IsPluginConfigurable));
                 }
+
+                RaisePropertyChanged(nameof(IsPluginConfigurable));
             }
         }
-        
+
         public bool IsPluginConfigurable => ConfigurationEditor != null;
 
         public object ConfigurationEditor
         {
-            get => Get<object>();
-            private set => Set(value);
+            get => _configurationEditor;
+            private set
+            {
+                _configurationEditor = value;
+                RaisePropertyChanged();
+            }
         }
     }
 }
