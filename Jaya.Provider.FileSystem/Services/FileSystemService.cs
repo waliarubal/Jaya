@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Jaya.Provider.FileSystem.Services
 {
-    [Export(typeof(IProviderService))]
+    [Export(nameof(FileSystemService), typeof(IProviderService))]
     public class FileSystemService : ProviderServiceBase, IProviderService
     {
         public FileSystemService()
@@ -21,9 +21,9 @@ namespace Jaya.Provider.FileSystem.Services
             IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
 
-            Configuration = ConfigurationService.Get<FileSystemConfigModel>();
+            Configuration = ConfigurationService.Get<ConfigurationModel>();
             if (Configuration == null)
-                Configuration = new FileSystemConfigModel { IsProtectedFileVisible = false };
+                Configuration = new ConfigurationModel { IsProtectedFileVisible = false };
         }
 
         protected override ProviderModel GetDefaultProvider()

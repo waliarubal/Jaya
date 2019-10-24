@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Jaya.Provider.FileSystem.Models
 {
-    public class FileSystemConfigModel: ConfigModelBase
+    public class ConfigurationModel: ConfigModelBase
     {
         [JsonProperty]
         public bool IsProtectedFileVisible
@@ -14,7 +14,7 @@ namespace Jaya.Provider.FileSystem.Models
 
         protected override ConfigModelBase Empty()
         {
-            return new FileSystemConfigModel();
+            return new ConfigurationModel();
         }
     }
 }
