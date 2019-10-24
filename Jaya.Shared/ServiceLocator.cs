@@ -12,6 +12,7 @@ namespace Jaya.Shared
     {
         static ServiceLocator _instance;
         static readonly object _syncRoot;
+
         CompositionHost _host;
         readonly Dictionary<string, IProviderService> _providersCache;
         bool _isProviderCacheInitialized;
