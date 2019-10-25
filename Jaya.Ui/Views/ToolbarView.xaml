@@ -181,15 +181,25 @@
                 <Image Source="/Assets/Images/Hide-16.png" />
             </ToggleButton>
             <Border Classes="Separator" />
-            <Button Command="{Binding OpenWindowCommand}" ToolTip.Tip="Manage Plugins">
+            <Button Command="{Binding OpenWindowCommand}" ToolTip.Tip="Plugins...">
                 <Button.CommandParameter>
                     <j:WindowOptionsModel
-                        Title="Manage Plugins"
+                        Title="Plugins"
                         Width="640"
                         Height="480"
                         ContentType="{x:Type v:ManagePluginsView}" />
                 </Button.CommandParameter>
                 <Image Source="/Assets/Images/Plugin-16.png" />
+            </Button>
+            <Button Command="{Binding OpenWindowCommand}" ToolTip.Tip="Options...">
+                <Button.CommandParameter>
+                    <j:WindowOptionsModel
+                        Title="Options"
+                        Width="640"
+                        Height="480"
+                        ContentType="{x:Type v:OptionsView}" />
+                </Button.CommandParameter>
+                <Image Source="/Assets/Images/Settings-32.png" />
             </Button>
         </StackPanel>
 

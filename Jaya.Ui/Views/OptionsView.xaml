@@ -12,27 +12,24 @@
         <vm:OptionsViewModel />
     </UserControl.DataContext>
     <UserControl.Styles>
-        <Style Selector="HeaderedContentControl">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Border>
-                            <StackPanel>
-                                <ContentPresenter Content="{TemplateBinding Header}" TextBlock.FontWeight="Bold" />
-                                <Border
-                                    BorderBrush="{TemplateBinding Background}"
-                                    BorderThickness="2"
-                                    CornerRadius="5">
-                                    <ContentPresenter Content="{TemplateBinding Content}" />
-                                </Border>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        <Style Selector="TextBlock, ComboBox, TextBox">
+            <Setter Property="Margin" Value="4 2" />
+        </Style>
+        <Style Selector="ComboBox, TextBox">
+            <Setter Property="MinWidth" Value="220" />
         </Style>
     </UserControl.Styles>
-    <HeaderedContentControl Margin="4" Header="Visual Experience">
-        Put stuff here!
-    </HeaderedContentControl>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Color Theme:" />
+        <ComboBox Grid.Column="1" Items="{Binding Themes, Mode=OneWay}" />
+    </Grid>
 </UserControl>
