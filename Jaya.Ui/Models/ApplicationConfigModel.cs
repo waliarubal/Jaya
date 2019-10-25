@@ -1,5 +1,7 @@
-﻿using Jaya.Shared.Base;
+﻿using Avalonia.ThemeManager;
+using Jaya.Shared.Base;
 using Newtonsoft.Json;
+using System;
 
 namespace Jaya.Ui.Models
 {
@@ -40,12 +42,47 @@ namespace Jaya.Ui.Models
             set => Set(value);
         }
 
+
+        public ITheme Theme
+        {
+            get => Get<ITheme>();
+            set
+            {
+                if (Set(value))
+                    App.ThemeSelector.SelectedTheme = value;
+            }
+        }
+
+        [JsonProperty]
+        string ThemeName
+        {
+            get => Get<string>();
+            set
+            {
+                Set(value);
+                SetTheme(value);
+            }
+        }
+
+        void SetTheme(string name)
+        {
+            foreach (var theme in App.ThemeSelector.Themes)
+            {
+                if (theme.Name.Equals(name, StringComparison.InvariantCulture))
+                {
+                    Theme = theme;
+                    break;
+                }
+            }
+        }
+
         protected override ConfigModelBase Empty()
         {
             return new ApplicationConfigModel
             {
                 WidthPx = 800,
-                HeightPx = 600
+                HeightPx = 600,
+                ThemeName = "Dark"
             };
         }
     }

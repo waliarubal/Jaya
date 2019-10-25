@@ -22,9 +22,11 @@ namespace Jaya.Ui
             {
                 Lifetime.Exit += OnExit;
 
-                ServiceLocator.Instance.GetService<SharedService>().LoadConfigurations();
                 ThemeSelector = Avalonia.ThemeManager.ThemeSelector.Create("Themes");
-                
+
+                var shared = ServiceLocator.Instance.GetService<SharedService>();
+                shared.LoadConfigurations();
+
                 Lifetime.MainWindow = new MainView();
             }
 
