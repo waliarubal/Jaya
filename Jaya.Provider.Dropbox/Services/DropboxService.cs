@@ -8,6 +8,7 @@ using System.Composition;
 namespace Jaya.Provider.Dropbox.Services
 {
     [Export(typeof(IProviderService))]
+    [Shared]
     public class DropboxService : ProviderServiceBase, IProviderService
     {
         public DropboxService()

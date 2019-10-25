@@ -5,6 +5,7 @@ using System.Composition;
 namespace Jaya.Ui.Services
 {
     [Export(nameof(ProviderService), typeof(IService))]
+    [Shared]
     public sealed class ProviderService : IService
     {
         [ImportingConstructor]

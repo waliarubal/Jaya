@@ -11,6 +11,7 @@ using System.IO;
 namespace Jaya.Provider.FileSystem.Services
 {
     [Export(typeof(IProviderService))]
+    [Shared]
     public class FileSystemService : ProviderServiceBase, IProviderService
     {
         public FileSystemService()

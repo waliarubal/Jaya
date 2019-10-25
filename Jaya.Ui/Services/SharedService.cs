@@ -7,6 +7,7 @@ using System.Composition;
 namespace Jaya.Ui.Services
 {
     [Export(nameof(SharedService), typeof(IService))]
+    [Shared]
     public sealed class SharedService : IService
     {
         readonly Subscription<byte> _onSimpleCommand;
