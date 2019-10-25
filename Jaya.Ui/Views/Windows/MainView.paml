@@ -35,11 +35,9 @@
                 IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}" />
             <GridSplitter
                 Grid.Column="1"
-                Width="6"
                 IsVisible="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}" />
             <GridSplitter
                 Grid.Column="3"
-                Width="6"
                 IsVisible="{Binding PaneConfig.IsPreviewOrDetailsPaneVisible, Mode=OneWay}" />
             <v:ExplorerView Grid.Column="2" Padding="8,0,0,0" />
             <v:PreviewView
