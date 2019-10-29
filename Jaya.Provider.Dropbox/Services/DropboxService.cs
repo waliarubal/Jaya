@@ -4,7 +4,6 @@ using Jaya.Provider.Dropbox.Views;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
-using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Threading.Tasks;
@@ -28,11 +27,6 @@ namespace Jaya.Provider.Dropbox.Services
             IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
             Configuration = ConfigurationService.GetOrDefault<ConfigModel>();
-        }
-
-        protected override DirectoryModel GetDirectory(ProviderModel provider, string path = null)
-        {
-            throw new NotImplementedException();
         }
 
         public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
@@ -102,11 +96,6 @@ namespace Jaya.Provider.Dropbox.Services
             }
 
             return providers;
-        }
-
-        protected override IEnumerable<ProviderModel> GetProviders()
-        {
-            throw new NotImplementedException();
         }
     }
 }

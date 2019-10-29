@@ -83,19 +83,14 @@ namespace Jaya.Shared.Base
             return (T)Configuration;
         }
 
-        public virtual async Task<IEnumerable<ProviderModel>> GetProvidersAsync()
+        public abstract Task<IEnumerable<ProviderModel>> GetProvidersAsync();
+
+        public abstract Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null);
+
+        public T GetConfiguration<T>() where T : ConfigModelBase
         {
-            return await Task.Run(() => GetProviders());
+            throw new NotImplementedException();
         }
-
-        public virtual async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
-        {
-            return await Task.Run(() => GetDirectory(provider, path));
-        }
-
-        protected abstract IEnumerable<ProviderModel> GetProviders();
-
-        protected abstract DirectoryModel GetDirectory(ProviderModel provider, string path = null);
 
         public override string ToString()
         {
@@ -105,11 +100,6 @@ namespace Jaya.Shared.Base
         public override int GetHashCode()
         {
             return Name.GetHashCode();
-        }
-
-        public T GetConfiguration<T>() where T : ConfigModelBase
-        {
-            throw new NotImplementedException();
         }
     }
 }
