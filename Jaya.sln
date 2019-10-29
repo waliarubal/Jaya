@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Shared", "Jaya.Shared\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.FileSystem", "Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj", "{2E4C50A5-0CD5-4E7E-ABCB-E76EFE75D068}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaya.Provider.Dropbox", "Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj", "{747A481D-288A-4849-BD42-A6EA5026B872}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.Dropbox", "Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj", "{747A481D-288A-4849-BD42-A6EA5026B872}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
