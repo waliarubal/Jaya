@@ -1,6 +1,7 @@
 ﻿using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Jaya.Shared.Base
@@ -82,17 +83,17 @@ namespace Jaya.Shared.Base
             return (T)Configuration;
         }
 
-        public async Task<ProviderModel> GetDefaultProviderAsync()
+        public virtual async Task<IEnumerable<ProviderModel>> GetProvidersAsync()
         {
-            return await Task.Run(() => GetDefaultProvider());
+            return await Task.Run(() => GetProviders());
         }
 
-        public async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
+        public virtual async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
         {
             return await Task.Run(() => GetDirectory(provider, path));
         }
 
-        protected abstract ProviderModel GetDefaultProvider();
+        protected abstract IEnumerable<ProviderModel> GetProviders();
 
         protected abstract DirectoryModel GetDirectory(ProviderModel provider, string path = null);
 

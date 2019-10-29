@@ -24,13 +24,6 @@ namespace Jaya.Provider.FileSystem.Services
             Configuration = ConfigurationService.GetOrDefault<ConfigModel>();
         }
 
-        protected override ProviderModel GetDefaultProvider()
-        {
-            var provider = new ProviderModel(Environment.MachineName, this);
-            provider.ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png";
-            return provider;
-        }
-
         protected override DirectoryModel GetDirectory(ProviderModel provider, string path = null)
         {
             var model = GetFromCache(provider, path);
@@ -119,6 +112,16 @@ namespace Jaya.Provider.FileSystem.Services
 
             AddToCache(provider, model);
             return model;
+        }
+
+        protected override IEnumerable<ProviderModel> GetProviders()
+        {
+            var provider = new ProviderModel(Environment.MachineName, this)
+            {
+                ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png"
+            };
+
+            return new List<ProviderModel> { provider };
         }
     }
 }

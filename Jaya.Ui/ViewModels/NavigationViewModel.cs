@@ -98,15 +98,17 @@ namespace Jaya.Ui.ViewModels
             }
             else if (node.Provider == null)
             {
-                var provider = await node.Service.GetDefaultProviderAsync();
-
-                var child = new TreeNodeModel(node.Service, provider);
-                child.Label = provider.Name;
-                child.FileSystemObject = new DirectoryModel();
-                child.ImagePath = provider.ImagePath;
-                child.NodeExpanded += OnNodeExpanded;
-                child.AddDummyChild();
-                AddChildNode(node, child);
+                var providers = await node.Service.GetProvidersAsync();
+                foreach(var provider in providers)
+                {
+                    var child = new TreeNodeModel(node.Service, provider);
+                    child.Label = provider.Name;
+                    child.FileSystemObject = new DirectoryModel();
+                    child.ImagePath = provider.ImagePath;
+                    child.NodeExpanded += OnNodeExpanded;
+                    child.AddDummyChild();
+                    AddChildNode(node, child);
+                }
             }
             else
             {

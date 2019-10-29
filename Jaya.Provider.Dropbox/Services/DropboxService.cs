@@ -4,6 +4,7 @@ using Jaya.Provider.Dropbox.Views;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
+using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace Jaya.Provider.Dropbox.Services
     [Shared]
     public class DropboxService : ProviderServiceBase, IProviderService
     {
-        DropboxClient _client;
+        const string ACCESS_TOKEN = "JYfV_JpVuKMAAAAAAAAEWW5ARisW4MoJnkHnD-1YcXergmD6ucwyW48pALcfpwhv";
 
         /// <summary>
         /// Refer https://www.dropbox.com/developers/documentation/dotnet#tutorial for Dropbox SDK documentation.
@@ -29,30 +30,12 @@ namespace Jaya.Provider.Dropbox.Services
             Configuration = ConfigurationService.GetOrDefault<ConfigModel>();
         }
 
-        DropboxClient Client
-        {
-            get
-            {
-                if (_client == null)
-                    _client = new DropboxClient("JYfV_JpVuKMAAAAAAAAEWW5ARisW4MoJnkHnD-1YcXergmD6ucwyW48pALcfpwhv");
-
-                return _client;
-            }
-        }
-
-        protected override ProviderModel GetDefaultProvider()
-        {
-            var provider = new ProviderModel("<Unknown Account>", this);
-            provider.ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Dropbox-32.png";
-            return provider;
-        }
-
         protected override DirectoryModel GetDirectory(ProviderModel provider, string path = null)
         {
-            return Task.Run(() => GetDirectoryAsync(provider, path)).Result;
+            throw new NotImplementedException();
         }
 
-        new async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
         {
             if (path == null)
                 path = string.Empty;
@@ -68,34 +51,37 @@ namespace Jaya.Provider.Dropbox.Services
             model.Directories = new List<DirectoryModel>();
             model.Files = new List<FileModel>();
 
-            var entries = await Client.Files.ListFolderAsync(path);
-            foreach (var entry in entries.Entries)
+            using (var client = new DropboxClient(ACCESS_TOKEN))
             {
-                if (entry.IsDeleted)
-                    continue;
-
-                if (entry.IsFolder)
+                var entries = await client.Files.ListFolderAsync(path);
+                foreach (var entry in entries.Entries)
                 {
-                    var directoryInfo = entry.AsFolder;
+                    if (entry.IsDeleted)
+                        continue;
 
-                    var directory = new DirectoryModel();
-                    directory.Name = entry.Name;
-                    directory.Path = entry.PathDisplay;
-                    model.Directories.Add(directory);
+                    if (entry.IsFolder)
+                    {
+                        var directoryInfo = entry.AsFolder;
 
-                }
-                else if (entry.IsFile)
-                {
-                    var fileInfo = entry.AsFile;
+                        var directory = new DirectoryModel();
+                        directory.Name = entry.Name;
+                        directory.Path = entry.PathDisplay;
+                        model.Directories.Add(directory);
 
-                    var file = new FileModel();
-                    file.Name = entry.Name;
-                    file.Path = entry.PathDisplay;
-                    file.Size = (long)fileInfo.Size;
-                    file.Created = fileInfo.ClientModified;
-                    file.Modified = fileInfo.ClientModified;
-                    file.Accessed = fileInfo.ClientModified;
-                    model.Files.Add(file);
+                    }
+                    else if (entry.IsFile)
+                    {
+                        var fileInfo = entry.AsFile;
+
+                        var file = new FileModel();
+                        file.Name = entry.Name;
+                        file.Path = entry.PathDisplay;
+                        file.Size = (long)fileInfo.Size;
+                        file.Created = fileInfo.ClientModified;
+                        file.Modified = fileInfo.ClientModified;
+                        file.Accessed = fileInfo.ClientModified;
+                        model.Files.Add(file);
+                    }
                 }
             }
 
@@ -103,9 +89,24 @@ namespace Jaya.Provider.Dropbox.Services
             return model;
         }
 
-        async void GetAccountAsync()
+        public override async Task<IEnumerable<ProviderModel>> GetProvidersAsync()
         {
-            var accountInfo = await Client.Users.GetCurrentAccountAsync();
+            var providers = new List<ProviderModel>();
+            using (var client = new DropboxClient(ACCESS_TOKEN))
+            {
+                var accountInfo = await client.Users.GetCurrentAccountAsync();
+
+                var provider = new ProviderModel(accountInfo.Name.DisplayName, this);
+                provider.ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Dropbox-32.png";
+                providers.Add(provider);
+            }
+
+            return providers;
+        }
+
+        protected override IEnumerable<ProviderModel> GetProviders()
+        {
+            throw new NotImplementedException();
         }
     }
 }
