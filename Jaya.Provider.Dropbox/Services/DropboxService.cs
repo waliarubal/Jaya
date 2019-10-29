@@ -97,7 +97,7 @@ namespace Jaya.Provider.Dropbox.Services
                 var accountInfo = await client.Users.GetCurrentAccountAsync();
 
                 var provider = new ProviderModel(accountInfo.Name.DisplayName, this);
-                provider.ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Dropbox-32.png";
+                provider.ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Account-32.png";
                 providers.Add(provider);
             }
 
