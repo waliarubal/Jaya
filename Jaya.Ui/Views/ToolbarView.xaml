@@ -44,7 +44,7 @@
                 <Setter Property="Width" Value="6" />
             </Style>
 
-            <Style Selector="Button, ToggleButton">
+            <Style Selector="Button">
                 <Setter Property="Margin" Value="1 0" />
                 <Setter Property="Padding" Value="2" />
                 <Setter Property="MinWidth" Value="21" />
@@ -53,14 +53,34 @@
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="BorderBrush" Value="Transparent" />
             </Style>
-            <Style Selector="Button:pointerover /template/ ContentPresenter, ToggleButton:pointerover /template/ ContentPresenter">
+            <Style Selector="Button:pointerover /template/ ContentPresenter">
                 <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
             </Style>
-            <Style Selector="Button:pressed /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
+            <Style Selector="Button:pressed /template/ ContentPresenter">
                 <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
             </Style>
-            <Style Selector="Button:disabled, ToggleButton:disabled">
+            <Style Selector="Button:disabled">
+                <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+            </Style>
+
+            <Style Selector="ToggleButton">
+                <Setter Property="Margin" Value="1 0" />
+                <Setter Property="Padding" Value="2" />
+                <Setter Property="MinWidth" Value="21" />
+                <Setter Property="MinHeight" Value="21" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Style>
+            <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+            </Style>
+            <Style Selector="ToggleButton:pressed /template/ ContentPresenter">
+                <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+            </Style>
+            <Style Selector="ToggleButton:disabled">
                 <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
             </Style>
             <Style Selector="ToggleButton:checked /template/ ContentPresenter">
@@ -68,7 +88,7 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
             </Style>
 
-            <Style Selector="Button &gt; Image">
+            <Style Selector="Button &gt; Image, ToggleButton &gt; Image">
                 <Setter Property="Width" Value="16" />
                 <Setter Property="Height" Value="16" />
             </Style>
