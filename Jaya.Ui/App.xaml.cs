@@ -10,10 +10,20 @@ namespace Jaya.Ui
 {
     public class App : Application
     {
+        readonly SharedService _shared;
+
+        public App()
+        {
+            ThemeSelector = Avalonia.ThemeManager.ThemeSelector.Create("Themes");
+
+            _shared = ServiceLocator.Instance.GetService<SharedService>();
+        }
 
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+   
+            _shared.LoadConfigurations();
         }
 
         public override void OnFrameworkInitializationCompleted()
@@ -21,12 +31,6 @@ namespace Jaya.Ui
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
             {
                 Lifetime.Exit += OnExit;
-
-                ThemeSelector = Avalonia.ThemeManager.ThemeSelector.Create("Themes");
-
-                var shared = ServiceLocator.Instance.GetService<SharedService>();
-                shared.LoadConfigurations();
-
                 Lifetime.MainWindow = new MainView();
             }
 
@@ -35,7 +39,7 @@ namespace Jaya.Ui
 
         void OnExit(object sender, ControlledApplicationLifetimeExitEventArgs e)
         {
-            ServiceLocator.Instance.GetService<SharedService>().SaveConfigurations();
+            _shared.SaveConfigurations();
             Lifetime.Exit -= OnExit;
         }
 
