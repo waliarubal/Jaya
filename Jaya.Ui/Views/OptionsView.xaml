@@ -34,6 +34,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Text="Color Theme:" />
@@ -57,5 +58,10 @@
             Grid.Row="2"
             Grid.ColumnSpan="3"
             Content="Use native menus. (Linux)" />
+
+        <CheckBox
+            Grid.Row="3"
+            Grid.ColumnSpan="3"
+            Content="Show status bar." />
     </Grid>
 </UserControl>
