@@ -41,6 +41,12 @@ namespace Jaya.Ui.Models
 
         public ProviderModel Provider { get; }
 
+        public bool IsDummy
+        {
+            get => Get<bool>();
+            private set => Set(value);
+        }
+
         public string Label
         {
             get => Get<string>();
@@ -119,8 +125,9 @@ namespace Jaya.Ui.Models
                 return;
 
             var child = _dummyChild = new TreeNodeModel(Service, Provider);
-            child.ImagePath = "Loading-16.png".GetImageUrl();
+            child.ImagePath = "Refresh-16.png".GetImageUrl();
             child.Label = "Loading...";
+            child.IsDummy = true;
             Children.Add(child);
         }
 
