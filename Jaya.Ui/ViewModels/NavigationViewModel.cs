@@ -82,8 +82,6 @@ namespace Jaya.Ui.ViewModels
             if (node.IsExpanded && !node.IsHavingDummyChild)
                 return;
 
-            node.RemoveDummyChild();
-
             if (node.Service == null)
             {
                 foreach (var service in GetService<ProviderService>().Services)
@@ -125,6 +123,8 @@ namespace Jaya.Ui.ViewModels
                     AddChildNode(node, child);
                 }
             }
+
+            node.RemoveDummyChild();
         }
     }
 }
