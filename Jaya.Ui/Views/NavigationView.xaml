@@ -33,7 +33,7 @@
             </Style>
             <Style Selector="Image.Spinner">
                 <Style.Animations>
-                    <Animation RepeatCount="Loop" Duration="0:0:2.5">
+                    <Animation RepeatCount="Loop" Duration="0:0:1.5">
                         <KeyFrame Cue="100%">
                             <Setter Property="RotateTransform.Angle" Value="360" />
                         </KeyFrame>
@@ -49,7 +49,11 @@
         <TreeView.ItemTemplate>
             <TreeDataTemplate ItemsSource="{Binding Children}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="{Binding IconImagePath, Converter={StaticResource BitmapValueConverter}}" />
+                    <Image IsVisible="{Binding !IsDummy}" Source="{Binding IconImagePath, Converter={StaticResource BitmapValueConverter}}" />
+                    <Image
+                        Classes="Spinner"
+                        IsVisible="{Binding IsDummy}"
+                        Source="avares://Jaya.Ui/Assets/Images/Refresh-16.png" />
                     <TextBlock Text="{Binding Label}" />
                 </StackPanel>
             </TreeDataTemplate>
