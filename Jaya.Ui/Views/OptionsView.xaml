@@ -21,12 +21,18 @@
                 <Setter Property="Margin" Value="4 2" />
                 <Setter Property="MinWidth" Value="120" />
             </Style>
+            <Style Selector="CheckBox">
+                <Setter Property="Margin" Value="4 2" />
+            </Style>
         </Grid.Styles>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -41,5 +47,15 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+
+        <CheckBox
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            Content="Do not use custom window chrome." />
+
+        <CheckBox
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            Content="Use native menus. (Linux)" />
     </Grid>
 </UserControl>
