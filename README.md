@@ -22,7 +22,9 @@ This project is in beta at the moment so it's not suitable for general use.
 
 ## Roadmap
 
-See the [open issues](https://github.com/waliarubal/Jaya/issues) for a list of proposed features (and known issues). You are more than welcome to make feature requests and lodge any bugs you encounter.
+See the [open issues](https://github.com/waliarubal/Jaya/issues) for a list of proposed features (and known issues). You are more than welcome to make feature requests and lodge any bugs you encounter. 
+
+For information on the release schedule, you can check the [milestones](https://github.com/waliarubal/Jaya/milestones).
 
 ## Contributing
 
