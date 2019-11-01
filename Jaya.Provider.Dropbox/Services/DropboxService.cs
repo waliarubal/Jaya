@@ -4,8 +4,11 @@ using Jaya.Provider.Dropbox.Views;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
+using System;
 using System.Collections.Generic;
 using System.Composition;
+using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Jaya.Provider.Dropbox.Services
@@ -14,7 +17,8 @@ namespace Jaya.Provider.Dropbox.Services
     [Shared]
     public class DropboxService : ProviderServiceBase, IProviderService
     {
-        const string ACCESS_TOKEN = "JYfV_JpVuKMAAAAAAAAEWW5ARisW4MoJnkHnD-1YcXergmD6ucwyW48pALcfpwhv";
+        const string REDIRECT_URI = "http://localhost:99/DropboxAuth";
+        const string APP_KEY = "wr1084dwe5oimdh";
 
         /// <summary>
         /// Refer https://www.dropbox.com/developers/documentation/dotnet#tutorial for Dropbox SDK documentation.
@@ -27,6 +31,27 @@ namespace Jaya.Provider.Dropbox.Services
             IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
             Configuration = ConfigurationService.GetOrDefault<ConfigModel>();
+        }
+
+        public async Task<string> GetToken()
+        {
+            var redirectUri = new Uri(REDIRECT_URI);
+            var authUri = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Code, APP_KEY, redirectUri);
+
+            Process.Start(authUri.ToString());
+
+            var http = new HttpListener();
+            http.Prefixes.Add(REDIRECT_URI);
+            http.Start();
+
+            var context = await http.GetContextAsync();
+            while(context.Request.Url.AbsolutePath != redirectUri.AbsolutePath)
+                context = await http.GetContextAsync();
+
+            redirectUri = new Uri(context.Request.QueryString["url_with_fragment"]);
+
+            var result = DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
+            return result.AccessToken;
         }
 
         public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
@@ -45,7 +70,7 @@ namespace Jaya.Provider.Dropbox.Services
             model.Directories = new List<DirectoryModel>();
             model.Files = new List<FileModel>();
 
-            using (var client = new DropboxClient(ACCESS_TOKEN))
+            using (var client = new DropboxClient("token"))
             {
                 var entries = await client.Files.ListFolderAsync(path);
                 foreach (var entry in entries.Entries)
@@ -86,7 +111,7 @@ namespace Jaya.Provider.Dropbox.Services
         public override async Task<IEnumerable<ProviderModel>> GetProvidersAsync()
         {
             var providers = new List<ProviderModel>();
-            using (var client = new DropboxClient(ACCESS_TOKEN))
+            using (var client = new DropboxClient("token"))
             {
                 var accountInfo = await client.Users.GetCurrentAccountAsync();
 
