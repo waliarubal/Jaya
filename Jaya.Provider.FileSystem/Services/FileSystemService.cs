@@ -16,7 +16,7 @@ namespace Jaya.Provider.FileSystem.Services
     public class FileSystemService : ProviderServiceBase, IProviderService
     {
 
-        public FileSystemService([Import(nameof(ConfigurationService))]IService configurationService): base(configurationService)
+        public FileSystemService([Import(nameof(ConfigurationService))]IService configService): base(configService)
         {
             Name = "File System";
             ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png";
@@ -122,7 +122,7 @@ namespace Jaya.Provider.FileSystem.Services
         {
             var providers = new List<AccountModelBase>
             {
-                new FileSystemProviderModel()
+                new AccountModel()
             };
 
             return await Task.Run(() => providers);

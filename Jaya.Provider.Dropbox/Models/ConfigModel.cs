@@ -9,17 +9,17 @@ namespace Jaya.Provider.Dropbox.Models
     {
         public ConfigModel()
         {
-            Providers = new ObservableCollection<DropboxProviderModel>();
+            Providers = new ObservableCollection<AccountModel>();
         }
 
         [JsonConstructor]
-        public ConfigModel(IEnumerable<DropboxProviderModel> accounts)
+        public ConfigModel(IEnumerable<AccountModel> accounts)
         {
-            Providers = new ObservableCollection<DropboxProviderModel>(accounts);
+            Providers = new ObservableCollection<AccountModel>(accounts);
         }
 
         [JsonProperty]
-        public ObservableCollection<DropboxProviderModel> Providers { get; private set; }
+        public ObservableCollection<AccountModel> Providers { get; private set; }
 
         protected override ConfigModelBase Empty()
         {
