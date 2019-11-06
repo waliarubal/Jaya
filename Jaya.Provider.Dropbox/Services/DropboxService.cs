@@ -1,5 +1,4 @@
 ﻿using Dropbox.Api;
-using Jaya.Provider.Dropbox.Models;
 using Jaya.Provider.Dropbox.Views;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
@@ -30,7 +29,11 @@ namespace Jaya.Provider.Dropbox.Services
             Description = "View your Dropbox accounts, inspect their contents and play with directories & files stored within them.";
             IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
-            Configuration = ConfigurationService.GetOrDefault<ConfigModel>();
+        }
+
+        public override T GetConfiguration<T>()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<string> GetToken()

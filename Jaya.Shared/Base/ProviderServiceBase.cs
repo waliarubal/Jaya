@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jaya.Shared.Base
 {
-    public abstract class ProviderServiceBase: IProviderService
+    public abstract class ProviderServiceBase : IProviderService
     {
         readonly MemoryCacheService _cache;
 
@@ -50,8 +50,6 @@ namespace Jaya.Shared.Base
             protected set;
         }
 
-        protected ConfigModelBase Configuration { get; set; }
-
         #endregion
 
         protected DirectoryModel GetFromCache(ProviderModel provider, string path)
@@ -78,10 +76,12 @@ namespace Jaya.Shared.Base
             _cache.Set(hash, directory);
         }
 
-        public T GetConfiguration<T>() where T : ConfigModelBase
-        {
-            return (T)Configuration;
-        }
+        public abstract T GetConfiguration<T>() where T : ConfigModelBase;
+
+        //public T GetConfiguration<T>() where T : ConfigModelBase
+        //{
+        //    return (T)Configuration;
+        //}
 
         public abstract Task<IEnumerable<ProviderModel>> GetProvidersAsync();
 

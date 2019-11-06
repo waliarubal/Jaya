@@ -16,9 +16,9 @@ namespace Jaya.Shared.Services
 
         string ImagePath { get; }
 
-        Type ConfigurationEditorType { get; }
-
         T GetConfiguration<T>() where T : ConfigModelBase;
+
+        Type ConfigurationEditorType { get; }
 
         Task<IEnumerable<ProviderModel>> GetProvidersAsync();
 
