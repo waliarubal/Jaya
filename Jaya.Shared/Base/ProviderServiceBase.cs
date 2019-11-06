@@ -54,7 +54,7 @@ namespace Jaya.Shared.Base
 
         #endregion
 
-        protected DirectoryModel GetFromCache(ProviderModel provider, string path)
+        protected DirectoryModel GetFromCache(ProviderModelBase provider, string path)
         {
             var hash = provider.GetHashCode();
             if (!string.IsNullOrEmpty(path))
@@ -66,7 +66,7 @@ namespace Jaya.Shared.Base
             return null;
         }
 
-        protected void AddToCache(ProviderModel provider, DirectoryModel directory)
+        protected void AddToCache(ProviderModelBase provider, DirectoryModel directory)
         {
             if (directory == null)
                 throw new ArgumentNullException(nameof(directory));
@@ -88,9 +88,9 @@ namespace Jaya.Shared.Base
             ConfigurationService.Set<T>(configuration);
         }
 
-        public abstract Task<IEnumerable<ProviderModel>> GetProvidersAsync();
+        public abstract Task<IEnumerable<ProviderModelBase>> GetProvidersAsync();
 
-        public abstract Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null);
+        public abstract Task<DirectoryModel> GetDirectoryAsync(ProviderModelBase provider, string path = null);
 
         public abstract void SaveConfigurations();
 

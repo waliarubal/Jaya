@@ -3,9 +3,9 @@ using System;
 
 namespace Jaya.Shared.Models
 {
-    public class ProviderModel: ModelBase
+    public abstract class ProviderModelBase: ModelBase
     {
-        public ProviderModel(string name, ProviderServiceBase service)
+        public ProviderModelBase(string name, ProviderServiceBase service)
         {
             Id = Guid.NewGuid();
             Name = name;

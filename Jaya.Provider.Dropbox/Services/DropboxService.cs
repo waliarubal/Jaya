@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Composition;
 using System.Diagnostics;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Jaya.Provider.Dropbox.Services
@@ -17,7 +18,7 @@ namespace Jaya.Provider.Dropbox.Services
     [Shared]
     public class DropboxService : ProviderServiceBase, IProviderService
     {
-        const string REDIRECT_URI = "http://localhost:99/DropboxAuth";
+        const string REDIRECT_URI = "http://localhost:4321/DropboxAuth/";
         const string APP_KEY = "wr1084dwe5oimdh";
         ConfigModel _config;
 
@@ -44,6 +45,25 @@ namespace Jaya.Provider.Dropbox.Services
             }
         }
 
+        void OpenBrowser(string url)
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                url = url.Replace("&", "^&"); // works on Windows and escape is needed for cmd.exe
+                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}"));
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Process.Start("xdg-open", url); // works on Linux
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                Process.Start("open", url); // not tested
+            }
+            else
+                throw new NotImplementedException();
+        }
+
         public override void SaveConfigurations()
         {
             if (_config == null)
@@ -52,12 +72,12 @@ namespace Jaya.Provider.Dropbox.Services
             ConfigurationService.Set(_config, Name);
         }
 
-        public async Task<string> GetToken()
+        async Task<string> GetToken()
         {
             var redirectUri = new Uri(REDIRECT_URI);
             var authUri = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Code, APP_KEY, redirectUri);
 
-            Process.Start(authUri.ToString());
+            OpenBrowser(authUri.ToString());
 
             var http = new HttpListener();
             http.Prefixes.Add(REDIRECT_URI);
@@ -67,13 +87,17 @@ namespace Jaya.Provider.Dropbox.Services
             while (context.Request.Url.AbsolutePath != redirectUri.AbsolutePath)
                 context = await http.GetContextAsync();
 
-            redirectUri = new Uri(context.Request.QueryString["url_with_fragment"]);
+            //TODO: add  error checks
 
-            var result = DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
-            return result.AccessToken;
+            return context.Request.QueryString["code"];
+
+            //redirectUri = new Uri(context.Request.QueryString["url_with_fragment"]);
+
+            //var result = DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
+            //return result.AccessToken;
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModelBase provider, string path = null)
         {
             if (path == null)
                 path = string.Empty;
@@ -127,19 +151,37 @@ namespace Jaya.Provider.Dropbox.Services
             return model;
         }
 
-        public override async Task<IEnumerable<ProviderModel>> GetProvidersAsync()
+        public async Task<ProviderModelBase> AddAccount()
         {
-            var providers = new List<ProviderModel>();
-            using (var client = new DropboxClient("token"))
+            var token = await GetToken();
+            if (string.IsNullOrEmpty(token))
+                return null;
+
+            var config = Configuration as ConfigModel;
+            using (var client = new DropboxClient(token))
             {
                 var accountInfo = await client.Users.GetCurrentAccountAsync();
 
-                var provider = new ProviderModel(accountInfo.Name.DisplayName, this);
-                provider.ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Account-32.png";
-                providers.Add(provider);
-            }
+                var provider = new DropboxProviderModel(accountInfo.Name.DisplayName, this)
+                {
+                    Email = accountInfo.Email,
+                    Token = token
+                };
+                config.Providers.Add(provider);
 
-            return providers;
+                SaveConfigurations();
+
+                return provider;
+            }
+        }
+
+        public override async Task<IEnumerable<ProviderModelBase>> GetProvidersAsync()
+        {
+            return await Task.Run(() =>
+            {
+                var config = Configuration as ConfigModel;
+                return config.Providers;
+            });
         }
     }
 }

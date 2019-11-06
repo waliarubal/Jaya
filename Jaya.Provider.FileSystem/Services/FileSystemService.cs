@@ -45,7 +45,7 @@ namespace Jaya.Provider.FileSystem.Services
             ConfigurationService.Set(_config, Name);
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModelBase provider, string path = null)
         {
             var model = GetFromCache(provider, path);
             if (model != null)
@@ -138,14 +138,11 @@ namespace Jaya.Provider.FileSystem.Services
             });
         }
 
-        public override async Task<IEnumerable<ProviderModel>> GetProvidersAsync()
+        public override async Task<IEnumerable<ProviderModelBase>> GetProvidersAsync()
         {
-            var providers = new List<ProviderModel>
+            var providers = new List<ProviderModelBase>
             {
-                new ProviderModel(Environment.MachineName, this)
-                {
-                    ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png"
-                }
+                new FileSystemProviderModel(this)
             };
 
             return await Task.Run(() => providers);

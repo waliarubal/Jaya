@@ -17,9 +17,9 @@ namespace Jaya.Shared.Services
 
         Type ConfigurationEditorType { get; }
 
-        Task<IEnumerable<ProviderModel>> GetProvidersAsync();
+        Task<IEnumerable<ProviderModelBase>> GetProvidersAsync();
 
-        Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null);
+        Task<DirectoryModel> GetDirectoryAsync(ProviderModelBase provider, string path = null);
 
         void SaveConfigurations();
     }
