@@ -6,7 +6,7 @@ namespace Jaya.Provider.Dropbox.Models
 {
     public class DropboxProviderModel: AccountModelBase
     {
-        public DropboxProviderModel(string name): base(name)
+        public DropboxProviderModel(string id, string name): base(id, name)
         {
             ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Account-32.png";
         }

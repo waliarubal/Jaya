@@ -1,21 +1,21 @@
 ﻿using Jaya.Shared.Base;
 using Newtonsoft.Json;
-using System;
 
 namespace Jaya.Shared.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class AccountModelBase: ModelBase
     {
-        public AccountModelBase(string name)
+        public AccountModelBase(string id, string name)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             Name = name;
         }
 
-        public Guid Id
+        [JsonProperty]
+        public string Id
         {
-            get => Get<Guid>();
+            get => Get<string>();
             private set => Set(value);
         }
 

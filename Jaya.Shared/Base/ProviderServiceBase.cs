@@ -10,10 +10,10 @@ namespace Jaya.Shared.Base
     {
         readonly MemoryCacheService _cache;
 
-        protected ProviderServiceBase()
+        protected ProviderServiceBase(IService configurationService)
         {
             _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
-            ConfigurationService = ServiceLocator.Instance.GetService<ConfigurationService>();
+            ConfigurationService = configurationService as ConfigurationService;
         }
 
         #region properties

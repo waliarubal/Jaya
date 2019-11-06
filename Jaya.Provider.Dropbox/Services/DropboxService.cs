@@ -25,7 +25,7 @@ namespace Jaya.Provider.Dropbox.Services
         /// <summary>
         /// Refer https://www.dropbox.com/developers/documentation/dotnet#tutorial for Dropbox SDK documentation.
         /// </summary>
-        public DropboxService()
+        public DropboxService([Import(nameof(ConfigurationService))]IService configurationService) : base(configurationService)
         {
             Name = "Dropbox";
             ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Dropbox-32.png";
@@ -139,7 +139,7 @@ namespace Jaya.Provider.Dropbox.Services
             {
                 var accountInfo = await client.Users.GetCurrentAccountAsync();
 
-                var provider = new DropboxProviderModel(accountInfo.Name.DisplayName)
+                var provider = new DropboxProviderModel(accountInfo.AccountId, accountInfo.Name.DisplayName)
                 {
                     Email = accountInfo.Email,
                     Token = token
