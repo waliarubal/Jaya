@@ -78,7 +78,7 @@ namespace Jaya.Shared.Base
             _cache.Set(hash, directory);
         }
 
-        public T GetConfigurtion<T>() where T : ConfigModelBase
+        public T GetConfiguration<T>() where T : ConfigModelBase
         {
             return (T)Configuration;
         }
@@ -86,11 +86,6 @@ namespace Jaya.Shared.Base
         public abstract Task<IEnumerable<ProviderModel>> GetProvidersAsync();
 
         public abstract Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null);
-
-        public T GetConfiguration<T>() where T : ConfigModelBase
-        {
-            throw new NotImplementedException();
-        }
 
         public override string ToString()
         {
