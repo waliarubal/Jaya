@@ -37,7 +37,7 @@ namespace Jaya.Provider.FileSystem.Services
             }
         }
 
-        public override void Dispose()
+        public override void SaveConfiguration()
         {
             if (_config == null)
                 return;

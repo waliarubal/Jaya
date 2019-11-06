@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Jaya.Shared.Services
 {
-    public interface IProviderService: IDisposable
+    public interface IProviderService
     {
         bool IsRootDrive { get; }
 
@@ -20,5 +20,7 @@ namespace Jaya.Shared.Services
         Task<IEnumerable<ProviderModel>> GetProvidersAsync();
 
         Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null);
+
+        void SaveConfiguration();
     }
 }

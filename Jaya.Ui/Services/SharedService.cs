@@ -15,12 +15,17 @@ namespace Jaya.Ui.Services
 
         readonly CommandService _commandService;
         readonly ConfigurationService _configService;
+        readonly ProviderService _providerService;
 
         [ImportingConstructor]
-        public SharedService([Import(nameof(CommandService))]IService commandService, [Import(nameof(ConfigurationService))]IService configurationService)
+        public SharedService(
+            [Import(nameof(CommandService))]IService commandService, 
+            [Import(nameof(ConfigurationService))]IService configurationService, 
+            [Import(nameof(ProviderService))]IService providerService)
         {
             _commandService = commandService as CommandService;
             _configService = configurationService as ConfigurationService;
+            _providerService = providerService as ProviderService;
 
             _onSimpleCommand = _commandService.EventAggregator.Subscribe<byte>(SimpleCommandAction);
             _onParameterizedCommand = _commandService.EventAggregator.Subscribe<KeyValuePair<byte, object>>(ParameterizedCommandAction);
@@ -54,6 +59,9 @@ namespace Jaya.Ui.Services
             _configService.Set(ApplicationConfiguration);
             _configService.Set(ToolbarConfiguration);
             _configService.Set(PaneConfiguration);
+
+            foreach (var service in _providerService.Services)
+                service.SaveConfiguration();
         }
 
         void SimpleCommandAction(byte type)
