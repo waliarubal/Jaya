@@ -21,6 +21,6 @@ namespace Jaya.Shared.Services
 
         Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null);
 
-        void SaveConfiguration();
+        void SaveConfigurations();
     }
 }

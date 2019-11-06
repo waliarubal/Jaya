@@ -44,7 +44,7 @@ namespace Jaya.Provider.Dropbox.Services
             }
         }
 
-        public override void SaveConfiguration()
+        public override void SaveConfigurations()
         {
             if (_config == null)
                 return;

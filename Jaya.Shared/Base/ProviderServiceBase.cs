@@ -92,7 +92,7 @@ namespace Jaya.Shared.Base
 
         public abstract Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null);
 
-        public abstract void SaveConfiguration();
+        public abstract void SaveConfigurations();
 
         public override string ToString()
         {
