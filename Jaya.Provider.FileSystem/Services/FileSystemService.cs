@@ -15,6 +15,8 @@ namespace Jaya.Provider.FileSystem.Services
     [Shared]
     public class FileSystemService : ProviderServiceBase, IProviderService
     {
+        ConfigModel _config;
+
         public FileSystemService()
         {
             Name = "File System";
@@ -24,9 +26,23 @@ namespace Jaya.Provider.FileSystem.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        public override T GetConfiguration<T>()
+        public override ConfigModelBase Configuration
         {
-            return ConfigurationService.Get<ConfigModel>() as T;
+            get
+            {
+                if (_config == null)
+                    _config = ConfigurationService.GetOrDefault<ConfigModel>(Name);
+
+                return _config;
+            }
+        }
+
+        public override void Dispose()
+        {
+            if (_config == null)
+                return;
+
+            ConfigurationService.Set(_config, Name);
         }
 
         public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)

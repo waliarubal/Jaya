@@ -13,6 +13,6 @@ namespace Jaya.Provider.FileSystem.ViewModels
             _config = GetProvider<FileSystemService>();
         }
 
-        public ConfigModel Configuration => _config.GetConfiguration<ConfigModel>();
+        public ConfigModel Configuration => (ConfigModel)_config.Configuration;
     }
 }

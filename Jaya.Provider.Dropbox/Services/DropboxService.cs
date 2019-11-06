@@ -19,6 +19,7 @@ namespace Jaya.Provider.Dropbox.Services
     {
         const string REDIRECT_URI = "http://localhost:99/DropboxAuth";
         const string APP_KEY = "wr1084dwe5oimdh";
+        ConfigModel _config;
 
         /// <summary>
         /// Refer https://www.dropbox.com/developers/documentation/dotnet#tutorial for Dropbox SDK documentation.
@@ -32,9 +33,23 @@ namespace Jaya.Provider.Dropbox.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        public override T GetConfiguration<T>()
+        public override ConfigModelBase Configuration
         {
-            return ConfigurationService.Get<ConfigModel>() as T;
+            get
+            {
+                if (_config == null)
+                    _config = ConfigurationService.GetOrDefault<ConfigModel>(Name);
+
+                return _config;
+            }
+        }
+
+        public override void Dispose()
+        {
+            if (_config == null)
+                return;
+
+            ConfigurationService.Set(_config, Name);
         }
 
         public async Task<string> GetToken()
@@ -49,7 +64,7 @@ namespace Jaya.Provider.Dropbox.Services
             http.Start();
 
             var context = await http.GetContextAsync();
-            while(context.Request.Url.AbsolutePath != redirectUri.AbsolutePath)
+            while (context.Request.Url.AbsolutePath != redirectUri.AbsolutePath)
                 context = await http.GetContextAsync();
 
             redirectUri = new Uri(context.Request.QueryString["url_with_fragment"]);

@@ -1,12 +1,11 @@
-﻿using Jaya.Shared.Base;
-using Jaya.Shared.Models;
+﻿using Jaya.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Jaya.Shared.Services
 {
-    public interface IProviderService
+    public interface IProviderService: IDisposable
     {
         bool IsRootDrive { get; }
 
@@ -15,8 +14,6 @@ namespace Jaya.Shared.Services
         string Description { get; }
 
         string ImagePath { get; }
-
-        T GetConfiguration<T>() where T : ConfigModelBase;
 
         Type ConfigurationEditorType { get; }
 

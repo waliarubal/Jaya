@@ -20,6 +20,8 @@ namespace Jaya.Shared.Base
 
         protected ConfigurationService ConfigurationService { get; }
 
+        public abstract ConfigModelBase Configuration { get; }
+
         public bool IsRootDrive
         {
             get;
@@ -76,16 +78,21 @@ namespace Jaya.Shared.Base
             _cache.Set(hash, directory);
         }
 
-        public abstract T GetConfiguration<T>() where T : ConfigModelBase;
+        protected T GetConfiguration<T>() where T : ConfigModelBase
+        {
+            return ConfigurationService.Get<T>();
+        }
 
-        //public T GetConfiguration<T>() where T : ConfigModelBase
-        //{
-        //    return (T)Configuration;
-        //}
+        protected void SetConfiguration<T>(T configuration) where T : ConfigModelBase
+        {
+            ConfigurationService.Set<T>(configuration);
+        }
 
         public abstract Task<IEnumerable<ProviderModel>> GetProvidersAsync();
 
         public abstract Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null);
+
+        public abstract void Dispose();
 
         public override string ToString()
         {
