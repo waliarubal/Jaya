@@ -1,4 +1,5 @@
 ﻿using Dropbox.Api;
+using Jaya.Provider.Dropbox.Models;
 using Jaya.Provider.Dropbox.Views;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
@@ -33,7 +34,7 @@ namespace Jaya.Provider.Dropbox.Services
 
         public override T GetConfiguration<T>()
         {
-            throw new NotImplementedException();
+            return ConfigurationService.Get<ConfigModel>() as T;
         }
 
         public async Task<string> GetToken()

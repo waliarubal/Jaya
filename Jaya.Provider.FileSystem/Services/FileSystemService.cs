@@ -1,4 +1,5 @@
-﻿using Jaya.Provider.FileSystem.Views;
+﻿using Jaya.Provider.FileSystem.Models;
+using Jaya.Provider.FileSystem.Views;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
@@ -25,7 +26,7 @@ namespace Jaya.Provider.FileSystem.Services
 
         public override T GetConfiguration<T>()
         {
-            throw new NotImplementedException();
+            return ConfigurationService.Get<ConfigModel>() as T;
         }
 
         public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModel provider, string path = null)
