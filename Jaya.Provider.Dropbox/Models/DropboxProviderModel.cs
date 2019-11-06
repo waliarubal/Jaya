@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 
 namespace Jaya.Provider.Dropbox.Models
 {
-    public class DropboxProviderModel: ProviderModelBase
+    public class DropboxProviderModel: ProviderAccountModelBase
     {
-        public DropboxProviderModel(string name, DropboxService service): base(name, service)
+        public DropboxProviderModel(string name): base(name)
         {
             ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Account-32.png";
         }

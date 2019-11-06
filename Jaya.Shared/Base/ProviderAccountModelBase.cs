@@ -1,15 +1,15 @@
 ﻿using Jaya.Shared.Base;
+using Newtonsoft.Json;
 using System;
 
 namespace Jaya.Shared.Models
 {
-    public abstract class ProviderModelBase: ModelBase
+    public abstract class ProviderAccountModelBase: ModelBase
     {
-        public ProviderModelBase(string name, ProviderServiceBase service)
+        public ProviderAccountModelBase(string name)
         {
             Id = Guid.NewGuid();
             Name = name;
-            Service = service;
         }
 
         public Guid Id
@@ -18,6 +18,7 @@ namespace Jaya.Shared.Models
             private set => Set(value);
         }
 
+        [JsonProperty]
         public string Name
         {
             get => Get<string>();
@@ -30,12 +31,6 @@ namespace Jaya.Shared.Models
             set => Set(value);
         }
 
-        public ProviderServiceBase Service
-        {
-            get => Get<ProviderServiceBase>();
-            private set => Set(value);
-        }
-
         public bool IsEnabled
         {
             get => Get<bool>();
@@ -46,11 +41,6 @@ namespace Jaya.Shared.Models
         {
             get => Get<DirectoryModel>();
             private set => Set(value);
-        }
-
-        public async void GetDirectory(string path = null)
-        {
-            Directory = await Service.GetDirectoryAsync(this, path);
         }
 
         public override string ToString()

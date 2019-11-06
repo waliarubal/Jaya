@@ -45,7 +45,7 @@ namespace Jaya.Provider.FileSystem.Services
             ConfigurationService.Set(_config, Name);
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModelBase provider, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderAccountModelBase provider, string path = null)
         {
             var model = GetFromCache(provider, path);
             if (model != null)
@@ -138,11 +138,11 @@ namespace Jaya.Provider.FileSystem.Services
             });
         }
 
-        public override async Task<IEnumerable<ProviderModelBase>> GetProvidersAsync()
+        public override async Task<IEnumerable<ProviderAccountModelBase>> GetAccountsAsync()
         {
-            var providers = new List<ProviderModelBase>
+            var providers = new List<ProviderAccountModelBase>
             {
-                new FileSystemProviderModel(this)
+                new FileSystemProviderModel()
             };
 
             return await Task.Run(() => providers);

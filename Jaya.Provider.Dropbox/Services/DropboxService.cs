@@ -97,7 +97,7 @@ namespace Jaya.Provider.Dropbox.Services
             //return result.AccessToken;
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderModelBase provider, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderAccountModelBase provider, string path = null)
         {
             if (path == null)
                 path = string.Empty;
@@ -151,7 +151,7 @@ namespace Jaya.Provider.Dropbox.Services
             return model;
         }
 
-        public async Task<ProviderModelBase> AddAccount()
+        public async Task<ProviderAccountModelBase> AddAccount()
         {
             var token = await GetToken();
             if (string.IsNullOrEmpty(token))
@@ -162,7 +162,7 @@ namespace Jaya.Provider.Dropbox.Services
             {
                 var accountInfo = await client.Users.GetCurrentAccountAsync();
 
-                var provider = new DropboxProviderModel(accountInfo.Name.DisplayName, this)
+                var provider = new DropboxProviderModel(accountInfo.Name.DisplayName)
                 {
                     Email = accountInfo.Email,
                     Token = token
@@ -175,13 +175,10 @@ namespace Jaya.Provider.Dropbox.Services
             }
         }
 
-        public override async Task<IEnumerable<ProviderModelBase>> GetProvidersAsync()
+        public override async Task<IEnumerable<ProviderAccountModelBase>> GetAccountsAsync()
         {
-            return await Task.Run(() =>
-            {
-                var config = Configuration as ConfigModel;
-                return config.Providers;
-            });
+            var config = Configuration as ConfigModel;
+            return await Task.Run(() => config.Providers);
         }
     }
 }

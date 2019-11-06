@@ -96,7 +96,7 @@ namespace Jaya.Ui.ViewModels
             }
             else if (node.Provider == null)
             {
-                var providers = await node.Service.GetProvidersAsync();
+                var providers = await node.Service.GetAccountsAsync();
                 foreach(var provider in providers)
                 {
                     var child = new TreeNodeModel(node.Service, provider);

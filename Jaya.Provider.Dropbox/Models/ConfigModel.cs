@@ -7,7 +7,7 @@ namespace Jaya.Provider.Dropbox.Models
 {
     public class ConfigModel : ConfigModelBase
     {
-        private ConfigModel()
+        public ConfigModel()
         {
             Providers = new ObservableCollection<DropboxProviderModel>();
         }

@@ -14,7 +14,7 @@ namespace Jaya.Ui.ViewModels
 
         ICommand _invokeObject;
         ProviderServiceBase _service;
-        ProviderModelBase _provider;
+        ProviderAccountModelBase _provider;
 
         public ExplorerViewModel()
         {
