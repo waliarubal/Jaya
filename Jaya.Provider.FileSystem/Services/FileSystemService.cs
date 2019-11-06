@@ -15,7 +15,6 @@ namespace Jaya.Provider.FileSystem.Services
     [Shared]
     public class FileSystemService : ProviderServiceBase, IProviderService
     {
-        ConfigModel _config;
 
         public FileSystemService()
         {
@@ -26,26 +25,7 @@ namespace Jaya.Provider.FileSystem.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        public override ConfigModelBase Configuration
-        {
-            get
-            {
-                if (_config == null)
-                    _config = ConfigurationService.GetOrDefault<ConfigModel>(Name);
-
-                return _config;
-            }
-        }
-
-        public override void SaveConfigurations()
-        {
-            if (_config == null)
-                return;
-
-            ConfigurationService.Set(_config, Name);
-        }
-
-        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderAccountModelBase provider, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase provider, string path = null)
         {
             var model = GetFromCache(provider, path);
             if (model != null)
@@ -138,9 +118,9 @@ namespace Jaya.Provider.FileSystem.Services
             });
         }
 
-        public override async Task<IEnumerable<ProviderAccountModelBase>> GetAccountsAsync()
+        public override async Task<IEnumerable<AccountModelBase>> GetAccountsAsync()
         {
-            var providers = new List<ProviderAccountModelBase>
+            var providers = new List<AccountModelBase>
             {
                 new FileSystemProviderModel()
             };

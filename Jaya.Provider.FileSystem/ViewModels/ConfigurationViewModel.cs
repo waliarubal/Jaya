@@ -6,13 +6,13 @@ namespace Jaya.Provider.FileSystem.ViewModels
 {
     public class ConfigurationViewModel: ViewModelBase
     {
-        readonly FileSystemService _config;
+        readonly FileSystemService _fileSystemService;
 
         public ConfigurationViewModel()
         {
-            _config = GetProvider<FileSystemService>();
+            _fileSystemService = GetProvider<FileSystemService>();
         }
 
-        public ConfigModel Configuration => (ConfigModel)_config.Configuration;
+        public ConfigModel Configuration => _fileSystemService.GetConfiguration<ConfigModel>();
     }
 }

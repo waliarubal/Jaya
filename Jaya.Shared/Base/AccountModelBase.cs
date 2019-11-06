@@ -4,9 +4,10 @@ using System;
 
 namespace Jaya.Shared.Models
 {
-    public abstract class ProviderAccountModelBase: ModelBase
+    [JsonObject(MemberSerialization.OptIn)]
+    public abstract class AccountModelBase: ModelBase
     {
-        public ProviderAccountModelBase(string name)
+        public AccountModelBase(string name)
         {
             Id = Guid.NewGuid();
             Name = name;

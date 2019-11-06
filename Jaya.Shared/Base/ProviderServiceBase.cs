@@ -20,8 +20,6 @@ namespace Jaya.Shared.Base
 
         protected ConfigurationService ConfigurationService { get; }
 
-        public abstract ConfigModelBase Configuration { get; }
-
         public bool IsRootDrive
         {
             get;
@@ -54,7 +52,7 @@ namespace Jaya.Shared.Base
 
         #endregion
 
-        protected DirectoryModel GetFromCache(ProviderAccountModelBase account, string path)
+        protected DirectoryModel GetFromCache(AccountModelBase account, string path)
         {
             var hash = account.GetHashCode();
             if (!string.IsNullOrEmpty(path))
@@ -66,7 +64,7 @@ namespace Jaya.Shared.Base
             return null;
         }
 
-        protected void AddToCache(ProviderAccountModelBase account, DirectoryModel directory)
+        protected void AddToCache(AccountModelBase account, DirectoryModel directory)
         {
             if (directory == null)
                 throw new ArgumentNullException(nameof(directory));
@@ -78,21 +76,19 @@ namespace Jaya.Shared.Base
             _cache.Set(hash, directory);
         }
 
-        protected T GetConfiguration<T>() where T : ConfigModelBase
+        public T GetConfiguration<T>() where T : ConfigModelBase
         {
-            return ConfigurationService.Get<T>();
+            return ConfigurationService.GetOrDefault<T>(Name);
         }
 
         protected void SetConfiguration<T>(T configuration) where T : ConfigModelBase
         {
-            ConfigurationService.Set<T>(configuration);
+            ConfigurationService.Set<T>(configuration, Name);
         }
 
-        public abstract Task<IEnumerable<ProviderAccountModelBase>> GetAccountsAsync();
+        public abstract Task<IEnumerable<AccountModelBase>> GetAccountsAsync();
 
-        public abstract Task<DirectoryModel> GetDirectoryAsync(ProviderAccountModelBase account, string path = null);
-
-        public abstract void SaveConfigurations();
+        public abstract Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null);
 
         public override string ToString()
         {

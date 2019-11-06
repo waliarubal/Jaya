@@ -1,5 +1,4 @@
-﻿using Dropbox.Api;
-using Jaya.Provider.Dropbox.Models;
+﻿using Jaya.Provider.Dropbox.Models;
 using Jaya.Provider.Dropbox.Views;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
@@ -20,7 +19,6 @@ namespace Jaya.Provider.Dropbox.Services
     {
         const string REDIRECT_URI = "http://localhost:4321/DropboxAuth/";
         const string APP_KEY = "wr1084dwe5oimdh";
-        ConfigModel _config;
 
         /// <summary>
         /// Refer https://www.dropbox.com/developers/documentation/dotnet#tutorial for Dropbox SDK documentation.
@@ -32,17 +30,6 @@ namespace Jaya.Provider.Dropbox.Services
             Description = "View your Dropbox accounts, inspect their contents and play with directories & files stored within them.";
             IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
-        }
-
-        public override ConfigModelBase Configuration
-        {
-            get
-            {
-                if (_config == null)
-                    _config = ConfigurationService.GetOrDefault<ConfigModel>(Name);
-
-                return _config;
-            }
         }
 
         void OpenBrowser(string url)
@@ -64,14 +51,6 @@ namespace Jaya.Provider.Dropbox.Services
                 throw new NotImplementedException();
         }
 
-        public override void SaveConfigurations()
-        {
-            if (_config == null)
-                return;
-
-            ConfigurationService.Set(_config, Name);
-        }
-
         async Task<string> GetToken()
         {
             var redirectUri = new Uri(REDIRECT_URI);
@@ -87,17 +66,11 @@ namespace Jaya.Provider.Dropbox.Services
             while (context.Request.Url.AbsolutePath != redirectUri.AbsolutePath)
                 context = await http.GetContextAsync();
 
-            //TODO: add  error checks
-
-            return context.Request.QueryString["code"];
-
-            //redirectUri = new Uri(context.Request.QueryString["url_with_fragment"]);
-
-            //var result = DropboxOAuth2Helper.ParseTokenFragment(redirectUri);
-            //return result.AccessToken;
+            var code = Uri.UnescapeDataString(context.Request.QueryString["code"]);
+            return code;
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(ProviderAccountModelBase provider, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase provider, string path = null)
         {
             if (path == null)
                 path = string.Empty;
@@ -151,13 +124,13 @@ namespace Jaya.Provider.Dropbox.Services
             return model;
         }
 
-        public async Task<ProviderAccountModelBase> AddAccount()
+        public async Task<AccountModelBase> AddAccount()
         {
             var token = await GetToken();
             if (string.IsNullOrEmpty(token))
                 return null;
 
-            var config = Configuration as ConfigModel;
+            var config = GetConfiguration<ConfigModel>();
             using (var client = new DropboxClient(token))
             {
                 var accountInfo = await client.Users.GetCurrentAccountAsync();
@@ -169,15 +142,15 @@ namespace Jaya.Provider.Dropbox.Services
                 };
                 config.Providers.Add(provider);
 
-                SaveConfigurations();
+                SetConfiguration(config);
 
                 return provider;
             }
         }
 
-        public override async Task<IEnumerable<ProviderAccountModelBase>> GetAccountsAsync()
+        public override async Task<IEnumerable<AccountModelBase>> GetAccountsAsync()
         {
-            var config = Configuration as ConfigModel;
+            var config = GetConfiguration<ConfigModel>();
             return await Task.Run(() => config.Providers);
         }
     }

@@ -3,7 +3,7 @@ using System;
 
 namespace Jaya.Provider.FileSystem.Models
 {
-    public class FileSystemProviderModel: ProviderAccountModelBase
+    public class FileSystemProviderModel: AccountModelBase
     {
         public FileSystemProviderModel() : base(Environment.MachineName)
         {

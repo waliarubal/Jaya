@@ -59,9 +59,6 @@ namespace Jaya.Ui.Services
             _configService.Set(ApplicationConfiguration);
             _configService.Set(ToolbarConfiguration);
             _configService.Set(PaneConfiguration);
-
-            foreach (var service in _providerService.Services)
-                service.SaveConfigurations();
         }
 
         void SimpleCommandAction(byte type)

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Jaya.Provider.Dropbox.Models
 {
-    public class DropboxProviderModel: ProviderAccountModelBase
+    public class DropboxProviderModel: AccountModelBase
     {
         public DropboxProviderModel(string name): base(name)
         {

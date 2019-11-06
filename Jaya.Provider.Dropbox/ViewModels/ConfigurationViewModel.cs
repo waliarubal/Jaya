@@ -16,7 +16,7 @@ namespace Jaya.Provider.Dropbox.ViewModels
             _dropboxService = GetProvider<DropboxService>();
         }
 
-        public ConfigModel Configuration => (ConfigModel)_dropboxService.Configuration;
+        public ConfigModel Configuration => _dropboxService.GetConfiguration<ConfigModel>();
 
         public ICommand AddAccountCommand
         {

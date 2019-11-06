@@ -11,7 +11,7 @@ namespace Jaya.Ui.ViewModels
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly SharedService _shared;
         ProviderServiceBase _service;
-        ProviderAccountModelBase _provider;
+        AccountModelBase _provider;
         DirectoryModel _directory;
 
         public StatusbarViewModel()

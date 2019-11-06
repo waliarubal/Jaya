@@ -15,7 +15,7 @@ namespace Jaya.Ui.Models
         public delegate void TreeNodeExpanded(TreeNodeModel node, bool isExpaded);
         public event TreeNodeExpanded NodeExpanded;
 
-        public TreeNodeModel(ProviderServiceBase service, ProviderAccountModelBase provider)
+        public TreeNodeModel(ProviderServiceBase service, AccountModelBase provider)
         {
             Service = service;
             Provider = provider;
@@ -39,7 +39,7 @@ namespace Jaya.Ui.Models
 
         public ProviderServiceBase Service { get; }
 
-        public ProviderAccountModelBase Provider { get; }
+        public AccountModelBase Provider { get; }
 
         public bool IsDummy
         {
