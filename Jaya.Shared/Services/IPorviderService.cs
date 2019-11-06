@@ -19,6 +19,6 @@ namespace Jaya.Shared.Services
 
         Task<IEnumerable<AccountModelBase>> GetAccountsAsync();
 
-        Task<DirectoryModel> GetDirectoryAsync(AccountModelBase provider, string path = null);
+        Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null);
     }
 }

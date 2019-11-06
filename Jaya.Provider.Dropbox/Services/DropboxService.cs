@@ -1,4 +1,5 @@
-﻿using Jaya.Provider.Dropbox.Models;
+﻿using Dropbox.Api;
+using Jaya.Provider.Dropbox.Models;
 using Jaya.Provider.Dropbox.Views;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
@@ -19,6 +20,7 @@ namespace Jaya.Provider.Dropbox.Services
     {
         const string REDIRECT_URI = "http://localhost:4321/DropboxAuth/";
         const string APP_KEY = "wr1084dwe5oimdh";
+        const string APP_SECRET = "ipwwjur866rwk3o";
 
         /// <summary>
         /// Refer https://www.dropbox.com/developers/documentation/dotnet#tutorial for Dropbox SDK documentation.
@@ -67,15 +69,17 @@ namespace Jaya.Provider.Dropbox.Services
                 context = await http.GetContextAsync();
 
             var code = Uri.UnescapeDataString(context.Request.QueryString["code"]);
-            return code;
+
+            var response = await  DropboxOAuth2Helper.ProcessCodeFlowAsync(code, APP_KEY, APP_SECRET);
+            return response.AccessToken;
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase provider, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null)
         {
             if (path == null)
                 path = string.Empty;
 
-            var model = GetFromCache(provider, path);
+            var model = GetFromCache(account, path);
             if (model != null)
                 return model;
             else
@@ -120,7 +124,7 @@ namespace Jaya.Provider.Dropbox.Services
                 }
             }
 
-            AddToCache(provider, model);
+            AddToCache(account, model);
             return model;
         }
 

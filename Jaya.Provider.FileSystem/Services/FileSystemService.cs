@@ -25,9 +25,9 @@ namespace Jaya.Provider.FileSystem.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase provider, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null)
         {
-            var model = GetFromCache(provider, path);
+            var model = GetFromCache(account, path);
             if (model != null)
                 return model;
 
@@ -50,7 +50,7 @@ namespace Jaya.Provider.FileSystem.Services
                         model.Directories.Add(drive);
                     }
 
-                    AddToCache(provider, model);
+                    AddToCache(account, model);
                     return model;
                 }
 
@@ -113,7 +113,7 @@ namespace Jaya.Provider.FileSystem.Services
 
                 }
 
-                AddToCache(provider, model);
+                AddToCache(account, model);
                 return model;
             });
         }
