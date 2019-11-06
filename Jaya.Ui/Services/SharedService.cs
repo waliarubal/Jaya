@@ -20,11 +20,11 @@ namespace Jaya.Ui.Services
         [ImportingConstructor]
         public SharedService(
             [Import(nameof(CommandService))]IService commandService, 
-            [Import(nameof(ConfigurationService))]IService configurationService, 
+            [Import(nameof(ConfigurationService))]IService configService, 
             [Import(nameof(ProviderService))]IService providerService)
         {
             _commandService = commandService as CommandService;
-            _configService = configurationService as ConfigurationService;
+            _configService = configService as ConfigurationService;
             _providerService = providerService as ProviderService;
 
             _onSimpleCommand = _commandService.EventAggregator.Subscribe<byte>(SimpleCommandAction);

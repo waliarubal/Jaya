@@ -9,11 +9,11 @@ namespace Jaya.Ui.Services
     public sealed class ProviderService : IService
     {
         [ImportingConstructor]
-        public ProviderService([ImportMany]IEnumerable<IProviderService> services)
+        public ProviderService([ImportMany]IEnumerable<IProviderService> providers)
         {
-            Services = services;
+            Providers = providers;
         }
 
-        public IEnumerable<IProviderService> Services { get; }
+        public IEnumerable<IProviderService> Providers { get; }
     }
 }

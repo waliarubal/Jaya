@@ -84,7 +84,7 @@ namespace Jaya.Ui.ViewModels
 
             if (node.Service == null)
             {
-                foreach (var service in GetService<ProviderService>().Services)
+                foreach (var service in GetService<ProviderService>().Providers)
                 {
                     var child = new TreeNodeModel(service as ProviderServiceBase, null);
                     child.Label = service.Name;

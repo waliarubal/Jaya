@@ -10,7 +10,7 @@ namespace Jaya.Ui.ViewModels
     {
         object _configurationEditor;
 
-        public IEnumerable<IProviderService> Plugins => GetService<ProviderService>().Services;
+        public IEnumerable<IProviderService> Plugins => GetService<ProviderService>().Providers;
 
         public IProviderService SelectedPlugin
         {
