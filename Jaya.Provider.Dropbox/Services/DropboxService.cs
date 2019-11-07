@@ -1,4 +1,4 @@
-﻿using Dropbox.Api;
+﻿using DotNetBox;
 using Jaya.Provider.Dropbox.Models;
 using Jaya.Provider.Dropbox.Views;
 using Jaya.Shared.Base;
@@ -23,7 +23,7 @@ namespace Jaya.Provider.Dropbox.Services
         const string APP_SECRET = "ipwwjur866rwk3o";
 
         /// <summary>
-        /// Refer https://www.dropbox.com/developers/documentation/dotnet#tutorial for Dropbox SDK documentation.
+        /// Refer https://dotnetbox.readthedocs.io/en/latest/index.html for Dropbox SDK documentation.
         /// </summary>
         public DropboxService([Import(nameof(ConfigurationService))]IService configService) : base(configService)
         {
@@ -56,9 +56,10 @@ namespace Jaya.Provider.Dropbox.Services
         async Task<string> GetToken()
         {
             var redirectUri = new Uri(REDIRECT_URI);
-            var authUri = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Code, APP_KEY, redirectUri);
 
-            OpenBrowser(authUri.ToString());
+            var client = new DropboxClient(APP_KEY, APP_SECRET);
+            var authorizeUrl = client.GetAuthorizeUrl(ResponseType.Code, REDIRECT_URI);
+            OpenBrowser(authorizeUrl);
 
             var http = new HttpListener();
             http.Prefixes.Add(REDIRECT_URI);
@@ -70,7 +71,7 @@ namespace Jaya.Provider.Dropbox.Services
 
             var code = Uri.UnescapeDataString(context.Request.QueryString["code"]);
 
-            var response = await  DropboxOAuth2Helper.ProcessCodeFlowAsync(code, APP_KEY, APP_SECRET);
+            var response = await client.AuthorizeCode(code, REDIRECT_URI);
             return response.AccessToken;
         }
 
@@ -90,37 +91,30 @@ namespace Jaya.Provider.Dropbox.Services
             model.Directories = new List<DirectoryModel>();
             model.Files = new List<FileModel>();
 
-            using (var client = new DropboxClient("token"))
+            var accountDetails = account as AccountModel;
+
+            var client = new DropboxClient(accountDetails.Token);
+
+            var entries = await client.Files.ListFolder(path);
+            foreach (var entry in entries.Entries)
             {
-                var entries = await client.Files.ListFolderAsync(path);
-                foreach (var entry in entries.Entries)
+                if (entry.IsDeleted)
+                    continue;
+
+                if (entry.IsFolder)
                 {
-                    if (entry.IsDeleted)
-                        continue;
+                    var directory = new DirectoryModel();
+                    directory.Name = entry.Name;
+                    directory.Path = entry.Path;
+                    model.Directories.Add(directory);
 
-                    if (entry.IsFolder)
-                    {
-                        var directoryInfo = entry.AsFolder;
-
-                        var directory = new DirectoryModel();
-                        directory.Name = entry.Name;
-                        directory.Path = entry.PathDisplay;
-                        model.Directories.Add(directory);
-
-                    }
-                    else if (entry.IsFile)
-                    {
-                        var fileInfo = entry.AsFile;
-
-                        var file = new FileModel();
-                        file.Name = entry.Name;
-                        file.Path = entry.PathDisplay;
-                        file.Size = (long)fileInfo.Size;
-                        file.Created = fileInfo.ClientModified;
-                        file.Modified = fileInfo.ClientModified;
-                        file.Accessed = fileInfo.ClientModified;
-                        model.Files.Add(file);
-                    }
+                }
+                else if (entry.IsFile)
+                {
+                    var file = new FileModel();
+                    file.Name = entry.Name;
+                    file.Path = entry.Path;
+                    model.Files.Add(file);
                 }
             }
 
@@ -135,21 +129,20 @@ namespace Jaya.Provider.Dropbox.Services
                 return null;
 
             var config = GetConfiguration<ConfigModel>();
-            using (var client = new DropboxClient(token))
+            var client = new DropboxClient(token);
+
+            var accountInfo = await client.Users.GetCurrentAccount();
+
+            var provider = new AccountModel(accountInfo.AccountId, accountInfo.Name.DisplayName)
             {
-                var accountInfo = await client.Users.GetCurrentAccountAsync();
+                Email = accountInfo.Email,
+                Token = token
+            };
+            config.Providers.Add(provider);
 
-                var provider = new AccountModel(accountInfo.AccountId, accountInfo.Name.DisplayName)
-                {
-                    Email = accountInfo.Email,
-                    Token = token
-                };
-                config.Providers.Add(provider);
+            SetConfiguration(config);
 
-                SetConfiguration(config);
-
-                return provider;
-            }
+            return provider;
         }
 
         public override async Task<IEnumerable<AccountModelBase>> GetAccountsAsync()
