@@ -7,7 +7,8 @@
         <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
         <StyleInclude Source="resm:Avalonia.Controls.DataGrid.Themes.Default.xaml?assembly=Avalonia.Controls.DataGrid" />
+        <StyleInclude Source="avares://Jaya.Shared/Styles/GridSplitterStyle.xaml" />
+        <StyleInclude Source="avares://Jaya.Shared/Styles/DataGridStyle.xaml" />
         <StyleInclude Source="avares://Jaya.Shared/Styles/StyledWindowStyle.xaml" />
-        <StyleInclude Source="/Styles/Styles.xaml" />
     </Application.Styles>
 </Application>
