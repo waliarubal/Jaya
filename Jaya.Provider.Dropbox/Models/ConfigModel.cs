@@ -12,11 +12,9 @@ namespace Jaya.Provider.Dropbox.Models
         }
 
         [JsonConstructor]
-        public ConfigModel(IEnumerable<AccountModel> accounts)
+        public ConfigModel(IEnumerable<AccountModel> accounts): this()
         {
-            if (accounts == null)
-                Accounts = new List<AccountModel>();
-            else
+            if (accounts != null)
                 Accounts = new List<AccountModel>(accounts);
         }
 
