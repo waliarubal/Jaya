@@ -2,6 +2,7 @@
 using Jaya.Provider.Dropbox.Services;
 using Jaya.Shared;
 using Jaya.Shared.Base;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Jaya.Provider.Dropbox.ViewModels
@@ -15,8 +16,10 @@ namespace Jaya.Provider.Dropbox.ViewModels
         {
             _dropboxService = GetProvider<DropboxService>();
         }
+  
+        ConfigModel Configuration => _dropboxService.GetConfiguration<ConfigModel>();
 
-        public ConfigModel Configuration => _dropboxService.GetConfiguration<ConfigModel>();
+        public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
 
         public ICommand AddAccountCommand
         {
@@ -32,6 +35,8 @@ namespace Jaya.Provider.Dropbox.ViewModels
         async void AddAccountAction()
         {
             var account = await _dropboxService.AddAccount();
+            if (account != null)
+                RaisePropertyChanged(nameof(Accounts));
         }
     }
 }

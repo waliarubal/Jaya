@@ -88,11 +88,11 @@
                 Grid.ColumnSpan="2"
                 Margin="12,8"
                 HorizontalContentAlignment="Stretch"
-                VerticalContentAlignment="Top"
+                VerticalContentAlignment="Stretch"
                 Content="{Binding ConfigurationEditor, Mode=OneWay}"
                 IsVisible="{Binding IsPluginConfigurable, Mode=OneWay}"
                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                ScrollViewer.VerticalScrollBarVisibility="Hidden" />
             <TextBlock
                 Grid.Row="2"
                 Grid.ColumnSpan="2"

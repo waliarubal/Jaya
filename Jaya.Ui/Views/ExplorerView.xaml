@@ -22,16 +22,9 @@
     <Grid>
         <!--  details view  -->
         <DataGrid
-            Padding="0"
-            AlternatingRowBackground="Transparent"
-            Background="Transparent"
-            CanUserReorderColumns="True"
-            CanUserResizeColumns="True"
-            CanUserSortColumns="True"
             IsReadOnly="True"
             IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
             Items="{Binding Directory.Children, Mode=OneWay}"
-            RowBackground="Transparent"
             SelectionMode="Extended">
             <DataGrid.Styles>
                 <Style Selector="TextBlock">

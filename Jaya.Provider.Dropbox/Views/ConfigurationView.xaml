@@ -13,8 +13,41 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Button Command="{Binding AddAccountCommand, Mode=OneTime}">Add Account</Button>
+        <DataGrid
+            Margin="0,2"
+            IsReadOnly="True"
+            Items="{Binding Accounts, Mode=OneWay}">
+            <DataGrid.Styles>
+                <Style Selector="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+            </DataGrid.Styles>
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Name}"
+                    Header="Name" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Email}"
+                    Header="Email" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Margin="2,2,0,2">Remove</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button
+            Grid.Row="1"
+            Margin="0,2"
+            Command="{Binding AddAccountCommand, Mode=OneTime}">
+            Add Account
+        </Button>
     </Grid>
 </UserControl>
