@@ -138,7 +138,7 @@ namespace Jaya.Provider.Dropbox.Services
                 Email = accountInfo.Email,
                 Token = token
             };
-            config.Providers.Add(provider);
+            config.Accounts.Add(provider);
 
             SetConfiguration(config);
 
@@ -148,7 +148,7 @@ namespace Jaya.Provider.Dropbox.Services
         public override async Task<IEnumerable<AccountModelBase>> GetAccountsAsync()
         {
             var config = GetConfiguration<ConfigModel>();
-            return await Task.Run(() => config.Providers);
+            return await Task.Run(() => config.Accounts);
         }
     }
 }

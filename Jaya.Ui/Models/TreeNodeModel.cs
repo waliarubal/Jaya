@@ -15,14 +15,14 @@ namespace Jaya.Ui.Models
         public delegate void TreeNodeExpanded(TreeNodeModel node, bool isExpaded);
         public event TreeNodeExpanded NodeExpanded;
 
-        public TreeNodeModel(ProviderServiceBase service, AccountModelBase provider)
+        public TreeNodeModel(ProviderServiceBase service, AccountModelBase account)
         {
             Service = service;
-            Provider = provider;
+            Account = account;
             IconImagePath = Constants.COLLAPSED_IMAGE_URL;
             Children = new ObservableCollection<TreeNodeModel>();
 
-            if (Service != null && Provider != null)
+            if (Service != null && Account != null)
             {
                 _shared = ServiceLocator.Instance.GetService<SharedService>();
                 _shared.ApplicationConfiguration.PropertyChanged += OnApplicationConfigChanged;
@@ -39,7 +39,7 @@ namespace Jaya.Ui.Models
 
         public ProviderServiceBase Service { get; }
 
-        public AccountModelBase Provider { get; }
+        public AccountModelBase Account { get; }
 
         public bool IsDummy
         {
@@ -124,7 +124,7 @@ namespace Jaya.Ui.Models
             if (IsHavingDummyChild)
                 return;
 
-            var child = _dummyChild = new TreeNodeModel(Service, Provider);
+            var child = _dummyChild = new TreeNodeModel(Service, Account);
             child.ImagePath = "Refresh-16.png".GetImageUrl();
             child.Label = "Loading...";
             child.IsDummy = true;

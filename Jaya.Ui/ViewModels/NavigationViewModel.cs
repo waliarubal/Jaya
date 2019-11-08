@@ -52,7 +52,7 @@ namespace Jaya.Ui.ViewModels
 
                 if (value.FileSystemObject != null)
                 {
-                    var args = new DirectoryChangedEventArgs(value.Service, value.Provider, value.FileSystemObject as DirectoryModel);
+                    var args = new DirectoryChangedEventArgs(value.Service, value.Account, value.FileSystemObject as DirectoryModel);
                     EventAggregator.Publish(args);
                 }
             }
@@ -94,7 +94,7 @@ namespace Jaya.Ui.ViewModels
                     AddChildNode(node, child);
                 }
             }
-            else if (node.Provider == null)
+            else if (node.Account == null)
             {
                 var providers = await node.Service.GetAccountsAsync();
                 foreach(var provider in providers)
@@ -110,10 +110,10 @@ namespace Jaya.Ui.ViewModels
             }
             else
             {
-                var currentDirectory = await node.Service.GetDirectoryAsync(node.Provider, node.FileSystemObject?.Path);
+                var currentDirectory = await node.Service.GetDirectoryAsync(node.Account, node.FileSystemObject?.Path);
                 foreach (var directory in currentDirectory.Directories)
                 {
-                    var child = new TreeNodeModel(node.Service, node.Provider);
+                    var child = new TreeNodeModel(node.Service, node.Account);
                     child.Label = directory.Name;
                     child.FileSystemObject = directory;
                     child.NodeExpanded += OnNodeExpanded;

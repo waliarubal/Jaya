@@ -1,7 +1,6 @@
 ﻿using Jaya.Shared.Base;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Jaya.Provider.Dropbox.Models
 {
@@ -9,21 +8,24 @@ namespace Jaya.Provider.Dropbox.Models
     {
         public ConfigModel()
         {
-            Providers = new ObservableCollection<AccountModel>();
+            Accounts = new List<AccountModel>();
         }
 
         [JsonConstructor]
         public ConfigModel(IEnumerable<AccountModel> accounts)
         {
-            Providers = new ObservableCollection<AccountModel>(accounts);
+            if (accounts == null)
+                Accounts = new List<AccountModel>();
+            else
+                Accounts = new List<AccountModel>(accounts);
         }
 
         [JsonProperty]
-        public ObservableCollection<AccountModel> Providers { get; private set; }
+        public IList<AccountModel> Accounts { get; private set; }
 
         protected override ConfigModelBase Empty()
         {
-            return new ConfigModel();
+            return new ConfigModel(null);
         }
     }
 }
