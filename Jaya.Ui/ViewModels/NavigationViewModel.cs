@@ -28,7 +28,7 @@ namespace Jaya.Ui.ViewModels
             get
             {
                 if (_populateCommand == null)
-                    _populateCommand = new RelayCommand<TreeNodeModel>(Populate);
+                    _populateCommand = new RelayCommand<TreeNodeModel>(PopulateAction);
 
                 return _populateCommand;
             }
@@ -74,7 +74,12 @@ namespace Jaya.Ui.ViewModels
             Invoke(() => node.Children.Add(childNode));
         }
 
-        async void Populate(TreeNodeModel node)
+        void RemoveChildNode(TreeNodeModel node, TreeNodeModel childNode)
+        {
+            Invoke(() => node.Children.Remove(childNode));
+        }
+
+        async void PopulateAction(TreeNodeModel node)
         {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));
@@ -86,26 +91,31 @@ namespace Jaya.Ui.ViewModels
             {
                 foreach (var service in GetService<ProviderService>().Providers)
                 {
-                    var child = new TreeNodeModel(service as ProviderServiceBase, null);
-                    child.Label = service.Name;
-                    child.ImagePath = service.ImagePath;
-                    child.NodeExpanded += OnNodeExpanded;
-                    child.AddDummyChild();
-                    AddChildNode(node, child);
+                    var serviceInstance = service as ProviderServiceBase;
+
+                    var serviceNode = new TreeNodeModel(service as ProviderServiceBase, null);
+                    serviceNode.Label = service.Name;
+                    serviceNode.ImagePath = service.ImagePath;
+                    serviceNode.NodeExpanded += OnNodeExpanded;
+                    serviceNode.AddDummyChild();
+                    AddChildNode(node, serviceNode);
+
+                    serviceInstance.AccountAdded += (AccountModelBase account) => OnAccountAction(account, AccountAction.Added, serviceNode);
+                    serviceInstance.AccountRemoved += (AccountModelBase account) => OnAccountAction(account, AccountAction.Removed, serviceNode);
                 }
             }
             else if (node.Account == null)
             {
-                var providers = await node.Service.GetAccountsAsync();
-                foreach(var provider in providers)
+                var accounts = await node.Service.GetAccountsAsync();
+                foreach (var account in accounts)
                 {
-                    var child = new TreeNodeModel(node.Service, provider);
-                    child.Label = provider.Name;
-                    child.FileSystemObject = new DirectoryModel();
-                    child.ImagePath = provider.ImagePath;
-                    child.NodeExpanded += OnNodeExpanded;
-                    child.AddDummyChild();
-                    AddChildNode(node, child);
+                    var accountNode = new TreeNodeModel(node.Service, account);
+                    accountNode.Label = account.Name;
+                    accountNode.FileSystemObject = new DirectoryModel();
+                    accountNode.ImagePath = account.ImagePath;
+                    accountNode.NodeExpanded += OnNodeExpanded;
+                    accountNode.AddDummyChild();
+                    AddChildNode(node, accountNode);
                 }
             }
             else
@@ -113,18 +123,43 @@ namespace Jaya.Ui.ViewModels
                 var currentDirectory = await node.Service.GetDirectoryAsync(node.Account, node.FileSystemObject?.Path);
                 foreach (var directory in currentDirectory.Directories)
                 {
-                    var child = new TreeNodeModel(node.Service, node.Account);
-                    child.Label = directory.Name;
-                    child.FileSystemObject = directory;
-                    child.NodeExpanded += OnNodeExpanded;
+                    var fileSystemObjectNode = new TreeNodeModel(node.Service, node.Account);
+                    fileSystemObjectNode.Label = directory.Name;
+                    fileSystemObjectNode.FileSystemObject = directory;
+                    fileSystemObjectNode.NodeExpanded += OnNodeExpanded;
                     if (directory.Type == FileSystemObjectType.Drive)
-                        child.ImagePath = "Hdd-16.png".GetImageUrl();
-                    child.AddDummyChild();
-                    AddChildNode(node, child);
+                        fileSystemObjectNode.ImagePath = "Hdd-16.png".GetImageUrl();
+                    fileSystemObjectNode.AddDummyChild();
+                    AddChildNode(node, fileSystemObjectNode);
                 }
             }
 
             node.RemoveDummyChild();
+        }
+
+        void OnAccountAction(AccountModelBase account, AccountAction action, TreeNodeModel node)
+        {
+            if (action == AccountAction.Added)
+            {
+                var accountNode = new TreeNodeModel(node.Service, account);
+                accountNode.Label = account.Name;
+                accountNode.FileSystemObject = new DirectoryModel();
+                accountNode.ImagePath = account.ImagePath;
+                accountNode.NodeExpanded += OnNodeExpanded;
+                accountNode.AddDummyChild();
+                AddChildNode(node, accountNode);
+            }
+            else if (action == AccountAction.Removed)
+            {
+                foreach (var accountNode in node.Children)
+                {
+                    if (!accountNode.Account.Equals(account))
+                        continue;
+
+                    RemoveChildNode(node, accountNode);
+                    break;
+                }
+            }
         }
     }
 }

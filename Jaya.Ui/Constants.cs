@@ -22,6 +22,12 @@
         }
     }
 
+    internal enum AccountAction: byte
+    {
+        Added,
+        Removed
+    }
+
     public enum CommandType : byte
     {
         Exit,
