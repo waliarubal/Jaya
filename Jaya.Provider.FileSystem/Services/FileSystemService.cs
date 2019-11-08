@@ -118,6 +118,16 @@ namespace Jaya.Provider.FileSystem.Services
             });
         }
 
+        protected override Task<AccountModelBase> AddAccountAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task<bool> RemoveAccountAsync(AccountModelBase account)
+        {
+            throw new NotImplementedException();
+        }
+
         public override async Task<IEnumerable<AccountModelBase>> GetAccountsAsync()
         {
             var providers = new List<AccountModelBase>

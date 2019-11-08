@@ -2,6 +2,7 @@
 using Jaya.Provider.Dropbox.Services;
 using Jaya.Shared;
 using Jaya.Shared.Base;
+using Jaya.Shared.Models;
 using System.Collections.Generic;
 using System.Windows.Input;
 
@@ -15,8 +16,18 @@ namespace Jaya.Provider.Dropbox.ViewModels
         public ConfigurationViewModel()
         {
             _dropboxService = GetProvider<DropboxService>();
+            _dropboxService.AccountAdded += OnAccountAddedOrRemoved;
+            _dropboxService.AccountRemoved += OnAccountAddedOrRemoved;
         }
-  
+
+        ~ConfigurationViewModel()
+        {
+            _dropboxService.AccountAdded -= OnAccountAddedOrRemoved;
+            _dropboxService.AccountRemoved -= OnAccountAddedOrRemoved;
+        }
+
+        #region properties
+
         ConfigModel Configuration => _dropboxService.GetConfiguration<ConfigModel>();
 
         public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
@@ -49,21 +60,23 @@ namespace Jaya.Provider.Dropbox.ViewModels
             }
         }
 
+        #endregion
+
+        void OnAccountAddedOrRemoved(AccountModelBase account)
+        {
+            RaisePropertyChanged(nameof(Accounts));
+        }
+
         async void RemoveAccountAction(AccountModel account)
         {
-            var isRemoved = await _dropboxService.RemoveAccountAsync(account);
+            var isRemoved = await _dropboxService.RemoveAccount(account);
             if (isRemoved)
-            {
                 SelectedAccount = null;
-                RaisePropertyChanged(nameof(Accounts));
-            }
         }
 
         async void AddAccountAction()
         {
-            var account = await _dropboxService.AddAccountAsync();
-            if (account != null)
-                RaisePropertyChanged(nameof(Accounts));
+            await _dropboxService.AddAccount();
         }
     }
 }

@@ -122,7 +122,7 @@ namespace Jaya.Provider.Dropbox.Services
             return model;
         }
 
-        public async Task<AccountModelBase> AddAccountAsync()
+        protected override async Task<AccountModelBase> AddAccountAsync()
         {
             var token = await GetToken();
             if (string.IsNullOrEmpty(token))
@@ -145,7 +145,7 @@ namespace Jaya.Provider.Dropbox.Services
             return provider;
         }
 
-        public async Task<bool> RemoveAccountAsync(AccountModelBase account)
+        protected override async Task<bool> RemoveAccountAsync(AccountModelBase account)
         {
             var config = GetConfiguration<ConfigModel>();
 

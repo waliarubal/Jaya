@@ -11,6 +11,12 @@ namespace Jaya.Shared.Base
         MemoryCacheService _cache;
         ConfigurationService _config;
 
+        public delegate void OnAccountAdded(AccountModelBase account);
+        public event OnAccountAdded AccountAdded;
+
+        public delegate void OnAccountRemoved(AccountModelBase account);
+        public event OnAccountRemoved AccountRemoved;
+
         protected ProviderServiceBase()
         {
             
@@ -105,6 +111,36 @@ namespace Jaya.Shared.Base
         {
             ConfigurationService.Set<T>(configuration, Name);
         }
+
+        public async Task<AccountModelBase> AddAccount()
+        {
+            var account = await AddAccountAsync();
+            if (account != null)
+            {
+                var handler = AccountAdded;
+                if (handler != null)
+                    handler.Invoke(account);
+            }
+
+            return account;
+        }
+
+        public async Task<bool> RemoveAccount(AccountModelBase account)
+        {
+            var isRemoved = await RemoveAccountAsync(account);
+            if (isRemoved)
+            {
+                var handler = AccountRemoved;
+                if (handler != null)
+                    handler.Invoke(account);
+            }
+
+            return isRemoved;
+        }
+
+        protected abstract Task<AccountModelBase> AddAccountAsync();
+
+        protected abstract Task<bool> RemoveAccountAsync(AccountModelBase account);
 
         public abstract Task<IEnumerable<AccountModelBase>> GetAccountsAsync();
 
