@@ -69,6 +69,8 @@ namespace Jaya.Provider.Dropbox.Services
             while (context.Request.Url.AbsolutePath != redirectUri.AbsolutePath)
                 context = await http.GetContextAsync();
 
+            http.Stop();
+
             var code = Uri.UnescapeDataString(context.Request.QueryString["code"]);
 
             var response = await client.AuthorizeCode(code, REDIRECT_URI);
