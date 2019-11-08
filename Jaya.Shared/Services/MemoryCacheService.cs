@@ -7,30 +7,41 @@ namespace Jaya.Shared.Services
     [Shared]
     public sealed class MemoryCacheService: IService
     {
-        readonly MemoryCache _cache;
-
-        public MemoryCacheService()
-        {
-            var options = new MemoryCacheOptions();
-
-            _cache = new MemoryCache(options);
-        }
+        MemoryCache _cache;
 
         ~MemoryCacheService()
         {
             _cache.Dispose();
         }
 
-        public long Count => _cache.Count;
+        #region properties
+
+        MemoryCache Cache
+        {
+            get
+            {
+                if (_cache == null)
+                {
+                    var options = new MemoryCacheOptions();
+                    _cache = new MemoryCache(options);
+                }
+
+                return _cache;
+            }
+        }
+
+        public long Count => Cache.Count;
+
+        #endregion
 
         public bool TryGetValue<T>(object key, out T result)
         {
-            return _cache.TryGetValue<T>(key, out result);
+            return Cache.TryGetValue<T>(key, out result);
         }
 
         public void Set<T>(object key, T value)
         {
-            _cache.Set<T>(key, value);
+            Cache.Set<T>(key, value);
         }
     }
 }

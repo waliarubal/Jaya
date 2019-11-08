@@ -16,7 +16,7 @@ namespace Jaya.Provider.FileSystem.Services
     public class FileSystemService : ProviderServiceBase, IProviderService
     {
 
-        public FileSystemService([Import(nameof(ConfigurationService))]IService configService): base(configService)
+        public FileSystemService()
         {
             Name = "File System";
             ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png";

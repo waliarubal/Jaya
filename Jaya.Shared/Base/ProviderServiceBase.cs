@@ -8,17 +8,37 @@ namespace Jaya.Shared.Base
 {
     public abstract class ProviderServiceBase : IProviderService
     {
-        readonly MemoryCacheService _cache;
+        MemoryCacheService _cache;
+        ConfigurationService _config;
 
-        protected ProviderServiceBase(IService configService)
+        protected ProviderServiceBase()
         {
-            _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
-            ConfigurationService = configService as ConfigurationService;
+            
         }
 
         #region properties
 
-        protected ConfigurationService ConfigurationService { get; }
+        MemoryCacheService Cache
+        {
+            get
+            {
+                if (_cache == null)
+                    _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
+
+                return _cache;
+            }
+        }
+
+        protected ConfigurationService ConfigurationService
+        {
+            get
+            {
+                if (_config == null)
+                    _config = ServiceLocator.Instance.GetService<ConfigurationService>();
+
+                return _config;
+            }
+        }
 
         public bool IsRootDrive
         {
@@ -58,7 +78,7 @@ namespace Jaya.Shared.Base
             if (!string.IsNullOrEmpty(path))
                 hash += path.GetHashCode();
 
-            if (_cache.TryGetValue(hash, out DirectoryModel directory))
+            if (Cache.TryGetValue(hash, out DirectoryModel directory))
                 return directory;
 
             return null;
@@ -73,7 +93,7 @@ namespace Jaya.Shared.Base
             if (!string.IsNullOrEmpty(directory.Path))
                 hash += directory.Path.GetHashCode();
 
-            _cache.Set(hash, directory);
+            Cache.Set(hash, directory);
         }
 
         public T GetConfiguration<T>() where T : ConfigModelBase

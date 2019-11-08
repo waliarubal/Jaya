@@ -35,6 +35,8 @@ namespace Jaya.Ui.Services
             _commandService.EventAggregator.UnSubscribe(_onDirectoryChanged);
         }
 
+        #region properties
+
         public RelayCommand<WindowOptionsModel> OpenWindowCommand
         {
             get
@@ -67,6 +69,8 @@ namespace Jaya.Ui.Services
                 return _navigateForward;
             }
         }
+
+        #endregion
 
         async void OpenWindowCommandAction(WindowOptionsModel option)
         {

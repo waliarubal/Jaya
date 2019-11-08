@@ -25,7 +25,7 @@ namespace Jaya.Provider.Dropbox.Services
         /// <summary>
         /// Refer https://dotnetbox.readthedocs.io/en/latest/index.html for Dropbox SDK documentation.
         /// </summary>
-        public DropboxService([Import(nameof(ConfigurationService))]IService configService) : base(configService)
+        public DropboxService()
         {
             Name = "Dropbox";
             ImagePath = "avares://Jaya.Provider.Dropbox/Assets/Images/Dropbox-32.png";

@@ -9,15 +9,25 @@ namespace Jaya.Shared.Base
     public abstract class ViewModelBase : ModelBase
     {
         ICommand _simpleCommand, _parameterizedCommand;
+        EventAggregator _eventAggregator;
 
         protected ViewModelBase()
         {
-            EventAggregator = GetService<CommandService>().EventAggregator;
+            
         }
 
         #region properties
 
-        protected EventAggregator EventAggregator { get; }
+        protected EventAggregator EventAggregator
+        {
+            get
+            {
+                if (_eventAggregator == null)
+                    _eventAggregator = GetService<CommandService>().EventAggregator;
+
+                return _eventAggregator;
+            }
+        }
 
         public ICommand SimpleCommand
         {
