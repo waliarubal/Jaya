@@ -1,5 +1,6 @@
 ﻿using Jaya.Shared.Base;
 using Newtonsoft.Json;
+using System;
 
 namespace Jaya.Shared.Models
 {
@@ -52,6 +53,15 @@ namespace Jaya.Shared.Models
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            var compareWith = obj as AccountModelBase;
+            if (compareWith == null)
+                return false;
+
+            return compareWith.GetHashCode() == GetHashCode();
         }
     }
 }

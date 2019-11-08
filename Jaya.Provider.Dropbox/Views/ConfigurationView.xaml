@@ -36,7 +36,9 @@
         <ListBox
             Grid.Row="1"
             Grid.RowSpan="3"
-            Items="{Binding Accounts, Mode=OneWay}">
+            Items="{Binding Accounts, Mode=OneWay}"
+            SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
+            SelectionMode="Single">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -59,7 +61,12 @@
             Command="{Binding AddAccountCommand, Mode=OneTime}">
             Add
         </Button>
-        <Button Grid.Row="2" Grid.Column="1">
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Command="{Binding RemoveAccountCommand, Mode=OneTime}"
+            CommandParameter="{Binding SelectedAccount, Mode=OneWay}"
+            IsEnabled="{Binding !!SelectedAccount, Mode=OneWay}">
             Remove
         </Button>
     </Grid>

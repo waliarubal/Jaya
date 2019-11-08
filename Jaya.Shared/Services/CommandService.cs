@@ -13,7 +13,7 @@ namespace Jaya.Shared.Services
         {
             get
             {
-                if (_eventAggregator == null)
+                if (_eventAggregator == null) { }
                     _eventAggregator = new EventAggregator();
 
                 return _eventAggregator;

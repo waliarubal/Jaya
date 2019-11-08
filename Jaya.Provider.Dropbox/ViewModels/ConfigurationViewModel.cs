@@ -10,7 +10,7 @@ namespace Jaya.Provider.Dropbox.ViewModels
     public class ConfigurationViewModel: ViewModelBase
     {
         readonly DropboxService _dropboxService;
-        ICommand _addAccount;
+        ICommand _addAccount, _removeAccount;
 
         public ConfigurationViewModel()
         {
@@ -20,6 +20,12 @@ namespace Jaya.Provider.Dropbox.ViewModels
         ConfigModel Configuration => _dropboxService.GetConfiguration<ConfigModel>();
 
         public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
+
+        public AccountModel SelectedAccount
+        {
+            get => Get<AccountModel>();
+            set => Set(value);
+        }
 
         public ICommand AddAccountCommand
         {
@@ -32,9 +38,30 @@ namespace Jaya.Provider.Dropbox.ViewModels
             }
         }
 
+        public ICommand RemoveAccountCommand
+        {
+            get
+            {
+                if (_removeAccount == null)
+                    _removeAccount = new RelayCommand<AccountModel>(RemoveAccountAction);
+
+                return _removeAccount;
+            }
+        }
+
+        async void RemoveAccountAction(AccountModel account)
+        {
+            var isRemoved = await _dropboxService.RemoveAccountAsync(account);
+            if (isRemoved)
+            {
+                SelectedAccount = null;
+                RaisePropertyChanged(nameof(Accounts));
+            }
+        }
+
         async void AddAccountAction()
         {
-            var account = await _dropboxService.AddAccount();
+            var account = await _dropboxService.AddAccountAsync();
             if (account != null)
                 RaisePropertyChanged(nameof(Accounts));
         }
