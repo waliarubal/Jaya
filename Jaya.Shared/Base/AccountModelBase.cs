@@ -1,6 +1,5 @@
 ﻿using Jaya.Shared.Base;
 using Newtonsoft.Json;
-using System;
 
 namespace Jaya.Shared.Models
 {
