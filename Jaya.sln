@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.FileSystem", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.Dropbox", "Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj", "{747A481D-288A-4849-BD42-A6EA5026B872}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.GoogleDrive", "Jaya.Provider.GoogleDrive\Jaya.Provider.GoogleDrive.csproj", "{FDB301A9-2FC0-4262-BC43-F4DFD673627D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{747A481D-288A-4849-BD42-A6EA5026B872}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{747A481D-288A-4849-BD42-A6EA5026B872}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{747A481D-288A-4849-BD42-A6EA5026B872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDB301A9-2FC0-4262-BC43-F4DFD673627D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB301A9-2FC0-4262-BC43-F4DFD673627D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB301A9-2FC0-4262-BC43-F4DFD673627D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB301A9-2FC0-4262-BC43-F4DFD673627D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
