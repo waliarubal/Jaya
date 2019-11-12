@@ -10,25 +10,25 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
 {
     public class ConfigurationViewModel: ViewModelBase
     {
-        readonly GoogleDriveService _dropboxService;
+        readonly GoogleDriveService _googleDriveService;
         ICommand _addAccount, _removeAccount;
 
         public ConfigurationViewModel()
         {
-            _dropboxService = GetProvider<GoogleDriveService>();
-            _dropboxService.AccountAdded += OnAccountAddedOrRemoved;
-            _dropboxService.AccountRemoved += OnAccountAddedOrRemoved;
+            _googleDriveService = GetProvider<GoogleDriveService>();
+            _googleDriveService.AccountAdded += OnAccountAddedOrRemoved;
+            _googleDriveService.AccountRemoved += OnAccountAddedOrRemoved;
         }
 
         ~ConfigurationViewModel()
         {
-            _dropboxService.AccountAdded -= OnAccountAddedOrRemoved;
-            _dropboxService.AccountRemoved -= OnAccountAddedOrRemoved;
+            _googleDriveService.AccountAdded -= OnAccountAddedOrRemoved;
+            _googleDriveService.AccountRemoved -= OnAccountAddedOrRemoved;
         }
 
         #region properties
 
-        ConfigModel Configuration => _dropboxService.GetConfiguration<ConfigModel>();
+        ConfigModel Configuration => _googleDriveService.GetConfiguration<ConfigModel>();
 
         public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
 
@@ -69,14 +69,14 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
 
         async void RemoveAccountAction(AccountModel account)
         {
-            var isRemoved = await _dropboxService.RemoveAccount(account);
+            var isRemoved = await _googleDriveService.RemoveAccount(account);
             if (isRemoved)
                 SelectedAccount = null;
         }
 
         async void AddAccountAction()
         {
-            await _dropboxService.AddAccount();
+            await _googleDriveService.AddAccount();
         }
     }
 }

@@ -1,4 +1,10 @@
 ﻿using DotNetBox;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Oauth2.v2;
+using Google.Apis.Oauth2.v2.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
 using Jaya.Provider.GoogleDrive.Models;
 using Jaya.Provider.GoogleDrive.Views;
 using Jaya.Shared.Base;
@@ -7,7 +13,8 @@ using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.Composition;
-using System.Net;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Jaya.Provider.GoogleDrive.Services
@@ -17,11 +24,11 @@ namespace Jaya.Provider.GoogleDrive.Services
     public class GoogleDriveService : ProviderServiceBase, IProviderService
     {
         const string REDIRECT_URI = "http://localhost:4321/DropboxAuth/";
-        const string CLIENT_ID = "wr1084dwe5oimdh";
-        const string CLIENT_SECRET = "ipwwjur866rwk3o";
+        const string CLIENT_ID = "538742722606-equtrav33c2tqaq2io7h19mkf4ch6jbp.apps.googleusercontent.com";
+        const string CLIENT_SECRET = "UGprjYfFkb--RHnGbgAnm_Aj";
 
         /// <summary>
-        /// Refer https://dotnetbox.readthedocs.io/en/latest/index.html for Dropbox SDK documentation.
+        /// Refer pages https://www.daimto.com/google-drive-authentication-c/ and https://www.daimto.com/google-drive-api-c/ for examples.
         /// </summary>
         public GoogleDriveService()
         {
@@ -32,28 +39,43 @@ namespace Jaya.Provider.GoogleDrive.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        async Task<string> GetToken()
+        async Task<UserCredential> GetToken()
         {
-            var redirectUri = new Uri(REDIRECT_URI);
+            var scopes = new string[]
+            {
+                DriveService.Scope.Drive
+            };
+            var secret = new ClientSecrets
+            {
+                ClientId = CLIENT_ID,
+                ClientSecret = CLIENT_SECRET
+            };
 
-            var client = new DropboxClient(CLIENT_ID, CLIENT_SECRET);
-            var authorizeUrl = client.GetAuthorizeUrl(ResponseType.Code, REDIRECT_URI);
-            OpenBrowser(authorizeUrl);
+            var configDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Jaya");
+            var dataStore = new FileDataStore(configDirectory, true);
 
-            var http = new HttpListener();
-            http.Prefixes.Add(REDIRECT_URI);
-            http.Start();
+            return await GoogleWebAuthorizationBroker.AuthorizeAsync(secret, scopes, Environment.UserName, CancellationToken.None, dataStore);
 
-            var context = await http.GetContextAsync();
-            while (context.Request.Url.AbsolutePath != redirectUri.AbsolutePath)
-                context = await http.GetContextAsync();
+            //var redirectUri = new Uri(REDIRECT_URI);
 
-            http.Stop();
+            //var client = new DropboxClient(CLIENT_ID, CLIENT_SECRET);
+            //var authorizeUrl = client.GetAuthorizeUrl(ResponseType.Code, REDIRECT_URI);
+            //OpenBrowser(authorizeUrl);
 
-            var code = Uri.UnescapeDataString(context.Request.QueryString["code"]);
+            //var http = new HttpListener();
+            //http.Prefixes.Add(REDIRECT_URI);
+            //http.Start();
 
-            var response = await client.AuthorizeCode(code, REDIRECT_URI);
-            return response.AccessToken;
+            //var context = await http.GetContextAsync();
+            //while (context.Request.Url.AbsolutePath != redirectUri.AbsolutePath)
+            //    context = await http.GetContextAsync();
+
+            //http.Stop();
+
+            //var code = Uri.UnescapeDataString(context.Request.QueryString["code"]);
+
+            //var response = await client.AuthorizeCode(code, REDIRECT_URI);
+            //return response.AccessToken;
         }
 
         public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null)
@@ -105,19 +127,22 @@ namespace Jaya.Provider.GoogleDrive.Services
 
         protected override async Task<AccountModelBase> AddAccountAsync()
         {
-            var token = await GetToken();
-            if (string.IsNullOrEmpty(token))
+            var credentials = await GetToken();
+            if (credentials == null)
                 return null;
 
-            var config = GetConfiguration<ConfigModel>();
-            var client = new DropboxClient(token);
-
-            var accountInfo = await client.Users.GetCurrentAccount();
-
-            var provider = new AccountModel(accountInfo.AccountId, accountInfo.Name.DisplayName)
+            Userinfoplus userInfo;
+            using (var oauthSerivce = new Oauth2Service(new BaseClientService.Initializer { HttpClientInitializer = credentials }))
             {
-                Email = accountInfo.Email,
-                Token = token
+                userInfo = await oauthSerivce.Userinfo.Get().ExecuteAsync();
+            }
+
+            var config = GetConfiguration<ConfigModel>();
+
+            var provider = new AccountModel(userInfo.Id, userInfo.Name)
+            {
+                Email = userInfo.Email,
+                Token = credentials.Token.AccessToken
             };
 
             config.Accounts.Add(provider);
