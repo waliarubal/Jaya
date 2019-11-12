@@ -23,7 +23,7 @@
 
     <TreeView
         BorderThickness="0"
-        Items="{Binding Node.Children}"
+        Items="{Binding Node.Children, Mode=OneWay}"
         SelectedItem="{Binding SelectedNode, Mode=OneWayToSource}"
         SelectionMode="Single">
         <TreeView.Styles>

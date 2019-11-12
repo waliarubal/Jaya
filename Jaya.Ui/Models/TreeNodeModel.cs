@@ -119,6 +119,15 @@ namespace Jaya.Ui.Models
 
         #endregion
 
+        public override bool Equals(object obj)
+        {
+            var compareWith = obj as TreeNodeModel;
+            if (compareWith == null)
+                return false;
+
+            return GetHashCode() == compareWith.GetHashCode();
+        }
+
         public void AddDummyChild()
         {
             if (IsHavingDummyChild)
