@@ -10,6 +10,7 @@ namespace Jaya.Shared.Base
     {
         MemoryCacheService _cache;
         ConfigurationService _config;
+        PlatformService _platform;
 
         public delegate void OnAccountAdded(AccountModelBase account);
         public event OnAccountAdded AccountAdded;
@@ -46,6 +47,17 @@ namespace Jaya.Shared.Base
             }
         }
 
+        PlatformService Platform
+        {
+            get
+            {
+                if (_platform == null)
+                    _platform = ServiceLocator.Instance.GetService<PlatformService>();
+
+                return _platform;
+            }
+        }
+
         public bool IsRootDrive
         {
             get;
@@ -77,6 +89,11 @@ namespace Jaya.Shared.Base
         }
 
         #endregion
+
+        protected void OpenBrowser(string url)
+        {
+            Platform.OpenBrowser(url);
+        }
 
         protected DirectoryModel GetFromCache(AccountModelBase account, string path)
         {

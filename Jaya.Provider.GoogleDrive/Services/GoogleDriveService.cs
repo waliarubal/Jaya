@@ -7,9 +7,7 @@ using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.Composition;
-using System.Diagnostics;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Jaya.Provider.GoogleDrive.Services
@@ -19,8 +17,8 @@ namespace Jaya.Provider.GoogleDrive.Services
     public class GoogleDriveService : ProviderServiceBase, IProviderService
     {
         const string REDIRECT_URI = "http://localhost:4321/DropboxAuth/";
-        const string APP_KEY = "wr1084dwe5oimdh";
-        const string APP_SECRET = "ipwwjur866rwk3o";
+        const string CLIENT_ID = "wr1084dwe5oimdh";
+        const string CLIENT_SECRET = "ipwwjur866rwk3o";
 
         /// <summary>
         /// Refer https://dotnetbox.readthedocs.io/en/latest/index.html for Dropbox SDK documentation.
@@ -34,30 +32,11 @@ namespace Jaya.Provider.GoogleDrive.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        void OpenBrowser(string url)
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                url = url.Replace("&", "^&"); // works on Windows and escape is needed for cmd.exe
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}"));
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                Process.Start("xdg-open", url); // works on Linux
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                Process.Start("open", url); // not tested
-            }
-            else
-                throw new NotImplementedException();
-        }
-
         async Task<string> GetToken()
         {
             var redirectUri = new Uri(REDIRECT_URI);
 
-            var client = new DropboxClient(APP_KEY, APP_SECRET);
+            var client = new DropboxClient(CLIENT_ID, CLIENT_SECRET);
             var authorizeUrl = client.GetAuthorizeUrl(ResponseType.Code, REDIRECT_URI);
             OpenBrowser(authorizeUrl);
 

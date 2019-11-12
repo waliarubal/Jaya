@@ -7,9 +7,7 @@ using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.Composition;
-using System.Diagnostics;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Jaya.Provider.Dropbox.Services
@@ -32,25 +30,6 @@ namespace Jaya.Provider.Dropbox.Services
             Description = "View your Dropbox accounts, inspect their contents and play with directories & files stored within them.";
             IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
-        }
-
-        void OpenBrowser(string url)
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                url = url.Replace("&", "^&"); // works on Windows and escape is needed for cmd.exe
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}"));
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                Process.Start("xdg-open", url); // works on Linux
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                Process.Start("open", url); // not tested
-            }
-            else
-                throw new NotImplementedException();
         }
 
         async Task<string> GetToken()
