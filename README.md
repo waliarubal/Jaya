@@ -6,18 +6,20 @@
 
 ## Jaya - Cross Plat
 
-**Jaya - Cross Plat** is a small .NET Core based cross platform plug-able file explorer application which runs on Windows, Mac and Linux. It currently allows browsing of file system and Dropbox accounts but will include integrations of additional cloud storage services like Google Drive, OneDrive, Box, etc. in near future.
+**Jaya - Cross Plat** is a small .NET Core based cross platform plug-able file explorer application which runs on Windows, Mac and Linux. It currently allows browsing of file system but will include integrations of additional cloud storage services in near future.
 
-Support for below mentioned cloud storage services are complete (or planned) as of now. If you would like addition of more cloud storage services, please raise request [here](https://github.com/waliarubal/Jaya/issues).
+Support for below mentioned storage services are complete (or planned) as of now. If you would like addition of more storage services, please raise request [here](https://github.com/waliarubal/Jaya/issues).
+- [x] File System
 - [x] Dropbox
 - [ ] Google Drive
+- [ ] Apple iCloud Drive
 - [ ] Microsoft OneDrive
 - [ ] Box
 - [ ] IDrive
 - [ ] SugarSync
-- [ ] Apple iCloud Drive
 - [ ] pCloud
 - [ ] Media Fire
+- [ ] FTP/SFTP
 
 This project is in beta at the moment so it's not suitable for general use.
 
@@ -41,13 +43,17 @@ For information on the release schedule, you can check the [milestones](https://
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-1. Fork the Project.
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the Branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
+If you are a .NET developer then you can develop plugins to support additional storage services or squash any existing bugs. You may also add new features or work on the ones which are not yet implemented.
 
-Buy me a coffee or donate funds to buy a Mac for development [here](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2).
+1. Fork the Project.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a pull request.
+
+If you are a designer, you can create new icons and images for the UI by following above mentioned steps. Suggestions and improvements in UX are also welcome.
+
+None of the above, you can still buy me a coffee or donate funds to buy a Mac for development [here](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2).
 
 ## License
 
@@ -56,4 +62,4 @@ Distributed under the MIT License. See [here](https://raw.githubusercontent.com/
 ## Contact
 
 Rubal Walia - walia.rubal@gmail.com  
-Project Link: [https://github.com/waliarubal/Jaya](https://github.com/waliarubal/Jaya)
+Project Link - [https://github.com/waliarubal/Jaya](https://github.com/waliarubal/Jaya)
