@@ -13,10 +13,6 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.Styles>
-            <Style Selector="Grid &gt; Button">
-                <Setter Property="Margin" Value="8,2,2,2" />
-                <Setter Property="MinWidth" Value="80" />
-            </Style>
             <Style Selector="Grid &gt; TextBlock">
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Margin" Value="4 2" />
@@ -25,49 +21,70 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="120" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="2" Text="Manage your registered Google Drive accounts." />
-        <ListBox
+
+        <TextBlock Text="Number of records to fetch in each request:" />
+        <TextBox Grid.Column="1" />
+
+        <TextBlock
             Grid.Row="1"
-            Grid.RowSpan="3"
-            Items="{Binding Accounts, Mode=OneWay}"
-            SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
-            SelectionMode="Single">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image
-                            Width="16"
-                            Height="16"
-                            Margin="4,0"
-                            Source="/Assets/Images/Account-32.png" />
-                        <TextBlock Text="{Binding Name, Mode=OneWay}" />
-                        <TextBlock Text=" (" />
-                        <TextBlock Text="{Binding Email, Mode=OneWay}" />
-                        <TextBlock Text=")" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button
-            Grid.Row="1"
-            Grid.Column="1"
-            Command="{Binding AddAccountCommand, Mode=OneTime}">
-            Add
-        </Button>
-        <Button
-            Grid.Row="2"
-            Grid.Column="1"
-            Command="{Binding RemoveAccountCommand, Mode=OneTime}"
-            CommandParameter="{Binding SelectedAccount, Mode=OneWay}"
-            IsEnabled="{Binding !!SelectedAccount, Mode=OneWay}">
-            Remove
-        </Button>
+            Grid.ColumnSpan="2"
+            Text="Manage your registered Google Drive accounts." />
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.Styles>
+                <Style Selector="Grid &gt; Button">
+                    <Setter Property="Margin" Value="8,2,2,2" />
+                    <Setter Property="MinWidth" Value="80" />
+                </Style>
+            </Grid.Styles>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ListBox
+                Grid.RowSpan="3"
+                Items="{Binding Accounts, Mode=OneWay}"
+                SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
+                SelectionMode="Single">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image
+                                Width="16"
+                                Height="16"
+                                Margin="4,0"
+                                Source="/Assets/Images/Account-32.png" />
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" />
+                            <TextBlock Text=" (" />
+                            <TextBlock Text="{Binding Email, Mode=OneWay}" />
+                            <TextBlock Text=")" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Grid.Column="1" Command="{Binding AddAccountCommand, Mode=OneTime}">
+                Add
+            </Button>
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Command="{Binding RemoveAccountCommand, Mode=OneTime}"
+                CommandParameter="{Binding SelectedAccount, Mode=OneWay}"
+                IsEnabled="{Binding !!SelectedAccount, Mode=OneWay}">
+                Remove
+            </Button>
+        </Grid>
+
+
     </Grid>
 </UserControl>

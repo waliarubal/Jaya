@@ -19,11 +19,21 @@ namespace Jaya.Provider.GoogleDrive.Models
         }
 
         [JsonProperty]
+        public int PageSize
+        {
+            get => Get<int>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
         public IList<AccountModel> Accounts { get; private set; }
 
         protected override ConfigModelBase Empty()
         {
-            return new ConfigModel(null);
+            return new ConfigModel(null)
+            {
+                PageSize = 1000
+            };
         }
     }
 }

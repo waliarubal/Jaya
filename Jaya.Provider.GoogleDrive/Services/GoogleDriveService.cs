@@ -29,6 +29,8 @@ namespace Jaya.Provider.GoogleDrive.Services
         const string MIME_TYPE_FILE = "application/vnd.google-apps.file";
         const string MIME_TYPE_DIRECTORY = "application/vnd.google-apps.folder";
 
+        ConfigModel _config;
+
         /// <summary>
         /// Refer pages https://www.daimto.com/google-drive-authentication-c/ and https://www.daimto.com/google-drive-api-c/ for examples.
         /// </summary>
@@ -39,6 +41,17 @@ namespace Jaya.Provider.GoogleDrive.Services
             Description = "View your Google Drive accounts, inspect their contents and play with directories & files stored within them.";
             IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
+        }
+
+        ConfigModel Config
+        {
+            get
+            {
+                if (_config == null)
+                    _config = GetConfiguration<ConfigModel>();
+
+                return _config;
+            }
         }
 
         BaseClientService.Initializer GetServiceInitializer(UserCredential credentials)
@@ -54,6 +67,7 @@ namespace Jaya.Provider.GoogleDrive.Services
             var scopes = new string[]
             {
                 DriveService.Scope.Drive,
+                DriveService.Scope.DriveMetadataReadonly,
                 Oauth2Service.Scope.UserinfoProfile,
                 Oauth2Service.Scope.UserinfoEmail
             };
@@ -96,28 +110,45 @@ namespace Jaya.Provider.GoogleDrive.Services
             FileList entries;
             using (var client = new DriveService(GetServiceInitializer(credentials)))
             {
-                entries = await client.Files.List().ExecuteAsync();
-            }
-            foreach (var entry in entries.Files)
-            {
-                if (entry.MimeType.Equals(MIME_TYPE_DIRECTORY))
-                {
-                    var directory = new DirectoryModel();
-                    directory.Id = entry.Id;
-                    directory.Name = entry.Name;
-                    directory.Path = entry.Name;
-                    model.Directories.Add(directory);
+                var request = client.Files.List();
+                request.Q = "trashed = false";
+                request.PageSize = 1000;
+                request.Fields = "nextPageToken, files(id, name, mimeType, parents, createdTime, modifiedTime, fileExtension, size)";
 
-                }
-                else if (entry.MimeType.Equals(MIME_TYPE_FILE))
+                entries = await request.ExecuteAsync();
+
+                while(entries.Files != null)
                 {
-                    var file = new FileModel();
-                    file.Id = entry.Id;
-                    file.Name = entry.Name;
-                    file.Path = entry.Name;
-                    model.Files.Add(file);
+                    foreach (var entry in entries.Files)
+                    {
+                        var parents = entry.Parents;
+                        if (entry.MimeType.Equals(MIME_TYPE_DIRECTORY))
+                        {
+                            var directory = new DirectoryModel();
+                            directory.Id = entry.Id;
+                            directory.Name = entry.Name;
+                            directory.Path = entry.Name;
+                            model.Directories.Add(directory);
+
+                        }
+                        else
+                        {
+                            var file = new FileModel();
+                            file.Id = entry.Id;
+                            file.Name = entry.Name;
+                            file.Path = entry.Name;
+                            model.Files.Add(file);
+                        }
+                    }
+
+                    if (entries.NextPageToken == null)
+                        break;
+
+                    request.PageToken = entries.NextPageToken;
+                    entries = await request.ExecuteAsync();
                 }
             }
+           
 
             AddToCache(account, model);
             return model;
