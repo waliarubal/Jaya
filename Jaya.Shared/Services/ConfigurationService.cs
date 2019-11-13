@@ -14,13 +14,16 @@ namespace Jaya.Shared.Services
 
         public ConfigurationService()
         {
-            _configurationFilePathFormat = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Jaya", "config_{0}.json");
+            ConfigurationDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Jaya");
+            _configurationFilePathFormat = Path.Combine(ConfigurationDirectory, "config_{0}.json");
         }
 
         ~ConfigurationService()
         {
 
         }
+
+        public string ConfigurationDirectory { get; }
 
         public T Get<T>(string key = null) where T : ConfigModelBase
         {

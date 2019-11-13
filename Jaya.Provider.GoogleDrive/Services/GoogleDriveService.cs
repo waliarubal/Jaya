@@ -1,9 +1,10 @@
-﻿using DotNetBox;
-using Google.Apis.Auth.OAuth2;
+﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
 using Google.Apis.Oauth2.v2;
 using Google.Apis.Oauth2.v2.Data;
 using Google.Apis.Services;
+using Google.Apis.Util;
 using Google.Apis.Util.Store;
 using Jaya.Provider.GoogleDrive.Models;
 using Jaya.Provider.GoogleDrive.Views;
@@ -13,7 +14,6 @@ using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.Composition;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,9 +23,11 @@ namespace Jaya.Provider.GoogleDrive.Services
     [Shared]
     public class GoogleDriveService : ProviderServiceBase, IProviderService
     {
-        const string REDIRECT_URI = "http://localhost:4321/DropboxAuth/";
         const string CLIENT_ID = "538742722606-equtrav33c2tqaq2io7h19mkf4ch6jbp.apps.googleusercontent.com";
         const string CLIENT_SECRET = "UGprjYfFkb--RHnGbgAnm_Aj";
+
+        const string MIME_TYPE_FILE = "application/vnd.google-apps.file";
+        const string MIME_TYPE_DIRECTORY = "application/vnd.google-apps.folder";
 
         /// <summary>
         /// Refer pages https://www.daimto.com/google-drive-authentication-c/ and https://www.daimto.com/google-drive-api-c/ for examples.
@@ -39,43 +41,38 @@ namespace Jaya.Provider.GoogleDrive.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        async Task<UserCredential> GetToken()
+        BaseClientService.Initializer GetServiceInitializer(UserCredential credentials)
+        {
+            return new BaseClientService.Initializer
+            {
+                HttpClientInitializer = credentials
+            };
+        }
+
+        async Task<UserCredential> GetCredentials()
         {
             var scopes = new string[]
             {
-                DriveService.Scope.Drive
+                DriveService.Scope.Drive,
+                Oauth2Service.Scope.UserinfoProfile,
+                Oauth2Service.Scope.UserinfoEmail
             };
             var secret = new ClientSecrets
             {
                 ClientId = CLIENT_ID,
                 ClientSecret = CLIENT_SECRET
             };
+            var dataStore = new FileDataStore(ConfigurationDirectory, true);
 
-            var configDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Jaya");
-            var dataStore = new FileDataStore(configDirectory, true);
+            var credentials = await GoogleWebAuthorizationBroker.AuthorizeAsync(secret, scopes, Environment.UserName, CancellationToken.None, dataStore);
+            if (credentials.Token.IsExpired(SystemClock.Default))
+            {
+                var isRefreshed = await credentials.RefreshTokenAsync(CancellationToken.None);
+                if (!isRefreshed)
+                    return null;
+            }
 
-            return await GoogleWebAuthorizationBroker.AuthorizeAsync(secret, scopes, Environment.UserName, CancellationToken.None, dataStore);
-
-            //var redirectUri = new Uri(REDIRECT_URI);
-
-            //var client = new DropboxClient(CLIENT_ID, CLIENT_SECRET);
-            //var authorizeUrl = client.GetAuthorizeUrl(ResponseType.Code, REDIRECT_URI);
-            //OpenBrowser(authorizeUrl);
-
-            //var http = new HttpListener();
-            //http.Prefixes.Add(REDIRECT_URI);
-            //http.Start();
-
-            //var context = await http.GetContextAsync();
-            //while (context.Request.Url.AbsolutePath != redirectUri.AbsolutePath)
-            //    context = await http.GetContextAsync();
-
-            //http.Stop();
-
-            //var code = Uri.UnescapeDataString(context.Request.QueryString["code"]);
-
-            //var response = await client.AuthorizeCode(code, REDIRECT_URI);
-            //return response.AccessToken;
+            return credentials;
         }
 
         public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null)
@@ -94,29 +91,30 @@ namespace Jaya.Provider.GoogleDrive.Services
             model.Directories = new List<DirectoryModel>();
             model.Files = new List<FileModel>();
 
-            var accountDetails = account as AccountModel;
+            var credentials = await GetCredentials();
 
-            var client = new DropboxClient(accountDetails.Token);
-
-            var entries = await client.Files.ListFolder(path);
-            foreach (var entry in entries.Entries)
+            FileList entries;
+            using (var client = new DriveService(GetServiceInitializer(credentials)))
             {
-                if (entry.IsDeleted)
-                    continue;
-
-                if (entry.IsFolder)
+                entries = await client.Files.List().ExecuteAsync();
+            }
+            foreach (var entry in entries.Files)
+            {
+                if (entry.MimeType.Equals(MIME_TYPE_DIRECTORY))
                 {
                     var directory = new DirectoryModel();
+                    directory.Id = entry.Id;
                     directory.Name = entry.Name;
-                    directory.Path = entry.Path;
+                    directory.Path = entry.Name;
                     model.Directories.Add(directory);
 
                 }
-                else if (entry.IsFile)
+                else if (entry.MimeType.Equals(MIME_TYPE_FILE))
                 {
                     var file = new FileModel();
+                    file.Id = entry.Id;
                     file.Name = entry.Name;
-                    file.Path = entry.Path;
+                    file.Path = entry.Name;
                     model.Files.Add(file);
                 }
             }
@@ -127,22 +125,21 @@ namespace Jaya.Provider.GoogleDrive.Services
 
         protected override async Task<AccountModelBase> AddAccountAsync()
         {
-            var credentials = await GetToken();
+            var credentials = await GetCredentials();
             if (credentials == null)
                 return null;
 
             Userinfoplus userInfo;
-            using (var oauthSerivce = new Oauth2Service(new BaseClientService.Initializer { HttpClientInitializer = credentials }))
+            using (var authService = new Oauth2Service(GetServiceInitializer(credentials)))
             {
-                userInfo = await oauthSerivce.Userinfo.Get().ExecuteAsync();
+                userInfo = await authService.Userinfo.Get().ExecuteAsync();
             }
 
             var config = GetConfiguration<ConfigModel>();
 
             var provider = new AccountModel(userInfo.Id, userInfo.Name)
             {
-                Email = userInfo.Email,
-                Token = credentials.Token.AccessToken
+                Email = userInfo.Email
             };
 
             config.Accounts.Add(provider);

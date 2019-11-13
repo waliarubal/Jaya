@@ -16,12 +16,5 @@ namespace Jaya.Provider.GoogleDrive.Models
             get => Get<string>();
             set => Set(value);
         }
-
-        [JsonProperty]
-        public string Token
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
     }
 }

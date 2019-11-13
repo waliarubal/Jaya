@@ -36,6 +36,8 @@ namespace Jaya.Shared.Base
             }
         }
 
+        protected string ConfigurationDirectory => ConfigurationService.ConfigurationDirectory;
+
         protected ConfigurationService ConfigurationService
         {
             get
