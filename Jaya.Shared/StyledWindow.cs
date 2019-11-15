@@ -2,22 +2,27 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Styling;
 using System;
 using System.IO;
+using Shapes = Avalonia.Controls.Shapes;
 
 namespace Jaya.Shared
 {
     public class StyledWindow : Window, IStyleable
     {
         const string DEFAULT_ICON = "avares://Jaya.Shared/Assets/Logo.ico";
+        const string MAXIMIZE_PATH_DATA = "M28,2h-6c-1.104,0-2,0.896-2,2s0.896,2,2,2h1.2l-4.6,4.601C18.28,10.921,18,11.344,18,12c0,1.094,0.859,2,2,2  c0.641,0,1.049-0.248,1.4-0.6L26,8.8V10c0,1.104,0.896,2,2,2s2-0.896,2-2V4C30,2.896,29.104,2,28,2z M12,18  c-0.641,0-1.049,0.248-1.4,0.6L6,23.2V22c0-1.104-0.896-2-2-2s-2,0.896-2,2v6c0,1.104,0.896,2,2,2h6c1.104,0,2-0.896,2-2  s-0.896-2-2-2H8.8l4.6-4.601C13.72,21.079,14,20.656,14,20C14,18.906,13.141,18,12,18z";
+        const string RESTORE_PATH_DATA = "M70,0H29.9C24.4,0,20,4.4,20,9.9V50c0,5.5,4.5,10,10,10h40c5.5,0,10-4.5,10-10V10C80,4.5,75.5,0,70,0z M70,50H30V10h40V50z    M10,40H0v30c0,5.5,4.5,10,10,10h30V70H10V40z";
 
         public static StyledProperty<object> HeaderContentProperty;
         public static StyledProperty<bool> IsModalProperty;
         Button _closeButton, _minimizeButton, _maximizeButton;
         Image _icon;
+        Shapes.Path _maximizeIcon;
         bool _isTemplateApplied;
 
         static StyledWindow()
@@ -54,6 +59,8 @@ namespace Jaya.Shared
             _maximizeButton.IsVisible = isNotModal;
             _maximizeButton.Click += delegate { WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; };
 
+            _maximizeIcon = GetControl<Shapes.Path>(e, "PART_MaximizeIcon");
+
             _icon = GetControl<Image>(e, "PART_Icon");
             _icon.Source = GetIcon(Icon);
 
@@ -67,8 +74,25 @@ namespace Jaya.Shared
             if (!_isTemplateApplied)
                 return;
 
-            if (nameof(Icon).Equals(e.Property.Name, StringComparison.InvariantCulture))
-                _icon.Source = GetIcon(Icon);
+            switch(e.Property.Name)
+            {
+                case nameof(Icon):
+                    _icon.Source = GetIcon(Icon);
+                    break;
+
+                case nameof(WindowState):
+                    if (e.NewValue.Equals(WindowState.Maximized))
+                    {
+                        _maximizeIcon.Data = PathGeometry.Parse(RESTORE_PATH_DATA);
+                        _maximizeButton.SetValue(ToolTip.TipProperty, "Restore");
+                    }
+                    else
+                    {
+                        _maximizeIcon.Data = PathGeometry.Parse(MAXIMIZE_PATH_DATA);
+                        _maximizeButton.SetValue(ToolTip.TipProperty, "Maximize");
+                    }
+                    break;
+            }
         }
 
         public object HeaderContent
