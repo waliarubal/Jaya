@@ -98,6 +98,12 @@
                                 <Setter Property="Background" Value="Red" />
                                 <Setter Property="BorderBrush" Value="Red" />
                             </Style>
+                            <Style Selector="local|StyledWindow /template/ Grid&gt;StackPanel&gt;Button#PART_Maximize">
+                                <Setter Property="ToolTip.Tip" Value="Restore" />
+                            </Style>
+                            <Style Selector="Button#PART_Maximize &gt; Path#PART_MaximizeIcon">
+                                <Setter Property="Data" Value="M70,0H29.9C24.4,0,20,4.4,20,9.9V50c0,5.5,4.5,10,10,10h40c5.5,0,10-4.5,10-10V10C80,4.5,75.5,0,70,0z M70,50H30V10h40V50z M10,40H0v30c0,5.5,4.5,10,10,10h30V70H10V40z" />
+                            </Style>
                         </StackPanel.Styles>
                         <Button Name="PART_Minimize" ToolTip.Tip="Minimize">
                             <Path Data="M1600 736v192q0 40-28 68t-68 28h-1216q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h1216q40 0 68 28t28 68z" Stretch="Uniform">

@@ -8,7 +8,6 @@ using Avalonia.Platform;
 using Avalonia.Styling;
 using System;
 using System.IO;
-using Shapes = Avalonia.Controls.Shapes;
 
 namespace Jaya.Shared
 {
@@ -22,13 +21,14 @@ namespace Jaya.Shared
         public static StyledProperty<bool> IsModalProperty;
         Button _closeButton, _minimizeButton, _maximizeButton;
         Image _icon;
-        Shapes.Path _maximizeIcon;
+        //Avalonia.Controls.Shapes.Path _maximizeIcon;
         bool _isTemplateApplied;
 
         static StyledWindow()
         {
             HeaderContentProperty = AvaloniaProperty.Register<StyledWindow, object>(nameof(HeaderContent));
             IsModalProperty = AvaloniaProperty.Register<StyledWindow, bool>(nameof(HeaderContent));
+            PseudoClass<StyledWindow, WindowState>(WindowStateProperty, (WindowState state) => state == WindowState.Maximized, "maximized");
         }
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
@@ -59,7 +59,7 @@ namespace Jaya.Shared
             _maximizeButton.IsVisible = isNotModal;
             _maximizeButton.Click += delegate { WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; };
 
-            _maximizeIcon = GetControl<Shapes.Path>(e, "PART_MaximizeIcon");
+            //_maximizeIcon = GetControl<Avalonia.Controls.Shapes.Path>(e, "PART_MaximizeIcon");
 
             _icon = GetControl<Image>(e, "PART_Icon");
             _icon.Source = GetIcon(Icon);
@@ -80,18 +80,18 @@ namespace Jaya.Shared
                     _icon.Source = GetIcon(Icon);
                     break;
 
-                case nameof(WindowState):
-                    if (e.NewValue.Equals(WindowState.Maximized))
-                    {
-                        _maximizeIcon.Data = PathGeometry.Parse(RESTORE_PATH_DATA);
-                        _maximizeButton.SetValue(ToolTip.TipProperty, "Restore");
-                    }
-                    else
-                    {
-                        _maximizeIcon.Data = PathGeometry.Parse(MAXIMIZE_PATH_DATA);
-                        _maximizeButton.SetValue(ToolTip.TipProperty, "Maximize");
-                    }
-                    break;
+                //case nameof(WindowState):
+                //    if (e.NewValue.Equals(WindowState.Maximized))
+                //    {
+                //        _maximizeIcon.Data = PathGeometry.Parse(RESTORE_PATH_DATA);
+                //        _maximizeButton.SetValue(ToolTip.TipProperty, "Restore");
+                //    }
+                //    else
+                //    {
+                //        _maximizeIcon.Data = PathGeometry.Parse(MAXIMIZE_PATH_DATA);
+                //        _maximizeButton.SetValue(ToolTip.TipProperty, "Maximize");
+                //    }
+                //    break;
             }
         }
 
