@@ -24,7 +24,6 @@ namespace Jaya.Shared
         {
             HeaderContentProperty = AvaloniaProperty.Register<StyledWindow, object>(nameof(HeaderContent));
             IsModalProperty = AvaloniaProperty.Register<StyledWindow, bool>(nameof(HeaderContent));
-            PseudoClass<StyledWindow, WindowState>(WindowStateProperty, (WindowState state) => state == WindowState.Maximized, "maximized");
         }
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
@@ -73,19 +72,6 @@ namespace Jaya.Shared
                 case nameof(Icon):
                     _icon.Source = GetIcon(Icon);
                     break;
-
-                //case nameof(WindowState):
-                //    if (e.NewValue.Equals(WindowState.Maximized))
-                //    {
-                //        _maximizeIcon.Data = PathGeometry.Parse(RESTORE_PATH_DATA);
-                //        _maximizeButton.SetValue(ToolTip.TipProperty, "Restore");
-                //    }
-                //    else
-                //    {
-                //        _maximizeIcon.Data = PathGeometry.Parse(MAXIMIZE_PATH_DATA);
-                //        _maximizeButton.SetValue(ToolTip.TipProperty, "Maximize");
-                //    }
-                //    break;
             }
         }
 
