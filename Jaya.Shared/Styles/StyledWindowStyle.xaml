@@ -98,7 +98,7 @@
                                 <Setter Property="Background" Value="Red" />
                                 <Setter Property="BorderBrush" Value="Red" />
                             </Style>
-                            <Style Selector="local|StyledWindow /template/ Grid &gt; StackPanel &gt; Button#PART_Maximize">
+                            <Style Selector="Button#PART_Maximize">
                                 <Setter Property="ToolTip.Tip" Value="Maximize" />
                             </Style>
                             <Style Selector="local|StyledWindow[WindowState=Maximized] /template/ Grid &gt; StackPanel &gt; Button#PART_Maximize">
