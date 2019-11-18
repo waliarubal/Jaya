@@ -14,6 +14,7 @@ using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.Composition;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -104,11 +105,19 @@ namespace Jaya.Provider.GoogleDrive.Services
 
             var credentials = await GetCredentials();
 
+            var parent = directory == null || directory.Id == null ? "root" : directory.Id;
+
+            var query = new StringBuilder();
+            if (directory.Id == null)
+                query.Append(" and 'root' in parents");
+            else
+                query.Append(" and '' in parents");
+
             FileList entries;
             using (var client = new DriveService(GetServiceInitializer(credentials)))
             {
                 var request = client.Files.List();
-                request.Q = "trashed = false";
+                request.Q = string.Format("trashed = false and '{0}' in parents", parent);
                 request.PageSize = 1000;
                 request.Fields = "nextPageToken, files(id, name, mimeType, parents, createdTime, modifiedTime, fileExtension, size)";
 
