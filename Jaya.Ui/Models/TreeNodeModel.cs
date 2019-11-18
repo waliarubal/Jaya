@@ -128,6 +128,11 @@ namespace Jaya.Ui.Models
             return GetHashCode() == compareWith.GetHashCode();
         }
 
+        public override int GetHashCode()
+        {
+            return new { Service, Account, FileSystemObject }.GetHashCode();
+        }
+
         public void AddDummyChild()
         {
             if (IsHavingDummyChild)
