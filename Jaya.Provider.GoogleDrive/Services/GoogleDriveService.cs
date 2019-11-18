@@ -128,6 +128,8 @@ namespace Jaya.Provider.GoogleDrive.Services
                             directory.Id = entry.Id;
                             directory.Name = entry.Name;
                             directory.Path = entry.Name;
+                            directory.Created = entry.CreatedTime;
+                            directory.Modified = entry.ModifiedTime;
                             model.Directories.Add(directory);
 
                         }
@@ -137,6 +139,8 @@ namespace Jaya.Provider.GoogleDrive.Services
                             file.Id = entry.Id;
                             file.Name = entry.Name;
                             file.Path = entry.Name;
+                            file.Created = entry.CreatedTime;
+                            file.Modified = entry.ModifiedTime;
                             model.Files.Add(file);
                         }
                     }
