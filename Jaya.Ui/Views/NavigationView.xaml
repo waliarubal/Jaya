@@ -31,7 +31,7 @@
                 <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=OneWayToSource}" />
                 <Setter Property="IsVisible" Value="{Binding FileSystemObject.IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}, FallbackValue=True}" />
             </Style>
-            <Style Selector="Image.Spinner">
+            <Style Selector="Image[IsVisible=True].Spinner">
                 <Style.Animations>
                     <Animation RepeatCount="Loop" Duration="0:0:1.5">
                         <KeyFrame Cue="100%">
