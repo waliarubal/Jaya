@@ -35,10 +35,10 @@ namespace Jaya.Shared.Base
             if (string.IsNullOrEmpty(propertyName))
                 return false;
 
-            //if (value == null)
-            //    return false;
-            //else if (value != null && _variables.ContainsKey(propertyName) && (object)value == _variables[propertyName])
-            //    return false;
+            if (value == null)
+                return false;
+            else if (value != null && _variables.ContainsKey(propertyName) && (object)value == _variables[propertyName])
+                return false;
 
             if (_variables.ContainsKey(propertyName))
                 _variables[propertyName] = value;

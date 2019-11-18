@@ -12,6 +12,7 @@ namespace Jaya.Ui.ViewModels
     {
         readonly SharedService _shared;
         ICommand _populateCommand;
+        TreeNodeModel _selectedNode;
 
         public NavigationViewModel()
         {
@@ -42,10 +43,10 @@ namespace Jaya.Ui.ViewModels
 
         public TreeNodeModel SelectedNode
         {
-            get => Get<TreeNodeModel>();
+            get => _selectedNode;
             set
             {
-                Set(value);
+                _selectedNode = value;
 
                 if (value == null)
                     return;

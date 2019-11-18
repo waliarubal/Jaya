@@ -75,7 +75,10 @@ namespace Jaya.Ui.Converters
                     return null;
 
                 if (_cache.TryGetValue(fallbackUri, out image))
+                {
+                    _cache.Set(uri, image);
                     return image;
+                }
 
                 image = new Bitmap(assets.Open(fallbackUri));
                 _cache.Set(fallbackUri, image);
