@@ -7,17 +7,11 @@ namespace Jaya.Shared.Services
     [Shared]
     public sealed class CommandService: IService
     {
-        EventAggregator _eventAggregator;
-
-        public EventAggregator EventAggregator
+        public CommandService()
         {
-            get
-            {
-                if (_eventAggregator == null) { }
-                    _eventAggregator = new EventAggregator();
-
-                return _eventAggregator;
-            }
+            EventAggregator = new EventAggregator();
         }
+
+        public EventAggregator EventAggregator { get; }
     }
 }
