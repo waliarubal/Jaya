@@ -138,13 +138,15 @@ namespace Jaya.Provider.GoogleDrive.Services
                             dir.Created = entry.CreatedTime;
                             dir.Modified = entry.ModifiedTime;
                             model.Directories.Add(dir);
-
                         }
                         else
                         {
+                            var nameParts = SplitName(entry.Name);
+
                             var file = new FileModel();
                             file.Id = entry.Id;
-                            file.Name = entry.Name;
+                            file.Name = nameParts.Name;
+                            file.Extension = nameParts.Extension;
                             file.Path = entry.Name;
                             file.Size = entry.Size;
                             file.Created = entry.CreatedTime;

@@ -91,8 +91,11 @@ namespace Jaya.Provider.Dropbox.Services
                 }
                 else if (entry.IsFile)
                 {
+                    var nameParts = SplitName(entry.Name);
+
                     var file = new FileModel();
-                    file.Name = entry.Name;
+                    file.Name = nameParts.Name;
+                    file.Extension = nameParts.Extension;
                     file.Path = entry.Path;
                     model.Files.Add(file);
                 }

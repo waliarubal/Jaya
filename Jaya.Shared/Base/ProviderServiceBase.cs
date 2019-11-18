@@ -2,6 +2,7 @@
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Jaya.Shared.Base
@@ -91,6 +92,20 @@ namespace Jaya.Shared.Base
         }
 
         #endregion
+
+        protected (string Name, string Extension) SplitName(string fileName)
+        {
+            var nameParts = fileName.Split('.');
+            if (nameParts.Length == 1)
+                return (nameParts[0], null);
+
+            var extensionBuilder = new StringBuilder();
+            for (var index = 1; index < nameParts.Length - 1; index++)
+                extensionBuilder.AppendFormat("{0}.", nameParts[index].ToLower());
+            extensionBuilder.Append(nameParts[nameParts.Length - 1]);
+
+            return (nameParts[0], extensionBuilder.ToString());
+        }
 
         protected void OpenBrowser(string url)
         {
