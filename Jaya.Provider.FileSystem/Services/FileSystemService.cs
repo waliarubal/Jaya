@@ -25,9 +25,9 @@ namespace Jaya.Provider.FileSystem.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null)
         {
-            var model = GetFromCache(account, path);
+            var model = GetFromCache(account, directory);
             if (model != null)
                 return model;
 
@@ -35,7 +35,7 @@ namespace Jaya.Provider.FileSystem.Services
             {
                 model = new DirectoryModel();
 
-                if (string.IsNullOrEmpty(path))
+                if (string.IsNullOrEmpty(directory.Path))
                 {
                     model.Directories = new List<DirectoryModel>();
                     foreach (var driveInfo in DriveInfo.GetDrives())
@@ -54,7 +54,7 @@ namespace Jaya.Provider.FileSystem.Services
                     return model;
                 }
 
-                var info = new DirectoryInfo(path);
+                DirectoryInfo info = new DirectoryInfo(directory.Path);
                 model.Name = info.Name;
                 model.Path = info.FullName;
                 model.Created = info.CreationTime;
@@ -91,21 +91,20 @@ namespace Jaya.Provider.FileSystem.Services
 
                 }
 
-
                 model.Directories = new List<DirectoryModel>();
                 try
                 {
                     foreach (var directoryInfo in info.GetDirectories())
                     {
-                        var directory = new DirectoryModel();
-                        directory.Name = directoryInfo.Name;
-                        directory.Path = directoryInfo.FullName;
-                        directory.Created = directoryInfo.CreationTime;
-                        directory.Modified = directoryInfo.LastWriteTime;
-                        directory.Accessed = directoryInfo.LastAccessTime;
-                        directory.IsHidden = directoryInfo.Attributes.HasFlag(FileAttributes.Hidden);
-                        directory.IsSystem = directoryInfo.Attributes.HasFlag(FileAttributes.System);
-                        model.Directories.Add(directory);
+                        var dir = new DirectoryModel();
+                        dir.Name = directoryInfo.Name;
+                        dir.Path = directoryInfo.FullName;
+                        dir.Created = directoryInfo.CreationTime;
+                        dir.Modified = directoryInfo.LastWriteTime;
+                        dir.Accessed = directoryInfo.LastAccessTime;
+                        dir.IsHidden = directoryInfo.Attributes.HasFlag(FileAttributes.Hidden);
+                        dir.IsSystem = directoryInfo.Attributes.HasFlag(FileAttributes.System);
+                        model.Directories.Add(dir);
                     }
                 }
                 catch (UnauthorizedAccessException)

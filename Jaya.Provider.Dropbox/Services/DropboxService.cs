@@ -56,25 +56,24 @@ namespace Jaya.Provider.Dropbox.Services
             return response.AccessToken;
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null)
         {
-            if (path == null)
-                path = string.Empty;
-
-            var model = GetFromCache(account, path);
+            var model = GetFromCache(account, directory);
             if (model != null)
                 return model;
             else
                 model = new DirectoryModel();
 
-            model.Name = path;
-            model.Path = path;
+            model.Name = directory.Name;
+            model.Path = directory.Path;
             model.Directories = new List<DirectoryModel>();
             model.Files = new List<FileModel>();
 
             var accountDetails = account as AccountModel;
 
             var client = new DropboxClient(accountDetails.Token);
+
+            var path = directory == null || directory.Path == null ? string.Empty : directory.Path;
 
             var entries = await client.Files.ListFolder(path);
             foreach (var entry in entries.Entries)
@@ -84,10 +83,10 @@ namespace Jaya.Provider.Dropbox.Services
 
                 if (entry.IsFolder)
                 {
-                    var directory = new DirectoryModel();
-                    directory.Name = entry.Name;
-                    directory.Path = entry.Path;
-                    model.Directories.Add(directory);
+                    var dir = new DirectoryModel();
+                    dir.Name = entry.Name;
+                    dir.Path = entry.Path;
+                    model.Directories.Add(dir);
 
                 }
                 else if (entry.IsFile)

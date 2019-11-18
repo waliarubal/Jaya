@@ -89,19 +89,16 @@ namespace Jaya.Provider.GoogleDrive.Services
             return credentials;
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null)
         {
-            if (path == null)
-                path = string.Empty;
-
-            var model = GetFromCache(account, path);
+            var model = GetFromCache(account, directory);
             if (model != null)
                 return model;
             else
                 model = new DirectoryModel();
 
-            model.Name = path;
-            model.Path = path;
+            model.Name = directory.Name;
+            model.Path = directory.Path;
             model.Directories = new List<DirectoryModel>();
             model.Files = new List<FileModel>();
 
@@ -124,13 +121,13 @@ namespace Jaya.Provider.GoogleDrive.Services
                         var parents = entry.Parents;
                         if (entry.MimeType.Equals(MIME_TYPE_DIRECTORY))
                         {
-                            var directory = new DirectoryModel();
-                            directory.Id = entry.Id;
-                            directory.Name = entry.Name;
-                            directory.Path = entry.Name;
-                            directory.Created = entry.CreatedTime;
-                            directory.Modified = entry.ModifiedTime;
-                            model.Directories.Add(directory);
+                            var dir = new DirectoryModel();
+                            dir.Id = entry.Id;
+                            dir.Name = entry.Name;
+                            dir.Path = entry.Name;
+                            dir.Created = entry.CreatedTime;
+                            dir.Modified = entry.ModifiedTime;
+                            model.Directories.Add(dir);
 
                         }
                         else

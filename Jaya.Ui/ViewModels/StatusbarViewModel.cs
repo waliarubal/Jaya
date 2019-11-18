@@ -37,7 +37,7 @@ namespace Jaya.Ui.ViewModels
         {
             _service = args.Service;
             _provider = args.Provider;
-            _directory = await _service.GetDirectoryAsync(_provider, args.Directory.Path);
+            _directory = await _service.GetDirectoryAsync(_provider, args.Directory);
 
             var count = 0L;
             if (_directory.Directories != null)

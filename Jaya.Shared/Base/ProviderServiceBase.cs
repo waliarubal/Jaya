@@ -97,14 +97,14 @@ namespace Jaya.Shared.Base
             Platform.OpenBrowser(url);
         }
 
-        protected DirectoryModel GetFromCache(AccountModelBase account, string path)
+        protected DirectoryModel GetFromCache(AccountModelBase account, DirectoryModel directory)
         {
             var hash = account.GetHashCode();
-            if (!string.IsNullOrEmpty(path))
-                hash += path.GetHashCode();
+            if (directory != null)
+                hash += directory.GetHashCode();
 
-            if (Cache.TryGetValue(hash, out DirectoryModel directory))
-                return directory;
+            if (Cache.TryGetValue(hash, out DirectoryModel dir))
+                return dir;
 
             return null;
         }
@@ -163,7 +163,7 @@ namespace Jaya.Shared.Base
 
         public abstract Task<IEnumerable<AccountModelBase>> GetAccountsAsync();
 
-        public abstract Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, string path = null);
+        public abstract Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null);
 
         public override string ToString()
         {

@@ -120,7 +120,7 @@ namespace Jaya.Ui.ViewModels
             }
             else
             {
-                var currentDirectory = await node.Service.GetDirectoryAsync(node.Account, node.FileSystemObject?.Path);
+                var currentDirectory = await node.Service.GetDirectoryAsync(node.Account, node.FileSystemObject as DirectoryModel);
                 foreach (var directory in currentDirectory.Directories)
                 {
                     var fileSystemObjectNode = new TreeNodeModel(node.Service, node.Account);
