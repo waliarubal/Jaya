@@ -12,7 +12,7 @@ Support for below mentioned storage services are complete (or planned) as of now
 - [x] File System
 - [x] Dropbox
 - [x] Google Drive
-- [ ] Apple iCloud Drive
+- [ ] Apple iCloud Drive (**help needed**)
 - [ ] Microsoft OneDrive
 - [ ] Box
 - [ ] IDrive
