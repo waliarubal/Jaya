@@ -18,6 +18,8 @@ namespace Jaya.Provider.Dropbox.ViewModels
             _dropboxService = GetProvider<DropboxService>();
             _dropboxService.AccountAdded += OnAccountAddedOrRemoved;
             _dropboxService.AccountRemoved += OnAccountAddedOrRemoved;
+
+            Configuration = _dropboxService.GetConfiguration<ConfigModel>();
         }
 
         ~ConfigurationViewModel()
@@ -28,7 +30,7 @@ namespace Jaya.Provider.Dropbox.ViewModels
 
         #region properties
 
-        ConfigModel Configuration => _dropboxService.GetConfiguration<ConfigModel>();
+        ConfigModel Configuration { get; }
 
         public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
 

@@ -18,6 +18,8 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
             _googleDriveService = GetProvider<GoogleDriveService>();
             _googleDriveService.AccountAdded += OnAccountAddedOrRemoved;
             _googleDriveService.AccountRemoved += OnAccountAddedOrRemoved;
+
+            Configuration = _googleDriveService.GetConfiguration<ConfigModel>();
         }
 
         ~ConfigurationViewModel()
@@ -28,7 +30,7 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
 
         #region properties
 
-        ConfigModel Configuration => _googleDriveService.GetConfiguration<ConfigModel>();
+        ConfigModel Configuration { get; }
 
         public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
 
