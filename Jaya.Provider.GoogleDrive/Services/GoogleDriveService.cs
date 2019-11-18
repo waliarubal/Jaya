@@ -134,6 +134,7 @@ namespace Jaya.Provider.GoogleDrive.Services
                             dir.Id = entry.Id;
                             dir.Name = entry.Name;
                             dir.Path = entry.Name;
+                            dir.Size = entry.Size;
                             dir.Created = entry.CreatedTime;
                             dir.Modified = entry.ModifiedTime;
                             model.Directories.Add(dir);
@@ -145,6 +146,7 @@ namespace Jaya.Provider.GoogleDrive.Services
                             file.Id = entry.Id;
                             file.Name = entry.Name;
                             file.Path = entry.Name;
+                            file.Size = entry.Size;
                             file.Created = entry.CreatedTime;
                             file.Modified = entry.ModifiedTime;
                             model.Files.Add(file);
