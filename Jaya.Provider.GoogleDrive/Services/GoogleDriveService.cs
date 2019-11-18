@@ -118,7 +118,7 @@ namespace Jaya.Provider.GoogleDrive.Services
             {
                 var request = client.Files.List();
                 request.Q = string.Format("trashed = false and '{0}' in parents", parent);
-                request.PageSize = 1000;
+                request.PageSize = Config.PageSize;
                 request.Fields = "nextPageToken, files(id, name, mimeType, parents, createdTime, modifiedTime, fileExtension, size)";
 
                 entries = await request.ExecuteAsync();

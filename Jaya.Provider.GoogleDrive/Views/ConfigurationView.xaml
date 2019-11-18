@@ -29,7 +29,7 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Number of records to fetch in each request:" />
-        <TextBox Grid.Column="1" />
+        <TextBox Grid.Column="1" Text="{Binding PageSize, Mode=TwoWay}" />
 
         <TextBlock
             Grid.Row="1"

@@ -32,6 +32,16 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
 
         public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
 
+        public int PageSize
+        {
+            get => Configuration.PageSize;
+            set
+            {
+                Configuration.PageSize = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public AccountModel SelectedAccount
         {
             get => Get<AccountModel>();
