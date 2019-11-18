@@ -11,7 +11,7 @@
 Support for below mentioned storage services are complete (or planned) as of now. If you would like addition of more storage services, please raise request [here](https://github.com/waliarubal/Jaya/issues).
 - [x] File System
 - [x] Dropbox
-- [ ] Google Drive
+- [x] Google Drive
 - [ ] Apple iCloud Drive
 - [ ] Microsoft OneDrive
 - [ ] Box
