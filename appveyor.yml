@@ -1,0 +1,22 @@
+version: 1.0.{build}
+branches:
+  only:
+  - dev
+image: Visual Studio 2019
+configuration: Release
+before_build:
+- cmd: >-
+    echo Build Directory: %APPVEYOR_BUILD_FOLDER%
+
+    nuget restore
+build:
+  verbosity: minimal
+test: off
+deploy: off
+on_success:
+- cmd: >-
+    dotnet publish -c Release -r win-x64 --self-contained true
+
+    dotnet publish -c Release -r linux-x64 --self-contained true
+
+    dotnet publish -c Release -r osx-x64 --self-contained true
