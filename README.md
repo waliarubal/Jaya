@@ -1,7 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/467yhb1fia401wai?svg=true)](https://ci.appveyor.com/project/waliarubal/jaya)
 [![GitHub stars](https://img.shields.io/github/stars/waliarubal/Jaya)](https://github.com/waliarubal/Jaya/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/waliarubal/Jaya)](https://github.com/waliarubal/Jaya/network)
-[![MIT license](https://img.shields.io/github/license/waliarubal/Jaya)](https://raw.githubusercontent.com/waliarubal/Jaya/master/LICENSE)
+[![MIT license](https://img.shields.io/github/license/waliarubal/Jaya)](https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2)
 
 ## Jaya - Cross Plat
@@ -34,9 +34,9 @@ This project is in beta at the moment so it's not suitable for general use.
 
 ### Screenshots
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/00.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Screenshots/00.png)
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/master/Screenshots/01.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Screenshots/01.png)
 
 ## Roadmap
 
