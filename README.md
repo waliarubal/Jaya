@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/467yhb1fia401wai?svg=true)](https://ci.appveyor.com/project/waliarubal/jaya)
+[![Build status](https://ci.appveyor.com/api/projects/status/467yhb1fia401wai?svg=true)](https://ci.appveyor.com/project/waliarubal/jaya-dev)
 [![GitHub stars](https://img.shields.io/github/stars/waliarubal/Jaya)](https://github.com/waliarubal/Jaya/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/waliarubal/Jaya)](https://github.com/waliarubal/Jaya/network)
 [![MIT license](https://img.shields.io/github/license/waliarubal/Jaya)](https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE)
