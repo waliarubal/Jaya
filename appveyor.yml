@@ -13,6 +13,8 @@ install:
 - cmd: ''
 build_script:
 - cmd: >-
+    CALL %APPVEYOR_BUILD_FOLDER%/Tools/init_git.ps1
+
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/init.bat
 
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/build.bat
