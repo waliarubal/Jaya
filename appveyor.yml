@@ -6,13 +6,11 @@ skip_tags: true
 image: Visual Studio 2019
 configuration: Release
 init:
-- cmd: >-
-    @echo off
-
-    for /f %%a in ('powershell -Command "Get-Date -format yy.MM.dd.HHmm"') do set BUILD_VERSION=%%a
+- cmd: '%APPVEYOR_BUILD_FOLDER%/Tools/init.bat'
 environment:
   BUILD_VERSION: 0.0.0.0
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  ACCESS_TOKEN: da2ea050a3aa364384a626f5b8c6f6acd808c9ae
 build_script:
 - cmd: '%APPVEYOR_BUILD_FOLDER%/Tools/build.bat'
 test: off
