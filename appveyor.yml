@@ -5,14 +5,17 @@ branches:
 skip_tags: true
 image: Visual Studio 2019
 configuration: Release
-init:
-- cmd: '%APPVEYOR_BUILD_FOLDER%/Tools/init.bat'
 environment:
   BUILD_VERSION: 0.0.0.0
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   ACCESS_TOKEN: da2ea050a3aa364384a626f5b8c6f6acd808c9ae
+install:
+- cmd: ''
 build_script:
-- cmd: '%APPVEYOR_BUILD_FOLDER%/Tools/build.bat'
+- cmd: >-
+    CALL %APPVEYOR_BUILD_FOLDER%/Tools/init.bat
+
+    CALL %APPVEYOR_BUILD_FOLDER%/Tools/build.bat
 test: off
 deploy: off
 on_success:
