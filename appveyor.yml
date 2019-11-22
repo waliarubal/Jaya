@@ -26,31 +26,39 @@ deploy: off
 on_success:
 - cmd: >-
 
+    echo Switch to build directory.
+    
     cd %APPVEYOR_BUILD_FOLDER%
     
     
-    SET zip = %APPVEYOR_BUILD_FOLDER%/windows_%BUILD_VERSION%.zip
+    echo Build for Windows 64-bit
     
-    SET source = %APPVEYOR_BUILD_FOLDER%/windows
+    SET OUTPUT=%APPVEYOR_BUILD_FOLDER%/windows_%BUILD_VERSION%.zip
+    
+    SET OUTPUT_DIR=%APPVEYOR_BUILD_FOLDER%/windows
 
-    dotnet publish -c Release -r win-x64 --self-contained true --output %source%
+    dotnet publish -c Release -r win-x64 --self-contained true --output %OUTPUT_DIR%
     
-    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe %zip% %source%
+    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe %OUTPUT% %OUTPUT_DIR%
     
     
-    SET zip = %APPVEYOR_BUILD_FOLDER%/linux_%BUILD_VERSION%.zip
+    @echo Build for Linux 64-bit
     
-    SET source = %APPVEYOR_BUILD_FOLDER%/linux
+    SET OUTPUT=%APPVEYOR_BUILD_FOLDER%/linux_%BUILD_VERSION%.zip
+    
+    SET OUTPUT_DIR=%APPVEYOR_BUILD_FOLDER%/linux
 
-    dotnet publish -c Release -r linux-x64 --self-contained true --output %source%
+    dotnet publish -c Release -r linux-x64 --self-contained true --output %OUTPUT_DIR%
     
-    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe %zip% %source%
+    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe %OUTPUT% %OUTPUT_DIR%
     
+    
+    @echo Build for Linux 64-bit
+    
+    SET OUTPUT=%APPVEYOR_BUILD_FOLDER%/osx_%BUILD_VERSION%.zip
+    
+    SET OUTPUT_DIR=%APPVEYOR_BUILD_FOLDER%/osx
 
-    SET zip = %APPVEYOR_BUILD_FOLDER%/osx_%BUILD_VERSION%.zip
+    dotnet publish -c Release -r osx-x64 --self-contained true --output %OUTPUT_DIR%
     
-    SET source = %APPVEYOR_BUILD_FOLDER%/osx
-
-    dotnet publish -c Release -r osx-x64 --self-contained true --output %source%
-    
-    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe %zip% %source%
+    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe %OUTPUT% %OUTPUT_DIR%
