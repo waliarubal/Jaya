@@ -1,6 +1,7 @@
 @ECHO off
 
-SET SEVEN_ZIP=%APPVEYOR_BUILD_FOLDER%/Tools/7za.exe
+SET SEVEN_ZIP=%APPVEYOR_BUILD_FOLDER%/Tools/7z/7za.exe
+SET CURL=%APPVEYOR_BUILD_FOLDER%/Tools/curl/curl.exe
 
 ECHO Switch to build directory   
 CD %APPVEYOR_BUILD_FOLDER%
@@ -28,3 +29,7 @@ SET OUTPUT_DIR=%APPVEYOR_BUILD_FOLDER%/osx
 SET PARAM=a -tzip %OUTPUT% %OUTPUT_DIR%/*
 CALL dotnet publish -c Release -r osx-x64 --self-contained true --output %OUTPUT_DIR%    
 START /wait /B "" %SEVEN_ZIP% %PARAM%
+
+SET RELEASE={"tag_name": "v%BUILD_VERSION%", "target_commitish": "dev", "name": "v%BUILD_VERSION%", "body": "", "draft": false, "prerelease": true}
+SET PARAM=--data "%RELEASE%" https://api.github.com/repos/waliarubal/jaya/releases?access_token=%ACCESS_TOKEN%
+START /wait /B "" %CURL% %PARAM%
