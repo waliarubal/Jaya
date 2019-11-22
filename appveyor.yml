@@ -18,17 +18,35 @@ build_script:
 
     echo Build Version: %BUILD_VERSION%
 
-    dotnet clean --configuration Release
-
-    dotnet restore --force
+    echo Build Directory: %APPVEYOR_BUILD_FOLDER%
 
     dotnet build --configuration Release
 test: off
 deploy: off
 on_success:
 - cmd: >-
-    dotnet publish -c Release -r win-x64 --self-contained true
+    cd %APPVEYOR_BUILD_FOLDER%
 
-    dotnet publish -c Release -r linux-x64 --self-contained true
+    dotnet publish -c Release -r win-x64 --self-contained true --output %APPVEYOR_BUILD_FOLDER%/windows
 
-    dotnet publish -c Release -r osx-x64 --self-contained true
+    cd %APPVEYOR_BUILD_FOLDER%/windows
+
+    dir /s /b /a-d
+
+
+    cd %APPVEYOR_BUILD_FOLDER%
+
+    dotnet publish -c Release -r linux-x64 --self-contained true --output %APPVEYOR_BUILD_FOLDER%/linux
+
+    cd %APPVEYOR_BUILD_FOLDER%/linux
+
+    dir /s /b /a-d
+
+
+    cd %APPVEYOR_BUILD_FOLDER%
+
+    dotnet publish -c Release -r osx-x64 --self-contained true --output %APPVEYOR_BUILD_FOLDER%/osx
+
+    cd %APPVEYOR_BUILD_FOLDER%/osx
+
+    dir /s /b /a-d
