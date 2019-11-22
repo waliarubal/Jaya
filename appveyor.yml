@@ -29,16 +29,16 @@ on_success:
 
     dotnet publish -c Release -r win-x64 --self-contained true --output %APPVEYOR_BUILD_FOLDER%/windows
     
-    %APPVEYOR_BUILD_FOLDER%/7zip.exe %APPVEYOR_BUILD_FOLDER%/windows_%BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%/windows
+    %APPVEYOR_BUILD_FOLDER%/Tools/7zip.exe %APPVEYOR_BUILD_FOLDER%/windows_%BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%/windows
 
 
     dotnet publish -c Release -r linux-x64 --self-contained true --output %APPVEYOR_BUILD_FOLDER%/linux
     
-    %APPVEYOR_BUILD_FOLDER%/7zip.exe %APPVEYOR_BUILD_FOLDER%/linux_%BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%/windows
+    %APPVEYOR_BUILD_FOLDER%/Tools/7zip.exe %APPVEYOR_BUILD_FOLDER%/linux_%BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%/windows
 
 
     cd %APPVEYOR_BUILD_FOLDER%
 
     dotnet publish -c Release -r osx-x64 --self-contained true --output %APPVEYOR_BUILD_FOLDER%/osx
     
-    %APPVEYOR_BUILD_FOLDER%/7zip.exe %APPVEYOR_BUILD_FOLDER%/osx_%BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%/windows
+    %APPVEYOR_BUILD_FOLDER%/Tools/7zip.exe %APPVEYOR_BUILD_FOLDER%/osx_%BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%/windows
