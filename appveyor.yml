@@ -28,25 +28,17 @@ on_success:
     cd %APPVEYOR_BUILD_FOLDER%
 
     dotnet publish -c Release -r win-x64 --self-contained true --output %APPVEYOR_BUILD_FOLDER%/windows
+    
+    %APPVEYOR_BUILD_FOLDER%/7zip.exe %APPVEYOR_BUILD_FOLDER%/windows_%BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%/windows
 
-    cd %APPVEYOR_BUILD_FOLDER%/windows
-
-    dir /s /b /a-d
-
-
-    cd %APPVEYOR_BUILD_FOLDER%
 
     dotnet publish -c Release -r linux-x64 --self-contained true --output %APPVEYOR_BUILD_FOLDER%/linux
-
-    cd %APPVEYOR_BUILD_FOLDER%/linux
-
-    dir /s /b /a-d
+    
+    %APPVEYOR_BUILD_FOLDER%/7zip.exe %APPVEYOR_BUILD_FOLDER%/linux_%BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%/windows
 
 
     cd %APPVEYOR_BUILD_FOLDER%
 
     dotnet publish -c Release -r osx-x64 --self-contained true --output %APPVEYOR_BUILD_FOLDER%/osx
-
-    cd %APPVEYOR_BUILD_FOLDER%/osx
-
-    dir /s /b /a-d
+    
+    %APPVEYOR_BUILD_FOLDER%/7zip.exe %APPVEYOR_BUILD_FOLDER%/osx_%BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%/windows
