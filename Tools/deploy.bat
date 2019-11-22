@@ -29,27 +29,3 @@ SET OUTPUT_DIR=%APPVEYOR_BUILD_FOLDER%/osx
 SET PARAM=a -tzip %OUTPUT% %OUTPUT_DIR%/*
 CALL dotnet publish -c Release -r osx-x64 --self-contained true --output %OUTPUT_DIR%    
 START /wait /B "" %SEVEN_ZIP% %PARAM%
-
-ECHO;
-ECHO Create GitHub release
-SET RELEASE={\"tag_name\": \"v%BUILD_VERSION%\", \"target_commitish\": \"dev\", \"name\": \"v%BUILD_VERSION%\", \"body\": \"\", \"draft\": false, \"prerelease\": true}
-SET PARAM=--header "Authorization: token %ACCESS_TOKEN%" --data "%RELEASE%" --header "Content-Type: application/json" --request POST https://api.github.com/repos/waliarubal/Jaya/releases
-START /wait /B "" %CURL% %PARAM%
-
-ECHO;
-ECHO Upload Windows binaries
-SET OUTPUT=%APPVEYOR_BUILD_FOLDER%/windows_%BUILD_VERSION%.zip    
-SET PARAM=--header "Authorization: token %ACCESS_TOKEN%" --header "Content-Type: application/zip" --upload-file @%OUTPUT% https://uploads.github.com/repos/waliarubal/Jaya/releases/v%BUILD_VERSION%/assets?name=windows.zip
-START /wait /B "" %CURL% %PARAM%
-
-ECHO;
-ECHO Upload Linux binaries
-SET OUTPUT=%APPVEYOR_BUILD_FOLDER%/linux_%BUILD_VERSION%.zip    
-SET PARAM=--header "Authorization: token %ACCESS_TOKEN%" --header "Content-Type: application/zip" --upload-file @%OUTPUT% https://uploads.github.com/repos/waliarubal/Jaya/releases/v%BUILD_VERSION%/assets?name=linux.zip
-START /wait /B "" %CURL% %PARAM%
-
-ECHO;
-ECHO Upload Mac OS binaries
-SET OUTPUT=%APPVEYOR_BUILD_FOLDER%/osx_%BUILD_VERSION%.zip    
-SET PARAM=--header "Authorization: token %ACCESS_TOKEN%" --header "Content-Type: application/zip" --upload-file @%OUTPUT% https://uploads.github.com/repos/waliarubal/Jaya/releases/v%BUILD_VERSION%/assets?name=osx.zip
-START /wait /B "" %CURL% %PARAM%
