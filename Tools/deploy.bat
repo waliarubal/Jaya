@@ -32,8 +32,8 @@ START /wait /B "" %SEVEN_ZIP% %PARAM%
 
 ECHO;
 ECHO Create GitHub release
-SET RELEASE={"tag_name": "v%BUILD_VERSION%", "target_commitish": "dev", "name": "v%BUILD_VERSION%", "body": "", "draft": false, "prerelease": true}
-SET PARAM=--data '%RELEASE%' --header 'Content-Type: application/json' --request POST https://api.github.com/repos/waliarubal/jaya/releases
+SET RELEASE={\"tag_name\": \"v%BUILD_VERSION%\", \"target_commitish\": \"dev\", \"name\": \"v%BUILD_VERSION%\", \"body\": \"\", \"draft\": false, \"prerelease\": true}
+SET PARAM=--data "%RELEASE%" --header "Content-Type: application/json" --request POST https://api.github.com/repos/waliarubal/jaya/releases
 START /wait /B "" %CURL% %PARAM%
 
 ECHO;
