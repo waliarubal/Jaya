@@ -1,16 +1,28 @@
-version: 1.0.{build}
+version: '{build}'
 branches:
   only:
   - dev
 image: Visual Studio 2019
 configuration: Release
-before_build:
+init:
 - cmd: >-
-    echo Build Directory: %APPVEYOR_BUILD_FOLDER%
+    @echo off
 
-    nuget restore
-build:
-  verbosity: minimal
+    for /f %%a in ('powershell -Command "Get-Date -format yy.MM.dd.HHmm"') do set BUILD_VERSION=%%a
+environment:
+  BUILD_VERSION: 0.0.0.0
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+build_script:
+- cmd: >-
+    @echo off
+
+    echo Build Version: %BUILD_VERSION%
+
+    dotnet clean --configuration Release
+
+    dotnet restore --force
+
+    dotnet build --configuration Release
 test: off
 deploy: off
 on_success:
