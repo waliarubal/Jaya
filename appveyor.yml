@@ -2,6 +2,7 @@ version: '{build}'
 branches:
   only:
   - dev
+skip_tags: true
 image: Visual Studio 2019
 configuration: Release
 init:
@@ -22,14 +23,6 @@ build_script:
 
     dotnet build --configuration Release
 test: off
-deploy:
-- provider: GitHub
-  tag: $(BUILD_VERSION)
-  release: $(BUILD_VERSION)
-  auth_token:
-    secure: tBxymE0ZPLM1QIjl36qzH6DdW+9QPbEvnsv3AzBC23IDfQjEULeojtQSGZ0yxPst
-  artifact: $(APPVEYOR_BUILD_FOLDER)/windows_$(BUILD_VERSION).zip
-  on:
-    branch: dev
+deploy: off
 on_success:
 - cmd: "@echo off\n\necho Switch to build directory   \ncd %APPVEYOR_BUILD_FOLDER%\n    \necho Build for Windows 64-bit    \nSET OUTPUT=%APPVEYOR_BUILD_FOLDER%/windows_%BUILD_VERSION%.zip    \nSET OUTPUT_DIR=%APPVEYOR_BUILD_FOLDER%/windows\ndotnet publish -c Release -r win-x64 --self-contained true --output %OUTPUT_DIR%   \n%APPVEYOR_BUILD_FOLDER%/Tools/7za.exe a -tzip %OUTPUT% %OUTPUT_DIR%/*\n        \n@echo Build for Linux 64-bit   \nSET OUTPUT=%APPVEYOR_BUILD_FOLDER%/linux_%BUILD_VERSION%.zip    \nSET OUTPUT_DIR=%APPVEYOR_BUILD_FOLDER%/linux\ndotnet publish -c Release -r linux-x64 --self-contained true --output %OUTPUT_DIR%\n%APPVEYOR_BUILD_FOLDER%/Tools/7za.exe a -tzip %OUTPUT% %OUTPUT_DIR%/*\n        \n@echo Build for Mac OS 64-bit    \nSET OUTPUT=%APPVEYOR_BUILD_FOLDER%/osx_%BUILD_VERSION%.zip    \nSET OUTPUT_DIR=%APPVEYOR_BUILD_FOLDER%/osx\ndotnet publish -c Release -r osx-x64 --self-contained true --output %OUTPUT_DIR%    \n%APPVEYOR_BUILD_FOLDER%/Tools/7za.exe a -tzip %OUTPUT% %OUTPUT_DIR%/*"
