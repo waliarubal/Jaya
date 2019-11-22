@@ -39,7 +39,7 @@ on_success:
 
     dotnet publish -c Release -r win-x64 --self-contained true --output %OUTPUT_DIR%
     
-    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe %OUTPUT% %OUTPUT_DIR%
+    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe a -tzip %OUTPUT% %OUTPUT_DIR%/*
     
     
     @echo Build for Linux 64-bit
@@ -50,7 +50,7 @@ on_success:
 
     dotnet publish -c Release -r linux-x64 --self-contained true --output %OUTPUT_DIR%
     
-    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe %OUTPUT% %OUTPUT_DIR%
+    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe a -tzip %OUTPUT% %OUTPUT_DIR%/*
     
     
     @echo Build for Linux 64-bit
@@ -61,4 +61,4 @@ on_success:
 
     dotnet publish -c Release -r osx-x64 --self-contained true --output %OUTPUT_DIR%
     
-    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe %OUTPUT% %OUTPUT_DIR%
+    %APPVEYOR_BUILD_FOLDER%/Tools/7za.exe a -tzip %OUTPUT% %OUTPUT_DIR%/*
