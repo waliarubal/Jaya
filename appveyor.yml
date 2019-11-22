@@ -5,16 +5,23 @@ branches:
 skip_tags: true
 image: Visual Studio 2019
 configuration: Release
+init:
+- ps: >-
+    git config --global core.autocrlf true
+
+    git config --global user.email "walia.rubal@gmail.com"
+
+    git config --global user.name "Rubal Walia"
+
+    git config --global credential.helper store
+
+    Add-Content "$HOME\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
 environment:
   BUILD_VERSION: 0.0.0.0
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   ACCESS_TOKEN: da2ea050a3aa364384a626f5b8c6f6acd808c9ae
-install:
-- cmd: ''
 build_script:
 - cmd: >-
-    CALL %APPVEYOR_BUILD_FOLDER%/Tools/init_git.ps1
-
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/init.bat
 
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/build.bat
