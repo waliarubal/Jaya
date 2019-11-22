@@ -19,7 +19,7 @@ init:
 environment:
   BUILD_VERSION: 0.0.0.0
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
-  ACCESS_TOKEN: da2ea050a3aa364384a626f5b8c6f6acd808c9ae
+  ACCESS_TOKEN: 6b1aac682b1412da770e3446e712dc67ed6894aa
 build_script:
 - cmd: >-
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/init.bat
