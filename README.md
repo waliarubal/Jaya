@@ -34,9 +34,9 @@ This project is in beta at the moment so it's not suitable for general use.
 
 ### Screenshots
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Screenshots/00.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/00.png)
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Screenshots/01.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/01.png)
 
 ## Roadmap
 
