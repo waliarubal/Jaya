@@ -32,24 +32,24 @@ START /wait /B "" %SEVEN_ZIP% %PARAM%
 
 ECHO;
 ECHO Create GitHub release
-SET RELEASE={'tag_name': 'v%BUILD_VERSION%', 'target_commitish': 'dev', 'name': 'v%BUILD_VERSION%', 'body': '', 'draft': false, 'prerelease': true}
-SET PARAM=--data "%RELEASE%" https://api.github.com/repos/waliarubal/jaya/releases
+SET RELEASE={"tag_name": "v%BUILD_VERSION%", "target_commitish": "dev", "name": "v%BUILD_VERSION%", "body": "", "draft": false, "prerelease": true}
+SET PARAM=-d '%RELEASE%' -H 'Content-Type: application/json' -X POST https://api.github.com/repos/waliarubal/jaya/releases
 START /wait /B "" %CURL% %PARAM%
 
 ECHO;
 ECHO Upload Windows binaries
 SET OUTPUT=%APPVEYOR_BUILD_FOLDER%/windows_%BUILD_VERSION%.zip    
-SET PARAM=--header 'Content-Type:application/octet-stream' --data-binary @%OUTPUT% https://uploads.github.com/repos/waliarubal/jaya/releases/v%BUILD_VERSION%/assets?name=windows.zip
+SET PARAM=-h 'Content-Type: application/octet-stream' -data-binary @%OUTPUT% https://uploads.github.com/repos/waliarubal/jaya/releases/v%BUILD_VERSION%/assets?name=windows.zip
 START /wait /B "" %CURL% %PARAM%
 
 ECHO;
 ECHO Upload Linux binaries
 SET OUTPUT=%APPVEYOR_BUILD_FOLDER%/linux_%BUILD_VERSION%.zip    
-SET PARAM=--header 'Content-Type:application/octet-stream' --data-binary @%OUTPUT% https://uploads.github.com/repos/waliarubal/jaya/releases/v%BUILD_VERSION%/assets?name=linux.zip
+SET PARAM=-h 'Content-Type: application/octet-stream' -data-binary @%OUTPUT% https://uploads.github.com/repos/waliarubal/jaya/releases/v%BUILD_VERSION%/assets?name=linux.zip
 START /wait /B "" %CURL% %PARAM%
 
 ECHO;
 ECHO Upload Mac OS binaries
 SET OUTPUT=%APPVEYOR_BUILD_FOLDER%/osx_%BUILD_VERSION%.zip    
-SET PARAM=--header 'Content-Type:application/octet-stream' --data-binary @%OUTPUT% https://uploads.github.com/repos/waliarubal/jaya/releases/v%BUILD_VERSION%/assets?name=osx.zip
+SET PARAM=-h 'Content-Type:application/octet-stream' -data-binary @%OUTPUT% https://uploads.github.com/repos/waliarubal/jaya/releases/v%BUILD_VERSION%/assets?name=osx.zip
 START /wait /B "" %CURL% %PARAM%
