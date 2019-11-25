@@ -31,21 +31,9 @@
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.9.0-preview7" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj" />
+    <ProjectReference Include="..\Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj" />
+    <ProjectReference Include="..\Jaya.Provider.GoogleDrive\Jaya.Provider.GoogleDrive.csproj" />
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
-    <ProjectReference Include="..\Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <OutputItemType>Content</OutputItemType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </ProjectReference>
-    <ProjectReference Include="..\Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <OutputItemType>Content</OutputItemType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </ProjectReference>
-    <ProjectReference Include="..\Jaya.Provider.GoogleDrive\Jaya.Provider.GoogleDrive.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <OutputItemType>Content</OutputItemType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </ProjectReference>
   </ItemGroup>
 </Project>
