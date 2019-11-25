@@ -32,10 +32,20 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
+    <ProjectReference Include="..\Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Content</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="..\Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Content</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="..\Jaya.Provider.GoogleDrive\Jaya.Provider.GoogleDrive.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Content</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </ProjectReference>
   </ItemGroup>
-  <!--<ItemGroup>
-    <None Update="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>-->
 </Project>

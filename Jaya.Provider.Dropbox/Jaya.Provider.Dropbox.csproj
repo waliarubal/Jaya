@@ -20,8 +20,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
   </ItemGroup>
-  <PropertyGroup Condition="'$(Platform)'=='AnyCPU'">
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <OutputPath>..\Jaya.Ui\bin\$(Configuration)\</OutputPath>
-  </PropertyGroup>
 </Project>
