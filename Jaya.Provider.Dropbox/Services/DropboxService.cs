@@ -1,4 +1,4 @@
-﻿using DotNetBox;
+﻿using Dropbox.Api;
 using Jaya.Provider.Dropbox.Models;
 using Jaya.Provider.Dropbox.Views;
 using Jaya.Shared.Base;
@@ -21,7 +21,7 @@ namespace Jaya.Provider.Dropbox.Services
         const string APP_SECRET = "ipwwjur866rwk3o";
 
         /// <summary>
-        /// Refer https://dotnetbox.readthedocs.io/en/latest/index.html for Dropbox SDK documentation.
+        /// Refer https://www.dropbox.com/developers/documentation/dotnet#tutorial and http://dropbox.github.io/dropbox-sdk-dotnet/html/T_Dropbox_Api_DropboxOAuth2Helper.htm for Dropbox SDK documentation.
         /// </summary>
         public DropboxService()
         {
@@ -75,7 +75,7 @@ namespace Jaya.Provider.Dropbox.Services
 
             var path = directory == null || directory.Path == null ? string.Empty : directory.Path;
 
-            var entries = await client.Files.ListFolder(path);
+            var entries = await client.Files.ListFolderAsync(path);
             foreach (var entry in entries.Entries)
             {
                 if (entry.IsDeleted)
@@ -85,7 +85,7 @@ namespace Jaya.Provider.Dropbox.Services
                 {
                     var dir = new DirectoryModel();
                     dir.Name = entry.Name;
-                    dir.Path = entry.Path;
+                    dir.Path = entry.PathDisplay;
                     model.Directories.Add(dir);
 
                 }
@@ -93,10 +93,14 @@ namespace Jaya.Provider.Dropbox.Services
                 {
                     var nameParts = SplitName(entry.Name);
 
+                    var fileInfo = entry.AsFile;
+
                     var file = new FileModel();
                     file.Name = nameParts.Name;
                     file.Extension = nameParts.Extension;
-                    file.Path = entry.Path;
+                    file.Path = entry.PathDisplay;
+                    file.Size = (long)fileInfo.Size;
+                    file.Modified = fileInfo.ClientModified;
                     model.Files.Add(file);
                 }
             }
@@ -114,7 +118,7 @@ namespace Jaya.Provider.Dropbox.Services
             var config = GetConfiguration<ConfigModel>();
             var client = new DropboxClient(token);
 
-            var accountInfo = await client.Users.GetCurrentAccount();
+            var accountInfo = await client.Users.GetCurrentAccountAsync();
 
             var provider = new AccountModel(accountInfo.AccountId, accountInfo.Name.DisplayName)
             {
