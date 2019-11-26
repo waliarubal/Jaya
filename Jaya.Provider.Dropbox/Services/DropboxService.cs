@@ -36,9 +36,8 @@ namespace Jaya.Provider.Dropbox.Services
         {
             var redirectUri = new Uri(REDIRECT_URI);
 
-            var client = new DropboxClient(APP_KEY, APP_SECRET);
-            var authorizeUrl = client.GetAuthorizeUrl(ResponseType.Code, REDIRECT_URI);
-            OpenBrowser(authorizeUrl);
+            var authorizeUrl = DropboxOAuth2Helper.GetAuthorizeUri(OAuthResponseType.Code, APP_KEY, new Uri(REDIRECT_URI));
+            OpenBrowser(authorizeUrl.ToString());
 
             var http = new HttpListener();
             http.Prefixes.Add(REDIRECT_URI);
@@ -52,7 +51,7 @@ namespace Jaya.Provider.Dropbox.Services
 
             var code = Uri.UnescapeDataString(context.Request.QueryString["code"]);
 
-            var response = await client.AuthorizeCode(code, REDIRECT_URI);
+            var response = await DropboxOAuth2Helper.ProcessCodeFlowAsync(code, APP_KEY, APP_SECRET, REDIRECT_URI);
             return response.AccessToken;
         }
 
