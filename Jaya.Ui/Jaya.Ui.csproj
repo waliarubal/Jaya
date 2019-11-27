@@ -29,11 +29,30 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.0-preview8" />
     <PackageReference Include="Avalonia.ThemeManager" Version="0.9.0-preview1" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.9.0-preview8" />
+
+    <PackageReference Include="Dropbox.Api" Version="4.9.4" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.42.0.1772" />
+    <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.42.0.1602" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj" />
-    <ProjectReference Include="..\Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj" />
-    <ProjectReference Include="..\Jaya.Provider.GoogleDrive\Jaya.Provider.GoogleDrive.csproj" />
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
+    <ProjectReference Include="..\Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Content</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Targets>Build</Targets>
+    </ProjectReference>
+    <ProjectReference Include="..\Jaya.Provider.FileSystem\Jaya.Provider.FileSystem.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Content</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Targets>Build</Targets>
+    </ProjectReference>
+    <ProjectReference Include="..\Jaya.Provider.GoogleDrive\Jaya.Provider.GoogleDrive.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Content</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Targets>Build</Targets>
+    </ProjectReference>
   </ItemGroup>
 </Project>
