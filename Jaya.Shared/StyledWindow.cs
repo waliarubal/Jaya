@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Styling;
@@ -42,7 +43,7 @@ namespace Jaya.Shared
             GetControl<Border>(e, "PART_TitleBar").PointerPressed += (sender, args) => PlatformImpl?.BeginMoveDrag(args);
 
             _closeButton = GetControl<Button>(e, "PART_Close");
-            _closeButton.Click += delegate { Close(); };
+            _closeButton.Click += (object sender, RoutedEventArgs arg) => Close();
 
             var isNotModal = !IsModal;
 
