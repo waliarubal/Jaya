@@ -130,7 +130,7 @@ namespace Jaya.Ui.Models
 
         public override int GetHashCode()
         {
-            return new { Service, Account, FileSystemObject }.GetHashCode();
+            return new { Service, Account, FileSystemObject, IsDummy }.GetHashCode();
         }
 
         public void AddDummyChild()

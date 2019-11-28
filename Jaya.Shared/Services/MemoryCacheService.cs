@@ -36,12 +36,12 @@ namespace Jaya.Shared.Services
 
         public bool TryGetValue<T>(object key, out T result)
         {
-            return Cache.TryGetValue<T>(key, out result);
+            return Cache.TryGetValue(key, out result);
         }
 
         public void Set<T>(object key, T value)
         {
-            Cache.Set<T>(key, value);
+            Cache.Set(key, value);
         }
     }
 }
