@@ -29,13 +29,18 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.0-preview8" />
     <PackageReference Include="Avalonia.ThemeManager" Version="0.9.0-preview1" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.9.0-preview8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
+  </ItemGroup>
 
+  <!--enter plugin entries below for debugging-->
+  <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <PackageReference Include="Dropbox.Api" Version="4.9.4" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.42.0.1772" />
     <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.42.0.1602" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />
+  <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <ProjectReference Include="..\Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <OutputItemType>Content</OutputItemType>
