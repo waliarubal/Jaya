@@ -1,4 +1,5 @@
-﻿using Avalonia.Threading;
+﻿using Avalonia.Controls;
+using Avalonia.Threading;
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace Jaya.Shared.Base
         }
 
         #region properties
+
+        protected bool IsDesignMode => Design.IsDesignMode;
 
         protected EventAggregator EventAggregator
         {

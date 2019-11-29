@@ -3,12 +3,13 @@ using Jaya.Provider.Dropbox.Services;
 using Jaya.Shared;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Jaya.Provider.Dropbox.ViewModels
 {
-    public class ConfigurationViewModel: ViewModelBase
+    public class ConfigurationViewModel : ViewModelBase
     {
         readonly DropboxService _dropboxService;
         ICommand _addAccount, _removeAccount;
