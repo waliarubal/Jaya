@@ -10,5 +10,6 @@
         <StyleInclude Source="avares://Jaya.Shared/Styles/GridSplitterStyle.xaml" />
         <StyleInclude Source="avares://Jaya.Shared/Styles/DataGridStyle.xaml" />
         <StyleInclude Source="avares://Jaya.Shared/Styles/StyledWindowStyle.xaml" />
+        <StyleInclude Source="/Styles/IconStyles.xaml" />
     </Application.Styles>
 </Application>

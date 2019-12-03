@@ -93,6 +93,15 @@
                 <Setter Property="Height" Value="16" />
             </Style>
 
+            <Style Selector="Button &gt; DrawingPresenter">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+            </Style>
+            <Style Selector="ToggleButton &gt; DrawingPresenter">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+            </Style>
+
             <Style Selector="Border.Separator">
                 <Setter Property="IsHitTestVisible" Value="False" />
                 <Setter Property="Background" Value="Transparent" />
@@ -106,21 +115,21 @@
             <Border Classes="Thumb" />
 
             <Button ToolTip.Tip="New Folder">
-                <Image Source="/Assets/Images/Add-Folder-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
             </Button>
             <Border Classes="Separator" />
             <Button ToolTip.Tip="Properties">
-                <Image Source="/Assets/Images/Property-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
             </Button>
             <Button ToolTip.Tip="Open">
-                <Image Source="/Assets/Images/Open-Document-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.OpenFile}" />
             </Button>
             <Border Classes="Separator" />
             <Button
                 Command="{Binding SimpleCommand}"
                 CommandParameter="{x:Static local:CommandType.Exit}"
                 ToolTip.Tip="Exit">
-                <Image Source="/Assets/Images/Shutdown-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Close}" />
             </Button>
         </StackPanel>
 
@@ -128,30 +137,30 @@
             <Border Classes="Thumb" />
 
             <Button ToolTip.Tip="Cut">
-                <Image Source="/Assets/Images/Cut-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Cut}" />
             </Button>
             <Button ToolTip.Tip="Copy">
-                <Image Source="/Assets/Images/Copy-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Copy}" />
             </Button>
             <Button ToolTip.Tip="Paste">
-                <Image Source="/Assets/Images/Paste-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Paste}" />
             </Button>
             <Border Classes="Separator" />
             <Button ToolTip.Tip="Delete">
-                <Image Source="/Assets/Images/Delete-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Delete}" />
             </Button>
             <Button ToolTip.Tip="Rename">
-                <Image Source="/Assets/Images/Rename-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Rename}" />
             </Button>
             <Border Classes="Separator" />
             <Button ToolTip.Tip="Select All">
-                <Image Source="/Assets/Images/Select-All-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.SelectAll}" />
             </Button>
             <Button ToolTip.Tip="Select None">
-                <Image Source="/Assets/Images/Select-None-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.SelectNone}" />
             </Button>
             <Button ToolTip.Tip="Invert Selection">
-                <Image Source="/Assets/Images/Invert-Selection-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.InvertSelection}" />
             </Button>
         </StackPanel>
 
@@ -162,21 +171,21 @@
                 CommandParameter="{x:Static local:CommandType.TogglePaneNavigation}"
                 IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
                 ToolTip.Tip="Navigation Pane">
-                <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.NavigationPane}" />
             </ToggleButton>
             <ToggleButton
                 Command="{Binding SimpleCommand}"
                 CommandParameter="{x:Static local:CommandType.TogglePanePreview}"
                 IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}"
                 ToolTip.Tip="Preview Pane">
-                <Image Source="/Assets/Images/Preview-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.PreviewPane}" />
             </ToggleButton>
             <ToggleButton
                 Command="{Binding SimpleCommand}"
                 CommandParameter="{x:Static local:CommandType.TogglePaneDetails}"
                 IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}"
                 ToolTip.Tip="Details Pane">
-                <Image Source="/Assets/Images/Details-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.DetailsPane}" />
             </ToggleButton>
             <Border Classes="Separator" />
             <ToggleButton
@@ -184,21 +193,21 @@
                 CommandParameter="{x:Static local:CommandType.ToggleItemCheckBoxes}"
                 IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}"
                 ToolTip.Tip="Item Check Boxes">
-                <Image Source="/Assets/Images/Checked-Checkbox-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.CheckBox}" />
             </ToggleButton>
             <ToggleButton
                 Command="{Binding SimpleCommand}"
                 CommandParameter="{x:Static local:CommandType.ToggleFileNameExtensions}"
                 IsChecked="{Binding ApplicationConfig.IsFileNameExtensionVisible, Mode=OneWay}"
                 ToolTip.Tip="File Name Extensions">
-                <Image Source="/Assets/Images/Code-File-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Extension}" />
             </ToggleButton>
             <ToggleButton
                 Command="{Binding SimpleCommand}"
                 CommandParameter="{x:Static local:CommandType.ToggleHiddenItems}"
                 IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}"
                 ToolTip.Tip="Hidden Items">
-                <Image Source="/Assets/Images/Hide-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
             </ToggleButton>
             <Border Classes="Separator" />
             <Button Command="{Binding OpenWindowCommand}" ToolTip.Tip="Plugins...">
@@ -209,7 +218,7 @@
                         Height="480"
                         ContentType="{x:Type v:ManagePluginsView}" />
                 </Button.CommandParameter>
-                <Image Source="/Assets/Images/Plugin-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Plugin}" />
             </Button>
             <Button Command="{Binding OpenWindowCommand}" ToolTip.Tip="Options...">
                 <Button.CommandParameter>
@@ -219,7 +228,7 @@
                         Height="480"
                         ContentType="{x:Type v:OptionsView}" />
                 </Button.CommandParameter>
-                <Image Source="/Assets/Images/Settings-32.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Property}" />
             </Button>
         </StackPanel>
 
@@ -227,17 +236,17 @@
             <Border Classes="Thumb" />
 
             <Button ToolTip.Tip="View Help">
-                <Image Source="/Assets/Images/Help-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.Help}" />
             </Button>
             <Button ToolTip.Tip="View License">
-                <Image Source="/Assets/Images/Certificate-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.CertificateWarning}" />
             </Button>
             <Border Classes="Separator" />
             <Button ToolTip.Tip="Send Feedback...">
-                <Image Source="/Assets/Images/Feedback-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.SendMail}" />
             </Button>
             <Button ToolTip.Tip="Check For Update...">
-                <Image Source="/Assets/Images/Update-16.png" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.RunUpdate}" />
             </Button>
         </StackPanel>
     </WrapPanel>
