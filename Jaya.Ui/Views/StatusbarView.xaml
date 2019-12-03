@@ -50,6 +50,10 @@
             <Setter Property="Width" Value="16" />
             <Setter Property="Height" Value="16" />
         </Style>
+        <Style Selector="ToggleButton &gt; DrawingPresenter">
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+        </Style>
     </UserControl.Styles>
     <Grid Margin="6,2">
         <Grid.ColumnDefinitions>
@@ -65,13 +69,13 @@
             Grid.Column="3"
             IsChecked="{Binding PaneConfig.IsDetailsView, Mode=TwoWay}"
             ToolTip.Tip="Dispaly information about each item in the window.">
-            <Image Source="/Assets/Images/List-16.png" />
+            <DrawingPresenter Drawing="{DynamicResource Icon.BulletList}" />
         </ToggleButton>
         <ToggleButton
             Grid.Column="4"
             IsChecked="{Binding PaneConfig.IsThumbnailView, Mode=TwoWay}"
             ToolTip.Tip="Display items by using large thumbnails.">
-            <Image Source="/Assets/Images/Image-16.png" />
+            <DrawingPresenter Drawing="{DynamicResource Icon.Image}" />
         </ToggleButton>
     </Grid>
 </UserControl>

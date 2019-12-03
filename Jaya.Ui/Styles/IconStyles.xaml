@@ -194,6 +194,21 @@
                 <GeometryDrawing Brush="#FF414141" Geometry="F1M8,7L8,3 6.277,3 7.944,4 2.481,7.277C2.178,7.958 2,8.707 2,9.5 2,12.363 4.201,14.746 7,15L7,13C5.309,12.755 4,11.259 4,9.5 4,8.109 4.822,6.915 6,6.352L6,9z" />
                 <GeometryDrawing Brush="#FF378A33" Geometry="F1M1,1L6,4 1,7z" />
             </DrawingGroup>
+            <DrawingGroup x:Key="Icon.BulletList">
+                <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M0,-0.000199999999999534L0,14.9998 5,14.9998 5,13.9998 16,13.9998 16,10.9998 5,10.9998 5,8.9998 16,8.9998 16,5.9998 5,5.9998 5,4.0008 16,4.0008 16,0.9998 5,0.9998 5,-0.000199999999999534z" />
+                <GeometryDrawing Brush="#FF424242" Geometry="F1M6,8L15,8 15,7 6,7z M6,3L15,3 15,2 6,2z M6,13L15,13 15,12 6,12z" />
+                <GeometryDrawing Brush="#FF1BA1E2" Geometry="F1M1,4L4,4 4,1 1,1z M1,14L4,14 4,11 1,11z M1,6L4,6 4,9 1,9z" />
+            </DrawingGroup>
+            <DrawingGroup x:Key="Icon.Image">
+                <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M0,15L16,15 16,0 0,0z" />
+                <GeometryDrawing Brush="#FF424242" Geometry="F1M1,1L1,10 2,9.073 2,2 14,2 14,11.098 15,12 15,1z" />
+                <GeometryDrawing Brush="#FF424242" Geometry="F1M1,1L1,10 2,9.073 2,2 14,2 14,11.098 15,12 15,1z" />
+                <GeometryDrawing Brush="#FFEFEFF0" Geometry="F1M10,4.5C10,5.328 10.672,6 11.5,6 12.328,6 13,5.328 13,4.5 13,3.672 12.328,3 11.5,3 10.672,3 10,3.672 10,4.5 M5,6.293L2,9.293 2,2 14,2 14,11.293 12,9.293 10,11.293z" />
+                <GeometryDrawing Brush="#FF1AA1E2" Geometry="F1M1,10L5,6.293 10,11.293 12,9.293 15,12 15,14 1,14z" />
+                <GeometryDrawing Brush="#FFC17C1A" Geometry="F1M11.5,3C10.672,3 10,3.672 10,4.5 10,5.328 10.672,6 11.5,6 12.328,6 13,5.328 13,4.5 13,3.672 12.328,3 11.5,3" />
+            </DrawingGroup>
         </Style.Resources>
     </Style>
 </Styles>

@@ -46,23 +46,28 @@
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="IsHitTestVisible" Value="False" />
             </Style>
+
+            <Style Selector="DrawingPresenter">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+            </Style>
         </Menu.Styles>
 
         <MenuItem Header="_File">
             <MenuItem Header="New Folder">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Add-Folder-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
             <MenuItem Header="Properties">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Property-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Open">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Open-Document-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.OpenFile}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
@@ -71,7 +76,7 @@
                 CommandParameter="{x:Static local:CommandType.Exit}"
                 Header="Exit">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Shutdown-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Close}" />
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
@@ -79,17 +84,17 @@
         <MenuItem Header="_Edit">
             <MenuItem Header="Cut">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Cut-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Cut}" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Copy">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Copy-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Copy}" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Paste">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Paste-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Paste}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
@@ -98,28 +103,28 @@
             <Separator />
             <MenuItem Header="Delete">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Delete-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Delete}" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Rename">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Rename-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Rename}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
             <MenuItem Header="Select All">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Select-All-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.SelectAll}" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Select None">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Select-None-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.SelectNone}" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Invert Selection">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Invert-Selection-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.InvertSelection}" />
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
@@ -131,7 +136,7 @@
                 Header="Navigation Pane">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}">
-                        <Image Source="/Assets/Images/Navigation-Toolbar-16.png" />
+                        <DrawingPresenter Drawing="{DynamicResource Icon.NavigationPane}" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
@@ -141,7 +146,7 @@
                 Header="Preview Pane">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}">
-                        <Image Source="/Assets/Images/Preview-16.png" />
+                        <DrawingPresenter Drawing="{DynamicResource Icon.PreviewPane}" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
@@ -151,7 +156,7 @@
                 Header="Details Pane">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}">
-                        <Image Source="/Assets/Images/Details-16.png" />
+                        <DrawingPresenter Drawing="{DynamicResource Icon.DetailsPane}" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
@@ -210,7 +215,7 @@
                 Header="Item Check Boxes">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}">
-                        <Image Source="/Assets/Images/Checked-Checkbox-16.png" />
+                        <DrawingPresenter Drawing="{DynamicResource Icon.CheckBox}" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
@@ -220,7 +225,7 @@
                 Header="File Name Extensions">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding ApplicationConfig.IsFileNameExtensionVisible, Mode=OneWay}">
-                        <Image Source="/Assets/Images/Code-File-16.png" />
+                        <DrawingPresenter Drawing="{DynamicResource Icon.Extension}" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
@@ -230,19 +235,19 @@
                 Header="Hidden Items">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}">
-                        <Image Source="/Assets/Images/Hide-16.png" />
+                        <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
             <MenuItem Header="Plugins...">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Plugin-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Plugin}" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Options...">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Settings-32.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Property}" />
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
@@ -250,23 +255,23 @@
         <MenuItem Header="_Help">
             <MenuItem Header="View Help">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Help-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Help}" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="View License">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Certificate-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.CertificateWarning}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
             <MenuItem Header="Send Feedback...">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Feedback-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.SendMail}" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Check For Update...">
                 <MenuItem.Icon>
-                    <Image Source="/Assets/Images/Update-16.png" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.RunUpdate}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
