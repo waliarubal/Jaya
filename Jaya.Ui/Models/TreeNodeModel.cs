@@ -19,7 +19,6 @@ namespace Jaya.Ui.Models
         {
             Service = service;
             Account = account;
-            IconImagePath = Constants.COLLAPSED_IMAGE_URL;
             Children = new ObservableCollection<TreeNodeModel>();
 
             if (Service != null && Account != null)
@@ -53,24 +52,16 @@ namespace Jaya.Ui.Models
             set => Set(value);
         }
 
+        public bool IsHavingImage => !string.IsNullOrEmpty(ImagePath);
+
         public string ImagePath
         {
             get => Get<string>();
             set
             {
-                Set(value);
-
-                if (string.IsNullOrEmpty(value) || (FileSystemObject != null && FileSystemObject.Type == FileSystemObjectType.Directory && !string.IsNullOrEmpty(FileSystemObject.Path)))
-                    IconImagePath = Constants.COLLAPSED_IMAGE_URL;
-                else
-                    IconImagePath = ImagePath;
+                if(Set(value))
+                    RaisePropertyChanged(nameof(IsHavingImage));
             }
-        }
-
-        public string IconImagePath
-        {
-            get => Get<string>();
-            private set => Set(value);
         }
 
         public bool IsExpanded
@@ -79,16 +70,6 @@ namespace Jaya.Ui.Models
             set
             {
                 Set(value);
-
-                if (string.IsNullOrEmpty(ImagePath))
-                {
-                    if (value && Children.Count > 0)
-                        IconImagePath = Constants.EXPANDED_IMAGE_URL;
-                    else
-                        IconImagePath = Constants.COLLAPSED_IMAGE_URL;
-                }
-                else
-                    IconImagePath = ImagePath;
 
                 var handler = NodeExpanded;
                 if (handler != null)
