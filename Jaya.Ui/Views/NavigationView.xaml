@@ -31,7 +31,7 @@
                 <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=OneWayToSource}" />
                 <Setter Property="IsVisible" Value="{Binding FileSystemObject.IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}, FallbackValue=True}" />
             </Style>
-            <Style Selector="Image[IsVisible=True].Spinner">
+            <Style Selector="DrawingPresenter[IsVisible=True].Spinner">
                 <Style.Animations>
                     <Animation RepeatCount="Loop" Duration="0:0:1.5">
                         <KeyFrame Cue="100%">
@@ -45,15 +45,20 @@
                 <Setter Property="Height" Value="16" />
                 <Setter Property="Margin" Value="0 0 4 0" />
             </Style>
+            <Style Selector="TreeViewItem &gt; StackPanel &gt; DrawingPresenter">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+                <Setter Property="Margin" Value="0 0 4 0" />
+            </Style>
         </TreeView.Styles>
         <TreeView.ItemTemplate>
             <TreeDataTemplate ItemsSource="{Binding Children}">
                 <StackPanel Orientation="Horizontal">
                     <Image IsVisible="{Binding !IsDummy}" Source="{Binding IconImagePath, Converter={StaticResource BitmapValueConverter}}" />
-                    <Image
+                    <DrawingPresenter
                         Classes="Spinner"
-                        IsVisible="{Binding IsDummy}"
-                        Source="avares://Jaya.Ui/Assets/Images/Refresh-16.png" />
+                        Drawing="{DynamicResource Icon.Refresh}"
+                        IsVisible="{Binding IsDummy}" />
                     <TextBlock Text="{Binding Label}" />
                 </StackPanel>
             </TreeDataTemplate>
