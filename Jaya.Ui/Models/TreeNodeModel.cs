@@ -139,7 +139,6 @@ namespace Jaya.Ui.Models
                 return;
 
             var child = _dummyChild = new TreeNodeModel(Service, Account);
-            child.ImagePath = "Refresh-16.png".GetImageUrl();
             child.Label = "Loading...";
             child.IsDummy = true;
             Children.Add(child);
