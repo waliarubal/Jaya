@@ -122,7 +122,15 @@
                     <Image
                         Width="16"
                         Height="16"
+                        IsVisible="{Binding IsHavingImage}"
                         Source="{Binding ImagePath, Mode=OneWay, Converter={StaticResource BitmapValueConverter}}" />
+                    <StackPanel IsVisible="{Binding PathParts.Count}">
+                        <DrawingPresenter
+                            Width="16"
+                            Height="16"
+                            Drawing="{DynamicResource Icon.Folder}"
+                            IsVisible="{Binding !IsHavingImage}" />
+                    </StackPanel>
                     <ItemsControl Padding="0" Items="{Binding PathParts, Mode=OneWay}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

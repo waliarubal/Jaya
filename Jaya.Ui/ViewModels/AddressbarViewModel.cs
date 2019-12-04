@@ -25,7 +25,7 @@ namespace Jaya.Ui.ViewModels
             };
             _navigationService = GetService<NavigationService>();
             _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
-            
+
             SearchQuery = string.Empty;
             SearchWatermark = "Search";
         }
@@ -61,8 +61,14 @@ namespace Jaya.Ui.ViewModels
         public string ImagePath
         {
             get => Get<string>();
-            private set => Set(value);
+            private set
+            {
+                Set(value);
+                RaisePropertyChanged(nameof(IsHavingImage));
+            }
         }
+
+        public bool IsHavingImage => !string.IsNullOrEmpty(ImagePath);
 
         public List<string> PathParts
         {
@@ -102,7 +108,7 @@ namespace Jaya.Ui.ViewModels
                 if (args.Directory.Type == FileSystemObjectType.Drive)
                     ImagePath = "Hdd-16.png".GetImageUrl();
                 else
-                    ImagePath = "Folder-16.png".GetImageUrl();
+                    ImagePath = null;
 
                 pathParts.AddRange(args.Directory.Path.Split(_pathSeparator, StringSplitOptions.RemoveEmptyEntries));
             }
