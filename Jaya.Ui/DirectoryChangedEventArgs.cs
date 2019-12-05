@@ -1,5 +1,6 @@
 ﻿using Jaya.Shared.Base;
 using Jaya.Shared.Models;
+using Jaya.Ui.Models;
 using System;
 
 namespace Jaya.Ui

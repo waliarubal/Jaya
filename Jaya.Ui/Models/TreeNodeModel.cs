@@ -47,7 +47,7 @@ namespace Jaya.Ui.Models
 
         #region properties
 
-        TreeNodeType? NodeType { get; }
+        internal TreeNodeType? NodeType { get; }
 
         public bool IsDummy => NodeType == TreeNodeType.Dummy;
 

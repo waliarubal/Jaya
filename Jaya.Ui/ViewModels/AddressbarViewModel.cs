@@ -1,6 +1,7 @@
 ﻿using Jaya.Shared;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
+using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Jaya.Ui.ViewModels
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly char[] _pathSeparator;
         ICommand _clearSearch;
+        TreeNodeType? _nodeType;
 
         public AddressbarViewModel()
         {
@@ -48,6 +50,32 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
+        TreeNodeType? NodeType
+        {
+            get => _nodeType;
+            set
+            {
+                if (value == _nodeType)
+                    return;
+
+                var oldValue = _nodeType;
+                _nodeType = value;
+
+                TriggerFileSystemObjectTypeChanged(oldValue);
+                TriggerFileSystemObjectTypeChanged(value);
+            }
+        }
+
+        public bool IsService => NodeType == TreeNodeType.Service;
+
+        public bool IsDrive => NodeType == TreeNodeType.Drive;
+
+        public bool IsDirectory => NodeType == TreeNodeType.Directory;
+
+        public bool IsAccount => NodeType == TreeNodeType.Account;
+
+        public bool IsComputer => NodeType == TreeNodeType.Computer;
+
         public ICommand NavigateBackCommand => _navigationService.NavigateBackCommand;
 
         public ICommand NavigateForwardCommand => _navigationService.NavigateForwardCommand;
@@ -61,14 +89,8 @@ namespace Jaya.Ui.ViewModels
         public string ImagePath
         {
             get => Get<string>();
-            private set
-            {
-                Set(value);
-                RaisePropertyChanged(nameof(IsHavingImage));
-            }
+            private set => Set(value);
         }
-
-        public bool IsHavingImage => !string.IsNullOrEmpty(ImagePath);
 
         public List<string> PathParts
         {
@@ -84,6 +106,32 @@ namespace Jaya.Ui.ViewModels
 
         #endregion
 
+        void TriggerFileSystemObjectTypeChanged(TreeNodeType? type)
+        {
+            switch (type)
+            {
+                case TreeNodeType.Service:
+                    RaisePropertyChanged(nameof(IsService));
+                    break;
+
+                case TreeNodeType.Account:
+                    RaisePropertyChanged(nameof(IsAccount));
+                    break;
+
+                case TreeNodeType.Computer:
+                    RaisePropertyChanged(nameof(IsComputer));
+                    break;
+
+                case TreeNodeType.Drive:
+                    RaisePropertyChanged(nameof(IsDrive));
+                    break;
+
+                case TreeNodeType.Directory:
+                    RaisePropertyChanged(nameof(IsDirectory));
+                    break;
+            }
+        }
+
         void ClearSearch()
         {
             SearchQuery = string.Empty;
@@ -96,19 +144,21 @@ namespace Jaya.Ui.ViewModels
             {
                 SearchWatermark = string.Format("Search {0}", args.Service.Name);
                 ImagePath = args.Service.ImagePath;
+                NodeType = TreeNodeType.Service;
             }
             else if (args.Directory == null || string.IsNullOrEmpty(args.Directory.Path))
             {
                 SearchWatermark = string.Format("Search {0}", args.Provider.Name);
                 ImagePath = args.Provider.ImagePath;
+                NodeType = args.Service.IsRootDrive ? TreeNodeType.Computer : TreeNodeType.Account;
             }
             else
             {
                 SearchWatermark = string.Format("Search {0}", args.Directory.Name);
                 if (args.Directory.Type == FileSystemObjectType.Drive)
-                    ImagePath = "Hdd-16.png".GetImageUrl();
+                    NodeType = TreeNodeType.Drive;
                 else
-                    ImagePath = null;
+                    NodeType = TreeNodeType.Directory;
 
                 pathParts.AddRange(args.Directory.Path.Split(_pathSeparator, StringSplitOptions.RemoveEmptyEntries));
             }
