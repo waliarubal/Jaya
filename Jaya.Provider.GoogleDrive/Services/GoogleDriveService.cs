@@ -40,7 +40,6 @@ namespace Jaya.Provider.GoogleDrive.Services
             Name = "Google Drive";
             ImagePath = "avares://Jaya.Provider.GoogleDrive/Assets/Images/GoogleDrive-32.png";
             Description = "View your Google Drive accounts, inspect their contents and play with directories & files stored within them.";
-            IsRootDrive = true;
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 

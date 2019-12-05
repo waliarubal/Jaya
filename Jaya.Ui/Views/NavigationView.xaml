@@ -50,16 +50,30 @@
                 <Setter Property="Height" Value="16" />
                 <Setter Property="Margin" Value="0 0 4 0" />
             </Style>
+            <Style Selector="Path[IsVisible=True].Icon">
+                <Setter Property="Width" Value="12" />
+                <Setter Property="Height" Value="12" />
+                <Setter Property="Margin" Value="0 0 4 0" />
+                <Setter Property="Stretch" Value="UniformToFill" />
+                <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+            </Style>
         </TreeView.Styles>
         <TreeView.ItemTemplate>
             <TreeDataTemplate ItemsSource="{Binding Children}">
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel IsVisible="{Binding !IsDummy}" Orientation="Horizontal">
-                        <Image IsVisible="{Binding IsHavingImage}" Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}}" />
-                        <StackPanel IsVisible="{Binding !IsHavingImage}" Orientation="Horizontal">
-                            <DrawingPresenter Drawing="{DynamicResource Icon.Folder}" IsVisible="{Binding !IsExpanded}" />
-                            <DrawingPresenter Drawing="{DynamicResource Icon.FolderOpen}" IsVisible="{Binding IsExpanded}" />
-                        </StackPanel>
+                    <Image IsVisible="{Binding IsService}" Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}}" />
+                    <DrawingPresenter Drawing="{DynamicResource Icon.CloudFolder}" IsVisible="{Binding IsAccount}" />
+                    <Path
+                        Classes="Icon"
+                        Data="M7 17H2a2 2 0 0 1-2-2V2C0 .9.9 0 2 0h16a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-5l4 2v1H3v-1l4-2zM2 2v11h16V2H2z"
+                        IsVisible="{Binding IsComputer}" />
+                    <Path
+                        Classes="Icon"
+                        Data="M2 2c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10.4 5.6A5 5 0 1 0 15 12V5l-2.6 2.6zM10 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM6 3v2h4V3H6zM4 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 16a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm12 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-16a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                        IsVisible="{Binding IsDrive}" />
+                    <StackPanel IsVisible="{Binding IsDirectory}" Orientation="Horizontal">
+                        <DrawingPresenter Drawing="{DynamicResource Icon.Folder}" IsVisible="{Binding !IsExpanded}" />
+                        <DrawingPresenter Drawing="{DynamicResource Icon.FolderOpen}" IsVisible="{Binding IsExpanded}" />
                     </StackPanel>
                     <DrawingPresenter
                         Classes="Spinner"

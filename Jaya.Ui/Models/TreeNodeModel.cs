@@ -7,6 +7,16 @@ using System.ComponentModel;
 
 namespace Jaya.Ui.Models
 {
+    public enum TreeNodeType: byte
+    {
+        Service,
+        Account,
+        Drive,
+        Directory,
+        Dummy,
+        Computer
+    }
+
     public class TreeNodeModel : ModelBase
     {
         TreeNodeModel _dummyChild;
@@ -15,11 +25,12 @@ namespace Jaya.Ui.Models
         public delegate void TreeNodeExpanded(TreeNodeModel node, bool isExpaded);
         public event TreeNodeExpanded NodeExpanded;
 
-        public TreeNodeModel(ProviderServiceBase service, AccountModelBase account)
+        public TreeNodeModel(ProviderServiceBase service, AccountModelBase account, TreeNodeType? nodeType)
         {
             Service = service;
             Account = account;
             Children = new ObservableCollection<TreeNodeModel>();
+            NodeType = nodeType;
 
             if (Service != null && Account != null)
             {
@@ -36,15 +47,23 @@ namespace Jaya.Ui.Models
 
         #region properties
 
+        TreeNodeType? NodeType { get; }
+
+        public bool IsDummy => NodeType == TreeNodeType.Dummy;
+
+        public bool IsService => NodeType == TreeNodeType.Service;
+
+        public bool IsDrive => NodeType == TreeNodeType.Drive;
+
+        public bool IsDirectory => NodeType == TreeNodeType.Directory;
+
+        public bool IsAccount => NodeType == TreeNodeType.Account;
+
+        public bool IsComputer => NodeType == TreeNodeType.Computer;
+
         public ProviderServiceBase Service { get; }
 
         public AccountModelBase Account { get; }
-
-        public bool IsDummy
-        {
-            get => Get<bool>();
-            private set => Set(value);
-        }
 
         public string Label
         {
@@ -52,16 +71,10 @@ namespace Jaya.Ui.Models
             set => Set(value);
         }
 
-        public bool IsHavingImage => !string.IsNullOrEmpty(ImagePath);
-
         public string ImagePath
         {
             get => Get<string>();
-            set
-            {
-                if(Set(value))
-                    RaisePropertyChanged(nameof(IsHavingImage));
-            }
+            set => Set(value);
         }
 
         public bool IsExpanded
@@ -119,9 +132,8 @@ namespace Jaya.Ui.Models
             if (IsHavingDummyChild)
                 return;
 
-            var child = _dummyChild = new TreeNodeModel(Service, Account);
+            var child = _dummyChild = new TreeNodeModel(Service, Account, TreeNodeType.Dummy);
             child.Label = "Loading...";
-            child.IsDummy = true;
             Children.Add(child);
         }
 

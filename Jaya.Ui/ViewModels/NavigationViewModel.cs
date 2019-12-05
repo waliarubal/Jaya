@@ -18,7 +18,7 @@ namespace Jaya.Ui.ViewModels
         {
             _shared = GetService<SharedService>();
 
-            Node = new TreeNodeModel(null, null);
+            Node = new TreeNodeModel(null, null, null);
             PopulateCommand.Execute(Node);
         }
 
@@ -94,7 +94,7 @@ namespace Jaya.Ui.ViewModels
                 {
                     var serviceInstance = service as ProviderServiceBase;
 
-                    var serviceNode = new TreeNodeModel(service as ProviderServiceBase, null);
+                    var serviceNode = new TreeNodeModel(service as ProviderServiceBase, null, TreeNodeType.Service);
                     serviceNode.Label = service.Name;
                     serviceNode.ImagePath = service.ImagePath;
                     serviceNode.NodeExpanded += OnNodeExpanded;
@@ -110,7 +110,7 @@ namespace Jaya.Ui.ViewModels
                 var accounts = await node.Service.GetAccountsAsync();
                 foreach (var account in accounts)
                 {
-                    var accountNode = new TreeNodeModel(node.Service, account);
+                    var accountNode = new TreeNodeModel(node.Service, account, node.Service.IsRootDrive ? TreeNodeType.Computer : TreeNodeType.Account);
                     accountNode.Label = account.Name;
                     accountNode.FileSystemObject = new DirectoryModel();
                     accountNode.ImagePath = account.ImagePath;
@@ -124,12 +124,10 @@ namespace Jaya.Ui.ViewModels
                 var currentDirectory = await node.Service.GetDirectoryAsync(node.Account, node.FileSystemObject as DirectoryModel);
                 foreach (var directory in currentDirectory.Directories)
                 {
-                    var fileSystemObjectNode = new TreeNodeModel(node.Service, node.Account);
+                    var fileSystemObjectNode = new TreeNodeModel(node.Service, node.Account, directory.Type == FileSystemObjectType.Drive ? TreeNodeType.Drive : TreeNodeType.Directory);
                     fileSystemObjectNode.Label = directory.Name;
                     fileSystemObjectNode.FileSystemObject = directory;
                     fileSystemObjectNode.NodeExpanded += OnNodeExpanded;
-                    if (directory.Type == FileSystemObjectType.Drive)
-                        fileSystemObjectNode.ImagePath = "Hdd-16.png".GetImageUrl();
                     fileSystemObjectNode.AddDummyChild();
                     AddChildNode(node, fileSystemObjectNode);
                 }
@@ -142,7 +140,7 @@ namespace Jaya.Ui.ViewModels
         {
             if (action == AccountAction.Added)
             {
-                var accountNode = new TreeNodeModel(node.Service, account);
+                var accountNode = new TreeNodeModel(node.Service, account, TreeNodeType.Account);
                 accountNode.Label = account.Name;
                 accountNode.FileSystemObject = new DirectoryModel();
                 accountNode.ImagePath = account.ImagePath;
