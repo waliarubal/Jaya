@@ -28,6 +28,17 @@
         Removed
     }
 
+    public enum ItemType : byte
+    {
+        Service,
+        Account,
+        Computer,
+        Drive,
+        Directory,
+        File,
+        Dummy
+    }
+
     public enum CommandType : byte
     {
         Exit,

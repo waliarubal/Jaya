@@ -7,16 +7,6 @@ using System.ComponentModel;
 
 namespace Jaya.Ui.Models
 {
-    public enum TreeNodeType: byte
-    {
-        Service,
-        Account,
-        Drive,
-        Directory,
-        Dummy,
-        Computer
-    }
-
     public class TreeNodeModel : ModelBase
     {
         TreeNodeModel _dummyChild;
@@ -25,7 +15,7 @@ namespace Jaya.Ui.Models
         public delegate void TreeNodeExpanded(TreeNodeModel node, bool isExpaded);
         public event TreeNodeExpanded NodeExpanded;
 
-        public TreeNodeModel(ProviderServiceBase service, AccountModelBase account, TreeNodeType? nodeType)
+        public TreeNodeModel(ProviderServiceBase service, AccountModelBase account, ItemType? nodeType)
         {
             Service = service;
             Account = account;
@@ -47,19 +37,19 @@ namespace Jaya.Ui.Models
 
         #region properties
 
-        internal TreeNodeType? NodeType { get; }
+        internal ItemType? NodeType { get; }
 
-        public bool IsDummy => NodeType == TreeNodeType.Dummy;
+        public bool IsDummy => NodeType == ItemType.Dummy;
 
-        public bool IsService => NodeType == TreeNodeType.Service;
+        public bool IsService => NodeType == ItemType.Service;
 
-        public bool IsDrive => NodeType == TreeNodeType.Drive;
+        public bool IsDrive => NodeType == ItemType.Drive;
 
-        public bool IsDirectory => NodeType == TreeNodeType.Directory;
+        public bool IsDirectory => NodeType == ItemType.Directory;
 
-        public bool IsAccount => NodeType == TreeNodeType.Account;
+        public bool IsAccount => NodeType == ItemType.Account;
 
-        public bool IsComputer => NodeType == TreeNodeType.Computer;
+        public bool IsComputer => NodeType == ItemType.Computer;
 
         public ProviderServiceBase Service { get; }
 
@@ -132,7 +122,7 @@ namespace Jaya.Ui.Models
             if (IsHavingDummyChild)
                 return;
 
-            var child = _dummyChild = new TreeNodeModel(Service, Account, TreeNodeType.Dummy);
+            var child = _dummyChild = new TreeNodeModel(Service, Account, ItemType.Dummy);
             child.Label = "Loading...";
             Children.Add(child);
         }

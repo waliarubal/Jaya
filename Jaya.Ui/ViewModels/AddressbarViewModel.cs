@@ -16,7 +16,7 @@ namespace Jaya.Ui.ViewModels
         readonly Subscription<SelectionChangedEventArgs> _onSelectionChanged;
         readonly char[] _pathSeparator;
         ICommand _clearSearch;
-        TreeNodeType? _nodeType;
+        ItemType? _nodeType;
 
         public AddressbarViewModel()
         {
@@ -50,7 +50,7 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        TreeNodeType? NodeType
+        ItemType? NodeType
         {
             get => _nodeType;
             set
@@ -66,15 +66,15 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        public bool IsService => NodeType == TreeNodeType.Service;
+        public bool IsService => NodeType == ItemType.Service;
 
-        public bool IsDrive => NodeType == TreeNodeType.Drive;
+        public bool IsDrive => NodeType == ItemType.Drive;
 
-        public bool IsDirectory => NodeType == TreeNodeType.Directory;
+        public bool IsDirectory => NodeType == ItemType.Directory;
 
-        public bool IsAccount => NodeType == TreeNodeType.Account;
+        public bool IsAccount => NodeType == ItemType.Account;
 
-        public bool IsComputer => NodeType == TreeNodeType.Computer;
+        public bool IsComputer => NodeType == ItemType.Computer;
 
         public ICommand NavigateBackCommand => _navigationService.NavigateBackCommand;
 
@@ -106,27 +106,27 @@ namespace Jaya.Ui.ViewModels
 
         #endregion
 
-        void TriggerFileSystemObjectTypeChanged(TreeNodeType? type)
+        void TriggerFileSystemObjectTypeChanged(ItemType? type)
         {
             switch (type)
             {
-                case TreeNodeType.Service:
+                case ItemType.Service:
                     RaisePropertyChanged(nameof(IsService));
                     break;
 
-                case TreeNodeType.Account:
+                case ItemType.Account:
                     RaisePropertyChanged(nameof(IsAccount));
                     break;
 
-                case TreeNodeType.Computer:
+                case ItemType.Computer:
                     RaisePropertyChanged(nameof(IsComputer));
                     break;
 
-                case TreeNodeType.Drive:
+                case ItemType.Drive:
                     RaisePropertyChanged(nameof(IsDrive));
                     break;
 
-                case TreeNodeType.Directory:
+                case ItemType.Directory:
                     RaisePropertyChanged(nameof(IsDirectory));
                     break;
             }
@@ -144,7 +144,7 @@ namespace Jaya.Ui.ViewModels
             {
                 SearchWatermark = string.Format("Search {0}", args.Service.Name);
                 ImagePath = args.Service.ImagePath;
-                NodeType = TreeNodeType.Service;
+                NodeType = ItemType.Service;
             }
             else if (args.Directory == null || string.IsNullOrEmpty(args.Directory.Path))
             {
@@ -152,15 +152,15 @@ namespace Jaya.Ui.ViewModels
 
                 SearchWatermark = string.Format("Search {0}", args.Account.Name);
                 ImagePath = args.Account.ImagePath;
-                NodeType = args.Service.IsRootDrive ? TreeNodeType.Computer : TreeNodeType.Account;
+                NodeType = args.Service.IsRootDrive ? ItemType.Computer : ItemType.Account;
             }
             else
             {
                 SearchWatermark = string.Format("Search {0}", args.Directory.Name);
                 if (args.Directory.Type == FileSystemObjectType.Drive)
-                    NodeType = TreeNodeType.Drive;
+                    NodeType = ItemType.Drive;
                 else
-                    NodeType = TreeNodeType.Directory;
+                    NodeType = ItemType.Directory;
 
                 pathParts.AddRange(args.Directory.Path.Split(_pathSeparator, StringSplitOptions.RemoveEmptyEntries));
             }

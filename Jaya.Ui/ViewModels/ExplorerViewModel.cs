@@ -14,7 +14,7 @@ namespace Jaya.Ui.ViewModels
 
         ICommand _invokeObject;
         ProviderServiceBase _service;
-        AccountModelBase _provider;
+        AccountModelBase _account;
 
         public ExplorerViewModel()
         {
@@ -34,7 +34,7 @@ namespace Jaya.Ui.ViewModels
             get
             {
                 if (_invokeObject == null)
-                    _invokeObject = new RelayCommand<FileSystemObjectModel>(InvokeObject);
+                    _invokeObject = new RelayCommand<ExplorerItemModel>(InvokeObject);
 
                 return _invokeObject;
             }
@@ -50,35 +50,86 @@ namespace Jaya.Ui.ViewModels
             private set => Set(value);
         }
 
+        public ExplorerItemModel Item
+        {
+            get => Get<ExplorerItemModel>();
+            private set => Set(value);
+        }
+
         #endregion
 
-        void InvokeObject(FileSystemObjectModel fileSystemObject)
+        void InvokeObject(ExplorerItemModel obj)
         {
-            switch(fileSystemObject.Type)
-            {
-                case FileSystemObjectType.Drive:
-                case FileSystemObjectType.Directory:
-                    var args = new SelectionChangedEventArgs(_service, _provider, fileSystemObject as DirectoryModel);
-                    EventAggregator.Publish(args);
-                    break;
+            //if (obj is FileSystemObjectModel fileSystemObject)
+            //{
+            //    switch (fileSystemObject.Type)
+            //    {
+            //        case FileSystemObjectType.Drive:
+            //        case FileSystemObjectType.Directory:
+            //            var args = new SelectionChangedEventArgs(_service, _account, obj as DirectoryModel);
+            //            EventAggregator.Publish(args);
+            //            break;
 
-                case FileSystemObjectType.File:
-                    break;
-            }
+            //        case FileSystemObjectType.File:
+            //            break;
+            //    }
+            //}
+            //else if (obj is ProviderServiceBase service)
+            //{
+            //    var args = new SelectionChangedEventArgs(service, null, null);
+            //    EventAggregator.Publish(args);
+            //}
+            //else if (obj is AccountModelBase account)
+            //{
+                
+            //}
         }
 
         async void SelectionChanged(SelectionChangedEventArgs args)
         {
             _service = args.Service;
-            _provider = args.Account;
+            _account = args.Account;
 
-            if (args.Directory != null)
+            if (_account == null)
+            {
+                var accounts = await _service.GetAccountsAsync();
+
+                var serviceItem = new ExplorerItemModel(ItemType.Service, _service.Name, _service.ImagePath);
+                foreach (var account in accounts)
+                {
+                    var accountItem = new ExplorerItemModel(_service.IsRootDrive ? ItemType.Computer : ItemType.Account, account.Name, account);
+                    serviceItem.Children.Add(accountItem);
+                }
+
+                Item = serviceItem;
+            }
+            else if (args.Directory != null)
             {
                 var directory = await args.Service.GetDirectoryAsync(args.Account, args.Directory);
+
+                var directoryItem = new ExplorerItemModel(directory.Type == FileSystemObjectType.Drive ? ItemType.Drive : ItemType.Directory, directory.Name, directory);
+                foreach (var subDirectory in directory.Directories)
+                {
+                    var subDirectoryItem = new ExplorerItemModel(subDirectory.Type == FileSystemObjectType.Drive ? ItemType.Drive : ItemType.Directory, subDirectory.Name, subDirectory);
+                    directoryItem.Children.Add(subDirectoryItem);
+                }
+                if (directory.Files != null)
+                {
+                    foreach (var file in directory.Files)
+                    {
+                        var fileItem = new ExplorerItemModel(ItemType.File, file.Name, file);
+                        directoryItem.Children.Add(fileItem);
+                    }
+                }
+
                 Directory = directory;
+                Item = directoryItem;
             }
             else
+            {
                 Directory = null;
+                Item = null;
+            }
         }
     }
 }

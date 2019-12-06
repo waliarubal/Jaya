@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
     xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+    xmlns:j="https://github.com/waliarubal/Jaya"
+    xmlns:m="clr-namespace:Jaya.Ui.Models;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="480"
@@ -18,6 +20,7 @@
         <c:FileSystemObjectToImageConverter x:Key="FileSystemObjectToImageConverter" />
         <c:FileSystemObjectToFileNameConverter x:Key="FileSystemObjectToFileNameConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
+        <j:BitmapValueConverter x:Key="BitmapValueConverter" />
     </UserControl.Resources>
     <Grid>
         <!--  details view  -->
@@ -66,7 +69,7 @@
             Padding="0"
             BorderBrush="Transparent"
             IsVisible="{Binding PaneConfig.IsThumbnailView, Mode=OneWay}"
-            Items="{Binding Directory.Children, Mode=OneWay}"
+            Items="{Binding Item.Children, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             SelectionMode="Multiple">
             <ListBox.Styles>
@@ -77,6 +80,20 @@
                     <Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />
                     <Setter Property="Margin" Value="2" />
                 </Style>
+                <Style Selector="Image[IsVisible=True].Icon">
+                    <Setter Property="Width" Value="48" />
+                    <Setter Property="Height" Value="48" />
+                </Style>
+                <Style Selector="DrawingPresenter[IsVisible=True].Icon">
+                    <Setter Property="Width" Value="48" />
+                    <Setter Property="Height" Value="48" />
+                </Style>
+                <Style Selector="Path[IsVisible=True].Icon">
+                    <Setter Property="Width" Value="48" />
+                    <Setter Property="Height" Value="48" />
+                    <Setter Property="Stretch" Value="UniformToFill" />
+                    <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+                </Style>
             </ListBox.Styles>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -84,20 +101,36 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Name="FileSyetemObjectEntry">
+                <DataTemplate DataType="{x:Type m:ExplorerItemModel}">
+                    <StackPanel Name="ObjectEntry">
                         <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #FileSyetemObjectEntry}">
+                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
                             </ia:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
                         <Image
-                            Width="48"
-                            Height="48"
-                            Source="{Binding Converter={StaticResource FileSystemObjectToImageConverter}, ConverterParameter=48}" />
+                            Classes="Icon"
+                            IsVisible="{Binding IsService}"
+                            Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=48}" />
+                        <DrawingPresenter
+                            Classes="Icon"
+                            Drawing="{DynamicResource Icon.CloudFolder}"
+                            IsVisible="{Binding IsAccount}" />
+                        <Path
+                            Classes="Icon"
+                            Data="M7 17H2a2 2 0 0 1-2-2V2C0 .9.9 0 2 0h16a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-5l4 2v1H3v-1l4-2zM2 2v11h16V2H2z"
+                            IsVisible="{Binding IsComputer}" />
+                        <Path
+                            Classes="Icon"
+                            Data="M2 2c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10.4 5.6A5 5 0 1 0 15 12V5l-2.6 2.6zM10 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM6 3v2h4V3H6zM4 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 16a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm12 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0-16a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+                            IsVisible="{Binding IsDrive}" />
+                        <DrawingPresenter
+                            Classes="Icon"
+                            Drawing="{DynamicResource Icon.TextFile}"
+                            IsVisible="{Binding IsFile}" />
                         <TextBlock
                             Width="54"
-                            Text="{Binding Mode=OneWay, Converter={StaticResource FileSystemObjectToFileNameConverter}}"
+                            Text="{Binding Mode=OneWay, Path=Label}"
                             TextAlignment="Center"
                             TextWrapping="Wrap" />
                     </StackPanel>

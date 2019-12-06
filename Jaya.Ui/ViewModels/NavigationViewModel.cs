@@ -91,7 +91,7 @@ namespace Jaya.Ui.ViewModels
                 {
                     var serviceInstance = service as ProviderServiceBase;
 
-                    var serviceNode = new TreeNodeModel(service as ProviderServiceBase, null, TreeNodeType.Service);
+                    var serviceNode = new TreeNodeModel(service as ProviderServiceBase, null, ItemType.Service);
                     serviceNode.Label = service.Name;
                     serviceNode.ImagePath = service.ImagePath;
                     serviceNode.NodeExpanded += OnNodeExpanded;
@@ -107,7 +107,7 @@ namespace Jaya.Ui.ViewModels
                 var accounts = await node.Service.GetAccountsAsync();
                 foreach (var account in accounts)
                 {
-                    var accountNode = new TreeNodeModel(node.Service, account, node.Service.IsRootDrive ? TreeNodeType.Computer : TreeNodeType.Account);
+                    var accountNode = new TreeNodeModel(node.Service, account, node.Service.IsRootDrive ? ItemType.Computer : ItemType.Account);
                     accountNode.Label = account.Name;
                     accountNode.FileSystemObject = new DirectoryModel();
                     accountNode.ImagePath = account.ImagePath;
@@ -121,7 +121,7 @@ namespace Jaya.Ui.ViewModels
                 var currentDirectory = await node.Service.GetDirectoryAsync(node.Account, node.FileSystemObject as DirectoryModel);
                 foreach (var directory in currentDirectory.Directories)
                 {
-                    var fileSystemObjectNode = new TreeNodeModel(node.Service, node.Account, directory.Type == FileSystemObjectType.Drive ? TreeNodeType.Drive : TreeNodeType.Directory);
+                    var fileSystemObjectNode = new TreeNodeModel(node.Service, node.Account, directory.Type == FileSystemObjectType.Drive ? ItemType.Drive : ItemType.Directory);
                     fileSystemObjectNode.Label = directory.Name;
                     fileSystemObjectNode.FileSystemObject = directory;
                     fileSystemObjectNode.NodeExpanded += OnNodeExpanded;
@@ -137,7 +137,7 @@ namespace Jaya.Ui.ViewModels
         {
             if (action == AccountAction.Added)
             {
-                var accountNode = new TreeNodeModel(node.Service, account, TreeNodeType.Account);
+                var accountNode = new TreeNodeModel(node.Service, account, ItemType.Account);
                 accountNode.Label = account.Name;
                 accountNode.FileSystemObject = new DirectoryModel();
                 accountNode.ImagePath = account.ImagePath;
