@@ -11,7 +11,7 @@ namespace Jaya.Ui.ViewModels
         readonly Subscription<SelectionChangedEventArgs> _onSelectionChanged;
         readonly SharedService _shared;
         ProviderServiceBase _service;
-        AccountModelBase _provider;
+        AccountModelBase _account;
         DirectoryModel _directory;
 
         public StatusbarViewModel()
@@ -38,11 +38,17 @@ namespace Jaya.Ui.ViewModels
             var count = 0L;
 
             _service = args.Service;
-            _provider = args.Account;
+            _account = args.Account;
 
-            if (args.Directory != null)
+            if (_account == null)
             {
-                _directory = await _service.GetDirectoryAsync(_provider, args.Directory);
+                var accounts = await _service.GetAccountsAsync();
+                foreach (var account in accounts)
+                    count += 1L;
+            }
+            else if (args.Directory != null)
+            {
+                _directory = await _service.GetDirectoryAsync(_account, args.Directory);
 
                 if (_directory.Directories != null)
                     count += _directory.Directories.Count;
