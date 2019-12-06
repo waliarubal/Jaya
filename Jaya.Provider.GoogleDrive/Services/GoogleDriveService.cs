@@ -31,6 +31,7 @@ namespace Jaya.Provider.GoogleDrive.Services
         const string MIME_TYPE_DIRECTORY = "application/vnd.google-apps.folder";
 
         ConfigModel _config;
+        IDataStore _dataStore;
 
         /// <summary>
         /// Refer pages https://www.daimto.com/google-drive-authentication-c/ and https://www.daimto.com/google-drive-api-c/ for examples.
@@ -41,6 +42,17 @@ namespace Jaya.Provider.GoogleDrive.Services
             ImagePath = "avares://Jaya.Provider.GoogleDrive/Assets/Images/GoogleDrive-32.png";
             Description = "View your Google Drive accounts, inspect their contents and play with directories & files stored within them.";
             ConfigurationEditorType = typeof(ConfigurationView);
+        }
+
+        IDataStore DataStore
+        {
+            get
+            {
+                if (_dataStore == null)
+                    _dataStore = new FileDataStore(ConfigurationDirectory, true);
+
+                return _dataStore;
+            }
         }
 
         ConfigModel Config
@@ -76,9 +88,8 @@ namespace Jaya.Provider.GoogleDrive.Services
                 ClientId = CLIENT_ID,
                 ClientSecret = CLIENT_SECRET
             };
-            var dataStore = new FileDataStore(ConfigurationDirectory, true);
 
-            var credentials = await GoogleWebAuthorizationBroker.AuthorizeAsync(secret, scopes, Environment.UserName, CancellationToken.None, dataStore);
+            var credentials = await GoogleWebAuthorizationBroker.AuthorizeAsync(secret, scopes, Environment.UserName, CancellationToken.None, DataStore);
             if (credentials.Token.IsExpired(SystemClock.Default))
             {
                 var isRefreshed = await credentials.RefreshTokenAsync(CancellationToken.None);
