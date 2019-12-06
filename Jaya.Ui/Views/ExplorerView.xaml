@@ -24,7 +24,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.Styles>
-            <Style Selector="DrawingPresenter[IsVisible=True].Spinner">
+            <Style Selector="DrawingPresenter.Spinner">
                 <Setter Property="Width" Value="16" />
                 <Setter Property="Height" Value="16" />
                 <Style.Animations>
@@ -103,12 +103,12 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding Object.Modified}" Header="Date Modified" />
+                <!--<DataGridTextColumn Binding="{Binding Object.Modified}" Header="Date Modified" />-->
                 <DataGridTextColumn Binding="{Binding Object.Type}" Header="Type" />
-                <DataGridTemplateColumn Header="Object.Size">
+                <DataGridTemplateColumn Header="Size">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding SizeString}" TextAlignment="Right" />
+                            <TextBlock Text="{Binding Object.SizeString}" TextAlignment="Right" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

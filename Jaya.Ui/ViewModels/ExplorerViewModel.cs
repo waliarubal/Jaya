@@ -44,12 +44,6 @@ namespace Jaya.Ui.ViewModels
 
         public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
 
-        public DirectoryModel Directory
-        {
-            get => Get<DirectoryModel>();
-            private set => Set(value);
-        }
-
         public ExplorerItemModel Item
         {
             get => Get<ExplorerItemModel>();
@@ -91,8 +85,8 @@ namespace Jaya.Ui.ViewModels
 
         async void SelectionChanged(SelectionChangedEventArgs args)
         {
-            IsBusy = true;
             Item = null;
+            IsBusy = true;
 
             _service = args.Service;
             _account = args.Account;
@@ -129,12 +123,7 @@ namespace Jaya.Ui.ViewModels
                     }
                 }
 
-                Directory = directory;
                 Item = directoryItem;
-            }
-            else
-            {
-                Directory = null;
             }
 
             IsBusy = false;
