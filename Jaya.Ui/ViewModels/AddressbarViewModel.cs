@@ -139,7 +139,7 @@ namespace Jaya.Ui.ViewModels
 
         void DirectoryChanged(DirectoryChangedEventArgs args)
         {
-            var pathParts = new List<string> { args.Service.Name, args.Provider.Name };
+            var pathParts = new List<string> { args.Service.Name };
             if (args.Provider == null)
             {
                 SearchWatermark = string.Format("Search {0}", args.Service.Name);
@@ -148,6 +148,8 @@ namespace Jaya.Ui.ViewModels
             }
             else if (args.Directory == null || string.IsNullOrEmpty(args.Directory.Path))
             {
+                pathParts.Add(args.Provider.Name);
+
                 SearchWatermark = string.Format("Search {0}", args.Provider.Name);
                 ImagePath = args.Provider.ImagePath;
                 NodeType = args.Service.IsRootDrive ? TreeNodeType.Computer : TreeNodeType.Account;

@@ -51,11 +51,8 @@ namespace Jaya.Ui.ViewModels
                 if (value == null)
                     return;
 
-                if (value.FileSystemObject != null)
-                {
-                    var args = new DirectoryChangedEventArgs(value.Service, value.Account, value.FileSystemObject as DirectoryModel);
-                    EventAggregator.Publish(args);
-                }
+                var args = new DirectoryChangedEventArgs(value.Service, value.Account, value.FileSystemObject as DirectoryModel);
+                EventAggregator.Publish(args);
             }
         }
 

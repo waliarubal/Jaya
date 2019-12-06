@@ -72,8 +72,13 @@ namespace Jaya.Ui.ViewModels
             _service = args.Service;
             _provider = args.Provider;
 
-            var directory = await args.Service.GetDirectoryAsync(args.Provider, args.Directory);
-            Directory = directory;
+            if (args.Directory != null)
+            {
+                var directory = await args.Service.GetDirectoryAsync(args.Provider, args.Directory);
+                Directory = directory;
+            }
+            else
+                Directory = null;
         }
     }
 }

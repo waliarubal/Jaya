@@ -6,7 +6,7 @@ using Jaya.Ui.Services;
 
 namespace Jaya.Ui.ViewModels
 {
-    public class StatusbarViewModel: ViewModelBase
+    public class StatusbarViewModel : ViewModelBase
     {
         readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
         readonly SharedService _shared;
@@ -35,15 +35,22 @@ namespace Jaya.Ui.ViewModels
 
         async void DirectoryChanged(DirectoryChangedEventArgs args)
         {
+            var count = 0L;
+
             _service = args.Service;
             _provider = args.Provider;
-            _directory = await _service.GetDirectoryAsync(_provider, args.Directory);
 
-            var count = 0L;
-            if (_directory.Directories != null)
-                count += _directory.Directories.Count;
-            if (_directory.Files != null)
-                count += _directory.Files.Count;
+            if (args.Directory != null)
+            {
+                _directory = await _service.GetDirectoryAsync(_provider, args.Directory);
+
+                if (_directory.Directories != null)
+                    count += _directory.Directories.Count;
+                if (_directory.Files != null)
+                    count += _directory.Files.Count;
+            }
+            else
+                _directory = null;
 
             Count = count;
         }
