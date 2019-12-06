@@ -7,13 +7,13 @@ namespace Jaya.Ui.ViewModels.Windows
 {
     public class MainViewModel : ViewModelBase
     {
-        readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
+        readonly Subscription<SelectionChangedEventArgs> _onDirectoryChanged;
         readonly SharedService _shared;
 
         public MainViewModel()
         {
             WindowTitle = Constants.APP_NAME;
-            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
+            _onDirectoryChanged = EventAggregator.Subscribe<SelectionChangedEventArgs>(DirectoryChanged);
             _shared = GetService<SharedService>();
         }
 
@@ -34,12 +34,12 @@ namespace Jaya.Ui.ViewModels.Windows
             private set => Set(value);
         }
 
-        void DirectoryChanged(DirectoryChangedEventArgs args)
+        void DirectoryChanged(SelectionChangedEventArgs args)
         {
-            if (args.Provider == null)
+            if (args.Account == null)
                 WindowTitle = Constants.APP_NAME;
             else if (args.Directory == null || string.IsNullOrEmpty(args.Directory.Path))
-                WindowTitle = args.Provider.Name;
+                WindowTitle = args.Account.Name;
             else
                 WindowTitle = args.Directory.Name;
         }

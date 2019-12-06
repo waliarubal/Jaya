@@ -13,7 +13,7 @@ namespace Jaya.Ui.ViewModels
     public class AddressbarViewModel : ViewModelBase
     {
         readonly NavigationService _navigationService;
-        readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
+        readonly Subscription<SelectionChangedEventArgs> _onSelectionChanged;
         readonly char[] _pathSeparator;
         ICommand _clearSearch;
         TreeNodeType? _nodeType;
@@ -26,7 +26,7 @@ namespace Jaya.Ui.ViewModels
                 Path.AltDirectorySeparatorChar
             };
             _navigationService = GetService<NavigationService>();
-            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
+            _onSelectionChanged = EventAggregator.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
 
             SearchQuery = string.Empty;
             SearchWatermark = "Search";
@@ -34,7 +34,7 @@ namespace Jaya.Ui.ViewModels
 
         ~AddressbarViewModel()
         {
-            EventAggregator.UnSubscribe(_onDirectoryChanged);
+            EventAggregator.UnSubscribe(_onSelectionChanged);
         }
 
         #region properties
@@ -137,10 +137,10 @@ namespace Jaya.Ui.ViewModels
             SearchQuery = string.Empty;
         }
 
-        void DirectoryChanged(DirectoryChangedEventArgs args)
+        void SelectionChanged(SelectionChangedEventArgs args)
         {
             var pathParts = new List<string> { args.Service.Name };
-            if (args.Provider == null)
+            if (args.Account == null)
             {
                 SearchWatermark = string.Format("Search {0}", args.Service.Name);
                 ImagePath = args.Service.ImagePath;
@@ -148,10 +148,10 @@ namespace Jaya.Ui.ViewModels
             }
             else if (args.Directory == null || string.IsNullOrEmpty(args.Directory.Path))
             {
-                pathParts.Add(args.Provider.Name);
+                pathParts.Add(args.Account.Name);
 
-                SearchWatermark = string.Format("Search {0}", args.Provider.Name);
-                ImagePath = args.Provider.ImagePath;
+                SearchWatermark = string.Format("Search {0}", args.Account.Name);
+                ImagePath = args.Account.ImagePath;
                 NodeType = args.Service.IsRootDrive ? TreeNodeType.Computer : TreeNodeType.Account;
             }
             else

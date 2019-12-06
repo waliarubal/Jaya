@@ -9,7 +9,7 @@ namespace Jaya.Ui.ViewModels
 {
     public class ExplorerViewModel: ViewModelBase
     {
-        readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
+        readonly Subscription<SelectionChangedEventArgs> _onSelectionChanged;
         readonly SharedService _shared;
 
         ICommand _invokeObject;
@@ -19,12 +19,12 @@ namespace Jaya.Ui.ViewModels
         public ExplorerViewModel()
         {
             _shared = GetService<SharedService>();
-            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
+            _onSelectionChanged = EventAggregator.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
         }
 
         ~ExplorerViewModel()
         {
-            EventAggregator.UnSubscribe(_onDirectoryChanged);
+            EventAggregator.UnSubscribe(_onSelectionChanged);
         }
 
         #region properties
@@ -58,7 +58,7 @@ namespace Jaya.Ui.ViewModels
             {
                 case FileSystemObjectType.Drive:
                 case FileSystemObjectType.Directory:
-                    var args = new DirectoryChangedEventArgs(_service, _provider, fileSystemObject as DirectoryModel);
+                    var args = new SelectionChangedEventArgs(_service, _provider, fileSystemObject as DirectoryModel);
                     EventAggregator.Publish(args);
                     break;
 
@@ -67,14 +67,14 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        async void DirectoryChanged(DirectoryChangedEventArgs args)
+        async void SelectionChanged(SelectionChangedEventArgs args)
         {
             _service = args.Service;
-            _provider = args.Provider;
+            _provider = args.Account;
 
             if (args.Directory != null)
             {
-                var directory = await args.Service.GetDirectoryAsync(args.Provider, args.Directory);
+                var directory = await args.Service.GetDirectoryAsync(args.Account, args.Directory);
                 Directory = directory;
             }
             else

@@ -14,25 +14,25 @@ namespace Jaya.Ui.Services
     public sealed class NavigationService: IService
     {
         readonly CommandService _commandService;
-        readonly Stack<DirectoryChangedEventArgs> _backwardStack, _forwardStack;
-        readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
+        readonly Stack<SelectionChangedEventArgs> _backwardStack, _forwardStack;
+        readonly Subscription<SelectionChangedEventArgs> _onSelectionChanged;
         RelayCommand _navigateBack, _navigateForward;
         RelayCommand<WindowOptionsModel> _openWindow;
-        DirectoryChangedEventArgs _directoryChangedArgs;
+        SelectionChangedEventArgs _directoryChangedArgs;
 
         [ImportingConstructor]
         public NavigationService([Import(nameof(CommandService))]IService commandService)
         {
             _commandService = commandService as CommandService;
 
-            _backwardStack = new Stack<DirectoryChangedEventArgs>();
-            _forwardStack = new Stack<DirectoryChangedEventArgs>();
-            _onDirectoryChanged = _commandService.EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
+            _backwardStack = new Stack<SelectionChangedEventArgs>();
+            _forwardStack = new Stack<SelectionChangedEventArgs>();
+            _onSelectionChanged = _commandService.EventAggregator.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
         }
 
         ~NavigationService()
         {
-            _commandService.EventAggregator.UnSubscribe(_onDirectoryChanged);
+            _commandService.EventAggregator.UnSubscribe(_onSelectionChanged);
         }
 
         #region properties
@@ -108,7 +108,7 @@ namespace Jaya.Ui.Services
             _commandService.EventAggregator.Publish(args);
         }
 
-        void DirectoryChanged(DirectoryChangedEventArgs args)
+        void SelectionChanged(SelectionChangedEventArgs args)
         {
             if (args.Direction == NavigationDirection.Unknown)
             {

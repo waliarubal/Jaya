@@ -8,7 +8,7 @@ namespace Jaya.Ui.ViewModels
 {
     public class StatusbarViewModel : ViewModelBase
     {
-        readonly Subscription<DirectoryChangedEventArgs> _onDirectoryChanged;
+        readonly Subscription<SelectionChangedEventArgs> _onSelectionChanged;
         readonly SharedService _shared;
         ProviderServiceBase _service;
         AccountModelBase _provider;
@@ -16,13 +16,13 @@ namespace Jaya.Ui.ViewModels
 
         public StatusbarViewModel()
         {
-            _onDirectoryChanged = EventAggregator.Subscribe<DirectoryChangedEventArgs>(DirectoryChanged);
+            _onSelectionChanged = EventAggregator.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
             _shared = GetService<SharedService>();
         }
 
         ~StatusbarViewModel()
         {
-            EventAggregator.UnSubscribe(_onDirectoryChanged);
+            EventAggregator.UnSubscribe(_onSelectionChanged);
         }
 
         public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
@@ -33,12 +33,12 @@ namespace Jaya.Ui.ViewModels
             private set => Set(value);
         }
 
-        async void DirectoryChanged(DirectoryChangedEventArgs args)
+        async void SelectionChanged(SelectionChangedEventArgs args)
         {
             var count = 0L;
 
             _service = args.Service;
-            _provider = args.Provider;
+            _provider = args.Account;
 
             if (args.Directory != null)
             {
