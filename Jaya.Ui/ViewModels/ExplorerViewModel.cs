@@ -60,6 +60,8 @@ namespace Jaya.Ui.ViewModels
 
         void InvokeObject(ExplorerItemModel obj)
         {
+            IsBusy = true;
+
             //if (obj is FileSystemObjectModel fileSystemObject)
             //{
             //    switch (fileSystemObject.Type)
@@ -81,12 +83,17 @@ namespace Jaya.Ui.ViewModels
             //}
             //else if (obj is AccountModelBase account)
             //{
-                
+
             //}
+
+            IsBusy = false;
         }
 
         async void SelectionChanged(SelectionChangedEventArgs args)
         {
+            IsBusy = true;
+            Item = null;
+
             _service = args.Service;
             _account = args.Account;
 
@@ -128,8 +135,9 @@ namespace Jaya.Ui.ViewModels
             else
             {
                 Directory = null;
-                Item = null;
             }
+
+            IsBusy = false;
         }
     }
 }

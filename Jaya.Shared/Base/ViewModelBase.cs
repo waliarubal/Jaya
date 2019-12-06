@@ -19,6 +19,12 @@ namespace Jaya.Shared.Base
 
         #region properties
 
+        public bool IsBusy
+        {
+            get => Get<bool>();
+            protected set => Set(value);
+        }
+
         protected bool IsDesignMode => Design.IsDesignMode;
 
         protected EventAggregator EventAggregator
