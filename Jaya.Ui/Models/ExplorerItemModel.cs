@@ -34,6 +34,8 @@ namespace Jaya.Ui.Models
 
         public bool IsFile => Type == ItemType.File;
 
+        public bool IsHavingMetaData => IsAccount || IsDrive || IsDirectory;
+
         public string Label
         {
             get => Get<string>();

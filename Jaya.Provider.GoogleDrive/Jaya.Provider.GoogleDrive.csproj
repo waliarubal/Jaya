@@ -13,8 +13,8 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.0-preview9" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.0-preview9" />
+    <PackageReference Include="Avalonia" Version="0.9.0-rc.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.0-rc.1" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.42.0.1772" />
     <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.42.0.1602" />
   </ItemGroup>
