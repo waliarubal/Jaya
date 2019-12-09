@@ -31,6 +31,7 @@ namespace Jaya.Provider.GoogleDrive.Services
         const string MIME_TYPE_DIRECTORY = "application/vnd.google-apps.folder";
 
         ConfigModel _config;
+        UserCredential _credential;
         IDataStore _dataStore;
 
         /// <summary>
@@ -74,8 +75,11 @@ namespace Jaya.Provider.GoogleDrive.Services
             };
         }
 
-        async Task<UserCredential> GetCredentials()
+        async Task<UserCredential> GetCredential()
         {
+            if (_credential != null && !_credential.Token.IsExpired(SystemClock.Default))
+                return _credential;
+
             var scopes = new string[]
             {
                 DriveService.Scope.Drive,
@@ -89,15 +93,15 @@ namespace Jaya.Provider.GoogleDrive.Services
                 ClientSecret = CLIENT_SECRET
             };
 
-            var credentials = await GoogleWebAuthorizationBroker.AuthorizeAsync(secret, scopes, Environment.UserName, CancellationToken.None, DataStore);
-            if (credentials.Token.IsExpired(SystemClock.Default))
+            _credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(secret, scopes, Environment.UserName, CancellationToken.None, DataStore);
+            if (_credential.Token.IsExpired(SystemClock.Default))
             {
-                var isRefreshed = await credentials.RefreshTokenAsync(CancellationToken.None);
+                var isRefreshed = await _credential.RefreshTokenAsync(CancellationToken.None);
                 if (!isRefreshed)
                     return null;
             }
 
-            return credentials;
+            return _credential;
         }
 
         public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null)
@@ -113,7 +117,7 @@ namespace Jaya.Provider.GoogleDrive.Services
             model.Directories = new List<DirectoryModel>();
             model.Files = new List<FileModel>();
 
-            var credentials = await GetCredentials();
+            var credentials = await GetCredential();
 
             var parent = directory == null || directory.Id == null ? "root" : directory.Id;
 
@@ -180,7 +184,7 @@ namespace Jaya.Provider.GoogleDrive.Services
 
         protected override async Task<AccountModelBase> AddAccountAsync()
         {
-            var credentials = await GetCredentials();
+            var credentials = await GetCredential();
             if (credentials == null)
                 return null;
 
