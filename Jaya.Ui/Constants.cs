@@ -52,6 +52,7 @@
         TogglePaneDetails,
         ToggleItemCheckBoxes,
         ToggleFileNameExtensions,
-        ToggleHiddenItems
+        ToggleHiddenItems,
+        ChangeTheme
     }
 }

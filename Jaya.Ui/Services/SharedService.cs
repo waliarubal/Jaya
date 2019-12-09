@@ -117,7 +117,12 @@ namespace Jaya.Ui.Services
 
         void ParameterizedCommandAction(KeyValuePair<byte, object> parameter)
         {
-
+            var command = (CommandType)parameter.Key;
+            switch(command)
+            {
+                case CommandType.ChangeTheme:
+                    break;
+            }
         }
     }
 }
