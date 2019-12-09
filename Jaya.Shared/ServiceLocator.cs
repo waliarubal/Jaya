@@ -128,17 +128,5 @@ namespace Jaya.Shared
             return (T)_providersCache[type.Name];
 
         }
-
-        /*
-        public object CreateInstance(Type type)
-        {
-            return null;
-        }
-
-        public T CreateInstance<T>()
-        {
-            return default;
-        }
-        */
     }
 }
