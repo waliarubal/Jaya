@@ -49,7 +49,10 @@ namespace Jaya.Ui.Models
             set
             {
                 if (Set(value))
+                {
                     App.ThemeSelector.SelectedTheme = value;
+                    Set(value.Name, nameof(ThemeName), false);
+                }
             }
         }
 
