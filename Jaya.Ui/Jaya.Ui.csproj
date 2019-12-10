@@ -37,7 +37,7 @@
   <!--enter plugin entries below for debugging-->
   <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <PackageReference Include="Dropbox.Api" Version="4.9.4" />
-    <PackageReference Include="Google.Apis.Drive.v3" Version="1.42.0.1772" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.42.0.1778" />
     <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.42.0.1602" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug'">
