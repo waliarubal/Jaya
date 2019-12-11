@@ -59,5 +59,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Targets>Build</Targets>
     </ProjectReference>
+    <ProjectReference Include="..\Jaya.Provider.Ftp\Jaya.Provider.Ftp.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <OutputItemType>Content</OutputItemType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Targets>Build</Targets>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Jaya.Shared.Models;
 using Newtonsoft.Json;
 
-namespace Jaya.Provider.Dropbox.Models
+namespace Jaya.Provider.Ftp.Models
 {
     public class AccountModel: AccountModelBase
     {
@@ -12,13 +12,6 @@ namespace Jaya.Provider.Dropbox.Models
 
         [JsonProperty]
         public string Email
-        {
-            get => Get<string>();
-            set => Set(value);
-        }
-
-        [JsonProperty]
-        public string Token
         {
             get => Get<string>();
             set => Set(value);

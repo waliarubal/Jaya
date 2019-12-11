@@ -7,7 +7,7 @@ namespace Jaya.Provider.GoogleDrive.Models
     {
         public AccountModel(string id, string name): base(id, name)
         {
-            ImagePath = "avares://Jaya.Provider.GoogleDrive/Assets/Images/Account-32.png";
+            
         }
 
         [JsonProperty]

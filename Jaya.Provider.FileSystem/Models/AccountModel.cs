@@ -7,7 +7,7 @@ namespace Jaya.Provider.FileSystem.Models
     {
         public AccountModel() : base(Environment.MachineName, Environment.MachineName)
         {
-            ImagePath = "avares://Jaya.Provider.FileSystem/Assets/Images/Computer-32.png";
+            
         }
     }
 }
