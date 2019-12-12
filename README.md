@@ -8,7 +8,7 @@
 
 **Jaya - Cross Plat** is a small .NET Core based cross platform file explorer application which runs on Windows, Mac and Linux. Its goal is very simple, *"To allow browsing and managing of several file systems simultaneously using a one  application which should work and look similar on all platforms it supports."*.
 
-Application is designed to be plug-able from the ground up i.e. anyone with experience of working with .NET Framework will be able to add support for new storage services by impleting a simple plugin. Support for below mentioned storage services are complete (or planned) as of now. If you would like addition of more storage services, please raise request [here](https://github.com/waliarubal/Jaya/issues).
+Application is designed to be plug-able from the ground up i.e. anyone with experience of working with .NET Framework will be able to add support for new storage services by implementing a simple plugin. Support for below mentioned storage services are complete (or planned) as of now. If you would like addition of more storage services, please raise request [here](https://github.com/waliarubal/Jaya/issues).
 - [x] File System
 - [x] Dropbox
 - [x] Google Drive
