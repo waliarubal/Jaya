@@ -107,6 +107,20 @@ namespace Jaya.Ui.Models
             }
         }
 
+        [JsonProperty]
+        public bool IsStatusBarVisible
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
+        public bool IsRibbonVisible
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         protected override ConfigModelBase Empty()
         {
             return new PaneConfigModel
@@ -117,7 +131,8 @@ namespace Jaya.Ui.Models
                 IsDetailsPaneVisible = false,
                 IsPreviewPaneVisible = false,
                 IsDetailsView = false,
-                IsThumbnailView = true
+                IsThumbnailView = true,
+                IsStatusBarVisible = true
             };
         }
 

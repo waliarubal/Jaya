@@ -18,5 +18,7 @@ namespace Jaya.Ui.ViewModels
         public IList<ITheme> Themes => App.ThemeSelector.Themes;
 
         public ApplicationConfigModel ApplicationConfig => _shared.ApplicationConfiguration;
+
+        public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
     }
 }

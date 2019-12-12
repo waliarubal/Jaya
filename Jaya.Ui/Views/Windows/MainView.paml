@@ -20,7 +20,7 @@
     <DockPanel>
         <v:ToolbarView DockPanel.Dock="Top" IsVisible="{Binding ToolbarConfig.IsVisible, Mode=OneWay}" />
         <v:AddressbarView DockPanel.Dock="Top" />
-        <v:StatusbarView DockPanel.Dock="Bottom" />
+        <v:StatusbarView DockPanel.Dock="Bottom" IsVisible="{Binding PaneConfig.IsStatusBarVisible, Mode=OneWay}" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding PaneConfig.NavigationPaneWidth, Mode=OneWay}" />

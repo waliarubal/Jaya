@@ -52,7 +52,8 @@
         <CheckBox
             Grid.Row="1"
             Grid.ColumnSpan="3"
-            Content="Do not use custom window chrome." />
+            Content="Use ribbon interface instead of menu and toolbar."
+            IsChecked="{Binding PaneConfig.IsRibbonVisible, Mode=TwoWay}" />
 
         <CheckBox
             Grid.Row="2"
@@ -62,6 +63,7 @@
         <CheckBox
             Grid.Row="3"
             Grid.ColumnSpan="3"
-            Content="Show status bar." />
+            Content="Show status bar."
+            IsChecked="{Binding PaneConfig.IsStatusBarVisible, Mode=TwoWay}" />
     </Grid>
 </UserControl>
