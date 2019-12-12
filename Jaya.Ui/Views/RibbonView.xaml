@@ -4,15 +4,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
+    d:DesignHeight="120"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:RibbonViewModel />
+    </UserControl.DataContext>
     <TabControl>
-        <TabItem>
-            <TabItem.Header>
-                Tab 1
-            </TabItem.Header>
+        <TabItem Header="File">
             Hello World
+        </TabItem>
+        <TabItem Header="Edit">
+            Hello World 2
+        </TabItem>
+        <TabItem Header="View">
+            Hello World 3
+        </TabItem>
+        <TabItem Header="Help">
+            Hello World 3
         </TabItem>
     </TabControl>
 </UserControl>

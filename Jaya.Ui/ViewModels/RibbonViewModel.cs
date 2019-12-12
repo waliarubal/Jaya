@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Jaya.Shared.Base;
 
 namespace Jaya.Ui.ViewModels
 {
