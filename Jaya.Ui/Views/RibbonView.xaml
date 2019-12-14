@@ -11,6 +11,114 @@
     <UserControl.DataContext>
         <vm:RibbonViewModel />
     </UserControl.DataContext>
+    <UserControl.Styles>
+        <!--  tab control  -->
+        <Style Selector="TabControl">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border
+                        Margin="{TemplateBinding Margin}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <DockPanel>
+                            <ItemsPresenter
+                                Name="PART_ItemsPresenter"
+                                ItemTemplate="{TemplateBinding ItemTemplate}"
+                                Items="{TemplateBinding Items}"
+                                ItemsPanel="{TemplateBinding ItemsPanel}">
+                            </ItemsPresenter>
+                            <ContentPresenter
+                                Name="PART_SelectedContentHost"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding SelectedContent}"
+                                ContentTemplate="{TemplateBinding SelectedContentTemplate}">
+                            </ContentPresenter>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Top]">
+            <Setter Property="Padding" Value="0 4 0 0" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Top] /template/ ItemsPresenter#PART_ItemsPresenter">
+            <Setter Property="DockPanel.Dock" Value="Top" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Bottom] /template/ ItemsPresenter#PART_ItemsPresenter">
+            <Setter Property="DockPanel.Dock" Value="Bottom" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Bottom]">
+            <Setter Property="Padding" Value="0 0 0 4" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Left] /template/ ItemsPresenter#PART_ItemsPresenter">
+            <Setter Property="DockPanel.Dock" Value="Left" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Left] /template/ ItemsPresenter#PART_ItemsPresenter &gt; WrapPanel">
+            <Setter Property="Orientation" Value="Vertical" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Left]">
+            <Setter Property="Padding" Value="4 0 0 0" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Right] /template/ ItemsPresenter#PART_ItemsPresenter">
+            <Setter Property="DockPanel.Dock" Value="Right" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Right] /template/ ItemsPresenter#PART_ItemsPresenter &gt; WrapPanel">
+            <Setter Property="Orientation" Value="Vertical" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Right]">
+            <Setter Property="Padding" Value="0 0 0 4" />
+        </Style>
+
+        <!--  tab item  -->
+        <Style Selector="TabItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLightBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter
+                        Name="PART_ContentPresenter"
+                        Margin="{TemplateBinding Margin}"
+                        Padding="{TemplateBinding Padding}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Content="{TemplateBinding Header}"
+                        ContentTemplate="{TemplateBinding HeaderTemplate}" />
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="TabItem:disabled">
+            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+        </Style>
+        <Style Selector="TabItem:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}" />
+        </Style>
+        <Style Selector="TabItem:selected">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+        </Style>
+        <Style Selector="TabItem:selected:focus">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush3}" />
+        </Style>
+        <Style Selector="TabItem:selected:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush3}" />
+        </Style>
+        <Style Selector="TabItem:selected:focus:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush2}" />
+        </Style>
+        <Style Selector="TabItem[TabStripPlacement=Right]">
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
+    </UserControl.Styles>
     <TabControl>
         <TabItem Header="File">
             Hello World
