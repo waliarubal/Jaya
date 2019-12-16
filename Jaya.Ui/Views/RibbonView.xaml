@@ -17,7 +17,7 @@
             <Setter Property="IsHitTestVisible" Value="False" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value=".5" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
             <Setter Property="Margin" Value="2 0" />
         </Style>
 
@@ -106,6 +106,10 @@
             <Setter Property="Height" Value="16" />
         </Style>
 
+        <Style Selector="TabItem &gt; StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
+
         <!--  ribbon  -->
         <Style Selector="TabControl">
             <Setter Property="Template">
@@ -128,7 +132,7 @@
                             <Border
                                 Padding="4,0,4,4"
                                 BorderBrush="{DynamicResource ThemeBorderMidBrush}"
-                                BorderThickness="1">
+                                BorderThickness=".5">
                                 <ContentPresenter
                                     Name="PART_SelectedContentHost"
                                     Margin="{TemplateBinding Padding}"
@@ -152,7 +156,7 @@
 
         <!--  ribbon item  -->
         <Style Selector="TabItem">
-            <Setter Property="BorderThickness" Value="1 1 1 0" />
+            <Setter Property="BorderThickness" Value=".5 .5 .5 0" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
@@ -192,13 +196,26 @@
     </UserControl.Styles>
     <TabControl>
         <TabItem Header="File">
-            <StackPanel Orientation="Horizontal">
-                <Button Classes="Large" ToolTip.Tip="New Folder">
-                    <StackPanel>
-                        <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
-                        <TextBlock Text="New Folder" />
-                    </StackPanel>
-                </Button>
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Button Classes="Large" ToolTip.Tip="New Folder">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
+                            <TextBlock Text="New Folder" />
+                        </StackPanel>
+                    </Button>
+                    <TextBlock
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        FontSize="{DynamicResource FontSizeSmall}"
+                        Text="New" />
+                </Grid>
+
+                <Border Classes="Separator" />
                 <StackPanel>
                     <Button Classes="Small" ToolTip.Tip="Properties">
                         <StackPanel>
