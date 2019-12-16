@@ -12,7 +12,68 @@
         <vm:RibbonViewModel />
     </UserControl.DataContext>
     <UserControl.Styles>
-        <!--  tab control  -->
+        <Style Selector="Border.Separator">
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value=".5" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+            <Setter Property="Margin" Value="2 0" />
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="Margin" Value="1 0" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="MinWidth" Value="21" />
+            <Setter Property="MinHeight" Value="21" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+        </Style>
+        <Style Selector="Button:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+        </Style>
+        <Style Selector="Button:disabled">
+            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+        </Style>
+
+        <Style Selector="ToggleButton">
+            <Setter Property="Margin" Value="1 0" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="MinWidth" Value="21" />
+            <Setter Property="MinHeight" Value="21" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+        </Style>
+        <Style Selector="ToggleButton:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+        </Style>
+        <Style Selector="ToggleButton:disabled">
+            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+        </Style>
+        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+        </Style>
+
+        <Style Selector="Button &gt; StackPanel &gt; DrawingPresenter">
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+        </Style>
+        <Style Selector="ToggleButton &gt; StackPanel &gt; DrawingPresenter">
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+        </Style>
+
+        <!--  ribbon  -->
         <Style Selector="TabControl">
             <Setter Property="Template">
                 <ControlTemplate>
@@ -31,10 +92,7 @@
                                 ItemsPanel="{TemplateBinding ItemsPanel}"
                                 ZIndex="999">
                             </ItemsPresenter>
-                            <Border
-                                Background="{DynamicResource ThemeAccentBrush3}"
-                                BorderBrush="{DynamicResource ThemeControlMidBrush}"
-                                BorderThickness="1">
+                            <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
                                 <ContentPresenter
                                     Name="PART_SelectedContentHost"
                                     Margin="{TemplateBinding Padding}"
@@ -56,7 +114,7 @@
             <Setter Property="DockPanel.Dock" Value="Top" />
         </Style>
 
-        <!--  tab item  -->
+        <!--  ribbon item  -->
         <Style Selector="TabItem">
             <Setter Property="BorderThickness" Value="1 1 1 0" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -87,15 +145,15 @@
         </Style>
         <Style Selector="TabItem:pointerover">
             <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+            <Setter Property="Margin" Value="0" />
         </Style>
         <Style Selector="TabItem:selected">
-            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush3}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
             <Setter Property="Margin" Value="0 0 0 -1" />
         </Style>
-        <Style Selector="TabItem:selected:focus:pointerover">
-            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush2}" />
-        </Style>
+
     </UserControl.Styles>
     <TabControl>
         <TabItem Header="File">

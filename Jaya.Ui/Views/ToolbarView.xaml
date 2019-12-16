@@ -88,11 +88,6 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
             </Style>
 
-            <Style Selector="Button &gt; Image, ToggleButton &gt; Image">
-                <Setter Property="Width" Value="16" />
-                <Setter Property="Height" Value="16" />
-            </Style>
-
             <Style Selector="Button &gt; DrawingPresenter">
                 <Setter Property="Width" Value="16" />
                 <Setter Property="Height" Value="16" />
