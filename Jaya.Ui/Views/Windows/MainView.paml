@@ -18,8 +18,9 @@
       <v:MenuView />
     </j:StyledWindow.HeaderContent>
     <DockPanel>
+        <v:RibbonView DockPanel.Dock="Top" Height="100" IsVisible="{Binding PaneConfig.IsRibbonVisible, Mode=OneWay}" />
         <v:ToolbarView DockPanel.Dock="Top" IsVisible="{Binding ToolbarConfig.IsVisible, Mode=OneWay}" />
-        <v:AddressbarView DockPanel.Dock="Top" />
+        <v:AddressbarView DockPanel.Dock="Top" IsVisible="{Binding ,Mode=OneWay}" />
         <v:StatusbarView DockPanel.Dock="Bottom" IsVisible="{Binding PaneConfig.IsStatusBarVisible, Mode=OneWay}" />
         <Grid>
             <Grid.ColumnDefinitions>

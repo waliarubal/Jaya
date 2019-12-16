@@ -5,13 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    d:DesignHeight="120"
+    d:DesignHeight="100"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:RibbonViewModel />
     </UserControl.DataContext>
     <UserControl.Styles>
+        <!--  separator  -->
         <Style Selector="Border.Separator">
             <Setter Property="IsHitTestVisible" Value="False" />
             <Setter Property="Background" Value="Transparent" />
@@ -64,7 +65,39 @@
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
         </Style>
 
-        <Style Selector="Button &gt; StackPanel &gt; DrawingPresenter">
+        <Style Selector="Button.Large">
+            <Setter Property="MinWidth" Value="38" />
+            <Setter Property="MaxWidth" Value="68" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style Selector="Button.Small">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style Selector="Button.Large &gt; StackPanel">
+            <Setter Property="Orientation" Value="Vertical" />
+        </Style>
+        <Style Selector="Button.Small &gt; StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
+
+        <Style Selector="Button.Large &gt; StackPanel &gt; TextBlock">
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0 2 0 0" />
+        </Style>
+        <Style Selector="Button.Small &gt; StackPanel &gt; TextBlock">
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="Margin" Value="2 0 0 0" />
+        </Style>
+
+        <Style Selector="Button.Large &gt; StackPanel &gt; DrawingPresenter">
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="32" />
+        </Style>
+        <Style Selector="Button.Small &gt; StackPanel &gt; DrawingPresenter">
             <Setter Property="Width" Value="16" />
             <Setter Property="Height" Value="16" />
         </Style>
@@ -92,7 +125,10 @@
                                 ItemsPanel="{TemplateBinding ItemsPanel}"
                                 ZIndex="999">
                             </ItemsPresenter>
-                            <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                            <Border
+                                Padding="4,0,4,4"
+                                BorderBrush="{DynamicResource ThemeBorderMidBrush}"
+                                BorderThickness="1">
                                 <ContentPresenter
                                     Name="PART_SelectedContentHost"
                                     Margin="{TemplateBinding Padding}"
@@ -153,11 +189,41 @@
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
             <Setter Property="Margin" Value="0 0 0 -1" />
         </Style>
-
     </UserControl.Styles>
     <TabControl>
         <TabItem Header="File">
-            Hello World
+            <StackPanel Orientation="Horizontal">
+                <Button Classes="Large" ToolTip.Tip="New Folder">
+                    <StackPanel>
+                        <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
+                        <TextBlock Text="New Folder" />
+                    </StackPanel>
+                </Button>
+                <StackPanel>
+                    <Button Classes="Small" ToolTip.Tip="Properties">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
+                            <TextBlock Text="Properties" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Small" ToolTip.Tip="Open">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.OpenFile}" />
+                            <TextBlock Text="Open" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <Border Classes="Separator" />
+                <Button
+                    Classes="Large"
+                    Command="{Binding SimpleCommand}"
+                    ToolTip.Tip="Exit">
+                    <StackPanel>
+                        <DrawingPresenter Drawing="{DynamicResource Icon.Close}" />
+                        <TextBlock Text="Exit" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
         </TabItem>
         <TabItem Header="Edit">
             Hello World 2
