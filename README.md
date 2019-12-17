@@ -36,11 +36,15 @@ This project is in beta at the moment so it's not suitable for general use.
 
 ![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/00.png)
 
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/06.png)
+
 ![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/02.png)
 
 ![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/05.png)
 
 ![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/01.png)
+
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/07.png)
 
 ![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/03.png)
 
