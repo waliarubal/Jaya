@@ -18,7 +18,7 @@
       <v:MenuView IsVisible="{Binding !PaneConfig.IsRibbonVisible, Mode=OneWay}" />
     </j:StyledWindow.HeaderContent>
     <DockPanel>
-        <v:RibbonView DockPanel.Dock="Top" Height="108" IsVisible="{Binding $parent[DockPanel].DataContext.PaneConfig.IsRibbonVisible, Mode=OneWay}" />
+        <v:RibbonView DockPanel.Dock="Top" Height="114" IsVisible="{Binding $parent[DockPanel].DataContext.PaneConfig.IsRibbonVisible, Mode=OneWay}" />
         <v:ToolbarView DockPanel.Dock="Top" IsVisible="{Binding $parent[DockPanel].DataContext.IsToolbarVisible, Mode=OneWay}" />
         <v:AddressbarView DockPanel.Dock="Top" />
         <v:StatusbarView DockPanel.Dock="Bottom" IsVisible="{Binding $parent[DockPanel].DataContext.PaneConfig.IsStatusBarVisible, Mode=OneWay}" />
