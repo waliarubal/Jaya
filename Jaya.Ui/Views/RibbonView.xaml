@@ -12,6 +12,90 @@
         <vm:RibbonViewModel />
     </UserControl.DataContext>
     <UserControl.Styles>
+        <!--  ribbon  -->
+        <Style Selector="TabControl">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border
+                        Margin="{TemplateBinding Margin}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <DockPanel>
+                            <ItemsPresenter
+                                Name="PART_ItemsPresenter"
+                                ItemTemplate="{TemplateBinding ItemTemplate}"
+                                Items="{TemplateBinding Items}"
+                                ItemsPanel="{TemplateBinding ItemsPanel}"
+                                ZIndex="999">
+                            </ItemsPresenter>
+                            <Border
+                                Padding="4,0,4,4"
+                                BorderBrush="{DynamicResource ThemeBorderMidBrush}"
+                                BorderThickness=".5">
+                                <ContentPresenter
+                                    Name="PART_SelectedContentHost"
+                                    Margin="{TemplateBinding Padding}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Content="{TemplateBinding SelectedContent}"
+                                    ContentTemplate="{TemplateBinding SelectedContentTemplate}">
+                                </ContentPresenter>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Top]">
+            <Setter Property="Padding" Value="0 4 0 0" />
+        </Style>
+        <Style Selector="TabControl[TabStripPlacement=Top] /template/ ItemsPresenter#PART_ItemsPresenter">
+            <Setter Property="DockPanel.Dock" Value="Top" />
+        </Style>
+
+        <!--  ribbon item  -->
+        <Style Selector="TabItem">
+            <Setter Property="BorderThickness" Value=".5 .5 .5 0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+            <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLightBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="8 2" />
+            <Setter Property="MinWidth" Value="58" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter
+                        Name="PART_ContentPresenter"
+                        Margin="{TemplateBinding Margin}"
+                        Padding="{TemplateBinding Padding}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Content="{TemplateBinding Header}"
+                        ContentTemplate="{TemplateBinding HeaderTemplate}" />
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        <Style Selector="TabItem:disabled">
+            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+        </Style>
+        <Style Selector="TabItem:pointerover">
+            <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style Selector="TabItem:selected">
+            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+            <Setter Property="Margin" Value="0 0 0 -1" />
+        </Style>
+
         <!--  separator  -->
         <Style Selector="Border.Separator">
             <Setter Property="IsHitTestVisible" Value="False" />
@@ -119,90 +203,6 @@
             <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
             <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
-
-        <!--  ribbon  -->
-        <Style Selector="TabControl">
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Border
-                        Margin="{TemplateBinding Margin}"
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                        <DockPanel>
-                            <ItemsPresenter
-                                Name="PART_ItemsPresenter"
-                                ItemTemplate="{TemplateBinding ItemTemplate}"
-                                Items="{TemplateBinding Items}"
-                                ItemsPanel="{TemplateBinding ItemsPanel}"
-                                ZIndex="999">
-                            </ItemsPresenter>
-                            <Border
-                                Padding="4,0,4,4"
-                                BorderBrush="{DynamicResource ThemeBorderMidBrush}"
-                                BorderThickness=".5">
-                                <ContentPresenter
-                                    Name="PART_SelectedContentHost"
-                                    Margin="{TemplateBinding Padding}"
-                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Content="{TemplateBinding SelectedContent}"
-                                    ContentTemplate="{TemplateBinding SelectedContentTemplate}">
-                                </ContentPresenter>
-                            </Border>
-                        </DockPanel>
-                    </Border>
-                </ControlTemplate>
-            </Setter>
-        </Style>
-        <Style Selector="TabControl[TabStripPlacement=Top]">
-            <Setter Property="Padding" Value="0 4 0 0" />
-        </Style>
-        <Style Selector="TabControl[TabStripPlacement=Top] /template/ ItemsPresenter#PART_ItemsPresenter">
-            <Setter Property="DockPanel.Dock" Value="Top" />
-        </Style>
-
-        <!--  ribbon item  -->
-        <Style Selector="TabItem">
-            <Setter Property="BorderThickness" Value=".5 .5 .5 0" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
-            <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLightBrush}" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="Padding" Value="8 2" />
-            <Setter Property="MinWidth" Value="58" />
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <ContentPresenter
-                        Name="PART_ContentPresenter"
-                        Margin="{TemplateBinding Margin}"
-                        Padding="{TemplateBinding Padding}"
-                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Content="{TemplateBinding Header}"
-                        ContentTemplate="{TemplateBinding HeaderTemplate}" />
-                </ControlTemplate>
-            </Setter>
-        </Style>
-        <Style Selector="TabItem:disabled">
-            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-        </Style>
-        <Style Selector="TabItem:pointerover">
-            <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-            <Setter Property="Margin" Value="0" />
-        </Style>
-        <Style Selector="TabItem:selected">
-            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-            <Setter Property="Margin" Value="0 0 0 -1" />
-        </Style>
     </UserControl.Styles>
     <TabControl>
         <TabItem Header="File">
@@ -218,14 +218,13 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <StackPanel Classes="Container">
-                    <Button Classes="Large" ToolTip.Tip="New Folder">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
-                            <TextBlock Text="New Folder" />
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
+
+                <Button Classes="Large" ToolTip.Tip="New Folder">
+                    <StackPanel>
+                        <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
+                        <TextBlock Text="New Folder" />
+                    </StackPanel>
+                </Button>
                 <TextBlock
                     Grid.Row="1"
                     Classes="Title"
@@ -262,6 +261,7 @@
                     Text="Open" />
 
                 <Border Grid.Column="3" Classes="Separator" />
+
                 <Button
                     Grid.Column="4"
                     Classes="Large"
@@ -272,6 +272,11 @@
                         <TextBlock Text="Exit" />
                     </StackPanel>
                 </Button>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Classes="Title"
+                    Text="Actions" />
             </Grid>
         </TabItem>
         <TabItem Header="Edit">

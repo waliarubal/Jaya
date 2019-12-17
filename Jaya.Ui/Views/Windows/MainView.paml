@@ -15,7 +15,7 @@
         <vm:MainViewModel />
     </j:StyledWindow.DataContext>
     <j:StyledWindow.HeaderContent>
-      <v:MenuView />
+      <v:MenuView IsVisible="{Binding !PaneConfig.IsRibbonVisible, Mode=OneWay}" />
     </j:StyledWindow.HeaderContent>
     <DockPanel>
         <v:RibbonView DockPanel.Dock="Top" Height="100" IsVisible="{Binding PaneConfig.IsRibbonVisible, Mode=OneWay}" />
