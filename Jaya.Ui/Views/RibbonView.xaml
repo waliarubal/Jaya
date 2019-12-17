@@ -280,7 +280,98 @@
             </Grid>
         </TabItem>
         <TabItem Header="Edit">
-            Hello World 2
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Classes="Container">
+                    <Button Classes="Large" ToolTip.Tip="Copy">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Copy}" />
+                            <TextBlock Text="Copy" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Large" ToolTip.Tip="Paste">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Paste}" />
+                            <TextBlock Text="Paste" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Button Classes="Small" ToolTip.Tip="Cut">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Cut}" />
+                            <TextBlock Text="Cut" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Classes="Title"
+                    Text="Clipboard" />
+
+                <Border Grid.Column="2" Classes="Separator" />
+
+                <StackPanel Grid.Column="3" Classes="Container">
+                    <Button Classes="Large" ToolTip.Tip="Delete">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Delete}" />
+                            <TextBlock Text="Delete" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Large" ToolTip.Tip="Rename">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Rename}" />
+                            <TextBlock Text="Rename" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Classes="Title"
+                    Text="Organize" />
+
+                <Border Grid.Column="4" Classes="Separator" />
+
+                <StackPanel Grid.Column="5">
+                    <Button Classes="Small" ToolTip.Tip="Select All">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.SelectAll}" />
+                            <TextBlock Text="Select All" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Small" ToolTip.Tip="Select None">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.SelectNone}" />
+                            <TextBlock Text="Select None" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Small" ToolTip.Tip="Invert Selection">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.InvertSelection}" />
+                            <TextBlock Text="Invert Selection" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="5"
+                    Classes="Title"
+                    Text="Select" />
+            </Grid>
         </TabItem>
         <TabItem Header="View">
             Hello World 3
