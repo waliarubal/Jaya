@@ -13,6 +13,14 @@
             <ControlTemplate>
                 <Grid Background="{TemplateBinding Background}">
                     <Grid.Styles>
+                        <Style Selector="Border.Separator">
+                            <Setter Property="IsHitTestVisible" Value="False" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderThickness" Value=".5" />
+                            <Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+                            <Setter Property="Margin" Value="2 4" />
+                        </Style>
                         <Style Selector="Border.Grip">
                             <Setter Property="BorderThickness" Value="0.5" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
@@ -63,6 +71,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image
@@ -76,16 +85,17 @@
                             VerticalContentAlignment="Center"
                             Background="Transparent"
                             Content="{TemplateBinding HeaderContent}" />
+                        <Border Grid.Column="2" Classes="Separator" />
                         <Border
                             Name="PART_TitleBar"
-                            Grid.Column="2"
+                            Grid.Column="3"
                             Margin="4,0,4,0"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0">
                             <TextBlock
                                 VerticalAlignment="Center"
                                 Text="{TemplateBinding Title}"
-                                TextAlignment="Center" />
+                                TextAlignment="Left" />
                         </Border>
                     </Grid>
                     <StackPanel

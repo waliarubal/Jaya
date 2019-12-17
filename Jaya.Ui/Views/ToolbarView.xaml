@@ -119,6 +119,9 @@
             <Button ToolTip.Tip="Open">
                 <DrawingPresenter Drawing="{DynamicResource Icon.OpenFile}" />
             </Button>
+            <Button ToolTip.Tip="Edit">
+                <DrawingPresenter Drawing="{DynamicResource Icon.EditFile}" />
+            </Button>
             <Border Classes="Separator" />
             <Button
                 Command="{Binding SimpleCommand}"

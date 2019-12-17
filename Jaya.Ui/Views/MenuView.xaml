@@ -70,6 +70,11 @@
                     <DrawingPresenter Drawing="{DynamicResource Icon.OpenFile}" />
                 </MenuItem.Icon>
             </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.EditFile}" />
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator />
             <MenuItem
                 Command="{Binding SimpleCommand}"
