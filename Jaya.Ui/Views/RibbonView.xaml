@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    d:DesignHeight="100"
+    d:DesignHeight="110"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.DataContext>
@@ -160,11 +160,27 @@
             <Setter Property="HorizontalContentAlignment" Value="Left" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
+        <Style Selector="ToggleButton.Large">
+            <Setter Property="MinWidth" Value="38" />
+            <Setter Property="MaxWidth" Value="68" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+        <Style Selector="ToggleButton.Small">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
 
         <Style Selector="Button.Large &gt; StackPanel">
             <Setter Property="Orientation" Value="Vertical" />
         </Style>
         <Style Selector="Button.Small &gt; StackPanel">
+            <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
+        <Style Selector="ToggleButton.Large &gt; StackPanel">
+            <Setter Property="Orientation" Value="Vertical" />
+        </Style>
+        <Style Selector="ToggleButton.Small &gt; StackPanel">
             <Setter Property="Orientation" Value="Horizontal" />
         </Style>
 
@@ -174,6 +190,15 @@
             <Setter Property="Margin" Value="0 2 0 0" />
         </Style>
         <Style Selector="Button.Small &gt; StackPanel &gt; TextBlock">
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="Margin" Value="4 0 0 0" />
+        </Style>
+        <Style Selector="ToggleButton.Large &gt; StackPanel &gt; TextBlock">
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0 2 0 0" />
+        </Style>
+        <Style Selector="ToggleButton.Small &gt; StackPanel &gt; TextBlock">
             <Setter Property="TextAlignment" Value="Left" />
             <Setter Property="Margin" Value="4 0 0 0" />
         </Style>
@@ -212,6 +237,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -277,6 +303,8 @@
                     Grid.Column="4"
                     Classes="Title"
                     Text="Actions" />
+
+                <Border Grid.Column="5" Classes="Separator" />
             </Grid>
         </TabItem>
         <TabItem Header="Edit">
@@ -286,6 +314,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -371,13 +400,159 @@
                     Grid.Column="5"
                     Classes="Title"
                     Text="Select" />
+
+                <Border Grid.Column="6" Classes="Separator" />
             </Grid>
         </TabItem>
         <TabItem Header="View">
-            Hello World 3
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ToggleButton Classes="Large" ToolTip.Tip="Navigation Pane">
+                    <StackPanel>
+                        <DrawingPresenter Drawing="{DynamicResource Icon.NavigationPane}" />
+                        <TextBlock Text="Navigation Pane" />
+                    </StackPanel>
+                </ToggleButton>
+                <StackPanel Grid.Column="1">
+                    <ToggleButton Classes="Small" ToolTip.Tip="Preview Pane">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.PreviewPane}" />
+                            <TextBlock Text="Preview Pane" />
+                        </StackPanel>
+                    </ToggleButton>
+                    <ToggleButton Classes="Small" ToolTip.Tip="Details Pane">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.DetailsPane}" />
+                            <TextBlock Text="Details Pane" />
+                        </StackPanel>
+                    </ToggleButton>
+                </StackPanel>
+                <TextBlock
+                    Grid.Row="1"
+                    Classes="Title"
+                    Text="Panes" />
+
+                <Border Grid.Column="2" Classes="Separator" />
+
+                <StackPanel Grid.Column="3">
+                    <ToggleButton Classes="Small" ToolTip.Tip="Item Check Boxes">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.CheckBox}" />
+                            <TextBlock Text="Item Check Boxes" />
+                        </StackPanel>
+                    </ToggleButton>
+                    <ToggleButton Classes="Small" ToolTip.Tip="File Name Extensions">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Extension}" />
+                            <TextBlock Text="File Name Extensions" />
+                        </StackPanel>
+                    </ToggleButton>
+                    <ToggleButton Classes="Small" ToolTip.Tip="Hidden Items">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
+                            <TextBlock Text="Hidden Items" />
+                        </StackPanel>
+                    </ToggleButton>
+                </StackPanel>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Classes="Title"
+                    Text="Show/Hide" />
+
+                <Border Grid.Column="4" Classes="Separator" />
+
+                <StackPanel Grid.Column="5" Classes="Container">
+                    <Button Classes="Large" ToolTip.Tip="Plugins...">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Plugin}" />
+                            <TextBlock Text="Plugins" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Large" ToolTip.Tip="Options...">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Property}" />
+                            <TextBlock Text="Options" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <Border Grid.Column="6" Classes="Separator" />
+            </Grid>
         </TabItem>
         <TabItem Header="Help">
-            Hello World 3
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Button Classes="Large" ToolTip.Tip="View Help">
+                    <StackPanel>
+                        <DrawingPresenter Drawing="{DynamicResource Icon.Help}" />
+                        <TextBlock Text="View Help" />
+                    </StackPanel>
+                </Button>
+                <StackPanel Grid.Column="1">
+                    <Button Classes="Small" ToolTip.Tip="View License">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.CertificateWarning}" />
+                            <TextBlock Text="View License" />
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="Small" ToolTip.Tip="Send Feedback...">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.SendMail}" />
+                            <TextBlock Text="Send Feedback" />
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Classes="Title"
+                    Text="Help &amp; Support" />
+
+                <Border Grid.Column="2" Classes="Separator" />
+
+                <Button
+                    Grid.Column="3"
+                    Classes="Large"
+                    ToolTip.Tip="Update...">
+                    <StackPanel>
+                        <DrawingPresenter Drawing="{DynamicResource Icon.RunUpdate}" />
+                        <TextBlock Text="Update" />
+                    </StackPanel>
+                </Button>
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Classes="Title"
+                    Text="Update" />
+
+                <Border Grid.Column="4" Classes="Separator" />
+            </Grid>
         </TabItem>
     </TabControl>
 </UserControl>
