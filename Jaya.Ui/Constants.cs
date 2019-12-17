@@ -3,7 +3,7 @@
     static class Constants
     {
         public const string IMAGES_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/{0}";
-        public const string APP_NAME = "Jaya";
+        public const string APP_NAME = "Jaya - Cross Plat";
 
         public static readonly string
             COLLAPSED_IMAGE_URL,

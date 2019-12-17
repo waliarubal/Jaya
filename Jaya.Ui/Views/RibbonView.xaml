@@ -3,9 +3,12 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:j="https://github.com/waliarubal/Jaya"
+    xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    d:DesignHeight="110"
+    d:DesignHeight="108"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <UserControl.DataContext>
@@ -420,20 +423,35 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <ToggleButton Classes="Large" ToolTip.Tip="Navigation Pane">
+                <ToggleButton
+                    Classes="Large"
+                    Command="{Binding SimpleCommand}"
+                    CommandParameter="{x:Static local:CommandType.TogglePaneNavigation}"
+                    IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
+                    ToolTip.Tip="Navigation Pane">
                     <StackPanel>
                         <DrawingPresenter Drawing="{DynamicResource Icon.NavigationPane}" />
                         <TextBlock Text="Navigation Pane" />
                     </StackPanel>
                 </ToggleButton>
                 <StackPanel Grid.Column="1">
-                    <ToggleButton Classes="Small" ToolTip.Tip="Preview Pane">
+                    <ToggleButton
+                        Classes="Small"
+                        Command="{Binding SimpleCommand}"
+                        CommandParameter="{x:Static local:CommandType.TogglePanePreview}"
+                        IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}"
+                        ToolTip.Tip="Preview Pane">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.PreviewPane}" />
                             <TextBlock Text="Preview Pane" />
                         </StackPanel>
                     </ToggleButton>
-                    <ToggleButton Classes="Small" ToolTip.Tip="Details Pane">
+                    <ToggleButton
+                        Classes="Small"
+                        Command="{Binding SimpleCommand}"
+                        CommandParameter="{x:Static local:CommandType.TogglePaneDetails}"
+                        IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}"
+                        ToolTip.Tip="Details Pane">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.DetailsPane}" />
                             <TextBlock Text="Details Pane" />
@@ -442,25 +460,41 @@
                 </StackPanel>
                 <TextBlock
                     Grid.Row="1"
+                    Grid.ColumnSpan="2"
                     Classes="Title"
                     Text="Panes" />
 
                 <Border Grid.Column="2" Classes="Separator" />
 
                 <StackPanel Grid.Column="3">
-                    <ToggleButton Classes="Small" ToolTip.Tip="Item Check Boxes">
+                    <ToggleButton
+                        Classes="Small"
+                        Command="{Binding SimpleCommand}"
+                        CommandParameter="{x:Static local:CommandType.ToggleItemCheckBoxes}"
+                        IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}"
+                        ToolTip.Tip="Item Check Boxes">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.CheckBox}" />
                             <TextBlock Text="Item Check Boxes" />
                         </StackPanel>
                     </ToggleButton>
-                    <ToggleButton Classes="Small" ToolTip.Tip="File Name Extensions">
+                    <ToggleButton
+                        Classes="Small"
+                        Command="{Binding SimpleCommand}"
+                        CommandParameter="{x:Static local:CommandType.ToggleFileNameExtensions}"
+                        IsChecked="{Binding ApplicationConfig.IsFileNameExtensionVisible, Mode=OneWay}"
+                        ToolTip.Tip="File Name Extensions">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.Extension}" />
                             <TextBlock Text="File Name Extensions" />
                         </StackPanel>
                     </ToggleButton>
-                    <ToggleButton Classes="Small" ToolTip.Tip="Hidden Items">
+                    <ToggleButton
+                        Classes="Small"
+                        Command="{Binding SimpleCommand}"
+                        CommandParameter="{x:Static local:CommandType.ToggleHiddenItems}"
+                        IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}"
+                        ToolTip.Tip="Hidden Items">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
                             <TextBlock Text="Hidden Items" />
@@ -476,13 +510,33 @@
                 <Border Grid.Column="4" Classes="Separator" />
 
                 <StackPanel Grid.Column="5" Classes="Container">
-                    <Button Classes="Large" ToolTip.Tip="Plugins...">
+                    <Button
+                        Classes="Large"
+                        Command="{Binding OpenWindowCommand}"
+                        ToolTip.Tip="Plugins...">
+                        <Button.CommandParameter>
+                            <j:WindowOptionsModel
+                                Title="Plugins"
+                                Width="640"
+                                Height="480"
+                                ContentType="{x:Type v:ManagePluginsView}" />
+                        </Button.CommandParameter>
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.Plugin}" />
                             <TextBlock Text="Plugins" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="Large" ToolTip.Tip="Options...">
+                    <Button
+                        Classes="Large"
+                        Command="{Binding OpenWindowCommand}"
+                        ToolTip.Tip="Options...">
+                        <Button.CommandParameter>
+                            <j:WindowOptionsModel
+                                Title="Options"
+                                Width="640"
+                                Height="480"
+                                ContentType="{x:Type v:OptionsView}" />
+                        </Button.CommandParameter>
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.Property}" />
                             <TextBlock Text="Options" />
