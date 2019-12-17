@@ -1,4 +1,5 @@
-﻿using Jaya.Shared.Base;
+﻿using Jaya.Shared;
+using Jaya.Shared.Base;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System.Windows.Input;
@@ -8,7 +9,7 @@ namespace Jaya.Ui.ViewModels
     public class RibbonViewModel: ViewModelBase
     {
         readonly SharedService _shared;
-        ICommand _openWindow;
+        ICommand _openWindow, _toggleRibbon;
 
         public RibbonViewModel()
         {
@@ -30,6 +31,22 @@ namespace Jaya.Ui.ViewModels
 
                 return _openWindow;
             }
+        }
+
+        public ICommand ToggleRibbonCommand
+        {
+            get
+            {
+                if (_toggleRibbon == null)
+                    _toggleRibbon = new RelayCommand(ToggleRibbonAction);
+
+                return _toggleRibbon;
+            }
+        }
+
+        void ToggleRibbonAction()
+        {
+            PaneConfig.IsRibbonCollapsed = !PaneConfig.IsRibbonCollapsed;
         }
     }
 }

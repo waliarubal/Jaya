@@ -8,13 +8,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    d:DesignHeight="108"
     d:DesignWidth="800"
+    IsRibbonExpanded="{Binding !PaneConfig.IsRibbonCollapsed, Mode=OneWay}"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:RibbonViewModel />
     </UserControl.DataContext>
     <UserControl.Styles>
+
+        <Style Selector="v|RibbonView[IsRibbonExpanded=True] &gt; TabControl /template/ Border &gt; Grid &gt; Button#PART_ToggleRibbonButton">
+            <Setter Property="ToolTip.Tip" Value="Collapse the Ribbon" />
+        </Style>
+        <Style Selector="v|RibbonView[IsRibbonExpanded=True] &gt; TabControl /template/ Border &gt; Grid &gt; Button#PART_ToggleRibbonButton &gt; StackPanel &gt; DrawingPresenter#PART_CollapseRibbon">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <Style Selector="v|RibbonView[IsRibbonExpanded=False] &gt; TabControl /template/ Border &gt; Grid &gt; Button#PART_ToggleRibbonButton">
+            <Setter Property="ToolTip.Tip" Value="Expand the Ribbon" />
+        </Style>
+        <Style Selector="v|RibbonView[IsRibbonExpanded=False] &gt; TabControl /template/ Border &gt; Grid &gt; Button#PART_ToggleRibbonButton &gt; StackPanel &gt; DrawingPresenter#PART_ExpandRibbon">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
         <!--  ribbon  -->
         <Style Selector="TabControl">
             <Setter Property="Template">
@@ -26,28 +40,45 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                        <DockPanel>
-                            <ItemsPresenter
-                                Name="PART_ItemsPresenter"
-                                ItemTemplate="{TemplateBinding ItemTemplate}"
-                                Items="{TemplateBinding Items}"
-                                ItemsPanel="{TemplateBinding ItemsPanel}"
-                                ZIndex="999">
-                            </ItemsPresenter>
-                            <Border
-                                Padding="4,0,4,4"
-                                BorderBrush="{DynamicResource ThemeBorderMidBrush}"
-                                BorderThickness=".5">
-                                <ContentPresenter
-                                    Name="PART_SelectedContentHost"
-                                    Margin="{TemplateBinding Padding}"
-                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Content="{TemplateBinding SelectedContent}"
-                                    ContentTemplate="{TemplateBinding SelectedContentTemplate}">
-                                </ContentPresenter>
-                            </Border>
-                        </DockPanel>
+                        <Grid>
+                            <DockPanel>
+                                <ItemsPresenter
+                                    Name="PART_ItemsPresenter"
+                                    ItemTemplate="{TemplateBinding ItemTemplate}"
+                                    Items="{TemplateBinding Items}"
+                                    ItemsPanel="{TemplateBinding ItemsPanel}"
+                                    ZIndex="98">
+                                </ItemsPresenter>
+                                <Border
+                                    Padding="4,0,4,4"
+                                    BorderBrush="{DynamicResource ThemeBorderMidBrush}"
+                                    BorderThickness=".5"
+                                    IsVisible="{Binding IsRibbonExpanded, Mode=OneWay}">
+                                    <ContentPresenter
+                                        Name="PART_SelectedContentHost"
+                                        Height="82"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{TemplateBinding SelectedContent}"
+                                        ContentTemplate="{TemplateBinding SelectedContentTemplate}">
+                                    </ContentPresenter>
+                                </Border>
+                            </DockPanel>
+                            <Button
+                                Name="PART_ToggleRibbonButton"
+                                Width="16"
+                                Height="16"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Command="{Binding ToggleRibbonCommand, Mode=OneTime}"
+                                ZIndex="99">
+                                <StackPanel>
+                                    <DrawingPresenter Name="PART_CollapseRibbon" Drawing="{DynamicResource Icon.ArrowUp}" />
+                                    <DrawingPresenter Name="PART_ExpandRibbon" Drawing="{DynamicResource Icon.ArrowDown}" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter>

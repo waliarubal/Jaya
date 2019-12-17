@@ -24,7 +24,7 @@ namespace Jaya.Shared
         static StyledWindow()
         {
             HeaderContentProperty = AvaloniaProperty.Register<StyledWindow, object>(nameof(HeaderContent));
-            IsModalProperty = AvaloniaProperty.Register<StyledWindow, bool>(nameof(HeaderContent));
+            IsModalProperty = AvaloniaProperty.Register<StyledWindow, bool>(nameof(IsModal));
         }
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)

@@ -121,6 +121,13 @@ namespace Jaya.Ui.Models
             set => Set(value);
         }
 
+        [JsonProperty]
+        public bool IsRibbonCollapsed
+        {
+            get => Get<bool>();
+            set => Set(value);
+        }
+
         protected override ConfigModelBase Empty()
         {
             return new PaneConfigModel
@@ -133,7 +140,8 @@ namespace Jaya.Ui.Models
                 IsDetailsView = false,
                 IsThumbnailView = true,
                 IsStatusBarVisible = true,
-                IsRibbonVisible = false
+                IsRibbonVisible = false,
+                IsRibbonCollapsed = false
             };
         }
 
