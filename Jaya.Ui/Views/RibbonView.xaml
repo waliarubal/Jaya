@@ -17,6 +17,7 @@
             <Setter Property="IsHitTestVisible" Value="False" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value=".5" />
+            <Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
             <Setter Property="Margin" Value="2 0" />
         </Style>
@@ -90,7 +91,7 @@
         </Style>
         <Style Selector="Button.Small &gt; StackPanel &gt; TextBlock">
             <Setter Property="TextAlignment" Value="Left" />
-            <Setter Property="Margin" Value="2 0 0 0" />
+            <Setter Property="Margin" Value="4 0 0 0" />
         </Style>
 
         <Style Selector="Button.Large &gt; StackPanel &gt; DrawingPresenter">
@@ -101,13 +102,22 @@
             <Setter Property="Width" Value="16" />
             <Setter Property="Height" Value="16" />
         </Style>
-        <Style Selector="ToggleButton &gt; StackPanel &gt; DrawingPresenter">
+        <Style Selector="ToggleButton.Large &gt; StackPanel &gt; DrawingPresenter">
+            <Setter Property="Width" Value="32" />
+            <Setter Property="Height" Value="32" />
+        </Style>
+        <Style Selector="ToggleButton.Small &gt; StackPanel &gt; DrawingPresenter">
             <Setter Property="Width" Value="16" />
             <Setter Property="Height" Value="16" />
         </Style>
 
-        <Style Selector="TabItem &gt; StackPanel">
+        <Style Selector="StackPanel.Container">
             <Setter Property="Orientation" Value="Horizontal" />
+        </Style>
+
+        <Style Selector="TextBlock.Title">
+            <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
         </Style>
 
         <!--  ribbon  -->
@@ -196,42 +206,64 @@
     </UserControl.Styles>
     <TabControl>
         <TabItem Header="File">
-            <StackPanel>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Classes="Container">
                     <Button Classes="Large" ToolTip.Tip="New Folder">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
                             <TextBlock Text="New Folder" />
                         </StackPanel>
                     </Button>
-                    <TextBlock
-                        Grid.Row="1"
-                        HorizontalAlignment="Center"
-                        FontSize="{DynamicResource FontSizeSmall}"
-                        Text="New" />
-                </Grid>
+                </StackPanel>
+                <TextBlock
+                    Grid.Row="1"
+                    Classes="Title"
+                    Text="New" />
 
-                <Border Classes="Separator" />
-                <StackPanel>
-                    <Button Classes="Small" ToolTip.Tip="Properties">
+                <Border Grid.Column="1" Classes="Separator" />
+
+                <StackPanel Grid.Column="2" Classes="Container">
+                    <Button Classes="Large" ToolTip.Tip="Properties">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
                             <TextBlock Text="Properties" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="Small" ToolTip.Tip="Open">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.OpenFile}" />
-                            <TextBlock Text="Open" />
-                        </StackPanel>
-                    </Button>
+                    <StackPanel>
+                        <Button Classes="Small" ToolTip.Tip="Open">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.OpenFile}" />
+                                <TextBlock Text="Open" />
+                            </StackPanel>
+                        </Button>
+                        <Button Classes="Small" ToolTip.Tip="Edit">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.EditFile}" />
+                                <TextBlock Text="Edit" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </StackPanel>
-                <Border Classes="Separator" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Classes="Title"
+                    Text="Open" />
+
+                <Border Grid.Column="3" Classes="Separator" />
                 <Button
+                    Grid.Column="4"
                     Classes="Large"
                     Command="{Binding SimpleCommand}"
                     ToolTip.Tip="Exit">
@@ -240,7 +272,7 @@
                         <TextBlock Text="Exit" />
                     </StackPanel>
                 </Button>
-            </StackPanel>
+            </Grid>
         </TabItem>
         <TabItem Header="Edit">
             Hello World 2
