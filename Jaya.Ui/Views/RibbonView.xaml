@@ -9,7 +9,7 @@
     xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignWidth="800"
-    IsRibbonExpanded="{Binding !PaneConfig.IsRibbonCollapsed, Mode=OneWay}"
+    IsRibbonExpanded="{Binding !PaneConfig.IsRibbonCollapsed, Mode=TwoWay}"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:RibbonViewModel />
@@ -74,8 +74,14 @@
                                 Command="{Binding ToggleRibbonCommand, Mode=OneTime}"
                                 ZIndex="99">
                                 <StackPanel>
-                                    <DrawingPresenter Name="PART_CollapseRibbon" Drawing="{DynamicResource Icon.ArrowUp}" />
-                                    <DrawingPresenter Name="PART_ExpandRibbon" Drawing="{DynamicResource Icon.ArrowDown}" />
+                                    <DrawingPresenter
+                                        Name="PART_CollapseRibbon"
+                                        Drawing="{DynamicResource Icon.ArrowUp}"
+                                        IsVisible="{Binding IsRibbonExpanded, Mode=OneWay}" />
+                                    <DrawingPresenter
+                                        Name="PART_ExpandRibbon"
+                                        Drawing="{DynamicResource Icon.ArrowDown}"
+                                        IsVisible="{Binding !IsRibbonExpanded, Mode=OneWay}" />
                                 </StackPanel>
                             </Button>
                         </Grid>

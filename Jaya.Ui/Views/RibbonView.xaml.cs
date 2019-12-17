@@ -10,7 +10,7 @@ namespace Jaya.Ui.Views
 
         static RibbonView()
         {
-            IsRibbonExpandedProperty = AvaloniaProperty.Register<RibbonView, bool>(nameof(IsRibbonExpanded));
+            IsRibbonExpandedProperty = AvaloniaProperty.Register<RibbonView, bool>(nameof(IsRibbonExpanded), true);
         }
 
         public RibbonView()
