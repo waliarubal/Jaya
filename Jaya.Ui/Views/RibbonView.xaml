@@ -14,291 +14,19 @@
     <UserControl.DataContext>
         <vm:RibbonViewModel />
     </UserControl.DataContext>
-    <UserControl.Styles>
+    <j:Ribbon>
+        <j:RibbonTab Header="File">
+            <StackPanel>
+                <j:RibbonGroup Header="New">
+                    <Button Classes="Large" ToolTip.Tip="New Folder">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
+                            <TextBlock Text="New Folder" />
+                        </StackPanel>
+                    </Button>
+                </j:RibbonGroup>
 
-        <Style Selector="v|RibbonView[IsRibbonExpanded=True] &gt; TabControl /template/ Border &gt; Grid &gt; Button#PART_ToggleRibbonButton">
-            <Setter Property="ToolTip.Tip" Value="Collapse the Ribbon" />
-        </Style>
-        <Style Selector="v|RibbonView[IsRibbonExpanded=True] &gt; TabControl /template/ Border &gt; Grid &gt; Button#PART_ToggleRibbonButton &gt; StackPanel &gt; DrawingPresenter#PART_CollapseRibbon">
-            <Setter Property="IsVisible" Value="True" />
-        </Style>
-        <Style Selector="v|RibbonView[IsRibbonExpanded=False] &gt; TabControl /template/ Border &gt; Grid &gt; Button#PART_ToggleRibbonButton">
-            <Setter Property="ToolTip.Tip" Value="Expand the Ribbon" />
-        </Style>
-        <Style Selector="v|RibbonView[IsRibbonExpanded=False] &gt; TabControl /template/ Border &gt; Grid &gt; Button#PART_ToggleRibbonButton &gt; StackPanel &gt; DrawingPresenter#PART_ExpandRibbon">
-            <Setter Property="IsVisible" Value="True" />
-        </Style>
-
-        <!--  ribbon  -->
-        <Style Selector="TabControl">
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Border
-                        Margin="{TemplateBinding Margin}"
-                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid>
-                            <DockPanel>
-                                <ItemsPresenter
-                                    Name="PART_ItemsPresenter"
-                                    ItemTemplate="{TemplateBinding ItemTemplate}"
-                                    Items="{TemplateBinding Items}"
-                                    ItemsPanel="{TemplateBinding ItemsPanel}"
-                                    ZIndex="98">
-                                </ItemsPresenter>
-                                <Border
-                                    Padding="4,0,4,4"
-                                    BorderBrush="{DynamicResource ThemeBorderMidBrush}"
-                                    BorderThickness=".5"
-                                    IsVisible="{Binding IsRibbonExpanded, Mode=OneWay}">
-                                    <ContentPresenter
-                                        Name="PART_SelectedContentHost"
-                                        Height="82"
-                                        Margin="{TemplateBinding Padding}"
-                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Content="{TemplateBinding SelectedContent}"
-                                        ContentTemplate="{TemplateBinding SelectedContentTemplate}">
-                                    </ContentPresenter>
-                                </Border>
-                            </DockPanel>
-                            <Button
-                                Name="PART_ToggleRibbonButton"
-                                Width="16"
-                                Height="16"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Command="{Binding ToggleRibbonCommand, Mode=OneTime}"
-                                ZIndex="99">
-                                <StackPanel>
-                                    <DrawingPresenter
-                                        Name="PART_CollapseRibbon"
-                                        Drawing="{DynamicResource Icon.ArrowUp}"
-                                        IsVisible="{Binding IsRibbonExpanded, Mode=OneWay}" />
-                                    <DrawingPresenter
-                                        Name="PART_ExpandRibbon"
-                                        Drawing="{DynamicResource Icon.ArrowDown}"
-                                        IsVisible="{Binding !IsRibbonExpanded, Mode=OneWay}" />
-                                </StackPanel>
-                            </Button>
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter>
-        </Style>
-        <Style Selector="TabControl[TabStripPlacement=Top]">
-            <Setter Property="Padding" Value="0 4 0 0" />
-        </Style>
-        <Style Selector="TabControl[TabStripPlacement=Top] /template/ ItemsPresenter#PART_ItemsPresenter">
-            <Setter Property="DockPanel.Dock" Value="Top" />
-        </Style>
-
-        <!--  ribbon item  -->
-        <Style Selector="TabItem">
-            <Setter Property="BorderThickness" Value=".5 .5 .5 0" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
-            <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLightBrush}" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="Padding" Value="8 2" />
-            <Setter Property="MinWidth" Value="58" />
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <ContentPresenter
-                        Name="PART_ContentPresenter"
-                        Margin="{TemplateBinding Margin}"
-                        Padding="{TemplateBinding Padding}"
-                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        Content="{TemplateBinding Header}"
-                        ContentTemplate="{TemplateBinding HeaderTemplate}" />
-                </ControlTemplate>
-            </Setter>
-        </Style>
-        <Style Selector="TabItem:disabled">
-            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-        </Style>
-        <Style Selector="TabItem:pointerover">
-            <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-            <Setter Property="Margin" Value="0" />
-        </Style>
-        <Style Selector="TabItem:selected">
-            <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-            <Setter Property="Margin" Value="0 0 0 -1" />
-        </Style>
-
-        <!--  separator  -->
-        <Style Selector="Border.Separator">
-            <Setter Property="IsHitTestVisible" Value="False" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value=".5" />
-            <Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-            <Setter Property="Margin" Value="2 0" />
-        </Style>
-
-        <Style Selector="Button">
-            <Setter Property="Margin" Value="1 0" />
-            <Setter Property="Padding" Value="2" />
-            <Setter Property="MinWidth" Value="21" />
-            <Setter Property="MinHeight" Value="21" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-        </Style>
-        <Style Selector="Button:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
-        </Style>
-        <Style Selector="Button:pressed /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
-        </Style>
-        <Style Selector="Button:disabled">
-            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-        </Style>
-
-        <Style Selector="ToggleButton">
-            <Setter Property="Margin" Value="1 0" />
-            <Setter Property="Padding" Value="2" />
-            <Setter Property="MinWidth" Value="21" />
-            <Setter Property="MinHeight" Value="21" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-        </Style>
-        <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
-        </Style>
-        <Style Selector="ToggleButton:pressed /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
-        </Style>
-        <Style Selector="ToggleButton:disabled">
-            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-        </Style>
-        <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
-        </Style>
-
-        <Style Selector="Button.Large">
-            <Setter Property="MinWidth" Value="38" />
-            <Setter Property="MaxWidth" Value="68" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-        </Style>
-        <Style Selector="Button.Small">
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-        </Style>
-        <Style Selector="ToggleButton.Large">
-            <Setter Property="MinWidth" Value="38" />
-            <Setter Property="MaxWidth" Value="68" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-        </Style>
-        <Style Selector="ToggleButton.Small">
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-        </Style>
-
-        <Style Selector="Button.Large &gt; StackPanel">
-            <Setter Property="Orientation" Value="Vertical" />
-        </Style>
-        <Style Selector="Button.Small &gt; StackPanel">
-            <Setter Property="Orientation" Value="Horizontal" />
-        </Style>
-        <Style Selector="ToggleButton.Large &gt; StackPanel">
-            <Setter Property="Orientation" Value="Vertical" />
-        </Style>
-        <Style Selector="ToggleButton.Small &gt; StackPanel">
-            <Setter Property="Orientation" Value="Horizontal" />
-        </Style>
-
-        <Style Selector="Button.Large &gt; StackPanel &gt; TextBlock">
-            <Setter Property="TextAlignment" Value="Center" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Margin" Value="0 2 0 0" />
-        </Style>
-        <Style Selector="Button.Small &gt; StackPanel &gt; TextBlock">
-            <Setter Property="TextAlignment" Value="Left" />
-            <Setter Property="Margin" Value="4 0 0 0" />
-        </Style>
-        <Style Selector="ToggleButton.Large &gt; StackPanel &gt; TextBlock">
-            <Setter Property="TextAlignment" Value="Center" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Margin" Value="0 2 0 0" />
-        </Style>
-        <Style Selector="ToggleButton.Small &gt; StackPanel &gt; TextBlock">
-            <Setter Property="TextAlignment" Value="Left" />
-            <Setter Property="Margin" Value="4 0 0 0" />
-        </Style>
-
-        <Style Selector="Button.Large &gt; StackPanel &gt; DrawingPresenter">
-            <Setter Property="Width" Value="32" />
-            <Setter Property="Height" Value="32" />
-        </Style>
-        <Style Selector="Button.Small &gt; StackPanel &gt; DrawingPresenter">
-            <Setter Property="Width" Value="16" />
-            <Setter Property="Height" Value="16" />
-        </Style>
-        <Style Selector="ToggleButton.Large &gt; StackPanel &gt; DrawingPresenter">
-            <Setter Property="Width" Value="32" />
-            <Setter Property="Height" Value="32" />
-        </Style>
-        <Style Selector="ToggleButton.Small &gt; StackPanel &gt; DrawingPresenter">
-            <Setter Property="Width" Value="16" />
-            <Setter Property="Height" Value="16" />
-        </Style>
-
-        <Style Selector="StackPanel.Container">
-            <Setter Property="Orientation" Value="Horizontal" />
-        </Style>
-
-        <Style Selector="TextBlock.Title">
-            <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-    </UserControl.Styles>
-    <TabControl>
-        <TabItem Header="File">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Button Classes="Large" ToolTip.Tip="New Folder">
-                    <StackPanel>
-                        <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
-                        <TextBlock Text="New Folder" />
-                    </StackPanel>
-                </Button>
-                <TextBlock
-                    Grid.Row="1"
-                    Classes="Title"
-                    Text="New" />
-
-                <Border Grid.Column="1" Classes="Separator" />
-
-                <StackPanel Grid.Column="2" Classes="Container">
+                <j:RibbonGroup Header="Open">
                     <Button Classes="Large" ToolTip.Tip="Properties">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
@@ -319,51 +47,24 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                </StackPanel>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Classes="Title"
-                    Text="Open" />
+                </j:RibbonGroup>
 
-                <Border Grid.Column="3" Classes="Separator" />
-
-                <Button
-                    Grid.Column="4"
-                    Classes="Large"
-                    Command="{Binding SimpleCommand}"
-                    ToolTip.Tip="Exit">
-                    <StackPanel>
-                        <DrawingPresenter Drawing="{DynamicResource Icon.Close}" />
-                        <TextBlock Text="Exit" />
-                    </StackPanel>
-                </Button>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="4"
-                    Classes="Title"
-                    Text="Actions" />
-
-                <Border Grid.Column="5" Classes="Separator" />
-            </Grid>
-        </TabItem>
-        <TabItem Header="Edit">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Classes="Container">
+                <j:RibbonGroup Header="Actions">
+                    <Button
+                        Classes="Large"
+                        Command="{Binding SimpleCommand}"
+                        ToolTip.Tip="Exit">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Close}" />
+                            <TextBlock Text="Exit" />
+                        </StackPanel>
+                    </Button>
+                </j:RibbonGroup>
+            </StackPanel>
+        </j:RibbonTab>
+        <j:RibbonTab Header="Edit">
+            <StackPanel>
+                <j:RibbonGroup Header="Clipboard">
                     <Button Classes="Large" ToolTip.Tip="Copy">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.Copy}" />
@@ -376,24 +77,17 @@
                             <TextBlock Text="Paste" />
                         </StackPanel>
                     </Button>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
-                    <Button Classes="Small" ToolTip.Tip="Cut">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.Cut}" />
-                            <TextBlock Text="Cut" />
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Classes="Title"
-                    Text="Clipboard" />
+                    <StackPanel>
+                        <Button Classes="Small" ToolTip.Tip="Cut">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.Cut}" />
+                                <TextBlock Text="Cut" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </j:RibbonGroup>
 
-                <Border Grid.Column="2" Classes="Separator" />
-
-                <StackPanel Grid.Column="3" Classes="Container">
+                <j:RibbonGroup Header="Organize">
                     <Button Classes="Large" ToolTip.Tip="Delete">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.Delete}" />
@@ -406,147 +100,111 @@
                             <TextBlock Text="Rename" />
                         </StackPanel>
                     </Button>
-                </StackPanel>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Classes="Title"
-                    Text="Organize" />
+                </j:RibbonGroup>
 
-                <Border Grid.Column="4" Classes="Separator" />
-
-                <StackPanel Grid.Column="5">
-                    <Button Classes="Small" ToolTip.Tip="Select All">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.SelectAll}" />
-                            <TextBlock Text="Select All" />
-                        </StackPanel>
-                    </Button>
-                    <Button Classes="Small" ToolTip.Tip="Select None">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.SelectNone}" />
-                            <TextBlock Text="Select None" />
-                        </StackPanel>
-                    </Button>
-                    <Button Classes="Small" ToolTip.Tip="Invert Selection">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.InvertSelection}" />
-                            <TextBlock Text="Invert Selection" />
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="5"
-                    Classes="Title"
-                    Text="Select" />
-
-                <Border Grid.Column="6" Classes="Separator" />
-            </Grid>
-        </TabItem>
-        <TabItem Header="View">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <ToggleButton
-                    Classes="Large"
-                    Command="{Binding SimpleCommand}"
-                    CommandParameter="{x:Static local:CommandType.TogglePaneNavigation}"
-                    IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
-                    ToolTip.Tip="Navigation Pane">
+                <j:RibbonGroup Header="Select">
                     <StackPanel>
-                        <DrawingPresenter Drawing="{DynamicResource Icon.NavigationPane}" />
-                        <TextBlock Text="Navigation Pane" />
+                        <Button Classes="Small" ToolTip.Tip="Select All">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.SelectAll}" />
+                                <TextBlock Text="Select All" />
+                            </StackPanel>
+                        </Button>
+                        <Button Classes="Small" ToolTip.Tip="Select None">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.SelectNone}" />
+                                <TextBlock Text="Select None" />
+                            </StackPanel>
+                        </Button>
+                        <Button Classes="Small" ToolTip.Tip="Invert Selection">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.InvertSelection}" />
+                                <TextBlock Text="Invert Selection" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
-                </ToggleButton>
-                <StackPanel Grid.Column="1">
+                </j:RibbonGroup>
+            </StackPanel>
+        </j:RibbonTab>
+        <j:RibbonTab Header="View">
+            <StackPanel>
+                <j:RibbonGroup Header="Panes">
                     <ToggleButton
-                        Classes="Small"
+                        Classes="Large"
                         Command="{Binding SimpleCommand}"
-                        CommandParameter="{x:Static local:CommandType.TogglePanePreview}"
-                        IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}"
-                        ToolTip.Tip="Preview Pane">
+                        CommandParameter="{x:Static local:CommandType.TogglePaneNavigation}"
+                        IsChecked="{Binding PaneConfig.IsNavigationPaneVisible, Mode=OneWay}"
+                        ToolTip.Tip="Navigation Pane">
                         <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.PreviewPane}" />
-                            <TextBlock Text="Preview Pane" />
+                            <DrawingPresenter Drawing="{DynamicResource Icon.NavigationPane}" />
+                            <TextBlock Text="Navigation Pane" />
                         </StackPanel>
                     </ToggleButton>
-                    <ToggleButton
-                        Classes="Small"
-                        Command="{Binding SimpleCommand}"
-                        CommandParameter="{x:Static local:CommandType.TogglePaneDetails}"
-                        IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}"
-                        ToolTip.Tip="Details Pane">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.DetailsPane}" />
-                            <TextBlock Text="Details Pane" />
-                        </StackPanel>
-                    </ToggleButton>
-                </StackPanel>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Classes="Title"
-                    Text="Panes" />
+                    <StackPanel>
+                        <ToggleButton
+                            Classes="Small"
+                            Command="{Binding SimpleCommand}"
+                            CommandParameter="{x:Static local:CommandType.TogglePanePreview}"
+                            IsChecked="{Binding PaneConfig.IsPreviewPaneVisible, Mode=OneWay}"
+                            ToolTip.Tip="Preview Pane">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.PreviewPane}" />
+                                <TextBlock Text="Preview Pane" />
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton
+                            Classes="Small"
+                            Command="{Binding SimpleCommand}"
+                            CommandParameter="{x:Static local:CommandType.TogglePaneDetails}"
+                            IsChecked="{Binding PaneConfig.IsDetailsPaneVisible, Mode=OneWay}"
+                            ToolTip.Tip="Details Pane">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.DetailsPane}" />
+                                <TextBlock Text="Details Pane" />
+                            </StackPanel>
+                        </ToggleButton>
+                    </StackPanel>
+                </j:RibbonGroup>
 
-                <Border Grid.Column="2" Classes="Separator" />
+                <j:RibbonGroup Header="Show/Hide">
+                    <StackPanel>
+                        <ToggleButton
+                            Classes="Small"
+                            Command="{Binding SimpleCommand}"
+                            CommandParameter="{x:Static local:CommandType.ToggleItemCheckBoxes}"
+                            IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}"
+                            ToolTip.Tip="Item Check Boxes">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.CheckBox}" />
+                                <TextBlock Text="Item Check Boxes" />
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton
+                            Classes="Small"
+                            Command="{Binding SimpleCommand}"
+                            CommandParameter="{x:Static local:CommandType.ToggleFileNameExtensions}"
+                            IsChecked="{Binding ApplicationConfig.IsFileNameExtensionVisible, Mode=OneWay}"
+                            ToolTip.Tip="File Name Extensions">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.Extension}" />
+                                <TextBlock Text="File Name Extensions" />
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton
+                            Classes="Small"
+                            Command="{Binding SimpleCommand}"
+                            CommandParameter="{x:Static local:CommandType.ToggleHiddenItems}"
+                            IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}"
+                            ToolTip.Tip="Hidden Items">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
+                                <TextBlock Text="Hidden Items" />
+                            </StackPanel>
+                        </ToggleButton>
+                    </StackPanel>
+                </j:RibbonGroup>
 
-                <StackPanel Grid.Column="3">
-                    <ToggleButton
-                        Classes="Small"
-                        Command="{Binding SimpleCommand}"
-                        CommandParameter="{x:Static local:CommandType.ToggleItemCheckBoxes}"
-                        IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=OneWay}"
-                        ToolTip.Tip="Item Check Boxes">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.CheckBox}" />
-                            <TextBlock Text="Item Check Boxes" />
-                        </StackPanel>
-                    </ToggleButton>
-                    <ToggleButton
-                        Classes="Small"
-                        Command="{Binding SimpleCommand}"
-                        CommandParameter="{x:Static local:CommandType.ToggleFileNameExtensions}"
-                        IsChecked="{Binding ApplicationConfig.IsFileNameExtensionVisible, Mode=OneWay}"
-                        ToolTip.Tip="File Name Extensions">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.Extension}" />
-                            <TextBlock Text="File Name Extensions" />
-                        </StackPanel>
-                    </ToggleButton>
-                    <ToggleButton
-                        Classes="Small"
-                        Command="{Binding SimpleCommand}"
-                        CommandParameter="{x:Static local:CommandType.ToggleHiddenItems}"
-                        IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}"
-                        ToolTip.Tip="Hidden Items">
-                        <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
-                            <TextBlock Text="Hidden Items" />
-                        </StackPanel>
-                    </ToggleButton>
-                </StackPanel>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Classes="Title"
-                    Text="Show/Hide" />
-
-                <Border Grid.Column="4" Classes="Separator" />
-
-                <StackPanel Grid.Column="5" Classes="Container">
+                <j:RibbonGroup>
                     <Button
                         Classes="Large"
                         Command="{Binding OpenWindowCommand}"
@@ -579,71 +237,43 @@
                             <TextBlock Text="Options" />
                         </StackPanel>
                     </Button>
-                </StackPanel>
-
-                <Border Grid.Column="6" Classes="Separator" />
-            </Grid>
-        </TabItem>
-        <TabItem Header="Help">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Button Classes="Large" ToolTip.Tip="View Help">
-                    <StackPanel>
-                        <DrawingPresenter Drawing="{DynamicResource Icon.Help}" />
-                        <TextBlock Text="View Help" />
-                    </StackPanel>
-                </Button>
-                <StackPanel Grid.Column="1">
-                    <Button Classes="Small" ToolTip.Tip="View License">
+                </j:RibbonGroup>
+            </StackPanel>
+        </j:RibbonTab>
+        <j:RibbonTab Header="Help">
+            <StackPanel>
+                <j:RibbonGroup Header="Help &amp; Support">
+                    <Button Classes="Large" ToolTip.Tip="View Help">
                         <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.CertificateWarning}" />
-                            <TextBlock Text="View License" />
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Help}" />
+                            <TextBlock Text="View Help" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="Small" ToolTip.Tip="Send Feedback...">
+                    <StackPanel>
+                        <Button Classes="Small" ToolTip.Tip="View License">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.CertificateWarning}" />
+                                <TextBlock Text="View License" />
+                            </StackPanel>
+                        </Button>
+                        <Button Classes="Small" ToolTip.Tip="Send Feedback...">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.SendMail}" />
+                                <TextBlock Text="Send Feedback" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </j:RibbonGroup>
+
+                <j:RibbonGroup Header="Update">
+                    <Button Classes="Large" ToolTip.Tip="Update...">
                         <StackPanel>
-                            <DrawingPresenter Drawing="{DynamicResource Icon.SendMail}" />
-                            <TextBlock Text="Send Feedback" />
+                            <DrawingPresenter Drawing="{DynamicResource Icon.RunUpdate}" />
+                            <TextBlock Text="Update" />
                         </StackPanel>
                     </Button>
-
-                </StackPanel>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Classes="Title"
-                    Text="Help &amp; Support" />
-
-                <Border Grid.Column="2" Classes="Separator" />
-
-                <Button
-                    Grid.Column="3"
-                    Classes="Large"
-                    ToolTip.Tip="Update...">
-                    <StackPanel>
-                        <DrawingPresenter Drawing="{DynamicResource Icon.RunUpdate}" />
-                        <TextBlock Text="Update" />
-                    </StackPanel>
-                </Button>
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Classes="Title"
-                    Text="Update" />
-
-                <Border Grid.Column="4" Classes="Separator" />
-            </Grid>
-        </TabItem>
-    </TabControl>
+                </j:RibbonGroup>
+            </StackPanel>
+        </j:RibbonTab>
+    </j:Ribbon>
 </UserControl>
