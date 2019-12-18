@@ -2,9 +2,186 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Jaya.Shared;assembly=Jaya.Shared">
+    <Design.PreviewWith>
+        <local:Ribbon Width="600">
+            <local:RibbonTab Header="File" />
+            <local:RibbonTab Header="Edit" />
+        </local:Ribbon>
+    </Design.PreviewWith>
+    <Styles.Resources>
+        <DrawingGroup x:Key="ArrowDown">
+            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M0,0L16,0 16,16 0,16z" />
+            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M2.3057,6.3906L4.7807,3.9156 7.9997,7.1356 11.2197,3.9156 13.6947,6.3906 7.9997,12.0836z" />
+            <GeometryDrawing Brush="#FF424242" Geometry="F1M3.7197,6.3901L4.7807,5.3291 7.9997,8.5491 11.2197,5.3291 12.2807,6.3901 7.9997,10.6701z" />
+        </DrawingGroup>
+        <DrawingGroup x:Key="ArrowUp">
+            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M13.6943,9.6094L11.2193,12.0844 8.0003,8.8644 4.7803,12.0844 2.3053,9.6094 8.0003,3.9154z" />
+            <GeometryDrawing Brush="#FF424242" Geometry="F1M12.2803,9.6094L11.2193,10.6704 8.0003,7.4504 4.7803,10.6704 3.7193,9.6094 8.0003,5.3294z" />
+        </DrawingGroup>
+    </Styles.Resources>
 
+    <!--  separator  -->
+    <Style Selector="Border.Separator">
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value=".5" />
+        <Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+        <Setter Property="Margin" Value="2 0" />
+    </Style>
+
+    <!--  button  -->
+    <Style Selector="local|Ribbon Button">
+        <Setter Property="Margin" Value="1 0" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="MinWidth" Value="21" />
+        <Setter Property="MinHeight" Value="21" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="local|Ribbon Button:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+    </Style>
+    <Style Selector="local|Ribbon Button:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+    </Style>
+    <Style Selector="local|Ribbon Button:disabled">
+        <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+    </Style>
+
+    <!--  toggle button  -->
+    <Style Selector="local|Ribbon ToggleButton">
+        <Setter Property="Margin" Value="1 0" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="MinWidth" Value="21" />
+        <Setter Property="MinHeight" Value="21" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="local|Ribbon ToggleButton:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+    </Style>
+    <Style Selector="local|Ribbon ToggleButton:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+    </Style>
+    <Style Selector="local|Ribbon ToggleButton:disabled">
+        <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+    </Style>
+    <Style Selector="local|Ribbon ToggleButton:checked /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+    </Style>
+
+    <!--  ribbon  -->
     <Style Selector="local|Ribbon">
+        <Setter Property="Padding" Value="0 4 0 0" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Margin="{TemplateBinding Margin}"
+                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ItemsPresenter
+                            Name="PART_ItemsPresenter"
+                            ItemTemplate="{TemplateBinding ItemTemplate}"
+                            Items="{TemplateBinding Items}"
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            ZIndex="98">
+                        </ItemsPresenter>
+                        <Border
+                            Grid.Row="1"
+                            Padding="4,0,4,4"
+                            BorderBrush="{DynamicResource ThemeBorderMidBrush}"
+                            BorderThickness=".5"
+                            IsVisible="{TemplateBinding IsExpanded,
+                                                        Mode=OneWay}">
+                            <ContentPresenter
+                                Name="PART_SelectedContentHost"
+                                Height="82"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding SelectedContent}"
+                                ContentTemplate="{TemplateBinding SelectedContentTemplate}">
+                            </ContentPresenter>
+                        </Border>
+                        <Button
+                            Name="PART_ToggleButton"
+                            Width="16"
+                            Height="16"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            ZIndex="99">
+                            <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
+                        </Button>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="local|Ribbon[IsExpanded=True] /template/ Border &gt; Grid &gt; Button#PART_ToggleButton">
+        <Setter Property="ToolTip.Tip" Value="Collapse the Ribbon" />
+    </Style>
+    <Style Selector="local|Ribbon[IsExpanded=False] /template/ Border &gt; Grid &gt; Button#PART_ToggleButton">
+        <Setter Property="ToolTip.Tip" Value="Expand the Ribbon" />
+    </Style>
+    <Style Selector="local|Ribbon[IsExpanded=False] /template/ Border &gt; Grid &gt; Button#PART_ToggleButton &gt; DrawingPresenter">
+        <Setter Property="RenderTransform">
+            <RotateTransform Angle="180" />
+        </Setter>
+    </Style>
 
+    <!--  ribbon tab  -->
+    <Style Selector="local|RibbonTab">
+        <Setter Property="BorderThickness" Value=".5 .5 .5 0" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+        <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLightBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="8 2" />
+        <Setter Property="MinWidth" Value="58" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ContentPresenter
+                    Name="PART_ContentPresenter"
+                    Margin="{TemplateBinding Margin}"
+                    Padding="{TemplateBinding Padding}"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Content="{TemplateBinding Header}"
+                    ContentTemplate="{TemplateBinding HeaderTemplate}" />
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="local|RibbonTab:disabled">
+        <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+    </Style>
+    <Style Selector="local|RibbonTab:pointerover">
+        <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
+    <Style Selector="local|RibbonTab:selected">
+        <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+        <Setter Property="Margin" Value="0 0 0 -1" />
     </Style>
 
 </Styles>

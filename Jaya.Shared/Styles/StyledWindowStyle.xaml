@@ -2,6 +2,9 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Jaya.Shared;assembly=Jaya.Shared">
+    <Design.PreviewWith>
+        <local:StyledWindow Width="640" Height="480" />
+    </Design.PreviewWith>
 
     <Style Selector="local|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
