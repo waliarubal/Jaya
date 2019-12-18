@@ -11,7 +11,7 @@ namespace Jaya.Shared
     /// </summary>
     public class Ribbon : TabControl, IStyleable
     {
-        public static StyledProperty<bool> IsExpandedProperty;
+        public static readonly StyledProperty<bool> IsExpandedProperty;
         Button _toggleButton;
         ISelectable _selectedTab;
 
@@ -23,7 +23,7 @@ namespace Jaya.Shared
         public bool IsExpanded
         {
             get => GetValue(IsExpandedProperty);
-            set => SetValue(IsExpandedProperty, value);
+            internal set => SetValue(IsExpandedProperty, value);
         }
 
         Type IStyleable.StyleKey => typeof(Ribbon);

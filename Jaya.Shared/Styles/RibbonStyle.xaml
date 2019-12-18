@@ -4,16 +4,78 @@
     xmlns:local="clr-namespace:Jaya.Shared;assembly=Jaya.Shared">
     <Design.PreviewWith>
         <local:Ribbon Width="600">
-            <local:RibbonTab Header="File" />
-            <local:RibbonTab Header="Edit" />
+            <local:Ribbon.Resources>
+                <DrawingGroup x:Key="ArrowUp">
+                    <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                    <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M13.6943,9.6094L11.2193,12.0844 8.0003,8.8644 4.7803,12.0844 2.3053,9.6094 8.0003,3.9154z" />
+                    <GeometryDrawing Brush="#FF424242" Geometry="F1M12.2803,9.6094L11.2193,10.6704 8.0003,7.4504 4.7803,10.6704 3.7193,9.6094 8.0003,5.3294z" />
+                </DrawingGroup>
+            </local:Ribbon.Resources>
+            <local:RibbonTab Header="First Tab">
+                <StackPanel>
+                    <local:RibbonGroup Header="First Group">
+                        <Button Classes="Large">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
+                                <TextBlock Text="First Button" />
+                            </StackPanel>
+                        </Button>
+                        <StackPanel>
+                            <Button Classes="Small">
+                                <StackPanel>
+                                    <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
+                                    <TextBlock Text="Second Button" />
+                                </StackPanel>
+                            </Button>
+                            <Button Classes="Small">
+                                <StackPanel>
+                                    <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
+                                    <TextBlock Text="Third Button" />
+                                </StackPanel>
+                            </Button>
+                            <Button Classes="Small">
+                                <StackPanel>
+                                    <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
+                                    <TextBlock Text="Fourth Button" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </local:RibbonGroup>
+                    <local:RibbonGroup Header="Second Group">
+                        <Button Classes="Large">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
+                                <TextBlock Text="First Button" />
+                            </StackPanel>
+                        </Button>
+                        <Button Classes="Large">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
+                                <TextBlock Text="Second Button" />
+                            </StackPanel>
+                        </Button>
+                        <StackPanel>
+                            <Button Classes="Small">
+                                <StackPanel>
+                                    <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
+                                    <TextBlock Text="Third Button" />
+                                </StackPanel>
+                            </Button>
+                            <Button Classes="Small">
+                                <StackPanel>
+                                    <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
+                                    <TextBlock Text="Fourth Button" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </local:RibbonGroup>
+                </StackPanel>
+            </local:RibbonTab>
+            <local:RibbonTab Header="Second Tab" />
         </local:Ribbon>
     </Design.PreviewWith>
+
     <Styles.Resources>
-        <DrawingGroup x:Key="ArrowDown">
-            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M0,0L16,0 16,16 0,16z" />
-            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M2.3057,6.3906L4.7807,3.9156 7.9997,7.1356 11.2197,3.9156 13.6947,6.3906 7.9997,12.0836z" />
-            <GeometryDrawing Brush="#FF424242" Geometry="F1M3.7197,6.3901L4.7807,5.3291 7.9997,8.5491 11.2197,5.3291 12.2807,6.3901 7.9997,10.6701z" />
-        </DrawingGroup>
         <DrawingGroup x:Key="ArrowUp">
             <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
             <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M13.6943,9.6094L11.2193,12.0844 8.0003,8.8644 4.7803,12.0844 2.3053,9.6094 8.0003,3.9154z" />
@@ -52,6 +114,51 @@
         <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
     </Style>
 
+    <Style Selector="local|RibbonGroup Button.Large">
+        <Setter Property="MinWidth" Value="38" />
+        <Setter Property="MaxWidth" Value="68" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="local|RibbonGroup Button.Small">
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="local|RibbonGroup Button.Large &gt; StackPanel">
+        <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+    <Style Selector="local|Ribbon Button.Small &gt; StackPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <Style Selector="local|RibbonGroup Button.Large &gt; StackPanel &gt; DrawingPresenter">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+    </Style>
+    <Style Selector="local|RibbonGroup Button.Small &gt; StackPanel &gt; DrawingPresenter">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+    </Style>
+    <Style Selector="local|RibbonGroup Button.Large &gt; StackPanel &gt; Image">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+    </Style>
+    <Style Selector="local|RibbonGroup Button.Small &gt; StackPanel &gt; Image">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+    </Style>
+
+    <Style Selector="local|RibbonGroup Button.Large &gt; StackPanel &gt; TextBlock">
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="0 2 0 0" />
+    </Style>
+    <Style Selector="local|RibbonGroup Button.Small &gt; StackPanel &gt; TextBlock">
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="Margin" Value="4 0 0 0" />
+    </Style>
+
     <!--  toggle button  -->
     <Style Selector="local|Ribbon ToggleButton">
         <Setter Property="Margin" Value="1 0" />
@@ -75,6 +182,91 @@
     <Style Selector="local|Ribbon ToggleButton:checked /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+    </Style>
+
+    <Style Selector="local|RibbonGroup ToggleButton.Large">
+        <Setter Property="MinWidth" Value="38" />
+        <Setter Property="MaxWidth" Value="68" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="local|RibbonGroup ToggleButton.Small">
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="local|RibbonGroup ToggleButton.Large &gt; StackPanel">
+        <Setter Property="Orientation" Value="Vertical" />
+    </Style>
+    <Style Selector="local|RibbonGroup ToggleButton.Small &gt; StackPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <Style Selector="local|RibbonGroup ToggleButton.Large &gt; StackPanel &gt; DrawingPresenter">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+    </Style>
+    <Style Selector="local|RibbonGroup ToggleButton.Small &gt; StackPanel &gt; DrawingPresenter">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+    </Style>
+    <Style Selector="local|RibbonGroup ToggleButton.Large &gt; StackPanel &gt; Image">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+    </Style>
+    <Style Selector="local|RibbonGroup ToggleButton.Small &gt; StackPanel &gt; Image">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+    </Style>
+
+    <Style Selector="local|RibbonGroup ToggleButton.Large &gt; StackPanel &gt; TextBlock">
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="0 2 0 0" />
+    </Style>
+    <Style Selector="local|RibbonGroup ToggleButton.Small &gt; StackPanel &gt; TextBlock">
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="Margin" Value="4 0 0 0" />
+    </Style>
+
+    <!--  ribbon group  -->
+    <Style Selector="local|RibbonGroup">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Grid.Styles>
+                        <Style Selector="ItemsPresenter#PART_Container">
+                            <Setter Property="ItemsPanel">
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </Setter>
+                        </Style>
+                    </Grid.Styles>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Border Margin="2">
+                        <ItemsPresenter
+                            Name="PART_Container"
+                            Margin="{TemplateBinding Padding}"
+                            ItemTemplate="{TemplateBinding ItemTemplate}"
+                            Items="{TemplateBinding Items}" />
+                    </Border>
+                    <TextBlock
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        FontSize="{DynamicResource FontSizeSmall}"
+                        Text="{TemplateBinding Header}" />
+                    <Border Grid.Column="1" Classes="Separator" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
     </Style>
 
     <!--  ribbon  -->
@@ -110,7 +302,6 @@
                                                         Mode=OneWay}">
                             <ContentPresenter
                                 Name="PART_SelectedContentHost"
-                                Height="82"
                                 Margin="{TemplateBinding Padding}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -182,6 +373,9 @@
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
         <Setter Property="Margin" Value="0 0 0 -1" />
+    </Style>
+    <Style Selector="local|RibbonTab &gt; StackPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
     </Style>
 
 </Styles>

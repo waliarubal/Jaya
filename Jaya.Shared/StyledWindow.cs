@@ -15,8 +15,8 @@ namespace Jaya.Shared
     {
         const string DEFAULT_ICON = "avares://Jaya.Shared/Assets/Logo.ico";
        
-        public static StyledProperty<object> HeaderContentProperty;
-        public static StyledProperty<bool> IsModalProperty;
+        public static readonly StyledProperty<object> HeaderContentProperty;
+        public static readonly StyledProperty<bool> IsModalProperty;
         Button _closeButton, _minimizeButton, _maximizeButton;
         Image _icon;
         bool _isTemplateApplied;
