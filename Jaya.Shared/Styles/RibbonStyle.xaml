@@ -75,14 +75,6 @@
         </local:Ribbon>
     </Design.PreviewWith>
 
-    <Styles.Resources>
-        <DrawingGroup x:Key="ArrowUp">
-            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
-            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M13.6943,9.6094L11.2193,12.0844 8.0003,8.8644 4.7803,12.0844 2.3053,9.6094 8.0003,3.9154z" />
-            <GeometryDrawing Brush="#FF424242" Geometry="F1M12.2803,9.6094L11.2193,10.6704 8.0003,7.4504 4.7803,10.6704 3.7193,9.6094 8.0003,5.3294z" />
-        </DrawingGroup>
-    </Styles.Resources>
-
     <!--  separator  -->
     <Style Selector="Border.Separator">
         <Setter Property="IsHitTestVisible" Value="False" />
@@ -281,6 +273,19 @@
                     Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}">
+                    <Border.Resources>
+                        <DrawingGroup x:Key="Help">
+                            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M0,8C0,3.582 3.582,0 8,0 12.418,0 16,3.582 16,8 16,12.418 12.418,16 8,16 3.582,16 0,12.418 0,8" />
+                            <GeometryDrawing Brush="#FF1AA1E2" Geometry="F1M11,7C11,8.104,10.102,9,9,9L9,10 7,10 7,9C7,7.896,7.897,7,9,7L9,5.203C8.841,5.115 8.495,5 8,5 7.505,5 7.159,5.115 7,5.203L7,6 5,6 5,5C5,3.841 6.262,3 8,3 9.738,3 11,3.841 11,5z M9,13L7,13 7,11 9,11z M8,1C4.134,1 1,4.134 1,8 1,11.865 4.134,15 8,15 11.866,15 15,11.865 15,8 15,4.134 11.866,1 8,1" />
+                            <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1M9,11L7,11 7,13 9,13z M9,10L7,10 7,9C7,7.896,7.897,7,9,7L9,5.203C8.841,5.115 8.495,5 8,5 7.505,5 7.159,5.115 7,5.203L7,6 5,6 5,5C5,3.841 6.262,3 8,3 9.738,3 11,3.841 11,5L11,7C11,8.104,10.102,9,9,9z" />
+                        </DrawingGroup>
+                        <DrawingGroup x:Key="ArrowUp">
+                            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M13.6943,9.6094L11.2193,12.0844 8.0003,8.8644 4.7803,12.0844 2.3053,9.6094 8.0003,3.9154z" />
+                            <GeometryDrawing Brush="#FF424242" Geometry="F1M12.2803,9.6094L11.2193,10.6704 8.0003,7.4504 4.7803,10.6704 3.7193,9.6094 8.0003,5.3294z" />
+                        </DrawingGroup>
+                    </Border.Resources>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -309,27 +314,37 @@
                                 ContentTemplate="{TemplateBinding SelectedContentTemplate}">
                             </ContentPresenter>
                         </Border>
-                        <Button
-                            Name="PART_ToggleButton"
-                            Width="16"
-                            Height="16"
+                        <StackPanel
+                            Margin="0,0,0,1"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
+                            Orientation="Horizontal"
                             ZIndex="99">
-                            <DrawingPresenter Drawing="{StaticResource ArrowUp}" />
-                        </Button>
+                            <Button Name="PART_ToggleButton">
+                                <DrawingPresenter
+                                    Width="16"
+                                    Height="16"
+                                    Drawing="{StaticResource ArrowUp}" />
+                            </Button>
+                            <Button Command="{TemplateBinding HelpButtonCommand}" ToolTip.Tip="Help">
+                                <DrawingPresenter
+                                    Width="16"
+                                    Height="16"
+                                    Drawing="{StaticResource Help}" />
+                            </Button>
+                        </StackPanel>
                     </Grid>
                 </Border>
             </ControlTemplate>
         </Setter>
     </Style>
-    <Style Selector="local|Ribbon[IsExpanded=True] /template/ Border &gt; Grid &gt; Button#PART_ToggleButton">
+    <Style Selector="local|Ribbon[IsExpanded=True] /template/ Border &gt; Grid &gt; StackPanel &gt; Button#PART_ToggleButton">
         <Setter Property="ToolTip.Tip" Value="Collapse the Ribbon" />
     </Style>
-    <Style Selector="local|Ribbon[IsExpanded=False] /template/ Border &gt; Grid &gt; Button#PART_ToggleButton">
+    <Style Selector="local|Ribbon[IsExpanded=False] /template/ Border &gt; Grid &gt; StackPanel &gt; Button#PART_ToggleButton">
         <Setter Property="ToolTip.Tip" Value="Expand the Ribbon" />
     </Style>
-    <Style Selector="local|Ribbon[IsExpanded=False] /template/ Border &gt; Grid &gt; Button#PART_ToggleButton &gt; DrawingPresenter">
+    <Style Selector="local|Ribbon[IsExpanded=False] /template/ Border &gt; Grid &gt; StackPanel &gt; Button#PART_ToggleButton &gt; DrawingPresenter">
         <Setter Property="RenderTransform">
             <RotateTransform Angle="180" />
         </Setter>
@@ -372,7 +387,7 @@
     <Style Selector="local|RibbonTab:selected">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-        <Setter Property="Margin" Value="0 0 0 -1" />
+        <Setter Property="Margin" Value="0 0 0 -3" />
     </Style>
     <Style Selector="local|RibbonTab &gt; StackPanel">
         <Setter Property="Orientation" Value="Horizontal" />

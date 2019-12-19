@@ -10,26 +10,22 @@ namespace Jaya.Ui
 {
     public class App : Application
     {
-        readonly SharedService _shared;
-
-        public App()
-        {
-            ThemeSelector = Avalonia.ThemeManager.ThemeSelector.Create("Themes");
-
-            _shared = ServiceLocator.Instance.GetService<SharedService>();
-        }
+        SharedService _shared;
 
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
-   
-            _shared.LoadConfigurations();
         }
 
         public override void OnFrameworkInitializationCompleted()
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
             {
+                ThemeSelector = Avalonia.ThemeManager.ThemeSelector.Create("Themes");
+
+                _shared = ServiceLocator.Instance.GetService<SharedService>();
+                _shared.LoadConfigurations();
+
                 Lifetime.Exit += OnExit;
                 Lifetime.MainWindow = new MainView();
             }

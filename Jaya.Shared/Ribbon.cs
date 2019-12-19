@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Styling;
 using System;
+using System.Windows.Input;
 
 namespace Jaya.Shared
 {
@@ -11,19 +12,30 @@ namespace Jaya.Shared
     /// </summary>
     public class Ribbon : TabControl, IStyleable
     {
-        public static readonly StyledProperty<bool> IsExpandedProperty;
+        public static readonly DirectProperty<Ribbon, bool> IsExpandedProperty;
+        public static readonly DirectProperty<Ribbon, ICommand> HelpButtonCommandProperty;
+
         Button _toggleButton;
+        ICommand _helpCommand;
+        bool _isExpanded;
         ISelectable _selectedTab;
 
         static Ribbon()
         {
-            IsExpandedProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsExpanded), true);
+            IsExpandedProperty = AvaloniaProperty.RegisterDirect<Ribbon, bool>(nameof(IsExpanded), o => o.IsExpanded, (o, v) => o.IsExpanded = v, true);
+            HelpButtonCommandProperty = AvaloniaProperty.RegisterDirect<Ribbon, ICommand>(nameof(HelpButtonCommand), o => o.HelpButtonCommand, (o, v) => o.HelpButtonCommand = v);
         }
 
         public bool IsExpanded
         {
-            get => GetValue(IsExpandedProperty);
-            internal set => SetValue(IsExpandedProperty, value);
+            get => _isExpanded;
+            internal set => SetAndRaise(IsExpandedProperty, ref _isExpanded, value);
+        }
+
+        public ICommand HelpButtonCommand
+        {
+            get => _helpCommand;
+            set => SetAndRaise(HelpButtonCommandProperty, ref _helpCommand, value);
         }
 
         protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
