@@ -7,17 +7,18 @@ namespace Jaya.Shared
 {
     public class RibbonGroup: ItemsControl, IStyleable
     {
-        public static readonly StyledProperty<string> HeaderProperty;
+        public static readonly DirectProperty<RibbonGroup, string> HeaderProperty;
+        string _header;
 
         static RibbonGroup()
         {
-            HeaderProperty = AvaloniaProperty.Register<RibbonGroup, string>(nameof(Header));
+            HeaderProperty = AvaloniaProperty.RegisterDirect<RibbonGroup, string>(nameof(Header), o => o.Header, (o, v) => o.Header = v);
         }
 
         public string Header
         {
-            get => GetValue(HeaderProperty);
-            set => SetValue(HeaderProperty, value);
+            get => _header;
+            set => SetAndRaise(HeaderProperty, ref _header, value);
         }
 
         Type IStyleable.StyleKey => typeof(RibbonGroup);
