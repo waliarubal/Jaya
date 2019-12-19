@@ -26,6 +26,21 @@ namespace Jaya.Shared
             internal set => SetValue(IsExpandedProperty, value);
         }
 
+        protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
+        {
+            switch(e.Property.Name)
+            {
+                case nameof(SelectedItem):
+                    if (e.NewValue == null || IsExpanded)
+                        break;
+
+                    IsExpanded = true;
+                    break;
+            }
+
+            base.OnPropertyChanged(e);
+        }
+
         Type IStyleable.StyleKey => typeof(Ribbon);
 
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
