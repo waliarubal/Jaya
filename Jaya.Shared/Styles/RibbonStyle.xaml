@@ -275,10 +275,9 @@
                     BorderThickness="{TemplateBinding BorderThickness}">
                     <Border.Resources>
                         <DrawingGroup x:Key="Help">
-                            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
-                            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M0,8C0,3.582 3.582,0 8,0 12.418,0 16,3.582 16,8 16,12.418 12.418,16 8,16 3.582,16 0,12.418 0,8" />
-                            <GeometryDrawing Brush="#FF1AA1E2" Geometry="F1M11,7C11,8.104,10.102,9,9,9L9,10 7,10 7,9C7,7.896,7.897,7,9,7L9,5.203C8.841,5.115 8.495,5 8,5 7.505,5 7.159,5.115 7,5.203L7,6 5,6 5,5C5,3.841 6.262,3 8,3 9.738,3 11,3.841 11,5z M9,13L7,13 7,11 9,11z M8,1C4.134,1 1,4.134 1,8 1,11.865 4.134,15 8,15 11.866,15 15,11.865 15,8 15,4.134 11.866,1 8,1" />
-                            <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1M9,11L7,11 7,13 9,13z M9,10L7,10 7,9C7,7.896,7.897,7,9,7L9,5.203C8.841,5.115 8.495,5 8,5 7.505,5 7.159,5.115 7,5.203L7,6 5,6 5,5C5,3.841 6.262,3 8,3 9.738,3 11,3.841 11,5L11,7C11,8.104,10.102,9,9,9z" />
+                            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M4,7.5C4,5.015 6.015,3 8.5,3 10.985,3 13,5.015 13,7.5 13,9.985 10.985,12 8.5,12 6.015,12 4,9.985 4,7.5" />
+                            <GeometryDrawing Brush="#FF1AA1E2" Geometry="F1M10,7C10,7.551,9.551,8,9,8L9,8.5 8,8.5 8,8C8,7.449,8.449,7,9,7L9,6C8.92,5.956 8.748,5.898 8.5,5.898 8.252,5.898 8.08,5.956 8,6L8,7 7,7 7,6C7,5.42 7.631,5 8.5,5 9.369,5 10,5.42 10,6z M9,10L8,10 8,9 9,9z M8.5,4C6.567,4 5,5.567 5,7.5 5,9.433 6.567,11 8.5,11 10.433,11 12,9.433 12,7.5 12,5.567 10.433,4 8.5,4" />
+                            <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1M9,9L8,9 8,10 9,10z M9,8.5L8,8.5 8,8C8,7.449,8.449,7,9,7L9,6C8.92,5.956 8.748,5.898 8.5,5.898 8.252,5.898 8.08,5.956 8,6L8,7 7,7 7,6C7,5.42 7.631,5 8.5,5 9.369,5 10,5.42 10,6L10,7C10,7.551,9.551,8,9,8z" />
                         </DrawingGroup>
                         <DrawingGroup x:Key="ArrowUp">
                             <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
@@ -320,16 +319,23 @@
                             VerticalAlignment="Top"
                             Orientation="Horizontal"
                             ZIndex="99">
-                            <Button Name="PART_ToggleButton">
+                            <Button
+                                Name="PART_ToggleButton"
+                                Width="14"
+                                Height="14">
                                 <DrawingPresenter
-                                    Width="16"
-                                    Height="16"
+                                    Width="14"
+                                    Height="14"
                                     Drawing="{StaticResource ArrowUp}" />
                             </Button>
-                            <Button Command="{TemplateBinding HelpButtonCommand}" ToolTip.Tip="Help">
+                            <Button
+                                Width="14"
+                                Height="14"
+                                Command="{TemplateBinding HelpButtonCommand}"
+                                ToolTip.Tip="Help">
                                 <DrawingPresenter
-                                    Width="16"
-                                    Height="16"
+                                    Width="14"
+                                    Height="14"
                                     Drawing="{StaticResource Help}" />
                             </Button>
                         </StackPanel>
@@ -387,7 +393,7 @@
     <Style Selector="local|RibbonTab:selected">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-        <Setter Property="Margin" Value="0 0 0 -3" />
+        <Setter Property="Margin" Value="0 0 0 -2" />
     </Style>
     <Style Selector="local|RibbonTab &gt; StackPanel">
         <Setter Property="Orientation" Value="Horizontal" />
