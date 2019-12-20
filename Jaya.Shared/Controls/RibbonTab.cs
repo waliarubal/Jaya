@@ -2,7 +2,7 @@
 using Avalonia.Styling;
 using System;
 
-namespace Jaya.Shared
+namespace Jaya.Shared.Controls
 {
     public class RibbonTab : TabItem, IStyleable
     {

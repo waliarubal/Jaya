@@ -14,19 +14,19 @@
     <UserControl.DataContext>
         <vm:RibbonViewModel />
     </UserControl.DataContext>
-    <j:Ribbon>
-        <j:RibbonTab Header="File">
+    <Ribbon>
+        <RibbonTab Header="File">
             <StackPanel>
-                <j:RibbonGroup Header="New">
+                <RibbonGroup Header="New">
                     <Button Classes="Large" ToolTip.Tip="New Folder">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
                             <TextBlock Text="New Folder" />
                         </StackPanel>
                     </Button>
-                </j:RibbonGroup>
+                </RibbonGroup>
 
-                <j:RibbonGroup Header="Open">
+                <RibbonGroup Header="Open">
                     <Button Classes="Large" ToolTip.Tip="Properties">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
@@ -47,9 +47,9 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                </j:RibbonGroup>
+                </RibbonGroup>
 
-                <j:RibbonGroup Header="Actions">
+                <RibbonGroup Header="Actions">
                     <Button
                         Classes="Large"
                         Command="{Binding SimpleCommand}"
@@ -59,12 +59,12 @@
                             <TextBlock Text="Exit" />
                         </StackPanel>
                     </Button>
-                </j:RibbonGroup>
+                </RibbonGroup>
             </StackPanel>
-        </j:RibbonTab>
-        <j:RibbonTab Header="Edit">
+        </RibbonTab>
+        <RibbonTab Header="Edit">
             <StackPanel>
-                <j:RibbonGroup Header="Clipboard">
+                <RibbonGroup Header="Clipboard">
                     <Button Classes="Large" ToolTip.Tip="Copy">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.Copy}" />
@@ -85,9 +85,9 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                </j:RibbonGroup>
+                </RibbonGroup>
 
-                <j:RibbonGroup Header="Organize">
+                <RibbonGroup Header="Organize">
                     <Button Classes="Large" ToolTip.Tip="Delete">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.Delete}" />
@@ -100,9 +100,9 @@
                             <TextBlock Text="Rename" />
                         </StackPanel>
                     </Button>
-                </j:RibbonGroup>
+                </RibbonGroup>
 
-                <j:RibbonGroup Header="Select">
+                <RibbonGroup Header="Select">
                     <StackPanel>
                         <Button Classes="Small" ToolTip.Tip="Select All">
                             <StackPanel>
@@ -123,12 +123,12 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                </j:RibbonGroup>
+                </RibbonGroup>
             </StackPanel>
-        </j:RibbonTab>
-        <j:RibbonTab Header="View">
+        </RibbonTab>
+        <RibbonTab Header="View">
             <StackPanel>
-                <j:RibbonGroup Header="Panes">
+                <RibbonGroup Header="Panes">
                     <ToggleButton
                         Classes="Large"
                         Command="{Binding SimpleCommand}"
@@ -164,9 +164,9 @@
                             </StackPanel>
                         </ToggleButton>
                     </StackPanel>
-                </j:RibbonGroup>
+                </RibbonGroup>
 
-                <j:RibbonGroup Header="Show/Hide">
+                <RibbonGroup Header="Show/Hide">
                     <StackPanel>
                         <ToggleButton
                             Classes="Small"
@@ -202,9 +202,9 @@
                             </StackPanel>
                         </ToggleButton>
                     </StackPanel>
-                </j:RibbonGroup>
+                </RibbonGroup>
 
-                <j:RibbonGroup>
+                <RibbonGroup>
                     <Button
                         Classes="Large"
                         Command="{Binding OpenWindowCommand}"
@@ -237,12 +237,12 @@
                             <TextBlock Text="Options" />
                         </StackPanel>
                     </Button>
-                </j:RibbonGroup>
+                </RibbonGroup>
             </StackPanel>
-        </j:RibbonTab>
-        <j:RibbonTab Header="Help">
+        </RibbonTab>
+        <RibbonTab Header="Help">
             <StackPanel>
-                <j:RibbonGroup Header="Help &amp; Support">
+                <RibbonGroup Header="Help &amp; Support">
                     <Button Classes="Large" ToolTip.Tip="View Help">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.Help}" />
@@ -263,17 +263,17 @@
                             </StackPanel>
                         </Button>
                     </StackPanel>
-                </j:RibbonGroup>
+                </RibbonGroup>
 
-                <j:RibbonGroup Header="Update">
+                <RibbonGroup Header="Update">
                     <Button Classes="Large" ToolTip.Tip="Update...">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.RunUpdate}" />
                             <TextBlock Text="Update" />
                         </StackPanel>
                     </Button>
-                </j:RibbonGroup>
+                </RibbonGroup>
             </StackPanel>
-        </j:RibbonTab>
-    </j:Ribbon>
+        </RibbonTab>
+    </Ribbon>
 </UserControl>

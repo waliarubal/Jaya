@@ -1,4 +1,4 @@
-﻿<j:StyledWindow
+﻿<StyledWindow
     x:Class="Jaya.Ui.Views.Windows.HostView"
     xmlns="https://github.com/avaloniaui"
     xmlns:j="https://github.com/waliarubal/Jaya"
@@ -15,7 +15,7 @@
     d:DesignWidth="640"
     d:DesignHeight="480"
     mc:Ignorable="d">
-  <j:StyledWindow.DataContext>
+  <StyledWindow.DataContext>
     <vm:HostViewModel />
-  </j:StyledWindow.DataContext>
-</j:StyledWindow>
+  </StyledWindow.DataContext>
+</StyledWindow>

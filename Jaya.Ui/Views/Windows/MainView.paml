@@ -1,4 +1,4 @@
-﻿<j:StyledWindow
+﻿<StyledWindow
     x:Class="Jaya.Ui.Views.Windows.MainView"
     xmlns:j="https://github.com/waliarubal/Jaya"
     xmlns="https://github.com/avaloniaui"
@@ -11,12 +11,12 @@
     Width="800"
     Height="600"
     mc:Ignorable="d">
-    <j:StyledWindow.DataContext>
+    <StyledWindow.DataContext>
         <vm:MainViewModel />
-    </j:StyledWindow.DataContext>
-    <j:StyledWindow.HeaderContent>
+    </StyledWindow.DataContext>
+    <StyledWindow.HeaderContent>
       <v:MenuView IsVisible="{Binding !PaneConfig.IsRibbonVisible, Mode=OneWay}" />
-    </j:StyledWindow.HeaderContent>
+    </StyledWindow.HeaderContent>
     <DockPanel>
         <v:RibbonView DockPanel.Dock="Top" IsVisible="{Binding $parent[DockPanel].DataContext.PaneConfig.IsRibbonVisible, Mode=OneWay}" />
         <v:ToolbarView DockPanel.Dock="Top" IsVisible="{Binding $parent[DockPanel].DataContext.IsToolbarVisible, Mode=OneWay}" />
@@ -51,4 +51,4 @@
                 IsVisible="{Binding $parent[Grid].DataContext.PaneConfig.IsDetailsPaneVisible, Mode=OneWay}" />
         </Grid>
     </DockPanel>
-</j:StyledWindow>
+</StyledWindow>

@@ -1,6 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Markup.Xaml;
-using Jaya.Shared;
+using Jaya.Shared.Controls;
 
 namespace Jaya.Ui.Views.Windows
 {

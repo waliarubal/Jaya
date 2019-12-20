@@ -5,7 +5,7 @@ using Avalonia.Styling;
 using System;
 using System.Windows.Input;
 
-namespace Jaya.Shared
+namespace Jaya.Shared.Controls
 {
     /// <summary>
     /// Refer https://www.powerworld.com/WebHelp/Content/MainDocumentation_HTML/Ribbons.htm for details.

@@ -9,7 +9,7 @@ using Avalonia.Styling;
 using System;
 using System.IO;
 
-namespace Jaya.Shared
+namespace Jaya.Shared.Controls
 {
     public class StyledWindow : Window, IStyleable
     {

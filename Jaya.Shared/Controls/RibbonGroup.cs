@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Styling;
 using System;
 
-namespace Jaya.Shared
+namespace Jaya.Shared.Controls
 {
     public class RibbonGroup: ItemsControl, IStyleable
     {
