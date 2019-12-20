@@ -62,14 +62,12 @@ namespace Jaya.Shared
                 if (assembly.FullName.StartsWith("Jaya.", StringComparison.InvariantCultureIgnoreCase))
                     assemblies.Add(assembly);
             }
-
             
             foreach (var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll", SearchOption.TopDirectoryOnly))
             {
                 var assembly = Assembly.LoadFrom(fileName);
                 assemblies.Add(assembly);
             }
-            
 
             var configuration = new ContainerConfiguration().WithAssemblies(assemblies, conventions);
             return configuration.CreateContainer();

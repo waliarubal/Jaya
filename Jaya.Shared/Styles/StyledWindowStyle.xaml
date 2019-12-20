@@ -1,12 +1,12 @@
 ﻿<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Jaya.Shared;assembly=Jaya.Shared">
+    xmlns:c="clr-namespace:Jaya.Shared.Controls;assembly=Jaya.Shared">
     <Design.PreviewWith>
         <StyledWindow Width="640" Height="480" />
     </Design.PreviewWith>
 
-    <Style Selector="StyledWindow">
+    <Style Selector="c|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
