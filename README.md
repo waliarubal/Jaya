@@ -4,6 +4,8 @@
 [![MIT license](https://img.shields.io/github/license/waliarubal/Jaya)](https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2)
 
+![Logo](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/Logo.png)
+
 ## Jaya - Cross Plat
 
 **Jaya - Cross Plat** is a small .NET Core based cross platform file explorer application which runs on Windows, Mac and Linux. Its goal is very simple, *"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports."*.
@@ -34,6 +36,8 @@ This project is in beta at the moment so it's not suitable for general use.
 
 ### Screenshots
 
+Dark Theme
+
 ![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/00.png)
 
 ![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/06.png)
@@ -41,6 +45,8 @@ This project is in beta at the moment so it's not suitable for general use.
 ![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/02.png)
 
 ![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/05.png)
+
+Light Theme
 
 ![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/01.png)
 
