@@ -14,7 +14,7 @@ namespace Jaya.Shared.Controls
     public class StyledWindow : Window, IStyleable
     {
         const string DEFAULT_ICON = "avares://Jaya.Shared/Assets/Logo.ico";
-       
+
         public static readonly StyledProperty<object> HeaderContentProperty;
         public static readonly StyledProperty<bool> IsModalProperty;
         Button _closeButton, _minimizeButton, _maximizeButton;
@@ -56,7 +56,20 @@ namespace Jaya.Shared.Controls
             _maximizeButton.Click += delegate { WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; };
 
             _icon = GetControl<Image>(e, "PART_Icon");
-            _icon.Source = GetIcon(Icon);
+            if (Icon == null)
+            {
+                var uri = new Uri(DEFAULT_ICON, UriKind.Absolute);
+                var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
+                using (var stream = assets.Open(uri))
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                    _icon.Source = new Bitmap(stream);
+                }
+
+                Icon = new WindowIcon(_icon.Source);
+            }
+            else
+                _icon.Source = GetIcon(Icon);
 
             _isTemplateApplied = true;
         }
@@ -68,7 +81,7 @@ namespace Jaya.Shared.Controls
             if (!_isTemplateApplied)
                 return;
 
-            switch(e.Property.Name)
+            switch (e.Property.Name)
             {
                 case nameof(Icon):
                     _icon.Source = GetIcon(Icon);
@@ -131,7 +144,7 @@ namespace Jaya.Shared.Controls
         {
             var control = GetControl<Border>(e, name);
             control.Cursor = new Cursor(cursor);
-            control.PointerPressed += (sender, args) => PlatformImpl?.BeginResizeDrag(edge, args);;
+            control.PointerPressed += (sender, args) => PlatformImpl?.BeginResizeDrag(edge, args); ;
         }
 
         T GetControl<T>(TemplateAppliedEventArgs e, string name) where T : Control
