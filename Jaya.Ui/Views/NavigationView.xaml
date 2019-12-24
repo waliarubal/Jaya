@@ -32,6 +32,7 @@
                 <Setter Property="IsVisible" Value="{Binding FileSystemObject.IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}, FallbackValue=True}" />
             </Style>
             <Style Selector="DrawingPresenter[IsVisible=True].Spinner">
+                <Setter Property="Margin" Value="0 0 4 0" />
                 <Style.Animations>
                     <Animation RepeatCount="Loop" Duration="0:0:1.5">
                         <KeyFrame Cue="100%">

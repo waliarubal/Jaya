@@ -24,7 +24,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.Styles>
-            <Style Selector="DrawingPresenter.Spinner">
+            <Style Selector="Panel[IsVisible=True] &gt; StackPanel &gt; DrawingPresenter.Spinner">
                 <Setter Property="Width" Value="16" />
                 <Setter Property="Height" Value="16" />
                 <Style.Animations>
@@ -200,14 +200,18 @@
             IsVisible="{Binding !Item.Children.Count, Mode=OneWay}"
             Text="This folder is empty." />
 
-        <StackPanel
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            IsVisible="{Binding IsBusy}"
-            Orientation="Horizontal">
-            <DrawingPresenter Classes="Spinner" Drawing="{DynamicResource Icon.Refresh}" />
-            <TextBlock Margin="4,0,0,0" Text="Working, please wait..." />
-        </StackPanel>
-
+        <Panel
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="{DynamicResource ThemeBackgroundBrush}"
+            IsVisible="{Binding IsBusy}">
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <DrawingPresenter Classes="Spinner" Drawing="{DynamicResource Icon.Refresh}" />
+                <TextBlock Margin="4,0,0,0" Text="Working, please wait..." />
+            </StackPanel>
+        </Panel>
     </Grid>
 </UserControl>
