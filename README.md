@@ -26,8 +26,8 @@ Application is designed to be plug-able from the ground up i.e. anyone with expe
 This project is in beta at the moment so it's not suitable for general use.
 
 <blockquote>
-<p lang="en" dir="ltr">This is an amazing and clever thing by <a href="https://twitter.com/walia_rubal?ref_src=twsrc%5Etfw">@walia_rubal</a> - it&#39;s a *cross platform file explorer application* for Windows, Mac and Linux written in .NET Core/C# and Avalonia! <a href="https://github.com/waliarubal/Jaya">https://github.com/waliarubal/Jaya</a> SWEET. It&#39;s fun to see how people build things like this.</p>
-&mdash; Scott Hanselman (@shanselman) <a href="https://twitter.com/shanselman/status/1186681229480906753?ref_src=twsrc%5Etfw">October 22, 2019</a>
+<p lang="en" dir="ltr">This is an amazing and clever thing by <a href="https://twitter.com/walia_rubal?ref_src=twsrc%5Etfw" target="_blank">@walia_rubal</a> - it&#39;s a *cross platform file explorer application* for Windows, Mac and Linux written in .NET Core/C# and Avalonia! <a href="https://github.com/waliarubal/Jaya">https://github.com/waliarubal/Jaya</a> SWEET. It&#39;s fun to see how people build things like this.</p>
+&mdash; Scott Hanselman (@shanselman) <a href="https://twitter.com/shanselman/status/1186681229480906753?ref_src=twsrc%5Etfw" target="_blank">October 22, 2019</a>
 </blockquote>
 
 ### Built With
