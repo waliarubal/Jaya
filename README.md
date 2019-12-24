@@ -4,7 +4,7 @@
 [![MIT license](https://img.shields.io/github/license/waliarubal/Jaya)](https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2)
 
-![Logo](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/Logo.png)
+<img src='https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/Logo.png' alt='Jaya - Cross Plat logo' align='right' />
 
 ## Jaya - Cross Plat
 
