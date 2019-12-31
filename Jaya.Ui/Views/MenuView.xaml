@@ -280,7 +280,11 @@
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem Header="About" />
+            <MenuItem Header="About">
+                <MenuItem.Icon>
+                    <Image Source="/Assets/Images/Logo.png" />
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
     </Menu>
 </UserControl>

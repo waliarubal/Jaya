@@ -257,20 +257,30 @@
                                 <TextBlock Text="View License" />
                             </StackPanel>
                         </Button>
-                        <Button Classes="Small" ToolTip.Tip="Send Feedback...">
-                            <StackPanel>
-                                <DrawingPresenter Drawing="{DynamicResource Icon.SendMail}" />
-                                <TextBlock Text="Send Feedback" />
-                            </StackPanel>
-                        </Button>
+
                     </StackPanel>
                 </RibbonGroup>
 
-                <RibbonGroup Header="Update">
+                <RibbonGroup Header="Support">
+                    <Button Classes="Large" ToolTip.Tip="Send Feedback...">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.SendMail}" />
+                            <TextBlock Text="Send Feedback" />
+                        </StackPanel>
+                    </Button>
                     <Button Classes="Large" ToolTip.Tip="Update...">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.RunUpdate}" />
                             <TextBlock Text="Update" />
+                        </StackPanel>
+                    </Button>
+                </RibbonGroup>
+
+                <RibbonGroup Header="About">
+                    <Button Classes="Large" ToolTip.Tip="About Jaya - Cross Plat">
+                        <StackPanel>
+                            <Image Source="/Assets/Logo.ico" />
+                            <TextBlock Text="About" />
                         </StackPanel>
                     </Button>
                 </RibbonGroup>
