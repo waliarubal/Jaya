@@ -3,7 +3,7 @@ using Jaya.Provider.GoogleDrive.Services;
 using Jaya.Shared;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Jaya.Provider.GoogleDrive.ViewModels
@@ -11,35 +11,27 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
     public class ConfigurationViewModel: ViewModelBase
     {
         readonly GoogleDriveService _googleDriveService;
+        readonly ConfigModel _config;
         ICommand _addAccount, _removeAccount;
 
         public ConfigurationViewModel()
         {
             _googleDriveService = GetProvider<GoogleDriveService>();
-            _googleDriveService.AccountAdded += OnAccountAddedOrRemoved;
-            _googleDriveService.AccountRemoved += OnAccountAddedOrRemoved;
 
-            Configuration = _googleDriveService.GetConfiguration<ConfigModel>();
-        }
-
-        ~ConfigurationViewModel()
-        {
-            _googleDriveService.AccountAdded -= OnAccountAddedOrRemoved;
-            _googleDriveService.AccountRemoved -= OnAccountAddedOrRemoved;
+            _config = _googleDriveService.GetConfiguration<ConfigModel>();
+            Accounts = new ObservableCollection<AccountModelBase>(_config.Accounts);
         }
 
         #region properties
 
-        ConfigModel Configuration { get; }
-
-        public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
+        public ObservableCollection<AccountModelBase> Accounts { get; }
 
         public int PageSize
         {
-            get => Configuration.PageSize;
+            get => _config.PageSize;
             set
             {
-                Configuration.PageSize = value;
+                _config.PageSize = value;
                 RaisePropertyChanged();
             }
         }
@@ -74,21 +66,21 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
 
         #endregion
 
-        void OnAccountAddedOrRemoved(AccountModelBase account)
-        {
-            RaisePropertyChanged(nameof(Accounts));
-        }
-
-        async void RemoveAccountAction(AccountModel account)
+        async void RemoveAccountAction(AccountModelBase account)
         {
             var isRemoved = await _googleDriveService.RemoveAccount(account);
             if (isRemoved)
+            {
+                Accounts.Remove(account);
                 SelectedAccount = null;
+            }   
         }
 
         async void AddAccountAction()
         {
-            await _googleDriveService.AddAccount();
+            var account = await _googleDriveService.AddAccount();
+            if (account != null)
+                Accounts.Add(account);
         }
     }
 }

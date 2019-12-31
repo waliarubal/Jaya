@@ -3,8 +3,7 @@ using Jaya.Provider.Dropbox.Services;
 using Jaya.Shared;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Jaya.Provider.Dropbox.ViewModels
@@ -13,27 +12,19 @@ namespace Jaya.Provider.Dropbox.ViewModels
     {
         readonly DropboxService _dropboxService;
         ICommand _addAccount, _removeAccount;
+        
 
         public ConfigurationViewModel()
         {
             _dropboxService = GetProvider<DropboxService>();
-            _dropboxService.AccountAdded += OnAccountAddedOrRemoved;
-            _dropboxService.AccountRemoved += OnAccountAddedOrRemoved;
 
-            Configuration = _dropboxService.GetConfiguration<ConfigModel>();
-        }
-
-        ~ConfigurationViewModel()
-        {
-            _dropboxService.AccountAdded -= OnAccountAddedOrRemoved;
-            _dropboxService.AccountRemoved -= OnAccountAddedOrRemoved;
+            var config = _dropboxService.GetConfiguration<ConfigModel>();
+            Accounts = new ObservableCollection<AccountModelBase>(config.Accounts);
         }
 
         #region properties
 
-        ConfigModel Configuration { get; }
-
-        public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
+        public ObservableCollection<AccountModelBase> Accounts { get; }
 
         public AccountModel SelectedAccount
         {
@@ -65,21 +56,21 @@ namespace Jaya.Provider.Dropbox.ViewModels
 
         #endregion
 
-        void OnAccountAddedOrRemoved(AccountModelBase account)
-        {
-            RaisePropertyChanged(nameof(Accounts));
-        }
-
         async void RemoveAccountAction(AccountModel account)
         {
             var isRemoved = await _dropboxService.RemoveAccount(account);
             if (isRemoved)
+            {
+                Accounts.Remove(account);
                 SelectedAccount = null;
+            }
         }
 
         async void AddAccountAction()
         {
-            await _dropboxService.AddAccount();
+            var account = await _dropboxService.AddAccount();
+            if (account != null)
+                Accounts.Add(account);
         }
     }
 }
