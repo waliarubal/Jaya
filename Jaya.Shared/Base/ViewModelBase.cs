@@ -64,11 +64,17 @@ namespace Jaya.Shared.Base
 
         protected T GetService<T>() where T : class, IService
         {
+            if (IsDesignMode)
+                return default;
+
             return ServiceLocator.Instance.GetService<T>();
         }
 
         protected T GetProvider<T>() where T : class, IProviderService
         {
+            if (IsDesignMode)
+                return default;
+
             return ServiceLocator.Instance.GetProviderService<T>();
         }
 

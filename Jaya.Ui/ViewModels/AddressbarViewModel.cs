@@ -1,7 +1,6 @@
 ﻿using Jaya.Shared;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
-using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System;
 using System.Collections.Generic;
