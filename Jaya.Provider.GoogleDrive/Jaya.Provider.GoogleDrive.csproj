@@ -15,7 +15,6 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.1" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.1" />
-    <PackageReference Include="FluentFTP" Version="28.0.5" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.42.0.1778" />
     <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.42.0.1602" />
   </ItemGroup>

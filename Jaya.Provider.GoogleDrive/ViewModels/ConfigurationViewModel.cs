@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace Jaya.Provider.GoogleDrive.ViewModels
 {
-    public class ConfigurationViewModel: ViewModelBase
+    public class ConfigurationViewModel : ViewModelBase
     {
         readonly GoogleDriveService _googleDriveService;
         readonly ConfigModel _config;
@@ -19,6 +19,7 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
             _googleDriveService = GetProvider<GoogleDriveService>();
 
             _config = _googleDriveService.GetConfiguration<ConfigModel>();
+
             Accounts = new ObservableCollection<AccountModelBase>(_config.Accounts);
         }
 
@@ -73,7 +74,7 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
             {
                 Accounts.Remove(account);
                 SelectedAccount = null;
-            }   
+            }
         }
 
         async void AddAccountAction()

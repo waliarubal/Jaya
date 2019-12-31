@@ -13,6 +13,7 @@ using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Composition;
 using System.Text;
 using System.Threading;
@@ -45,6 +46,8 @@ namespace Jaya.Provider.GoogleDrive.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
+        #region properties
+
         IDataStore DataStore
         {
             get
@@ -62,10 +65,12 @@ namespace Jaya.Provider.GoogleDrive.Services
             {
                 if (_config == null)
                     _config = GetConfiguration<ConfigModel>();
-
+                    
                 return _config;
             }
         }
+
+        #endregion
 
         BaseClientService.Initializer GetServiceInitializer(UserCredential credentials)
         {
