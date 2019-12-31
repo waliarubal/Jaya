@@ -53,6 +53,7 @@
                     <Button
                         Classes="Large"
                         Command="{Binding SimpleCommand}"
+                        CommandParameter="{x:Static local:CommandType.Exit}"
                         ToolTip.Tip="Exit">
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.Close}" />
