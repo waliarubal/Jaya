@@ -40,9 +40,9 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        public ApplicationConfigModel ApplicationConfig => _shared.ApplicationConfiguration;
+        public ApplicationConfigModel ApplicationConfig => _shared?.ApplicationConfiguration;
 
-        public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
+        public PaneConfigModel PaneConfig => _shared?.PaneConfiguration;
 
         public ExplorerItemModel Item
         {

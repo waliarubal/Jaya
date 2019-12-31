@@ -15,7 +15,7 @@ namespace Jaya.Ui.ViewModels.Windows
         {
             WindowTitle = Constants.APP_NAME;
 
-            _onDirectoryChanged = EventAggregator.Subscribe<SelectionChangedEventArgs>(DirectoryChanged);
+            _onDirectoryChanged = EventAggregator?.Subscribe<SelectionChangedEventArgs>(DirectoryChanged);
 
             _shared = GetService<SharedService>();
             _shared.ToolbarConfiguration.PropertyChanged += OnPropertyChanged;

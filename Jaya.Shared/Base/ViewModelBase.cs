@@ -32,7 +32,7 @@ namespace Jaya.Shared.Base
             get
             {
                 if (_eventAggregator == null)
-                    _eventAggregator = GetService<CommandService>().EventAggregator;
+                    _eventAggregator = GetService<CommandService>()?.EventAggregator;
 
                 return _eventAggregator;
             }

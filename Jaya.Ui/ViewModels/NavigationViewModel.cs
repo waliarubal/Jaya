@@ -19,7 +19,8 @@ namespace Jaya.Ui.ViewModels
             _shared = GetService<SharedService>();
 
             Node = new TreeNodeModel(null, null, null);
-            PopulateCommand.Execute(Node);
+            if (!IsDesignMode)
+                PopulateCommand.Execute(Node);
         }
 
         #region properties
