@@ -18,7 +18,7 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
         {
             _googleDriveService = GetProvider<GoogleDriveService>();
 
-            _config = _googleDriveService.GetConfiguration<ConfigModel>();
+            _config = _googleDriveService.Config;
 
             Accounts = new ObservableCollection<AccountModelBase>(_config.Accounts);
         }

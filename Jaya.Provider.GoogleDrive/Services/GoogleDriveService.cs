@@ -58,12 +58,21 @@ namespace Jaya.Provider.GoogleDrive.Services
             }
         }
 
-        ConfigModel Config
+        internal ConfigModel Config
         {
             get
             {
                 if (_config == null)
+                {
                     _config = GetConfiguration<ConfigModel>();
+                    _config.PropertyChanged += (sender, e) =>
+                    {
+                        if (e.PropertyName.Equals(nameof(ConfigModel.Accounts)))
+                            return;
+
+                        SetConfiguration(_config);
+                    };
+                }
                     
                 return _config;
             }
