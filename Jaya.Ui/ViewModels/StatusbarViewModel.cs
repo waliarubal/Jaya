@@ -16,13 +16,13 @@ namespace Jaya.Ui.ViewModels
 
         public StatusbarViewModel()
         {
-            _onSelectionChanged = EventAggregator.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
+            _onSelectionChanged = EventAggregator?.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
             _shared = GetService<SharedService>();
         }
 
         ~StatusbarViewModel()
         {
-            EventAggregator.UnSubscribe(_onSelectionChanged);
+            EventAggregator?.UnSubscribe(_onSelectionChanged);
         }
 
         public PaneConfigModel PaneConfig => _shared.PaneConfiguration;

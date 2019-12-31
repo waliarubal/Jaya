@@ -25,7 +25,7 @@ namespace Jaya.Ui.ViewModels
                 Path.AltDirectorySeparatorChar
             };
             _navigationService = GetService<NavigationService>();
-            _onSelectionChanged = EventAggregator.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
+            _onSelectionChanged = EventAggregator?.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
 
             SearchQuery = string.Empty;
             SearchWatermark = "Search";
@@ -33,7 +33,7 @@ namespace Jaya.Ui.ViewModels
 
         ~AddressbarViewModel()
         {
-            EventAggregator.UnSubscribe(_onSelectionChanged);
+            EventAggregator?.UnSubscribe(_onSelectionChanged);
         }
 
         #region properties
@@ -75,9 +75,9 @@ namespace Jaya.Ui.ViewModels
 
         public bool IsComputer => NodeType == ItemType.Computer;
 
-        public ICommand NavigateBackCommand => _navigationService.NavigateBackCommand;
+        public ICommand NavigateBackCommand => _navigationService?.NavigateBackCommand;
 
-        public ICommand NavigateForwardCommand => _navigationService.NavigateForwardCommand;
+        public ICommand NavigateForwardCommand => _navigationService?.NavigateForwardCommand;
 
         public string SearchQuery
         {

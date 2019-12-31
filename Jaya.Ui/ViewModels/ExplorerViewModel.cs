@@ -19,12 +19,12 @@ namespace Jaya.Ui.ViewModels
         public ExplorerViewModel()
         {
             _shared = GetService<SharedService>();
-            _onSelectionChanged = EventAggregator.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
+            _onSelectionChanged = EventAggregator?.Subscribe<SelectionChangedEventArgs>(SelectionChanged);
         }
 
         ~ExplorerViewModel()
         {
-            EventAggregator.UnSubscribe(_onSelectionChanged);
+            EventAggregator?.UnSubscribe(_onSelectionChanged);
         }
 
         #region properties
@@ -40,9 +40,9 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
-        public ApplicationConfigModel ApplicationConfig => _shared?.ApplicationConfiguration;
+        public ApplicationConfigModel ApplicationConfig => _shared.ApplicationConfiguration;
 
-        public PaneConfigModel PaneConfig => _shared?.PaneConfiguration;
+        public PaneConfigModel PaneConfig => _shared.PaneConfiguration;
 
         public ExplorerItemModel Item
         {

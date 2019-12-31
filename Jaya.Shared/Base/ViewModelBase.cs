@@ -31,8 +31,11 @@ namespace Jaya.Shared.Base
         {
             get
             {
+                if (IsDesignMode)
+                    return default;
+
                 if (_eventAggregator == null)
-                    _eventAggregator = GetService<CommandService>()?.EventAggregator;
+                    _eventAggregator = GetService<CommandService>().EventAggregator;
 
                 return _eventAggregator;
             }
@@ -90,7 +93,7 @@ namespace Jaya.Shared.Base
 
         void SimpleCommandAction(byte type)
         {
-            EventAggregator.Publish(type);
+            EventAggregator?.Publish(type);
         }
 
         void ParameterizedCommandAction(object parameter)
@@ -103,7 +106,7 @@ namespace Jaya.Shared.Base
                 throw new ArgumentException("Failed to parse command parameters.", nameof(parameter));
 
             var param = new KeyValuePair<byte, object>((byte)parameters[0], parameters[1]);
-            EventAggregator.Publish(param);
+            EventAggregator?.Publish(param);
         }
     }
 }
