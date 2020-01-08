@@ -54,52 +54,38 @@ namespace Jaya.Ui.ViewModels
 
         void InvokeObject(ExplorerItemModel obj)
         {
+            if (!obj.Type.HasValue)
+                return;
+
             IsBusy = true;
 
-            SelectionChangedEventArgs args = null;
+            DirectoryModel directory = null;
             switch (obj.Type.Value)
             {
-                case ItemType.Computer:
+                
                 case ItemType.Drive:
                 case ItemType.Directory:
+                    directory = obj.Object as DirectoryModel;
                     break;
 
+                case ItemType.File:
+                    break;
+
+                case ItemType.Computer:
                 case ItemType.Account:
+                    _account = obj.Object as AccountModelBase;
                     break;
 
                 case ItemType.Service:
-                    args = new SelectionChangedEventArgs(obj.Object as ProviderServiceBase, null, null);
+                    _service = obj.Object as ProviderServiceBase;
+                    _account = null;
                     break;
             }
 
-            if (args != null)
-                EventAggregator.Publish(args);
-
-            //if (obj is FileSystemObjectModel fileSystemObject)
-            //{
-            //    switch (fileSystemObject.Type)
-            //    {
-            //        case FileSystemObjectType.Drive:
-            //        case FileSystemObjectType.Directory:
-            //            var args = new SelectionChangedEventArgs(_service, _account, obj as DirectoryModel);
-            //            EventAggregator.Publish(args);
-            //            break;
-
-            //        case FileSystemObjectType.File:
-            //            break;
-            //    }
-            //}
-            //else if (obj is ProviderServiceBase service)
-            //{
-            //    var args = new SelectionChangedEventArgs(service, null, null);
-            //    EventAggregator.Publish(args);
-            //}
-            //else if (obj is AccountModelBase account)
-            //{
-
-            //}
-
             IsBusy = false;
+
+            var eventArgs = new SelectionChangedEventArgs(_service, _account, directory);
+            EventAggregator.Publish(eventArgs);
         }
 
         async void SelectionChanged(SelectionChangedEventArgs args)
