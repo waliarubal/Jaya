@@ -62,7 +62,6 @@ namespace Jaya.Ui.ViewModels
             DirectoryModel directory = null;
             switch (obj.Type.Value)
             {
-                
                 case ItemType.Drive:
                 case ItemType.Directory:
                     directory = obj.Object as DirectoryModel;
