@@ -256,7 +256,14 @@
                 <DrawingPresenter Drawing="{DynamicResource Icon.RunUpdate}" />
             </Button>
             <Border Classes="Separator" />
-            <Button ToolTip.Tip="About Jaya - Cross Plat">
+            <Button Command="{Binding OpenWindowCommand}" ToolTip.Tip="About Jaya - Cross Plat">
+                <Button.CommandParameter>
+                    <j:WindowOptionsModel
+                        Title="Plugins"
+                        Width="640"
+                        Height="480"
+                        ContentType="{x:Type v:AboutView}" />
+                </Button.CommandParameter>
                 <Image Source="/Assets/Logo.ico" />
             </Button>
         </StackPanel>

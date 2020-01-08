@@ -1,10 +1,15 @@
 ﻿<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:c="clr-namespace:Jaya.Shared.Controls;assembly=Jaya.Shared">
+    xmlns:c="clr-namespace:Jaya.Shared.Controls;assembly=Jaya.Shared"
+    xmlns:co="clr-namespace:Jaya.Shared.Converters;assembly=Jaya.Shared">
     <Design.PreviewWith>
         <StyledWindow Width="640" Height="480" />
     </Design.PreviewWith>
+
+    <Styles.Resources>
+        <co:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    </Styles.Resources>
 
     <Style Selector="c|StyledWindow">
         <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
@@ -87,8 +92,14 @@
                             HorizontalContentAlignment="Left"
                             VerticalContentAlignment="Center"
                             Background="Transparent"
-                            Content="{TemplateBinding HeaderContent}" />
-                        <Border Grid.Column="2" Classes="Separator" />
+                            Content="{TemplateBinding HeaderContent}"
+                            IsVisible="{TemplateBinding IsModal,
+                                                        Converter={StaticResource InverseBooleanConverter}}" />
+                        <Border
+                            Grid.Column="2"
+                            Classes="Separator"
+                            IsVisible="{TemplateBinding IsModal,
+                                                        Converter={StaticResource InverseBooleanConverter}}" />
                         <Border
                             Name="PART_TitleBar"
                             Grid.Column="3"
