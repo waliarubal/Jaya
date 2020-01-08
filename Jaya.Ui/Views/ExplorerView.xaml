@@ -152,11 +152,11 @@
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type m:ExplorerItemModel}">
                     <StackPanel Name="ObjectEntry">
-                        <!--<i:Interaction.Behaviors>
+                        <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
                             </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>-->
+                        </i:Interaction.Behaviors>
                         <Image
                             Classes="Icon"
                             IsVisible="{Binding IsService}"

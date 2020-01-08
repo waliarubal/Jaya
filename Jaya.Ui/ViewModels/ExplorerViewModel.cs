@@ -56,6 +56,25 @@ namespace Jaya.Ui.ViewModels
         {
             IsBusy = true;
 
+            SelectionChangedEventArgs args = null;
+            switch (obj.Type.Value)
+            {
+                case ItemType.Computer:
+                case ItemType.Drive:
+                case ItemType.Directory:
+                    break;
+
+                case ItemType.Account:
+                    break;
+
+                case ItemType.Service:
+                    args = new SelectionChangedEventArgs(obj.Object as ProviderServiceBase, null, null);
+                    break;
+            }
+
+            if (args != null)
+                EventAggregator.Publish(args);
+
             //if (obj is FileSystemObjectModel fileSystemObject)
             //{
             //    switch (fileSystemObject.Type)
