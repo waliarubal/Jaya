@@ -259,7 +259,7 @@
             <Button Command="{Binding OpenWindowCommand}" ToolTip.Tip="About Jaya - Cross Plat">
                 <Button.CommandParameter>
                     <j:WindowOptionsModel
-                        Title="Plugins"
+                        Title="About Jaya - Cross Plat"
                         Width="640"
                         Height="480"
                         ContentType="{x:Type v:AboutView}" />

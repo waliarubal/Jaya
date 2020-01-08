@@ -277,7 +277,17 @@
                 </RibbonGroup>
 
                 <RibbonGroup Header="About">
-                    <Button Classes="Large" ToolTip.Tip="About Jaya - Cross Plat">
+                    <Button
+                        Classes="Large"
+                        Command="{Binding OpenWindowCommand}"
+                        ToolTip.Tip="About Jaya - Cross Plat">
+                        <Button.CommandParameter>
+                            <j:WindowOptionsModel
+                                Title="About Jaya - Cross Plat"
+                                Width="640"
+                                Height="480"
+                                ContentType="{x:Type v:AboutView}" />
+                        </Button.CommandParameter>
                         <StackPanel>
                             <Image Source="/Assets/Logo.ico" />
                             <TextBlock Text="About" />
