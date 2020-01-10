@@ -32,7 +32,6 @@
     </Style>
     <Style Selector="c|Hyperlink:pointerover /template/ ContentPresenter">
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="TextBlock.Foreground" Value="#FD0034" />
         <Setter Property="BorderBrush" Value="#3465ca" />
     </Style>
     <Style Selector="c|Hyperlink:pressed  /template/ ContentPresenter">

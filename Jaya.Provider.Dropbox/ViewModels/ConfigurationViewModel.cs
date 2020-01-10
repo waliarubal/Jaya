@@ -12,8 +12,7 @@ namespace Jaya.Provider.Dropbox.ViewModels
     {
         readonly DropboxService _dropboxService;
         ICommand _addAccount, _removeAccount;
-        
-
+       
         public ConfigurationViewModel()
         {
             _dropboxService = GetProvider<DropboxService>();

@@ -25,7 +25,7 @@
             <StackPanel Margin="0,0,0,12" Orientation="Horizontal">
                 <TextBlock Text="{Binding VersionString, Mode=OneTime, StringFormat='{}{0} '}" />
                 <TextBlock Text="{Binding Bitness, Mode=OneTime, StringFormat='({0}-bit) '}" />
-                <Hyperlink Content="What's new in this version?" />
+                <Hyperlink Content="What's new in this version?" Url="https://github.com/waliarubal/Jaya/releases" />
             </StackPanel>
             <TextBlock
                 Width="{Binding $parent.Bounds.Width, Mode=OneWay}"
@@ -34,9 +34,9 @@
                 TextWrapping="Wrap" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Want to help? " />
-                <Hyperlink Content="Make a donation" />
+                <Hyperlink Content="Make a donation" Url="{Binding DonationUrl, Mode=OneTime}" />
                 <TextBlock Text=" or " />
-                <Hyperlink Content="get involved" />
+                <Hyperlink Content="get involved" Url="{Binding IssuesUrl, Mode=OneTime}" />
                 <TextBlock Text="!" />
             </StackPanel>
         </StackPanel>

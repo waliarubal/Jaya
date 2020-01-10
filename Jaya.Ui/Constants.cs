@@ -1,10 +1,33 @@
-﻿namespace Jaya.Ui
+﻿using System;
+
+namespace Jaya.Ui
 {
     static class Constants
     {
-        public const string IMAGES_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/{0}";
+        const string IMAGES_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/{0}";
+        const string REPO_URL = "https://github.com/waliarubal/Jaya/";
+
         public const string APP_NAME = "Jaya - Cross Plat";
         public const string APP_DESCRIPTION = "Jaya - Cross Plat is a small .NET Core based cross platform file explorer application which runs on Windows, Mac and Linux. Its goal is very simple, \"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports.\".";
+
+        public static readonly Uri
+            URL_DONATION,
+            URL_LICENSE,
+            URL_ISSUES,
+            URL_RELEASES;
+
+        static Constants()
+        {
+            URL_DONATION = new Uri("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2");
+            URL_LICENSE = new Uri("https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE");
+            URL_ISSUES = GetRepositoryUrl("issues");
+            URL_RELEASES = GetRepositoryUrl("releases");
+        }
+
+        static Uri GetRepositoryUrl(string urlFragment)
+        {
+            return new Uri(string.Format("{0}{1}", REPO_URL, urlFragment));
+        }
 
         public static string GetImageUrl(this string fileName)
         {
@@ -12,7 +35,7 @@
         }
     }
 
-    internal enum AccountAction: byte
+    internal enum AccountAction : byte
     {
         Added,
         Removed
