@@ -284,8 +284,8 @@
                         <Button.CommandParameter>
                             <j:WindowOptionsModel
                                 Title="About Jaya - Cross Plat"
-                                Width="640"
-                                Height="480"
+                                Width="480"
+                                Height="320"
                                 ContentType="{x:Type v:AboutView}" />
                         </Button.CommandParameter>
                         <StackPanel>

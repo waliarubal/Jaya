@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    d:DesignHeight="480"
-    d:DesignWidth="640"
+    d:DesignHeight="320"
+    d:DesignWidth="480"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:AboutViewModel />
@@ -16,25 +16,37 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <StackPanel Margin="8">
             <TextBlock FontSize="24" Text="{Binding Name, Mode=OneTime}" />
             <StackPanel Margin="0,0,0,12" Orientation="Horizontal">
                 <TextBlock Text="{Binding VersionString, Mode=OneTime, StringFormat='{}{0} '}" />
                 <TextBlock Text="{Binding Bitness, Mode=OneTime, StringFormat='({0}-bit) '}" />
-                <TextBlock Text="What's new in this version?" />
+                <Hyperlink Content="What's new in this version?" />
             </StackPanel>
-
             <TextBlock
                 Width="{Binding $parent.Bounds.Width, Mode=OneWay}"
                 Margin="0,0,0,12"
                 Text="{Binding Description, Mode=OneTime}"
                 TextWrapping="Wrap" />
-            <TextBlock Text="Want to help? Make a donation or get involved!" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Want to help? " />
+                <Hyperlink Content="Make a donation" />
+                <TextBlock Text=" or " />
+                <Hyperlink Content="get involved" />
+                <TextBlock Text="!" />
+            </StackPanel>
         </StackPanel>
 
         <Image
             Grid.Column="1"
             VerticalAlignment="Top"
             Source="/Assets/Images/Logo.png" />
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        </StackPanel>
     </Grid>
 </UserControl>
