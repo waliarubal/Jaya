@@ -23,7 +23,7 @@ Application is designed to be plug-able from the ground up i.e. anyone with expe
 - [ ] Media Fire
 - [ ] FTP/SFTP
 
-This project is in beta at the moment so it's not suitable for general use.
+This project is in beta at the moment so it's not suitable for general use. Technical users with programming experience can try things out, just open the project in Visual Studio 2017 or Visual Studio 2019 and run it in 'Debug' mode.
 
 <blockquote>
 <p lang="en" dir="ltr">This is an amazing and clever thing by <a href="https://twitter.com/walia_rubal?ref_src=twsrc%5Etfw" target="_blank">@walia_rubal</a> - it&#39;s a *cross platform file explorer application* for Windows, Mac and Linux written in .NET Core/C# and Avalonia! <a href="https://github.com/waliarubal/Jaya">https://github.com/waliarubal/Jaya</a> SWEET. It&#39;s fun to see how people build things like this.</p>
