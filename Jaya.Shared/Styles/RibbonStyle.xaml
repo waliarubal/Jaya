@@ -140,6 +140,18 @@
         <Setter Property="Width" Value="16" />
         <Setter Property="Height" Value="16" />
     </Style>
+    <Style Selector="c|RibbonGroup Button.Large &gt; StackPanel &gt; Path">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Stretch" Value="UniformToFill" />
+        <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+    </Style>
+    <Style Selector="c|RibbonGroup Button.Small &gt; StackPanel &gt; Path">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Stretch" Value="UniformToFill" />
+        <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+    </Style>
 
     <Style Selector="c|RibbonGroup Button.Large &gt; StackPanel &gt; TextBlock">
         <Setter Property="TextAlignment" Value="Center" />
@@ -209,6 +221,18 @@
     <Style Selector="c|RibbonGroup ToggleButton.Small &gt; StackPanel &gt; Image">
         <Setter Property="Width" Value="16" />
         <Setter Property="Height" Value="16" />
+    </Style>
+    <Style Selector="c|RibbonGroup ToggleButton.Large &gt; StackPanel &gt; Path">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Stretch" Value="UniformToFill" />
+        <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+    </Style>
+    <Style Selector="c|RibbonGroup ToggleButton.Small &gt; StackPanel &gt; Path">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Stretch" Value="UniformToFill" />
+        <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
     </Style>
 
     <Style Selector="c|RibbonGroup ToggleButton.Large &gt; StackPanel &gt; TextBlock">
