@@ -136,5 +136,10 @@ namespace Jaya.Provider.FileSystem.Services
 
             return await Task.Run(() => providers);
         }
+
+        public override Task FormatAsync(AccountModelBase account, DirectoryModel directory = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

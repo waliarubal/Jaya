@@ -146,5 +146,10 @@ namespace Jaya.Provider.Dropbox.Services
             var config = GetConfiguration<ConfigModel>();
             return await Task.Run(() => config.Accounts);
         }
+
+        public override Task FormatAsync(AccountModelBase account, DirectoryModel directory = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

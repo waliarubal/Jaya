@@ -180,6 +180,8 @@ namespace Jaya.Shared.Base
 
         public abstract Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null);
 
+        public abstract Task FormatAsync(AccountModelBase account, DirectoryModel directory = null);
+
         public override string ToString()
         {
             return Name;
