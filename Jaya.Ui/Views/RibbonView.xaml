@@ -257,13 +257,24 @@
                         </StackPanel>
                     </Button>
                     <StackPanel>
+                        <Button Classes="Small" ToolTip.Tip="Project URL">
+                            <StackPanel>
+                                <Path Data="{StaticResource Icon.Github}" />
+                                <TextBlock Text="Project URL" />
+                            </StackPanel>
+                        </Button>
                         <Button Classes="Small" ToolTip.Tip="View License">
                             <StackPanel>
                                 <DrawingPresenter Drawing="{DynamicResource Icon.CertificateWarning}" />
                                 <TextBlock Text="View License" />
                             </StackPanel>
                         </Button>
-
+                        <Button Classes="Small" ToolTip.Tip="Make a Donation">
+                            <StackPanel>
+                                <Path Data="{StaticResource Icon.Donate}" />
+                                <TextBlock Text="Donate" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
                 </RibbonGroup>
 

@@ -275,9 +275,19 @@
                     <DrawingPresenter Drawing="{DynamicResource Icon.Help}" />
                 </MenuItem.Icon>
             </MenuItem>
+            <MenuItem Header="Project URL">
+                <MenuItem.Icon>
+                    <Path Data="{StaticResource Icon.Github}" />
+                </MenuItem.Icon>
+            </MenuItem>
             <MenuItem Header="View License">
                 <MenuItem.Icon>
                     <DrawingPresenter Drawing="{DynamicResource Icon.CertificateWarning}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Donate">
+                <MenuItem.Icon>
+                    <Path Data="{StaticResource Icon.Donate}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
