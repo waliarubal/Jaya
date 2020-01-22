@@ -1,12 +1,9 @@
 <p align="center">
-	<a href="https://github.com/waliarubal/Jaya/" target="_blank" rel="noopener noreferrer">
+	<a href="https://github.com/waliarubal/Jaya/" target="_blank">
 		<img src="https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/Logo.png" alt="Jaya - Cross Plat logo" >
 	</a>
-  <h1>Jaya - Cross Plat</h1>
 </p>
-
-<br/>
-<br/>
+<h1 align="center">Jaya - Cross Plat</h1>
 
 <p align="center">
 	<a href="https://ci.appveyor.com/project/waliarubal/jaya-dev" target="_blank"><img alt="Build status" src="https://ci.appveyor.com/api/projects/status/467yhb1fia401wai?svg=true"></a>
