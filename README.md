@@ -1,12 +1,20 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/467yhb1fia401wai?svg=true)](https://ci.appveyor.com/project/waliarubal/jaya-dev)
-[![GitHub stars](https://img.shields.io/github/stars/waliarubal/Jaya)](https://github.com/waliarubal/Jaya/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/waliarubal/Jaya)](https://github.com/waliarubal/Jaya/network)
-[![MIT license](https://img.shields.io/github/license/waliarubal/Jaya)](https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2)
+<p align="center">
+	<a href="https://github.com/waliarubal/Jaya/" target="_blank" rel="noopener noreferrer">
+		<img src="https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/Logo.png" alt="Jaya - Cross Plat logo" >
+	</a>
+  <h1>Jaya - Cross Plat</h1>
+</p>
 
-<img src='https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/Logo.png' alt='Jaya - Cross Plat logo' align='right' />
+<br/>
+<br/>
 
-## Jaya - Cross Plat
+<p align="center">
+	<a href="https://ci.appveyor.com/project/waliarubal/jaya-dev" target="_blank"><img alt="Build status" src="https://ci.appveyor.com/api/projects/status/467yhb1fia401wai?svg=true"></a>
+  <a href="https://github.com/waliarubal/Jaya/stargazers" target="_blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/waliarubal/Jaya"></a>
+  <a href="https://github.com/waliarubal/Jaya/network" target="_blank"><img alt="GitHub forks" src="https://img.shields.io/github/forks/waliarubal/Jaya"></a>
+  <a href="https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE" target="_blank"><img alt="MIT license" src="https://img.shields.io/github/license/waliarubal/Jaya"></a>
+  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2" target="_blank"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-green.svg"></a>
+</p>
 
 **Jaya - Cross Plat** is a small .NET Core based cross platform file explorer application which runs on Windows, Mac and Linux. Its goal is very simple, *"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports."*.
 
