@@ -20,22 +20,11 @@
         </Grid.Styles>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="120" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Number of records to fetch in each request:" />
-        <TextBox Grid.Column="1" Text="{Binding PageSize, Mode=TwoWay}" />
-
-        <TextBlock
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            Text="Manage your registered Google Drive accounts." />
-        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+        <TextBlock Text="Manage your registered FTP/FTPS accounts." />
+        <Grid Grid.Row="1">
             <Grid.Styles>
                 <Style Selector="Grid &gt; Button">
                     <Setter Property="Margin" Value="8,2,2,2" />
