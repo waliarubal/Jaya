@@ -110,6 +110,14 @@ namespace Jaya.Provider.Ftp.Services
 
         protected override async Task<AccountModelBase> AddAccountAsync()
         {
+            var config = GetConfiguration<ConfigModel>();
+
+            var account = new AccountModel("", "");
+
+            config.Accounts.Add(account);
+            SetConfiguration(config);
+
+            return account;
             /*
             var credentials = await GetCredential();
             if (credentials == null)
