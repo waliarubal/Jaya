@@ -141,7 +141,6 @@ namespace Jaya.Provider.Ftp.Services
 
             return provider;
             */
-            throw new NotImplementedException();
         }
 
         protected override async Task<bool> RemoveAccountAsync(AccountModelBase account)
