@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="120" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Text="Manage your registered FTP/FTPS accounts." />
@@ -75,5 +76,64 @@
         </Grid>
 
 
+        <Grid Grid.Row="2">
+            <Grid.Styles>
+                <Style Selector="Button">
+                    <Setter Property="Margin" Value="2" />
+                    <Setter Property="MinWidth" Value="80" />
+                </Style>
+                <Style Selector="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="4 2" />
+                </Style>
+                <Style Selector="TextBox">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="4 2" />
+                </Style>
+                <Style Selector="CheckBox">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="4 2" />
+                </Style>
+            </Grid.Styles>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Host:" />
+            <TextBox Grid.Column="1" Text="{Binding SelectedAccount.Host, Mode=TwoWay}" />
+
+            <TextBlock Grid.Column="2" Text="Port:" />
+            <TextBox Grid.Column="3" Text="{Binding SelectedAccount.Host, Mode=TwoWay}" />
+
+            <CheckBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Content="Log in anonymously instead of using user name and password."
+                IsChecked="{Binding SelectedAccount.IsAnonymous, Mode=TwoWay}" />
+
+            <TextBlock Grid.Row="2" Text="User Name:" />
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Text="{Binding SelectedAccount.UserName, Mode=TwoWay}" />
+
+            <TextBlock Grid.Row="3" Text="Password:" />
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                PasswordChar="*"
+                Text="{Binding SelectedAccount.Password, Mode=TwoWay}" />
+        </Grid>
     </Grid>
 </UserControl>

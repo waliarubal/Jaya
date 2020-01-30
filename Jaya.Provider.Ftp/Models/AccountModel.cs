@@ -44,5 +44,14 @@ namespace Jaya.Provider.Ftp.Models
             get => Get<string>();
             set => Set(value);
         }
+
+        public static AccountModel Empty()
+        {
+            var account = new AccountModel(string.Empty, string.Empty)
+            {
+                Port = 21
+            };
+            return account;
+        }
     }
 }

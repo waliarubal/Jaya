@@ -10,22 +10,23 @@ namespace Jaya.Provider.Ftp.ViewModels
 {
     public class ConfigurationViewModel: ViewModelBase
     {
-        readonly FtpService _googleDriveService;
+        readonly FtpService _service;
         ICommand _addAccount, _removeAccount;
 
         public ConfigurationViewModel()
         {
-            _googleDriveService = GetProvider<FtpService>();
-            _googleDriveService.AccountAdded += OnAccountAddedOrRemoved;
-            _googleDriveService.AccountRemoved += OnAccountAddedOrRemoved;
+            _service = GetProvider<FtpService>();
+            _service.AccountAdded += OnAccountAddedOrRemoved;
+            _service.AccountRemoved += OnAccountAddedOrRemoved;
 
-            Configuration = _googleDriveService.GetConfiguration<ConfigModel>();
+            Configuration = _service.GetConfiguration<ConfigModel>();
+            SelectedAccount = AccountModel.Empty();
         }
 
         ~ConfigurationViewModel()
         {
-            _googleDriveService.AccountAdded -= OnAccountAddedOrRemoved;
-            _googleDriveService.AccountRemoved -= OnAccountAddedOrRemoved;
+            _service.AccountAdded -= OnAccountAddedOrRemoved;
+            _service.AccountRemoved -= OnAccountAddedOrRemoved;
         }
 
         #region properties
@@ -71,14 +72,14 @@ namespace Jaya.Provider.Ftp.ViewModels
 
         async void RemoveAccountAction(AccountModel account)
         {
-            var isRemoved = await _googleDriveService.RemoveAccount(account);
+            var isRemoved = await _service.RemoveAccount(account);
             if (isRemoved)
                 SelectedAccount = null;
         }
 
         async void AddAccountAction()
         {
-            await _googleDriveService.AddAccount();
+            await _service.AddAccount();
         }
     }
 }
