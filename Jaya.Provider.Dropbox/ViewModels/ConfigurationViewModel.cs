@@ -67,7 +67,7 @@ namespace Jaya.Provider.Dropbox.ViewModels
 
         async void AddAccountAction()
         {
-            var account = await _dropboxService.AddAccount();
+            var account = await _dropboxService.AddAccount(null);
             if (account != null)
                 Accounts.Add(account);
         }

@@ -79,7 +79,7 @@ namespace Jaya.Provider.GoogleDrive.ViewModels
 
         async void AddAccountAction()
         {
-            var account = await _googleDriveService.AddAccount();
+            var account = await _googleDriveService.AddAccount(null);
             if (account != null)
                 Accounts.Add(account);
         }

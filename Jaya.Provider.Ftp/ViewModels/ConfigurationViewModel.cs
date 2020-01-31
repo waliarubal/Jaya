@@ -20,7 +20,7 @@ namespace Jaya.Provider.Ftp.ViewModels
             _service.AccountRemoved += OnAccountAddedOrRemoved;
 
             Configuration = _service.GetConfiguration<ConfigModel>();
-            SelectedAccount = AccountModel.Empty();
+            NewAccountAction();
         }
 
         ~ConfigurationViewModel()
@@ -41,12 +41,18 @@ namespace Jaya.Provider.Ftp.ViewModels
             set => Set(value);
         }
 
+        public AccountModel NewAccount
+        {
+            get => Get<AccountModel>();
+            private set => Set(value);
+        }
+
         public ICommand AddAccountCommand
         {
             get
             {
                 if (_addAccount == null)
-                    _addAccount = new RelayCommand(AddAccountAction);
+                    _addAccount = new RelayCommand<AccountModel>(AddAccountAction);
 
                 return _addAccount;
             }
@@ -78,7 +84,7 @@ namespace Jaya.Provider.Ftp.ViewModels
 
         void NewAccountAction()
         {
-            SelectedAccount = AccountModel.Empty();
+            NewAccount = AccountModel.Empty();
         }
 
         void OnAccountAddedOrRemoved(AccountModelBase account)
@@ -93,9 +99,13 @@ namespace Jaya.Provider.Ftp.ViewModels
                 SelectedAccount = null;
         }
 
-        async void AddAccountAction()
+        async void AddAccountAction(AccountModel account)
         {
-            await _service.AddAccount();
+            var newAccount = await _service.AddAccount(account);
+            if (newAccount == null)
+                return;
+
+            NewAccountAction();
         }
     }
 }

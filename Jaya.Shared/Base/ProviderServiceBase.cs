@@ -146,9 +146,9 @@ namespace Jaya.Shared.Base
             ConfigurationService.Set<T>(configuration, Name);
         }
 
-        public async Task<AccountModelBase> AddAccount()
+        public async Task<AccountModelBase> AddAccount(AccountModelBase account)
         {
-            var account = await AddAccountAsync();
+            account = await AddAccountAsync(account);
             if (account != null)
             {
                 var handler = AccountAdded;
@@ -172,7 +172,7 @@ namespace Jaya.Shared.Base
             return isRemoved;
         }
 
-        protected abstract Task<AccountModelBase> AddAccountAsync();
+        protected abstract Task<AccountModelBase> AddAccountAsync(AccountModelBase account = null);
 
         protected abstract Task<bool> RemoveAccountAsync(AccountModelBase account);
 

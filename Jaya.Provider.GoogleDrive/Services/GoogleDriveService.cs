@@ -195,7 +195,7 @@ namespace Jaya.Provider.GoogleDrive.Services
             return model;
         }
 
-        protected override async Task<AccountModelBase> AddAccountAsync()
+        protected override async Task<AccountModelBase> AddAccountAsync(AccountModelBase account = null)
         {
             var credentials = await GetCredential();
             if (credentials == null)

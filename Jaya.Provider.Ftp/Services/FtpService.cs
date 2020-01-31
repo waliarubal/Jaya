@@ -16,8 +16,6 @@ namespace Jaya.Provider.Ftp.Services
     [Shared]
     public class FtpService : ProviderServiceBase, IProviderService
     {
-        ConfigModel _config;
-
         /// <summary>
         /// Refer pages https://www.daimto.com/google-drive-authentication-c/ and https://www.daimto.com/google-drive-api-c/ for examples.
         /// </summary>
@@ -29,23 +27,12 @@ namespace Jaya.Provider.Ftp.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        ConfigModel Config
-        {
-            get
-            {
-                if (_config == null)
-                    _config = GetConfiguration<ConfigModel>();
-
-                return _config;
-            }
-        }
-
         async Task<FtpClient> GetConnection(AccountModel account)
         {
             var connection = new FtpClient();
             connection.Host = account.Host;
             connection.Port = account.Port;
-            
+
             if (!account.IsAnonymous)
             {
                 var credentials = new NetworkCredential(account.UserName, account.Password);
@@ -74,74 +61,62 @@ namespace Jaya.Provider.Ftp.Services
             model.Directories = new List<DirectoryModel>();
             model.Files = new List<FileModel>();
 
-            var client = await GetConnection(account as AccountModel);
-            var entries = await client.GetListingAsync(path, FtpListOption.AllFiles);
-            foreach (var entry in entries)
+            using (var client = await GetConnection(account as AccountModel))
             {
-                switch(entry.Type)
+                var entries = await client.GetListingAsync(path, FtpListOption.AllFiles);
+                foreach (var entry in entries)
                 {
-                    case FtpFileSystemObjectType.Directory:
-                        var dir = new DirectoryModel();
-                        dir.Id = entry.FullName.GetHashCode().ToString();
-                        dir.Name = entry.Name;
-                        dir.Path = entry.FullName;
-                        dir.Size = entry.Size;
-                        dir.Created = entry.Created;
-                        dir.Modified = entry.Modified;
-                        model.Directories.Add(dir);
-                        break;
+                    switch (entry.Type)
+                    {
+                        case FtpFileSystemObjectType.Directory:
+                            var dir = new DirectoryModel();
+                            dir.Id = entry.FullName.GetHashCode().ToString();
+                            dir.Name = entry.Name;
+                            dir.Path = entry.FullName;
+                            dir.Size = entry.Size;
+                            dir.Created = entry.Created;
+                            dir.Modified = entry.Modified;
+                            model.Directories.Add(dir);
+                            break;
 
-                    case FtpFileSystemObjectType.File:
-                        var file = new FileModel();
-                        file.Id = entry.FullName.GetHashCode().ToString();
-                        file.Name = entry.Name;
-                        file.Path = entry.FullName;
-                        file.Size = entry.Size;
-                        file.Created = entry.Created;
-                        file.Modified = entry.Modified;
-                        model.Files.Add(file);
-                        break;
+                        case FtpFileSystemObjectType.File:
+                            var file = new FileModel();
+                            file.Id = entry.FullName.GetHashCode().ToString();
+                            file.Name = entry.Name;
+                            file.Path = entry.FullName;
+                            file.Size = entry.Size;
+                            file.Created = entry.Created;
+                            file.Modified = entry.Modified;
+                            model.Files.Add(file);
+                            break;
+                    }
                 }
+
+                if (client.IsConnected)
+                    await client.DisconnectAsync();
             }
 
             AddToCache(account, model);
             return model;
         }
 
-        protected override async Task<AccountModelBase> AddAccountAsync()
+        protected override async Task<AccountModelBase> AddAccountAsync(AccountModelBase account = null)
         {
-            var config = GetConfiguration<ConfigModel>();
+            var ftpAccount = account as AccountModel;
 
-            var account = new AccountModel("", "");
-
-            config.Accounts.Add(account);
-            SetConfiguration(config);
-
-            return account;
-            /*
-            var credentials = await GetCredential();
-            if (credentials == null)
-                return null;
-
-            Userinfoplus userInfo;
-            using (var authService = new Oauth2Service(GetServiceInitializer(credentials)))
+            using (var connection = await GetConnection(ftpAccount))
             {
-                userInfo = await authService.Userinfo.Get().ExecuteAsync();
+                if (!connection.IsConnected)
+                    return null;
+
+                await connection.DisconnectAsync();
+
+                var config = GetConfiguration<ConfigModel>();
+                config.Accounts.Add(ftpAccount);
+                SetConfiguration(config);
+
+                return ftpAccount;
             }
-
-            var config = GetConfiguration<ConfigModel>();
-
-            var provider = new AccountModel(userInfo.Id, userInfo.Name)
-            {
-                Email = userInfo.Email
-            };
-
-            config.Accounts.Add(provider);
-            SetConfiguration(config);
-
-            return provider;
-            */
-            throw new NotImplementedException();
         }
 
         protected override async Task<bool> RemoveAccountAsync(AccountModelBase account)

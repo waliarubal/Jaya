@@ -117,7 +117,7 @@ namespace Jaya.Provider.FileSystem.Services
             });
         }
 
-        protected override Task<AccountModelBase> AddAccountAsync()
+        protected override Task<AccountModelBase> AddAccountAsync(AccountModelBase account = null)
         {
             throw new NotImplementedException();
         }

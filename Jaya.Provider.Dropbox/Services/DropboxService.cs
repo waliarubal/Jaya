@@ -107,7 +107,7 @@ namespace Jaya.Provider.Dropbox.Services
             return model;
         }
 
-        protected override async Task<AccountModelBase> AddAccountAsync()
+        protected override async Task<AccountModelBase> AddAccountAsync(AccountModelBase account = null)
         {
             var token = await GetToken();
             if (string.IsNullOrEmpty(token))

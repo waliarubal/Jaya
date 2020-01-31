@@ -104,24 +104,24 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock Text="Host:" />
-            <TextBox Grid.Column="1" Text="{Binding SelectedAccount.Host, Mode=TwoWay}" />
+            <TextBox Grid.Column="1" Text="{Binding NewAccount.Host, Mode=TwoWay}" />
 
             <TextBlock Grid.Column="2" Text="Port:" />
-            <TextBox Grid.Column="3" Text="{Binding SelectedAccount.Host, Mode=TwoWay}" />
+            <TextBox Grid.Column="3" Text="{Binding NewAccount.Port, Mode=TwoWay}" />
 
             <CheckBox
                 Grid.Row="1"
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Content="Log in anonymously instead of using user name and password."
-                IsChecked="{Binding SelectedAccount.IsAnonymous, Mode=TwoWay}" />
+                IsChecked="{Binding NewAccount.IsAnonymous, Mode=TwoWay}" />
 
             <TextBlock Grid.Row="2" Text="User Name:" />
             <TextBox
                 Grid.Row="2"
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
-                Text="{Binding SelectedAccount.UserName, Mode=TwoWay}" />
+                Text="{Binding NewAccount.UserName, Mode=TwoWay}" />
 
             <TextBlock Grid.Row="3" Text="Password:" />
             <TextBox
@@ -129,13 +129,13 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 PasswordChar="*"
-                Text="{Binding SelectedAccount.Password, Mode=TwoWay}" />
+                Text="{Binding NewAccount.Password, Mode=TwoWay}" />
 
             <StackPanel
                 Grid.Row="4"
                 Grid.ColumnSpan="4"
                 Orientation="Horizontal">
-                <Button Command="{Binding NewAccountCommand, Mode=OneTime}">
+                <Button Command="{Binding NewAccountCommand, Mode=OneTime}" CommandParameter="{Binding NewAccount, Mode=OneWay}">
                     New
                 </Button>
                 <Button Command="{Binding AddAccountCommand, Mode=OneTime}">
