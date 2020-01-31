@@ -11,7 +11,7 @@ namespace Jaya.Provider.Ftp.ViewModels
     public class ConfigurationViewModel: ViewModelBase
     {
         readonly FtpService _service;
-        ICommand _addAccount, _removeAccount, _newAccount;
+        ICommand _addAccount, _removeAccount, _clear;
 
         public ConfigurationViewModel()
         {
@@ -20,7 +20,7 @@ namespace Jaya.Provider.Ftp.ViewModels
             _service.AccountRemoved += OnAccountAddedOrRemoved;
 
             Configuration = _service.GetConfiguration<ConfigModel>();
-            NewAccountAction();
+            ClearAction();
         }
 
         ~ConfigurationViewModel()
@@ -58,14 +58,14 @@ namespace Jaya.Provider.Ftp.ViewModels
             }
         }
 
-        public ICommand NewAccountCommand
+        public ICommand ClearCommand
         {
             get
             {
-                if (_newAccount == null)
-                    _newAccount = new RelayCommand(NewAccountAction);
+                if (_clear == null)
+                    _clear = new RelayCommand(ClearAction);
 
-                return _newAccount;
+                return _clear;
             }
         }
 
@@ -82,7 +82,7 @@ namespace Jaya.Provider.Ftp.ViewModels
 
         #endregion
 
-        void NewAccountAction()
+        void ClearAction()
         {
             NewAccount = AccountModel.Empty();
         }
@@ -105,7 +105,7 @@ namespace Jaya.Provider.Ftp.ViewModels
             if (newAccount == null)
                 return;
 
-            NewAccountAction();
+            ClearAction();
         }
     }
 }

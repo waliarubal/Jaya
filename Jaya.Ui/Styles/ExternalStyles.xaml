@@ -3,9 +3,10 @@
     <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
     <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml" />-->
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
-    <StyleInclude Source="avares://Jaya.Shared/Styles/HyperlinkStyle.xaml" />
     <StyleInclude Source="avares://Jaya.Shared/Styles/GridSplitterStyle.xaml" />
+    <StyleInclude Source="avares://Jaya.Shared/Styles/HyperlinkStyle.xaml" />
     <StyleInclude Source="avares://Jaya.Shared/Styles/DataGridStyle.xaml" />
     <StyleInclude Source="avares://Jaya.Shared/Styles/StyledWindowStyle.xaml" />
     <StyleInclude Source="avares://Jaya.Shared/Styles/RibbonStyle.xaml" />
+    <StyleInclude Source="avares://Jaya.Shared/Styles/GroupBoxStyle.xaml" />
 </Styles>
