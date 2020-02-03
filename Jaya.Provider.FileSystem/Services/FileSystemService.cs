@@ -25,7 +25,7 @@ namespace Jaya.Provider.FileSystem.Services
             ConfigurationEditorType = typeof(ConfigurationView);
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null, string searchQuery = null)
         {
             var model = GetFromCache(account, directory);
             if (model != null)

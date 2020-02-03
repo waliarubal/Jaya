@@ -178,7 +178,7 @@ namespace Jaya.Shared.Base
 
         public abstract Task<IEnumerable<AccountModelBase>> GetAccountsAsync();
 
-        public abstract Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null);
+        public abstract Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null, string searchQuery = null);
 
         public abstract Task FormatAsync(AccountModelBase account, DirectoryModel directory = null);
 
