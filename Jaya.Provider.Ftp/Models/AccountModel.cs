@@ -14,14 +14,22 @@ namespace Jaya.Provider.Ftp.Models
         public string Host
         {
             get => Get<string>();
-            set => Set(value);
+            set
+            {
+                if (Set(value))
+                    UpdateIdAndName();
+            }
         }
 
         [JsonProperty]
         public int Port
         {
             get => Get<int>();
-            set => Set(value);
+            set
+            {
+                if (Set(value))
+                    UpdateIdAndName();
+            }
         }
 
         [JsonProperty]
@@ -43,6 +51,16 @@ namespace Jaya.Provider.Ftp.Models
         {
             get => Get<string>();
             set => Set(value);
+        }
+
+        void UpdateIdAndName()
+        {
+            Name = Id = string.Format("{0}:{1}", Host, Port);
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
 
         public static AccountModel Empty()

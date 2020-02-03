@@ -54,9 +54,6 @@
                                 Margin="4,0"
                                 Source="/Assets/Images/Account-32.png" />
                             <TextBlock Text="{Binding Name, Mode=OneWay}" />
-                            <TextBlock Text=" (" />
-                            <TextBlock Text="{Binding Email, Mode=OneWay}" />
-                            <TextBlock Text=")" />
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -124,6 +121,7 @@
                     Grid.Row="2"
                     Grid.Column="1"
                     Grid.ColumnSpan="3"
+                    IsEnabled="{Binding !NewAccount.IsAnonymous, Mode=OneWay}"
                     Text="{Binding NewAccount.UserName, Mode=TwoWay}" />
 
                 <TextBlock Grid.Row="3" Text="Password:" />
@@ -131,6 +129,7 @@
                     Grid.Row="3"
                     Grid.Column="1"
                     Grid.ColumnSpan="3"
+                    IsEnabled="{Binding !NewAccount.IsAnonymous, Mode=OneWay}"
                     PasswordChar="*"
                     Text="{Binding NewAccount.Password, Mode=TwoWay}" />
 

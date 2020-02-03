@@ -16,9 +16,6 @@ namespace Jaya.Provider.Ftp.Services
     [Shared]
     public class FtpService : ProviderServiceBase, IProviderService
     {
-        /// <summary>
-        /// Refer pages https://www.daimto.com/google-drive-authentication-c/ and https://www.daimto.com/google-drive-api-c/ for examples.
-        /// </summary>
         public FtpService()
         {
             Name = "FTP/FTPS";

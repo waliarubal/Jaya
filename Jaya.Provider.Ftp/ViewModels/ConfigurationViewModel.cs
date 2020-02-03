@@ -2,8 +2,7 @@
 using Jaya.Provider.Ftp.Services;
 using Jaya.Shared;
 using Jaya.Shared.Base;
-using Jaya.Shared.Models;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Jaya.Provider.Ftp.ViewModels
@@ -11,29 +10,22 @@ namespace Jaya.Provider.Ftp.ViewModels
     public class ConfigurationViewModel: ViewModelBase
     {
         readonly FtpService _service;
+        readonly ConfigModel _config;
         ICommand _addAccount, _removeAccount, _clear;
 
         public ConfigurationViewModel()
         {
             _service = GetProvider<FtpService>();
-            _service.AccountAdded += OnAccountAddedOrRemoved;
-            _service.AccountRemoved += OnAccountAddedOrRemoved;
 
-            Configuration = _service.GetConfiguration<ConfigModel>();
             ClearAction();
-        }
 
-        ~ConfigurationViewModel()
-        {
-            _service.AccountAdded -= OnAccountAddedOrRemoved;
-            _service.AccountRemoved -= OnAccountAddedOrRemoved;
+            _config = _service.GetConfiguration<ConfigModel>();
+            Accounts = new ObservableCollection<AccountModel>(_config.Accounts);
         }
 
         #region properties
 
-        ConfigModel Configuration { get; }
-
-        public IEnumerable<AccountModel> Accounts => Configuration.Accounts;
+        public ObservableCollection<AccountModel> Accounts { get; }
 
         public AccountModel SelectedAccount
         {
@@ -87,16 +79,14 @@ namespace Jaya.Provider.Ftp.ViewModels
             NewAccount = AccountModel.Empty();
         }
 
-        void OnAccountAddedOrRemoved(AccountModelBase account)
-        {
-            RaisePropertyChanged(nameof(Accounts));
-        }
-
         async void RemoveAccountAction(AccountModel account)
         {
             var isRemoved = await _service.RemoveAccount(account);
             if (isRemoved)
+            {
+                Accounts.Remove(account);
                 SelectedAccount = null;
+            }
         }
 
         async void AddAccountAction(AccountModel account)
@@ -105,6 +95,7 @@ namespace Jaya.Provider.Ftp.ViewModels
             if (newAccount == null)
                 return;
 
+            Accounts.Add(account);
             ClearAction();
         }
     }

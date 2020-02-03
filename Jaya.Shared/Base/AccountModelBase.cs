@@ -16,14 +16,14 @@ namespace Jaya.Shared.Models
         public string Id
         {
             get => Get<string>();
-            private set => Set(value);
+            protected set => Set(value);
         }
 
         [JsonProperty]
         public string Name
         {
             get => Get<string>();
-            private set => Set(value);
+            protected set => Set(value);
         }
 
         public string ImagePath
