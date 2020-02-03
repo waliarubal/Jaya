@@ -37,9 +37,9 @@
   <!--enter plugin entries below for debugging-->
   <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <PackageReference Include="Dropbox.Api" Version="4.9.4" />
-    <PackageReference Include="Google.Apis.Drive.v3" Version="1.43.0.1835" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.43.0.1841" />
     <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.43.0.1602" />
-    <PackageReference Include="FluentFTP" Version="29.0.4" />
+    <PackageReference Include="FluentFTP" Version="30.0.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <ProjectReference Include="..\Jaya.Provider.Dropbox\Jaya.Provider.Dropbox.csproj">
