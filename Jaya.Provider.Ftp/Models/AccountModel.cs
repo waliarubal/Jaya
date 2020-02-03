@@ -58,11 +58,6 @@ namespace Jaya.Provider.Ftp.Models
             Name = Id = string.Format("{0}:{1}", Host, Port);
         }
 
-        public override string ToString()
-        {
-            return Name;
-        }
-
         public static AccountModel Empty()
         {
             var account = new AccountModel(string.Empty, string.Empty)
