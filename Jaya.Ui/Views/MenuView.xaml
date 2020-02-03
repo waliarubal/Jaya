@@ -269,6 +269,23 @@
             </MenuItem>
         </MenuItem>
 
+        <MenuItem Header="Search">
+            <MenuItem Header="Current Folder" />
+            <MenuItem Header="All Subfolders" />
+            <MenuItem Header="Search Again In" />
+            <Separator />
+            <MenuItem Header="Date Modified" />
+            <MenuItem Header="Kind" />
+            <MenuItem Header="Size" />
+            <MenuItem Header="Other Properties" />
+            <Separator />
+            <MenuItem Header="Recent Searches" />
+            <MenuItem Header="Advanced Options" />
+            <MenuItem Header="Save Search" />
+            <Separator />
+            <MenuItem Header="Close Search" />
+        </MenuItem>
+
         <MenuItem Header="_Help">
             <MenuItem Header="View Help">
                 <MenuItem.Icon>
