@@ -30,7 +30,7 @@ namespace Jaya.Shared.Services
             var type = typeof(T);
 
             if (string.IsNullOrEmpty(key))
-                key = type.Name;
+                key = GetUsableKey(type);
 
             var fileInfo = new FileInfo(string.Format(_configurationFilePathFormat, key));
             if (fileInfo.Exists)
@@ -59,7 +59,7 @@ namespace Jaya.Shared.Services
             var type = typeof(T);
 
             if (string.IsNullOrEmpty(key))
-                key = type.Name;
+                key = GetUsableKey(type);
 
             // create configuration directory if missing
             var fileInfo = new FileInfo(string.Format(_configurationFilePathFormat, key));
@@ -71,6 +71,17 @@ namespace Jaya.Shared.Services
                 var serializer = new JsonSerializer { Formatting = Formatting.None };
                 serializer.Serialize(writer, value, type);
             }
+        }
+
+        string GetUsableKey(Type type)
+        {
+            var name = type.Name;
+
+            var invalidChars = new char[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
+            foreach (var invalidChar in invalidChars)
+                name = name.Replace(invalidChar, '_');
+
+            return name;
         }
 
     }
