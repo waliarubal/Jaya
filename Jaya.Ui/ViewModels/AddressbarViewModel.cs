@@ -14,7 +14,7 @@ namespace Jaya.Ui.ViewModels
         readonly NavigationService _navigationService;
         readonly Subscription<SelectionChangedEventArgs> _onSelectionChanged;
         readonly char[] _pathSeparator;
-        ICommand _clearSearch;
+        ICommand _clearSearch, _search;
         ItemType? _nodeType;
 
         public AddressbarViewModel()
@@ -37,6 +37,17 @@ namespace Jaya.Ui.ViewModels
         }
 
         #region properties
+
+        public ICommand SearchCommand
+        {
+            get
+            {
+                if (_search == null)
+                    _search = new RelayCommand<string>(SearchAction);
+
+                return _search;
+            }
+        }
 
         public ICommand ClearSearchCommand
         {
@@ -129,6 +140,11 @@ namespace Jaya.Ui.ViewModels
                     RaisePropertyChanged(nameof(IsDirectory));
                     break;
             }
+        }
+
+        void SearchAction(string searchQuery)
+        {
+
         }
 
         void ClearSearch()
