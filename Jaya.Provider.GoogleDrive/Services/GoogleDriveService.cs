@@ -117,7 +117,7 @@ namespace Jaya.Provider.GoogleDrive.Services
             return _credential;
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null, string searchQuery = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null)
         {
             var model = GetFromCache(account, directory);
             if (model != null)

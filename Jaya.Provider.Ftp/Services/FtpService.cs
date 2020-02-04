@@ -40,7 +40,7 @@ namespace Jaya.Provider.Ftp.Services
             return connection;
         }
 
-        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null, string searchQuery = null)
+        public override async Task<DirectoryModel> GetDirectoryAsync(AccountModelBase account, DirectoryModel directory = null)
         {
             var model = GetFromCache(account, directory);
             if (model != null)
