@@ -15,7 +15,7 @@
 ## Table Of Contents
 
 * [About The Project](#about-the-project)
-  * [Built With](#built-with)
+  * [Built Using](#built-using)
   * [Screenshots](#screenshots)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
@@ -42,12 +42,14 @@ Application is designed to be plug-able from the ground up i.e. anyone with expe
 
 This project is in beta at the moment so it's not suitable for general use.
 
-### Built With
+### Built Using
 
-This project would have not existed without the use of below mentioned fantastic open source frameworks.
+This project would have not existed without the availbility of below mentioned fantastic frameworks and tools.
 
 * [.NET Core](https://github.com/dotnet/core)
 * [Avalonia UI](https://avaloniaui.net/)
+* [Visual Studio IDE](https://visualstudio.microsoft.com/vs/)
+* [AppVeyor](https://www.appveyor.com/)
 
 ### Screenshots
 
