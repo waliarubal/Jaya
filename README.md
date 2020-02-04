@@ -12,6 +12,17 @@
   <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2" target="_blank"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-green.svg"></a>
 </p>
 
+## Table Of Contents
+
+* [About The Project](#about-the-project)
+  * [Built With](#built-with)
+  * [Screenshots](#screenshots)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [Getting Started](#getting-started)
+* [License](#license)
+* [Contact](#contact)
+
 ## About The Project
 
 **Jaya - Cross Plat** is a small .NET Core based cross platform file explorer application which runs on Windows, Mac and Linux. Its goal is very simple, *"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports."*.
@@ -33,7 +44,8 @@ This project is in beta at the moment so it's not suitable for general use.
 
 ### Built With
 
-This project would have not existed without the use of below mentioned open source fantastic frameworks.
+This project would have not existed without the use of below mentioned fantastic open source frameworks.
+
 * [.NET Core](https://github.com/dotnet/core)
 * [Avalonia UI](https://avaloniaui.net/)
 
