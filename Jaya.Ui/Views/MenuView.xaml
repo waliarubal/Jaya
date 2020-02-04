@@ -270,20 +270,64 @@
         </MenuItem>
 
         <MenuItem Header="Search">
-            <MenuItem Header="Current Folder" />
-            <MenuItem Header="All Subfolders" />
-            <MenuItem Header="Search Again In" />
+            <MenuItem Header="Current Folder">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Folder}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="All Subfolders">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.SubFolders}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Search Again In">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.FindInFiles}" />
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Date Modified" />
-            <MenuItem Header="Kind" />
-            <MenuItem Header="Size" />
-            <MenuItem Header="Other Properties" />
+            <MenuItem Header="Date Modified">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Calendar}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Kind">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.ContentType}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Size">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.CodeFile}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Other Properties">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Recent Searches" />
-            <MenuItem Header="Advanced Options" />
-            <MenuItem Header="Save Search" />
+            <MenuItem Header="Recent Searches">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.History}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Advanced Options">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Property}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Save Search">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Save}" />
+                </MenuItem.Icon>
+            </MenuItem>
             <Separator />
-            <MenuItem Header="Close Search" />
+            <MenuItem Header="Close Search">
+                <MenuItem.Icon>
+                    <DrawingPresenter Drawing="{DynamicResource Icon.Close}" />
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
 
         <MenuItem Header="_Help">

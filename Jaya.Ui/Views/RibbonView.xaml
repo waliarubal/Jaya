@@ -247,6 +247,95 @@
                 </RibbonGroup>
             </StackPanel>
         </RibbonTab>
+
+        <RibbonTab Header="Search">
+            <StackPanel>
+                <RibbonGroup Header="Location">
+                    <StackPanel>
+                        <ToggleButton Classes="Small" ToolTip.Tip="Current Folder">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.Folder}" />
+                                <TextBlock Text="Current Folder" />
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton Classes="Small" ToolTip.Tip="All Subfolders">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.SubFolders}" />
+                                <TextBlock Text="All Subfolders" />
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton Classes="Small" ToolTip.Tip="Search Again In">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.FindInFiles}" />
+                                <TextBlock Text="Search Again In" />
+                            </StackPanel>
+                        </ToggleButton>
+                    </StackPanel>
+                </RibbonGroup>
+
+                <RibbonGroup Header="Refine">
+                    <Button Classes="Large" ToolTip.Tip="Date Modified">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Calendar}" />
+                            <TextBlock Text="Date Modified" />
+                        </StackPanel>
+                    </Button>
+                    <StackPanel>
+                        <ToggleButton Classes="Small" ToolTip.Tip="Kind">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.ContentType}" />
+                                <TextBlock Text="Kind" />
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton Classes="Small" ToolTip.Tip="Size">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.CodeFile}" />
+                                <TextBlock Text="Size" />
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton Classes="Small" ToolTip.Tip="Other Properties">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
+                                <TextBlock Text="Other Properties" />
+                            </StackPanel>
+                        </ToggleButton>
+                    </StackPanel>
+                </RibbonGroup>
+
+                <RibbonGroup Header="Options">
+                    <StackPanel>
+                        <ToggleButton Classes="Small" ToolTip.Tip="Recent Searches">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.History}" />
+                                <TextBlock Text="Recent Searches" />
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton Classes="Small" ToolTip.Tip="Advanced Options">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.Property}" />
+                                <TextBlock Text="Advanced Options" />
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton Classes="Small" ToolTip.Tip="Save Search">
+                            <StackPanel>
+                                <DrawingPresenter Drawing="{DynamicResource Icon.Save}" />
+                                <TextBlock Text="Save Search" />
+                            </StackPanel>
+                        </ToggleButton>
+                    </StackPanel>
+                </RibbonGroup>
+
+                <RibbonGroup Header="">
+                    <Button Classes="Large" ToolTip.Tip="Close Search">
+                        <StackPanel>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.Close}" />
+                            <TextBlock Text="Close Search" />
+                        </StackPanel>
+                    </Button>
+                </RibbonGroup>
+            </StackPanel>
+        </RibbonTab>
+
         <RibbonTab Header="Help">
             <StackPanel>
                 <RibbonGroup Header="Help &amp; Support">
