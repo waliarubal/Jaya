@@ -264,12 +264,12 @@
                                 <TextBlock Text="All Subfolders" />
                             </StackPanel>
                         </ToggleButton>
-                        <ToggleButton Classes="Small" ToolTip.Tip="Search Again In">
+                        <Button Classes="Small" ToolTip.Tip="Search Again In">
                             <StackPanel>
                                 <DrawingPresenter Drawing="{DynamicResource Icon.FindInFiles}" />
                                 <TextBlock Text="Search Again In" />
                             </StackPanel>
-                        </ToggleButton>
+                        </Button>
                     </StackPanel>
                 </RibbonGroup>
 
@@ -281,47 +281,47 @@
                         </StackPanel>
                     </Button>
                     <StackPanel>
-                        <ToggleButton Classes="Small" ToolTip.Tip="Kind">
+                        <Button Classes="Small" ToolTip.Tip="Kind">
                             <StackPanel>
                                 <DrawingPresenter Drawing="{DynamicResource Icon.ContentType}" />
                                 <TextBlock Text="Kind" />
                             </StackPanel>
-                        </ToggleButton>
-                        <ToggleButton Classes="Small" ToolTip.Tip="Size">
+                        </Button>
+                        <Button Classes="Small" ToolTip.Tip="Size">
                             <StackPanel>
                                 <DrawingPresenter Drawing="{DynamicResource Icon.CodeFile}" />
                                 <TextBlock Text="Size" />
                             </StackPanel>
-                        </ToggleButton>
-                        <ToggleButton Classes="Small" ToolTip.Tip="Other Properties">
+                        </Button>
+                        <Button Classes="Small" ToolTip.Tip="Other Properties">
                             <StackPanel>
                                 <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
                                 <TextBlock Text="Other Properties" />
                             </StackPanel>
-                        </ToggleButton>
+                        </Button>
                     </StackPanel>
                 </RibbonGroup>
 
                 <RibbonGroup Header="Options">
                     <StackPanel>
-                        <ToggleButton Classes="Small" ToolTip.Tip="Recent Searches">
+                        <Button Classes="Small" ToolTip.Tip="Recent Searches">
                             <StackPanel>
                                 <DrawingPresenter Drawing="{DynamicResource Icon.History}" />
                                 <TextBlock Text="Recent Searches" />
                             </StackPanel>
-                        </ToggleButton>
-                        <ToggleButton Classes="Small" ToolTip.Tip="Advanced Options">
+                        </Button>
+                        <Button Classes="Small" ToolTip.Tip="Advanced Options">
                             <StackPanel>
                                 <DrawingPresenter Drawing="{DynamicResource Icon.Property}" />
                                 <TextBlock Text="Advanced Options" />
                             </StackPanel>
-                        </ToggleButton>
-                        <ToggleButton Classes="Small" ToolTip.Tip="Save Search">
+                        </Button>
+                        <Button Classes="Small" ToolTip.Tip="Save Search">
                             <StackPanel>
                                 <DrawingPresenter Drawing="{DynamicResource Icon.Save}" />
                                 <TextBlock Text="Save Search" />
                             </StackPanel>
-                        </ToggleButton>
+                        </Button>
                     </StackPanel>
                 </RibbonGroup>
 

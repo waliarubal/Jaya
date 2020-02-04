@@ -255,6 +255,47 @@
             </Button>
         </StackPanel>
 
+        <StackPanel>
+            <Border Classes="Thumb" />
+
+            <ToggleButton ToolTip.Tip="Search Current Folder">
+                <DrawingPresenter Drawing="{DynamicResource Icon.Folder}" />
+            </ToggleButton>
+            <ToggleButton ToolTip.Tip="Search All Subfolders">
+                <DrawingPresenter Drawing="{DynamicResource Icon.SubFolders}" />
+            </ToggleButton>
+            <Button ToolTip.Tip="Search Again In">
+                <DrawingPresenter Drawing="{DynamicResource Icon.FindInFiles}" />
+            </Button>
+            <Border Classes="Separator" />
+            <Button ToolTip.Tip="Date Modified">
+                <DrawingPresenter Drawing="{DynamicResource Icon.Calendar}" />
+            </Button>
+            <Button ToolTip.Tip="Kind">
+                <DrawingPresenter Drawing="{DynamicResource Icon.ContentType}" />
+            </Button>
+            <Button ToolTip.Tip="Size">
+                <DrawingPresenter Drawing="{DynamicResource Icon.CodeFile}" />
+            </Button>
+            <Button ToolTip.Tip="Other Properties">
+                <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
+            </Button>
+            <Border Classes="Separator" />
+            <Button ToolTip.Tip="Recent Searches">
+                <DrawingPresenter Drawing="{DynamicResource Icon.History}" />
+            </Button>
+            <Button ToolTip.Tip="Advanced Options">
+                <DrawingPresenter Drawing="{DynamicResource Icon.Property}" />
+            </Button>
+            <Button ToolTip.Tip="Save Search">
+                <DrawingPresenter Drawing="{DynamicResource Icon.Save}" />
+            </Button>
+            <Border Classes="Separator" />
+            <Button ToolTip.Tip="Close Search">
+                <DrawingPresenter Drawing="{DynamicResource Icon.Close}" />
+            </Button>
+        </StackPanel>
+
         <StackPanel IsVisible="{Binding ToolbarConfig.IsHelpVisible, Mode=OneWay}">
             <Border Classes="Thumb" />
 
