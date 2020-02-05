@@ -25,4 +25,15 @@ artifacts:
   name: mac_portable
 - path: publish/windows_portable_$(BUILD_VERSION).zip
   name: windows_portable
-deploy: off
+deploy:
+- provider: GitHub
+  tag: $(BUILD_VERSION)
+  release: $(BUILD_VERSION)
+  description: Automated release of v$(BUILD_VERSION).
+  auth_token:
+    secure: UgS7u6/QF29WDtX3jzm9xC64vZ52V8yGYWAvpMW+h+95ghtdOHalzcmyemVTg28H
+  repository: waliarubal/Jaya
+  artifact: publish/windows_$(BUILD_VERSION).exe,publish/linux_portable_$(BUILD_VERSION).zip,publish/osx_portable_$(BUILD_VERSION).zip,publish/windows_portable_$(BUILD_VERSION).zip
+  prerelease: true
+  on:
+    branch: dev
