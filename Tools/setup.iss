@@ -1,32 +1,40 @@
+; process command line arguments
+#ifndef APP_VERSION
+	#define APP_VERSION "1.0"
+#endif
+#ifndef APP_ROOT
+	#define APP_ROOT "."
+#endif
+
 #define APP_NAME "Jaya - Cross Plat"
-#define APP_VERSION "1.0"
 #define APP_PUBLISHER "Rubal Walia"
+#define APP_EMAIL "walia.rubal@gmail.com"
 #define APP_URL "https://github.com/waliarubal/Jaya"
-#define APP_EXECUTABLE "MyProg.exe"
+#define APP_EXECUTABLE "Jaya.Ui.exe"
 
 [Setup]
-; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
-; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{395A0915-9AD7-4CB5-A72B-3369DF5656E4}
 AppName={#APP_NAME}
 AppVersion={#APP_VERSION}
+AppContact={#APP_EMAIL}
 AppPublisher={#APP_PUBLISHER}
 AppPublisherURL={#APP_URL}
 AppSupportURL={#APP_URL}
 AppUpdatesURL={#APP_URL}
 DefaultDirName={autopf}\Jaya
 DisableProgramGroupPage=yes
-; The [Icons] "quicklaunchicon" entry uses {userappdata} but its [Tasks] entry has a proper IsAdminInstallMode Check.
 UsedUserAreasWarning=no
-LicenseFile=C:\Program Files (x86)\Inno Setup 6\license.txt
-; Uncomment the following line to run in non administrative install mode (install for current user only.)
-;PrivilegesRequired=lowest
+LicenseFile={#APP_ROOT}LICENSE
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=windows
-SetupIconFile=F:\Projects\Jaya\Jaya.Ui\Assets\Logo.ico
+OutputBaseFilename=WindowsInstaller
+SetupIconFile={#APP_ROOT}Jaya.Ui\Assets\Logo.ico
+UninstallDisplayName={#APP_NAME}
+UninstallDisplayIcon={app}\{#APP_EXECUTABLE}
 Compression=lzma
 SolidCompression=yes
-WizardStyle=modern
+WizardStyle=classic
+SetupLogging=yes
+SetupMutex={#APP_NAME}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -36,9 +44,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 6.1; Check: not IsAdminInstallMode
 
 [Files]
-Source: "C:\Program Files (x86)\Inno Setup 6\Examples\MyProg.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\admin\Desktop\Android SDK_20180704\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+Source: "{#APP_ROOT}publish\windows\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\{#APP_NAME}"; Filename: "{app}\{#APP_EXECUTABLE}"
