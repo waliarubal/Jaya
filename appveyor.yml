@@ -12,15 +12,17 @@ build_script:
 - cmd: >-
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/init.bat
 
-    CALL %APPVEYOR_BUILD_FOLDER%/Tools/build.bat
+    CALL %APPVEYOR_BUILD_FOLDER%/Tools/sanity_check.bat
 
-    CALL %APPVEYOR_BUILD_FOLDER%/Tools/deploy.bat
+    CALL %APPVEYOR_BUILD_FOLDER%/Tools/build.bat
 test: off
 artifacts:
-- path: publish/WindowsInstaller.exe
-  name: windows_$(BUILD_VERSION)
-- path: publish/linux_$(BUILD_VERSION).zip
-  name: linux_$(BUILD_VERSION)
-- path: publish/osx_$(BUILD_VERSION).zip
-  name: mac_$(BUILD_VERSION)
+- path: publish/windows_$(BUILD_VERSION).exe
+  name: windows
+- path: publish/linux_portable_$(BUILD_VERSION).zip
+  name: linux_portable
+- path: publish/osx_portable_$(BUILD_VERSION).zip
+  name: mac_portable
+- path: publish/windows_portable_$(BUILD_VERSION).zip
+  name: windows_portable
 deploy: off

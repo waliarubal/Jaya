@@ -3,7 +3,7 @@
 	#define APP_VERSION "1.0"
 #endif
 #ifndef APP_ROOT
-	#define APP_ROOT "."
+	#define APP_ROOT ".."
 #endif
 
 #define APP_NAME "Jaya - Cross Plat"
@@ -26,7 +26,7 @@ DisableProgramGroupPage=yes
 UsedUserAreasWarning=no
 LicenseFile={#APP_ROOT}LICENSE
 PrivilegesRequiredOverridesAllowed=dialog
-OutputBaseFilename=WindowsInstaller
+OutputBaseFilename=windows_{#APP_VERSION}
 SetupIconFile={#APP_ROOT}Jaya.Ui\Assets\Logo.ico
 UninstallDisplayName={#APP_NAME}
 UninstallDisplayIcon={app}\{#APP_EXECUTABLE}
