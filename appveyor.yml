@@ -18,9 +18,9 @@ build_script:
 test: off
 artifacts:
 - path: publish/WindowsInstaller.exe
-  name: windows
+  name: windows_$(BUILD_VERSION)
 - path: publish/linux_$(BUILD_VERSION).zip
-  name: linux
+  name: linux_$(BUILD_VERSION)
 - path: publish/osx_$(BUILD_VERSION).zip
-  name: mac
+  name: mac_$(BUILD_VERSION)
 deploy: off
