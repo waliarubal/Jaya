@@ -21,7 +21,7 @@ namespace Jaya.Ui
             URL_DONATION = new Uri("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2");
             URL_LICENSE = new Uri("https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE");
             URL_ISSUES = GetRepositoryUrl("issues");
-            URL_RELEASES = GetRepositoryUrl("releases");
+            URL_RELEASES = new Uri("https://api.github.com/repos/waliarubal/Jaya/releases", UriKind.Absolute);
         }
 
         static Uri GetRepositoryUrl(string urlFragment)
