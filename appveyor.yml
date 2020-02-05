@@ -13,6 +13,8 @@ build_script:
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/init.bat
 
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/build.bat
+
+    CALL %APPVEYOR_BUILD_FOLDER%/Tools/deploy.bat
 test: off
 artifacts:
 - path: publish/WindowsInstaller.exe
@@ -22,5 +24,3 @@ artifacts:
 - path: publish/osx_$(BUILD_VERSION).zip
   name: mac
 deploy: off
-on_success:
-- cmd: '%APPVEYOR_BUILD_FOLDER%/Tools/deploy.bat'
