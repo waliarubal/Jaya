@@ -50,6 +50,7 @@ This project would have not existed without the availbility of below mentioned f
 * [Avalonia UI](https://avaloniaui.net/)
 * [Visual Studio IDE](https://visualstudio.microsoft.com/vs/)
 * [AppVeyor](https://www.appveyor.com/)
+* [Inno Setup](https://www.jrsoftware.org/isinfo.php)
 
 ### Screenshots
 
@@ -91,7 +92,7 @@ None of the above, you can still buy me a coffee or donate funds to buy a Mac fo
 
 ## Getting Started
 
-Technical users with programming experience can try things out, just open the project in Visual Studio 2017 or Visual Studio 2019 and run it in 'Debug' mode. Follow below mentioned steps to show your love and support towards project growth.
+Technical users with programming experience can try things out, just open the project in Visual Studio 2017 IDE or Visual Studio 2019 IDE and run it in 'Debug' mode. Follow below mentioned steps to show your love and support towards project growth.
 
 1. Fork the Project.
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
