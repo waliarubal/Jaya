@@ -9,7 +9,7 @@ namespace Jaya.Ui.ViewModels
 
         public string Description => Constants.APP_DESCRIPTION;
 
-        Version Version => new Version(0,0,0,0);
+        Version Version => Constants.VERSION;
 
         public string VersionString => string.Format("{0}.{1}.{2}.{3}", Version.Major, Version.Minor, Version.Build, Version.Revision);
 
