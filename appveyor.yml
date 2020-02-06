@@ -6,7 +6,10 @@ skip_tags: true
 image: Visual Studio 2019
 configuration: Release
 init:
-- cmd: CALL %APPVEYOR_BUILD_FOLDER%/Tools/init.bat
+- cmd: >-
+    @ECHO off
+
+    FOR /f %%a IN ('powershell -Command "Get-Date -format yy.MM.dd.HHmm"') do set BUILD_VERSION=%%a
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
