@@ -35,6 +35,9 @@ SolidCompression=yes
 WizardStyle=classic
 SetupLogging=yes
 SetupMutex={#APP_NAME}
+UsePreviousAppDir=yes
+CreateUninstallRegKey=no
+UpdateUninstallLogAppName=no
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
