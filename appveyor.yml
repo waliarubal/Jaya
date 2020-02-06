@@ -14,10 +14,8 @@ dotnet_csproj:
   patch: true
   file: '**\*.csproj'
   version: $(BUILD_VERSION)
-  package_version: $(BUILD_VERSION)
   assembly_version: $(BUILD_VERSION)
   file_version: $(BUILD_VERSION)
-  informational_version: $(BUILD_VERSION)
 environment:
   BUILD_VERSION: 0.0.0.0
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
