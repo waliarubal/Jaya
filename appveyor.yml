@@ -6,10 +6,12 @@ skip_tags: true
 image: Visual Studio 2019
 configuration: Release
 init:
-- cmd: >-
+- ps: >-
     @ECHO off
 
     FOR /f %%a IN ('powershell -Command "Get-Date -format yy.MM.dd.HHmm"') do set BUILD_VERSION=%%a
+
+    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -19,6 +21,7 @@ dotnet_csproj:
 environment:
   BUILD_VERSION: 0.0.0.0
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  APPVEYOR_RDP_PASSWORD: abqpw8697l
 build_script:
 - cmd: >-
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/sanity_check.bat
