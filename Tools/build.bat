@@ -8,6 +8,7 @@ SET SEVEN_ZIP=%APPVEYOR_BUILD_FOLDER%/Tools/7z/7za.exe
 SET CURL=%APPVEYOR_BUILD_FOLDER%/Tools/curl/curl.exe
 SET PUBLISH_FOLDER=%APPVEYOR_BUILD_FOLDER%/publish
 SET INNO_SETUP="%programfiles(x86)%/Inno Setup 6/ISCC.exe"
+SET EDIT_BIN="%programfiles(x86)%/Microsoft Visual Studio/2019/Community/SDK/ScopeCppSDK/vc15/VC/bin/editbin.exe"
 
 ECHO Switch to build directory: %APPVEYOR_BUILD_FOLDER% 
 CD %APPVEYOR_BUILD_FOLDER%
@@ -21,6 +22,8 @@ ECHO Build for Windows (64-bit)
 SET OUTPUT=%PUBLISH_FOLDER%/windows_portable.zip    
 SET OUTPUT_DIR=%PUBLISH_FOLDER%/windows
 CALL dotnet publish -c Release -r win-x64 --self-contained true --output %OUTPUT_DIR%
+SET PARAM=/subsystem:windows "%OUTPUT_DIR%/Jaya.Ui.exe"
+START /wait /B "" %EDIT_BIN% %PARAM%
 SET PARAM=a -tzip %OUTPUT% %OUTPUT_DIR%/*
 START /wait /B "" %SEVEN_ZIP% %PARAM%
 ECHO;
