@@ -6,12 +6,12 @@ skip_tags: true
 image: Visual Studio 2019
 configuration: Release
 init:
-- ps: >-
+- cmd: >-
     @ECHO off
 
     FOR /f %%a IN ('powershell -Command "Get-Date -format yy.MM.dd.HHmm"') do set BUILD_VERSION=%%a
 
-    iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+    powershell -command "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))"
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
