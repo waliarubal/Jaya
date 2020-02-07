@@ -21,7 +21,6 @@ dotnet_csproj:
 environment:
   BUILD_VERSION: 0.0.0.0
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
-  APPVEYOR_RDP_PASSWORD: abqpw8697l
 build_script:
 - cmd: >-
     CALL %APPVEYOR_BUILD_FOLDER%/Tools/sanity_check.bat
