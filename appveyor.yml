@@ -10,8 +10,6 @@ init:
     @ECHO off
 
     FOR /f %%a IN ('powershell -Command "Get-Date -format yy.MM.dd.HHmm"') do set BUILD_VERSION=%%a
-
-    powershell -command "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))"
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -49,3 +47,5 @@ deploy:
   force_update: true
   on:
     branch: dev
+on_finish:
+- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
