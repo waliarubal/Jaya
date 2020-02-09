@@ -1,7 +1,7 @@
 version: '{build}'
 branches:
   only:
-  - dev
+  - prod
 skip_tags: true
 image: Visual Studio 2019
 configuration: Release
@@ -46,4 +46,4 @@ deploy:
   prerelease: true
   force_update: true
   on:
-    branch: dev
+    branch: prod
