@@ -24,6 +24,7 @@
         <StackPanel Margin="8">
             <TextBlock FontSize="24" Text="{Binding Name, Mode=OneTime}" />
             <StackPanel Margin="0,0,0,12" Orientation="Horizontal">
+                <TextBlock Text="Version " />
                 <TextBlock Text="{Binding VersionString, Mode=OneTime, StringFormat='{}{0} '}" />
                 <TextBlock Text="{Binding Bitness, Mode=OneTime, StringFormat='({0}-bit) '}" />
                 <Hyperlink Content="What's new in this version?" Url="https://github.com/waliarubal/Jaya/releases" />

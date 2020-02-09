@@ -382,7 +382,7 @@
                             <j:WindowOptionsModel
                                 Title="Update"
                                 Width="480"
-                                Height="140"
+                                Height="320"
                                 ContentType="{x:Type v:UpdateView}" />
                         </Button.CommandParameter>
                         <StackPanel>

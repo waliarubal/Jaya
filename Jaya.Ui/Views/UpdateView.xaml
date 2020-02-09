@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    d:DesignWidth="480"
+    Design.Height="320"
+    Design.Width="480"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:UpdateViewModel />
@@ -42,7 +43,8 @@
         <ProgressBar
             Grid.Row="1"
             Grid.Column="1"
-            Grid.ColumnSpan="2" />
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top" />
         <Button
             Grid.Row="3"
             Grid.ColumnSpan="2"
@@ -58,9 +60,9 @@
                     <Setter Property="VerticalAlignment" Value="Center" />
                 </Style>
             </StackPanel.Styles>
+            <TextBlock Text="Version " />
             <TextBlock Text="{Binding VersionString, Mode=OneTime, StringFormat='{}{0} '}" />
             <TextBlock Text="{Binding Bitness, Mode=OneTime, StringFormat='({0}-bit) '}" />
-            <Hyperlink Content="What's new in this version?" Url="https://github.com/waliarubal/Jaya/releases" />
         </StackPanel>
     </Grid>
 </UserControl>
