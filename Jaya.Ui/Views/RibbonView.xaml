@@ -374,7 +374,17 @@
                             <TextBlock Text="Send Feedback" />
                         </StackPanel>
                     </Button>
-                    <Button Classes="Large" ToolTip.Tip="Update...">
+                    <Button
+                        Classes="Large"
+                        Command="{Binding OpenWindowCommand}"
+                        ToolTip.Tip="Update...">
+                        <Button.CommandParameter>
+                            <j:WindowOptionsModel
+                                Title="Update"
+                                Width="480"
+                                Height="140"
+                                ContentType="{x:Type v:UpdateView}" />
+                        </Button.CommandParameter>
                         <StackPanel>
                             <DrawingPresenter Drawing="{DynamicResource Icon.RunUpdate}" />
                             <TextBlock Text="Update" />

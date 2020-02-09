@@ -4,16 +4,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignWidth="320"
+    xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
+    d:DesignWidth="480"
     mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:UpdateViewModel />
+    </UserControl.DataContext>
     <Grid Margin="8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" MinHeight="16" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <DrawingPresenter
@@ -24,21 +30,37 @@
             Drawing="{DynamicResource Icon.RunUpdate}" />
         <TextBlock
             Grid.Column="1"
+            Grid.ColumnSpan="2"
             VerticalAlignment="Bottom"
             FontSize="22"
             Text="You're up to date" />
         <TextBlock
             Grid.Row="1"
             Grid.Column="1"
-            VerticalAlignment="Top"
-            Text="Last checked: Today 23:01" />
-        <ProgressBar Grid.Row="1" Grid.Column="1" />
-        <Button
-            Grid.Row="2"
             Grid.ColumnSpan="2"
-            Margin="0,16,0,0"
+            Text="Last checked: Today 23:01" />
+        <ProgressBar
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="2" />
+        <Button
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
             HorizontalAlignment="Left">
             <TextBlock Margin="8,0" Text="Check for updates" />
         </Button>
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="2"
+            Orientation="Horizontal">
+            <StackPanel.Styles>
+                <Style Selector="StackPanel &gt; TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+            </StackPanel.Styles>
+            <TextBlock Text="{Binding VersionString, Mode=OneTime, StringFormat='{}{0} '}" />
+            <TextBlock Text="{Binding Bitness, Mode=OneTime, StringFormat='({0}-bit) '}" />
+            <Hyperlink Content="What's new in this version?" Url="https://github.com/waliarubal/Jaya/releases" />
+        </StackPanel>
     </Grid>
 </UserControl>
