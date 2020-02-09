@@ -1,14 +1,11 @@
-﻿using Jaya.Shared.Services;
+﻿using Jaya.Shared.Base;
 using System;
-using System.Composition;
 
-namespace Jaya.Ui.Services
+namespace Jaya.Ui.ViewModels
 {
-    [Shared]
-    [Export(nameof(UpdateService), typeof(IService))]
-    public sealed class UpdateService: IService
+    public class UpdateViewModel: ViewModelBase
     {
-        public Version Version => Constants.VERSION;
+        Version Version => Constants.VERSION;
 
         public string VersionString => string.Format("{0}.{1}.{2}.{3}", Version.Major, Version.Minor, Version.Build, Version.Revision);
 
