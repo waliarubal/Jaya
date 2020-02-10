@@ -48,7 +48,8 @@
         <Button
             Grid.Row="3"
             Grid.ColumnSpan="2"
-            HorizontalAlignment="Left">
+            HorizontalAlignment="Left"
+            Command="{Binding CheckForUpdateCommand}">
             <TextBlock Margin="8,0" Text="Check for updates" />
         </Button>
         <StackPanel

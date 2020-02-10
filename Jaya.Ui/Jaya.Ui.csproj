@@ -32,6 +32,7 @@
     <PackageReference Include="Avalonia.ThemeManager" Version="0.9.1" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.9.2" />
     <PackageReference Include="RestSharp" Version="106.10.2-alpha.0.8" />
+    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="106.10.2-alpha.0.8" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />

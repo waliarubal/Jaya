@@ -43,6 +43,7 @@ deploy:
     secure: UgS7u6/QF29WDtX3jzm9xC64vZ52V8yGYWAvpMW+h+95ghtdOHalzcmyemVTg28H
   repository: waliarubal/Jaya
   artifact: publish/windows.exe,publish/linux_portable.zip,publish/osx_portable.zip,publish/windows_portable.zip
+  draft: true
   prerelease: true
   force_update: true
   on:
