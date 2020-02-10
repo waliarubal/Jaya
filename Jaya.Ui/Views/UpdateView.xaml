@@ -40,7 +40,7 @@
             Grid.Column="1"
             Grid.ColumnSpan="2"
             IsVisible="{Binding !IsBusy, Mode=OneWay}"
-            Text="{Binding LastChecked, Mode=OneWay, StringFormat='Last checked: {0:dd MMMM, yyyy HH:mm:ss}'}" />
+            Text="{Binding Checked, Mode=OneWay, StringFormat='Last checked: {0:dd MMMM, yyyy HH:mm:ss}'}" />
         <ProgressBar
             Grid.Row="1"
             Grid.Column="1"
@@ -52,9 +52,12 @@
         <Grid
             Grid.Row="2"
             Grid.ColumnSpan="3"
-            Margin="8"
-            IsVisible="{Binding !!LatestRelease, Mode=OneWay}">
+            Margin="0,8"
+            IsVisible="{Binding !!Update, Mode=OneWay}">
             <Grid.Styles>
+                <Style Selector="StackPanel &gt; TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
                 <Style Selector="Border.Separator">
                     <Setter Property="IsHitTestVisible" Value="False" />
                     <Setter Property="Background" Value="Transparent" />
@@ -65,21 +68,46 @@
             </Grid.Styles>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Border Classes="Separator" />
-            <Border Grid.Row="3" Classes="Separator" />
+            <Border Grid.Row="0" Classes="Separator" />
+            <TextBlock
+                Grid.Row="1"
+                Margin="0,0,0,4"
+                Text="{Binding Update.Notes}"
+                TextWrapping="Wrap" />
+            <TextBlock Grid.Row="2" Text="{Binding Update.Version, StringFormat='Version: {0}'}" />
+            <TextBlock Grid.Row="3" Text="{Binding Update.Date, StringFormat='Released: {0:dd MMMM, yyyy HH:mm:ss}'}" />
+            <TextBlock
+                Grid.Row="4"
+                IsVisible="{Binding Update.IsPrerelease}"
+                Text="This is a pre-release update." />
+            <Border Grid.Row="6" Classes="Separator" />
         </Grid>
 
-        <Button
+        <TextBlock
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            IsVisible="{Binding !!Update}"
+            Text="You are already running the latest version of software." />
+
+        <StackPanel
             Grid.Row="3"
             Grid.ColumnSpan="2"
-            HorizontalAlignment="Left"
-            Command="{Binding CheckForUpdateCommand}"
-            IsEnabled="{Binding !IsBusy, Mode=OneWay}">
-            <TextBlock Margin="8,0" Text="Check for updates" />
-        </Button>
+            IsEnabled="{Binding !IsBusy, Mode=OneWay}"
+            Orientation="Horizontal">
+            <Button Command="{Binding CheckForUpdateCommand}">
+                <TextBlock Margin="8,0" Text="Check for updates" />
+            </Button>
+        </StackPanel>
+
         <StackPanel
             Grid.Row="3"
             Grid.Column="2"

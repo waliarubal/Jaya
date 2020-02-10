@@ -8,6 +8,10 @@ namespace Jaya.Ui.ViewModels
 {
     public class UpdateViewModel: ViewModelBase
     {
+        const string UP_TO_DATE = "You're up to date";
+        const string CHECKING_FOR_UPDATE = "Checking for update...";
+        const string UPDATE_AVAILABLE = "Update available";
+
         RelayCommand _checkForUpdate;
         UpdateService _updateService;
 
@@ -15,8 +19,10 @@ namespace Jaya.Ui.ViewModels
         {
             _updateService = GetService<UpdateService>();
 
-            Title = Constants.UP_TO_DATE;
-            LastChecked = _updateService?.LastChecked;
+            if (Update == null)
+                Title = UP_TO_DATE;
+            else
+                Title = UPDATE_AVAILABLE;
         }
 
         public string Title
@@ -29,17 +35,9 @@ namespace Jaya.Ui.ViewModels
 
         public byte? Bitness => _updateService?.Bitness;
 
-        public ReleaseModel LatestRelease
-        {
-            get => Get<ReleaseModel>();
-            private set => Set(value);
-        }
+        public ReleaseModel Update => _updateService?.Update;
 
-        public DateTime? LastChecked
-        {
-            get => Get<DateTime?>();
-            private set => Set(value);
-        }
+        public DateTime? Checked => _updateService?.Checked;
 
         public RelayCommand CheckForUpdateCommand
         {
@@ -54,17 +52,18 @@ namespace Jaya.Ui.ViewModels
 
         async void CheckForUpdateAction()
         {
-            Title = Constants.CHECKING_FOR_UPDATE;
+            Title = CHECKING_FOR_UPDATE;
             IsBusy = true;
 
-            LatestRelease = await _updateService.CheckForUpdate();
-            if (LatestRelease == null)
-                Title = Constants.UP_TO_DATE;
-            else
-                Title = Constants.UPDATE_AVAILABLE;
+            await _updateService.CheckForUpdate();
 
+            if (Update == null)
+                Title = UP_TO_DATE;
+            else
+                Title = UPDATE_AVAILABLE;
+
+            RaisePropertyChanged(nameof(Checked));
             IsBusy = false;
-            LastChecked = _updateService.LastChecked;
         }
     }
 }

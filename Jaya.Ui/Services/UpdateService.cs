@@ -29,13 +29,15 @@ namespace Jaya.Ui.Services
 
         public Version Version { get; }
 
-        public DateTime? LastChecked => _sharedService?.ApplicationConfiguration.LastUpdateChecked;
+        public DateTime? Checked => _sharedService?.ApplicationConfiguration.UpdateChecked;
+
+        public ReleaseModel Update => _sharedService?.ApplicationConfiguration.Update;
 
         public string VersionString { get; }
 
         public byte Bitness { get; }
 
-        public async Task<ReleaseModel> CheckForUpdate()
+        public async Task CheckForUpdate()
         {
             var client = new RestClient(GITHUB_API);
             client.UseNewtonsoftJson();
@@ -44,13 +46,11 @@ namespace Jaya.Ui.Services
 
             var response = await client.GetAsync<ReleaseModel[]>(request);
 
-            _sharedService.ApplicationConfiguration.LastUpdateChecked = DateTime.Now;
-            _sharedService.SaveConfigurations();
-
             if (response.Length > 0)
-                return response[0];
+                _sharedService.ApplicationConfiguration.Update = response[0];
 
-            return null;
+            _sharedService.ApplicationConfiguration.UpdateChecked = DateTime.Now;
+            _sharedService.SaveConfigurations();
         }
     }
 }
