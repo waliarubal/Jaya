@@ -34,22 +34,50 @@
             Grid.ColumnSpan="2"
             VerticalAlignment="Bottom"
             FontSize="22"
-            Text="You're up to date" />
+            Text="{Binding Title, Mode=OneWay}" />
         <TextBlock
             Grid.Row="1"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            Text="Last checked: Today 23:01" />
+            IsVisible="{Binding !IsBusy, Mode=OneWay}"
+            Text="{Binding LastChecked, Mode=OneWay, StringFormat='Last checked: {0:dd MMMM, yyyy HH:mm:ss}'}" />
         <ProgressBar
             Grid.Row="1"
             Grid.Column="1"
             Grid.ColumnSpan="2"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Top"
+            IsIndeterminate="True"
+            IsVisible="{Binding IsBusy, Mode=OneWay}" />
+
+        <Grid
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            Margin="8"
+            IsVisible="{Binding !!LatestRelease, Mode=OneWay}">
+            <Grid.Styles>
+                <Style Selector="Border.Separator">
+                    <Setter Property="IsHitTestVisible" Value="False" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value=".5" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+                    <Setter Property="Margin" Value="0 2" />
+                </Style>
+            </Grid.Styles>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border Classes="Separator" />
+            <Border Grid.Row="3" Classes="Separator" />
+        </Grid>
+
         <Button
             Grid.Row="3"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Left"
-            Command="{Binding CheckForUpdateCommand}">
+            Command="{Binding CheckForUpdateCommand}"
+            IsEnabled="{Binding !IsBusy, Mode=OneWay}">
             <TextBlock Margin="8,0" Text="Check for updates" />
         </Button>
         <StackPanel

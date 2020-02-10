@@ -8,6 +8,13 @@ namespace Jaya.Ui.Models
     public class ApplicationConfigModel : ConfigModelBase
     {
         [JsonProperty]
+        public DateTime LastUpdateChecked
+        {
+            get => Get<DateTime>();
+            set => Set(value);
+        }
+
+        [JsonProperty]
         public bool IsItemCheckBoxVisible
         {
             get => Get<bool>();

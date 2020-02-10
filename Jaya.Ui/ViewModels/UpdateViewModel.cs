@@ -1,5 +1,6 @@
 ﻿using Jaya.Shared;
 using Jaya.Shared.Base;
+using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System;
 
@@ -12,14 +13,33 @@ namespace Jaya.Ui.ViewModels
 
         public UpdateViewModel()
         {
-            _updateService = ServiceLocator.Instance.GetService<UpdateService>();
+            _updateService = GetService<UpdateService>();
+
+            Title = Constants.UP_TO_DATE;
+            LastChecked = _updateService?.LastChecked;
         }
 
-        Version Version => Constants.VERSION;
+        public string Title
+        {
+            get => Get<string>();
+            private set => Set(value);
+        }
 
-        public string VersionString => string.Format("{0}.{1}.{2}.{3}", Version.Major, Version.Minor, Version.Build, Version.Revision);
+        public string VersionString => _updateService?.VersionString;
 
-        public byte Bitness => Environment.Is64BitOperatingSystem ? (byte)64 : (byte)32;
+        public byte? Bitness => _updateService?.Bitness;
+
+        public ReleaseModel LatestRelease
+        {
+            get => Get<ReleaseModel>();
+            private set => Set(value);
+        }
+
+        public DateTime? LastChecked
+        {
+            get => Get<DateTime?>();
+            private set => Set(value);
+        }
 
         public RelayCommand CheckForUpdateCommand
         {
@@ -34,7 +54,17 @@ namespace Jaya.Ui.ViewModels
 
         async void CheckForUpdateAction()
         {
-            var update = await _updateService.CheckForUpdate();
+            Title = Constants.CHECKING_FOR_UPDATE;
+            IsBusy = true;
+
+            LatestRelease = await _updateService.CheckForUpdate();
+            if (LatestRelease == null)
+                Title = Constants.UP_TO_DATE;
+            else
+                Title = Constants.UPDATE_AVAILABLE;
+
+            IsBusy = false;
+            LastChecked = _updateService.LastChecked;
         }
     }
 }

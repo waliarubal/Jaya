@@ -11,11 +11,14 @@ namespace Jaya.Ui
         public const string APP_NAME = "Jaya - Cross Plat";
         public const string APP_DESCRIPTION = "Jaya - Cross Plat is a small .NET Core based cross platform file explorer application which runs on Windows, Mac and Linux. Its goal is very simple, \"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports.\".";
 
+        public const string UP_TO_DATE = "You're up to date";
+        public const string CHECKING_FOR_UPDATE = "Checking for update...";
+        public const string UPDATE_AVAILABLE = "Update available";
+
         public static readonly Uri
             URL_DONATION,
             URL_LICENSE,
-            URL_ISSUES,
-            URL_RELEASES;
+            URL_ISSUES;
 
         public static readonly Version VERSION;
 
@@ -24,7 +27,6 @@ namespace Jaya.Ui
             URL_DONATION = new Uri("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2");
             URL_LICENSE = new Uri("https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE");
             URL_ISSUES = GetRepositoryUrl("issues");
-            URL_RELEASES = new Uri("https://api.github.com/repos/waliarubal/Jaya/releases", UriKind.Absolute);
             VERSION = Assembly.GetExecutingAssembly().GetName().Version;
         }
 

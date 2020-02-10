@@ -1,19 +1,25 @@
 ﻿using Jaya.Shared.Base;
+using Jaya.Ui.Services;
 using System;
 
 namespace Jaya.Ui.ViewModels
 {
     public class AboutViewModel: ViewModelBase
     {
+        UpdateService _updateService;
+
+        public AboutViewModel()
+        {
+            _updateService = GetService<UpdateService>();
+        }
+
         public string Name => Constants.APP_NAME;
 
         public string Description => Constants.APP_DESCRIPTION;
 
-        Version Version => Constants.VERSION;
+        public string VersionString => _updateService?.VersionString;
 
-        public string VersionString => string.Format("{0}.{1}.{2}.{3}", Version.Major, Version.Minor, Version.Build, Version.Revision);
-
-        public byte Bitness => Environment.Is64BitOperatingSystem ? (byte)64 : (byte)32;
+        public byte? Bitness => _updateService?.Bitness;
 
         public Uri DonationUrl => Constants.URL_DONATION;
 
