@@ -4,6 +4,8 @@ using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
 using System;
 using System.Composition;
+using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -61,32 +63,39 @@ namespace Jaya.Ui.Services
             _sharedService.SaveConfigurations();
         }
 
-        public void DownloadUpdate()
+        public async Task DownloadUpdate()
         {
-            if (Update == null )
+            if (Update == null)
                 return;
 
-            var platform = _platformService.GetPlatform();
+            var platformString = _platformService.GetPlatform().ToString();
 
-            string downloadUrl = null;
+            Uri url = null;
             foreach(var download in Update.Downloads)
             {
-                var x = platform.ToString();
-                downloadUrl = download.Url;
+                if (download.Url.Contains(platformString, StringComparison.OrdinalIgnoreCase))
+                {
+                    url = new Uri(download.Url, UriKind.Absolute);
+                    break;
+                }
             }
 
-            var client = new RestClient(GITHUB_API);
+            if (url == null)
+                return;
 
-            var request = new RestRequest(downloadUrl);
-            request.ResponseWriter = responseStream =>
+            var client = new RestClient();
+
+            var request = new RestRequest(url, Method.GET);
+
+            var response = await client.ExecuteAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                using (responseStream)
-                {
-                    
-                }
-            };
+                if (!Directory.Exists(_sharedService.UpdateConfiguration.DownloadDirectory))
+                    Directory.CreateDirectory(_sharedService.UpdateConfiguration.DownloadDirectory);
 
-            var response = client.DownloadData(request);
+                var updateFilePath = Path.Combine(_sharedService.UpdateConfiguration.DownloadDirectory, Path.GetFileName(url.LocalPath));
+                File.WriteAllBytes(updateFilePath, response.RawBytes);
+            }
         }
     }
 }

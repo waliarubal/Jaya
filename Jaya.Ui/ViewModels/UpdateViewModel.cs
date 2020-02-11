@@ -100,12 +100,12 @@ namespace Jaya.Ui.ViewModels
             IsBusy = false;
         }
 
-        void DownloadUpdateAction()
+        async void DownloadUpdateAction()
         {
             Title = DOWNLOADING;
             IsBusy = true;
 
-            _updateService.DownloadUpdate();
+            await _updateService.DownloadUpdate();
 
             IsBusy = false;
         }
