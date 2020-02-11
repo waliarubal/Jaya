@@ -1,9 +1,9 @@
 ; process command line arguments
 #ifndef APP_VERSION
-	#define APP_VERSION "1.0"
+	#define APP_VERSION "1.0.0.0"
 #endif
 #ifndef APP_ROOT
-	#define APP_ROOT ".."
+	#define APP_ROOT "..\"
 #endif
 
 #define APP_NAME "Jaya - Cross Plat"
@@ -36,6 +36,10 @@ SolidCompression=yes
 WizardStyle=classic
 SetupLogging=yes
 UsePreviousAppDir=yes
+
+[INI]
+Filename: "config.ini"; Section: "InstallSettings"; Flags: uninsdeletesection
+Filename: "config.ini"; Section: "InstallSettings"; Key: "InstallPath"; String: "{app}"
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -103,6 +107,21 @@ end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
 begin
+  case CurStep of
+    ssInstall:
+      begin
+        if (IsUpgrade()) then
+        begin
+          UnInstallOldVersion();
+        end;
+      end;
+
+     ssPostInstall:
+     begin
+      
+     end;
+  end;
+
   if (CurStep=ssInstall) then
   begin
     if (IsUpgrade()) then
