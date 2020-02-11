@@ -19,6 +19,7 @@ namespace Jaya.Ui.Services
 
         readonly SharedService _sharedService;
         readonly PlatformService _platformService;
+        readonly bool _isPortable;
 
         [ImportingConstructor]
         public UpdateService(
@@ -27,6 +28,8 @@ namespace Jaya.Ui.Services
         {
             _sharedService = sharedService as SharedService;
             _platformService = platformService as PlatformService;
+
+            _isPortable = true;
 
             Version = Assembly.GetExecutingAssembly().GetName().Version;
             VersionString = string.Format("{0}.{1}.{2}.{3}", Version.Major, Version.Minor, Version.Build, Version.Revision);
@@ -68,12 +71,12 @@ namespace Jaya.Ui.Services
             if (Update == null)
                 return;
 
-            var platformString = _platformService.GetPlatform().ToString();
+            var updateFilePrefix = string.Format("{0}{1}", _platformService.GetPlatform(), _isPortable ? "_portable" : string.Empty);
 
             Uri url = null;
             foreach(var download in Update.Downloads)
             {
-                if (download.Url.Contains(platformString, StringComparison.OrdinalIgnoreCase))
+                if (download.Url.Contains(updateFilePrefix, StringComparison.OrdinalIgnoreCase))
                 {
                     url = new Uri(download.Url, UriKind.Absolute);
                     break;
