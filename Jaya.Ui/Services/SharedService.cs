@@ -45,6 +45,8 @@ namespace Jaya.Ui.Services
 
         public PaneConfigModel PaneConfiguration { get; private set; }
 
+        public UpdateConfigModel UpdateConfiguration { get; private set; }
+
         #endregion
 
         internal void LoadConfigurations()
@@ -52,6 +54,7 @@ namespace Jaya.Ui.Services
             ApplicationConfiguration = _configService.GetOrDefault<ApplicationConfigModel>();
             ToolbarConfiguration = _configService.GetOrDefault<ToolbarConfigModel>();
             PaneConfiguration = _configService.GetOrDefault<PaneConfigModel>();
+            UpdateConfiguration = _configService.GetOrDefault<UpdateConfigModel>();
         }
 
         internal void SaveConfigurations()
@@ -59,6 +62,7 @@ namespace Jaya.Ui.Services
             _configService.Set(ApplicationConfiguration);
             _configService.Set(ToolbarConfiguration);
             _configService.Set(PaneConfiguration);
+            _configService.Set(UpdateConfiguration);
         }
 
         void SimpleCommandAction(byte type)

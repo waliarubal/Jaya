@@ -7,7 +7,7 @@ namespace Jaya.Shared.Services
 {
     [Export(nameof(PlatformService), typeof(IService))]
     [Shared]
-    public class PlatformService: IService
+    public class PlatformService : IService
     {
         public void OpenBrowser(string url)
         {
@@ -26,6 +26,23 @@ namespace Jaya.Shared.Services
             }
             else
                 throw new NotImplementedException();
+        }
+
+        public OSPlatform GetPlatform()
+        {
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                return OSPlatform.OSX;
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                return OSPlatform.Linux;
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                return OSPlatform.Windows;
+
+            // return windows for all others
+            return OSPlatform.Windows;
+
         }
     }
 }

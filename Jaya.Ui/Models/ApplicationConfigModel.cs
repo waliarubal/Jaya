@@ -7,19 +7,6 @@ namespace Jaya.Ui.Models
 {
     public class ApplicationConfigModel : ConfigModelBase
     {
-        [JsonProperty]
-        public DateTime UpdateChecked
-        {
-            get => Get<DateTime>();
-            set => Set(value);
-        }
-
-        [JsonProperty]
-        public ReleaseModel Update
-        {
-            get => Get<ReleaseModel>();
-            set => Set(value);
-        }
 
         [JsonProperty]
         public bool IsItemCheckBoxVisible

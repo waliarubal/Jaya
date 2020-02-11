@@ -114,7 +114,7 @@
             <Button Command="{Binding CheckForUpdateCommand}">
                 <TextBlock Text="Check for Update" />
             </Button>
-            <Button IsVisible="{Binding IsUpdateAvailable}">
+            <Button Command="{Binding DownloadUpdateCommand}" IsVisible="{Binding IsUpdateAvailable}">
                 <TextBlock Text="Download Update" />
             </Button>
         </StackPanel>

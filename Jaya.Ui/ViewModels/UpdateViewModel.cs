@@ -3,6 +3,7 @@ using Jaya.Shared.Base;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System;
+using System.Windows.Input;
 
 namespace Jaya.Ui.ViewModels
 {
@@ -11,8 +12,9 @@ namespace Jaya.Ui.ViewModels
         const string UP_TO_DATE = "You're up to date";
         const string CHECKING_FOR_UPDATE = "Checking for update...";
         const string UPDATE_AVAILABLE = "Update available";
+        const string DOWNLOADING = "Downloaidng update...";
 
-        RelayCommand _checkForUpdate;
+        RelayCommand _checkForUpdate, _downloadUpdate;
         UpdateService _updateService;
 
         public UpdateViewModel()
@@ -22,6 +24,8 @@ namespace Jaya.Ui.ViewModels
             Update = _updateService?.Update;
             Checked = _updateService?.Checked;
         }
+
+        #region properties
 
         public string Title
         {
@@ -58,7 +62,9 @@ namespace Jaya.Ui.ViewModels
         {
             get => Get<DateTime?>();
             private set => Set(value);
-        } 
+        }
+
+        #endregion
 
         public RelayCommand CheckForUpdateCommand
         {
@@ -71,6 +77,17 @@ namespace Jaya.Ui.ViewModels
             }
         }
 
+        public ICommand DownloadUpdateCommand
+        {
+            get
+            {
+                if (_downloadUpdate == null)
+                    _downloadUpdate = new RelayCommand(DownloadUpdateAction);
+
+                return _downloadUpdate;
+            }
+        }
+
         async void CheckForUpdateAction()
         {
             Title = CHECKING_FOR_UPDATE;
@@ -79,6 +96,16 @@ namespace Jaya.Ui.ViewModels
             await _updateService.CheckForUpdate();
             Update = _updateService.Update;
             Checked = _updateService.Checked;
+
+            IsBusy = false;
+        }
+
+        void DownloadUpdateAction()
+        {
+            Title = DOWNLOADING;
+            IsBusy = true;
+
+            _updateService.DownloadUpdate();
 
             IsBusy = false;
         }
