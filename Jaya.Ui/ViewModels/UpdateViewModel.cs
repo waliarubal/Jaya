@@ -107,6 +107,7 @@ namespace Jaya.Ui.ViewModels
 
             await _updateService.DownloadUpdate();
 
+            Title = UPDATE_AVAILABLE;
             IsBusy = false;
         }
     }
