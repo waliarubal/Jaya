@@ -19,10 +19,8 @@ namespace Jaya.Ui.ViewModels
         {
             _updateService = GetService<UpdateService>();
 
-            if (Update == null)
-                Title = UP_TO_DATE;
-            else
-                Title = UPDATE_AVAILABLE;
+            Update = _updateService?.Update;
+            Checked = _updateService?.Checked;
         }
 
         public string Title
@@ -35,9 +33,32 @@ namespace Jaya.Ui.ViewModels
 
         public byte? Bitness => _updateService?.Bitness;
 
-        public ReleaseModel Update => _updateService?.Update;
+        public bool IsUpdateAvailable
+        {
+            get => Get<bool>();
+            private set => Set(value);
+        }
 
-        public DateTime? Checked => _updateService?.Checked;
+        public ReleaseModel Update
+        {
+            get => Get<ReleaseModel>();
+            private set
+            {
+                Set(value);
+
+                IsUpdateAvailable = value != null;
+                if (IsUpdateAvailable)
+                    Title = UPDATE_AVAILABLE;
+                else
+                    Title = UP_TO_DATE;
+            }
+        }
+
+        public DateTime? Checked
+        {
+            get => Get<DateTime?>();
+            private set => Set(value);
+        } 
 
         public RelayCommand CheckForUpdateCommand
         {
@@ -56,13 +77,9 @@ namespace Jaya.Ui.ViewModels
             IsBusy = true;
 
             await _updateService.CheckForUpdate();
+            Update = _updateService.Update;
+            Checked = _updateService.Checked;
 
-            if (Update == null)
-                Title = UP_TO_DATE;
-            else
-                Title = UPDATE_AVAILABLE;
-
-            RaisePropertyChanged(nameof(Checked));
             IsBusy = false;
         }
     }

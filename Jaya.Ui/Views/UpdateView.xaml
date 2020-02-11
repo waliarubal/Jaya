@@ -53,7 +53,7 @@
             Grid.Row="2"
             Grid.ColumnSpan="3"
             Margin="0,8"
-            IsVisible="{Binding !!Update, Mode=OneWay}">
+            IsVisible="{Binding IsUpdateAvailable}">
             <Grid.Styles>
                 <Style Selector="StackPanel &gt; TextBlock">
                     <Setter Property="VerticalAlignment" Value="Center" />
@@ -95,7 +95,7 @@
             Grid.ColumnSpan="3"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            IsVisible="{Binding !!Update}"
+            IsVisible="{Binding !IsUpdateAvailable}"
             Text="You are already running the latest version of software." />
 
         <StackPanel
@@ -103,8 +103,19 @@
             Grid.ColumnSpan="2"
             IsEnabled="{Binding !IsBusy, Mode=OneWay}"
             Orientation="Horizontal">
+            <StackPanel.Styles>
+                <Style Selector="Button &gt; TextBlock">
+                    <Setter Property="Margin" Value="8 0" />
+                </Style>
+                <Style Selector="Button">
+                    <Setter Property="Margin" Value="0 0 4 0" />
+                </Style>
+            </StackPanel.Styles>
             <Button Command="{Binding CheckForUpdateCommand}">
-                <TextBlock Margin="8,0" Text="Check for updates" />
+                <TextBlock Text="Check for Update" />
+            </Button>
+            <Button IsVisible="{Binding IsUpdateAvailable}">
+                <TextBlock Text="Download Update" />
             </Button>
         </StackPanel>
 
