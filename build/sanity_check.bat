@@ -1,4 +1,8 @@
 @ECHO off
 ECHO Build Version: %BUILD_VERSION%
 ECHO Build Directory: %APPVEYOR_BUILD_FOLDER%
+
+SET SOURCE=%APPVEYOR_BUILD_FOLDER%/src
+CD %SOURCE%
 CALL dotnet build --configuration Release
+CD %APPVEYOR_BUILD_FOLDER%
