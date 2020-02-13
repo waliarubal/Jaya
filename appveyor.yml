@@ -21,9 +21,9 @@ environment:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
 build_script:
 - cmd: >-
-    CALL %APPVEYOR_BUILD_FOLDER%/Tools/sanity_check.bat
+    CALL %APPVEYOR_BUILD_FOLDER%/build/sanity_check.bat
 
-    CALL %APPVEYOR_BUILD_FOLDER%/Tools/build.bat
+    CALL %APPVEYOR_BUILD_FOLDER%/build/build.bat
 test: off
 artifacts:
 - path: publish/windows.exe

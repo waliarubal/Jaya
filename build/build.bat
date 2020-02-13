@@ -4,14 +4,15 @@ SETLOCAL EnableDelayedExpansion
 REM IF "%BUILD_VERSION%"=="" SET BUILD_VERSION="1.0.0.0"
 REM IF "%APPVEYOR_BUILD_FOLDER%"=="" SET APPVEYOR_BUILD_FOLDER=%~dp0../
 
-SET SEVEN_ZIP=%APPVEYOR_BUILD_FOLDER%/Tools/7z/7za.exe
-SET CURL=%APPVEYOR_BUILD_FOLDER%/Tools/curl/curl.exe
+SET SOURCE=%APPVEYOR_BUILD_FOLDER%/src
+SET SEVEN_ZIP=%APPVEYOR_BUILD_FOLDER%/build/7z/7za.exe
+SET CURL=%APPVEYOR_BUILD_FOLDER%/build/curl/curl.exe
 SET PUBLISH_FOLDER=%APPVEYOR_BUILD_FOLDER%/publish
 SET INNO_SETUP="%programfiles(x86)%/Inno Setup 6/ISCC.exe"
 SET EDIT_BIN="%programfiles(x86)%/Microsoft Visual Studio/2019/Community/SDK/ScopeCppSDK/vc15/VC/bin/editbin.exe"
 
-ECHO Switch to build directory: %APPVEYOR_BUILD_FOLDER% 
-CD %APPVEYOR_BUILD_FOLDER%
+ECHO Switch to source directory: %SOURCE%
+CD %SOURCE%
 
 ECHO;
 ECHO Delete publish folder: %PUBLISH_FOLDER%

@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/waliarubal/Jaya/" target="_blank">
-    <img src="https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/Logo.png" alt="Jaya - Cross Plat logo" >
+    <img src="https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/Logo.png" alt="Jaya - Cross Plat logo" >
   </a>
 </p>
 <h3 align="center">Jaya - Cross Plat</h3>
@@ -56,23 +56,23 @@ This project would have not existed without the availbility of below mentioned f
 
 Dark Theme
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/00.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/00.png)
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/06.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/06.png)
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/02.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/02.png)
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/05.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/05.png)
 
 Light Theme
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/01.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/01.png)
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/07.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/07.png)
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/03.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/03.png)
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/Documents/04.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/04.png)
 
 ## Roadmap
 
