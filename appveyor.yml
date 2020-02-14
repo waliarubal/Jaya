@@ -21,9 +21,9 @@ environment:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
 build_script:
 - cmd: >-
-    CALL %APPVEYOR_BUILD_FOLDER%/build/sanity_check.bat
+    CALL %APPVEYOR_BUILD_FOLDER%/Tools/sanity_check.bat
 
-    CALL %APPVEYOR_BUILD_FOLDER%/build/build.bat
+    CALL %APPVEYOR_BUILD_FOLDER%/Tools/build.bat
 test: off
 artifacts:
 - path: publish/windows.exe
@@ -35,16 +35,9 @@ artifacts:
 - path: publish/windows_portable.zip
   name: windows_portable
 deploy:
-- provider: GitHub
-  tag: $(BUILD_VERSION)
-  release: $(BUILD_VERSION)
-  description: Automated release for version $(BUILD_VERSION).
-  auth_token:
-    secure: UgS7u6/QF29WDtX3jzm9xC64vZ52V8yGYWAvpMW+h+95ghtdOHalzcmyemVTg28H
-  repository: waliarubal/Jaya
-  artifact: publish/windows.exe,publish/linux_portable.zip,publish/osx_portable.zip,publish/windows_portable.zip
-  draft: true
-  prerelease: true
-  force_update: true
+- provider: Webhook
+  url: https://app.signpath.io/API/v1/ec7e0b29-bda8-4762-8956-49e0648546a2/Integrations/AppVeyor?ProjectKey=Jaya&SigningPolicyKey=test-signing
+  authorization:
+    secure: OtXpNcIUg4QDVhgYGDibvo+A0ZYUOIMIXYhQTWE1Pbutn5KbAHcmcp6j/WpchLMefW6AMiuoxnBe3rfLbPFYl2K4RvkBlb33DaV+K1RihMTD0z2waJwy5TLgNrSLVRT9
   on:
     branch: prod
