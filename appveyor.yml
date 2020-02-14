@@ -38,6 +38,6 @@ deploy:
 - provider: Webhook
   url: https://app.signpath.io/API/v1/ec7e0b29-bda8-4762-8956-49e0648546a2/Integrations/AppVeyor?ProjectKey=Jaya&SigningPolicyKey=test-signing
   authorization:
-    secure: OtXpNcIUg4QDVhgYGDibvo+A0ZYUOIMIXYhQTWE1Pbutn5KbAHcmcp6j/WpchLMefW6AMiuoxnBe3rfLbPFYl2K4RvkBlb33DaV+K1RihMTD0z2waJwy5TLgNrSLVRT9
+    secure: ssAvpMv48FaPJ5o+C3mgoX6tBHKsrJpkfH7JHfsExn3JgX3RsZFqGZ7/YaQCvEF5aTf7WIkusbm/w+O31nq4Zg==
   on:
     branch: prod
