@@ -23,12 +23,15 @@ ECHO Build for Windows (64-bit)
 SET OUTPUT=%PUBLISH_FOLDER%/windows_portable.zip    
 SET OUTPUT_DIR=%PUBLISH_FOLDER%/windows
 CALL dotnet publish -c Release -r win-x64 --self-contained true --output %OUTPUT_DIR%
+ECHO;
 SET PARAM=/subsystem:windows "%OUTPUT_DIR%/Jaya.Ui.exe"
 START /wait /B "" %EDIT_BIN% %PARAM%
+ECHO;
 SET PARAM=a -tzip %OUTPUT% %OUTPUT_DIR%/*
 START /wait /B "" %SEVEN_ZIP% %PARAM%
 ECHO;
 SET PARAM=/O"%PUBLISH_FOLDER%" /DAPP_VERSION=%BUILD_VERSION% /DAPP_ROOT="%APPVEYOR_BUILD_FOLDER%/" "%APPVEYOR_BUILD_FOLDER%/tools/setup.iss"
+ECHO InnoSetup Parameter: %PARAM%
 START /wait /B "" %INNO_SETUP% %PARAM%
 
 ECHO;   
