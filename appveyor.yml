@@ -19,6 +19,8 @@ dotnet_csproj:
 environment:
   BUILD_VERSION: 0.0.0.0
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
+install:
+- ps: Install-Module -Name SignPath
 build_script:
 - cmd: >-
     CALL %APPVEYOR_BUILD_FOLDER%/build/sanity_check.bat
@@ -34,10 +36,26 @@ artifacts:
   name: mac_portable
 - path: publish/windows_portable.zip
   name: windows_portable
+before_deploy:
+- ps: >-
+    Submit-SigningRequest
+        -CIUserToken vmlwij0aaygcon1v8hsp
+        -OrganizationId ec7e0b29-bda8-4762-8956-49e0648546a2
+        -ProjectKey Jaya
+        -SigningPolicyKey test-signing
+        -InputArtifactPath publish/*
+        -OutputArtifactPath published_signed/*
+        -WaitForCompletion
 deploy:
-- provider: Webhook
-  url: https://app.signpath.io/API/v1/ec7e0b29-bda8-4762-8956-49e0648546a2/Integrations/AppVeyor?ProjectKey=Jaya&SigningPolicyKey=test-signing
-  authorization:
-    secure: ssAvpMv48FaPJ5o+C3mgoX6tBHKsrJpkfH7JHfsExn3JgX3RsZFqGZ7/YaQCvEF5aTf7WIkusbm/w+O31nq4Zg==
+- provider: GitHub
+  tag: $(BUILD_VERSION)
+  release: $(BUILD_VERSION)
+  auth_token:
+    secure: WHpMKpgKBOBAZJtEykGiktPF6gfjlHZMati9bXH6xZZS12v72miRO5a6ORsxkU1n
+  repository: waliarubal/Jaya
+  artifact: publish_signed/windows.exe,publish_signed/linux_portable.zip,publish_signed/osx_portable.zip,publish_signed/windows_portable.zip
+  draft: true
+  prerelease: true
+  force_update: true
   on:
     branch: prod
