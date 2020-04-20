@@ -44,7 +44,7 @@ before_deploy:
       -OrganizationId "ec7e0b29-bda8-4762-8956-49e0648546a2" `
       -ProjectKey "Jaya" `
       -SigningPolicyKey "test-signing" `
-      -OutputArtifactPath "published_signed/windows.exe" `
+      -OutputArtifactPath "publish_signed/windows.exe" `
       -WaitForCompletion
 deploy:
 - provider: GitHub
