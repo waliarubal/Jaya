@@ -26,6 +26,13 @@ build_script:
     CALL %APPVEYOR_BUILD_FOLDER%/build/sanity_check.bat
 
     CALL %APPVEYOR_BUILD_FOLDER%/build/build.bat
+
+
+    REM Sign installer binaries
+
+    SET PowerShellScriptPath=%APPVEYOR_BUILD_FOLDER%/build/sign.ps1
+
+    PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& '%PowerShellScriptPath%'";
 test: off
 artifacts:
 - path: publish/windows.exe
@@ -36,16 +43,6 @@ artifacts:
   name: mac_portable
 - path: publish/windows_portable.zip
   name: windows_portable
-before_deploy:
-- ps: >-
-    Submit-SigningRequest `
-      -InputArtifactPath "publish/windows.exe" `
-      -CIUserToken "AEVquz4p/MFkP7KiMAEJMipcmYZZzXuavTXDTbZW6wPd" `
-      -OrganizationId "ec7e0b29-bda8-4762-8956-49e0648546a2" `
-      -ProjectKey "Jaya" `
-      -SigningPolicyKey "test-signing" `
-      -OutputArtifactPath "publish_signed/windows.exe" `
-      -WaitForCompletion
 deploy:
 - provider: GitHub
   tag: $(BUILD_VERSION)
@@ -53,7 +50,7 @@ deploy:
   auth_token:
     secure: WHpMKpgKBOBAZJtEykGiktPF6gfjlHZMati9bXH6xZZS12v72miRO5a6ORsxkU1n
   repository: waliarubal/Jaya
-  artifact: publish_signed/windows.exe,publish/linux_portable.zip,publish/osx_portable.zip,publish/windows_portable.zip
+  artifact: publish/windows.exe,publish/linux_portable.zip,publish/osx_portable.zip,publish/windows_portable.zip
   draft: true
   prerelease: true
   force_update: true

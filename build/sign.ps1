@@ -6,3 +6,5 @@ Submit-SigningRequest `
   -SigningPolicyKey "test-signing" `
   -OutputArtifactPath "publish_signed/windows.exe" `
   -WaitForCompletion
+
+Move-Item -path "publish_signed/windows.exe" -destination "publish/windows.exe" -Force
