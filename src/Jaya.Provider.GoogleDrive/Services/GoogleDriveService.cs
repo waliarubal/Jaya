@@ -201,7 +201,7 @@ namespace Jaya.Provider.GoogleDrive.Services
             if (credentials == null)
                 return null;
 
-            Userinfoplus userInfo;
+            Userinfo userInfo;
             using (var authService = new Oauth2Service(GetServiceInitializer(credentials)))
             {
                 userInfo = await authService.Userinfo.Get().ExecuteAsync();

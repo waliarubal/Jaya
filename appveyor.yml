@@ -38,14 +38,16 @@ artifacts:
   name: windows_portable
 before_deploy:
 - ps: >-
-    Submit-SigningRequest
-        -CIUserToken AEVquz4p/MFkP7KiMAEJMipcmYZZzXuavTXDTbZW6wPd
-        -OrganizationId ec7e0b29-bda8-4762-8956-49e0648546a2
-        -ProjectKey Jaya
-        -SigningPolicyKey test-signing
-        -InputArtifactPath publish/*
-        -OutputArtifactPath published_signed/*
-        -WaitForCompletion
+    # The CI user must be a submitter for the given signing policy!
+
+    Submit-SigningRequest `
+      -InputArtifactPath "publish/*" `
+      -CIUserToken "AEVquz4p/MFkP7KiMAEJMipcmYZZzXuavTXDTbZW6wPd" `
+      -OrganizationId "ec7e0b29-bda8-4762-8956-49e0648546a2" `
+      -ProjectKey "Jaya" `
+      -SigningPolicyKey "test-signing" `
+      -OutputArtifactPath "published_signed/*" `
+      -WaitForCompletion
 deploy:
 - provider: GitHub
   tag: $(BUILD_VERSION)
