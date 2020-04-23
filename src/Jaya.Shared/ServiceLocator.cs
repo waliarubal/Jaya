@@ -49,6 +49,7 @@ namespace Jaya.Shared
         }
 
         #endregion
+
         CompositionHost RegisterServices()
         {
             var conventions = new ConventionBuilder();
