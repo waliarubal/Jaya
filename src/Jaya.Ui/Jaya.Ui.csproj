@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>Jaya.Ui.Program</StartupObject>
     <LangVersion>7.1</LangVersion>
     <ApplicationIcon>Assets\Logo.ico</ApplicationIcon>
@@ -25,12 +25,12 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.9" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.9" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.9" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.9" />
+    <PackageReference Include="Avalonia" Version="0.9.6" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.6" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.6" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.6" />
     <PackageReference Include="Avalonia.ThemeManager" Version="0.9.4" />
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.9.9" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.9.6" />
     <PackageReference Include="RestSharp" Version="106.10.2-alpha.0.8" />
     <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="106.10.2-alpha.0.8" />
   </ItemGroup>

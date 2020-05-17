@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>7.1</LangVersion>
     <ApplicationIcon>Assets\Logo.ico</ApplicationIcon>
     <StartupObject />
@@ -23,9 +23,9 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.9" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.9" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.9" />
+    <PackageReference Include="Avalonia" Version="0.9.6" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.6" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Composition" Version="1.4.0" />
