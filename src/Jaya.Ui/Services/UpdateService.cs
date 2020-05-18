@@ -3,7 +3,6 @@ using Jaya.Ui.Models;
 using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
 using System;
-using System.Composition;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -11,8 +10,6 @@ using System.Threading.Tasks;
 
 namespace Jaya.Ui.Services
 {
-    [Shared]
-    [Export(nameof(UpdateService), typeof(IService))]
     public sealed class UpdateService: IService
     {
         const string GITHUB_API = "https://api.github.com/";
@@ -21,10 +18,9 @@ namespace Jaya.Ui.Services
         readonly PlatformService _platformService;
         readonly bool _isPortable;
 
-        [ImportingConstructor]
         public UpdateService(
-            [Import(nameof(SharedService))]IService sharedService,
-            [Import(nameof(PlatformService))]IService platformService)
+            IService sharedService,
+            IService platformService)
         {
             _sharedService = sharedService as SharedService;
             _platformService = platformService as PlatformService;

@@ -2,12 +2,9 @@
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using System.Collections.Generic;
-using System.Composition;
 
 namespace Jaya.Ui.Services
 {
-    [Export(nameof(SharedService), typeof(IService))]
-    [Shared]
     public sealed class SharedService : IService
     {
         readonly Subscription<byte> _onSimpleCommand;
@@ -17,11 +14,10 @@ namespace Jaya.Ui.Services
         readonly ConfigurationService _configService;
         readonly ProviderService _providerService;
 
-        [ImportingConstructor]
         public SharedService(
-            [Import(nameof(CommandService))]IService commandService, 
-            [Import(nameof(ConfigurationService))]IService configService, 
-            [Import(nameof(ProviderService))]IService providerService)
+            IService commandService, 
+            IService configService, 
+            IService providerService)
         {
             _commandService = commandService as CommandService;
             _configService = configService as ConfigurationService;

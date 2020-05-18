@@ -1,13 +1,10 @@
 ﻿using Jaya.Shared.Base;
 using Newtonsoft.Json;
 using System;
-using System.Composition;
 using System.IO;
 
 namespace Jaya.Shared.Services
 {
-    [Export(nameof(ConfigurationService), typeof(IService))]
-    [Shared]
     public sealed class ConfigurationService: IService
     {
         readonly string _configurationFilePathFormat;

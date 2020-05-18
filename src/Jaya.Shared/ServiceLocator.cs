@@ -1,10 +1,9 @@
 ﻿using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
-using System.Composition.Convention;
-using System.Composition.Hosting;
 using System.IO;
 using System.Reflection;
+using TinyIoC;
 
 namespace Jaya.Shared
 {
@@ -13,7 +12,7 @@ namespace Jaya.Shared
         static ServiceLocator _instance;
         static readonly object _syncRoot;
 
-        CompositionHost _host;
+        TinyIoCContainer _container;
         readonly Dictionary<string, IProviderService> _providersCache;
         bool _isProviderCacheInitialized;
 
@@ -50,11 +49,11 @@ namespace Jaya.Shared
 
         #endregion
 
-        CompositionHost RegisterServices()
+        TinyIoCContainer RegisterServices()
         {
-            var conventions = new ConventionBuilder();
-            conventions.ForTypesDerivedFrom<IService>().Export<IService>();
-            conventions.ForTypesDerivedFrom<IProviderService>().Export<IProviderService>();
+            //var conventions = new ConventionBuilder();
+            //conventions.ForTypesDerivedFrom<IService>().Export<IService>();
+            //conventions.ForTypesDerivedFrom<IProviderService>().Export<IProviderService>();
 
             var assemblies = new List<Assembly>();
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
@@ -69,16 +68,30 @@ namespace Jaya.Shared
                 assemblies.Add(assembly);
             }
 
-            var configuration = new ContainerConfiguration().WithAssemblies(assemblies, conventions);
-            return configuration.CreateContainer();
+            var serviceType = typeof(IService);
+            var serviceProviderType = typeof(IServiceProvider);
+
+            var container = new TinyIoCContainer();
+            foreach(var assembly in assemblies)
+            {
+                foreach(var type in assembly.GetExportedTypes())
+                {
+                    if (type.IsClass && (type.IsAssignableFrom(serviceType) || type.IsAssignableFrom(serviceProviderType)))
+                        container.Register(type);
+                }
+            }
+            return container;
+
+            //var configuration = new ContainerConfiguration().WithAssemblies(assemblies, conventions);
+            //return configuration.CreateContainer();
         }
 
         void UnregisterServices()
         {
-            if (_host == null)
+            if (_container == null)
                 return;
 
-            _host.Dispose();
+            _container.Dispose();
         }
 
         public void Dispose()
@@ -97,7 +110,7 @@ namespace Jaya.Shared
             if (_isProviderCacheInitialized)
                 return;
 
-            var providers = _host.GetExports<IProviderService>();
+            var providers = _container.ResolveAll<IProviderService>();
             foreach (var provider in providers)
             {
                 var providerType = provider.GetType();
@@ -108,17 +121,17 @@ namespace Jaya.Shared
 
         public T GetService<T>() where T : class, IService
         {
-            if (_host == null)
-                _host = RegisterServices();
+            if (_container == null)
+                _container = RegisterServices();
 
             var type = typeof(T);
-            return (T)_host.GetExport<IService>(type.Name);
+            return (T)_container.Resolve<IService>(type.Name);
         }
 
         public T GetProviderService<T>() where T : class, IProviderService
         {
-            if (_host == null)
-                _host = RegisterServices();
+            if (_container == null)
+                _container = RegisterServices();
 
             InitializeProvidersCache();
 

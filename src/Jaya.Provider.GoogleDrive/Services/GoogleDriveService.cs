@@ -13,15 +13,12 @@ using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
-using System.Composition;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Jaya.Provider.GoogleDrive.Services
 {
-    [Export(typeof(IProviderService))]
-    [Shared]
     public class GoogleDriveService : ProviderServiceBase, IProviderService
     {
         const string CLIENT_ID = "538742722606-equtrav33c2tqaq2io7h19mkf4ch6jbp.apps.googleusercontent.com";

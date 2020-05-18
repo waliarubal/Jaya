@@ -5,14 +5,11 @@ using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
-using System.Composition;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace Jaya.Provider.FileSystem.Services
 {
-    [Export(typeof(IProviderService))]
-    [Shared]
     public class FileSystemService : ProviderServiceBase, IProviderService
     {
 

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Composition;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Jaya.Shared.Services
 {
-    [Export(nameof(PlatformService), typeof(IService))]
-    [Shared]
     public class PlatformService : IService
     {
         public void OpenBrowser(string url)

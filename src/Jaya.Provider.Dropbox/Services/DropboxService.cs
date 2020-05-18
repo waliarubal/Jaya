@@ -6,14 +6,11 @@ using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
-using System.Composition;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace Jaya.Provider.Dropbox.Services
 {
-    [Export(typeof(IProviderService))]
-    [Shared]
     public class DropboxService : ProviderServiceBase, IProviderService
     {
         const string REDIRECT_URI = "http://localhost:4321/DropboxAuth/";
