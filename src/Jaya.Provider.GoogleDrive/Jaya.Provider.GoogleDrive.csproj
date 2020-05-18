@@ -18,7 +18,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.6" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.6" />
-    <PackageReference Include="Google.Apis.Drive.v3" Version="1.45.0.1922" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.45.0.1951" />
     <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.45.0.1869" />
   </ItemGroup>
   <ItemGroup>
