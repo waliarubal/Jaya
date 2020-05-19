@@ -17,7 +17,7 @@ namespace Jaya.Ui.Services
         RelayCommand<WindowOptionsModel> _openWindow;
         SelectionChangedEventArgs _directoryChangedArgs;
 
-        public NavigationService(IService commandService)
+        public NavigationService(CommandService commandService)
         {
             _commandService = commandService as CommandService;
 

@@ -19,8 +19,8 @@ namespace Jaya.Ui.Services
         readonly bool _isPortable;
 
         public UpdateService(
-            IService sharedService,
-            IService platformService)
+            SharedService sharedService,
+            PlatformService platformService)
         {
             _sharedService = sharedService as SharedService;
             _platformService = platformService as PlatformService;

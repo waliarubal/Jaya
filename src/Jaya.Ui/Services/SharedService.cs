@@ -15,9 +15,9 @@ namespace Jaya.Ui.Services
         readonly ProviderService _providerService;
 
         public SharedService(
-            IService commandService, 
-            IService configService, 
-            IService providerService)
+            CommandService commandService, 
+            ConfigurationService configService, 
+            ProviderService providerService)
         {
             _commandService = commandService as CommandService;
             _configService = configService as ConfigurationService;

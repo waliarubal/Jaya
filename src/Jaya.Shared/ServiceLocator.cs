@@ -76,7 +76,7 @@ namespace Jaya.Shared
             {
                 foreach(var type in assembly.GetExportedTypes())
                 {
-                    if (type.IsClass && (type.IsAssignableFrom(serviceType) || type.IsAssignableFrom(serviceProviderType)))
+                    if (type.IsClass && (serviceType.IsAssignableFrom(type) || serviceProviderType.IsAssignableFrom(type)))
                         container.Register(type);
                 }
             }
