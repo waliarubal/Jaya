@@ -1,6 +1,7 @@
 ﻿using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using TinyIoC;
@@ -61,7 +62,7 @@ namespace Jaya.Shared
                 if (assembly.FullName.StartsWith("Jaya.", StringComparison.InvariantCultureIgnoreCase))
                     assemblies.Add(assembly);
             }
-            
+
             foreach (var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll", SearchOption.TopDirectoryOnly))
             {
                 var assembly = Assembly.LoadFrom(fileName);
@@ -72,12 +73,16 @@ namespace Jaya.Shared
             var serviceProviderType = typeof(IServiceProvider);
 
             var container = new TinyIoCContainer();
-            foreach(var assembly in assemblies)
+            foreach (var assembly in assemblies)
             {
-                foreach(var type in assembly.GetExportedTypes())
+                foreach (var type in assembly.GetExportedTypes())
                 {
                     if (type.IsClass && (serviceType.IsAssignableFrom(type) || serviceProviderType.IsAssignableFrom(type)))
+                    {
+                        Debugger.Log(0, string.Empty, $"{type.Name}{Environment.NewLine}");
                         container.Register(type);
+                    }
+
                 }
             }
             return container;
@@ -101,7 +106,7 @@ namespace Jaya.Shared
                 _providersCache.Clear();
                 _isProviderCacheInitialized = false;
             }
-                
+
             UnregisterServices();
         }
 

@@ -19,7 +19,7 @@
 //#define TINYMESSENGER
 
 // Uncomment this line if you want to internalize this library
-//#define TINYIOC_INTERNAL
+#define TINYIOC_INTERNAL
 
 // Uncomment this line if you want to target PCL.
 //#define PORTABLE
