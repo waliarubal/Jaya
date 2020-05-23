@@ -55,10 +55,6 @@ namespace Jaya.Shared
         {
             var container = new ServiceCollection();
 
-            //var conventions = new ConventionBuilder();
-            //conventions.ForTypesDerivedFrom<IService>().Export<IService>();
-            //conventions.ForTypesDerivedFrom<IProviderService>().Export<IProviderService>();
-
             var assemblies = new List<Assembly>();
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
@@ -90,9 +86,6 @@ namespace Jaya.Shared
             }
 
             return container.BuildServiceProvider();
-
-            //var configuration = new ContainerConfiguration().WithAssemblies(assemblies, conventions);
-            //return configuration.CreateContainer();
         }
 
         void UnregisterServices()
