@@ -6,6 +6,7 @@
 <h3 align="center">Jaya - Cross Plat</h3>
 <p align="center">
   <a href="https://ci.appveyor.com/project/waliarubal/jaya-dev" target="_blank"><img alt="Build status" src="https://ci.appveyor.com/api/projects/status/467yhb1fia401wai?svg=true"></a>
+  <a href="https://gitter.im/JayaCrossPlat/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank"><img alt="Gitter Chat" src="https://badges.gitter.im/JayaCrossPlat/community.svg"></a>
   <a href="https://github.com/waliarubal/Jaya/stargazers" target="_blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/waliarubal/Jaya"></a>
   <a href="https://github.com/waliarubal/Jaya/network" target="_blank"><img alt="GitHub forks" src="https://img.shields.io/github/forks/waliarubal/Jaya"></a>
   <a href="https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE" target="_blank"><img alt="MIT license" src="https://img.shields.io/github/license/waliarubal/Jaya"></a>
