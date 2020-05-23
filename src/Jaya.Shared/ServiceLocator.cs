@@ -1,10 +1,11 @@
 ﻿using Jaya.Shared.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using TinyIoC;
 
 namespace Jaya.Shared
 {
@@ -13,7 +14,7 @@ namespace Jaya.Shared
         static ServiceLocator _instance;
         static readonly object _syncRoot;
 
-        TinyIoCContainer _container;
+        ServiceProvider _container;
         readonly Dictionary<string, IProviderService> _providersCache;
         bool _isProviderCacheInitialized;
 
@@ -50,8 +51,10 @@ namespace Jaya.Shared
 
         #endregion
 
-        TinyIoCContainer RegisterServices()
+        ServiceProvider RegisterServices()
         {
+            var container = new ServiceCollection();
+
             //var conventions = new ConventionBuilder();
             //conventions.ForTypesDerivedFrom<IService>().Export<IService>();
             //conventions.ForTypesDerivedFrom<IProviderService>().Export<IProviderService>();
@@ -72,20 +75,21 @@ namespace Jaya.Shared
             var serviceType = typeof(IService);
             var serviceProviderType = typeof(IServiceProvider);
 
-            var container = new TinyIoCContainer();
             foreach (var assembly in assemblies)
             {
                 foreach (var type in assembly.GetExportedTypes())
                 {
-                    if (type.IsClass && (serviceType.IsAssignableFrom(type) || serviceProviderType.IsAssignableFrom(type)))
-                    {
-                        Debugger.Log(0, string.Empty, $"{type.Name}{Environment.NewLine}");
-                        container.Register(type);
-                    }
+                    if (!type.IsClass)
+                        continue;
 
+                    if (serviceType.IsAssignableFrom(type))
+                        container.AddSingleton(serviceType, type);
+                    else if (serviceProviderType.IsAssignableFrom(type))
+                        container.AddSingleton(serviceProviderType, type);
                 }
             }
-            return container;
+
+            return container.BuildServiceProvider();
 
             //var configuration = new ContainerConfiguration().WithAssemblies(assemblies, conventions);
             //return configuration.CreateContainer();
@@ -115,7 +119,7 @@ namespace Jaya.Shared
             if (_isProviderCacheInitialized)
                 return;
 
-            var providers = _container.ResolveAll<IProviderService>();
+            var providers = _container.GetServices<IProviderService>();
             foreach (var provider in providers)
             {
                 var providerType = provider.GetType();
@@ -130,7 +134,7 @@ namespace Jaya.Shared
                 _container = RegisterServices();
 
             var type = typeof(T);
-            return (T)_container.Resolve<IService>(type.Name);
+            return (T)_container.GetService<IService>();
         }
 
         public T GetProviderService<T>() where T : class, IProviderService
