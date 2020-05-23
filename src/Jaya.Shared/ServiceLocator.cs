@@ -1,9 +1,7 @@
 ﻿using Jaya.Shared.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -16,7 +14,8 @@ namespace Jaya.Shared
 
         ServiceProvider _container;
         readonly Dictionary<string, IProviderService> _providersCache;
-        bool _isProviderCacheInitialized;
+        readonly Dictionary<string, IService> _serviceCache;
+        bool _isCacheInitialized;
 
         static ServiceLocator()
         {
@@ -25,6 +24,7 @@ namespace Jaya.Shared
 
         private ServiceLocator()
         {
+            _serviceCache = new Dictionary<string, IService>();
             _providersCache = new Dictionary<string, IProviderService>();
         }
 
@@ -105,19 +105,27 @@ namespace Jaya.Shared
 
         public void Dispose()
         {
-            if (_isProviderCacheInitialized)
+            if (_isCacheInitialized)
             {
+                _serviceCache.Clear();
                 _providersCache.Clear();
-                _isProviderCacheInitialized = false;
+                _isCacheInitialized = false;
             }
 
             UnregisterServices();
         }
 
-        void InitializeProvidersCache()
+        void InitializeCache()
         {
-            if (_isProviderCacheInitialized)
+            if (_isCacheInitialized)
                 return;
+
+            var services = _container.GetServices<IService>();
+            foreach (var service in services)
+            {
+                var serviceType = service.GetType();
+                _serviceCache.Add(serviceType.Name, service);
+            }
 
             var providers = _container.GetServices<IProviderService>();
             foreach (var provider in providers)
@@ -125,7 +133,8 @@ namespace Jaya.Shared
                 var providerType = provider.GetType();
                 _providersCache.Add(providerType.Name, provider);
             }
-            _isProviderCacheInitialized = true;
+
+            _isCacheInitialized = true;
         }
 
         public T GetService<T>() where T : class, IService
@@ -133,8 +142,10 @@ namespace Jaya.Shared
             if (_container == null)
                 _container = RegisterServices();
 
+            InitializeCache();
+
             var type = typeof(T);
-            return (T)_container.GetService<IService>();
+            return (T)_serviceCache[type.Name];
         }
 
         public T GetProviderService<T>() where T : class, IProviderService
@@ -142,7 +153,7 @@ namespace Jaya.Shared
             if (_container == null)
                 _container = RegisterServices();
 
-            InitializeProvidersCache();
+            InitializeCache();
 
             var type = typeof(T);
             return (T)_providersCache[type.Name];
