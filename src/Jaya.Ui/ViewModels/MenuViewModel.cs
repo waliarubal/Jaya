@@ -2,6 +2,7 @@
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System.Windows.Input;
+using Jaya.Shared;
 
 namespace Jaya.Ui.ViewModels
 {
@@ -13,6 +14,7 @@ namespace Jaya.Ui.ViewModels
         public MenuViewModel()
         {
             _shared = GetService<SharedService>();
+            SimpleCommand = new RelayCommand<byte>(_shared.SimpleCommandAction);
         }
 
         public ToolbarConfigModel ToolbarConfig => _shared.ToolbarConfiguration;

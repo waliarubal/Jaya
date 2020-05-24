@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Jaya.Shared.Services
 {
-    public class PlatformService : IService
+    public class PlatformService : IPlatformService
     {
         public void OpenBrowser(string url)
         {

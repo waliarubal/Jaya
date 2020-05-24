@@ -1,6 +1,6 @@
 ﻿namespace Jaya.Shared.Services
 {
-    public sealed class CommandService: IService
+    public sealed class CommandService: ICommandService
     {
         public CommandService()
         {

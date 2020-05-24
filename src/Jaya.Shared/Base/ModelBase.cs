@@ -37,7 +37,7 @@ namespace Jaya.Shared.Base
 
             if (value == null)
                 return false;
-            else if (value != null && _variables.ContainsKey(propertyName) && (object)value == _variables[propertyName])
+            if (_variables.ContainsKey(propertyName) && (object)value == _variables[propertyName])
                 return false;
 
             if (_variables.ContainsKey(propertyName))

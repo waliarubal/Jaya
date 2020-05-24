@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Jaya.Shared.Services
 {
-    public sealed class ConfigurationService: IService
+    public sealed class ConfigurationService: IConfigurationService
     {
         readonly string _configurationFilePathFormat;
 
@@ -44,9 +44,7 @@ namespace Jaya.Shared.Services
 
         public T GetOrDefault<T>(string key = null) where T : ConfigModelBase
         {
-            var config = Get<T>(key);
-            if (config == default(T))
-                config = ConfigModelBase.Empty<T>();
+            var config = Get<T>(key) ?? ConfigModelBase.Empty<T>();
 
             return config;
         }
@@ -60,7 +58,7 @@ namespace Jaya.Shared.Services
 
             // create configuration directory if missing
             var fileInfo = new FileInfo(string.Format(_configurationFilePathFormat, key));
-            if (!fileInfo.Directory.Exists)
+            if (fileInfo.Directory != null && !fileInfo.Directory.Exists)
                 Directory.CreateDirectory(fileInfo.DirectoryName);
 
             using (var writer = File.CreateText(fileInfo.FullName))

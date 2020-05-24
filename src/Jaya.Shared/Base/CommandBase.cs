@@ -42,8 +42,7 @@ namespace Jaya.Shared.Base
         private void RaiseCanExecuteChanged()
         {
             var handler = CanExecuteChanged;
-            if (handler != null)
-                handler.Invoke(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         public bool CanExecute(object parameter)

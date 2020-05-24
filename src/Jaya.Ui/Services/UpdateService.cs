@@ -15,12 +15,12 @@ namespace Jaya.Ui.Services
         const string GITHUB_API = "https://api.github.com/";
 
         readonly SharedService _sharedService;
-        readonly PlatformService _platformService;
+        readonly IPlatformService _platformService;
         readonly bool _isPortable;
 
         public UpdateService(
             SharedService sharedService,
-            PlatformService platformService)
+            IPlatformService platformService)
         {
             _sharedService = sharedService as SharedService;
             _platformService = platformService as PlatformService;

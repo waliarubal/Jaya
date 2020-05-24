@@ -10,7 +10,6 @@ namespace Jaya.Ui.ViewModels.Windows
     {
         readonly Subscription<SelectionChangedEventArgs> _onDirectoryChanged;
         readonly SharedService _shared;
-
         public MainViewModel()
         {
             WindowTitle = Constants.APP_NAME;
@@ -20,6 +19,7 @@ namespace Jaya.Ui.ViewModels.Windows
             _shared = GetService<SharedService>();
             _shared.ToolbarConfiguration.PropertyChanged += OnPropertyChanged;
             _shared.PaneConfiguration.PropertyChanged += OnPropertyChanged;
+            SimpleCommand = new RelayCommand<byte>(_shared.SimpleCommandAction);
         }
 
         ~MainViewModel()

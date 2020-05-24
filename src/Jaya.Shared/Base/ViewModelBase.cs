@@ -35,7 +35,7 @@ namespace Jaya.Shared.Base
                     return default;
 
                 if (_eventAggregator == null)
-                    _eventAggregator = GetService<CommandService>().EventAggregator;
+                    _eventAggregator = GetService<ICommandService>().EventAggregator;
 
                 return _eventAggregator;
             }
@@ -50,6 +50,7 @@ namespace Jaya.Shared.Base
 
                 return _simpleCommand;
             }
+            set => _simpleCommand = value;
         }
 
         public ICommand ParameterizedCommand

@@ -67,11 +67,7 @@ namespace Jaya.Shared.Base
             protected set;
         }
 
-        public string Name
-        {
-            get;
-            protected set;
-        }
+        public string Name { get; set; }
 
         public string Description
         {
@@ -152,8 +148,7 @@ namespace Jaya.Shared.Base
             if (account != null)
             {
                 var handler = AccountAdded;
-                if (handler != null)
-                    handler.Invoke(account);
+                handler?.Invoke(account);
             }
 
             return account;
@@ -165,8 +160,7 @@ namespace Jaya.Shared.Base
             if (isRemoved)
             {
                 var handler = AccountRemoved;
-                if (handler != null)
-                    handler.Invoke(account);
+                handler?.Invoke(account);
             }
 
             return isRemoved;

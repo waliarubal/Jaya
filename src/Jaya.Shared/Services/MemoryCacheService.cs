@@ -2,7 +2,7 @@
 
 namespace Jaya.Shared.Services
 {
-    public sealed class MemoryCacheService: IService
+    public sealed class MemoryCacheService: IMemoryCacheService
     {
         MemoryCache _cache;
 
