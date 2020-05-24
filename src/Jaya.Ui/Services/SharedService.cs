@@ -10,21 +10,20 @@ namespace Jaya.Ui.Services
         readonly Subscription<byte> _onSimpleCommand;
         readonly Subscription<KeyValuePair<byte, object>> _onParameterizedCommand;
 
-        readonly CommandService _commandService;
-        readonly ConfigurationService _configService;
-        readonly ProviderService _providerService;
+        readonly ICommandService _commandService;
+        readonly IConfigurationService _configService;
+        readonly IServiceProviderContainer _providerService;
 
         public SharedService(
-            CommandService commandService, 
-            ConfigurationService configService, 
-            ProviderService providerService)
+            ICommandService commandService, 
+            IConfigurationService configService, 
+            IServiceProviderContainer providerService)
         {
-            _commandService = commandService as CommandService;
-            _configService = configService as ConfigurationService;
-            _providerService = providerService as ProviderService;
-
+            _commandService = commandService;
+            _configService = configService;
+            _providerService = providerService;
             _onSimpleCommand = _commandService.EventAggregator.Subscribe<byte>(SimpleCommandAction);
-            _onParameterizedCommand = _commandService.EventAggregator.Subscribe<KeyValuePair<byte, object>>(ParameterizedCommandAction);
+           _onParameterizedCommand = _commandService.EventAggregator.Subscribe<KeyValuePair<byte, object>>(ParameterizedCommandAction);
         }
 
         ~SharedService()
@@ -61,7 +60,7 @@ namespace Jaya.Ui.Services
             _configService.Set(UpdateConfiguration);
         }
 
-        void SimpleCommandAction(byte type)
+        public void SimpleCommandAction(byte type)
         {
             switch ((CommandType)type)
             {

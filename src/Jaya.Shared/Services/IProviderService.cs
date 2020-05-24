@@ -1,7 +1,7 @@
-﻿using Jaya.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Jaya.Shared.Models;
 
 namespace Jaya.Shared.Services
 {
@@ -23,4 +23,5 @@ namespace Jaya.Shared.Services
 
         Task FormatAsync(AccountModelBase account, DirectoryModel directory = null);
     }
+
 }

@@ -92,9 +92,10 @@ namespace Jaya.Ui.ViewModels
                 {
                     var serviceInstance = service as ProviderServiceBase;
 
-                    var serviceNode = new TreeNodeModel(service as ProviderServiceBase, null, ItemType.Service);
-                    serviceNode.Label = service.Name;
-                    serviceNode.ImagePath = service.ImagePath;
+                    var serviceNode = new TreeNodeModel(service as ProviderServiceBase, null, ItemType.Service)
+                    {
+                        Label = service.Name, ImagePath = service.ImagePath
+                    };
                     serviceNode.NodeExpanded += OnNodeExpanded;
                     serviceNode.AddDummyChild();
                     AddChildNode(node, serviceNode);

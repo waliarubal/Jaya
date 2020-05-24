@@ -11,7 +11,7 @@ namespace Jaya.Ui
         {
             return AppBuilder.Configure<App>()
                            .UsePlatformDetect()
-                           .LogToDebug(LogEventLevel.Warning);
+                           .LogToDebug(LogEventLevel.Information);
         }
 
         // The entry point. Things aren't ready yet, so at this point
