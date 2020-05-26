@@ -64,18 +64,19 @@ namespace Jaya.Shared
 
             var assemblies = new List<Assembly>();
 
+
+            foreach (var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll", SearchOption.TopDirectoryOnly))
+            {
+                var assembly = Assembly.LoadFrom(fileName);
+                assemblies.Add(assembly);
+            }
+
             var currentDomainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (var assembly in currentDomainAssemblies)
             {
                 if (assembly.FullName.StartsWith("Jaya.", StringComparison.InvariantCultureIgnoreCase) &&
                     !assembly.FullName.StartsWith("Jaya.Shared", StringComparison.InvariantCultureIgnoreCase))
                     assemblies.Add(assembly);
-            }
-
-            foreach (var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll", SearchOption.TopDirectoryOnly))
-            {
-                var assembly = Assembly.LoadFrom(fileName);
-                assemblies.Add(assembly);
             }
 
             foreach (var assembly in assemblies)
@@ -95,6 +96,7 @@ namespace Jaya.Shared
             {
                 _serviceCache.Clear();
                 _providersCache.Clear();
+
                 IsCacheInitialized = false;
             }
 
@@ -103,18 +105,18 @@ namespace Jaya.Shared
 
         void AddToContainer(ServiceCollection collection, Assembly assembly)
         {
-            var serviceType = typeof(IService);
-            var serviceProviderType = typeof(IServiceProvider);
+            var serviceInterfaceType = typeof(IService);
+            var serviceProviderInterfaceType = typeof(IProviderService);
 
             foreach (var type in assembly.GetExportedTypes())
             {
-                if (!type.IsClass)
+                if (!type.IsClass || type.IsAbstract)
                     continue;
 
-                if (serviceType.IsAssignableFrom(type))
-                    collection.AddSingleton(serviceType, type);
-                else if (serviceProviderType.IsAssignableFrom(type))
-                    collection.AddSingleton(serviceProviderType, type);
+                if (serviceInterfaceType.IsAssignableFrom(type))
+                    collection.AddSingleton(serviceInterfaceType, type);
+                else if (serviceProviderInterfaceType.IsAssignableFrom(type))
+                    collection.AddSingleton(serviceProviderInterfaceType, type);
             }
         }
 
@@ -134,10 +136,21 @@ namespace Jaya.Shared
             foreach (var provider in providers)
             {
                 var providerType = provider.GetType();
-                _providersCache.Add(providerType.Name, provider);
+                _providersCache.TryAdd(providerType.Name, provider);
             }
 
             return true;
+        }
+
+        public IEnumerable<IProviderService> GetProviders()
+        {
+            if (Container == null)
+            {
+                Container = RegisterServices();
+                IsCacheInitialized = InitializeCache();
+            }
+
+            return _providersCache.Values;
         }
 
         public T GetService<T>() where T : class, IService
@@ -166,7 +179,6 @@ namespace Jaya.Shared
                 return (T)service;
 
             return Container.GetService<T>();
-
         }
 
     }

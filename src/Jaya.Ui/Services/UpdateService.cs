@@ -22,7 +22,7 @@ namespace Jaya.Ui.Services
         public UpdateService()
         {
             _sharedService = ServiceLocator.Instance.GetService<SharedService>();
-            _platformService = ServiceLocator.Instance.GetService<PlatformService>();
+            _platformService = ServiceLocator.Instance.GetService<IPlatformService>();
 
             _isPortable = true;
 

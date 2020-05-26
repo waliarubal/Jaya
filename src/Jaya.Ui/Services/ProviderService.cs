@@ -1,13 +1,14 @@
-﻿using Jaya.Shared.Services;
+﻿using Jaya.Shared;
+using Jaya.Shared.Services;
 using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
     public sealed class ProviderService : IService
     {
-        public ProviderService(IEnumerable<IProviderService> providers)
+        public ProviderService()
         {
-            Providers = providers;
+            Providers = ServiceLocator.Instance.GetProviders();
         }
 
         public IEnumerable<IProviderService> Providers { get; }

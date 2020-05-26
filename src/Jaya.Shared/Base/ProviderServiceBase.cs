@@ -9,9 +9,9 @@ namespace Jaya.Shared.Base
 {
     public abstract class ProviderServiceBase : IProviderService
     {
-        MemoryCacheService _cache;
-        ConfigurationService _config;
-        PlatformService _platform;
+        IMemoryCacheService _cache;
+        IConfigurationService _config;
+        IPlatformService _platform;
 
         public delegate void OnAccountAdded(AccountModelBase account);
         public event OnAccountAdded AccountAdded;
@@ -26,12 +26,12 @@ namespace Jaya.Shared.Base
 
         #region properties
 
-        MemoryCacheService Cache
+        IMemoryCacheService Cache
         {
             get
             {
                 if (_cache == null)
-                    _cache = ServiceLocator.Instance.GetService<MemoryCacheService>();
+                    _cache = ServiceLocator.Instance.GetService<IMemoryCacheService>();
 
                 return _cache;
             }
@@ -39,23 +39,23 @@ namespace Jaya.Shared.Base
 
         protected string ConfigurationDirectory => ConfigurationService.ConfigurationDirectory;
 
-        protected ConfigurationService ConfigurationService
+        protected IConfigurationService ConfigurationService
         {
             get
             {
                 if (_config == null)
-                    _config = ServiceLocator.Instance.GetService<ConfigurationService>();
+                    _config = ServiceLocator.Instance.GetService<IConfigurationService>();
 
                 return _config;
             }
         }
 
-        PlatformService Platform
+        protected IPlatformService Platform
         {
             get
             {
                 if (_platform == null)
-                    _platform = ServiceLocator.Instance.GetService<PlatformService>();
+                    _platform = ServiceLocator.Instance.GetService<IPlatformService>();
 
                 return _platform;
             }
