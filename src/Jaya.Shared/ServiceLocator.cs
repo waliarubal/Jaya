@@ -49,6 +49,8 @@ namespace Jaya.Shared
             }
         }
 
+        internal ServiceProvider Container => _container;
+
         #endregion
 
         ServiceProvider RegisterServices()
