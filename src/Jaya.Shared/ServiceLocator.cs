@@ -2,10 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Reflection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Jaya.Shared
 {
@@ -57,33 +55,30 @@ namespace Jaya.Shared
         {
             var container = new ServiceCollection();
 
-            var assemblies = new List<Assembly>(); 
-           
-            for (var index = 0; index < AppDomain.CurrentDomain.GetAssemblies().Length; index++)
+            var assemblies = new List<Assembly>();
+
+            var currentDomainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            for (var index = 0; index < currentDomainAssemblies.Length; index++)
             {
-                var assembly = AppDomain.CurrentDomain.GetAssemblies()[index];
+                var assembly = currentDomainAssemblies[index];
                 if (assembly.FullName != null &&
-                    assembly.FullName.StartsWith("Jaya.", StringComparison.InvariantCultureIgnoreCase))
-                    if (!assembly.FullName.StartsWith("Jaya.Shared"))
-                    {
-                        assemblies.Add(assembly);
-                    }
+                    assembly.FullName.StartsWith("Jaya.", StringComparison.InvariantCultureIgnoreCase) && 
+                    !assembly.FullName.StartsWith("Jaya.Shared"))
+                    assemblies.Add(assembly);
             }
 
-            foreach (var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll",
-                SearchOption.TopDirectoryOnly))
+            foreach (var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll", SearchOption.TopDirectoryOnly))
             {
                 var assembly = Assembly.LoadFrom(fileName);
                 assemblies.Add(assembly);
             }
-           
+
             // forces before the shared
             container.AddTransient<ICommandService, CommandService>();
             container.AddTransient<IMemoryCacheService, MemoryCacheService>();
             container.AddTransient<IConfigurationService, ConfigurationService>();
             container.AddTransient<IPlatformService, PlatformService>();
-           
-            
+
             foreach (var assembly in assemblies)
             {
                 AddToContainer(container, assembly);
@@ -91,7 +86,7 @@ namespace Jaya.Shared
 
             return container.BuildServiceProvider();
         }
-        
+
         void UnregisterServices()
         {
             _container?.Dispose();
@@ -135,11 +130,12 @@ namespace Jaya.Shared
         {
             if (_container == null)
                 _container = RegisterServices();
+
             InitializeCache();
+
             if (_serviceCache.TryGetValue(typeof(T).Name, out var service))
-            {
-                return (T) service;
-            }
+                return (T)service;
+            
             return _container.GetService<T>();
         }
 
@@ -147,11 +143,12 @@ namespace Jaya.Shared
         {
             if (_container == null)
                 _container = RegisterServices();
+
             InitializeCache();
+
             if (_providersCache.TryGetValue(typeof(T).Name, out var service))
-            {
-                return (T) service;
-            }
+                return (T)service;
+            
             return _container.GetService<T>();
 
         }
@@ -160,26 +157,23 @@ namespace Jaya.Shared
             var serviceType = typeof(IService);
             var serviceProviderType = typeof(IServiceProvider);
             var serviceProviderContainer = typeof(IServiceProviderContainer);
-            
+
             foreach (var type in assembly.GetExportedTypes())
             {
                 if (!type.IsClass)
-                    continue; 
+                    continue;
                 //collection.AddTransient(type);
-               
-                  if (serviceType.IsAssignableFrom(type))
-                      collection.AddSingleton(serviceType, type);
-                  else if (serviceProviderType.IsAssignableFrom(type))
-                      collection.AddSingleton(serviceProviderType, type);
-                  if (serviceProviderContainer.IsAssignableFrom(type))
-                  {
-                      collection.AddTransient(serviceProviderContainer, type);
-                  }
-                  else
-                  {
-                      collection.AddTransient(type);
-                  }       
-            }   
+
+                if (serviceType.IsAssignableFrom(type))
+                    collection.AddSingleton(serviceType, type);
+                else if (serviceProviderType.IsAssignableFrom(type))
+                    collection.AddSingleton(serviceProviderType, type);
+
+                if (serviceProviderContainer.IsAssignableFrom(type))
+                    collection.AddTransient(serviceProviderContainer, type);
+                else
+                    collection.AddTransient(type);
+            }
         }
 
     }
