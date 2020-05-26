@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/waliarubal/Jaya/" target="_blank">
-    <img src="https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/Logo.png" alt="Jaya - Cross Plat logo" >
+    <img src="https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/Logo.png" alt="Jaya - Cross Plat logo" >
   </a>
 </p>
 <h3 align="center">Jaya - Cross Plat</h3>
@@ -58,23 +58,23 @@ This project would have not existed without the availbility of below mentioned f
 
 Dark Theme
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/00.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/00.png)
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/06.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/06.png)
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/02.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/02.png)
 
-![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/05.png)
+![Dark Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/05.png)
 
 Light Theme
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/01.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/01.png)
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/07.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/07.png)
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/03.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/03.png)
 
-![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/doc/04.png)
+![Light Theme](https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/04.png)
 
 ## Roadmap
 
@@ -104,11 +104,10 @@ Technical users with programming experience can try things out, just open the pr
 
 ## License
 
-Distributed under the MIT License. See [here](https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE) for more information.
+Distributed under The 3-Clause BSD License. See [here](https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE) for more information.
 
 ## Contact
 
-Rubal Walia - walia.rubal@gmail.com  
 Project Website - [https://github.com/waliarubal/Jaya/](https://github.com/waliarubal/Jaya/)
 
 <blockquote>
