@@ -33,20 +33,25 @@
                             <Setter Property="BorderThickness" Value="0.5" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
                         </Style>
+                        <Style Selector="c|StyledWindow[WindowState=Maximized] /template/ Border.Grip">
+                            <Setter Property="IsVisible" Value="False" />
+                        </Style>
                         <Style Selector="StackPanel &gt; Button &gt; Path">
                             <Setter Property="Width" Value="12" />
                             <Setter Property="Height" Value="12" />
                             <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
                             <Setter Property="Stretch" Value="UniformToFill" />
                         </Style>
-                        <Style Selector="StackPanel &gt; Button">
-                            <Setter Property="Margin" Value="1 0" />
+                        <Style Selector="StackPanel > Button">
                             <Setter Property="Padding" Value="2" />
-                            <Setter Property="Width" Value="30" />
-                            <Setter Property="Height" Value="24" />
+                            <Setter Property="Width" Value="45" />
+                            <Setter Property="Height" Value="30" />
                             <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="BorderThickness" Value="0" />
                             <Setter Property="BorderBrush" Value="Transparent" />
+                        </Style>
+                      <Style Selector="c|StyledWindow[WindowState=Maximized] /template/ StackPanel > Button">
+                            <Setter Property="Height" Value="22" />
                         </Style>
                         <Style Selector="StackPanel &gt; Button:pointerover /template/ ContentPresenter">
                             <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
@@ -84,9 +89,9 @@
                         </Grid.ColumnDefinitions>
                         <Image
                             Name="PART_Icon"
-                            Width="22"
-                            Height="22"
-                            Margin="2,2,2,0" />
+                            Width="16"
+                            Height="16"
+                            Margin="2,0" />
                         <ContentControl
                             Grid.Column="1"
                             HorizontalContentAlignment="Left"
@@ -103,7 +108,6 @@
                         <Border
                             Name="PART_TitleBar"
                             Grid.Column="3"
-                            Margin="4,0,4,0"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0">
                             <TextBlock
@@ -115,7 +119,6 @@
                     <StackPanel
                         Grid.Row="1"
                         Grid.Column="2"
-                        Margin="0,2,2,2"
                         Orientation="Horizontal">
                         <StackPanel.Styles>
                             <Style Selector="Button#PART_Close:pointerover /template/ ContentPresenter">
@@ -128,25 +131,29 @@
                             <Style Selector="StyledWindow[WindowState=Maximized] /template/ Grid &gt; StackPanel &gt; Button#PART_Maximize">
                                 <Setter Property="ToolTip.Tip" Value="Restore" />
                             </Style>
-                            <Style Selector="Button#PART_Maximize &gt; Path">
-                                <Setter Property="Data" Value="M28,2h-6c-1.104,0-2,0.896-2,2s0.896,2,2,2h1.2l-4.6,4.601C18.28,10.921,18,11.344,18,12c0,1.094,0.859,2,2,2  c0.641,0,1.049-0.248,1.4-0.6L26,8.8V10c0,1.104,0.896,2,2,2s2-0.896,2-2V4C30,2.896,29.104,2,28,2z M12,18  c-0.641,0-1.049,0.248-1.4,0.6L6,23.2V22c0-1.104-0.896-2-2-2s-2,0.896-2,2v6c0,1.104,0.896,2,2,2h6c1.104,0,2-0.896,2-2  s-0.896-2-2-2H8.8l4.6-4.601C13.72,21.079,14,20.656,14,20C14,18.906,13.141,18,12,18z" />
+                            <Style Selector="StyledWindow:not(StyledWindow[WindowState=Maximized]) /template/ Button#PART_Maximize :is(Control).RestoreGlyph">
+                                <Setter Property="IsVisible" Value="False" />
                             </Style>
-                            <Style Selector="StyledWindow[WindowState=Maximized] /template/ Grid &gt; StackPanel &gt; Button#PART_Maximize &gt; Path">
-                                <Setter Property="Data" Value="M70,0H29.9C24.4,0,20,4.4,20,9.9V50c0,5.5,4.5,10,10,10h40c5.5,0,10-4.5,10-10V10C80,4.5,75.5,0,70,0z M70,50H30V10h40V50z M10,40H0v30c0,5.5,4.5,10,10,10h30V70H10V40z" />
-                            </Style>
+                          <Style Selector="StyledWindow[WindowState=Maximized] /template/ Button#PART_Maximize :is(Control).MaximizeGlyph">
+                            <Setter Property="IsVisible" Value="False" />
+                          </Style>
                         </StackPanel.Styles>
                         <Button Name="PART_Minimize" ToolTip.Tip="Minimize">
-                            <Path Data="M1600 736v192q0 40-28 68t-68 28h-1216q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h1216q40 0 68 28t28 68z" Stretch="Uniform">
-                                <Path.RenderTransform>
-                                    <RotateTransform Angle="180" />
-                                </Path.RenderTransform>
-                            </Path>
+                          <Rectangle Width="10" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
                         </Button>
                         <Button Name="PART_Maximize">
-                            <Path />
+                          <Panel>
+                            <Border Classes="MaximizeGlyph" Width="10" Height="10" BorderThickness="1" BorderBrush="{Binding $parent[Button].Foreground}"/>
+                            <Panel Classes="RestoreGlyph" Width="10" Height="10">
+                              <Border Width="8" Height="8" BorderThickness="0,1,1,0" BorderBrush="{Binding $parent[Button].Foreground}" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                              <Rectangle Width="1" Height="1" Margin="2,1,0,0" Fill="{Binding $parent[Button].Foreground}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                              <Rectangle Width="1" Height="1" Margin="0,0,1,2" Fill="{Binding $parent[Button].Foreground}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                              <Border Width="8" Height="8" BorderThickness="1" BorderBrush="{Binding $parent[Button].Foreground}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                            </Panel>
+                          </Panel>
                         </Button>
                         <Button Name="PART_Close" ToolTip.Tip="Close">
-                            <Path Data="M22.245,4.015c0.313,0.313,0.313,0.826,0,1.139l-6.276,6.27c-0.313,0.312-0.313,0.826,0,1.14l6.273,6.272  c0.313,0.313,0.313,0.826,0,1.14l-2.285,2.277c-0.314,0.312-0.828,0.312-1.142,0l-6.271-6.271c-0.313-0.313-0.828-0.313-1.141,0  l-6.276,6.267c-0.313,0.313-0.828,0.313-1.141,0l-2.282-2.28c-0.313-0.313-0.313-0.826,0-1.14l6.278-6.269  c0.313-0.312,0.313-0.826,0-1.14L1.709,5.147c-0.314-0.313-0.314-0.827,0-1.14l2.284-2.278C4.308,1.417,4.821,1.417,5.135,1.73  L11.405,8c0.314,0.314,0.828,0.314,1.141,0.001l6.276-6.267c0.312-0.312,0.826-0.312,1.141,0L22.245,4.015z" />
+                          <Path Data="M 0 0 L 10 10 M 10 0 L 0 10" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="10" Height="10"/>
                         </Button>
                     </StackPanel>
                     <ContentPresenter
