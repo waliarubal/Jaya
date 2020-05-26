@@ -1,4 +1,5 @@
-﻿using Jaya.Shared.Services;
+﻿using Jaya.Shared;
+using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
@@ -18,12 +19,10 @@ namespace Jaya.Ui.Services
         readonly IPlatformService _platformService;
         readonly bool _isPortable;
 
-        public UpdateService(
-            SharedService sharedService,
-            IPlatformService platformService)
+        public UpdateService()
         {
-            _sharedService = sharedService as SharedService;
-            _platformService = platformService as PlatformService;
+            _sharedService = ServiceLocator.Instance.GetService<SharedService>();
+            _platformService = ServiceLocator.Instance.GetService<PlatformService>();
 
             _isPortable = true;
 

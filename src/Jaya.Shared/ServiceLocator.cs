@@ -11,11 +11,8 @@ namespace Jaya.Shared
     {
         static ServiceLocator _instance;
         static readonly object _syncRoot;
-
-        ServiceProvider _container;
         readonly Dictionary<string, IProviderService> _providersCache;
         readonly Dictionary<string, IService> _serviceCache;
-        bool _isCacheInitialized;
 
         static ServiceLocator()
         {
@@ -49,7 +46,9 @@ namespace Jaya.Shared
             }
         }
 
-        internal ServiceProvider Container => _container;
+        internal ServiceProvider Container { get; private set; }
+
+        internal bool IsCacheInitialized { get; private set; }
 
         #endregion
 
@@ -57,15 +56,19 @@ namespace Jaya.Shared
         {
             var container = new ServiceCollection();
 
+            // add shared services in the beginning
+            container.AddSingleton<ICommandService, CommandService>();
+            container.AddSingleton<IMemoryCacheService, MemoryCacheService>();
+            container.AddSingleton<IConfigurationService, ConfigurationService>();
+            container.AddSingleton<IPlatformService, PlatformService>();
+
             var assemblies = new List<Assembly>();
 
             var currentDomainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-            for (var index = 0; index < currentDomainAssemblies.Length; index++)
+            foreach (var assembly in currentDomainAssemblies)
             {
-                var assembly = currentDomainAssemblies[index];
-                if (assembly.FullName != null &&
-                    assembly.FullName.StartsWith("Jaya.", StringComparison.InvariantCultureIgnoreCase) && 
-                    !assembly.FullName.StartsWith("Jaya.Shared"))
+                if (assembly.FullName.StartsWith("Jaya.", StringComparison.InvariantCultureIgnoreCase) &&
+                    !assembly.FullName.StartsWith("Jaya.Shared", StringComparison.InvariantCultureIgnoreCase))
                     assemblies.Add(assembly);
             }
 
@@ -75,107 +78,95 @@ namespace Jaya.Shared
                 assemblies.Add(assembly);
             }
 
-            // forces before the shared
-            container.AddTransient<ICommandService, CommandService>();
-            container.AddTransient<IMemoryCacheService, MemoryCacheService>();
-            container.AddTransient<IConfigurationService, ConfigurationService>();
-            container.AddTransient<IPlatformService, PlatformService>();
-
             foreach (var assembly in assemblies)
-            {
                 AddToContainer(container, assembly);
-            }
 
             return container.BuildServiceProvider();
         }
 
         void UnregisterServices()
         {
-            _container?.Dispose();
+            Container?.Dispose();
         }
 
         public void Dispose()
         {
-            if (_isCacheInitialized)
+            if (IsCacheInitialized)
             {
                 _serviceCache.Clear();
                 _providersCache.Clear();
-                _isCacheInitialized = false;
+                IsCacheInitialized = false;
             }
 
             UnregisterServices();
         }
 
-        void InitializeCache()
+        void AddToContainer(ServiceCollection collection, Assembly assembly)
         {
-            if (_isCacheInitialized)
-                return;
+            var serviceType = typeof(IService);
+            var serviceProviderType = typeof(IServiceProvider);
 
-            var services = _container.GetServices<IService>();
+            foreach (var type in assembly.GetExportedTypes())
+            {
+                if (!type.IsClass)
+                    continue;
+
+                if (serviceType.IsAssignableFrom(type))
+                    collection.AddSingleton(serviceType, type);
+                else if (serviceProviderType.IsAssignableFrom(type))
+                    collection.AddSingleton(serviceProviderType, type);
+            }
+        }
+
+        bool InitializeCache()
+        {
+            if (IsCacheInitialized)
+                return true;
+
+            var services = Container.GetServices<IService>();
             foreach (var service in services)
             {
                 var serviceType = service.GetType();
                 _serviceCache.Add(serviceType.Name, service);
             }
 
-            var providers = _container.GetServices<IProviderService>();
+            var providers = Container.GetServices<IProviderService>();
             foreach (var provider in providers)
             {
                 var providerType = provider.GetType();
                 _providersCache.Add(providerType.Name, provider);
             }
 
-            _isCacheInitialized = true;
+            return true;
         }
 
         public T GetService<T>() where T : class, IService
         {
-            if (_container == null)
-                _container = RegisterServices();
-
-            InitializeCache();
+            if (Container == null)
+            {
+                Container = RegisterServices();
+                IsCacheInitialized = InitializeCache();
+            }
 
             if (_serviceCache.TryGetValue(typeof(T).Name, out var service))
                 return (T)service;
-            
-            return _container.GetService<T>();
+
+            return Container.GetService<T>();
         }
 
         public T GetProviderService<T>() where T : class, IProviderService
         {
-            if (_container == null)
-                _container = RegisterServices();
-
-            InitializeCache();
+            if (Container == null)
+            {
+                Container = RegisterServices();
+                IsCacheInitialized = InitializeCache();
+            }
 
             if (_providersCache.TryGetValue(typeof(T).Name, out var service))
                 return (T)service;
-            
-            return _container.GetService<T>();
 
-        }
-        private void AddToContainer(ServiceCollection collection, Assembly assembly)
-        {
-            var serviceType = typeof(IService);
-            var serviceProviderType = typeof(IServiceProvider);
-            var serviceProviderContainer = typeof(IServiceProviderContainer);
+            return Container.GetService<T>();
 
-            foreach (var type in assembly.GetExportedTypes())
-            {
-                if (!type.IsClass)
-                    continue;
-                //collection.AddTransient(type);
-
-                if (serviceType.IsAssignableFrom(type))
-                    collection.AddSingleton(serviceType, type);
-                else if (serviceProviderType.IsAssignableFrom(type))
-                    collection.AddSingleton(serviceProviderType, type);
-
-                if (serviceProviderContainer.IsAssignableFrom(type))
-                    collection.AddTransient(serviceProviderContainer, type);
-                else
-                    collection.AddTransient(type);
-            }
         }
 
     }

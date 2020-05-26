@@ -12,18 +12,16 @@ namespace Jaya.Ui.Services
 
         readonly ICommandService _commandService;
         readonly IConfigurationService _configService;
-        readonly IServiceProviderContainer _providerService;
 
         public SharedService(
-            ICommandService commandService, 
-            IConfigurationService configService, 
-            IServiceProviderContainer providerService)
+            ICommandService commandService,
+            IConfigurationService configService)
         {
             _commandService = commandService;
             _configService = configService;
-            _providerService = providerService;
+
             _onSimpleCommand = _commandService.EventAggregator.Subscribe<byte>(SimpleCommandAction);
-           _onParameterizedCommand = _commandService.EventAggregator.Subscribe<KeyValuePair<byte, object>>(ParameterizedCommandAction);
+            _onParameterizedCommand = _commandService.EventAggregator.Subscribe<KeyValuePair<byte, object>>(ParameterizedCommandAction);
         }
 
         ~SharedService()

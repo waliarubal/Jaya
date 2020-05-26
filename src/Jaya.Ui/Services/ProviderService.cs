@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Jaya.Ui.Services
 {
-    public sealed class ProviderService : IServiceProviderContainer
+    public sealed class ProviderService : IService
     {
         public ProviderService(IEnumerable<IProviderService> providers)
         {
