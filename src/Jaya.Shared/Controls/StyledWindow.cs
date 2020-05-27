@@ -31,16 +31,22 @@ namespace Jaya.Shared.Controls
         {
             base.OnTemplateApplied(e);
 
-            SetupWindowEdge(e, "PART_RightGrip", StandardCursorType.RightSide, WindowEdge.East);
-            SetupWindowEdge(e, "PART_LeftGrip", StandardCursorType.LeftSide, WindowEdge.West);
-            SetupWindowEdge(e, "PART_TopGrip", StandardCursorType.TopSide, WindowEdge.North);
-            SetupWindowEdge(e, "PART_BottomGrip", StandardCursorType.BottomSide, WindowEdge.South);
-            SetupWindowEdge(e, "PART_TopLeftGrip", StandardCursorType.TopLeftCorner, WindowEdge.NorthWest);
-            SetupWindowEdge(e, "PART_TopRightGrip", StandardCursorType.TopRightCorner, WindowEdge.NorthEast);
-            SetupWindowEdge(e, "PART_BottomLeftGrip", StandardCursorType.BottomLeftCorner, WindowEdge.SouthWest);
-            SetupWindowEdge(e, "PART_BottomRightGrip", StandardCursorType.BottomRightCorner, WindowEdge.SouthEast);
+            SetupSide("TopLeft", StandardCursorType.TopLeftCorner, WindowEdge.NorthWest, ref e);
+            SetupSide("TopCenter", StandardCursorType.TopSide, WindowEdge.North, ref e);
+            SetupSide("TopRight", StandardCursorType.TopRightCorner, WindowEdge.NorthEast, ref e);
+            SetupSide("MiddleRight", StandardCursorType.RightSide, WindowEdge.East, ref e);
+            SetupSide("BottomRight", StandardCursorType.BottomRightCorner, WindowEdge.SouthEast, ref e);
+            SetupSide("BottomCenter", StandardCursorType.BottomSide, WindowEdge.South, ref e);
+            SetupSide("BottomLeft", StandardCursorType.BottomLeftCorner, WindowEdge.SouthWest, ref e);
+            SetupSide("MiddleLeft", StandardCursorType.LeftSide, WindowEdge.West, ref e);
 
-            GetControl<Border>(e, "PART_TitleBar").PointerPressed += (sender, args) => PlatformImpl?.BeginMoveDrag(args);
+            Border titlebar = GetControl<Border>(e, "PART_TitleBar");
+            titlebar.PointerPressed += (sender, args) => PlatformImpl?.BeginMoveDrag(args);
+            titlebar.DoubleTapped += (sneder, args) =>
+            {
+                if (CanResize && (!IsModal))
+                    WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            };
 
             _closeButton = GetControl<Button>(e, "PART_Close");
             _closeButton.Click += (object sender, RoutedEventArgs arg) => Close();
@@ -49,11 +55,11 @@ namespace Jaya.Shared.Controls
 
             _minimizeButton = GetControl<Button>(e, "PART_Minimize");
             _minimizeButton.IsVisible = isNotModal;
-            _minimizeButton.Click += delegate { WindowState = WindowState.Minimized; };
+            _minimizeButton.Click += (sneder, args) => WindowState = WindowState.Minimized;
 
             _maximizeButton = GetControl<Button>(e, "PART_Maximize");
             _maximizeButton.IsVisible = isNotModal;
-            _maximizeButton.Click += delegate { WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; };
+            _maximizeButton.Click += (sneder, args) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
 
             _icon = GetControl<Image>(e, "PART_Icon");
             if (Icon == null)
@@ -140,11 +146,11 @@ namespace Jaya.Shared.Controls
             }
         }
 
-        void SetupWindowEdge(TemplateAppliedEventArgs e, string name, StandardCursorType cursor, WindowEdge edge)
+        void SetupSide(string name, StandardCursorType cursor, WindowEdge edge, ref TemplateAppliedEventArgs e)
         {
-            var control = GetControl<Border>(e, name);
+            var control = e.NameScope.Get<Control>("PART_" + name + "Edge");
             control.Cursor = new Cursor(cursor);
-            control.PointerPressed += (sender, args) => PlatformImpl?.BeginResizeDrag(edge, args); ;
+            control.PointerPressed += (sender, ep) => BeginResizeDrag(edge, ep);
         }
 
         T GetControl<T>(TemplateAppliedEventArgs e, string name) where T : Control

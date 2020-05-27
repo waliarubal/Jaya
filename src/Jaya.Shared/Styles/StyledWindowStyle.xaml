@@ -3,217 +3,198 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:Jaya.Shared.Controls;assembly=Jaya.Shared"
     xmlns:co="clr-namespace:Jaya.Shared.Converters;assembly=Jaya.Shared">
-    <Design.PreviewWith>
-        <StyledWindow Width="640" Height="480" />
-    </Design.PreviewWith>
+  <Design.PreviewWith>
+    <StyledWindow Width="640" Height="480" />
+  </Design.PreviewWith>
 
-    <Styles.Resources>
-        <co:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-    </Styles.Resources>
+  <Styles.Resources>
+    <co:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+  </Styles.Resources>
 
-    <Style Selector="c|StyledWindow">
-        <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
-        <Setter Property="HasSystemDecorations" Value="False" />
-        <Setter Property="SizeToContent" Value="Manual" />
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Grid Background="{TemplateBinding Background}">
-                    <Grid.Styles>
-                        <Style Selector="Border.Separator">
-                            <Setter Property="IsHitTestVisible" Value="False" />
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="BorderThickness" Value=".5" />
-                            <Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-                            <Setter Property="Margin" Value="2 4" />
-                        </Style>
-                        <Style Selector="Border.Grip">
-                            <Setter Property="BorderThickness" Value="0.5" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
-                        </Style>
-                        <Style Selector="c|StyledWindow[WindowState=Maximized] /template/ Border.Grip">
-                            <Setter Property="IsVisible" Value="False" />
-                        </Style>
-                        <Style Selector="StackPanel &gt; Button &gt; Path">
-                            <Setter Property="Width" Value="12" />
-                            <Setter Property="Height" Value="12" />
-                            <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
-                            <Setter Property="Stretch" Value="UniformToFill" />
-                        </Style>
-                        <Style Selector="StackPanel > Button">
-                            <Setter Property="Padding" Value="2" />
-                            <Setter Property="Width" Value="45" />
-                            <Setter Property="Height" Value="30" />
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="BorderThickness" Value="0" />
-                            <Setter Property="BorderBrush" Value="Transparent" />
-                        </Style>
-                      <Style Selector="c|StyledWindow[WindowState=Maximized] /template/ StackPanel > Button">
-                            <Setter Property="Height" Value="22" />
-                        </Style>
-                        <Style Selector="StackPanel &gt; Button:pointerover /template/ ContentPresenter">
-                            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
-                        </Style>
-                        <Style Selector="StackPanel &gt; Button:pressed /template/ ContentPresenter">
-                            <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
-                        </Style>
-                        <Style Selector="StackPanel &gt; Button:disabled">
-                            <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-                        </Style>
-                    </Grid.Styles>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+  <Style Selector="c|StyledWindow">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
+    <Setter Property="HasSystemDecorations" Value="False" />
+    <Setter Property="SizeToContent" Value="Manual" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Classes="WindowEdgeBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+          <Border.Styles>
+            <Style Selector="c|StyledWindow[WindowState=Maximized] /template/ Border.WindowEdgeBorder">
+              <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+            <Style Selector="c|StyledWindow[WindowState=Maximized] /template/ Grid#ResizeGrid">
+              <Setter Property="IsVisible" Value="False"/>
+            </Style>
+            <Style Selector="c|StyledWindow /template/ Grid#ResizeGrid > Border">
+              <Setter Property="Background" Value="#01000000"/>
+              <Setter Property="MinWidth" Value="4"/>
+              <Setter Property="MinHeight" Value="4"/>
+            </Style>
+          </Border.Styles>
+          <Panel>
+            <Grid>
+              <Grid.Styles>
+                <Style Selector="Border.Separator">
+                  <Setter Property="IsHitTestVisible" Value="False" />
+                  <Setter Property="Background" Value="Transparent" />
+                  <Setter Property="BorderThickness" Value=".5" />
+                  <Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
+                  <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+                  <Setter Property="Margin" Value="2 4" />
+                </Style>
+                <Style Selector="Border.Grip">
+                  <Setter Property="BorderThickness" Value="0.5" />
+                  <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+                </Style>
+                <Style Selector="c|StyledWindow[WindowState=Maximized] /template/ Border.Grip">
+                  <Setter Property="IsVisible" Value="False" />
+                </Style>
+                <Style Selector="StackPanel &gt; Button &gt; Path">
+                  <Setter Property="Width" Value="12" />
+                  <Setter Property="Height" Value="12" />
+                  <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+                  <Setter Property="Stretch" Value="UniformToFill" />
+                </Style>
+                <Style Selector="StackPanel > Button">
+                  <Setter Property="Padding" Value="2" />
+                  <Setter Property="Width" Value="45" />
+                  <Setter Property="Height" Value="30" />
+                  <Setter Property="Background" Value="Transparent" />
+                  <Setter Property="BorderThickness" Value="0" />
+                  <Setter Property="BorderBrush" Value="Transparent" />
+                </Style>
+                <Style Selector="StackPanel &gt; Button:pointerover /template/ ContentPresenter">
+                  <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+                  <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+                </Style>
+                <Style Selector="StackPanel &gt; Button:pressed /template/ ContentPresenter">
+                  <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+                </Style>
+                <Style Selector="StackPanel &gt; Button:disabled">
+                  <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+                </Style>
+              </Grid.Styles>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
 
-                    <Grid
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Margin="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Image
-                            Name="PART_Icon"
-                            Width="16"
-                            Height="16"
-                            Margin="2,0" />
-                        <ContentControl
-                            Grid.Column="1"
-                            HorizontalContentAlignment="Left"
-                            VerticalContentAlignment="Center"
-                            Background="Transparent"
-                            Content="{TemplateBinding HeaderContent}"
-                            IsVisible="{TemplateBinding IsModal,
+              <Grid
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  Margin="2">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Name="PART_Icon"
+                    Width="16"
+                    Height="16"
+                    Margin="2,0" />
+                <ContentControl
+                    Grid.Column="1"
+                    HorizontalContentAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    Background="Transparent"
+                    Content="{TemplateBinding HeaderContent}"
+                    IsVisible="{TemplateBinding IsModal,
                                                         Converter={StaticResource InverseBooleanConverter}}" />
-                        <Border
-                            Grid.Column="2"
-                            Classes="Separator"
-                            IsVisible="{TemplateBinding IsModal,
+                <Border
+                    Grid.Column="2"
+                    Classes="Separator"
+                    IsVisible="{TemplateBinding IsModal,
                                                         Converter={StaticResource InverseBooleanConverter}}" />
-                        <Border
-                            Name="PART_TitleBar"
-                            Grid.Column="3"
-                            Background="{TemplateBinding Background}"
-                            BorderThickness="0">
-                            <TextBlock
-                                VerticalAlignment="Center"
-                                Text="{TemplateBinding Title}"
-                                TextAlignment="Left" />
-                        </Border>
-                    </Grid>
-                    <StackPanel
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Orientation="Horizontal">
-                        <StackPanel.Styles>
-                            <Style Selector="Button#PART_Close:pointerover /template/ ContentPresenter">
-                                <Setter Property="Background" Value="Red" />
-                                <Setter Property="BorderBrush" Value="Red" />
-                            </Style>
-                            <Style Selector="Button#PART_Maximize">
-                                <Setter Property="ToolTip.Tip" Value="Maximize" />
-                            </Style>
-                            <Style Selector="StyledWindow[WindowState=Maximized] /template/ Grid &gt; StackPanel &gt; Button#PART_Maximize">
-                                <Setter Property="ToolTip.Tip" Value="Restore" />
-                            </Style>
-                            <Style Selector="StyledWindow:not(StyledWindow[WindowState=Maximized]) /template/ Button#PART_Maximize :is(Control).RestoreGlyph">
-                                <Setter Property="IsVisible" Value="False" />
-                            </Style>
-                          <Style Selector="StyledWindow[WindowState=Maximized] /template/ Button#PART_Maximize :is(Control).MaximizeGlyph">
-                            <Setter Property="IsVisible" Value="False" />
-                          </Style>
-                        </StackPanel.Styles>
-                        <Button Name="PART_Minimize" ToolTip.Tip="Minimize">
-                          <Rectangle Width="10" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
-                        </Button>
-                        <Button Name="PART_Maximize">
-                          <Panel>
-                            <Border Classes="MaximizeGlyph" Width="10" Height="10" BorderThickness="1" BorderBrush="{Binding $parent[Button].Foreground}"/>
-                            <Panel Classes="RestoreGlyph" Width="10" Height="10">
-                              <Border Width="8" Height="8" BorderThickness="0,1,1,0" BorderBrush="{Binding $parent[Button].Foreground}" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-                              <Rectangle Width="1" Height="1" Margin="2,1,0,0" Fill="{Binding $parent[Button].Foreground}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                              <Rectangle Width="1" Height="1" Margin="0,0,1,2" Fill="{Binding $parent[Button].Foreground}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                              <Border Width="8" Height="8" BorderThickness="1" BorderBrush="{Binding $parent[Button].Foreground}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                            </Panel>
-                          </Panel>
-                        </Button>
-                        <Button Name="PART_Close" ToolTip.Tip="Close">
-                          <Path Data="M 0 0 L 10 10 M 10 0 L 0 10" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="10" Height="10"/>
-                        </Button>
-                    </StackPanel>
-                    <ContentPresenter
-                        Name="PART_ContentPresenter"
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Grid.ColumnSpan="2"
-                        Margin="{TemplateBinding Padding}"
-                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                        Background="{TemplateBinding Background}"
-                        Content="{TemplateBinding Content}"
-                        ContentTemplate="{TemplateBinding ContentTemplate}" />
-                    <Border
-                        Name="PART_TopLeftGrip"
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Classes="Grip" />
-                    <Border
-                        Name="PART_TopGrip"
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Grid.ColumnSpan="2"
-                        Classes="Grip" />
-                    <Border
-                        Name="PART_TopRightGrip"
-                        Grid.Row="0"
-                        Grid.Column="3"
-                        Classes="Grip" />
-                    <Border
-                        Name="PART_LeftGrip"
-                        Grid.Row="1"
-                        Grid.RowSpan="2"
-                        Grid.Column="0"
-                        Classes="Grip" />
-                    <Border
-                        Name="PART_RightGrip"
-                        Grid.Row="1"
-                        Grid.RowSpan="2"
-                        Grid.Column="3"
-                        Classes="Grip" />
-                    <Border
-                        Name="PART_BottomLeftGrip"
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Classes="Grip" />
-                    <Border
-                        Name="PART_BottomGrip"
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Grid.ColumnSpan="2"
-                        Classes="Grip" />
-                    <Border
-                        Name="PART_BottomRightGrip"
-                        Grid.Row="3"
-                        Grid.Column="3"
-                        Classes="Grip" />
-                </Grid>
-            </ControlTemplate>
-        </Setter>
-    </Style>
-
+                <Border
+                    Name="PART_TitleBar"
+                    Grid.Column="3"
+                    Background="{TemplateBinding Background}"
+                    BorderThickness="0">
+                  <TextBlock
+                      VerticalAlignment="Center"
+                      Text="{TemplateBinding Title}"
+                      TextAlignment="Left" />
+                </Border>
+              </Grid>
+              <StackPanel
+                  Grid.Row="1"
+                  Grid.Column="2"
+                  Orientation="Horizontal">
+                <StackPanel.Styles>
+                  <Style Selector="Button#PART_Close:pointerover /template/ ContentPresenter">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="BorderBrush" Value="Red" />
+                  </Style>
+                  <Style Selector="Button#PART_Maximize">
+                    <Setter Property="ToolTip.Tip" Value="Maximize" />
+                  </Style>
+                  <Style Selector="StyledWindow[WindowState=Maximized] /template/ Grid &gt; StackPanel &gt; Button#PART_Maximize">
+                    <Setter Property="ToolTip.Tip" Value="Restore" />
+                  </Style>
+                  <Style Selector="StyledWindow:not(StyledWindow[WindowState=Maximized]) /template/ Button#PART_Maximize :is(Control).RestoreGlyph">
+                    <Setter Property="IsVisible" Value="False" />
+                  </Style>
+                  <Style Selector="StyledWindow[WindowState=Maximized] /template/ Button#PART_Maximize :is(Control).MaximizeGlyph">
+                    <Setter Property="IsVisible" Value="False" />
+                  </Style>
+                </StackPanel.Styles>
+                <Button Name="PART_Minimize" ToolTip.Tip="Minimize">
+                  <Rectangle Width="10" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+                </Button>
+                <Button Name="PART_Maximize">
+                  <Panel>
+                    <Border Classes="MaximizeGlyph" Width="10" Height="10" BorderThickness="1" BorderBrush="{Binding $parent[Button].Foreground}"/>
+                    <Panel Classes="RestoreGlyph" Width="10" Height="10">
+                      <Border Width="8" Height="8" BorderThickness="0,1,1,0" BorderBrush="{Binding $parent[Button].Foreground}" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                      <Rectangle Width="1" Height="1" Margin="2,1,0,0" Fill="{Binding $parent[Button].Foreground}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                      <Rectangle Width="1" Height="1" Margin="0,0,1,2" Fill="{Binding $parent[Button].Foreground}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                      <Border Width="8" Height="8" BorderThickness="1" BorderBrush="{Binding $parent[Button].Foreground}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                    </Panel>
+                  </Panel>
+                </Button>
+                <Button Name="PART_Close" ToolTip.Tip="Close">
+                  <Path Data="M 0 0 L 10 10 M 10 0 L 0 10" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="10" Height="10"/>
+                </Button>
+              </StackPanel>
+              <ContentPresenter
+                  Name="PART_ContentPresenter"
+                  Grid.Row="2"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="2"
+                  Margin="{TemplateBinding Padding}"
+                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                  Background="{TemplateBinding Background}"
+                  Content="{TemplateBinding Content}"
+                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+            </Grid>
+            <Grid Name="ResizeGrid" ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,*,Auto">
+              <Border x:Name="PART_TopLeftEdge" Grid.Row="0" Grid.Column="0"/>
+              <Border x:Name="PART_TopCenterEdge" Grid.Row="0" Grid.Column="1"/>
+              <Border x:Name="PART_TopRightEdge" Grid.Row="0" Grid.Column="2"/>
+              <Border x:Name="PART_MiddleRightEdge" Grid.Row="1" Grid.Column="2"/>
+              <Border x:Name="PART_BottomRightEdge" Grid.Row="2" Grid.Column="2"/>
+              <Border x:Name="PART_BottomCenterEdge" Grid.Row="2" Grid.Column="1"/>
+              <Border x:Name="PART_BottomLeftEdge" Grid.Row="2" Grid.Column="0"/>
+              <Border x:Name="PART_MiddleLeftEdge" Grid.Row="1" Grid.Column="0"/>
+            </Grid>
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
 </Styles>
