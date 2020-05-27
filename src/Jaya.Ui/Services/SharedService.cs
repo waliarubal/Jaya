@@ -1,4 +1,8 @@
-﻿using Jaya.Shared;
+﻿//
+// Copyright (c) Rubal Walia. All rights reserved.
+// Licensed under the 3-Clause BSD license. See LICENSE file in the project root for full license information.
+//
+using Jaya.Shared;
 using Jaya.Shared.Services;
 using Jaya.Ui.Models;
 using System.Collections.Generic;

@@ -1,4 +1,8 @@
-﻿using Google.Apis.Auth.OAuth2;
+﻿//
+// Copyright (c) Rubal Walia. All rights reserved.
+// Licensed under the 3-Clause BSD license. See LICENSE file in the project root for full license information.
+//
+using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data;
 using Google.Apis.Oauth2.v2;
