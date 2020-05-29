@@ -1,4 +1,8 @@
-﻿using FluentFTP;
+﻿//
+// Copyright (c) Rubal Walia. All rights reserved.
+// Licensed under the 3-Clause BSD license. See LICENSE file in the project root for full license information.
+//
+using FluentFTP;
 using Jaya.Provider.Ftp.Models;
 using Jaya.Provider.Ftp.Views;
 using Jaya.Shared.Base;

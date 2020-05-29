@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.GoogleDrive",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.Ftp", "Jaya.Provider.Ftp\Jaya.Provider.Ftp.csproj", "{870AE579-A91F-4F81-AF15-05E45E3B286A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaya.Provider.S3", "Jaya.Provider.S3\Jaya.Provider.S3.csproj", "{37A99B8A-3048-410D-8A19-3C7F5BBA8820}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{870AE579-A91F-4F81-AF15-05E45E3B286A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{870AE579-A91F-4F81-AF15-05E45E3B286A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{870AE579-A91F-4F81-AF15-05E45E3B286A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37A99B8A-3048-410D-8A19-3C7F5BBA8820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37A99B8A-3048-410D-8A19-3C7F5BBA8820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37A99B8A-3048-410D-8A19-3C7F5BBA8820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37A99B8A-3048-410D-8A19-3C7F5BBA8820}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
