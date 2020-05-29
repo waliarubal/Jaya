@@ -15,17 +15,26 @@
     <UserControl.Resources>
         <j:BitmapValueConverter x:Key="BitmapValueConverter" />
     </UserControl.Resources>
-    <Grid Margin="6,4">
+    <Grid Margin="6,4,12,4">
         <Grid.Styles>
-            <Style Selector="Button, ToggleButton">
-                <Setter Property="Margin" Value="1 0" />
-                <Setter Property="Padding" Value="2" />
-                <Setter Property="MinWidth" Value="21" />
-                <Setter Property="MinHeight" Value="21" />
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="BorderBrush" Value="Transparent" />
-            </Style>
+          <Style Selector="Button.NavigationButton">
+            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+          </Style>
+          <Style Selector="Button.PrimaryNavigationButton">
+              <Setter Property="MinWidth" Value="30" />
+          </Style>
+          <Style Selector="Button.SecondaryNavigationButton">
+            <Setter Property="MinWidth" Value="20" />
+          </Style>
+          <Style Selector="Button.TertiaryNavigationButton">
+            <Setter Property="MinWidth" Value="30" />
+          </Style>
+          
             <Style Selector="Button:pointerover /template/ ContentPresenter, ToggleButton:pointerover /template/ ContentPresenter">
                 <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
@@ -46,7 +55,11 @@
                 <Setter Property="Height" Value="16" />
             </Style>
 
-            <Style Selector="Button &gt; Path, Grid &gt; Path">
+            <Style Selector="Button > Path">
+                <Setter Property="Stroke" Value="{Binding $parent[Button].Foreground}"/>
+                <Setter Property="StrokeThickness" Value="2"/>
+            </Style>
+            <Style Selector="Grid &gt; Path">
                 <Setter Property="Width" Value="12" />
                 <Setter Property="Height" Value="12" />
                 <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
@@ -54,7 +67,7 @@
             </Style>
 
             <Style Selector="Border.AddressBox">
-                <Setter Property="Height" Value="22" />
+                <Setter Property="Height" Value="30" />
                 <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
                 <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
@@ -65,6 +78,15 @@
             <Style Selector="Border.AddressBox:focus">
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
             </Style>
+          <Style Selector="Border.AddressBox Button">
+            <Setter Property="MinWidth" Value="30" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+          </Style>
 
             <Style Selector="Border.AddressBox &gt; Grid &gt; TextBox, Border.AddressBox &gt; Grid &gt; ComboBox">
                 <Setter Property="Height" Value="18" />
@@ -84,25 +106,23 @@
         </Grid.ColumnDefinitions>
 
         <Button
-            Margin="0,0,8,0"
+            Classes="NavigationButton PrimaryNavigationButton"
             Command="{Binding NavigateBackCommand}"
             ToolTip.Tip="Back">
-            <Path Data="M464.344,207.418l0.768,0.168H135.888l103.496-103.724c5.068-5.064,7.848-11.924,7.848-19.124 c0-7.2-2.78-14.012-7.848-19.088L223.28,49.538c-5.064-5.064-11.812-7.864-19.008-7.864c-7.2,0-13.952,2.78-19.016,7.844    L7.844,226.914C2.76,231.998-0.02,238.77,0,245.974c-0.02,7.244,2.76,14.02,7.844,19.096l177.412,177.412    c5.064,5.06,11.812,7.844,19.016,7.844c7.196,0,13.944-2.788,19.008-7.844l16.104-16.112c5.068-5.056,7.848-11.808,7.848-19.008    c0-7.196-2.78-13.592-7.848-18.652L134.72,284.406h329.992c14.828,0,27.288-12.78,27.288-27.6v-22.788    C492,219.198,479.172,207.418,464.344,207.418z" />
+            <Path Data="M 5 0 L 0 5 L 5 10 M 0 5 L 12 5" />
         </Button>
         <Button
+            Classes="NavigationButton PrimaryNavigationButton"
             Grid.Column="1"
             Command="{Binding NavigateForwardCommand}"
             ToolTip.Tip="Forward">
-            <Path Data="M484.14,226.886L306.46,49.202c-5.072-5.072-11.832-7.856-19.04-7.856c-7.216,0-13.972,2.788-19.044,7.856l-16.132,16.136 c-5.068,5.064-7.86,11.828-7.86,19.04c0,7.208,2.792,14.2,7.86,19.264L355.9,207.526H26.58C11.732,207.526,0,219.15,0,234.002    v22.812c0,14.852,11.732,27.648,26.58,27.648h330.496L252.248,388.926c-5.068,5.072-7.86,11.652-7.86,18.864    c0,7.204,2.792,13.88,7.86,18.948l16.132,16.084c5.072,5.072,11.828,7.836,19.044,7.836c7.208,0,13.968-2.8,19.04-7.872    l177.68-177.68c5.084-5.088,7.88-11.88,7.86-19.1C492.02,238.762,489.228,231.966,484.14,226.886z" />
+          <Path Data="M 7 0 L 12 5 L 7 10 M 0 5 L 12 5" />
         </Button>
-        <Button Grid.Column="2" ToolTip.Tip="Recent Locations">
-            <Path
-                Width="8"
-                Height="8"
-                Data="M484.132,124.986l-16.116-16.228c-5.072-5.068-11.82-7.86-19.032-7.86c-7.208,0-13.964,2.792-19.036,7.86l-183.84,183.848 L62.056,108.554c-5.064-5.068-11.82-7.856-19.028-7.856s-13.968,2.788-19.036,7.856l-16.12,16.128    c-10.496,10.488-10.496,27.572,0,38.06l219.136,219.924c5.064,5.064,11.812,8.632,19.084,8.632h0.084    c7.212,0,13.96-3.572,19.024-8.632l218.932-219.328c5.072-5.064,7.856-12.016,7.864-19.224    C491.996,136.902,489.204,130.046,484.132,124.986z" />
+        <Button Classes="NavigationButton SecondaryNavigationButton" Grid.Column="2" ToolTip.Tip="Recent Locations">
+            <Path Data="M 0 0 L 3.5 3.5 L 7 0" />
         </Button>
-        <Button Grid.Column="3" ToolTip.Tip="Up">
-            <Path Data="M442.627,185.388L265.083,7.844C260.019,2.78,253.263,0,245.915,0c-7.204,0-13.956,2.78-19.02,7.844L49.347,185.388    c-10.488,10.492-10.488,27.568,0,38.052l16.12,16.128c5.064,5.06,11.82,7.844,19.028,7.844c7.204,0,14.192-2.784,19.252-7.844    l103.808-103.584v329.084c0,14.832,11.616,26.932,26.448,26.932h22.8c14.832,0,27.624-12.1,27.624-26.932V134.816l104.396,104.752    c5.06,5.06,11.636,7.844,18.844,7.844s13.864-2.784,18.932-7.844l16.072-16.128C453.163,212.952,453.123,195.88,442.627,185.388z" />
+        <Button Classes="NavigationButton TertiaryNavigationButton" Grid.Column="3" ToolTip.Tip="Up">
+          <Path Data="M 0 5 L 5 0 L 10 5 M 5 0 L 5 12" />
         </Button>
         <Border Grid.Column="4" Classes="AddressBox">
             <Grid>
@@ -129,7 +149,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Margin="4,0,0,0">
@@ -153,7 +172,7 @@
                         Classes="Icon"
                         Drawing="{DynamicResource Icon.Folder}"
                         IsVisible="{Binding IsDirectory}" />
-                    <ItemsControl Padding="0" Items="{Binding PathParts, Mode=OneWay}">
+                    <ItemsControl Margin="0,0,16,0" Padding="0" Items="{Binding PathParts, Mode=OneWay}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal" />
@@ -162,57 +181,71 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding}" />
                                     <Path
                                         Margin="6,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Data="M 0 2 L 4 6 L 0 10 Z"
                                         Fill="{DynamicResource ThemeForegroundBrush}" />
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Text="{Binding}" />
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
                 <ComboBox
-                    Grid.Column="1"
-                    Margin="4,0,0,0"
-                    IsVisible="False" />
-                <Button Grid.Column="2" ToolTip.Tip="Refresh">
-                    <Path Data="M427.408,19.697c-7.803-3.23-14.463-1.902-19.986,3.999l-37.116,36.834C349.94,41.305,326.672,26.412,300.5,15.848   C274.328,5.285,247.251,0.003,219.271,0.003c-29.692,0-58.052,5.808-85.08,17.417c-27.03,11.61-50.347,27.215-69.951,46.82   c-19.605,19.607-35.214,42.921-46.824,69.949C5.807,161.219,0,189.575,0,219.271c0,29.687,5.807,58.05,17.417,85.079   c11.613,27.031,27.218,50.347,46.824,69.952c19.604,19.599,42.921,35.207,69.951,46.818c27.028,11.611,55.388,17.419,85.08,17.419   c32.736,0,63.865-6.899,93.363-20.7c29.5-13.795,54.625-33.26,75.377-58.386c1.52-1.903,2.234-4.045,2.136-6.424   c-0.089-2.378-0.999-4.329-2.711-5.852l-39.108-39.399c-2.101-1.711-4.473-2.566-7.139-2.566c-3.045,0.38-5.232,1.526-6.566,3.429   c-13.895,18.086-30.93,32.072-51.107,41.977c-20.173,9.894-41.586,14.839-64.237,14.839c-19.792,0-38.684-3.854-56.671-11.564   c-17.989-7.706-33.551-18.127-46.682-31.261c-13.13-13.135-23.551-28.691-31.261-46.682c-7.708-17.987-11.563-36.874-11.563-56.671   c0-19.795,3.858-38.691,11.563-56.674c7.707-17.985,18.127-33.547,31.261-46.678c13.135-13.134,28.693-23.555,46.682-31.265   c17.983-7.707,36.879-11.563,56.671-11.563c38.259,0,71.475,13.039,99.646,39.116l-39.409,39.394   c-5.903,5.711-7.231,12.279-4.001,19.701c3.241,7.614,8.856,11.42,16.854,11.42h127.906c4.949,0,9.23-1.807,12.848-5.424   c3.613-3.616,5.42-7.898,5.42-12.847V36.55C438.542,28.558,434.84,22.943,427.408,19.697z" Fill="{DynamicResource ThemeForegroundLowBrush}" />
+                    Grid.Column="0"
+                    Margin="-1,-1,0,-1"/>
+                <Button Classes="RefreshButton" Grid.Column="2" ToolTip.Tip="Refresh">
+                  <Panel Width="10" Height="11">
+                    <Ellipse VerticalAlignment="Bottom" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="10" Height="10">
+                      <Ellipse.OpacityMask>
+                        <RadialGradientBrush Center="62.5%,12.5%" GradientOrigin="62.5%,12.5%" Radius="2">
+                          <GradientStop Offset="0.1" Color="Transparent"/>
+                          <GradientStop Offset="0.1" Color="White"/>
+                        </RadialGradientBrush>
+                      </Ellipse.OpacityMask>
+                    </Ellipse>
+                    <Border Margin="1,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="5" Height="5" BorderThickness="0,1.5,1.5,0" BorderBrush="{Binding $parent[Button].Foreground}"/>
+                  </Panel>
+                  <!--Path Data="M 8 3 S 8,9 4,9 S 2,7 0,4 S 2,3 4,2" /-->
+                  <!-- A 5,5 340 1 6,3-->
                 </Button>
             </Grid>
         </Border>
         <GridSplitter
             Grid.Column="5"
-            Width="6"
+            Width="12"
             Opacity="0" />
         <Border Grid.Column="6" Classes="AddressBox">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="31" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+              <!--Path
+                    Grid.Column="0"
+                    Width="12"
+                    Height="12"
+                    Data="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
+                    Stroke="{DynamicResource ThemeControlHighBrush}"
+                    IsVisible="{Binding !SearchQuery.Length, Mode=OneWay}"/-->
+              <Panel Grid.Column="0" Width="13" Height="13" IsVisible="{Binding !SearchQuery.Length, Mode=OneWay}">
+                <Line Stroke="{DynamicResource ThemeControlHighBrush}" StrokeThickness="1" StartPoint="0,13" EndPoint="5,8"/>
+                <Ellipse Stroke="{DynamicResource ThemeControlHighBrush}" StrokeThickness="1" Width="8.5" Height="8.5" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+              </Panel>
                 <TextBox
-                    Margin="4,0"
+                  Grid.Column="1"
+                    Margin="9,0"
                     AcceptsReturn="False"
                     Text="{Binding SearchQuery, Mode=TwoWay}"
                     TextWrapping="NoWrap"
                     Watermark="{Binding SearchWatermark, Mode=OneWay}" />
-                <Path
-                    Grid.Column="1"
-                    Width="12"
-                    Height="12"
-                    Margin="0,0,6,0"
-                    Data="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
-                    Fill="{DynamicResource ThemeControlHighBrush}"
-                    IsVisible="{Binding !SearchQuery.Length, Mode=OneWay}"
-                    Stretch="Uniform" />
 
                 <Button
                     Grid.Column="2"
