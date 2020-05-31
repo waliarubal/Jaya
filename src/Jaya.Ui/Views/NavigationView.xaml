@@ -10,8 +10,6 @@
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="320"
     d:DesignWidth="220"
-    BorderBrush="{DynamicResource ThemeControlMidBrush}"
-    BorderThickness="1"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:NavigationViewModel />

@@ -2,15 +2,15 @@
 
     <Style Selector="GridSplitter:vertical">
         <Setter Property="Width" Value="6" />
-        <Setter Property="Background" Value="{DynamicResource ThemeControlLowBrush}" />
-      <Setter Property="Template">
-        <ControlTemplate>
-          <Border
-            BorderBrush="{TemplateBinding Background}"
-            BorderThickness="1,0,0,0"
-            Background="#01000000" HorizontalAlignment="Left"/>
-        </ControlTemplate>
-      </Setter>
+        <Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                  BorderBrush="{TemplateBinding Background}"
+                  BorderThickness="1,0,0,0"
+                  Background="#01000000" HorizontalAlignment="Left"/>
+            </ControlTemplate>
+        </Setter>
     </Style>
 
     <Style Selector="GridSplitter:horizontal">
