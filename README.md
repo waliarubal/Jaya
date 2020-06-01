@@ -1,9 +1,9 @@
 <p align="center">
   <a href="https://github.com/waliarubal/Jaya/" target="_blank">
-    <img src="https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/Logo.png" alt="Jaya - Cross Plat logo" >
+    <img src="https://raw.githubusercontent.com/waliarubal/Jaya/dev/docs/Logo.png" alt="JayaFM Logo" >
   </a>
 </p>
-<h3 align="center">Jaya - Cross Plat</h3>
+<h3 align="center">Jaya File Manager (JayaFM)</h3>
 <p align="center">
   <a href="https://ci.appveyor.com/project/waliarubal/jaya-dev" target="_blank"><img alt="Build status" src="https://ci.appveyor.com/api/projects/status/467yhb1fia401wai?svg=true"></a>
   <a href="https://gitter.im/JayaCrossPlat/Jaya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank"><img alt="Gitter Chat" src="https://badges.gitter.im/JayaCrossPlat/Jaya.svg"></a>
@@ -26,7 +26,7 @@
 
 ## About The Project
 
-**Jaya - Cross Plat** is a small .NET Core based cross platform file manager application which runs on Windows, Mac and Linux. Its goal is very simple, *"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports."*.
+**Jaya File Manager** is a small .NET Core based cross platform file manager application which runs on Windows, Mac and Linux. Its goal is very simple, *"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports."*.
 
 Application is designed to be plug-able from the ground up i.e. anyone with experience of working with .NET Core will be able to add support for any new storage service by implementing a simple plugin. Support for below mentioned storage services are complete (or planned) as of now. If you would like addition of more storage services, please raise request [here](https://github.com/waliarubal/Jaya/issues).
 - [x] File System
