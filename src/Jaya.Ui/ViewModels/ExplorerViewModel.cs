@@ -72,6 +72,10 @@ namespace Jaya.Ui.ViewModels
                     break;
 
                 case ItemType.File:
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo((obj.Object as FileModel).Path)
+                    {
+                        UseShellExecute = true
+                    });
                     break;
 
                 case ItemType.Computer:
