@@ -29,6 +29,12 @@ namespace Jaya.Shared.Base
             protected set => Set(value);
         }
 
+        public bool IsLoaded 
+        { 
+            get => Get<bool>(); 
+            internal set => Set(value); 
+        }
+
         protected bool IsDesignMode => Design.IsDesignMode;
 
         protected EventAggregator EventAggregator
