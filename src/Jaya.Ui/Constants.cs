@@ -13,9 +13,9 @@ namespace Jaya.Ui
         const string IMAGES_PATH_FORMAT = "avares://Jaya.Ui/Assets/Images/{0}";
         const string REPO_URL = "https://github.com/waliarubal/Jaya/";
 
-        public const string APP_SHORT_NAME = "Jaya";
-        public const string APP_NAME = "Jaya - Cross Plat";
-        public const string APP_DESCRIPTION = "Jaya - Cross Plat is a small .NET Core based cross platform file explorer application which runs on Windows, Mac and Linux. Its goal is very simple, \"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports.\".";
+        public const string APP_SHORT_NAME = "JayaFM";
+        public const string APP_NAME = "Jaya File Manager";
+        public const string APP_DESCRIPTION = "Jaya File Manager is a small .NET Core based cross platform file explorer application which runs on Windows, Mac and Linux. Its goal is very simple, \"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports.\".";
 
         public static readonly Uri
             URL_DONATION,

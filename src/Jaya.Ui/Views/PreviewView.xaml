@@ -3,16 +3,15 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:j="https://github.com/waliarubal/Jaya"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="320"
     d:DesignWidth="260"
+    j:ViewModelLocator.AutoWireViewModel="True"
     BorderBrush="{DynamicResource ThemeControlMidBrush}"
     BorderThickness="1"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <vm:PreviewViewModel />
-    </UserControl.DataContext>
     <TextBlock
         HorizontalAlignment="Center"
         VerticalAlignment="Center"

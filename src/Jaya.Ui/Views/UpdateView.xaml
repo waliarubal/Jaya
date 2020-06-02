@@ -3,14 +3,16 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:j="https://github.com/waliarubal/Jaya"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
+    j:ViewModelLocator.AutoWireViewModel="True"
     Design.Height="320"
     Design.Width="480"
     mc:Ignorable="d">
-    <UserControl.DataContext>
+    <Design.DataContext>
         <vm:UpdateViewModel />
-    </UserControl.DataContext>
+    </Design.DataContext>
     <Grid Margin="8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

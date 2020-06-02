@@ -11,11 +11,9 @@
     MinHeight="{Binding Option.Height, Mode=OneWay}"
     Width="{Binding Option.Width, Mode=OneWay}"
     Height="{Binding Option.Height, Mode=OneWay}"
+    j:ViewModelLocator.AutoWireViewModel="True"
     IsModal="True"
     d:DesignWidth="640"
     d:DesignHeight="480"
     mc:Ignorable="d">
-  <StyledWindow.DataContext>
-    <vm:HostViewModel />
-  </StyledWindow.DataContext>
 </StyledWindow>

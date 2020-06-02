@@ -10,10 +10,8 @@
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="320"
     d:DesignWidth="220"
+    j:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <vm:NavigationViewModel />
-    </UserControl.DataContext>
     <UserControl.Resources>
         <j:BitmapValueConverter x:Key="BitmapValueConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />

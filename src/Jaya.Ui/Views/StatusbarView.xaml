@@ -3,13 +3,15 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:j="https://github.com/waliarubal/Jaya"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
+    j:ViewModelLocator.AutoWireViewModel="True"
     Design.Width="800"
     mc:Ignorable="d">
-    <UserControl.DataContext>
+    <Design.DataContext>
         <vm:StatusbarViewModel />
-    </UserControl.DataContext>
+    </Design.DataContext>
     <UserControl.Styles>
         <Style Selector="Border.Separator">
             <Setter Property="IsHitTestVisible" Value="False" />

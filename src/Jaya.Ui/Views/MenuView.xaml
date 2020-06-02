@@ -7,10 +7,8 @@
     xmlns:local="clr-namespace:Jaya.Ui;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
+    j:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <vm:MenuViewModel />
-    </UserControl.DataContext>
     <Menu>
         <Menu.Resources>
             <j:MultiValueConverter x:Key="MultiValueConverter" />

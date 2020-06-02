@@ -2,6 +2,7 @@
 // Copyright (c) Rubal Walia. All rights reserved.
 // Licensed under the 3-Clause BSD license. See LICENSE file in the project root for full license information.
 //
+using Jaya.Shared.Base;
 using Jaya.Shared.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -68,7 +69,6 @@ namespace Jaya.Shared
 
             var assemblies = new List<Assembly>();
 
-
             foreach (var fileName in Directory.GetFiles(Environment.CurrentDirectory, "Jaya.Provider.*.dll", SearchOption.TopDirectoryOnly))
             {
                 var assembly = Assembly.LoadFrom(fileName);
@@ -111,6 +111,7 @@ namespace Jaya.Shared
         {
             var serviceInterfaceType = typeof(IService);
             var serviceProviderInterfaceType = typeof(IProviderService);
+            var viewModelBaseType = typeof(ViewModelBase);
 
             foreach (var type in assembly.GetExportedTypes())
             {
@@ -121,6 +122,8 @@ namespace Jaya.Shared
                     collection.AddSingleton(serviceInterfaceType, type);
                 else if (serviceProviderInterfaceType.IsAssignableFrom(type))
                     collection.AddSingleton(serviceProviderInterfaceType, type);
+                else if (viewModelBaseType.IsAssignableFrom(type))
+                    collection.AddTransient(type);
             }
         }
 

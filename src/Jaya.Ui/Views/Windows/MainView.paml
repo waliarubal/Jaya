@@ -10,10 +10,7 @@
     Title="{Binding WindowTitle, Mode=OneWay}"
     Width="800"
     Height="600"
-    mc:Ignorable="d">
-    <StyledWindow.DataContext>
-        <vm:MainViewModel />
-    </StyledWindow.DataContext>
+    mc:Ignorable="d" j:ViewModelLocator.AutoWireViewModel="True">
     <StyledWindow.HeaderContent>
       <v:MenuView IsVisible="{Binding !PaneConfig.IsRibbonVisible, Mode=OneWay}" />
     </StyledWindow.HeaderContent>

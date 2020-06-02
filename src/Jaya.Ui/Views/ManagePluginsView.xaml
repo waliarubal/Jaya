@@ -8,10 +8,8 @@
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignHeight="480"
     d:DesignWidth="640"
+    j:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <vm:ManagePluginsViewModel />
-    </UserControl.DataContext>
     <UserControl.Resources>
         <j:BitmapValueConverter x:Key="BitmapValueConverter" />
     </UserControl.Resources>
