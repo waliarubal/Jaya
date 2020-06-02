@@ -135,6 +135,9 @@
                   Grid.Column="2"
                   Orientation="Horizontal">
                 <StackPanel.Styles>
+                  <Style Selector="Button#PART_Close:pointerover">
+                    <Setter Property="Foreground" Value="White" />
+                  </Style>
                   <Style Selector="Button#PART_Close:pointerover /template/ ContentPresenter">
                     <Setter Property="Background" Value="Red" />
                     <Setter Property="BorderBrush" Value="Red" />

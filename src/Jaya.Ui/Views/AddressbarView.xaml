@@ -110,26 +110,26 @@
             Classes="NavigationButton PrimaryNavigationButton"
             Command="{Binding NavigateBackCommand}"
             ToolTip.Tip="Back">
-            <Path Data="M 5 0 L 0 5 L 5 10 M 0 5 L 12 5" />
+            <Path Data="{DynamicResource Icon.BackArrow}" />
         </Button>
         <Button
             Grid.Column="1"
             Classes="NavigationButton PrimaryNavigationButton"
             Command="{Binding NavigateForwardCommand}"
             ToolTip.Tip="Forward">
-            <Path Data="M 7 0 L 12 5 L 7 10 M 0 5 L 12 5" />
+            <Path Data="{DynamicResource Icon.ForwardArrow}" />
         </Button>
         <Button
             Grid.Column="2"
             Classes="NavigationButton SecondaryNavigationButton"
             ToolTip.Tip="Recent Locations">
-            <Path Data="M 0 0 L 3.5 3.5 L 7 0" />
+            <Path Data="{DynamicResource Icon.DownChevron}" />
         </Button>
         <Button
             Grid.Column="3"
             Classes="NavigationButton TertiaryNavigationButton"
             ToolTip.Tip="Up">
-            <Path Data="M 0 5 L 5 0 L 10 5 M 5 0 L 5 12" />
+            <Path Data="{DynamicResource Icon.UpArrow}" />
         </Button>
         <Border Grid.Column="4" Classes="AddressBox">
             <Grid>
@@ -199,8 +199,8 @@
                                         Margin="6,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Data="M 0 2 L 4 6 L 0 10 Z"
-                                        Fill="{DynamicResource ThemeForegroundBrush}" />
+                                        Data="{DynamicResource Icon.RightChevron}"
+                                        Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="2" />
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

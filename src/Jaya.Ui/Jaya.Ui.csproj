@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>Jaya.Ui.Program</StartupObject>
     <LangVersion>7.1</LangVersion>
-    <ApplicationIcon>Assets\Logo.ico</ApplicationIcon>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
     <Version>0.0.0.0</Version>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <FileVersion>0.0.0.0</FileVersion>

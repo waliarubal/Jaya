@@ -48,6 +48,7 @@
         <Image
             Grid.Column="1"
             VerticalAlignment="Top"
+            Width="128" Height="128"
             Source="/Assets/Images/Logo.png" />
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
