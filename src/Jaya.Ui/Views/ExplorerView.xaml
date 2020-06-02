@@ -128,9 +128,6 @@
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             SelectionMode="Multiple">
             <ListBox.Styles>
-                <Style Selector="WrapPanel">
-                    <Setter Property="Width" Value="{Binding $parent[ScrollViewer].Bounds.Width, Mode=OneWay}" />
-                </Style>
                 <Style Selector="ListBoxItem">
                     <!--<Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />-->
                     <Setter Property="Margin" Value="2" />
@@ -152,7 +149,7 @@
             </ListBox.Styles>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel />
+                    <WrapPanel Width="{Binding $parent[ScrollContentPresenter].Bounds.Width, Mode=OneWay}"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
