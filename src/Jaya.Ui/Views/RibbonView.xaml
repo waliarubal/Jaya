@@ -9,11 +9,9 @@
     xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignWidth="800"
+    j:ViewModelLocator.AutoWireViewModel="True"
     IsRibbonExpanded="{Binding !PaneConfig.IsRibbonCollapsed, Mode=TwoWay}"
     mc:Ignorable="d">
-    <UserControl.DataContext>
-        <vm:RibbonViewModel />
-    </UserControl.DataContext>
     <Ribbon>
         <RibbonTab Header="File">
             <StackPanel>

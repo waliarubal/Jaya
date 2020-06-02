@@ -8,33 +8,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     d:DesignWidth="800"
+    j:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <UserControl.DataContext>
+    <Design.DataContext>
         <vm:AddressbarViewModel />
-    </UserControl.DataContext>
+    </Design.DataContext>
     <UserControl.Resources>
         <j:BitmapValueConverter x:Key="BitmapValueConverter" />
     </UserControl.Resources>
     <Grid Margin="6,4,12,4">
         <Grid.Styles>
-          <Style Selector="Button.NavigationButton">
-            <Setter Property="MinHeight" Value="30" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="2" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-          </Style>
-          <Style Selector="Button.PrimaryNavigationButton">
-              <Setter Property="MinWidth" Value="30" />
-          </Style>
-          <Style Selector="Button.SecondaryNavigationButton">
-            <Setter Property="MinWidth" Value="20" />
-          </Style>
-          <Style Selector="Button.TertiaryNavigationButton">
-            <Setter Property="MinWidth" Value="30" />
-          </Style>
-          
+            <Style Selector="Button.NavigationButton">
+                <Setter Property="MinHeight" Value="30" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="2" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Style>
+            <Style Selector="Button.PrimaryNavigationButton">
+                <Setter Property="MinWidth" Value="30" />
+            </Style>
+            <Style Selector="Button.SecondaryNavigationButton">
+                <Setter Property="MinWidth" Value="20" />
+            </Style>
+            <Style Selector="Button.TertiaryNavigationButton">
+                <Setter Property="MinWidth" Value="30" />
+            </Style>
+
             <Style Selector="Button:pointerover /template/ ContentPresenter, ToggleButton:pointerover /template/ ContentPresenter">
                 <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
@@ -55,9 +56,9 @@
                 <Setter Property="Height" Value="16" />
             </Style>
 
-            <Style Selector="Button > Path">
-                <Setter Property="Stroke" Value="{Binding $parent[Button].Foreground}"/>
-                <Setter Property="StrokeThickness" Value="2"/>
+            <Style Selector="Button &gt; Path">
+                <Setter Property="Stroke" Value="{Binding $parent[Button].Foreground}" />
+                <Setter Property="StrokeThickness" Value="2" />
             </Style>
             <Style Selector="Grid &gt; Path">
                 <Setter Property="Width" Value="12" />
@@ -78,15 +79,15 @@
             <Style Selector="Border.AddressBox:focus">
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
             </Style>
-          <Style Selector="Border.AddressBox Button">
-            <Setter Property="MinWidth" Value="30" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Padding" Value="2" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-          </Style>
+            <Style Selector="Border.AddressBox Button">
+                <Setter Property="MinWidth" Value="30" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="2" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Style>
 
             <Style Selector="Border.AddressBox &gt; Grid &gt; TextBox, Border.AddressBox &gt; Grid &gt; ComboBox">
                 <Setter Property="Height" Value="18" />
@@ -112,17 +113,23 @@
             <Path Data="M 5 0 L 0 5 L 5 10 M 0 5 L 12 5" />
         </Button>
         <Button
-            Classes="NavigationButton PrimaryNavigationButton"
             Grid.Column="1"
+            Classes="NavigationButton PrimaryNavigationButton"
             Command="{Binding NavigateForwardCommand}"
             ToolTip.Tip="Forward">
-          <Path Data="M 7 0 L 12 5 L 7 10 M 0 5 L 12 5" />
+            <Path Data="M 7 0 L 12 5 L 7 10 M 0 5 L 12 5" />
         </Button>
-        <Button Classes="NavigationButton SecondaryNavigationButton" Grid.Column="2" ToolTip.Tip="Recent Locations">
+        <Button
+            Grid.Column="2"
+            Classes="NavigationButton SecondaryNavigationButton"
+            ToolTip.Tip="Recent Locations">
             <Path Data="M 0 0 L 3.5 3.5 L 7 0" />
         </Button>
-        <Button Classes="NavigationButton TertiaryNavigationButton" Grid.Column="3" ToolTip.Tip="Up">
-          <Path Data="M 0 5 L 5 0 L 10 5 M 5 0 L 5 12" />
+        <Button
+            Grid.Column="3"
+            Classes="NavigationButton TertiaryNavigationButton"
+            ToolTip.Tip="Up">
+            <Path Data="M 0 5 L 5 0 L 10 5 M 5 0 L 5 12" />
         </Button>
         <Border Grid.Column="4" Classes="AddressBox">
             <Grid>
@@ -172,7 +179,10 @@
                         Classes="Icon"
                         Drawing="{DynamicResource Icon.Folder}"
                         IsVisible="{Binding IsDirectory}" />
-                    <ItemsControl Margin="0,0,16,0" Padding="0" Items="{Binding PathParts, Mode=OneWay}">
+                    <ItemsControl
+                        Margin="0,0,16,0"
+                        Padding="0"
+                        Items="{Binding PathParts, Mode=OneWay}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal" />
@@ -196,21 +206,34 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
-                <ComboBox
-                    Grid.Column="0"
-                    Margin="-1,-1,0,-1"/>
-                <Button Classes="RefreshButton" Grid.Column="2" ToolTip.Tip="Refresh">
-                  <Panel Width="10" Height="11">
-                    <Ellipse VerticalAlignment="Bottom" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Width="10" Height="10">
-                      <Ellipse.OpacityMask>
-                        <RadialGradientBrush Center="62.5%,12.5%" GradientOrigin="62.5%,12.5%" Radius="2">
-                          <GradientStop Offset="0.1" Color="Transparent"/>
-                          <GradientStop Offset="0.1" Color="White"/>
-                        </RadialGradientBrush>
-                      </Ellipse.OpacityMask>
-                    </Ellipse>
-                    <Border Margin="1,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="5" Height="5" BorderThickness="0,1.5,1.5,0" BorderBrush="{Binding $parent[Button].Foreground}"/>
-                  </Panel>
+                <ComboBox Grid.Column="0" Margin="-1,-1,0,-1" />
+                <Button
+                    Grid.Column="2"
+                    Classes="RefreshButton"
+                    ToolTip.Tip="Refresh">
+                    <Panel Width="10" Height="11">
+                        <Ellipse
+                            Width="10"
+                            Height="10"
+                            VerticalAlignment="Bottom"
+                            Stroke="{Binding $parent[Button].Foreground}"
+                            StrokeThickness="2">
+                            <Ellipse.OpacityMask>
+                                <RadialGradientBrush Center="62.5%,12.5%" GradientOrigin="62.5%,12.5%" Radius="2">
+                                    <GradientStop Offset="0.1" Color="Transparent" />
+                                    <GradientStop Offset="0.1" Color="White" />
+                                </RadialGradientBrush>
+                            </Ellipse.OpacityMask>
+                        </Ellipse>
+                        <Border
+                            Width="5"
+                            Height="5"
+                            Margin="1,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="{Binding $parent[Button].Foreground}"
+                            BorderThickness="0,1.5,1.5,0" />
+                    </Panel>
                 </Button>
             </Grid>
         </Border>
@@ -226,12 +249,26 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-              <Panel Grid.Column="0" Width="13" Height="13">
-                <Line Stroke="{DynamicResource ThemeControlHighBrush}" StrokeThickness="1" StartPoint="0,13" EndPoint="5,8"/>
-                <Ellipse Stroke="{DynamicResource ThemeControlHighBrush}" StrokeThickness="1" Width="8.5" Height="8.5" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-              </Panel>
+                <Panel
+                    Grid.Column="0"
+                    Width="13"
+                    Height="13">
+                    <Line
+                        Stroke="{DynamicResource ThemeControlHighBrush}"
+                        StrokeThickness="1"
+                        StartPoint="0,13"
+                        EndPoint="5,8" />
+                    <Ellipse
+                        Width="8.5"
+                        Height="8.5"
+                        Margin="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Stroke="{DynamicResource ThemeControlHighBrush}"
+                        StrokeThickness="1" />
+                </Panel>
                 <TextBox
-                  Grid.Column="1"
+                    Grid.Column="1"
                     Margin="9,0"
                     AcceptsReturn="False"
                     Text="{Binding SearchQuery, Mode=TwoWay}"
@@ -243,7 +280,10 @@
                     Command="{Binding ClearSearchCommand}"
                     IsVisible="{Binding SearchQuery.Length, Mode=OneWay}"
                     ToolTip.Tip="Clear Search">
-                  <Path Data="M 0 0 L 10 10 M 0 10 L 10 0" Width="10" Height="10" />
+                    <Path
+                        Width="10"
+                        Height="10"
+                        Data="M 0 0 L 10 10 M 0 10 L 10 0" />
                 </Button>
                 <Button
                     Grid.Column="3"
@@ -251,7 +291,10 @@
                     CommandParameter="{Binding SearchQuery, Mode=OneWay}"
                     IsVisible="{Binding SearchQuery.Length, Mode=OneWay}"
                     ToolTip.Tip="{Binding SearchWatermark, Mode=OneWay}">
-                  <Path Data="M 7 0 L 12 5 L 7 10 M 0 5 L 12 5" Width="12" Height="10" />
+                    <Path
+                        Width="12"
+                        Height="10"
+                        Data="M 7 0 L 12 5 L 7 10 M 0 5 L 12 5" />
                 </Button>
             </Grid>
         </Border>
