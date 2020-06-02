@@ -71,7 +71,12 @@
                 <DataGridTemplateColumn Header="Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel x:Name="ObjectEntry" Orientation="Horizontal" Background="#01000000">
+                                <i:Interaction.Behaviors>
+                                    <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
+                                        <ia:InvokeCommandAction Command="{Binding $parent[DataGrid].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
+                                    </ia:EventTriggerBehavior>
+                                </i:Interaction.Behaviors>
                                 <Image
                                     Classes="Icon"
                                     IsVisible="{Binding IsService}"
@@ -152,7 +157,7 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type m:ExplorerItemModel}">
-                    <StackPanel Name="ObjectEntry">
+                    <StackPanel Name="ObjectEntry" Background="#01000000">
                         <i:Interaction.Behaviors>
                             <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
                                 <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
