@@ -5,7 +5,7 @@
 </p>
 <h3 align="center">Jaya File Manager (JayaFM)</h3>
 <p align="center">
-  <a href="https://ci.appveyor.com/project/waliarubal/jaya-dev" target="_blank"><img alt="Build status" src="https://ci.appveyor.com/api/projects/status/467yhb1fia401wai?svg=true"></a>
+  <img alt="Build status" src="https://github.com/waliarubal/Jaya/workflows/Production%20Build/badge.svg">
   <a href="https://gitter.im/JayaCrossPlat/Jaya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank"><img alt="Gitter Chat" src="https://badges.gitter.im/JayaCrossPlat/Jaya.svg"></a>
   <a href="https://github.com/waliarubal/Jaya/stargazers" target="_blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/waliarubal/Jaya"></a>
   <a href="https://github.com/waliarubal/Jaya/network" target="_blank"><img alt="GitHub forks" src="https://img.shields.io/github/forks/waliarubal/Jaya"></a>
