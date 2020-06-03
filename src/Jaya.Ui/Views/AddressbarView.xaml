@@ -179,6 +179,12 @@
                         Classes="Icon"
                         Drawing="{DynamicResource Icon.Folder}"
                         IsVisible="{Binding IsDirectory}" />
+                    <Path
+                        Margin="6,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Data="{DynamicResource Icon.RightChevron}"
+                        Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="2" />
                     <ItemsControl
                         Margin="0,0,16,0"
                         Padding="0"
