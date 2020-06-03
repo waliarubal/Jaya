@@ -1,4 +1,7 @@
 ; process command line arguments
+#ifndef APP_NAME
+	#define APP_NAME "Jaya File Manager"
+#endif
 #ifndef APP_VERSION
 	#define APP_VERSION "1.0.0.0"
 #endif
@@ -6,7 +9,6 @@
 	#define APP_ROOT "..\"
 #endif
 
-#define APP_NAME "Jaya - Cross Plat"
 #define APP_PUBLISHER "Rubal Walia"
 #define APP_EMAIL "walia.rubal@gmail.com"
 #define APP_URL "https://github.com/waliarubal/Jaya"
@@ -25,10 +27,10 @@ AppUpdatesURL={#APP_URL}
 DefaultDirName={autopf}\Jaya
 DisableProgramGroupPage=yes
 UsedUserAreasWarning=no
-LicenseFile={#APP_ROOT}LICENSE
+LicenseFile={#APP_ROOT}\LICENSE
 PrivilegesRequiredOverridesAllowed=dialog
 OutputBaseFilename=windows
-SetupIconFile={#APP_ROOT}src\Jaya.Ui\Assets\Logo.ico
+SetupIconFile={#APP_ROOT}\src\Jaya.Ui\Assets\Logo.ico
 UninstallDisplayName={#APP_NAME}
 UninstallDisplayIcon={app}\{#APP_EXECUTABLE}
 Compression=lzma
@@ -49,7 +51,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 6.1; Check: not IsAdminInstallMode
 
 [Files]
-Source: "{#APP_ROOT}publish\windows\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#APP_ROOT}\publish\windows\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{autoprograms}\{#APP_NAME}"; Filename: "{app}\{#APP_EXECUTABLE}"

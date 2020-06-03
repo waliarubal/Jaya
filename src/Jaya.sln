@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Ui", "Jaya.Ui\Jaya.Ui.csproj", "{CDB00482-676D-4BB5-9997-9A1FB368ABA0}"
 EndProject
@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.GoogleDrive",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.Ftp", "Jaya.Provider.Ftp\Jaya.Provider.Ftp.csproj", "{870AE579-A91F-4F81-AF15-05E45E3B286A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jaya.Provider.S3", "Jaya.Provider.S3\Jaya.Provider.S3.csproj", "{37A99B8A-3048-410D-8A19-3C7F5BBA8820}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Provider.S3", "Jaya.Provider.S3\Jaya.Provider.S3.csproj", "{37A99B8A-3048-410D-8A19-3C7F5BBA8820}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
