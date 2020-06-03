@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 
 src/Jaya.app/Contents/MacOS/
+tools
