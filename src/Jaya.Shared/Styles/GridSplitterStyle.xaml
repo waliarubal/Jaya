@@ -12,6 +12,11 @@
             </ControlTemplate>
         </Setter>
     </Style>
+    <Style Selector="GridSplitter.MainWindowGridSplitter:vertical">
+        <Setter Property="Background" Value="#01000000" />
+        <Setter Property="Margin" Value="0,0,-6,0"/>
+        <Setter Property="ZIndex" Value="99"/>
+    </Style>
 
     <Style Selector="GridSplitter:horizontal">
         <Setter Property="Height" Value="6" />

@@ -11,21 +11,54 @@
     d:DesignHeight="320"
     d:DesignWidth="220"
     j:ViewModelLocator.AutoWireViewModel="True"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Margin="0,0,-12,0">
     <UserControl.Resources>
         <j:BitmapValueConverter x:Key="BitmapValueConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
     </UserControl.Resources>
 
     <TreeView
+        Padding="0"
         BorderThickness="0"
         Items="{Binding Node.Children, Mode=OneWay}"
         SelectedItem="{Binding SelectedNode, Mode=OneWayToSource}"
         SelectionMode="Single">
         <TreeView.Styles>
+            <Style Selector="TreeView">
+              <Setter Property="Template">
+                <ControlTemplate>
+                  <Border BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+                    <DockPanel>
+                      <Rectangle Classes="RightwardShadow" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+                      <ScrollViewer Background="{TemplateBinding Background}"
+                                    HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                                    VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
+                        <ItemsPresenter Name="PART_ItemsPresenter"
+                                        Items="{TemplateBinding Items}"
+                                        ItemsPanel="{TemplateBinding ItemsPanel}"
+                                        Margin="{TemplateBinding Padding}"/>
+                      </ScrollViewer>
+                    </DockPanel>
+                  </Border>
+                </ControlTemplate>
+              </Setter>
+            </Style>
             <Style Selector="TreeViewItem">
                 <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=OneWayToSource}" />
                 <Setter Property="IsVisible" Value="{Binding FileSystemObject.IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}, FallbackValue=True}" />
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
+            <Style Selector="TreeView:not(:pointerover) TreeViewItem /template/ ToggleButton#expander">
+                <Setter Property="IsHitTestVisible" Value="False"/>
+                <Setter Property="Opacity" Value="0"/>
+            </Style>
+            <Style Selector="TreeViewItem /template/ Border#SelectionBorder:pointerover">
+              <Setter Property="Background" Value="{DynamicResource NavigationPane.ItemHoverBrush}"/>
+            </Style>
+            <Style Selector="TreeViewItem:selected /template/ Border#SelectionBorder">
+              <Setter Property="Background" Value="{DynamicResource NavigationPane.ItemSelectedBrush}"/>
             </Style>
             <Style Selector="DrawingPresenter[IsVisible=True].Spinner">
                 <Setter Property="Margin" Value="0 0 4 0" />

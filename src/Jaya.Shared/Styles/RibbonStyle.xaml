@@ -79,20 +79,17 @@
     <Style Selector="Border.Separator">
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value=".5" />
-        <Setter Property="Background" Value="{DynamicResource ThemeBorderMidBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+        <Setter Property="BorderThickness" Value="1,1,0,0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Ribbon.SeparatorBrush}" />
         <Setter Property="Margin" Value="2 0" />
     </Style>
 
     <!--  button  -->
     <Style Selector="c|Ribbon Button">
-        <Setter Property="Margin" Value="1 0" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="MinWidth" Value="21" />
         <Setter Property="MinHeight" Value="21" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="Transparent" />
     </Style>
     <Style Selector="c|Ribbon Button:pointerover /template/ ContentPresenter">
@@ -162,6 +159,16 @@
         <Setter Property="TextAlignment" Value="Left" />
         <Setter Property="Margin" Value="4 0 0 0" />
     </Style>
+  
+    <Style Selector="c|RibbonGroup :is(Button)">
+      <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style Selector="c|RibbonGroup :is(Button):pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Ribbon.ControlHoverBackgroundBrush}"/>
+    </Style>
+    <Style Selector="c|RibbonGroup :is(Button):pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource Ribbon.ControlPressedBackgroundBrush}"/>
+    </Style>
 
     <!--  toggle button  -->
     <Style Selector="c|Ribbon ToggleButton">
@@ -170,15 +177,7 @@
         <Setter Property="MinWidth" Value="21" />
         <Setter Property="MinHeight" Value="21" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="Transparent" />
-    </Style>
-    <Style Selector="c|Ribbon ToggleButton:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
-    </Style>
-    <Style Selector="c|Ribbon ToggleButton:pressed /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
     </Style>
     <Style Selector="c|Ribbon ToggleButton:disabled">
         <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
@@ -244,12 +243,15 @@
         <Setter Property="TextAlignment" Value="Left" />
         <Setter Property="Margin" Value="4 0 0 0" />
     </Style>
+    <Style Selector="c|RibbonGroup :is(Button):checked /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource Ribbon.ControlPressedBackgroundBrush}"/>
+    </Style>
 
     <!--  ribbon group  -->
     <Style Selector="c|RibbonGroup">
         <Setter Property="Template">
             <ControlTemplate>
-                <Grid>
+                <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="*,Auto">
                     <Grid.Styles>
                         <Style Selector="ItemsPresenter#PART_Container">
                             <Setter Property="ItemsPanel">
@@ -259,14 +261,6 @@
                             </Setter>
                         </Style>
                     </Grid.Styles>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
                     <Border Margin="2">
                         <ItemsPresenter
                             Name="PART_Container"
@@ -276,10 +270,11 @@
                     </Border>
                     <TextBlock
                         Grid.Row="1"
+                        Margin="0,-4,0,1"
                         HorizontalAlignment="Center"
                         FontSize="{DynamicResource FontSizeSmall}"
                         Text="{TemplateBinding Header}" />
-                    <Border Grid.Column="1" Classes="Separator" />
+                    <Rectangle Width="1" VerticalAlignment="Stretch" Margin="2,-1" Grid.Column="1" Grid.RowSpan="2" Fill="{DynamicResource Ribbon.SeparatorBrush}" />
                 </Grid>
             </ControlTemplate>
         </Setter>
@@ -287,14 +282,15 @@
 
     <!--  ribbon  -->
     <Style Selector="c|Ribbon">
-        <Setter Property="Padding" Value="0 4 0 0" />
+        <Setter Property="Margin" Value="0,0,0,-8"/>
+        <Setter Property="Padding" Value="0 3" />
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <ControlTemplate>
                 <Border
                     Margin="{TemplateBinding Margin}"
                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                     VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                    Background="{TemplateBinding Background}"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}">
                     <Border.Resources>
@@ -303,17 +299,15 @@
                             <GeometryDrawing Brush="#FF1AA1E2" Geometry="F1M10,7C10,7.551,9.551,8,9,8L9,8.5 8,8.5 8,8C8,7.449,8.449,7,9,7L9,6C8.92,5.956 8.748,5.898 8.5,5.898 8.252,5.898 8.08,5.956 8,6L8,7 7,7 7,6C7,5.42 7.631,5 8.5,5 9.369,5 10,5.42 10,6z M9,10L8,10 8,9 9,9z M8.5,4C6.567,4 5,5.567 5,7.5 5,9.433 6.567,11 8.5,11 10.433,11 12,9.433 12,7.5 12,5.567 10.433,4 8.5,4" />
                             <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1M9,9L8,9 8,10 9,10z M9,8.5L8,8.5 8,8C8,7.449,8.449,7,9,7L9,6C8.92,5.956 8.748,5.898 8.5,5.898 8.252,5.898 8.08,5.956 8,6L8,7 7,7 7,6C7,5.42 7.631,5 8.5,5 9.369,5 10,5.42 10,6L10,7C10,7.551,9.551,8,9,8z" />
                         </DrawingGroup>
-                        <DrawingGroup x:Key="ArrowUp">
-                            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
-                            <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M13.6943,9.6094L11.2193,12.0844 8.0003,8.8644 4.7803,12.0844 2.3053,9.6094 8.0003,3.9154z" />
-                            <GeometryDrawing Brush="#FF424242" Geometry="F1M12.2803,9.6094L11.2193,10.6704 8.0003,7.4504 4.7803,10.6704 3.7193,9.6094 8.0003,5.3294z" />
-                        </DrawingGroup>
                     </Border.Resources>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
+                        <Rectangle Fill="{DynamicResource Ribbon.TabStripBackgroundBrush}"/>
+                        <Rectangle Classes="UpwardShadow" VerticalAlignment="Bottom" IsVisible="{TemplateBinding IsExpanded, Mode=OneWay}"/>
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"
                             ItemTemplate="{TemplateBinding ItemTemplate}"
@@ -321,11 +315,10 @@
                             ItemsPanel="{TemplateBinding ItemsPanel}"
                             ZIndex="98">
                         </ItemsPresenter>
-                        <Border
+                        <Border Height="93"
                             Grid.Row="1"
-                            Padding="4,0,4,4"
-                            BorderBrush="{DynamicResource ThemeBorderMidBrush}"
-                            BorderThickness=".5"
+                            Padding="4,0"
+                            BorderThickness="0" Background="{DynamicResource Ribbon.BackgroundBrush}"
                             IsVisible="{TemplateBinding IsExpanded,
                                                         Mode=OneWay}">
                             <ContentPresenter
@@ -338,31 +331,43 @@
                             </ContentPresenter>
                         </Border>
                         <StackPanel
-                            Margin="0,0,0,1"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             Orientation="Horizontal"
                             ZIndex="99">
+                          <StackPanel.Styles>
+                            <Style Selector="Button">
+                              <Setter Property="Padding" Value="2" />
+                              <Setter Property="MinWidth" Value="21" />
+                              <Setter Property="MinHeight" Value="21" />
+                              <Setter Property="Background" Value="Transparent" />
+                              <Setter Property="BorderBrush" Value="Transparent" />
+                            </Style>
+                            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                              <Setter Property="Background" Value="{DynamicResource Ribbon.ControlHoverBackgroundBrush}" />
+                            </Style>
+                            <Style Selector="Button:pressed /template/ ContentPresenter">
+                              <Setter Property="Background" Value="{DynamicResource Ribbon.ControlPressedBackgroundBrush}" />
+                            </Style>
+                            <Style Selector="Button:disabled">
+                              <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+                            </Style>
+                          </StackPanel.Styles>
                             <Button
                                 Name="PART_ToggleButton"
-                                Width="14"
-                                Height="14">
-                                <DrawingPresenter
-                                    Width="14"
-                                    Height="14"
-                                    Drawing="{StaticResource ArrowUp}" />
+                                Width="23"
+                                Height="23">
+                                <Path Data="M 0 2.5 L 2.5 0 L 5 2.5" Width="5" Height="2.5" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Fill="Transparent" />
                             </Button>
                             <Button
-                                Width="14"
-                                Height="14"
+                                Width="23"
+                                Height="23"
                                 Command="{TemplateBinding HelpButtonCommand}"
                                 ToolTip.Tip="Help">
-                                <DrawingPresenter
-                                    Width="14"
-                                    Height="14"
-                                    Drawing="{StaticResource Help}" />
+                                <Path Data="F1M9,9L8,9 8,10 9,10z M9,8.5L8,8.5 8,8C8,7.449,8.449,7,9,7L9,6C8.92,5.956 8.748,5.898 8.5,5.898 8.252,5.898 8.08,5.956 8,6L8,7 7,7 7,6C7,5.42 7.631,5 8.5,5 9.369,5 10,5.42 10,6L10,7C10,7.551,9.551,8,9,8z" Fill="{Binding $parent[Button].Foreground}" Width="5" Height="8" Stretch="Uniform"/>
                             </Button>
                         </StackPanel>
+                        <Rectangle Classes="DownwardShadow" Grid.Row="2"/>
                     </Grid>
                 </Border>
             </ControlTemplate>
@@ -374,50 +379,78 @@
     <Style Selector="c|Ribbon[IsExpanded=False] /template/ Border &gt; Grid &gt; StackPanel &gt; Button#PART_ToggleButton">
         <Setter Property="ToolTip.Tip" Value="Expand the Ribbon" />
     </Style>
-    <Style Selector="c|Ribbon[IsExpanded=False] /template/ Border &gt; Grid &gt; StackPanel &gt; Button#PART_ToggleButton &gt; DrawingPresenter">
+    <Style Selector="c|Ribbon[IsExpanded=False] /template/ Border &gt; Grid &gt; StackPanel &gt; Button#PART_ToggleButton &gt; Path">
         <Setter Property="RenderTransform">
             <RotateTransform Angle="180" />
         </Setter>
     </Style>
+  
+    <Style Selector=":is(ContentControl).RibbonView">
+        <Setter Property="Margin" Value="0,0,0,-8"/>
+    </Style>
+    <Style Selector=":is(ContentControl).RibbonView > c|Ribbon">
+        <Setter Property="Margin" Value="0"/>
+    </Style>
 
     <!--  ribbon tab  -->
     <Style Selector="c|RibbonTab">
-        <Setter Property="BorderThickness" Value=".5 .5 .5 0" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
-        <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLightBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="8 2" />
-        <Setter Property="MinWidth" Value="58" />
+        <Setter Property="Padding" Value="8,3,8,4" />
+        <Setter Property="Margin" Value="-6,0" />
+        <Setter Property="MinWidth" Value="70" />
         <Setter Property="Template">
             <ControlTemplate>
-                <ContentPresenter
-                    Name="PART_ContentPresenter"
-                    Margin="{TemplateBinding Margin}"
-                    Padding="{TemplateBinding Padding}"
-                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Content="{TemplateBinding Header}"
-                    ContentTemplate="{TemplateBinding HeaderTemplate}" />
+              <Panel>
+                <Grid IsVisible="{TemplateBinding IsSelected}" ClipToBounds="True" ColumnDefinitions="6,*,6">
+                  <Grid.OpacityMask>
+                    <LinearGradientBrush StartPoint="0%,100%" EndPoint="0%,0%">
+                      <GradientStop Offset="0" Color="White"/>
+                      <GradientStop Offset="0.625" Color="#7FFFFFFF"/>
+                      <GradientStop Offset="1" Color="#00FFFFFF"/>
+                    </LinearGradientBrush>
+                  </Grid.OpacityMask>
+                  <!--Grid.Resources>
+                    <LinearGradientBrush x:Key="OpacityMaskBrush" StartPoint="0%,100%" EndPoint="0%,0%">
+                      <GradientStop Offset="0" Color="White"/>
+                      <GradientStop Offset="1" Color="#7FFFFFFF"/>
+                    </LinearGradientBrush>
+                  </Grid.Resources-->
+                  <Rectangle Classes="LeftwardShadow" Grid.Column="0"/>
+                  <Rectangle Fill="{DynamicResource Shadow.ShadowBrush}" Grid.Column="1"/>
+                  <Rectangle Classes="RightwardShadow" Grid.Column="2"/>
+                </Grid>
+                <Panel Margin="6,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  <Rectangle Classes="RibbonTabBackgroundRectangle"/>
+                  <ContentPresenter
+                      Name="PART_ContentPresenter"
+                      Padding="{TemplateBinding Padding}"
+                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                      Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      Content="{TemplateBinding Header}"
+                      ContentTemplate="{TemplateBinding HeaderTemplate}" />
+                </Panel>
+              </Panel>
             </ControlTemplate>
         </Setter>
     </Style>
     <Style Selector="c|RibbonTab:disabled">
         <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
     </Style>
-    <Style Selector="c|RibbonTab:pointerover">
-        <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-        <Setter Property="Margin" Value="0" />
+    <Style Selector="c|RibbonTab/template/ Rectangle.RibbonTabBackgroundRectangle">
+      <Setter Property="Fill" Value="#01000000"/>
     </Style>
-    <Style Selector="c|RibbonTab:selected">
-        <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-        <Setter Property="Margin" Value="0 0 0 -2" />
+    <Style Selector="c|RibbonTab:pointerover:not(:selected) /template/ Rectangle.RibbonTabBackgroundRectangle">
+        <Setter Property="Fill" Value="{DynamicResource Ribbon.TabHoverBackgroundBrush}" />
+    </Style>
+    <Style Selector="c|RibbonTab:selected /template/ Rectangle.RibbonTabBackgroundRectangle">
+        <Setter Property="Fill" Value="{DynamicResource Ribbon.TabSelectedBackgroundBrush}" />
     </Style>
     <Style Selector="c|RibbonTab &gt; StackPanel">
         <Setter Property="Orientation" Value="Horizontal" />

@@ -37,7 +37,7 @@
         </Grid.Styles>
 
         <!--  details view  -->
-        <DataGrid
+        <DataGrid Background="{DynamicResource FilesList.BackgroundBrush}"
             IsReadOnly="True"
             IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
             Items="{Binding Item.Children, Mode=OneWay}"
@@ -126,7 +126,8 @@
             IsVisible="{Binding PaneConfig.IsThumbnailView, Mode=OneWay}"
             Items="{Binding Item.Children, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            SelectionMode="Multiple">
+            SelectionMode="Multiple"
+            Background="{DynamicResource FilesList.BackgroundBrush}">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
                     <!--<Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />-->
@@ -204,7 +205,7 @@
         <Border
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="{DynamicResource ThemeBackgroundBrush}"
+            Background="{DynamicResource FilesList.BackgroundBrush}"
             BorderThickness="0"
             IsVisible="{Binding IsBusy}">
             <StackPanel

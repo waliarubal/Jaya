@@ -22,7 +22,6 @@ namespace Jaya.Shared.Controls
         public static readonly StyledProperty<object> HeaderContentProperty;
         public static readonly StyledProperty<bool> IsModalProperty;
         Button _closeButton, _minimizeButton, _maximizeButton;
-        Image _icon;
         bool _isTemplateApplied;
 
         static StyledWindow()
@@ -65,38 +64,7 @@ namespace Jaya.Shared.Controls
             _maximizeButton.IsVisible = isNotModal;
             _maximizeButton.Click += (sneder, args) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
 
-            _icon = GetControl<Image>(e, "PART_Icon");
-            if (Icon == null)
-            {
-                var uri = new Uri(DEFAULT_ICON, UriKind.Absolute);
-                var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-                using (var stream = assets.Open(uri))
-                {
-                    stream.Seek(0, SeekOrigin.Begin);
-                    _icon.Source = new Bitmap(stream);
-                }
-
-                Icon = new WindowIcon(_icon.Source);
-            }
-            else
-                _icon.Source = GetIcon(Icon);
-
             _isTemplateApplied = true;
-        }
-
-        protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
-
-            if (!_isTemplateApplied)
-                return;
-
-            switch (e.Property.Name)
-            {
-                case nameof(Icon):
-                    _icon.Source = GetIcon(Icon);
-                    break;
-            }
         }
 
         public object HeaderContent
@@ -126,29 +94,6 @@ namespace Jaya.Shared.Controls
         }
 
         Type IStyleable.StyleKey => typeof(StyledWindow);
-
-        Bitmap GetIcon(WindowIcon icon)
-        {
-            if (icon == null)
-            {
-                var uri = new Uri(DEFAULT_ICON, UriKind.Absolute);
-                var assets = AvaloniaLocator.Current.GetService<IAssetLoader>();
-                using (var stream = assets.Open(uri))
-                {
-                    stream.Seek(0, SeekOrigin.Begin);
-                    return new Bitmap(stream);
-                }
-            }
-            else
-            {
-                using (var stream = new MemoryStream())
-                {
-                    icon.Save(stream);
-                    stream.Seek(0, SeekOrigin.Begin);
-                    return new Bitmap(stream);
-                }
-            }
-        }
 
         void SetupSide(string name, StandardCursorType cursor, WindowEdge edge, ref TemplateAppliedEventArgs e)
         {

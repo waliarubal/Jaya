@@ -8,20 +8,21 @@
   </Design.PreviewWith>
 
   <Styles.Resources>
+    <co:IconImageConverter x:Key="IconImageConverter" />
     <co:InverseBooleanConverter x:Key="InverseBooleanConverter" />
   </Styles.Resources>
 
   <Style Selector="c|StyledWindow">
-    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+    <Setter Property="Background" Value="{DynamicResource Window.BackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Window.BorderBrush}" />
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
-    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource Window.ForegroundBrush}" />
     <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}" />
     <Setter Property="HasSystemDecorations" Value="False" />
     <Setter Property="SizeToContent" Value="Manual" />
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Classes="WindowEdgeBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+        <Border Classes="WindowEdgeBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
           <Border.Styles>
             <Style Selector="c|StyledWindow[WindowState=Maximized] /template/ Border.WindowEdgeBorder">
               <Setter Property="BorderThickness" Value="0"/>
@@ -56,7 +57,7 @@
                 <Style Selector="StackPanel &gt; Button &gt; Path">
                   <Setter Property="Width" Value="12" />
                   <Setter Property="Height" Value="12" />
-                  <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+                  <Setter Property="Fill" Value="{DynamicResource Window.TitlebarForegroundBrush}" />
                   <Setter Property="Stretch" Value="UniformToFill" />
                 </Style>
                 <Style Selector="StackPanel > Button">
@@ -67,15 +68,29 @@
                   <Setter Property="BorderThickness" Value="0" />
                   <Setter Property="BorderBrush" Value="Transparent" />
                 </Style>
+                <Style Selector="c|StyledWindow[IsModal=True] /template/ StackPanel > Button#PART_Close">
+                  <Setter Property="Width" Value="30"/>
+                </Style>
                 <Style Selector="StackPanel &gt; Button:pointerover /template/ ContentPresenter">
-                  <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
-                  <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+                  <Setter Property="Background" Value="{DynamicResource Window.CaptionButtonHoverBrush}" />
                 </Style>
                 <Style Selector="StackPanel &gt; Button:pressed /template/ ContentPresenter">
-                  <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+                  <Setter Property="Background" Value="{DynamicResource Window.CaptionButtonPressedBrush}" />
                 </Style>
                 <Style Selector="StackPanel &gt; Button:disabled">
                   <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+                </Style>
+                <Style Selector="c|StyledWindow[IsActive=False] /template/ StackPanel > Button:not(:pointerover):not(:pressed)">
+                  <Setter Property="Opacity" Value="0.375" />
+                </Style>
+                <Style Selector="c|StyledWindow[IsActive=False] /template/ :is(Control).TranslucentWhenWindowInactive">
+                  <Setter Property="Opacity" Value="0.375" />
+                </Style>
+                <Style Selector="c|StyledWindow[IsActive=True] /template/ Rectangle.TitlebarBackground">
+                  <Setter Property="Fill" Value="{DynamicResource Window.ActiveTitlebarBackgroundBrush}"/>
+                </Style>
+                <Style Selector="c|StyledWindow[IsActive=False] /template/ Rectangle.TitlebarBackground">
+                  <Setter Property="Fill" Value="{DynamicResource Window.InactiveTitlebarBackgroundBrush}"/>
                 </Style>
               </Grid.Styles>
               <Grid.ColumnDefinitions>
@@ -90,22 +105,32 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
               </Grid.RowDefinitions>
-
-              <Grid
+              <Rectangle
+                  Classes="TitlebarBackground"
                   Grid.Row="1"
                   Grid.Column="1"
-                  Margin="2">
+                  Grid.ColumnSpan="2" />
+              <Rectangle
+                  Classes="UpwardShadow"
+                  VerticalAlignment="Bottom"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="2" />
+              <Grid
+                  Grid.Row="1"
+                  Grid.Column="1">
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="Auto" />
                   <ColumnDefinition Width="Auto" />
                   <ColumnDefinition Width="Auto" />
                   <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image
+                <Image Classes="TranslucentWhenWindowInactive"
                     Name="PART_Icon"
-                    Width="16"
-                    Height="16"
-                    Margin="2,0" />
+                    MaxWidth="16"
+                    MaxHeight="16"
+                    Margin="4,2"
+                    Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource IconImageConverter}}" />
                 <ContentControl
                     Grid.Column="1"
                     HorizontalContentAlignment="Left"
@@ -115,16 +140,11 @@
                     IsVisible="{TemplateBinding IsModal,
                                                         Converter={StaticResource InverseBooleanConverter}}" />
                 <Border
-                    Grid.Column="2"
-                    Classes="Separator"
-                    IsVisible="{TemplateBinding IsModal,
-                                                        Converter={StaticResource InverseBooleanConverter}}" />
-                <Border
                     Name="PART_TitleBar"
                     Grid.Column="3"
-                    Background="{TemplateBinding Background}"
+                    Background="#01000000"
                     BorderThickness="0">
-                  <TextBlock
+                  <TextBlock Classes="TranslucentWhenWindowInactive" Foreground="{DynamicResource Window.TitlebarForegroundBrush}"
                       VerticalAlignment="Center"
                       Text="{TemplateBinding Title}"
                       TextAlignment="Left" />
@@ -139,8 +159,10 @@
                     <Setter Property="Foreground" Value="White" />
                   </Style>
                   <Style Selector="Button#PART_Close:pointerover /template/ ContentPresenter">
-                    <Setter Property="Background" Value="Red" />
-                    <Setter Property="BorderBrush" Value="Red" />
+                    <Setter Property="Background" Value="#FFE81123" />
+                  </Style>
+                  <Style Selector="Button#PART_Close:pressed /template/ ContentPresenter">
+                    <Setter Property="Background" Value="#99E71022" />
                   </Style>
                   <Style Selector="Button#PART_Maximize">
                     <Setter Property="ToolTip.Tip" Value="Maximize" />
@@ -173,6 +195,10 @@
                   <Path Data="M 0 0 L 10 10 M 10 0 L 0 10" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Center" Width="10" Height="10"/>
                 </Button>
               </StackPanel>
+              <Rectangle Grid.Row="2"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="2"
+                  Fill="{TemplateBinding Background}" />
               <ContentPresenter
                   Name="PART_ContentPresenter"
                   Grid.Row="2"

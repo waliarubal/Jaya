@@ -10,13 +10,29 @@
     d:DesignWidth="800"
     j:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
+  <UserControl.Template>
+    <ControlTemplate>
+      <Panel>
+        <ContentPresenter Name="PART_ContentPresenter"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        Content="{TemplateBinding Content}"
+                        Padding="{TemplateBinding Padding}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+        <Rectangle Classes="UpwardShadow" VerticalAlignment="Bottom"/>
+      </Panel>
+    </ControlTemplate>
+  </UserControl.Template>
     <Design.DataContext>
         <vm:AddressbarViewModel />
     </Design.DataContext>
     <UserControl.Resources>
         <j:BitmapValueConverter x:Key="BitmapValueConverter" />
     </UserControl.Resources>
-    <Grid Margin="6,4,12,4">
+    <Grid Margin="6,4">
         <Grid.Styles>
             <Style Selector="Button.NavigationButton">
                 <Setter Property="MinHeight" Value="30" />
@@ -25,30 +41,38 @@
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource NavigationBar.ControlIdleForegroundBrush}" />
+                <Setter Property="Template">
+                  <ControlTemplate>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Content="{TemplateBinding Content}"
+                                      Padding="{TemplateBinding Padding}"
+                                      TextBlock.Foreground="{TemplateBinding Foreground}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                  </ControlTemplate>
+                </Setter>
             </Style>
             <Style Selector="Button.PrimaryNavigationButton">
-                <Setter Property="MinWidth" Value="30" />
+                <Setter Property="MinWidth" Value="29" />
             </Style>
             <Style Selector="Button.SecondaryNavigationButton">
                 <Setter Property="MinWidth" Value="20" />
             </Style>
             <Style Selector="Button.TertiaryNavigationButton">
-                <Setter Property="MinWidth" Value="30" />
+                <Setter Property="MinWidth" Value="24" />
             </Style>
 
-            <Style Selector="Button:pointerover /template/ ContentPresenter, ToggleButton:pointerover /template/ ContentPresenter">
-                <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+            <Style Selector="Button:pointerover, ToggleButton:pointerover">
+              <Setter Property="Foreground" Value="{DynamicResource NavigationBar.ControlHoverForegroundBrush}" />
             </Style>
-            <Style Selector="Button:pressed /template/ ContentPresenter, ToggleButton:pressed /template/ ContentPresenter">
-                <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+            <Style Selector="Button:pressed, ToggleButton:pressed">
+              <Setter Property="Foreground" Value="{DynamicResource NavigationBar.ControlPressedForegroundBrush}" />
             </Style>
             <Style Selector="Button:disabled, ToggleButton:disabled">
                 <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-            </Style>
-            <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
             </Style>
 
             <Style Selector="Button &gt; Image">
@@ -69,15 +93,15 @@
 
             <Style Selector="Border.AddressBox">
                 <Setter Property="Height" Value="30" />
-                <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
-                <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource NavigationBar.BoxIdleBorderBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
             </Style>
             <Style Selector="Border.AddressBox:pointerover">
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource NavigationBar.BoxHoverBorderBrush}" />
             </Style>
             <Style Selector="Border.AddressBox:focus">
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource NavigationBar.BoxHoverBorderBrush}" />
             </Style>
             <Style Selector="Border.AddressBox Button">
                 <Setter Property="MinWidth" Value="30" />
@@ -87,13 +111,113 @@
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource NavigationBar.ControlIdleForegroundBrush}" />
+                <Setter Property="Template">
+                  <ControlTemplate>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Background="Transparent" BorderBrush="Transparent" BorderThickness="0"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Content="{TemplateBinding Content}"
+                                      Padding="{TemplateBinding Padding}"
+                                      TextBlock.Foreground="{TemplateBinding Foreground}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                  </ControlTemplate>
+                </Setter>
             </Style>
 
-            <Style Selector="Border.AddressBox &gt; Grid &gt; TextBox, Border.AddressBox &gt; Grid &gt; ComboBox">
-                <Setter Property="Height" Value="18" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Padding" Value="0" />
+            <Style Selector="Border.AddressBox ComboBox">
+                <Setter Property="BorderThickness" Value="0,0,1,0" />
+                <Setter Property="BorderBrush" Value="{DynamicResource NavigationBar.BoxIdleBorderBrush}" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+            <Style Selector="Border.AddressBox:pointerover ComboBox">
+              <Setter Property="BorderBrush" Value="{DynamicResource NavigationBar.BoxHoverBorderBrush}" />
+            </Style>
+            <Style Selector="TextBox.SearchBox">
+              <Setter Property="Height" Value="30" />
+              <Setter Property="Background" Value="Transparent" />
+              <Setter Property="BorderBrush" Value="{DynamicResource NavigationBar.BoxIdleBorderBrush}" />
+              <Setter Property="BorderThickness" Value="1" />
+              <Setter Property="Margin" Value="0"/>
+              <Setter Property="Template">
+                <ControlTemplate>
+                  <Border Name="border"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+                    <DockPanel>
+                      <Panel
+                    DockPanel.Dock="Left"
+                    Width="13"
+                    Height="13"
+                    Margin="14,0,9,0">
+                        <Line
+                            Stroke="{DynamicResource ThemeControlHighBrush}"
+                            StrokeThickness="1"
+                            StartPoint="0,13"
+                            EndPoint="5,8" />
+                        <Ellipse
+                            Width="8.5"
+                            Height="8.5"
+                            Margin="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Stroke="{DynamicResource ThemeControlHighBrush}"
+                            StrokeThickness="1" />
+                      </Panel>
+                      <DockPanel Margin="{TemplateBinding Padding}">
+
+                        <TextBlock Name="floatingWatermark"
+                                   Foreground="{DynamicResource ThemeAccentBrush}"
+                                   FontSize="{DynamicResource FontSizeSmall}"
+                                   Text="{TemplateBinding Watermark}"
+                                   DockPanel.Dock="Top">
+                          <TextBlock.IsVisible>
+                            <MultiBinding Converter="{x:Static BoolConverters.And}">
+                              <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                                       Path="UseFloatingWatermark"/>
+                              <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                                       Path="Text"
+                                       Converter="{x:Static StringConverters.IsNotNullOrEmpty}"/>
+                            </MultiBinding>
+                          </TextBlock.IsVisible>
+                        </TextBlock>
+
+                        <DataValidationErrors>
+                          <ScrollViewer HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                                        VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
+
+                            <Panel>
+                              <TextBlock Name="watermark"
+                                         Opacity="0.5"
+                                         Text="{TemplateBinding Watermark}"
+                                         IsVisible="{TemplateBinding Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"/>
+                              <TextPresenter Name="PART_TextPresenter"
+                                             Text="{TemplateBinding Text, Mode=TwoWay}"
+                                             CaretIndex="{TemplateBinding CaretIndex}"
+                                             SelectionStart="{TemplateBinding SelectionStart}"
+                                             SelectionEnd="{TemplateBinding SelectionEnd}"
+                                             TextAlignment="{TemplateBinding TextAlignment}"
+                                             TextWrapping="{TemplateBinding TextWrapping}"
+                                             PasswordChar="{TemplateBinding PasswordChar}"
+                                             SelectionBrush="{TemplateBinding SelectionBrush}"
+                                             SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                                             CaretBrush="{TemplateBinding CaretBrush}"/>
+                            </Panel>
+                          </ScrollViewer>
+                        </DataValidationErrors>
+                      </DockPanel>
+                    </DockPanel>
+                  </Border>
+                </ControlTemplate>
+              </Setter>
+            </Style>
+            <Style Selector="TextBox:pointerover /template/ Border#border">
+              <Setter Property="BorderBrush" Value="{DynamicResource NavigationBar.BoxHoverBorderBrush}" />
+            </Style>
+            <Style Selector="TextBox:focus /template/ Border#border">
+              <Setter Property="BorderBrush" Value="{DynamicResource NavigationBar.BoxHoverBorderBrush}" />
             </Style>
         </Grid.Styles>
         <Grid.ColumnDefinitions>
@@ -183,8 +307,8 @@
                         Margin="6,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Data="{DynamicResource Icon.RightChevron}"
-                        Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="2" />
+                        Data="{DynamicResource Icon.RightChevronSmall}"
+                        Stroke="{DynamicResource NavigationBar.ControlIdleForegroundBrush}" StrokeThickness="2" />
                     <ItemsControl
                         Margin="0,0,16,0"
                         Padding="0"
@@ -205,8 +329,8 @@
                                         Margin="6,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Data="{DynamicResource Icon.RightChevron}"
-                                        Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="2" />
+                                        Data="{DynamicResource Icon.RightChevronSmall}"
+                                        Stroke="{DynamicResource NavigationBar.ControlIdleForegroundBrush}" StrokeThickness="2" />
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -247,42 +371,9 @@
             Grid.Column="5"
             Width="12"
             Opacity="0" />
-        <Border Grid.Column="6" Classes="AddressBox">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="31" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Panel
-                    Grid.Column="0"
-                    Width="13"
-                    Height="13">
-                    <Line
-                        Stroke="{DynamicResource ThemeControlHighBrush}"
-                        StrokeThickness="1"
-                        StartPoint="0,13"
-                        EndPoint="5,8" />
-                    <Ellipse
-                        Width="8.5"
-                        Height="8.5"
-                        Margin="1"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Stroke="{DynamicResource ThemeControlHighBrush}"
-                        StrokeThickness="1" />
-                </Panel>
-                <TextBox
-                    Grid.Column="1"
-                    Margin="9,0"
-                    AcceptsReturn="False"
-                    Text="{Binding SearchQuery, Mode=TwoWay}"
-                    TextWrapping="NoWrap"
-                    Watermark="{Binding SearchWatermark, Mode=OneWay}" />
-
+        <DockPanel Margin="6,0,2,0" Grid.Column="6">
                 <Button
-                    Grid.Column="2"
+                    DockPanel.Dock="Right"
                     Command="{Binding ClearSearchCommand}"
                     IsVisible="{Binding SearchQuery.Length, Mode=OneWay}"
                     ToolTip.Tip="Clear Search">
@@ -292,7 +383,7 @@
                         Data="M 0 0 L 10 10 M 0 10 L 10 0" />
                 </Button>
                 <Button
-                    Grid.Column="3"
+                    DockPanel.Dock="Right"
                     Command="{Binding SearchCommand}"
                     CommandParameter="{Binding SearchQuery, Mode=OneWay}"
                     IsVisible="{Binding SearchQuery.Length, Mode=OneWay}"
@@ -302,7 +393,12 @@
                         Height="10"
                         Data="M 7 0 L 12 5 L 7 10 M 0 5 L 12 5" />
                 </Button>
-            </Grid>
-        </Border>
+          <TextBox ZIndex="-10"
+                   Classes="SearchBox"
+                   AcceptsReturn="False"
+                   Text="{Binding SearchQuery, Mode=TwoWay}"
+                   TextWrapping="NoWrap"
+                   Watermark="{Binding SearchWatermark, Mode=OneWay}" />
+      </DockPanel>
     </Grid>
 </UserControl>

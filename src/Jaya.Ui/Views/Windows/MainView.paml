@@ -10,15 +10,16 @@
     Title="{Binding WindowTitle, Mode=OneWay}"
     Width="800"
     Height="600"
+    Icon="avares://Jaya.Ui/Assets/Logo.ico"
     mc:Ignorable="d" j:ViewModelLocator.AutoWireViewModel="True">
     <StyledWindow.HeaderContent>
       <v:MenuView IsVisible="{Binding !PaneConfig.IsRibbonVisible, Mode=OneWay}" />
     </StyledWindow.HeaderContent>
     <DockPanel>
-        <v:RibbonView DockPanel.Dock="Top" IsVisible="{Binding $parent[DockPanel].DataContext.PaneConfig.IsRibbonVisible, Mode=OneWay}" />
-        <v:ToolbarView DockPanel.Dock="Top" IsVisible="{Binding $parent[DockPanel].DataContext.IsToolbarVisible, Mode=OneWay}" />
-        <v:AddressbarView DockPanel.Dock="Top" />
-        <v:StatusbarView DockPanel.Dock="Bottom" IsVisible="{Binding $parent[DockPanel].DataContext.PaneConfig.IsStatusBarVisible, Mode=OneWay}" />
+        <v:RibbonView Classes="RibbonView" DockPanel.Dock="Top" IsVisible="{Binding $parent[DockPanel].DataContext.PaneConfig.IsRibbonVisible, Mode=OneWay}" />
+        <v:ToolbarView Classes="ToolbarView" DockPanel.Dock="Top" IsVisible="{Binding $parent[DockPanel].DataContext.IsToolbarVisible, Mode=OneWay}" />
+        <v:AddressbarView Classes="AddressbarView" DockPanel.Dock="Top" />
+        <v:StatusbarView Classes="StatusbarView" DockPanel.Dock="Bottom" IsVisible="{Binding $parent[DockPanel].DataContext.PaneConfig.IsStatusBarVisible, Mode=OneWay}" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding $parent[DockPanel].DataContext.PaneConfig.NavigationPaneWidth, Mode=OneWay}" />
@@ -27,22 +28,22 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="{Binding $parent[DockPanel].DataContext.PaneConfig.PreviewOrDetailsPanePaneWidth, Mode=OneWay}" />
             </Grid.ColumnDefinitions>
-            <v:NavigationView
+            <v:NavigationView Classes="NavigationView"
                 Grid.Column="0"
                 Width="{Binding $parent[Grid].Grid.ColumnDefinitions[0].Bounds.Width, Mode=OneWay}"
                 IsVisible="{Binding $parent[Grid].DataContext.PaneConfig.IsNavigationPaneVisible, Mode=OneWay}" />
-            <GridSplitter
+            <GridSplitter Classes="MainWindowGridSplitter"
                 Grid.Column="1"
                 IsVisible="{Binding $parent[Grid].DataContext.PaneConfig.IsNavigationPaneVisible, Mode=OneWay}" />
-            <GridSplitter
+            <GridSplitter Classes="MainWindowGridSplitter"
                 Grid.Column="3"
                 IsVisible="{Binding $parent[Grid].DataContext.PaneConfig.IsPreviewOrDetailsPaneVisible, Mode=OneWay}" />
-            <v:ExplorerView Grid.Column="2" Padding="8,0,0,0" />
-            <v:PreviewView
+            <v:ExplorerView Classes="ExplorerView" Grid.Column="2" Padding="8,0,0,0" />
+            <v:PreviewView Classes="PreviewView"
                 Grid.Column="4"
                 Width="{Binding $parent[Grid].Grid.ColumnDefinitions[4].Bounds.Width, Mode=OneWay}"
                 IsVisible="{Binding $parent[Grid].DataContext.PaneConfig.IsPreviewPaneVisible, Mode=OneWay}" />
-            <v:DetailsView
+            <v:DetailsView Classes="DetailsView"
                 Grid.Column="4"
                 Width="{Binding $parent[Grid].Grid.ColumnDefinitions[4].Bounds.Width, Mode=OneWay}"
                 IsVisible="{Binding $parent[Grid].DataContext.PaneConfig.IsDetailsPaneVisible, Mode=OneWay}" />

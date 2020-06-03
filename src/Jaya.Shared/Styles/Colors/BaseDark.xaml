@@ -1,0 +1,60 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Styles.Resources>
+    <Color x:Key="Shadow.ShadowColor">#60000000</Color>
+    <GradientStops x:Key="Shadow.ShadowStops">
+      <GradientStop Offset="0" Color="{DynamicResource Shadow.ShadowColor}"/>
+      <GradientStop Offset="0.333" Color="#30000000"/>
+      <GradientStop Offset="0.667" Color="#15000000"/>
+      <GradientStop Offset="1" Color="#00000000"/>
+    </GradientStops>
+    
+    <Color x:Key="Window.BorderColor">#FF535353</Color>
+    <Color x:Key="Window.BackgroundColor">#FF191919</Color>
+    <Color x:Key="Window.ForegroundColor">#FFFFFFFF</Color>
+
+    <Color x:Key="Window.ActiveTitlebarBackgroundColor">#FF2B2B2B</Color>
+    <Color x:Key="Window.InactiveTitlebarBackgroundColor">#FF3E3E3E</Color>
+    <Color x:Key="Window.TitlebarForegroundColor">#FFFFFFFF</Color>
+
+    <Color x:Key="Window.CaptionButtonHoverColor">#1AFFFFFF</Color>
+    <Color x:Key="Window.CaptionButtonPressedColor">#36FFFFFF</Color>
+
+
+    <Color x:Key="Ribbon.TabStripBackgroundColor">#FF191919</Color>
+    <Color x:Key="Ribbon.BackgroundColor">#FF303030</Color>
+    <Color x:Key="Ribbon.SeparatorColor">#FF555555</Color>
+
+    <Color x:Key="Ribbon.TabHoverBackgroundColor">#1AFFFFFF</Color>
+    <Color x:Key="Ribbon.TabSelectedBackgroundColor">#FF303030</Color>
+
+    <Color x:Key="Ribbon.FileButtonIdleColor">#FF0066B4</Color>
+    <Color x:Key="Ribbon.FileButtonHoverColor">#FF197FCD</Color>
+    <Color x:Key="Ribbon.FileButtonPressedColor">#FF004D9B</Color>
+
+    <Color x:Key="Ribbon.ControlHoverBackgroundColor">#40BFBFBF</Color>
+    <Color x:Key="Ribbon.ControlPressedBackgroundColor">#80BFBFBF</Color>
+
+
+    <Color x:Key="NavigationBar.BoxIdleBorderColor">#FF535353</Color>
+    <Color x:Key="NavigationBar.BoxHoverBorderColor">#FF6C6C6C</Color>
+
+    <Color x:Key="NavigationBar.ControlIdleForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="NavigationBar.ControlHoverForegroundColor">#FF3298FE</Color>
+    <Color x:Key="NavigationBar.ControlPressedForegroundColor">#FF3674B2</Color>
+
+
+    <Color x:Key="NavigationPane.ItemHoverColor">#1AFFFFFF</Color>
+    <Color x:Key="NavigationPane.ItemSelectedColor">#26FFFFFF</Color>
+
+
+    <Color x:Key="FilesList.BackgroundColor">#FF202020</Color>
+    <Color x:Key="FilesList.SeparatorColor">#FF2B2B2B</Color>
+
+    <Color x:Key="FilesList.ItemHoverColor">#1AFFFFFF</Color>
+    <Color x:Key="FilesList.ItemSelectedColor">#36FFFFFF</Color>
+
+
+    <Color x:Key="StatusBar.BackgroundColor">#FF303030</Color>
+    <Color x:Key="StatusBar.SeparatorColor">#FF555555</Color>
+  </Styles.Resources>
+</Styles>

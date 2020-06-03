@@ -1,0 +1,79 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Styles.Resources>
+    <SolidColorBrush x:Key="Shadow.ShadowBrush" Color="{DynamicResource Shadow.ShadowColor}"/>
+    <LinearGradientBrush x:Key="Shadow.LeftwardBrush" StartPoint="150%,0%" EndPoint="0%,0%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
+    <LinearGradientBrush x:Key="Shadow.UpwardBrush" StartPoint="0%,200%" EndPoint="0%,0%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
+    <LinearGradientBrush x:Key="Shadow.RightwardBrush" StartPoint="-50%,0%" EndPoint="100%,0%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
+    <LinearGradientBrush x:Key="Shadow.DownwardBrush" StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
+
+    <SolidColorBrush x:Key="Window.BorderBrush" Color="{DynamicResource Window.BorderColor}"/>
+    <SolidColorBrush x:Key="Window.BackgroundBrush" Color="{DynamicResource Window.BackgroundColor}"/>
+    <SolidColorBrush x:Key="Window.ForegroundBrush" Color="{DynamicResource Window.ForegroundColor}"/>
+
+    <SolidColorBrush x:Key="Window.ActiveTitlebarBackgroundBrush" Color="{DynamicResource Window.ActiveTitlebarBackgroundColor}"/>
+    <SolidColorBrush x:Key="Window.InactiveTitlebarBackgroundBrush" Color="{DynamicResource Window.InactiveTitlebarBackgroundColor}"/>
+    <SolidColorBrush x:Key="Window.TitlebarForegroundBrush" Color="{DynamicResource Window.TitlebarForegroundColor}"/>
+
+    <SolidColorBrush x:Key="Window.CaptionButtonHoverBrush" Color="{DynamicResource Window.CaptionButtonHoverColor}"/>
+    <SolidColorBrush x:Key="Window.CaptionButtonPressedBrush" Color="{DynamicResource Window.CaptionButtonPressedColor}"/>
+
+
+    <SolidColorBrush x:Key="Ribbon.TabStripBackgroundBrush" Color="{DynamicResource Ribbon.TabStripBackgroundColor}"/>
+    <SolidColorBrush x:Key="Ribbon.BackgroundBrush" Color="{DynamicResource Ribbon.BackgroundColor}"/>
+    <SolidColorBrush x:Key="Ribbon.SeparatorBrush" Color="{DynamicResource Ribbon.SeparatorColor}"/>
+
+    <SolidColorBrush x:Key="Ribbon.TabHoverBackgroundBrush" Color="{DynamicResource Ribbon.TabHoverBackgroundColor}"/>
+    <SolidColorBrush x:Key="Ribbon.TabSelectedBackgroundBrush" Color="{DynamicResource Ribbon.TabSelectedBackgroundColor}"/>
+
+    <SolidColorBrush x:Key="Ribbon.FileButtonIdleBrush" Color="{DynamicResource Ribbon.FileButtonIdleColor}"/>
+    <SolidColorBrush x:Key="Ribbon.FileButtonHoverBrush" Color="{DynamicResource Ribbon.FileButtonHoverColor}"/>
+    <SolidColorBrush x:Key="Ribbon.FileButtonPressedBrush" Color="{DynamicResource Ribbon.FileButtonPressedColor}"/>
+
+    <SolidColorBrush x:Key="Ribbon.ControlHoverBackgroundBrush" Color="{DynamicResource Ribbon.ControlHoverBackgroundColor}"/>
+    <SolidColorBrush x:Key="Ribbon.ControlPressedBackgroundBrush" Color="{DynamicResource Ribbon.ControlPressedBackgroundColor}"/>
+
+
+    <SolidColorBrush x:Key="NavigationBar.BoxIdleBorderBrush" Color="{DynamicResource NavigationBar.BoxIdleBorderColor}"/>
+    <SolidColorBrush x:Key="NavigationBar.BoxHoverBorderBrush" Color="{DynamicResource NavigationBar.BoxHoverBorderColor}"/>
+
+    <SolidColorBrush x:Key="NavigationBar.ControlIdleForegroundBrush" Color="{DynamicResource NavigationBar.ControlIdleForegroundColor}"/>
+    <SolidColorBrush x:Key="NavigationBar.ControlHoverForegroundBrush" Color="{DynamicResource NavigationBar.ControlHoverForegroundColor}"/>
+    <SolidColorBrush x:Key="NavigationBar.ControlPressedForegroundBrush" Color="{DynamicResource NavigationBar.ControlPressedForegroundColor}"/>
+
+
+    <SolidColorBrush x:Key="NavigationPane.ItemHoverBrush" Color="{DynamicResource NavigationPane.ItemHoverColor}"/>
+    <SolidColorBrush x:Key="NavigationPane.ItemSelectedBrush" Color="{DynamicResource NavigationPane.ItemSelectedColor}"/>
+
+
+    <SolidColorBrush x:Key="FilesList.BackgroundBrush" Color="{DynamicResource FilesList.BackgroundColor}"/>
+    <SolidColorBrush x:Key="FilesList.SeparatorBrush" Color="{DynamicResource FilesList.SeparatorColor}"/>
+
+    <SolidColorBrush x:Key="FilesList.ItemHoverBrush" Color="{DynamicResource FilesList.ItemHoverColor}"/>
+    <SolidColorBrush x:Key="FilesList.ItemSelectedBrush" Color="{DynamicResource FilesList.ItemSelectedColor}"/>
+
+
+    <SolidColorBrush x:Key="StatusBar.BackgroundBrush" Color="{DynamicResource StatusBar.BackgroundColor}"/>
+    <SolidColorBrush x:Key="StatusBar.SeparatorBrush" Color="{DynamicResource StatusBar.SeparatorColor}"/>
+  </Styles.Resources>
+
+  <!--<LinearGradientBrush x:Key="Shadow.LeftwardBrush"
+    <LinearGradientBrush x:Key="Shadow.UpwardBrush"
+    <LinearGradientBrush x:Key="Shadow.RightwardBrush"
+    <LinearGradientBrush x:Key="Shadow.DownwardBrush"-->
+  <Style Selector="Rectangle.LeftwardShadow">
+    <Setter Property="Fill" Value="{DynamicResource Shadow.LeftwardBrush}"/>
+    <Setter Property="Width" Value="6"/>
+  </Style>
+  <Style Selector="Rectangle.UpwardShadow">
+    <Setter Property="Fill" Value="{DynamicResource Shadow.UpwardBrush}"/>
+    <Setter Property="Height" Value="4"/>
+  </Style>
+  <Style Selector="Rectangle.RightwardShadow">
+    <Setter Property="Fill" Value="{DynamicResource Shadow.RightwardBrush}"/>
+    <Setter Property="Width" Value="6"/>
+  </Style>
+  <Style Selector="Rectangle.DownwardShadow">
+    <Setter Property="Fill" Value="{DynamicResource Shadow.DownwardBrush}"/>
+    <Setter Property="Height" Value="8"/>
+  </Style>
+</Styles>
