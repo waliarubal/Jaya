@@ -76,8 +76,8 @@ Task("BuildWindows64")
     };
     DotNetCorePublish(GetPath(_sourceDirectory), settings);
 
-    Information("Create archive 'windows.zip' from the build.");
-    Zip(outputDirectory, _outputDirectory + File("windows.zip"));
+    Information("Create portable ZIP archive from the build.");
+    Zip(outputDirectory, _outputDirectory + File("windows_portable.zip"));
 
     Information("Create installation setup.");
     var setupSettings = new InnoSetupSettings
@@ -99,7 +99,25 @@ Task("BuildMacOS64")
     .IsDependentOn("BuildInitialization")
     .Does(() => 
 {
-    Information("Executing MacOS (64-bit) build.");
+    var outputDirectory = _outputDirectory + Directory("osx");
+
+    Information("Build for MacOS (64-bit).");
+    var settings = new DotNetCorePublishSettings
+    {
+        Framework = "netcoreapp3.1",
+        Configuration = "Release",
+        SelfContained = true,
+        Runtime = "osx-x64",
+        OutputDirectory = GetPath(outputDirectory)
+    };
+    DotNetCorePublish(GetPath(_sourceDirectory), settings);
+
+    Information("Create portable ZIP archive from the build.");
+    Zip(outputDirectory, _outputDirectory + File("osx_portable.zip"));
+
+    Information("Create MacOS application bundle.");
+    CopyDirectory(_buildDirectory + Directory("Jaya.app"), _outputDirectory + Directory("Jaya.app"));
+    CopyDirectory(outputDirectory, _outputDirectory + Directory("Jaya.app/Contents/MacOS"));
 });
 
 Task("BuildLinux64")
@@ -107,7 +125,21 @@ Task("BuildLinux64")
     .IsDependentOn("BuildInitialization")
     .Does(() => 
 {
-    Information("Executing Linux (64-bit) build.");
+    var outputDirectory = _outputDirectory + Directory("osx");
+
+    Information("Build for Linux (64-bit).");
+    var settings = new DotNetCorePublishSettings
+    {
+        Framework = "netcoreapp3.1",
+        Configuration = "Release",
+        SelfContained = true,
+        Runtime = "linux-x64",
+        OutputDirectory = GetPath(outputDirectory)
+    };
+    DotNetCorePublish(GetPath(_sourceDirectory), settings);
+
+    Information("Create portable ZIP archive from the build.");
+    Zip(outputDirectory, _outputDirectory + File("linux_portable.zip"));
 });
 
 Task("Deploy")
