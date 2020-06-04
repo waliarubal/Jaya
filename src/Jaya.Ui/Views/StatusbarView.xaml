@@ -8,7 +8,23 @@
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
     j:ViewModelLocator.AutoWireViewModel="True"
     Design.Width="800"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Margin="0,-4,0,0" ZIndex="999">
+  <UserControl.Template>
+    <ControlTemplate>
+      <DockPanel>
+        <Rectangle Classes="UpwardShadow" DockPanel.Dock="Top"/>
+        <ContentPresenter Name="PART_ContentPresenter"
+                        Background="{DynamicResource StatusBar.BackgroundBrush}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        Content="{TemplateBinding Content}"
+                        Padding="{TemplateBinding Padding}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+      </DockPanel>
+    </ControlTemplate>
+  </UserControl.Template>
     <Design.DataContext>
         <vm:StatusbarViewModel />
     </Design.DataContext>
@@ -16,9 +32,9 @@
         <Style Selector="Border.Separator">
             <Setter Property="IsHitTestVisible" Value="False" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value=".5" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
-            <Setter Property="Margin" Value="8 0" />
+            <Setter Property="BorderThickness" Value="0.5" />
+            <Setter Property="BorderBrush" Value="{DynamicResource StatusBar.SeparatorBrush}" />
+            <Setter Property="Margin" Value="10,4" />
         </Style>
 
         <Style Selector="TextBlock">

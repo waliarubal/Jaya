@@ -16,6 +16,11 @@
         <Setter Property="Background" Value="#01000000" />
         <Setter Property="Margin" Value="0,0,-6,0"/>
         <Setter Property="ZIndex" Value="99"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="#01000000"/>
+        </ControlTemplate>
+      </Setter>
     </Style>
 
     <Style Selector="GridSplitter:horizontal">

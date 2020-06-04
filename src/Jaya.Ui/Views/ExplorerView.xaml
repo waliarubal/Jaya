@@ -37,7 +37,7 @@
         </Grid.Styles>
 
         <!--  details view  -->
-        <DataGrid Background="{DynamicResource FilesList.BackgroundBrush}"
+        <DataGrid Background="{DynamicResource FilesList.BackgroundBrush}" RowBackground="{DynamicResource FilesList.BackgroundBrush}"
             IsReadOnly="True"
             IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
             Items="{Binding Item.Children, Mode=OneWay}"
