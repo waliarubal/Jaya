@@ -29,6 +29,6 @@ jobs:
         # The path of the Cake script to run.
         script-path: build/build.cake
         # The verbosity level with which to run the script. Valid values are: Quiet, Minimal, Normal, Verbose or Diagnostic.
-        verbosity: Normal
+        verbosity: Diagnostic
         # Flag for if Cake modules should be installed/bootstrapped.
         cake-bootstrap: false
