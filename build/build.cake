@@ -19,6 +19,11 @@ ConvertableDirectoryPath _sourceDirectory, _buildDirectory, _outputDirectory;
 bool _isGithubActionsBuild;
 OperatingSystem _operatingSystem;
 
+string GetPath(ConvertableDirectoryPath path)
+{
+    return MakeAbsolute(path).FullPath;
+}
+
 Setup(context => 
 {
     _versionString = string.Format("{0}.{1}", VERSION_PREFIX, BUILD_NUMBER);
@@ -45,16 +50,16 @@ Task("BuildInitialization")
     .Does(() => 
 {
     Information($"Build is running on {_operatingSystem} operating system{(_isGithubActionsBuild ? " using Github Actions infrastructure" : string.Empty)}.");
-    Information($"Source Directory: {_sourceDirectory}");
-    Information($"Build Directory: {_buildDirectory}");
+    Information($"Source Directory: {GetPath(_sourceDirectory)}");
+    Information($"Build Directory: {GetPath(_buildDirectory)}");
     Information($"Version: {_versionString}");
 
-    Information($"Clean up any existing output in directory '{_outputDirectory}'.");
+    Information($"Clean up any existing output in directory '{GetPath(_outputDirectory)}'.");
     CleanDirectories(_outputDirectory);
 });
 
 Task("BuildWindows64")
-    .WithCriteria(_operatingSystem == OperatingSystem.Windows)
+    .WithCriteria(() => _operatingSystem == OperatingSystem.Windows)
     .IsDependentOn("BuildInitialization")
     .Does(() => 
 {
@@ -67,9 +72,9 @@ Task("BuildWindows64")
         Configuration = "Release",
         SelfContained = true,
         Runtime = "win-x64",
-        OutputDirectory = outputDirectory
+        OutputDirectory = GetPath(outputDirectory)
     };
-    DotNetCorePublish(_sourceDirectory, settings);
+    DotNetCorePublish(GetPath(_sourceDirectory), settings);
 
     Information("Create archive 'windows.zip' from the build.");
     Zip(outputDirectory, _outputDirectory + File("windows.zip"));
@@ -83,14 +88,14 @@ Task("BuildWindows64")
         {
             { "APP_NAME", APP_NAME },
             { "APP_VERSION", _versionString },
-            { "APP_ROOT", MakeAbsolute(Directory("../")).FullPath }
+            { "APP_ROOT", GetPath(Directory("../")) }
         }
     };
     InnoSetup(_buildDirectory + File("setup.iss"), setupSettings);
 });
 
 Task("BuildMacOS64")
-    .WithCriteria(_operatingSystem == OperatingSystem.MacOS)
+    .WithCriteria(() => _operatingSystem == OperatingSystem.MacOS)
     .IsDependentOn("BuildInitialization")
     .Does(() => 
 {
@@ -98,7 +103,7 @@ Task("BuildMacOS64")
 });
 
 Task("BuildLinux64")
-    .WithCriteria(_operatingSystem == OperatingSystem.Linux)
+    .WithCriteria(() => _operatingSystem == OperatingSystem.Linux)
     .IsDependentOn("BuildInitialization")
     .Does(() => 
 {
