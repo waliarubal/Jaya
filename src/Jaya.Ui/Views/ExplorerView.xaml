@@ -37,10 +37,12 @@
         </Grid.Styles>
 
         <!--  details view  -->
-        <DataGrid Background="{DynamicResource FilesList.BackgroundBrush}" RowBackground="{DynamicResource FilesList.BackgroundBrush}"
+        <DataGrid
+            Background="{DynamicResource FilesList.BackgroundBrush}"
             IsReadOnly="True"
             IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
             Items="{Binding Item.Children, Mode=OneWay}"
+            RowBackground="{DynamicResource FilesList.BackgroundBrush}"
             SelectionMode="Extended">
             <DataGrid.Styles>
                 <Style Selector="TextBlock">
@@ -63,15 +65,15 @@
                     <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
                     <Setter Property="Margin" Value="0 0 4 0" />
                 </Style>
-                <!--<Style Selector="DataGridRow">
-                    <Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />
-                </Style>-->
             </DataGrid.Styles>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel x:Name="ObjectEntry" Orientation="Horizontal" Background="#01000000">
+                            <StackPanel
+                                x:Name="ObjectEntry"
+                                Background="#01000000"
+                                Orientation="Horizontal">
                                 <i:Interaction.Behaviors>
                                     <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
                                         <ia:InvokeCommandAction Command="{Binding $parent[DataGrid].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
@@ -122,15 +124,14 @@
         <!--  thumbnail view  -->
         <ListBox
             Padding="0"
+            Background="{DynamicResource FilesList.BackgroundBrush}"
             BorderBrush="Transparent"
             IsVisible="{Binding PaneConfig.IsThumbnailView, Mode=OneWay}"
             Items="{Binding Item.Children, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            SelectionMode="Multiple"
-            Background="{DynamicResource FilesList.BackgroundBrush}">
+            SelectionMode="Multiple">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
-                    <!--<Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />-->
                     <Setter Property="Margin" Value="2" />
                 </Style>
                 <Style Selector="Image[IsVisible=True].Icon">
@@ -150,7 +151,7 @@
             </ListBox.Styles>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Width="{Binding $parent[ScrollContentPresenter].Bounds.Width, Mode=OneWay}"/>
+                    <WrapPanel Width="{Binding $parent[ScrollContentPresenter].Bounds.Width, Mode=OneWay}" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
