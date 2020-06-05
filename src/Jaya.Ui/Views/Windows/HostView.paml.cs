@@ -13,11 +13,10 @@ namespace Jaya.Ui.Views.Windows
 
         public HostView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-            App.ThemeSelector.EnableThemes(this);
         }
 
         private void InitializeComponent()

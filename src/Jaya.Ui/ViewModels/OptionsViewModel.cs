@@ -2,8 +2,9 @@
 // Copyright (c) Rubal Walia. All rights reserved.
 // Licensed under the 3-Clause BSD license. See LICENSE file in the project root for full license information.
 //
-using Avalonia.ThemeManager;
+using Jaya.Shared;
 using Jaya.Shared.Base;
+using Jaya.Shared.Models;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Jaya.Ui.ViewModels
             _shared = GetService<SharedService>();
         }
 
-        public IList<ITheme> Themes => App.ThemeSelector.Themes;
+        public IEnumerable<ThemeModel> Themes => ThemeManager.Instance.Themes;
 
         public ApplicationConfigModel ApplicationConfig => _shared.ApplicationConfiguration;
 

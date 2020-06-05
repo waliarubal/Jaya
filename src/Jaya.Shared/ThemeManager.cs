@@ -20,13 +20,15 @@ namespace Jaya.Shared
 
         private ThemeManager()
         {
+            _windows = new List<Window>();
+
             _themes = new List<ThemeModel>
             {
-                new ThemeModel("Light", new Uri("avares://Jaya.Shared/Styles/Colors/BaseLight.xaml")),
-                new ThemeModel("Dark", new Uri("avares://Jaya.Shared/Styles/Colors/BaseDark.xaml"))
+                new ThemeModel("Light", new Uri("avares://Jaya.Shared/Styles/Accents/BaseLight.xaml")),
+                new ThemeModel("Dark", new Uri("avares://Jaya.Shared/Styles/Accents/BaseDark.xaml"))
             };
 
-            _windows = new List<Window>();
+            SelectedTheme = _themes[0];
         }
 
         public static ThemeManager Instance
@@ -63,6 +65,9 @@ namespace Jaya.Shared
 
         internal void EnableTheme(Window window)
         {
+            if (SelectedTheme != null && SelectedTheme.Style != null)
+                window.Styles.Add(SelectedTheme.Style);
+
             window.Opened += (sender, e) =>
             {
                 _windows.Add(window);

@@ -5,7 +5,6 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Avalonia.ThemeManager;
 using Jaya.Shared;
 using Jaya.Ui.Services;
 using Jaya.Ui.Views.Windows;
@@ -25,8 +24,6 @@ namespace Jaya.Ui
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime)
             {
-                ThemeSelector = Avalonia.ThemeManager.ThemeSelector.Create("Themes");
-
                 _shared = ServiceLocator.Instance.GetService<SharedService>();
                 _shared.LoadConfigurations();
 
@@ -44,7 +41,5 @@ namespace Jaya.Ui
         }
 
         internal static IClassicDesktopStyleApplicationLifetime Lifetime => Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
-
-        internal static IThemeSelector ThemeSelector { get; private set; }
     }
 }

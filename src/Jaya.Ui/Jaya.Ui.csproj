@@ -32,7 +32,6 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.6" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.6" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.6" />
-    <PackageReference Include="Avalonia.ThemeManager" Version="0.9.4" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.9.6" />
     <PackageReference Include="RestSharp" Version="106.11.4" />
     <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="106.11.4" />

@@ -2,8 +2,9 @@
 // Copyright (c) Rubal Walia. All rights reserved.
 // Licensed under the 3-Clause BSD license. See LICENSE file in the project root for full license information.
 //
-using Avalonia.ThemeManager;
+using Jaya.Shared;
 using Jaya.Shared.Base;
+using Jaya.Shared.Models;
 using Newtonsoft.Json;
 using System;
 
@@ -48,14 +49,14 @@ namespace Jaya.Ui.Models
         }
 
 
-        public ITheme Theme
+        public ThemeModel Theme
         {
-            get => Get<ITheme>();
+            get => Get<ThemeModel>();
             set
             {
                 if (Set(value))
                 {
-                    App.ThemeSelector.SelectedTheme = value;
+                    ThemeManager.Instance.SelectedTheme = value;
                     Set(value.Name, nameof(ThemeName), false);
                 }
             }
@@ -74,7 +75,7 @@ namespace Jaya.Ui.Models
 
         void SetTheme(string name)
         {
-            foreach (var theme in App.ThemeSelector.Themes)
+            foreach (var theme in ThemeManager.Instance.Themes)
             {
                 if (theme.Name.Equals(name, StringComparison.InvariantCulture))
                 {

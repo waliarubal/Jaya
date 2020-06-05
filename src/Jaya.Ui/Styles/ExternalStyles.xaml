@@ -1,14 +1,14 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
-    
+
     <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml" />
     <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />-->
-    
+
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
-    
-    <StyleInclude Source="avares://Jaya.Shared/Styles/Colors/BaseLight.xaml" />
-    <!--<StyleInclude Source="avares://Jaya.Shared/Styles/Colors/BaseDark.xaml" />-->
-    
+
+    <StyleInclude Source="avares://Jaya.Shared/Styles/Accents/BaseLight.xaml" />
+    <!--<StyleInclude Source="avares://Jaya.Shared/Styles/Accents/BaseDark.xaml" />-->
+
     <StyleInclude Source="avares://Jaya.Shared/Styles/DefaultTheme.xaml" />
     <StyleInclude Source="avares://Jaya.Shared/Styles/GridSplitterStyle.xaml" />
     <StyleInclude Source="avares://Jaya.Shared/Styles/HyperlinkStyle.xaml" />
@@ -16,7 +16,7 @@
     <StyleInclude Source="avares://Jaya.Shared/Styles/StyledWindowStyle.xaml" />
     <StyleInclude Source="avares://Jaya.Shared/Styles/RibbonStyle.xaml" />
     <StyleInclude Source="avares://Jaya.Shared/Styles/GroupBoxStyle.xaml" />
-  
+
     <StyleInclude Source="avares://Jaya.Ui/Styles/AboutViewStyles.xaml" />
     <StyleInclude Source="avares://Jaya.Ui/Styles/AddressbarViewStyles.xaml" />
     <StyleInclude Source="avares://Jaya.Ui/Styles/ExplorerViewStyles.xaml" />

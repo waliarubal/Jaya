@@ -5,6 +5,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Jaya.Shared.Base;
+using Jaya.Shared.Controls;
 using System;
 using System.Globalization;
 using System.Reflection;
@@ -46,6 +47,10 @@ namespace Jaya.Shared
             var viewType = control.GetType();
             var viewName = viewType.FullName.Replace(".Views.", ".ViewModels.");
             var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+
+            var windowType = typeof(StyledWindow);
+            if (windowType.IsAssignableFrom(viewType))
+                ThemeManager.Instance.EnableTheme(view as StyledWindow);
 
             var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}Model, {1}", viewName, viewAssemblyName);
             var viewModelType = Type.GetType(viewModelName);
