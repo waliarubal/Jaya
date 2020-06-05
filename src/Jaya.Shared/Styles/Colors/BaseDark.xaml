@@ -45,16 +45,23 @@
 
     <Color x:Key="NavigationPane.ItemHoverColor">#1AFFFFFF</Color>
     <Color x:Key="NavigationPane.ItemSelectedColor">#26FFFFFF</Color>
+    
+    <Color x:Key="NavigationPane.ExpanderArrowIdleForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="NavigationPane.ExpanderArrowHoverForegroundColor">#FF3298FE</Color>
 
 
     <Color x:Key="FilesList.BackgroundColor">#FF202020</Color>
     <Color x:Key="FilesList.SeparatorColor">#FF2B2B2B</Color>
 
     <Color x:Key="FilesList.ItemHoverColor">#1AFFFFFF</Color>
+    <Color x:Key="FilesList.ItemSelectedHoverColor">#29FFFFFF</Color>
     <Color x:Key="FilesList.ItemSelectedColor">#36FFFFFF</Color>
 
 
     <Color x:Key="StatusBar.BackgroundColor">#FF303030</Color>
     <Color x:Key="StatusBar.SeparatorColor">#FF555555</Color>
+
+    <Color x:Key="StatusBar.ButtonHoverBackgroundColor">#40BFBFBF</Color>
+    <Color x:Key="StatusBar.ButtonCheckedBackgroundColor">#80BFBFBF</Color>
   </Styles.Resources>
 </Styles>

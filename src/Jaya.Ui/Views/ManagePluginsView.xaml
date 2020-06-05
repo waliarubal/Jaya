@@ -19,7 +19,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ListBox
+        <ListBox Classes="InstalledPlugins"
             Grid.RowSpan="2"
             Items="{Binding Plugins, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -27,15 +27,6 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Grid.Styles>
-                            <Style Selector="Image">
-                                <Setter Property="Width" Value="16" />
-                                <Setter Property="Height" Value="16" />
-                            </Style>
-                            <Style Selector="TextBlock">
-                                <Setter Property="Margin" Value="4 0 0 0" />
-                            </Style>
-                        </Grid.Styles>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -47,19 +38,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Grid Grid.Column="1" Margin="4,0">
-            <Grid.Styles>
-                <Style Selector="Image">
-                    <Setter Property="Width" Value="32" />
-                    <Setter Property="Height" Value="32" />
-                    <Setter Property="VerticalAlignment" Value="Top" />
-                    <Setter Property="HorizontalAlignment" Value="Left" />
-                </Style>
-                <Style Selector="TextBlock">
-                    <Setter Property="TextWrapping" Value="Wrap" />
-                    <Setter Property="Margin" Value="4 0 0 0" />
-                </Style>
-            </Grid.Styles>
+        <Grid Classes="SelectedPluginHeader" Grid.Column="1" Margin="4,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />

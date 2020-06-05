@@ -51,23 +51,11 @@
             IsIndeterminate="True"
             IsVisible="{Binding IsBusy, Mode=OneWay}" />
 
-        <Grid
+        <Grid Classes="UpdateAvailable"
             Grid.Row="2"
             Grid.ColumnSpan="3"
             Margin="0,8"
             IsVisible="{Binding IsUpdateAvailable}">
-            <Grid.Styles>
-                <Style Selector="StackPanel &gt; TextBlock">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                </Style>
-                <Style Selector="Border.Separator">
-                    <Setter Property="IsHitTestVisible" Value="False" />
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="BorderThickness" Value=".5" />
-                    <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
-                    <Setter Property="Margin" Value="0 2" />
-                </Style>
-            </Grid.Styles>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -100,19 +88,11 @@
             IsVisible="{Binding !IsUpdateAvailable}"
             Text="You are already running the latest version of software." />
 
-        <StackPanel
+        <StackPanel Classes="CheckForUpdates"
             Grid.Row="3"
             Grid.ColumnSpan="2"
             IsEnabled="{Binding !IsBusy, Mode=OneWay}"
             Orientation="Horizontal">
-            <StackPanel.Styles>
-                <Style Selector="Button &gt; TextBlock">
-                    <Setter Property="Margin" Value="8 0" />
-                </Style>
-                <Style Selector="Button">
-                    <Setter Property="Margin" Value="0 0 4 0" />
-                </Style>
-            </StackPanel.Styles>
             <Button Command="{Binding CheckForUpdateCommand}">
                 <TextBlock Text="Check for Update" />
             </Button>
@@ -121,15 +101,10 @@
             </Button>
         </StackPanel>
 
-        <StackPanel
+        <StackPanel Classes="Version"
             Grid.Row="3"
             Grid.Column="2"
             Orientation="Horizontal">
-            <StackPanel.Styles>
-                <Style Selector="StackPanel &gt; TextBlock">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                </Style>
-            </StackPanel.Styles>
             <TextBlock Text="Version " />
             <TextBlock Text="{Binding VersionString, Mode=OneTime, StringFormat='{}{0} '}" />
             <TextBlock Text="{Binding Bitness, Mode=OneTime, StringFormat='({0}-bit) '}" />

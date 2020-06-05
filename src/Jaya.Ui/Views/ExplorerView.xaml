@@ -22,19 +22,6 @@
         <j:BitmapValueConverter x:Key="BitmapValueConverter" />
     </UserControl.Resources>
     <Grid>
-        <Grid.Styles>
-            <Style Selector="Border[IsVisible=True] &gt; StackPanel &gt; DrawingPresenter.Spinner">
-                <Setter Property="Width" Value="16" />
-                <Setter Property="Height" Value="16" />
-                <Style.Animations>
-                    <Animation RepeatCount="Loop" Duration="0:0:1.5">
-                        <KeyFrame Cue="100%">
-                            <Setter Property="RotateTransform.Angle" Value="360" />
-                        </KeyFrame>
-                    </Animation>
-                </Style.Animations>
-            </Style>
-        </Grid.Styles>
 
         <!--  details view  -->
         <DataGrid Background="{DynamicResource FilesList.BackgroundBrush}" RowBackground="{DynamicResource FilesList.BackgroundBrush}"
@@ -42,31 +29,6 @@
             IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
             Items="{Binding Item.Children, Mode=OneWay}"
             SelectionMode="Extended">
-            <DataGrid.Styles>
-                <Style Selector="TextBlock">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                </Style>
-                <Style Selector="Image[IsVisible=True].Icon">
-                    <Setter Property="Width" Value="16" />
-                    <Setter Property="Height" Value="16" />
-                    <Setter Property="Margin" Value="0 0 4 0" />
-                </Style>
-                <Style Selector="DrawingPresenter[IsVisible=True].Icon">
-                    <Setter Property="Width" Value="16" />
-                    <Setter Property="Height" Value="16" />
-                    <Setter Property="Margin" Value="0 0 4 0" />
-                </Style>
-                <Style Selector="Path[IsVisible=True].Icon">
-                    <Setter Property="Width" Value="16" />
-                    <Setter Property="Height" Value="16" />
-                    <Setter Property="Stretch" Value="UniformToFill" />
-                    <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
-                    <Setter Property="Margin" Value="0 0 4 0" />
-                </Style>
-                <!--<Style Selector="DataGridRow">
-                    <Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />
-                </Style>-->
-            </DataGrid.Styles>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name">
                     <DataGridTemplateColumn.CellTemplate>
@@ -128,26 +90,6 @@
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             SelectionMode="Multiple"
             Background="{DynamicResource FilesList.BackgroundBrush}">
-            <ListBox.Styles>
-                <Style Selector="ListBoxItem">
-                    <!--<Setter Property="IsVisible" Value="{Binding IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}}" />-->
-                    <Setter Property="Margin" Value="2" />
-                </Style>
-                <Style Selector="Image[IsVisible=True].Icon">
-                    <Setter Property="Width" Value="48" />
-                    <Setter Property="Height" Value="48" />
-                </Style>
-                <Style Selector="DrawingPresenter[IsVisible=True].Icon">
-                    <Setter Property="Width" Value="48" />
-                    <Setter Property="Height" Value="48" />
-                </Style>
-                <Style Selector="Path[IsVisible=True].Icon">
-                    <Setter Property="Width" Value="48" />
-                    <Setter Property="Height" Value="48" />
-                    <Setter Property="Stretch" Value="UniformToFill" />
-                    <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
-                </Style>
-            </ListBox.Styles>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding $parent[ScrollContentPresenter].Bounds.Width, Mode=OneWay}"/>

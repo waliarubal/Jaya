@@ -1,0 +1,98 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui">
+  <Style Selector="v|NavigationView">
+    <Setter Property="Margin" Value="0,0,-12,0" />
+  </Style>
+
+  <Style Selector="TreeView">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+          <DockPanel>
+            <Rectangle Classes="RightwardShadow" HorizontalAlignment="Right" DockPanel.Dock="Right"/>
+            <ScrollViewer Background="{TemplateBinding Background}"
+                          HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                          VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
+              <ItemsPresenter Name="PART_ItemsPresenter"
+                              Items="{TemplateBinding Items}"
+                              ItemsPanel="{TemplateBinding ItemsPanel}"
+                              Margin="{TemplateBinding Padding}"/>
+            </ScrollViewer>
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="TreeViewItem">
+    <Setter Property="Padding" Value="4"/>
+    <Setter Property="Margin" Value="0"/>
+  </Style>
+  <Style Selector="TreeViewItem /template/ ToggleButton#expander">
+    <Setter Property="Margin" Value="4,0,0,0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="#01000000"
+                Width="14" Height="14"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+          <Path x:Name="arrowPath" Fill="Transparent"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Data="M 0 0 L 3.5 3.5 L 0 7"
+                StrokeThickness="2"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="TreeViewItem /template/ ToggleButton#expander /template/ Path#arrowPath">
+    <Setter Property="Stroke" Value="{DynamicResource NavigationPane.ExpanderArrowIdleForegroundBrush}"/>
+  </Style>
+  <Style Selector="TreeViewItem /template/ ToggleButton#expander:pointerover /template/ Path#arrowPath">
+    <Setter Property="Stroke" Value="{DynamicResource NavigationPane.ExpanderArrowHoverForegroundBrush}"/>
+  </Style>
+  <Style Selector="TreeViewItem /template/ ToggleButton#expander:checked">
+    <Setter Property="RenderTransform">
+      <RotateTransform Angle="90"/>
+    </Setter>
+  </Style>
+  <Style Selector="TreeView:not(:pointerover) TreeViewItem /template/ ToggleButton#expander">
+    <Setter Property="IsHitTestVisible" Value="False"/>
+    <Setter Property="Opacity" Value="0"/>
+  </Style>
+  <Style Selector="TreeViewItem /template/ Border#SelectionBorder:pointerover">
+    <Setter Property="Background" Value="{DynamicResource NavigationPane.ItemHoverBrush}"/>
+  </Style>
+  <Style Selector="TreeViewItem:selected /template/ Border#SelectionBorder">
+    <Setter Property="Background" Value="{DynamicResource NavigationPane.ItemSelectedBrush}"/>
+  </Style>
+  <Style Selector="v|NavigationView DrawingPresenter[IsVisible=True].Spinner">
+    <Setter Property="Margin" Value="0 0 4 0" />
+    <Style.Animations>
+      <Animation RepeatCount="Loop" Duration="0:0:1.5">
+        <KeyFrame Cue="100%">
+          <Setter Property="RotateTransform.Angle" Value="360" />
+        </KeyFrame>
+      </Animation>
+    </Style.Animations>
+  </Style>
+  <Style Selector="v|NavigationView Image[IsVisible=True].Icon">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Margin" Value="0 0 4 0" />
+  </Style>
+  <Style Selector="v|NavigationView DrawingPresenter[IsVisible=True].Icon">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Margin" Value="0 0 4 0" />
+  </Style>
+  <Style Selector="v|NavigationView Path[IsVisible=True].Icon">
+    <Setter Property="Width" Value="12" />
+    <Setter Property="Height" Value="12" />
+    <Setter Property="Margin" Value="0 0 4 0" />
+    <Setter Property="Stretch" Value="UniformToFill" />
+    <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+  </Style>
+</Styles>

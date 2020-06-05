@@ -1,9 +1,9 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <Styles.Resources>
     <SolidColorBrush x:Key="Shadow.ShadowBrush" Color="{DynamicResource Shadow.ShadowColor}"/>
-    <LinearGradientBrush x:Key="Shadow.LeftwardBrush" StartPoint="150%,0%" EndPoint="0%,0%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
-    <LinearGradientBrush x:Key="Shadow.UpwardBrush" StartPoint="0%,200%" EndPoint="0%,0%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
-    <LinearGradientBrush x:Key="Shadow.RightwardBrush" StartPoint="-50%,0%" EndPoint="100%,0%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
+    <LinearGradientBrush x:Key="Shadow.LeftwardBrush" StartPoint="125%,0%" EndPoint="0%,0%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
+    <LinearGradientBrush x:Key="Shadow.UpwardBrush" StartPoint="0%,150%" EndPoint="0%,0%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
+    <LinearGradientBrush x:Key="Shadow.RightwardBrush" StartPoint="-25%,0%" EndPoint="100%,0%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
     <LinearGradientBrush x:Key="Shadow.DownwardBrush" StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource Shadow.ShadowStops}"/>
 
     <SolidColorBrush x:Key="Window.BorderBrush" Color="{DynamicResource Window.BorderColor}"/>
@@ -43,6 +43,9 @@
 
     <SolidColorBrush x:Key="NavigationPane.ItemHoverBrush" Color="{DynamicResource NavigationPane.ItemHoverColor}"/>
     <SolidColorBrush x:Key="NavigationPane.ItemSelectedBrush" Color="{DynamicResource NavigationPane.ItemSelectedColor}"/>
+    
+    <SolidColorBrush x:Key="NavigationPane.ExpanderArrowIdleForegroundBrush" Color="{DynamicResource NavigationPane.ExpanderArrowIdleForegroundColor}"/>
+    <SolidColorBrush x:Key="NavigationPane.ExpanderArrowHoverForegroundBrush" Color="{DynamicResource NavigationPane.ExpanderArrowHoverForegroundColor}"/>
 
 
     <SolidColorBrush x:Key="FilesList.BackgroundBrush" Color="{DynamicResource FilesList.BackgroundColor}"/>
@@ -50,10 +53,14 @@
 
     <SolidColorBrush x:Key="FilesList.ItemHoverBrush" Color="{DynamicResource FilesList.ItemHoverColor}"/>
     <SolidColorBrush x:Key="FilesList.ItemSelectedBrush" Color="{DynamicResource FilesList.ItemSelectedColor}"/>
+    <SolidColorBrush x:Key="FilesList.ItemSelectedHoverBrush" Color="{DynamicResource FilesList.ItemSelectedHoverColor}"/>
 
 
     <SolidColorBrush x:Key="StatusBar.BackgroundBrush" Color="{DynamicResource StatusBar.BackgroundColor}"/>
     <SolidColorBrush x:Key="StatusBar.SeparatorBrush" Color="{DynamicResource StatusBar.SeparatorColor}"/>
+    
+    <SolidColorBrush x:Key="StatusBar.ButtonHoverBackgroundBrush" Color="{DynamicResource StatusBar.ButtonHoverBackgroundColor}"/>
+    <SolidColorBrush x:Key="StatusBar.ButtonCheckedBackgroundBrush" Color="{DynamicResource StatusBar.ButtonCheckedBackgroundColor}"/>
   </Styles.Resources>
 
   <!--<LinearGradientBrush x:Key="Shadow.LeftwardBrush"

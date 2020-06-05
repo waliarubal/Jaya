@@ -1,0 +1,16 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui">
+  <Style Selector="v|OptionsView TextBlock">
+    <Setter Property="VerticalAlignment" Value="Center" />
+    <Setter Property="Margin" Value="4 2" />
+  </Style>
+  <Style Selector="v|OptionsView ComboBox">
+    <Setter Property="Margin" Value="4 2" />
+    <Setter Property="MinWidth" Value="120" />
+  </Style>
+  <Style Selector="v|OptionsView CheckBox">
+    <Setter Property="Margin" Value="4 2" />
+  </Style>
+</Styles>
