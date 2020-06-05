@@ -11,19 +11,6 @@
     j:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <Grid Margin="4">
-        <Grid.Styles>
-            <Style Selector="TextBlock">
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Margin" Value="4 2" />
-            </Style>
-            <Style Selector="ComboBox">
-                <Setter Property="Margin" Value="4 2" />
-                <Setter Property="MinWidth" Value="120" />
-            </Style>
-            <Style Selector="CheckBox">
-                <Setter Property="Margin" Value="4 2" />
-            </Style>
-        </Grid.Styles>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />

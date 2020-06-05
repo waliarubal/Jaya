@@ -1,0 +1,36 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui">
+    <Style Selector="v|AboutView StackPanel.SocialButtonsContainer Button">
+        <Setter Property="Margin" Value="4" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="MinWidth" Value="21" />
+        <Setter Property="MinHeight" Value="21" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="v|AboutView StackPanel.SocialButtonsContainer Button:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+    </Style>
+    <Style Selector="v|AboutView StackPanel.SocialButtonsContainer Button:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+    </Style>
+    <Style Selector="v|AboutView StackPanel.SocialButtonsContainer Button:disabled">
+        <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+    </Style>
+
+    <Style Selector="v|AboutView StackPanel.SocialButtonsContainer Button &gt; Path">
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+    </Style>
+    <Style Selector="v|AboutView StackPanel.SocialButtonsContainer Button &gt; DrawingPresenter">
+        <Setter Property="Width" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Stretch" Value="UniformToFill" />
+    </Style>
+</Styles>

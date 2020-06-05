@@ -1,0 +1,113 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui">
+  <Styles.Resources>
+    <VisualBrush
+                x:Key="ThumbBrush"
+                DestinationRect="0,0,2,2"
+                SourceRect="0,0,2,2"
+                TileMode="Tile">
+      <VisualBrush.Visual>
+        <Rectangle
+            Width="1"
+            Height="1"
+            Fill="#FF505050" />
+        <!--  ThemeControlMidColor #FF505050  -->
+      </VisualBrush.Visual>
+    </VisualBrush>
+  </Styles.Resources>
+  <Style Selector="v|ToolbarView StackPanel">
+    <Setter Property="Orientation" Value="Horizontal" />
+    <Setter Property="Margin" Value="0 2" />
+  </Style>
+
+  <Style Selector="v|ToolbarView Border.Thumb">
+    <Setter Property="Background" Value="{StaticResource ThumbBrush}" />
+    <Setter Property="Margin" Value="2 0" />
+    <Setter Property="Width" Value="6" />
+  </Style>
+
+  <Style Selector="v|ToolbarView Button">
+    <Setter Property="Margin" Value="1 0" />
+    <Setter Property="Padding" Value="2" />
+    <Setter Property="MinWidth" Value="21" />
+    <Setter Property="MinHeight" Value="21" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="v|ToolbarView Button:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+  </Style>
+  <Style Selector="v|ToolbarView Button:pressed /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+  </Style>
+  <Style Selector="v|ToolbarView Button:disabled">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+  </Style>
+
+  <Style Selector="v|ToolbarView ToggleButton">
+    <Setter Property="Margin" Value="1 0" />
+    <Setter Property="Padding" Value="2" />
+    <Setter Property="MinWidth" Value="21" />
+    <Setter Property="MinHeight" Value="21" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="v|ToolbarView ToggleButton:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+  </Style>
+  <Style Selector="v|ToolbarView ToggleButton:pressed /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush}" />
+  </Style>
+  <Style Selector="v|ToolbarView ToggleButton:disabled">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+  </Style>
+  <Style Selector="v|ToolbarView ToggleButton:checked /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
+  </Style>
+
+  <Style Selector="v|ToolbarView Button &gt; DrawingPresenter">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+  </Style>
+  <Style Selector="v|ToolbarView ToggleButton &gt; DrawingPresenter">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+  </Style>
+
+  <Style Selector="v|ToolbarView Button &gt; Path">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Stretch" Value="UniformToFill" />
+    <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+  </Style>
+  <Style Selector="v|ToolbarView ToggleButton &gt; Path">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Stretch" Value="UniformToFill" />
+    <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
+  </Style>
+
+  <Style Selector="v|ToolbarView Button &gt; Image">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+  </Style>
+  <Style Selector="v|ToolbarView ToggleButton &gt; Image">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+  </Style>
+
+  <Style Selector="v|ToolbarView Border.Separator">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value=".5" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+    <Setter Property="Margin" Value="2 0" />
+  </Style>
+</Styles>

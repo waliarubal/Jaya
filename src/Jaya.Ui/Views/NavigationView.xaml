@@ -8,7 +8,6 @@
     xmlns:m="clr-namespace:Jaya.Ui.Models;assembly=Jaya.Ui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels;assembly=Jaya.Ui"
-    Margin="0,0,-12,0"
     d:DesignHeight="320"
     d:DesignWidth="220"
     j:ViewModelLocator.AutoWireViewModel="True"
@@ -17,6 +16,12 @@
         <j:BitmapValueConverter x:Key="BitmapValueConverter" />
         <c:BooleanToTreeNodeVisibilityConverter x:Key="TreeNodeVisibilityConverter" />
     </UserControl.Resources>
+    <UserControl.Styles>
+        <Style Selector="TreeViewItem">
+            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=OneWayToSource}" />
+            <Setter Property="IsVisible" Value="{Binding FileSystemObject.IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}, FallbackValue=True}" />
+        </Style>
+    </UserControl.Styles>
 
     <TreeView
         Padding="0"
@@ -24,75 +29,6 @@
         Items="{Binding Node.Children, Mode=OneWay}"
         SelectedItem="{Binding SelectedNode, Mode=OneWayToSource}"
         SelectionMode="Single">
-        <TreeView.Styles>
-            <Style Selector="TreeView">
-                <Setter Property="Template">
-                    <ControlTemplate>
-                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                            <DockPanel>
-                                <Rectangle
-                                    HorizontalAlignment="Right"
-                                    Classes="RightwardShadow"
-                                    DockPanel.Dock="Right" />
-                                <ScrollViewer
-                                    Background="{TemplateBinding Background}"
-                                    HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
-                                    VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
-                                    <ItemsPresenter
-                                        Name="PART_ItemsPresenter"
-                                        Margin="{TemplateBinding Padding}"
-                                        Items="{TemplateBinding Items}"
-                                        ItemsPanel="{TemplateBinding ItemsPanel}" />
-                                </ScrollViewer>
-                            </DockPanel>
-                        </Border>
-                    </ControlTemplate>
-                </Setter>
-            </Style>
-            <Style Selector="TreeViewItem">
-                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=OneWayToSource}" />
-                <Setter Property="IsVisible" Value="{Binding FileSystemObject.IsHidden, Mode=OneWay, Converter={StaticResource TreeNodeVisibilityConverter}, FallbackValue=True}" />
-                <Setter Property="Padding" Value="4" />
-                <Setter Property="Margin" Value="0" />
-            </Style>
-            <Style Selector="TreeView:not(:pointerover) TreeViewItem /template/ ToggleButton#expander">
-                <Setter Property="IsHitTestVisible" Value="False" />
-                <Setter Property="Opacity" Value="0" />
-            </Style>
-            <Style Selector="TreeViewItem /template/ Border#SelectionBorder:pointerover">
-                <Setter Property="Background" Value="{DynamicResource NavigationPane.ItemHoverBrush}" />
-            </Style>
-            <Style Selector="TreeViewItem:selected /template/ Border#SelectionBorder">
-                <Setter Property="Background" Value="{DynamicResource NavigationPane.ItemSelectedBrush}" />
-            </Style>
-            <Style Selector="DrawingPresenter[IsVisible=True].Spinner">
-                <Setter Property="Margin" Value="0 0 4 0" />
-                <Style.Animations>
-                    <Animation RepeatCount="Loop" Duration="0:0:1.5">
-                        <KeyFrame Cue="100%">
-                            <Setter Property="RotateTransform.Angle" Value="360" />
-                        </KeyFrame>
-                    </Animation>
-                </Style.Animations>
-            </Style>
-            <Style Selector="Image[IsVisible=True].Icon">
-                <Setter Property="Width" Value="16" />
-                <Setter Property="Height" Value="16" />
-                <Setter Property="Margin" Value="0 0 4 0" />
-            </Style>
-            <Style Selector="DrawingPresenter[IsVisible=True].Icon">
-                <Setter Property="Width" Value="16" />
-                <Setter Property="Height" Value="16" />
-                <Setter Property="Margin" Value="0 0 4 0" />
-            </Style>
-            <Style Selector="Path[IsVisible=True].Icon">
-                <Setter Property="Width" Value="12" />
-                <Setter Property="Height" Value="12" />
-                <Setter Property="Margin" Value="0 0 4 0" />
-                <Setter Property="Stretch" Value="UniformToFill" />
-                <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
-            </Style>
-        </TreeView.Styles>
         <TreeView.ItemTemplate>
             <TreeDataTemplate ItemsSource="{Binding Children}">
                 <StackPanel Orientation="Horizontal">

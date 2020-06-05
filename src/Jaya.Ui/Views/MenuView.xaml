@@ -14,50 +14,6 @@
             <j:MultiValueConverter x:Key="MultiValueConverter" />
         </Menu.Resources>
 
-        <Menu.Styles>
-            <Style Selector="ToggleButton">
-                <Setter Property="Margin" Value="1 0" />
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="MinWidth" Value="21" />
-                <Setter Property="MinHeight" Value="21" />
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="BorderBrush" Value="Transparent" />
-                <Setter Property="IsHitTestVisible" Value="False" />
-            </Style>
-            <Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderBrush" Value="Transparent" />
-            </Style>
-            <Style Selector="ToggleButton:pressed /template/ ContentPresenter">
-                <Setter Property="Background" Value="Transparent" />
-            </Style>
-            <Style Selector="ToggleButton:disabled">
-                <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-            </Style>
-            <Style Selector="ToggleButton:checked /template/ ContentPresenter">
-                <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemeAccentBrush}" />
-            </Style>
-
-            <Style Selector="CheckBox">
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="IsHitTestVisible" Value="False" />
-            </Style>
-
-            <Style Selector="MenuItem &gt; DrawingPresenter">
-                <Setter Property="Width" Value="16" />
-                <Setter Property="Height" Value="16" />
-            </Style>
-
-            <Style Selector="MenuItem &gt; Path">
-                <Setter Property="Width" Value="16" />
-                <Setter Property="Height" Value="16" />
-                <Setter Property="Stretch" Value="UniformToFill" />
-                <Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}" />
-            </Style>
-        </Menu.Styles>
-
         <MenuItem Header="_File">
             <MenuItem Header="New Folder">
                 <MenuItem.Icon>
@@ -176,11 +132,6 @@
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Toolbars">
-                <MenuItem.Styles>
-                    <Style Selector="CheckBox">
-                        <Setter Property="IsThreeState" Value="False" />
-                    </Style>
-                </MenuItem.Styles>
                 <MenuItem
                     Command="{Binding SimpleCommand}"
                     CommandParameter="{x:Static local:CommandType.ToggleToolbars}"

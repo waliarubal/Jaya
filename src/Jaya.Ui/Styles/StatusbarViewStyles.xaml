@@ -1,0 +1,67 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui">
+  <Style Selector="v|StatusbarView">
+    <Setter Property="Margin" Value="0,-4,0,0"/>
+    <Setter Property="ZIndex" Value="999"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DockPanel>
+          <Rectangle Classes="UpwardShadow" DockPanel.Dock="Top"/>
+          <ContentPresenter Name="PART_ContentPresenter"
+                          Background="{DynamicResource StatusBar.BackgroundBrush}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Content="{TemplateBinding Content}"
+                          Padding="{TemplateBinding Padding}"
+                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="v|StatusbarView Border.Separator">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0.5" />
+    <Setter Property="BorderBrush" Value="{DynamicResource StatusBar.SeparatorBrush}" />
+    <Setter Property="Margin" Value="10,4" />
+  </Style>
+
+  <Style Selector="v|StatusbarView TextBlock">
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <Style Selector="v|StatusbarView ToggleButton">
+    <Setter Property="Padding" Value="2" />
+    <Setter Property="Width" Value="26" />
+    <Setter Property="VerticalAlignment" Value="Stretch" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="v|StatusbarView ToggleButton:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource StatusBar.ButtonHoverBackgroundBrush}" />
+  </Style>
+  <Style Selector="v|StatusbarView ToggleButton:pressed /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource StatusBar.ButtonCheckedBackgroundBrush}" />
+  </Style>
+  <Style Selector="v|StatusbarView ToggleButton:disabled">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+  </Style>
+  <Style Selector="v|StatusbarView ToggleButton:checked /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource StatusBar.ButtonCheckedBackgroundBrush}" />
+  </Style>
+
+  <Style Selector="v|StatusbarView ToggleButton &gt; Image">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+  </Style>
+  <Style Selector="v|StatusbarView ToggleButton &gt; DrawingPresenter">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+  </Style>
+</Styles>

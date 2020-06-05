@@ -1,0 +1,26 @@
+﻿<Styles
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui">
+  <Style Selector="v|UpdateView Grid.UpdateAvailable StackPanel &gt; TextBlock">
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="v|UpdateView Grid.UpdateAvailable Border.Separator">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value=".5" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeControlMidBrush}" />
+    <Setter Property="Margin" Value="0 2" />
+  </Style>
+
+  <Style Selector="v|UpdateView StackPanel.CheckForUpdates Button &gt; TextBlock">
+    <Setter Property="Margin" Value="8 0" />
+  </Style>
+  <Style Selector="v|UpdateView StackPanel.CheckForUpdates Button">
+    <Setter Property="Margin" Value="0 0 4 0" />
+  </Style>
+
+  <Style Selector="v|UpdateView StackPanel.Version TextBlock">
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+</Styles>
