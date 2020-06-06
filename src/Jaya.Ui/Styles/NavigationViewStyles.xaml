@@ -1,12 +1,14 @@
 ﻿<Styles
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui">
+  xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
+  xmlns:converters="clr-namespace:Avalonia.Controls.Converters;assembly=Avalonia.Controls">
   <Style Selector="v|NavigationView">
     <Setter Property="Margin" Value="0,0,-12,0" />
   </Style>
 
   <Style Selector="TreeView">
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border BorderBrush="{TemplateBinding BorderBrush}"
@@ -27,8 +29,41 @@
     </Setter>
   </Style>
   <Style Selector="TreeViewItem">
+    <Style.Resources>
+      <converters:MarginMultiplierConverter Indent="8" Left="True" x:Key="LeftMarginConverter" />
+    </Style.Resources>
     <Setter Property="Padding" Value="4"/>
     <Setter Property="Margin" Value="0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <StackPanel>
+          <Border Name="SelectionBorder"
+                  Focusable="True"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  TemplatedControl.IsTemplateFocusTarget="True">
+            <Grid Name="PART_Header"
+                  ColumnDefinitions="16, *"
+                  Margin="{TemplateBinding Level, Mode=OneWay, Converter={StaticResource LeftMarginConverter}}" >
+              <ToggleButton Name="expander"
+                            Focusable="False"
+                            IsChecked="{TemplateBinding IsExpanded, Mode=TwoWay}"/>
+              <ContentPresenter Name="PART_HeaderPresenter"
+                                Focusable="False"
+                                Content="{TemplateBinding Header}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalAlignment}"
+                                Padding="{TemplateBinding Padding}"
+                                Grid.Column="1"/>
+            </Grid>
+          </Border>
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                          IsVisible="{TemplateBinding IsExpanded}"
+                          Items="{TemplateBinding Items}"
+                          ItemsPanel="{TemplateBinding ItemsPanel}"/>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
   </Style>
   <Style Selector="TreeViewItem /template/ ToggleButton#expander">
     <Setter Property="Margin" Value="4,0,0,0"/>

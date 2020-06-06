@@ -16,9 +16,14 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.6" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.6" />
-    <PackageReference Include="FluentFTP" Version="32.4.1" />
+    <PackageReference Include="Avalonia" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.9.9" />
+    <PackageReference Include="FluentFTP" Version="32.4.3" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.46.0.1964" />
+    <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.46.0.1869" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />

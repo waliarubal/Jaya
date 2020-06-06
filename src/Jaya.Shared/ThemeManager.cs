@@ -63,7 +63,7 @@ namespace Jaya.Shared
             }
         }
 
-        internal void EnableTheme(Window window)
+        public void EnableTheme(Window window)
         {
             if (SelectedTheme != null && SelectedTheme.Style != null)
                 window.Styles.Add(SelectedTheme.Style);
