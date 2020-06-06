@@ -81,15 +81,12 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!--  thumbnail view  -->
-        <ListBox
-            Padding="0"
-            BorderBrush="Transparent"
+        <!--  icons view  -->
+        <ListBox Classes="IconsView"
             IsVisible="{Binding PaneConfig.IsThumbnailView, Mode=OneWay}"
             Items="{Binding Item.Children, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            SelectionMode="Multiple"
-            Background="{DynamicResource FilesList.BackgroundBrush}">
+            SelectionMode="Multiple">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding $parent[ScrollContentPresenter].Bounds.Width, Mode=OneWay}"/>
@@ -138,6 +135,123 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
+        <!--  list view  -->
+        <ListBox Classes="ListView"
+            IsVisible="{Binding PaneConfig.IsListView, Mode=OneWay}"
+            Items="{Binding Item.Children, Mode=OneWay}"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            SelectionMode="Multiple">
+          <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Width="{Binding $parent[ScrollContentPresenter].Bounds.Width, Mode=OneWay}" Orientation="Vertical"/>
+            </ItemsPanelTemplate>
+          </ListBox.ItemsPanel>
+          <ListBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type m:ExplorerItemModel}">
+              <StackPanel Name="ObjectEntry" Background="#01000000" Orientation="Horizontal">
+                <i:Interaction.Behaviors>
+                  <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
+                    <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
+                  </ia:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+                <Image
+                    Classes="Icon"
+                    IsVisible="{Binding IsService}"
+                    Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=16}" />
+                <DrawingPresenter
+                    Classes="Icon"
+                    Drawing="{DynamicResource Icon.CloudFolder}"
+                    IsVisible="{Binding IsAccount}" />
+                <Path
+                    Classes="Icon"
+                    Data="{StaticResource Icon.Computer}"
+                    IsVisible="{Binding IsComputer}" />
+                <Path
+                    Classes="Icon"
+                    Data="{StaticResource Icon.Drive}"
+                    IsVisible="{Binding IsDrive}"
+                    Stretch="Uniform" />
+                <DrawingPresenter
+                    Classes="Icon"
+                    Drawing="{DynamicResource Icon.Folder}"
+                    IsVisible="{Binding IsDirectory}" />
+                <DrawingPresenter
+                    Classes="Icon"
+                    Drawing="{DynamicResource Icon.TextFile}"
+                    IsVisible="{Binding IsFile}" />
+                <TextBlock
+                    Height="16"
+                    Text="{Binding Mode=OneWay, Path=Label}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--  tiles view  -->
+        <ListBox Classes="TilesView"
+            IsVisible="{Binding PaneConfig.IsTilesView, Mode=OneWay}"
+            Items="{Binding Item.Children, Mode=OneWay}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            SelectionMode="Multiple">
+          <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Width="{Binding $parent[ScrollContentPresenter].Bounds.Width, Mode=OneWay}"/>
+            </ItemsPanelTemplate>
+          </ListBox.ItemsPanel>
+          <ListBox.ItemTemplate>
+            <DataTemplate DataType="{x:Type m:ExplorerItemModel}">
+              <StackPanel Width="240" Height="48" Name="ObjectEntry" Background="#01000000" Orientation="Horizontal">
+                <i:Interaction.Behaviors>
+                  <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
+                    <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
+                  </ia:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+                <Image
+                    Classes="Icon"
+                    IsVisible="{Binding IsService}"
+                    Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=48}" />
+                <DrawingPresenter
+                    Classes="Icon"
+                    Drawing="{DynamicResource Icon.CloudFolder}"
+                    IsVisible="{Binding IsAccount}" />
+                <Path
+                    Classes="Icon"
+                    Data="{StaticResource Icon.Computer}"
+                    IsVisible="{Binding IsComputer}" />
+                <Path
+                    Classes="Icon"
+                    Data="{StaticResource Icon.Drive}"
+                    IsVisible="{Binding IsDrive}"
+                    Stretch="Uniform" />
+                <DrawingPresenter
+                    Classes="Icon"
+                    Drawing="{DynamicResource Icon.Folder}"
+                    IsVisible="{Binding IsDirectory}" />
+                <DrawingPresenter
+                    Classes="Icon"
+                    Drawing="{DynamicResource Icon.TextFile}"
+                    IsVisible="{Binding IsFile}" />
+                <UniformGrid Columns="1">
+                  <TextBlock
+                      Text="{Binding Mode=OneWay, Path=Label}"
+                      TextAlignment="Left"
+                      TextWrapping="Wrap" />
+                  <TextBlock Classes="SecondaryText"
+                      Text="{Binding Mode=OneWay, Path=Object.Type}"
+                      TextAlignment="Left"
+                      TextWrapping="Wrap" />
+                  <TextBlock Classes="SecondaryText"
+                      Text="{Binding Mode=OneWay, Path=Object.SizeString}"
+                      TextAlignment="Left"
+                      TextWrapping="Wrap" />
+                </UniformGrid>
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+
         <TextBlock
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -147,7 +261,6 @@
         <Border
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="{DynamicResource FilesList.BackgroundBrush}"
             BorderThickness="0"
             IsVisible="{Binding IsBusy}">
             <StackPanel

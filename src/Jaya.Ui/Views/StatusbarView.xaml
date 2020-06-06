@@ -25,12 +25,27 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Text="{Binding Count, Mode=OneWay, StringFormat={}{0} items, FallbackValue=0L}" />
         <Border Grid.Column="1" Classes="Separator" />
-        <ToggleButton
-            Grid.Column="3"
-            IsChecked="{Binding PaneConfig.IsDetailsView, Mode=TwoWay}"
-            ToolTip.Tip="Dispaly information about each item in the window.">
+        <!--Un-comment out the two commented-out sections below to see the new file list view modes!-->
+        <!--StackPanel Grid.Column="3" Orientation="Horizontal">
+          <ToggleButton Width="60"
+                Grid.Column="3"
+                IsChecked="{Binding PaneConfig.IsListView, Mode=TwoWay}"
+                Content="LIST VIEW"/>
+          <ToggleButton Width="65"
+                Grid.Column="3"
+                IsChecked="{Binding PaneConfig.IsTilesView, Mode=TwoWay}"
+                Content="TILES VIEW"/>
+          <ToggleButton Width="90"
+                Grid.Column="3"
+                IsChecked="{Binding PaneConfig.IsContentView, Mode=TwoWay}"
+                Content="CONTENT VIEW"/-->
+          <ToggleButton
+              Grid.Column="3"
+              IsChecked="{Binding PaneConfig.IsDetailsView, Mode=TwoWay}"
+              ToolTip.Tip="Display information about each item in the window.">
             <DrawingPresenter Drawing="{DynamicResource Icon.BulletList}" />
-        </ToggleButton>
+          </ToggleButton>
+        <!--/StackPanel-->
         <ToggleButton
             Grid.Column="4"
             IsChecked="{Binding PaneConfig.IsThumbnailView, Mode=TwoWay}"

@@ -94,6 +94,15 @@ namespace Jaya.Ui.Models
                 if (value && IsThumbnailView)
                     IsThumbnailView = !value;
 
+                if (value && IsListView)
+                    IsListView = !value;
+
+                if (value && IsTilesView)
+                    IsTilesView = !value;
+
+                if (value && IsContentView)
+                    IsContentView = !value;
+
                 Set(value);
             }
         }
@@ -106,6 +115,81 @@ namespace Jaya.Ui.Models
             {
                 if (value && IsDetailsView)
                     IsDetailsView = !value;
+
+                if (value && IsListView)
+                    IsListView = !value;
+
+                if (value && IsTilesView)
+                    IsTilesView = !value;
+
+                if (value && IsContentView)
+                    IsContentView = !value;
+
+                Set(value);
+            }
+        }
+
+        [JsonProperty]
+        public bool IsListView
+        {
+            get => Get<bool>();
+            set
+            {
+                if (value && IsThumbnailView)
+                    IsThumbnailView = !value;
+
+                if (value && IsDetailsView)
+                    IsDetailsView = !value;
+
+                if (value && IsTilesView)
+                    IsTilesView = !value;
+
+                if (value && IsContentView)
+                    IsContentView = !value;
+
+                Set(value);
+            }
+        }
+
+        [JsonProperty]
+        public bool IsTilesView
+        {
+            get => Get<bool>();
+            set
+            {
+                if (value && IsThumbnailView)
+                    IsThumbnailView = !value;
+
+                if (value && IsDetailsView)
+                    IsDetailsView = !value;
+
+                if (value && IsListView)
+                    IsListView = !value;
+
+                if (value && IsContentView)
+                    IsContentView = !value;
+
+                Set(value);
+            }
+        }
+
+        [JsonProperty]
+        public bool IsContentView
+        {
+            get => Get<bool>();
+            set
+            {
+                if (value && IsThumbnailView)
+                    IsThumbnailView = !value;
+
+                if (value && IsDetailsView)
+                    IsDetailsView = !value;
+
+                if (value && IsListView)
+                    IsListView = !value;
+
+                if (value && IsTilesView)
+                    IsTilesView = !value;
 
                 Set(value);
             }
