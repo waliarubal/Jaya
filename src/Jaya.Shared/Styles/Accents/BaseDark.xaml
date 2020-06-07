@@ -1,4 +1,5 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
   <Styles.Resources>
     <Color x:Key="Shadow.ShadowColor">#60000000</Color>
     <GradientStops x:Key="Shadow.ShadowStops">

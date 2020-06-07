@@ -1,13 +1,9 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StyleInclude Source="avares://Jaya.Shared/Styles/Accents/BaseLight.xaml" />
+    <!--<StyleInclude Source="avares://Jaya.Shared/Styles/Accents/BaseDark.xaml" />-->
+  
     <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
-
-    <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml" />-->
-    <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
-
     <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
-
-    <!--<StyleInclude Source="avares://Jaya.Shared/Styles/Accents/BaseLight.xaml" />-->
-    <StyleInclude Source="avares://Jaya.Shared/Styles/Accents/BaseDark.xaml" />
 
     <StyleInclude Source="avares://Jaya.Shared/Styles/DefaultTheme.xaml" />
     <StyleInclude Source="avares://Jaya.Shared/Styles/GridSplitterStyle.xaml" />
@@ -24,6 +20,7 @@
     <StyleInclude Source="avares://Jaya.Ui/Styles/MenuViewStyles.xaml" />
     <StyleInclude Source="avares://Jaya.Ui/Styles/NavigationViewStyles.xaml" />
     <StyleInclude Source="avares://Jaya.Ui/Styles/OptionsViewStyles.xaml" />
+    <StyleInclude Source="avares://Jaya.Ui/Styles/RibbonViewStyles.xaml" />
     <StyleInclude Source="avares://Jaya.Ui/Styles/StatusbarViewStyles.xaml" />
     <StyleInclude Source="avares://Jaya.Ui/Styles/ToolbarViewStyles.xaml" />
     <StyleInclude Source="avares://Jaya.Ui/Styles/UpdateViewStyles.xaml" />

@@ -14,18 +14,6 @@
     IsRibbonExpanded="{Binding !PaneConfig.IsRibbonCollapsed, Mode=TwoWay}"
     mc:Ignorable="d">
   <Panel>
-    <Panel.Styles>
-      <StyleInclude Source="avares://AvaloniaUI.Ribbon/Styles/RibbonStyles.xaml" />
-
-      <Style Selector="DrawingPresenter">
-        <Setter Property="Width" Value="16"/>
-        <Setter Property="Height" Value="16"/>
-      </Style>
-      <Style Selector="DrawingPresenter.Large">
-        <Setter Property="Width" Value="32"/>
-        <Setter Property="Height" Value="32"/>
-      </Style>
-    </Panel.Styles>
     <ribbon:Ribbon>
       <ribbon:Ribbon.Menu>
         <ribbon:RibbonMenu ribbon:KeyTip.KeyTipKeys="F">

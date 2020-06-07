@@ -54,10 +54,10 @@
     <Setter Property="MinWidth" Value="24" />
   </Style>
 
-  <Style Selector="v|AddressbarView Button:pointerover, ToggleButton:pointerover">
+  <Style Selector="v|AddressbarView Button:pointerover, v|AddressbarView ToggleButton:pointerover">
     <Setter Property="Foreground" Value="{DynamicResource NavigationBar.ControlHoverForegroundBrush}" />
   </Style>
-  <Style Selector="v|AddressbarView Button:pressed, ToggleButton:pressed">
+  <Style Selector="v|AddressbarView Button:pressed, v|AddressbarView ToggleButton:pressed">
     <Setter Property="Foreground" Value="{DynamicResource NavigationBar.ControlPressedForegroundBrush}" />
   </Style>
   <Style Selector="v|AddressbarView Button:disabled, ToggleButton:disabled">
