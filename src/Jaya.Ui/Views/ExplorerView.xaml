@@ -22,18 +22,25 @@
         <j:BitmapValueConverter x:Key="BitmapValueConverter" />
     </UserControl.Resources>
     <Grid>
+      <Grid.Styles>
+        <Style Selector="DataGrid[IsVisible=True]">
+          <Setter Property="Items" Value="{Binding Item.Children, Mode=OneWay}"/>
+        </Style>
+        <Style Selector="ListBox[IsVisible=True]">
+          <Setter Property="Items" Value="{Binding Item.Children, Mode=OneWay}"/>
+        </Style>
+      </Grid.Styles>
 
         <!--  details view  -->
         <DataGrid
             IsReadOnly="True"
             IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
-            Items="{Binding Item.Children, Mode=OneWay}"
             SelectionMode="Extended">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel x:Name="ObjectEntry" Orientation="Horizontal" Background="#01000000">
+                            <StackPanel x:Name="ObjectEntry" DataContext="{Binding}" Orientation="Horizontal" Background="#01000000">
                                 <i:Interaction.Behaviors>
                                     <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
                                         <ia:InvokeCommandAction Command="{Binding $parent[DataGrid].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
@@ -84,7 +91,6 @@
         <!--  icons view  -->
         <ListBox Classes="IconsView"
             IsVisible="{Binding PaneConfig.IsThumbnailView, Mode=OneWay}"
-            Items="{Binding Item.Children, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             SelectionMode="Multiple">
             <ListBox.ItemsPanel>
@@ -138,7 +144,6 @@
         <!--  list view  -->
         <ListBox Classes="ListView"
             IsVisible="{Binding PaneConfig.IsListView, Mode=OneWay}"
-            Items="{Binding Item.Children, Mode=OneWay}"
             ScrollViewer.VerticalScrollBarVisibility="Disabled"
             SelectionMode="Multiple">
           <ListBox.ItemsPanel>
@@ -192,7 +197,6 @@
         <!--  tiles view  -->
         <ListBox Classes="TilesView"
             IsVisible="{Binding PaneConfig.IsTilesView, Mode=OneWay}"
-            Items="{Binding Item.Children, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             SelectionMode="Multiple">
           <ListBox.ItemsPanel>
