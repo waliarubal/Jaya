@@ -7,6 +7,8 @@ using Jaya.Shared.Base;
 using Jaya.Shared.Models;
 using Jaya.Ui.Models;
 using Jaya.Ui.Services;
+using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Jaya.Ui.ViewModels
@@ -98,18 +100,22 @@ namespace Jaya.Ui.ViewModels
             Item = null;
             IsBusy = true;
 
+            
             _service = args.Service;
             _account = args.Account;
 
             if (_account == null)
             {
                 var accounts = await _service.GetAccountsAsync();
-
                 var serviceItem = new ExplorerItemModel(ItemType.Service, _service.Name, _service.ImagePath);
+
                 foreach (var account in accounts)
                 {
-                    var accountItem = new ExplorerItemModel(_service.IsRootDrive ? ItemType.Computer : ItemType.Account, account.Name, account);
-                    serviceItem.Children.Add(accountItem);
+                    await Task.Run(new Action(() =>
+                    {
+                        var accountItem = new ExplorerItemModel(_service.IsRootDrive ? ItemType.Computer : ItemType.Account, account.Name, account);
+                        serviceItem.Children.Add(accountItem);
+                    }));
                 }
 
                 Item = serviceItem;
@@ -117,19 +123,26 @@ namespace Jaya.Ui.ViewModels
             else if (args.Directory != null)
             {
                 var directory = await args.Service.GetDirectoryAsync(args.Account, args.Directory);
-
                 var directoryItem = new ExplorerItemModel(directory.Type == FileSystemObjectType.Drive ? ItemType.Drive : ItemType.Directory, directory.Name, directory);
+
                 foreach (var subDirectory in directory.Directories)
                 {
-                    var subDirectoryItem = new ExplorerItemModel(subDirectory.Type == FileSystemObjectType.Drive ? ItemType.Drive : ItemType.Directory, subDirectory.Name, subDirectory);
-                    directoryItem.Children.Add(subDirectoryItem);
+                    await Task.Run(new Action(() =>
+                    {
+                        var subDirectoryItem = new ExplorerItemModel(subDirectory.Type == FileSystemObjectType.Drive ? ItemType.Drive : ItemType.Directory, subDirectory.Name, subDirectory);
+                        directoryItem.Children.Add(subDirectoryItem);
+                    }));
                 }
+
                 if (directory.Files != null)
                 {
                     foreach (var file in directory.Files)
                     {
-                        var fileItem = new ExplorerItemModel(ItemType.File, file.Name, file);
-                        directoryItem.Children.Add(fileItem);
+                        await Task.Run(new Action(() =>
+                        {
+                            var fileItem = new ExplorerItemModel(ItemType.File, file.Name, file);
+                            directoryItem.Children.Add(fileItem);
+                        }));
                     }
                 }
 
