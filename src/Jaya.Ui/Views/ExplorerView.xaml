@@ -24,7 +24,7 @@
     <Grid>
 
         <!--  details view  -->
-        <DataGrid Background="{DynamicResource FilesList.BackgroundBrush}" RowBackground="{DynamicResource FilesList.BackgroundBrush}"
+        <DataGrid
             IsReadOnly="True"
             IsVisible="{Binding PaneConfig.IsDetailsView, Mode=OneWay}"
             Items="{Binding Item.Children, Mode=OneWay}"
