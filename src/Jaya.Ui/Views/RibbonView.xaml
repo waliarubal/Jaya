@@ -158,7 +158,7 @@
               <ListBoxItem Content="Content" IsSelected="{Binding PaneConfig.IsContentView, Mode=TwoWay}"/>
             </ribbon:Gallery>
           </ribbon:RibbonGroupBox>
-          <!--ribbon:RibbonGroupBox Header="Show/hide">
+          <ribbon:RibbonGroupBox Header="Show/hide">
             <ribbon:RibbonToggleButton Content="Item check boxes" MaxSize="Medium" MinSize="Small" IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=TwoWay}" ribbon:KeyTip.KeyTipKeys="HT">
               <ribbon:RibbonToggleButton.Icon>
                 <DrawingPresenter Drawing="{DynamicResource Icon.CheckBox}" />
@@ -169,12 +169,12 @@
                 <DrawingPresenter Drawing="{DynamicResource Icon.Extension}" />
               </ribbon:RibbonToggleButton.Icon>
             </ribbon:RibbonToggleButton>
-            <ribbon:RibbonToggleButton Content="Hidden items" MaxSize="Medium" MinSize="Small" IsChecked="{Binding ApplicationConfig.IsItemCheckBoxVisible, Mode=TwoWay}" ribbon:KeyTip.KeyTipKeys="HH">
+            <ribbon:RibbonToggleButton Content="Hidden items" MaxSize="Medium" MinSize="Small" IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=TwoWay}" ribbon:KeyTip.KeyTipKeys="HH">
               <ribbon:RibbonToggleButton.Icon>
                 <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
               </ribbon:RibbonToggleButton.Icon>
             </ribbon:RibbonToggleButton>
-          </ribbon:RibbonGroupBox-->
+          </ribbon:RibbonGroupBox>
           <ribbon:RibbonGroupBox Header="Configuration">
             <ribbon:RibbonButton Content="Options" MaxSize="Large" MinSize="Medium" Command="{Binding OpenWindowCommand}" ribbon:KeyTip.KeyTipKeys="OP">
               <ribbon:RibbonButton.CommandParameter>

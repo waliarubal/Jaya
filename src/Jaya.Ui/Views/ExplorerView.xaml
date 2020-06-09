@@ -29,6 +29,12 @@
         <Style Selector="ListBox[IsVisible=True]">
           <Setter Property="Items" Value="{Binding Item.Children, Mode=OneWay}"/>
         </Style>
+        <Style Selector="ListBoxItem CheckBox">
+          <Setter Property="Background" Value="{DynamicResource Window.BackgroundBrush}"/>
+        </Style>
+        <Style Selector="ListBoxItem[IsSelected=False][IsPointerOver=False] CheckBox">
+          <Setter Property="IsVisible" Value="False"/>
+        </Style>
       </Grid.Styles>
 
         <!--  details view  -->
@@ -46,6 +52,10 @@
                                         <ia:InvokeCommandAction Command="{Binding $parent[DataGrid].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
                                     </ia:EventTriggerBehavior>
                                 </i:Interaction.Behaviors>
+                                <Panel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" IsVisible="{Binding Path=$parent[DataGrid].DataContext.ApplicationConfig.IsItemCheckBoxVisible}">
+                                  <Rectangle Width="{Binding #SelectionCheckBox.Bounds.Width}" Height="{Binding #SelectionCheckBox.Bounds.Height}"/>
+                                  <CheckBox x:Name="SelectionCheckBox" IsChecked="{Binding $parent[DataGridRow].IsSelected}"/>
+                                </Panel>
                                 <Image
                                     Classes="Icon"
                                     IsVisible="{Binding IsService}"
@@ -100,43 +110,48 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type m:ExplorerItemModel}">
+                  <Panel>
                     <StackPanel Name="ObjectEntry" Background="#01000000">
-                        <i:Interaction.Behaviors>
-                            <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
-                                <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
-                            </ia:EventTriggerBehavior>
-                        </i:Interaction.Behaviors>
-                        <Image
-                            Classes="Icon"
-                            IsVisible="{Binding IsService}"
-                            Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=48}" />
-                        <DrawingPresenter
-                            Classes="Icon"
-                            Drawing="{DynamicResource Icon.CloudFolder}"
-                            IsVisible="{Binding IsAccount}" />
-                        <Path
-                            Classes="Icon"
-                            Data="{StaticResource Icon.Computer}"
-                            IsVisible="{Binding IsComputer}" />
-                        <Path
-                            Classes="Icon"
-                            Data="{StaticResource Icon.Drive}"
-                            IsVisible="{Binding IsDrive}"
-                            Stretch="Uniform" />
-                        <DrawingPresenter
-                            Classes="Icon"
-                            Drawing="{DynamicResource Icon.Folder}"
-                            IsVisible="{Binding IsDirectory}" />
-                        <DrawingPresenter
-                            Classes="Icon"
-                            Drawing="{DynamicResource Icon.TextFile}"
-                            IsVisible="{Binding IsFile}" />
-                        <TextBlock
-                            Width="54"
-                            Text="{Binding Mode=OneWay, Path=Label}"
-                            TextAlignment="Center"
-                            TextWrapping="Wrap" />
+                      <i:Interaction.Behaviors>
+                        <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
+                          <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
+                        </ia:EventTriggerBehavior>
+                      </i:Interaction.Behaviors>
+                      <Image
+                          Classes="Icon"
+                          IsVisible="{Binding IsService}"
+                          Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=48}" />
+                      <DrawingPresenter
+                          Classes="Icon"
+                          Drawing="{DynamicResource Icon.CloudFolder}"
+                          IsVisible="{Binding IsAccount}" />
+                      <Path
+                          Classes="Icon"
+                          Data="{StaticResource Icon.Computer}"
+                          IsVisible="{Binding IsComputer}" />
+                      <Path
+                          Classes="Icon"
+                          Data="{StaticResource Icon.Drive}"
+                          IsVisible="{Binding IsDrive}"
+                          Stretch="Uniform" />
+                      <DrawingPresenter
+                          Classes="Icon"
+                          Drawing="{DynamicResource Icon.Folder}"
+                          IsVisible="{Binding IsDirectory}" />
+                      <DrawingPresenter
+                          Classes="Icon"
+                          Drawing="{DynamicResource Icon.TextFile}"
+                          IsVisible="{Binding IsFile}" />
+                      <TextBlock
+                          Width="54"
+                          Text="{Binding Mode=OneWay, Path=Label}"
+                          TextAlignment="Center"
+                          TextWrapping="Wrap" />
                     </StackPanel>
+                    <Panel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" IsVisible="{Binding Path=$parent[ListBox].DataContext.ApplicationConfig.IsItemCheckBoxVisible}">
+                      <CheckBox IsChecked="{Binding $parent[ListBoxItem].IsSelected}"/>
+                    </Panel>
+                  </Panel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -153,43 +168,48 @@
           </ListBox.ItemsPanel>
           <ListBox.ItemTemplate>
             <DataTemplate DataType="{x:Type m:ExplorerItemModel}">
-              <StackPanel Name="ObjectEntry" Background="#01000000" Orientation="Horizontal">
-                <i:Interaction.Behaviors>
-                  <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
-                    <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
-                  </ia:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <Image
-                    Classes="Icon"
-                    IsVisible="{Binding IsService}"
-                    Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=16}" />
-                <DrawingPresenter
-                    Classes="Icon"
-                    Drawing="{DynamicResource Icon.CloudFolder}"
-                    IsVisible="{Binding IsAccount}" />
-                <Path
-                    Classes="Icon"
-                    Data="{StaticResource Icon.Computer}"
-                    IsVisible="{Binding IsComputer}" />
-                <Path
-                    Classes="Icon"
-                    Data="{StaticResource Icon.Drive}"
-                    IsVisible="{Binding IsDrive}"
-                    Stretch="Uniform" />
-                <DrawingPresenter
-                    Classes="Icon"
-                    Drawing="{DynamicResource Icon.Folder}"
-                    IsVisible="{Binding IsDirectory}" />
-                <DrawingPresenter
-                    Classes="Icon"
-                    Drawing="{DynamicResource Icon.TextFile}"
-                    IsVisible="{Binding IsFile}" />
-                <TextBlock
-                    Height="16"
-                    Text="{Binding Mode=OneWay, Path=Label}"
-                    TextAlignment="Center"
-                    TextWrapping="Wrap" />
-              </StackPanel>
+              <Panel>
+                <StackPanel Name="ObjectEntry" Background="#01000000" Orientation="Horizontal">
+                  <i:Interaction.Behaviors>
+                    <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
+                      <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
+                    </ia:EventTriggerBehavior>
+                  </i:Interaction.Behaviors>
+                  <Image
+                      Classes="Icon"
+                      IsVisible="{Binding IsService}"
+                      Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=16}" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.CloudFolder}"
+                      IsVisible="{Binding IsAccount}" />
+                  <Path
+                      Classes="Icon"
+                      Data="{StaticResource Icon.Computer}"
+                      IsVisible="{Binding IsComputer}" />
+                  <Path
+                      Classes="Icon"
+                      Data="{StaticResource Icon.Drive}"
+                      IsVisible="{Binding IsDrive}"
+                      Stretch="Uniform" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.Folder}"
+                      IsVisible="{Binding IsDirectory}" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.TextFile}"
+                      IsVisible="{Binding IsFile}" />
+                  <TextBlock
+                      Height="16"
+                      Text="{Binding Mode=OneWay, Path=Label}"
+                      TextAlignment="Center"
+                      TextWrapping="Wrap" />
+                </StackPanel>
+                <Panel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" IsVisible="{Binding Path=$parent[ListBox].DataContext.ApplicationConfig.IsItemCheckBoxVisible}">
+                  <CheckBox IsChecked="{Binding $parent[ListBoxItem].IsSelected}"/>
+                </Panel>
+              </Panel>
             </DataTemplate>
           </ListBox.ItemTemplate>
         </ListBox>
@@ -206,52 +226,57 @@
           </ListBox.ItemsPanel>
           <ListBox.ItemTemplate>
             <DataTemplate DataType="{x:Type m:ExplorerItemModel}">
-              <StackPanel Width="240" Height="48" Name="ObjectEntry" Background="#01000000" Orientation="Horizontal">
-                <i:Interaction.Behaviors>
-                  <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
-                    <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
-                  </ia:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <Image
-                    Classes="Icon"
-                    IsVisible="{Binding IsService}"
-                    Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=48}" />
-                <DrawingPresenter
-                    Classes="Icon"
-                    Drawing="{DynamicResource Icon.CloudFolder}"
-                    IsVisible="{Binding IsAccount}" />
-                <Path
-                    Classes="Icon"
-                    Data="{StaticResource Icon.Computer}"
-                    IsVisible="{Binding IsComputer}" />
-                <Path
-                    Classes="Icon"
-                    Data="{StaticResource Icon.Drive}"
-                    IsVisible="{Binding IsDrive}"
-                    Stretch="Uniform" />
-                <DrawingPresenter
-                    Classes="Icon"
-                    Drawing="{DynamicResource Icon.Folder}"
-                    IsVisible="{Binding IsDirectory}" />
-                <DrawingPresenter
-                    Classes="Icon"
-                    Drawing="{DynamicResource Icon.TextFile}"
-                    IsVisible="{Binding IsFile}" />
-                <UniformGrid Columns="1">
-                  <TextBlock
-                      Text="{Binding Mode=OneWay, Path=Label}"
-                      TextAlignment="Left"
-                      TextWrapping="Wrap" />
-                  <TextBlock Classes="SecondaryText"
-                      Text="{Binding Mode=OneWay, Path=Object.Type}"
-                      TextAlignment="Left"
-                      TextWrapping="Wrap" />
-                  <TextBlock Classes="SecondaryText"
-                      Text="{Binding Mode=OneWay, Path=Object.SizeString}"
-                      TextAlignment="Left"
-                      TextWrapping="Wrap" />
-                </UniformGrid>
-              </StackPanel>
+              <Panel>
+                <StackPanel Width="240" Height="48" Name="ObjectEntry" Background="#01000000" Orientation="Horizontal">
+                  <i:Interaction.Behaviors>
+                    <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
+                      <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
+                    </ia:EventTriggerBehavior>
+                  </i:Interaction.Behaviors>
+                  <Image
+                      Classes="Icon"
+                      IsVisible="{Binding IsService}"
+                      Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=48}" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.CloudFolder}"
+                      IsVisible="{Binding IsAccount}" />
+                  <Path
+                      Classes="Icon"
+                      Data="{StaticResource Icon.Computer}"
+                      IsVisible="{Binding IsComputer}" />
+                  <Path
+                      Classes="Icon"
+                      Data="{StaticResource Icon.Drive}"
+                      IsVisible="{Binding IsDrive}"
+                      Stretch="Uniform" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.Folder}"
+                      IsVisible="{Binding IsDirectory}" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.TextFile}"
+                      IsVisible="{Binding IsFile}" />
+                  <UniformGrid Columns="1">
+                    <TextBlock
+                        Text="{Binding Mode=OneWay, Path=Label}"
+                        TextAlignment="Left"
+                        TextWrapping="Wrap" />
+                    <TextBlock Classes="SecondaryText"
+                        Text="{Binding Mode=OneWay, Path=Object.Type}"
+                        TextAlignment="Left"
+                        TextWrapping="Wrap" />
+                    <TextBlock Classes="SecondaryText"
+                        Text="{Binding Mode=OneWay, Path=Object.SizeString}"
+                        TextAlignment="Left"
+                        TextWrapping="Wrap" />
+                  </UniformGrid>
+                </StackPanel>
+                <Panel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" IsVisible="{Binding Path=$parent[ListBox].DataContext.ApplicationConfig.IsItemCheckBoxVisible}">
+                  <CheckBox IsChecked="{Binding $parent[ListBoxItem].IsSelected}"/>
+                </Panel>
+              </Panel>
             </DataTemplate>
           </ListBox.ItemTemplate>
         </ListBox>
