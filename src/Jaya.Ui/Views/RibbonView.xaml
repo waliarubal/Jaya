@@ -41,22 +41,32 @@
               </ribbon:RibbonButton.Icon>
             </ribbon:RibbonButton>
             <ribbon:RibbonButton Content="Copy Path" MaxSize="Medium" MinSize="Small" ribbon:KeyTip.KeyTipKeys="CP">
-              <!--ribbon:RibbonButton.Icon>
-                <DrawingPresenter Drawing="{DynamicResource Icon.Cut}" />
-              </ribbon:RibbonButton.Icon-->
+              <ribbon:RibbonButton.Icon>
+                <DrawingPresenter Drawing="{DynamicResource Icon.CopyPath}" />
+              </ribbon:RibbonButton.Icon>
             </ribbon:RibbonButton>
             <ribbon:RibbonButton Content="Paste shortcut" MaxSize="Medium" MinSize="Small" ribbon:KeyTip.KeyTipKeys="PS">
               <!--ribbon:RibbonButton.Icon>
-                <DrawingPresenter Drawing="{DynamicResource Icon.Cut}" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.PasteShortcut}" />
               </ribbon:RibbonButton.Icon-->
             </ribbon:RibbonButton>
           </ribbon:RibbonGroupBox>
           <ribbon:RibbonGroupBox Header="Organize">
             <ribbon:RibbonToggleButton Content="Move to" MaxSize="Large" MinSize="Medium" ribbon:KeyTip.KeyTipKeys="M">
-              
+              <ribbon:RibbonToggleButton.LargeIcon>
+                <DrawingPresenter Classes="Large" Drawing="{DynamicResource Icon.MoveTo}"/>
+              </ribbon:RibbonToggleButton.LargeIcon>
+              <ribbon:RibbonToggleButton.Icon>
+                <DrawingPresenter Drawing="{DynamicResource Icon.MoveTo}"/>
+              </ribbon:RibbonToggleButton.Icon>
             </ribbon:RibbonToggleButton>
             <ribbon:RibbonToggleButton Content="Copy to" MaxSize="Large" MinSize="Medium" ribbon:KeyTip.KeyTipKeys="CF">
-
+              <ribbon:RibbonToggleButton.LargeIcon>
+                <DrawingPresenter Classes="Large" Drawing="{DynamicResource Icon.CopyTo}"/>
+              </ribbon:RibbonToggleButton.LargeIcon>
+              <ribbon:RibbonToggleButton.Icon>
+                <DrawingPresenter Drawing="{DynamicResource Icon.CopyTo}"/>
+              </ribbon:RibbonToggleButton.Icon>
             </ribbon:RibbonToggleButton>
             <ribbon:RibbonButton Content="Delete" MaxSize="Large" MinSize="Medium" ribbon:KeyTip.KeyTipKeys="D">
               <ribbon:RibbonButton.LargeIcon>
