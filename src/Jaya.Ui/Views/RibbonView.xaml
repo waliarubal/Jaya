@@ -46,9 +46,9 @@
               </ribbon:RibbonButton.Icon>
             </ribbon:RibbonButton>
             <ribbon:RibbonButton Content="Paste shortcut" MaxSize="Medium" MinSize="Small" ribbon:KeyTip.KeyTipKeys="PS">
-              <!--ribbon:RibbonButton.Icon>
+              <ribbon:RibbonButton.Icon>
                 <DrawingPresenter Drawing="{DynamicResource Icon.PasteShortcut}" />
-              </ribbon:RibbonButton.Icon-->
+              </ribbon:RibbonButton.Icon>
             </ribbon:RibbonButton>
           </ribbon:RibbonGroupBox>
           <ribbon:RibbonGroupBox Header="Organize">
@@ -86,18 +86,30 @@
             </ribbon:RibbonButton>
           </ribbon:RibbonGroupBox>
           <ribbon:RibbonGroupBox Header="New">
-            <ribbon:RibbonButton Content="New folder" MaxSize="Large" MinSize="Large" ribbon:KeyTip.KeyTipKeys="N">
+            <ribbon:RibbonButton Content="New folder" MaxSize="Large" MinSize="Small" ribbon:KeyTip.KeyTipKeys="N">
+              <ribbon:RibbonButton.Icon>
+                <DrawingPresenter Drawing="{DynamicResource Icon.NewFolder}" />
+              </ribbon:RibbonButton.Icon>
               <ribbon:RibbonButton.LargeIcon>
                 <DrawingPresenter Classes="Large" Drawing="{DynamicResource Icon.NewFolder}" />
               </ribbon:RibbonButton.LargeIcon>
             </ribbon:RibbonButton>
             <ribbon:RibbonToggleButton Content="New item" MaxSize="Medium" MinSize="Small" ribbon:KeyTip.KeyTipKeys="W">
+              <ribbon:RibbonToggleButton.Icon>
+                <DrawingPresenter Drawing="{DynamicResource Icon.NewItem}"/>
+              </ribbon:RibbonToggleButton.Icon>
             </ribbon:RibbonToggleButton>
             <ribbon:RibbonToggleButton Content="Easy access" MaxSize="Medium" MinSize="Small" ribbon:KeyTip.KeyTipKeys="A">
+              <ribbon:RibbonToggleButton.Icon>
+                <DrawingPresenter Drawing="{DynamicResource Icon.EasyAccess}"/>
+              </ribbon:RibbonToggleButton.Icon>
             </ribbon:RibbonToggleButton>
           </ribbon:RibbonGroupBox>
           <ribbon:RibbonGroupBox Header="Open">
-            <ribbon:RibbonButton Content="Properties" MaxSize="Large" MinSize="Large" ribbon:KeyTip.KeyTipKeys="PR">
+            <ribbon:RibbonButton Content="Properties" MaxSize="Large" MinSize="Small" ribbon:KeyTip.KeyTipKeys="PR">
+              <ribbon:RibbonButton.Icon>
+                <DrawingPresenter Drawing="{DynamicResource Icon.FileProperties}" />
+              </ribbon:RibbonButton.Icon>
               <ribbon:RibbonButton.LargeIcon>
                 <DrawingPresenter Classes="Large" Drawing="{DynamicResource Icon.FileProperties}" />
               </ribbon:RibbonButton.LargeIcon>
