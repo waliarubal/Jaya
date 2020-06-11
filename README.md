@@ -20,13 +20,12 @@
   * [Screenshots](#screenshots)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
-* [Getting Started](#getting-started)
+* [Getting Started (Technical)](#getting-started)
 * [License](#license)
-* [Contact](#contact)
 
 ## About The Project
 
-**Jaya File Manager** is a small .NET Core based cross platform file manager application which runs on Windows, Mac and Linux. Its goal is very simple, *"Allow browsing and managing of several file systems simultaneously using a single application which should work and look similar on all desktop platforms it supports."*.
+**Jaya File Manager** is a .NET Core based cross platform file manager application which runs on Windows, Mac and Linux. Its goal is very simple, *"Allow browsing and managing of several file systems simultaneously using a single application which should work and look alike on all desktop platforms it supports."*.
 
 Application is designed to be plug-able from the ground up i.e. anyone with experience of working with .NET Core will be able to add support for any new storage service by implementing a simple plugin. Support for below mentioned storage services are complete (or planned) as of now. If you would like addition of more storage services, please raise request [here](https://github.com/waliarubal/Jaya/issues).
 - [x] File System
@@ -41,8 +40,9 @@ Application is designed to be plug-able from the ground up i.e. anyone with expe
 - [ ] Media Fire
 - [x] FTP/SFTP
 - [ ] Amazon S3
+- [ ] Azure Blob Storage
 
-This project is in beta at the moment so it's not suitable for general use.
+This project is in early beta at the moment so it's not suitable for general use.
 
 ### Built Using
 
@@ -50,8 +50,8 @@ This project would have not existed without the availbility of below mentioned f
 
 * [.NET Core](https://github.com/dotnet/core)
 * [Avalonia UI](https://avaloniaui.net/)
-* [Visual Studio IDE](https://visualstudio.microsoft.com/vs/)
-* [AppVeyor](https://www.appveyor.com/)
+* [Visual Studio](https://visualstudio.microsoft.com/vs/)
+* [Cake](https://cakebuild.net/)
 * [Inno Setup](https://www.jrsoftware.org/isinfo.php)
 
 ### Screenshots
@@ -78,9 +78,7 @@ Light Theme
 
 ## Roadmap
 
-See the [open issues](https://github.com/waliarubal/Jaya/issues) for a list of proposed features (and known issues). You are more than welcome to make feature requests and lodge any bugs you encounter. 
-
-For information on the release schedule, you can check the [milestones](https://github.com/waliarubal/Jaya/milestones).
+See the [open issues](https://github.com/waliarubal/Jaya/issues) and [project boards](https://github.com/waliarubal/Jaya/projects) for list of proposed features (and known issues). You are more than welcome to make feature requests and lodge any bugs you encounter. 
 
 ## Contributing
 
@@ -90,9 +88,13 @@ If you are a .NET Core developer then you can develop plugins to support additio
 
 A designer! Not a problem, create new vector icons and images for the UI. Suggestions and improvements in UX are also welcome.
 
-None of the above, you can still buy me a coffee or donate funds to buy a Mac for development [here](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2).
+None of the above, you can still buy the core contributors coffee or donate funds to procure Mac for development [here](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2).
 
-## Getting Started
+* [Rubal Walia](https://github.com/waliarubal): Original Concept and Development
+* [Splitwirez](https://github.com/Splitwirez): UI and UX Specialist
+* [Giorgio Zoppi](https://github.com/giorgiozoppi): Development
+
+## Getting Started (Technical)
 
 Technical users with programming experience can try things out, just open the project in Visual Studio 2017 IDE or Visual Studio 2019 IDE and run it in 'Debug' mode. Follow below mentioned steps to show your love and support towards project growth.
 
@@ -105,10 +107,6 @@ Technical users with programming experience can try things out, just open the pr
 ## License
 
 Distributed under The 3-Clause BSD License. See [here](https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE) for more information.
-
-## Contact
-
-Project Website - [https://github.com/waliarubal/Jaya/](https://github.com/waliarubal/Jaya/)
 
 <blockquote>
 <p lang="en" dir="ltr">This is an amazing and clever thing by <a href="https://twitter.com/walia_rubal?ref_src=twsrc%5Etfw" target="_blank">@walia_rubal</a> - it&#39;s a *cross platform file explorer application* for Windows, Mac and Linux written in .NET Core/C# and Avalonia! <a href="https://github.com/waliarubal/Jaya">https://github.com/waliarubal/Jaya</a> SWEET. It&#39;s fun to see how people build things like this.</p>
