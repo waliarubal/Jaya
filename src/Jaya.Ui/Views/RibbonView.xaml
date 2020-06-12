@@ -298,7 +298,7 @@
                             MaxSize="Medium"
                             MinSize="Small">
                             <ribbon:RibbonToggleButton.Icon>
-                                <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
+                                <DrawingPresenter Drawing="{DynamicResource Icon.HiddenFiles}" />
                             </ribbon:RibbonToggleButton.Icon>
                         </ribbon:RibbonToggleButton>
                     </ribbon:RibbonGroupBox>
@@ -537,7 +537,7 @@
                             IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}"
                             ToolTip.Tip="Hidden Items">
                             <StackPanel>
-                                <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
+                                <DrawingPresenter Drawing="{DynamicResource Icon.HiddenFiles}" />
                                 <TextBlock Text="Hidden Items" />
                             </StackPanel>
                         </ToggleButton>

@@ -201,7 +201,7 @@
                 Header="Hidden Items">
                 <MenuItem.Icon>
                     <ToggleButton IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}">
-                        <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
+                        <DrawingPresenter Drawing="{DynamicResource Icon.HiddenFiles}" />
                     </ToggleButton>
                 </MenuItem.Icon>
             </MenuItem>

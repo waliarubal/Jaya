@@ -117,7 +117,7 @@
                 CommandParameter="{x:Static local:CommandType.ToggleHiddenItems}"
                 IsChecked="{Binding ApplicationConfig.IsHiddenItemVisible, Mode=OneWay}"
                 ToolTip.Tip="Hidden Items">
-                <DrawingPresenter Drawing="{DynamicResource Icon.FilesDisabled}" />
+                <DrawingPresenter Drawing="{DynamicResource Icon.HiddenFiles}" />
             </ToggleButton>
             <Border Classes="Separator" />
             <Button Command="{Binding OpenWindowCommand}" ToolTip.Tip="Plugins...">
