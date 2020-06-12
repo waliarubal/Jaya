@@ -23,7 +23,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    - name: Execute Cake Build Script
+    - name: Execute Build Script
       uses: cake-build/cake-action@v1.1.1
       with:
         # The path of the Cake script to run.
