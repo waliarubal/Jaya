@@ -40,13 +40,13 @@
                         Classes="Icon"
                         Drawing="{DynamicResource Icon.CloudFolder}"
                         IsVisible="{Binding IsAccount}" />
-                    <Path
+                    <DrawingPresenter
                         Classes="Icon"
-                        Data="{StaticResource Icon.Computer}"
+                        Drawing="{DynamicResource Icon.Computer}"
                         IsVisible="{Binding IsComputer}" />
-                    <Path
+                  <DrawingPresenter
                         Classes="Icon"
-                        Data="{StaticResource Icon.Drive}"
+                        Drawing="{DynamicResource Icon.Drive}"
                         IsVisible="{Binding IsDrive}" />
                     <StackPanel IsVisible="{Binding IsDirectory}" Orientation="Horizontal">
                         <DrawingPresenter

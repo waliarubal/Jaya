@@ -68,13 +68,13 @@
                         Classes="Icon"
                         Drawing="{DynamicResource Icon.CloudFolder}"
                         IsVisible="{Binding IsAccount}" />
-                    <Path
+                    <DrawingPresenter
                         Classes="Icon"
-                        Data="{StaticResource Icon.Computer}"
+                        Drawing="{StaticResource Icon.Computer}"
                         IsVisible="{Binding IsComputer}" />
-                    <Path
+                    <DrawingPresenter
                         Classes="Icon"
-                        Data="{StaticResource Icon.Drive}"
+                        Drawing="{StaticResource Icon.Drive}"
                         IsVisible="{Binding IsDrive}" />
                     <DrawingPresenter
                         Classes="Icon"

@@ -64,15 +64,14 @@
                                     Classes="Icon"
                                     Drawing="{DynamicResource Icon.CloudFolder}"
                                     IsVisible="{Binding IsAccount}" />
-                                <Path
+                                <DrawingPresenter
                                     Classes="Icon"
-                                    Data="{StaticResource Icon.Computer}"
+                                    Drawing="{DynamicResource Icon.Computer}"
                                     IsVisible="{Binding IsComputer}" />
-                                <Path
+                                <DrawingPresenter
                                     Classes="Icon"
-                                    Data="{StaticResource Icon.Drive}"
-                                    IsVisible="{Binding IsDrive}"
-                                    Stretch="Uniform" />
+                                    Drawing="{DynamicResource Icon.Drive}"
+                                    IsVisible="{Binding IsDrive}" />
                                 <DrawingPresenter
                                     Classes="Icon"
                                     Drawing="{DynamicResource Icon.Folder}"
@@ -125,15 +124,14 @@
                           Classes="Icon"
                           Drawing="{DynamicResource Icon.CloudFolder}"
                           IsVisible="{Binding IsAccount}" />
-                      <Path
+                      <DrawingPresenter
                           Classes="Icon"
-                          Data="{StaticResource Icon.Computer}"
+                          Drawing="{DynamicResource Icon.Computer}"
                           IsVisible="{Binding IsComputer}" />
-                      <Path
+                      <DrawingPresenter
                           Classes="Icon"
-                          Data="{StaticResource Icon.Drive}"
-                          IsVisible="{Binding IsDrive}"
-                          Stretch="Uniform" />
+                          Drawing="{DynamicResource Icon.Drive}"
+                          IsVisible="{Binding IsDrive}" />
                       <DrawingPresenter
                           Classes="Icon"
                           Drawing="{DynamicResource Icon.Folder}"
@@ -183,15 +181,14 @@
                       Classes="Icon"
                       Drawing="{DynamicResource Icon.CloudFolder}"
                       IsVisible="{Binding IsAccount}" />
-                  <Path
+                  <DrawingPresenter
                       Classes="Icon"
-                      Data="{StaticResource Icon.Computer}"
+                      Drawing="{DynamicResource Icon.Computer}"
                       IsVisible="{Binding IsComputer}" />
-                  <Path
+                  <DrawingPresenter
                       Classes="Icon"
-                      Data="{StaticResource Icon.Drive}"
-                      IsVisible="{Binding IsDrive}"
-                      Stretch="Uniform" />
+                      Drawing="{DynamicResource Icon.Drive}"
+                      IsVisible="{Binding IsDrive}" />
                   <DrawingPresenter
                       Classes="Icon"
                       Drawing="{DynamicResource Icon.Folder}"
@@ -241,15 +238,14 @@
                       Classes="Icon"
                       Drawing="{DynamicResource Icon.CloudFolder}"
                       IsVisible="{Binding IsAccount}" />
-                  <Path
+                  <DrawingPresenter
                       Classes="Icon"
-                      Data="{StaticResource Icon.Computer}"
+                      Drawing="{DynamicResource Icon.Computer}"
                       IsVisible="{Binding IsComputer}" />
-                  <Path
+                  <DrawingPresenter
                       Classes="Icon"
-                      Data="{StaticResource Icon.Drive}"
-                      IsVisible="{Binding IsDrive}"
-                      Stretch="Uniform" />
+                      Drawing="{DynamicResource Icon.Drive}"
+                      IsVisible="{Binding IsDrive}" />
                   <DrawingPresenter
                       Classes="Icon"
                       Drawing="{DynamicResource Icon.Folder}"
