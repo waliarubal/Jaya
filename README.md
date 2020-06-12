@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/waliarubal/Jaya/" target="_blank">
+  <a href="https://github.com/JayaFM/Jaya/" target="_blank">
     <img src="https://raw.githubusercontent.com/JayaFM/Jaya/dev/docs/Logo.png" alt="JayaFM Logo" >
   </a>
 </p>
@@ -9,7 +9,7 @@
   <a href="https://gitter.im/JayaCrossPlat/Jaya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank"><img alt="Gitter Chat" src="https://badges.gitter.im/JayaCrossPlat/Jaya.svg"></a>
   <a href="https://github.com/JayaFM/Jaya/stargazers" target="_blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/JayaFM/Jaya"></a>
   <a href="https://github.com/JayaFM/Jaya/network" target="_blank"><img alt="GitHub forks" src="https://img.shields.io/github/forks/JayaFM/Jaya"></a>
-  <a href="https://raw.githubusercontent.com/waliarubal/Jaya/dev/LICENSE" target="_blank"><img alt="MIT license" src="https://img.shields.io/github/license/JayaFM/Jaya"></a>
+  <a href="https://raw.githubusercontent.com/JayaFM/Jaya/dev/LICENSE" target="_blank"><img alt="MIT license" src="https://img.shields.io/github/license/JayaFM/Jaya"></a>
   <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2" target="_blank"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-green.svg"></a>
 </p>
 
