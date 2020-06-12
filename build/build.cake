@@ -1,6 +1,8 @@
 #addin nuget:?package=SharpZipLib
 #addin nuget:?package=Cake.Compression
 
+#tool "nuget:?package=gitreleasemanager"
+
 enum OperatingSystem 
 {
     Windows,
@@ -10,13 +12,13 @@ enum OperatingSystem
 
 // script arguments and constants
 const string APP_NAME = "Jaya File Manager";
-var BUILD_NUMBER = Argument<int>("BuildNumber", 1);
+var BUILD_NUMBER = EnvironmentVariable("GITHUB_RUN_NUMBER", "1");
 var VERSION_PREFIX = Argument("VersionPrefix", "0.0.0");
 
 // public variables
 string _versionString = string.Empty;
-ConvertableDirectoryPath _sourceDirectory, _buildDirectory, _outputDirectory;
 bool _isGithubActionsBuild;
+ConvertableDirectoryPath _sourceDirectory, _buildDirectory, _outputDirectory;
 OperatingSystem _operatingSystem;
 
 string GetPath(ConvertableDirectoryPath path)
