@@ -20,6 +20,10 @@
         <GradientStop Offset="0" Color="#FF24A469"/>
         <GradientStop Offset="1" Color="#FF0F7B41"/>
       </GradientStops>
+      <GradientStops x:Key="IconRes.AccentRed">
+        <GradientStop Offset="0" Color="#FFD03807"/>
+        <GradientStop Offset="1" Color="#FFAC3108"/>
+      </GradientStops>
       <GradientStops x:Key="IconRes.AccentLightGrey">
         <GradientStop Offset="0" Color="#FFE9E9E9"/>
         <GradientStop Offset="1" Color="#FFDFDFDF"/>
@@ -35,10 +39,6 @@
       <GradientStops x:Key="IconRes.AccentWhite">
         <GradientStop Offset="0" Color="#FFFFFFFF"/>
         <GradientStop Offset="1" Color="#FFF9F9F9"/>
-      </GradientStops>
-      <GradientStops x:Key="IconRes.AccentRed">
-        <GradientStop Offset="0" Color="#FFD03807"/>
-        <GradientStop Offset="1" Color="#FFAC3108"/>
       </GradientStops>
 
 
@@ -508,11 +508,71 @@
         <GeometryDrawing Brush="#FF414141" Geometry="F1M8,7L8,3 6.277,3 7.944,4 2.481,7.277C2.178,7.958 2,8.707 2,9.5 2,12.363 4.201,14.746 7,15L7,13C5.309,12.755 4,11.259 4,9.5 4,8.109 4.822,6.915 6,6.352L6,9z" />
         <GeometryDrawing Brush="#FF378A33" Geometry="F1M1,1L6,4 1,7z" />
       </DrawingGroup>
-      <DrawingGroup x:Key="Icon.BulletList">
-        <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+      <DrawingGroup x:Key="Icon.DetailsView">
+        <!--GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
         <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M0,-0.000199999999999534L0,14.9998 5,14.9998 5,13.9998 16,13.9998 16,10.9998 5,10.9998 5,8.9998 16,8.9998 16,5.9998 5,5.9998 5,4.0008 16,4.0008 16,0.9998 5,0.9998 5,-0.000199999999999534z" />
         <GeometryDrawing Brush="#FF424242" Geometry="F1M6,8L15,8 15,7 6,7z M6,3L15,3 15,2 6,2z M6,13L15,13 15,12 6,12z" />
-        <GeometryDrawing Brush="#FF1BA1E2" Geometry="F1M1,4L4,4 4,1 1,1z M1,14L4,14 4,11 1,11z M1,6L4,6 4,9 1,9z" />
+        <GeometryDrawing Brush="#FF1BA1E2" Geometry="F1M1,4L4,4 4,1 1,1z M1,14L4,14 4,11 1,11z M1,6L4,6 4,9 1,9z" /-->
+        <GeometryDrawing Geometry="M 0 0 L 16 0 L 16 16 L 0 16 Z" Brush="#01000000"/>
+        <GeometryDrawing Geometry="M 0 1 L 3 1 L 3 4 L 0 4 Z
+                         M 5 2 L 9 2 L 9 3 L 5 3 Z
+                         M 11 2 L 15 2 L 15 3 L 11 3 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="0,4" GradientStops="{DynamicResource IconRes.AccentGrey}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M 1 2 L 2 2 L 2 3 L 1 3 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0,2" EndPoint="0,3" GradientStops="{DynamicResource IconRes.AccentRed}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M 0 6 L 3 6 L 3 9 L 0 9 Z
+                         M 5 7 L 9 7 L 9 8 L 5 8 Z
+                         M 11 7 L 15 7 L 15 8 L 11 8 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0,6" EndPoint="0,9" GradientStops="{DynamicResource IconRes.AccentGrey}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M 1 7 L 2 7 L 2 8 L 1 8 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0,7" EndPoint="0,8" GradientStops="{DynamicResource IconRes.AccentRed}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M 0 11 L 3 11 L 3 14 L 0 14 Z
+                         M 5 12 L 9 12 L 9 13 L 5 13 Z
+                         M 11 12 L 15 12 L 15 13 L 11 13 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0,11" EndPoint="0,14" GradientStops="{DynamicResource IconRes.AccentGrey}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M 1 12 L 2 12 L 2 13 L 1 13 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0,12" EndPoint="0,13" GradientStops="{DynamicResource IconRes.AccentRed}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+      </DrawingGroup>
+      <DrawingGroup x:Key="Icon.IconsView">
+        <GeometryDrawing Geometry="M 0 0 L 16 0 L 16 16 L 0 16 Z" Brush="#01000000"/>
+        <GeometryDrawing Geometry="M 1 2 L 15 2 L 15 14 L 1 14 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource IconRes.AccentGrey}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M 2 3 L 14 3 L 14 13 L 2 13 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource IconRes.AccentWhite}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M 3 4 L 13 4 L 13 12 L 3 12 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%" GradientStops="{DynamicResource IconRes.AccentBlue}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
+        <GeometryDrawing Geometry="M 3 7 L 6.5 9 L 11 9.5 L 13 10 L 13 12 L 3 12 Z">
+          <GeometryDrawing.Brush>
+            <LinearGradientBrush StartPoint="0%,50%" EndPoint="0%,100%" GradientStops="{DynamicResource IconRes.AccentGreen}"/>
+          </GeometryDrawing.Brush>
+        </GeometryDrawing>
       </DrawingGroup>
       <DrawingGroup x:Key="Icon.Image">
         <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />

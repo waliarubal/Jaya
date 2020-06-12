@@ -43,14 +43,14 @@
               Grid.Column="3"
               IsChecked="{Binding PaneConfig.IsDetailsView, Mode=TwoWay}"
               ToolTip.Tip="Display information about each item in the window.">
-            <DrawingPresenter Drawing="{DynamicResource Icon.BulletList}" />
+            <DrawingPresenter Drawing="{DynamicResource Icon.DetailsView}" />
           </ToggleButton>
         <!--/StackPanel-->
         <ToggleButton
             Grid.Column="4"
             IsChecked="{Binding PaneConfig.IsThumbnailView, Mode=TwoWay}"
             ToolTip.Tip="Display items by using large thumbnails.">
-            <DrawingPresenter Drawing="{DynamicResource Icon.Image}" />
+            <DrawingPresenter Drawing="{DynamicResource Icon.IconsView}" />
         </ToggleButton>
     </Grid>
 </UserControl>
