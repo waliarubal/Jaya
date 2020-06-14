@@ -19,8 +19,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ListBox Classes="InstalledPlugins"
+        <ListBox
             Grid.RowSpan="2"
+            Classes="InstalledPlugins"
             Items="{Binding Plugins, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             SelectedItem="{Binding SelectedPlugin, Mode=TwoWay}">
@@ -30,15 +31,20 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Image Source="{Binding ImagePath, Mode=OneWay, Converter={StaticResource BitmapValueConverter}}" />
                         <TextBlock Grid.Column="1" Text="{Binding Name, Mode=OneWay}" />
+                        <CheckBox Grid.Column="2" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Grid Classes="SelectedPluginHeader" Grid.Column="1" Margin="4,0">
+        <Grid
+            Grid.Column="1"
+            Margin="4,0"
+            Classes="SelectedPluginHeader">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />

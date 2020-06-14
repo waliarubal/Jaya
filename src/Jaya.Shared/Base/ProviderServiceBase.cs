@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Jaya.Shared.Base
 {
-    public abstract class ProviderServiceBase : IProviderService
+    public abstract class ProviderServiceBase : ModelBase, IProviderService
     {
         IMemoryCacheService _cache;
         IConfigurationService _config;
@@ -89,6 +89,12 @@ namespace Jaya.Shared.Base
         {
             get;
             protected set;
+        }
+
+        public bool IsEnabled
+        {
+            get => Get<bool>();
+            set => Set(value);
         }
 
         #endregion
