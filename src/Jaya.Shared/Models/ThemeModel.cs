@@ -6,20 +6,19 @@ using System.Collections.Generic;
 
 namespace Jaya.Shared.Models
 {
-    public class ThemeModel: ModelBase
+    public class ThemeModel : ModelBase
     {
-        public ThemeModel(string name, Uri[] themeUris)
+        public ThemeModel(string name, params Uri[] themeStyleUris)
         {
             Name = name;
 
-            Styles = new List<IStyle>();
-            foreach (Uri themeUri in themeUris)
+            var styles = new List<IStyle>();
+            foreach (var styleUri in themeStyleUris)
             {
-                Styles.Add(new StyleInclude(themeUri)
-                {
-                    Source = themeUri
-                });
+                var style = new StyleInclude(styleUri) { Source = styleUri };
+                styles.Add(style);
             }
+            Styles = styles;
         }
 
         public string Name

@@ -8,13 +8,12 @@ using System.Collections.Generic;
 
 namespace Jaya.Shared
 {
-    public sealed class ThemeManager: ModelBase
+    public sealed class ThemeManager : ModelBase
     {
         static readonly object _syncLock;
         static ThemeManager _instance;
         readonly List<ThemeModel> _themes;
         readonly List<Window> _windows;
-        ThemeModel _previousTheme = null;
 
         static ThemeManager()
         {
@@ -27,16 +26,12 @@ namespace Jaya.Shared
 
             _themes = new List<ThemeModel>
             {
-                new ThemeModel("Light", new Uri[]
-                {
+                new ThemeModel("Light",
                     new Uri("avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"),
-                    new Uri("avares://Jaya.Shared/Styles/Accents/BaseLight.xaml")
-                }),
-                new ThemeModel("Dark", new Uri[]
-                {
+                    new Uri("avares://Jaya.Shared/Styles/Accents/BaseLight.xaml")),
+                new ThemeModel("Dark",
                     new Uri("avares://Avalonia.Themes.Default/Accents/BaseDark.xaml"),
-                    new Uri("avares://Jaya.Shared/Styles/Accents/BaseDark.xaml")
-                })
+                    new Uri("avares://Jaya.Shared/Styles/Accents/BaseDark.xaml"))
             };
 
             SelectedTheme = _themes[0];
@@ -66,50 +61,51 @@ namespace Jaya.Shared
                 if (Design.IsDesignMode)
                     return;
 
+                var currentTheme = Get<ThemeModel>();
+
                 if (!Set(value) || value.Styles.Count == 0)
                     return;
 
+                var currentAppStyles = new List<IStyle>();
+                currentAppStyles.AddRange(Application.Current.Styles);
 
-                List<IStyle> styles = new List<IStyle>();
+                if (currentTheme != null)
+                    currentAppStyles.RemoveRange(0, currentTheme.Styles.Count);
 
+                currentAppStyles.InsertRange(0, SelectedTheme.Styles);
 
-                styles.AddRange(Application.Current.Styles);
-                /*for (int i = Application.Current.Styles.Count - 1; i >= 0; i--)
-                    Application.Current.Styles.RemoveAt(i);*/
                 Application.Current.Styles.Clear();
+                Application.Current.Styles.AddRange(currentAppStyles);
 
-                if (_previousTheme != null)
-                    styles.RemoveRange(0, _previousTheme.Styles.Count);
-
-                styles.InsertRange(0, SelectedTheme.Styles);
-
-                Application.Current.Styles.AddRange(styles);
-                //Application.Current.Styles.Add(SelectedTheme.Style);
-
-                _previousTheme = SelectedTheme;
-
-                foreach (var window in _windows)
+                if (currentTheme != null)
                 {
-                    window.Styles.Clear();
-                    foreach (IStyle style in SelectedTheme.Styles)
-                        window.Styles.Add(style);
+                    foreach (var window in _windows)
+                    {
+                        foreach (var style in currentTheme.Styles)
+                            window.Styles.Remove(style);
+
+                        foreach (var style in SelectedTheme.Styles)
+                            window.Styles.Add(style);
+                    }
                 }
             }
-
         }
 
         public void EnableTheme(Window window)
         {
-            if (SelectedTheme != null && SelectedTheme.Styles.Count > 0)
-                foreach (IStyle style in SelectedTheme.Styles)
-                    window.Styles.Add(style);
+            if (Design.IsDesignMode)
+            {
+                if (SelectedTheme != null && SelectedTheme.Styles.Count > 0)
+                    foreach (var style in SelectedTheme.Styles)
+                        window.Styles.Add(style);
+            }
 
             window.Opened += (sender, e) =>
             {
                 _windows.Add(window);
 
                 if (SelectedTheme != null && SelectedTheme.Styles.Count > 0)
-                    foreach (IStyle style in SelectedTheme.Styles)
+                    foreach (var style in SelectedTheme.Styles)
                         window.Styles.Add(style);
             };
 

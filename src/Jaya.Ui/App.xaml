@@ -4,29 +4,32 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Jaya.Ui">
     <Application.Styles>
-      <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
-      <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
+        <!--  enable below two lines for designer support, keep them commented for theme switching to work dueing execution time  -->
+        <!--<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml" />
+        <StyleInclude Source="avares://Jaya.Shared/Styles/Accents/BaseLight.xaml" />-->
 
-      <StyleInclude Source="avares://Jaya.Shared/Styles/DefaultTheme.xaml" />
-      <StyleInclude Source="avares://Jaya.Shared/Styles/GridSplitterStyle.xaml" />
-      <StyleInclude Source="avares://Jaya.Shared/Styles/HyperlinkStyle.xaml" />
-      <StyleInclude Source="avares://Jaya.Shared/Styles/DataGridStyle.xaml" />
-      <StyleInclude Source="avares://Jaya.Shared/Styles/StyledWindowStyle.xaml" />
-      <StyleInclude Source="avares://Jaya.Shared/Styles/RibbonStyle.xaml" />
-      <StyleInclude Source="avares://Jaya.Shared/Styles/GroupBoxStyle.xaml" />
+        <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml" />
 
-      <StyleInclude Source="avares://Jaya.Ui/Styles/AboutViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/AddressbarViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/ExplorerViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/ManagePluginsViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/MenuViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/NavigationViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/OptionsViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/RibbonViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/StatusbarViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/ToolbarViewStyles.xaml" />
-      <StyleInclude Source="avares://Jaya.Ui/Styles/UpdateViewStyles.xaml" />
-      <!--StyleInclude Source="avares://Jaya.Ui/Styles/ExternalStyles.xaml" /-->
+        <StyleInclude Source="avares://Jaya.Shared/Styles/DefaultTheme.xaml" />
+        <StyleInclude Source="avares://Jaya.Shared/Styles/GridSplitterStyle.xaml" />
+        <StyleInclude Source="avares://Jaya.Shared/Styles/HyperlinkStyle.xaml" />
+        <StyleInclude Source="avares://Jaya.Shared/Styles/DataGridStyle.xaml" />
+        <StyleInclude Source="avares://Jaya.Shared/Styles/StyledWindowStyle.xaml" />
+        <StyleInclude Source="avares://Jaya.Shared/Styles/RibbonStyle.xaml" />
+        <StyleInclude Source="avares://Jaya.Shared/Styles/GroupBoxStyle.xaml" />
+
+        <StyleInclude Source="avares://Jaya.Ui/Styles/AboutViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/AddressbarViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/ExplorerViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/ManagePluginsViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/MenuViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/NavigationViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/OptionsViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/RibbonViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/StatusbarViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/ToolbarViewStyles.xaml" />
+        <StyleInclude Source="avares://Jaya.Ui/Styles/UpdateViewStyles.xaml" />
         <StyleInclude Source="avares://Jaya.Ui/Styles/IconStyles.xaml" />
     </Application.Styles>
 </Application>
