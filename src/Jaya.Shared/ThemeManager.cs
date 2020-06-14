@@ -69,8 +69,8 @@ namespace Jaya.Shared
                 var currentAppStyles = new List<IStyle>();
                 currentAppStyles.AddRange(Application.Current.Styles);
 
-                if (currentTheme != null)
-                    currentAppStyles.RemoveRange(0, currentTheme.Styles.Count);
+                // remove default theme styles
+                currentAppStyles.RemoveRange(0, 2);
 
                 currentAppStyles.InsertRange(0, SelectedTheme.Styles);
 
