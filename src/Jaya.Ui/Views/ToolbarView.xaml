@@ -60,7 +60,7 @@
                 <DrawingPresenter Drawing="{DynamicResource Icon.Rename}" />
             </Button>
             <Button ToolTip.Tip="Format">
-                <Path Data="{StaticResource Icon.DiscClean}" />
+                <Path Data="{DynamicResource Icon.DiscClean}" />
             </Button>
             <Border Classes="Separator" />
             <Button ToolTip.Tip="Select All">
@@ -190,13 +190,13 @@
                 <DrawingPresenter Drawing="{DynamicResource Icon.Help}" />
             </Button>
             <Button ToolTip.Tip="Project URL">
-                <Path Data="{StaticResource Icon.Github}" />
+                <Path Data="{DynamicResource Icon.Github}" />
             </Button>
             <Button ToolTip.Tip="View License">
                 <DrawingPresenter Drawing="{DynamicResource Icon.CertificateWarning}" />
             </Button>
             <Button ToolTip.Tip="Make a Donation">
-                <Path Data="{StaticResource Icon.Donate}" />
+                <Path Data="{DynamicResource Icon.Donate}" />
             </Button>
             <Border Classes="Separator" />
             <Button ToolTip.Tip="Send Feedback...">

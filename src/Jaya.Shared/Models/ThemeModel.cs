@@ -2,18 +2,24 @@
 using Avalonia.Styling;
 using Jaya.Shared.Base;
 using System;
+using System.Collections.Generic;
 
 namespace Jaya.Shared.Models
 {
     public class ThemeModel: ModelBase
     {
-        public ThemeModel(string name, Uri themeUri)
+        public ThemeModel(string name, Uri[] themeUris)
         {
             Name = name;
-            Style = new StyleInclude(themeUri)
+
+            Styles = new List<IStyle>();
+            foreach (Uri themeUri in themeUris)
             {
-                Source = themeUri
-            };
+                Styles.Add(new StyleInclude(themeUri)
+                {
+                    Source = themeUri
+                });
+            }
         }
 
         public string Name
@@ -22,9 +28,9 @@ namespace Jaya.Shared.Models
             private set => Set(value);
         }
 
-        public IStyle Style
+        public IList<IStyle> Styles
         {
-            get => Get<IStyle>();
+            get => Get<IList<IStyle>>();
             private set => Set(value);
         }
 

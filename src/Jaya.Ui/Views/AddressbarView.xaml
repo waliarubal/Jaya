@@ -70,11 +70,11 @@
                         IsVisible="{Binding IsAccount}" />
                     <DrawingPresenter
                         Classes="Icon"
-                        Drawing="{StaticResource Icon.Computer}"
+                        Drawing="{DynamicResource Icon.Computer}"
                         IsVisible="{Binding IsComputer}" />
                     <DrawingPresenter
                         Classes="Icon"
-                        Drawing="{StaticResource Icon.Drive}"
+                        Drawing="{DynamicResource Icon.Drive}"
                         IsVisible="{Binding IsDrive}" />
                     <DrawingPresenter
                         Classes="Icon"
