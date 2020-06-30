@@ -277,6 +277,70 @@
           </ListBox.ItemTemplate>
         </ListBox>
 
+      <ListBox Classes="ContentView"
+            IsVisible="{Binding PaneConfig.IsContentView, Mode=OneWay}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            SelectionMode="Multiple">
+        <ListBox.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Vertical"/>
+          </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemTemplate>
+          <DataTemplate DataType="{x:Type m:ExplorerItemModel}">
+            <Panel>
+              <DockPanel Background="#01000000">
+                <i:Interaction.Behaviors>
+                  <ia:EventTriggerBehavior EventName="DoubleTapped" SourceObject="{Binding #ObjectEntry}">
+                    <ia:InvokeCommandAction Command="{Binding $parent[ListBox].DataContext.InvokeObjectCommand}" CommandParameter="{Binding}" />
+                  </ia:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+                <Panel Name="ObjectEntry" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" DockPanel.Dock="Left">
+                  <Image
+                      Classes="Icon"
+                      IsVisible="{Binding IsService}"
+                      Source="{Binding ImagePath, Converter={StaticResource BitmapValueConverter}, ConverterParameter=32}" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.CloudFolder}"
+                      IsVisible="{Binding IsAccount}" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.Computer}"
+                      IsVisible="{Binding IsComputer}" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.Drive}"
+                      IsVisible="{Binding IsDrive}" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.Folder}"
+                      IsVisible="{Binding IsDirectory}" />
+                  <DrawingPresenter
+                      Classes="Icon"
+                      Drawing="{DynamicResource Icon.TextFile}"
+                      IsVisible="{Binding IsFile}" />
+                </Panel>
+                <UniformGrid Rows="2">
+                  <TextBlock Text="{Binding Mode=OneWay, Path=Label}" TextAlignment="Left" Classes="ContentViewFileName"/>
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Size: " Classes="PropertyLabel"/>
+                    <TextBlock Text="{Binding Object.SizeString}"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Type: " Classes="PropertyLabel"/>
+                    <TextBlock Text="{Binding Object.Type}"/>
+                  </StackPanel>
+                </UniformGrid>
+              </DockPanel>
+              <Panel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" IsVisible="{Binding Path=$parent[ListBox].DataContext.ApplicationConfig.IsItemCheckBoxVisible}">
+                <CheckBox IsChecked="{Binding $parent[ListBoxItem].IsSelected}"/>
+              </Panel>
+            </Panel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
         <TextBlock
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
