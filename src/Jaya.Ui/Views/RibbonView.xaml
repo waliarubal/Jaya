@@ -16,14 +16,13 @@
     <Panel>
         <ribbon:Ribbon>
             <ribbon:Ribbon.Menu>
-                <ribbon:RibbonMenu ribbon:KeyTip.KeyTipKeys="F">
-                    <ribbon:RibbonMenu.MenuItems>
-                        <MenuItem
-                            Command="{Binding SimpleCommand}"
-                            CommandParameter="{x:Static local:CommandType.Exit}"
-                            Header="Close" />
-                    </ribbon:RibbonMenu.MenuItems>
-                </ribbon:RibbonMenu>
+              <ribbon:RibbonMenu RightColumnHeader="Frequent places">
+                <ribbon:RibbonMenuItem ribbon:KeyTip.KeyTipKeys="F" Command="{Binding SimpleCommand}" CommandParameter="{x:Static local:CommandType.Exit}" Header="Close">
+                  <ribbon:RibbonMenuItem.Icon>
+                    <DrawingPresenter Classes="Large" Drawing="{DynamicResource Icon.Close}" />
+                  </ribbon:RibbonMenuItem.Icon>
+                </ribbon:RibbonMenuItem>
+              </ribbon:RibbonMenu>
             </ribbon:Ribbon.Menu>
             <ribbon:RibbonTab ribbon:KeyTip.KeyTipKeys="H" Header="Home">
                 <ribbon:RibbonTab.Groups>

@@ -28,6 +28,7 @@
     <SolidColorBrush x:Key="Ribbon.FileButtonIdleBrush" Color="{DynamicResource Ribbon.FileButtonIdleColor}"/>
     <SolidColorBrush x:Key="Ribbon.FileButtonHoverBrush" Color="{DynamicResource Ribbon.FileButtonHoverColor}"/>
     <SolidColorBrush x:Key="Ribbon.FileButtonPressedBrush" Color="{DynamicResource Ribbon.FileButtonPressedColor}"/>
+    <SolidColorBrush x:Key="Ribbon.FileButtonForegroundBrush" Color="{DynamicResource Ribbon.FileButtonForegroundColor}"/>
 
     <SolidColorBrush x:Key="Ribbon.ControlHoverBackgroundBrush" Color="{DynamicResource Ribbon.ControlHoverBackgroundColor}"/>
     <SolidColorBrush x:Key="Ribbon.ControlPressedBackgroundBrush" Color="{DynamicResource Ribbon.ControlPressedBackgroundColor}"/>

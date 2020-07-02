@@ -30,6 +30,7 @@
         <Color x:Key="Ribbon.FileButtonIdleColor">#FF0066B4</Color>
         <Color x:Key="Ribbon.FileButtonHoverColor">#FF197FCD</Color>
         <Color x:Key="Ribbon.FileButtonPressedColor">#FF004D9B</Color>
+        <Color x:Key="Ribbon.FileButtonForegroundColor">#FFFFFFFF</Color>
 
         <Color x:Key="Ribbon.ControlHoverBackgroundColor">#40404040</Color>
         <Color x:Key="Ribbon.ControlPressedBackgroundColor">#80404040</Color>
