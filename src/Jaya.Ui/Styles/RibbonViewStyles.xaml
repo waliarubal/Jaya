@@ -258,7 +258,7 @@
       <ControlTemplate>
         <Border x:Name="EdgeBorder" BorderThickness="0">
           <Grid Name="ContentsGrid"
-                ColumnDefinitions="*,15"
+                ColumnDefinitions="*,Auto"
                 RowDefinitions="*,15">
             <Rectangle Grid.Column="1" Grid.RowSpan="2" Margin="0,4" Width="1" HorizontalAlignment="Right" Fill="{DynamicResource Ribbon.SeparatorBrush}"/>
             <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
