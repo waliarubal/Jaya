@@ -261,13 +261,33 @@
                         </ribbon:RibbonToggleButton>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Layout">
-                        <ribbon:Gallery ribbon:KeyTip.KeyTipKeys="L">
-                            <ListBoxItem Content="Icons" IsSelected="{Binding PaneConfig.IsThumbnailView, Mode=TwoWay}" />
-                            <ListBoxItem Content="List" IsSelected="{Binding PaneConfig.IsListView, Mode=TwoWay}" />
-                            <ListBoxItem Content="Details" IsSelected="{Binding PaneConfig.IsDetailsView, Mode=TwoWay}" />
-                            <ListBoxItem Content="Tiles" IsSelected="{Binding PaneConfig.IsTilesView, Mode=TwoWay}" />
-                            <ListBoxItem Content="Content" IsSelected="{Binding PaneConfig.IsContentView, Mode=TwoWay}" />
-                        </ribbon:Gallery>
+                      <ribbon:Gallery ribbon:KeyTip.KeyTipKeys="L">
+                        <ribbon:GalleryItem Content="Icons" IsSelected="{Binding PaneConfig.IsThumbnailView, Mode=TwoWay}">
+                          <ribbon:GalleryItem.Icon>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.IconsView}" />
+                          </ribbon:GalleryItem.Icon>
+                        </ribbon:GalleryItem>
+                        <ribbon:GalleryItem Content="List" IsSelected="{Binding PaneConfig.IsListView, Mode=TwoWay}">
+                          <ribbon:GalleryItem.Icon>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.ListView}" />
+                          </ribbon:GalleryItem.Icon>
+                        </ribbon:GalleryItem>
+                        <ribbon:GalleryItem Content="Details" IsSelected="{Binding PaneConfig.IsDetailsView, Mode=TwoWay}">
+                          <ribbon:GalleryItem.Icon>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.DetailsView}" />
+                          </ribbon:GalleryItem.Icon>
+                        </ribbon:GalleryItem>
+                        <ribbon:GalleryItem Content="Tiles" IsSelected="{Binding PaneConfig.IsTilesView, Mode=TwoWay}">
+                          <ribbon:GalleryItem.Icon>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.TilesView}" />
+                          </ribbon:GalleryItem.Icon>
+                        </ribbon:GalleryItem>
+                        <ribbon:GalleryItem Content="Content" IsSelected="{Binding PaneConfig.IsContentView, Mode=TwoWay}">
+                          <ribbon:GalleryItem.Icon>
+                            <DrawingPresenter Drawing="{DynamicResource Icon.ContentView}" />
+                          </ribbon:GalleryItem.Icon>
+                        </ribbon:GalleryItem>
+                      </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Show/hide">
                         <ribbon:RibbonToggleButton
