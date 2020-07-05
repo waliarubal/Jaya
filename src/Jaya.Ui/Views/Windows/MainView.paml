@@ -1,5 +1,4 @@
 ﻿<StyledWindow
-    x:Class="Jaya.Ui.Views.Windows.MainView"
     xmlns:j="https://github.com/waliarubal/Jaya"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:Jaya.Ui.Views;assembly=Jaya.Ui"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels.Windows;assembly=Jaya.Ui"
+    x:Class="Jaya.Ui.Views.Windows.MainView"
     Title="{Binding WindowTitle, Mode=OneWay}"
     Width="800"
     Height="600"

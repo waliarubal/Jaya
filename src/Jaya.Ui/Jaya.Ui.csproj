@@ -25,9 +25,6 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Services\SharedService.cs~RF810d89.TMP" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.11" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="0.9.11" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.11" />

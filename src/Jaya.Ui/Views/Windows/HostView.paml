@@ -1,11 +1,11 @@
 ﻿<StyledWindow
-    x:Class="Jaya.Ui.Views.Windows.HostView"
     xmlns="https://github.com/avaloniaui"
     xmlns:j="https://github.com/waliarubal/Jaya"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Jaya.Ui.ViewModels.Windows;assembly=Jaya.Ui"
+    x:Class="Jaya.Ui.Views.Windows.HostView"
     Title="{Binding Option.Title, Mode=OneWay}"
     MinWidth="{Binding Option.Width, Mode=OneWay}"
     MinHeight="{Binding Option.Height, Mode=OneWay}"
