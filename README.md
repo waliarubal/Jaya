@@ -109,6 +109,6 @@ Technical users with programming experience can try things out, just open the pr
 Distributed under The 3-Clause BSD License. See [here](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/LICENSE) for more information.
 
 <blockquote>
-<p lang="en" dir="ltr">This is an amazing and clever thing by <a href="https://twitter.com/walia_rubal?ref_src=twsrc%5Etfw" target="_blank">@imnew2game</a> - it&#39;s a *cross platform file explorer application* for Windows, Mac and Linux written in .NET Core/C# and Avalonia! <a href="https://github.com/JayaFM/Jaya">https://github.com/JayaFM/Jaya</a> SWEET. It&#39;s fun to see how people build things like this.</p>
+<p lang="en" dir="ltr">This is an amazing and clever thing by <a href="https://twitter.com/walia_rubal?ref_src=twsrc%5Etfw" target="_blank">@imnew2game</a> - it&#39;s a *cross platform file explorer application* for Windows, Mac and Linux written in .NET Core/C# and Avalonia! <a href="https://github.com/nullvoid-creations/Jaya">https://github.com/nullvoid-creations/Jaya</a> SWEET. It&#39;s fun to see how people build things like this.</p>
 &mdash; Scott Hanselman (@shanselman) <a href="https://twitter.com/shanselman/status/1186681229480906753?ref_src=twsrc%5Etfw" target="_blank">October 22, 2019</a>
 </blockquote>
