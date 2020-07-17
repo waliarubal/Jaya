@@ -18,8 +18,8 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.11" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.11" />
-    <PackageReference Include="Google.Apis.Drive.v3" Version="1.47.0.1995" />
-    <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.47.0.1869" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.48.0.2013" />
+    <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.48.0.1869" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Jaya.Shared\Jaya.Shared.csproj" />

@@ -41,8 +41,8 @@
   <!--enter plugin entries below for debugging-->
   <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <PackageReference Include="Dropbox.Api" Version="4.10.0" />
-    <PackageReference Include="Google.Apis.Drive.v3" Version="1.47.0.1995" />
-    <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.47.0.1869" />
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.48.0.2013" />
+    <PackageReference Include="Google.Apis.Oauth2.v2" Version="1.48.0.1869" />
     <PackageReference Include="FluentFTP" Version="32.4.3" />
     <PackageReference Include="AWSSDK.S3" Version="3.5.0-beta" />
   </ItemGroup>
