@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/nullvoid-creations/Jaya" target="_blank">
-    <img src="https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/docs/Logo.png" alt="JayaFM Logo" >
+    <img src="/docs/Logo.png" alt="JayaFM Logo" >
   </a>
 </p>
 <h3 align="center">Jaya File Manager (JayaFM)</h3>
@@ -9,7 +9,7 @@
   <a href="https://gitter.im/JayaCrossPlat/Jaya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge" target="_blank"><img alt="Gitter Chat" src="https://badges.gitter.im/JayaCrossPlat/Jaya.svg"></a>
   <a href="https://github.com/nullvoid-creations/Jaya/stargazers" target="_blank"><img alt="GitHub stars" src="https://img.shields.io/github/stars/nullvoid-creations/Jaya"></a>
   <a href="https://github.com/nullvoid-creations/Jaya/network" target="_blank"><img alt="GitHub forks" src="https://img.shields.io/github/forks/nullvoid-creations/Jaya"></a>
-  <a href="https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/LICENSE" target="_blank"><img alt="MIT license" src="https://img.shields.io/github/license/nullvoid-creations/Jaya"></a>
+  <a href="/LICENSE" target="_blank"><img alt="MIT license" src="https://img.shields.io/github/license/nullvoid-creations/Jaya"></a>
   <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2" target="_blank"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-green.svg"></a>
 </p>
 
@@ -54,27 +54,25 @@ This project would have not existed without the availbility of below mentioned f
 * [Cake](https://cakebuild.net/)
 * [Inno Setup](https://www.jrsoftware.org/isinfo.php)
 
-### Screenshots
+## Screenshots
 
-Dark Theme
+Main Window
 
-![Dark Theme](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/docs/00.png)
+![Light Theme Main Window](/docs/MainUI_Light.png)
 
-![Dark Theme](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/docs/06.png)
+![Dark Theme Main Window](/docs/MainUI_Dark.png)
 
-![Dark Theme](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/docs/02.png)
+Options UI (WIP)
 
-![Dark Theme](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/docs/05.png)
+![Light Theme Options UI](/docs/Options_Light.png)
 
-Light Theme
+![Dark Theme Options UI](/docs/Options_Dark.png)
 
-![Light Theme](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/docs/01.png)
+Plugins UI (WIP)
 
-![Light Theme](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/docs/07.png)
+![Light Theme Plugins UI](/docs/Plugins_Light.png)
 
-![Light Theme](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/docs/03.png)
-
-![Light Theme](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/docs/04.png)
+![Dark Theme Plugins UI](/docs/Plugins_Dark.png)
 
 ## Roadmap
 
@@ -106,7 +104,7 @@ Technical users with programming experience can try things out, just open the pr
 
 ## License
 
-Distributed under The 3-Clause BSD License. See [here](https://raw.githubusercontent.com/nullvoid-creations/Jaya/dev/LICENSE) for more information.
+Distributed under The 3-Clause BSD License. See [here](/LICENSE) for more information.
 
 <blockquote>
 <p lang="en" dir="ltr">This is an amazing and clever thing by <a href="https://twitter.com/walia_rubal?ref_src=twsrc%5Etfw" target="_blank">@imnew2game</a> - it&#39;s a *cross platform file explorer application* for Windows, Mac and Linux written in .NET Core/C# and Avalonia! <a href="https://github.com/nullvoid-creations/Jaya">https://github.com/nullvoid-creations/Jaya</a> SWEET. It&#39;s fun to see how people build things like this.</p>

@@ -218,11 +218,11 @@
                     </ribbon:RibbonGroupBox>
                 </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
-            <ribbon:RibbonTab ribbon:KeyTip.KeyTipKeys="S" Header="Share">
+            <!--ribbon:RibbonTab ribbon:KeyTip.KeyTipKeys="S" Header="Share">
                 <ribbon:RibbonTab.Groups>
                     <ribbon:RibbonGroupBox Header="TBD" />
                 </ribbon:RibbonTab.Groups>
-            </ribbon:RibbonTab>
+            </ribbon:RibbonTab-->
             <ribbon:RibbonTab ribbon:KeyTip.KeyTipKeys="V" Header="View">
                 <ribbon:RibbonTab.Groups>
                     <ribbon:RibbonGroupBox Header="Panes">
