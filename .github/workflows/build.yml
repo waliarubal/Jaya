@@ -41,4 +41,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: |
-            publish/windows.exe
+            publish/setup.exe
+            publish/windows_portable.zip
+            publish/osx_portable.zip
+            publish/osx_app.zip
+            publish/linux_portable
