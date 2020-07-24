@@ -32,3 +32,13 @@ jobs:
         verbosity: Normal
         # Flag for if Cake modules should be installed/bootstrapped.
         cake-bootstrap: false
+        
+  deploy:
+    needs: [build]
+    runs-on: windows-latest
+    steps:
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+            publish/windows.exe
