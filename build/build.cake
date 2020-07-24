@@ -31,7 +31,7 @@ Setup(context =>
     _versionString = string.Format("{0}.{1}", VERSION_PREFIX, BUILD_NUMBER);
     _isGithubActionsBuild = GitHubActions.IsRunningOnGitHubActions;
 
-    var platform = Environment.Platform.Family;
+    var platform = Context.Environment.OSVersion.Platform;
     switch (platform)
     {
         case PlatformFamily.Linux:
