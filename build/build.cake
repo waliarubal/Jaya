@@ -31,13 +31,23 @@ Setup(context =>
     _versionString = string.Format("{0}.{1}", VERSION_PREFIX, BUILD_NUMBER);
     _isGithubActionsBuild = GitHubActions.IsRunningOnGitHubActions;
 
-    if (IsRunningOnWindows())
-        _operatingSystem = OperatingSystem.Windows;
-    else if (IsRunningOnUnix())
-        _operatingSystem = OperatingSystem.Linux;
-    else
-        _operatingSystem = OperatingSystem.MacOS;
-     
+    var platform = Environment.Platform.Family;
+    switch (platform)
+    {
+        case PlatformFamily.Linux:
+            _operatingSystem = OperatingSystem.Linux;
+            break;
+
+        case PlatformFamily.OSX:
+            _operatingSystem = OperatingSystem.MacOS;
+            break;
+
+        default:
+            _operatingSystem = OperatingSystem.Windows;
+            break;
+        
+    }
+    
     _sourceDirectory = Directory("../src");
     _buildDirectory = Directory("../build");
     _outputDirectory = Directory("../publish");
@@ -120,6 +130,7 @@ Task("BuildMacOS64")
     Information("Create MacOS application bundle.");
     CopyDirectory(_buildDirectory + Directory("Jaya.app"), _outputDirectory + Directory("Jaya.app"));
     CopyDirectory(outputDirectory, _outputDirectory + Directory("Jaya.app/Contents/MacOS"));
+    Zip(_outputDirectory + Directory("Jaya.app/Contents/MacOS"), _outputDirectory + File("osx_app.zip"));
 });
 
 Task("BuildLinux64")
