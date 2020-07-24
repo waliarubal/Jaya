@@ -45,7 +45,6 @@ Setup(context =>
         default:
             _operatingSystem = OperatingSystem.Windows;
             break;
-        
     }
     
     _sourceDirectory = Directory("../src");
