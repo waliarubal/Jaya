@@ -8,7 +8,7 @@ using Jaya.Shared.Controls;
 
 namespace Jaya.Ui.Views.Windows
 {
-    public class HostView : StyledWindow
+    public class HostView: StyledWindow
     {
 
         public HostView()
