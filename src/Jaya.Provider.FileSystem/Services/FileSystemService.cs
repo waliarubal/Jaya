@@ -4,12 +4,14 @@
 //
 using Jaya.Provider.FileSystem.Models;
 using Jaya.Provider.FileSystem.Views;
+using Jaya.Shared;
 using Jaya.Shared.Base;
 using Jaya.Shared.Models;
 using Jaya.Shared.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Jaya.Provider.FileSystem.Services
@@ -39,18 +41,48 @@ namespace Jaya.Provider.FileSystem.Services
                 if (string.IsNullOrEmpty(directory.Path))
                 {
                     model.Directories = new List<DirectoryModel>();
-                    foreach (var driveInfo in DriveInfo.GetDrives())
+                    if (ServiceLocator.Instance.GetService<IPlatformService>().GetPlatform() == OSPlatform.Linux)
                     {
-                        if (!driveInfo.IsReady)
-                            continue;
+                        try
+                        {
+                            foreach (var driveInfo in DriveInfo.GetDrives())
+                            {
+                                if (!driveInfo.IsReady)
+                                    continue;
 
-                        var drive = new DirectoryModel(true);
-                        drive.Name = driveInfo.Name;
-                        drive.Path = driveInfo.RootDirectory.FullName;
-                        drive.Size = driveInfo.TotalSize;
-                        model.Directories.Add(drive);
+                                if (driveInfo.Name.Equals("/", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    var rootDir = new DirectoryModel();
+                                    rootDir.Name = driveInfo.Name;
+                                    rootDir.Path = driveInfo.RootDirectory.FullName;
+                                    
+                                    rootDir = GetDirectoryAsync(account, rootDir).Result;
+                                    
+                                    model.Directories = rootDir.Directories;
+                                    model.Files = rootDir.Files;
+                                    break;
+                                }
+                            }
+                        }
+                        catch (UnauthorizedAccessException)
+                        {
+
+                        }
                     }
+                    else
+                    {
+                        foreach (var driveInfo in DriveInfo.GetDrives())
+                        {
+                            if (!driveInfo.IsReady)
+                                continue;
 
+                            var drive = new DirectoryModel(true);
+                            drive.Name = driveInfo.Name;
+                            drive.Path = driveInfo.RootDirectory.FullName;
+                            drive.Size = driveInfo.TotalSize;
+                            model.Directories.Add(drive);
+                        }
+                    }
                     AddToCache(account, model);
                     return model;
                 }
