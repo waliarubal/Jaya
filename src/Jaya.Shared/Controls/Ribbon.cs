@@ -44,7 +44,7 @@ namespace Jaya.Shared.Controls
 
         protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
         {
-            switch(e.Property.Name)
+            switch (e.Property.Name)
             {
                 case nameof(SelectedItem):
                     if (e.NewValue == null || IsExpanded)
