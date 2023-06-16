@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33801.468
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Ui", "Jaya.Ui\Jaya.Ui.csproj", "{3A0BB386-5A98-449C-89B6-F4B1B82A8028}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jaya.Ui.Desktop", "Jaya.Ui.Desktop\Jaya.Ui.Desktop.csproj", "{429E8527-1B26-4BBE-9379-FAD51C46CE1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A0BB386-5A98-449C-89B6-F4B1B82A8028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A0BB386-5A98-449C-89B6-F4B1B82A8028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A0BB386-5A98-449C-89B6-F4B1B82A8028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A0BB386-5A98-449C-89B6-F4B1B82A8028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{429E8527-1B26-4BBE-9379-FAD51C46CE1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{429E8527-1B26-4BBE-9379-FAD51C46CE1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{429E8527-1B26-4BBE-9379-FAD51C46CE1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{429E8527-1B26-4BBE-9379-FAD51C46CE1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D60BD45B-FB73-4172-8DD3-025900D8538D}
+	EndGlobalSection
+EndGlobal
