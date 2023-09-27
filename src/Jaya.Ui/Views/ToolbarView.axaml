@@ -1,15 +1,12 @@
-<Window
-    x:Class="Jaya.Ui.Views.MainWindow"
+<UserControl
+    x:Class="Jaya.Ui.Views.ToolbarView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="clr-namespace:Jaya.Ui.Views"
-    xmlns:vm="using:Jaya.Ui.ViewModels"
-    Title="Jaya.Ui"
-    Width="1024"
-    Height="768"
-    Icon="/Assets/avalonia-logo.ico"
+    Height="54"
+    d:DesignWidth="800"
+    Background="#2C2C2C"
     mc:Ignorable="d">
-    <views:ObjectsView />
-</Window>
+
+</UserControl>

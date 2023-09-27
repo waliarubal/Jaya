@@ -2,9 +2,9 @@
 
 namespace Jaya.Ui.Views;
 
-public partial class MainView : UserControl
+public partial class ObjectsView : UserControl
 {
-    public MainView()
+    public ObjectsView()
     {
         InitializeComponent();
     }
