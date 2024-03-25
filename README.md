@@ -12,6 +12,7 @@
   <a href="/LICENSE" target="_blank"><img alt="MIT license" src="https://img.shields.io/github/license/nullvoid-creations/Jaya"></a>
   <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2" target="_blank"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-green.svg"></a>
 </p>
+[![BuiltWithDot.Net shield](https://builtwithdot.net/project/482/jaya-cross-platform-file-explorer-net-core-csharp/badge)](https://builtwithdot.net/project/482/jaya-cross-platform-file-explorer-net-core-csharp)
 
 ## Table Of Contents
 
