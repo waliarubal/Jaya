@@ -13,6 +13,7 @@
   <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DEXCFJ6R48SR2" target="_blank"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-green.svg"></a>
   <a href="https://builtwithdot.net/project/482/jaya-cross-platform-file-explorer-net-core-csharp"><img src="https://builtwithdot.net/project/482/jaya-cross-platform-file-explorer-net-core-csharp/badge" /></a>
 </p>
+
 ## Table Of Contents
 
 * [About The Project](#about-the-project)
